@@ -1,0 +1,63 @@
+name: fsc
+
+services:
+
+  nginx:
+    image: nginx:stable
+    container_name: fsc-nginx
+    restart: unless-stopped
+    networks:
+      - fsc-network
+    volumes:
+      - nginx_data:/etc/nginx/conf.d
+
+  frontend:
+    image: node:22-alpine
+    container_name: fsc-frontend
+    restart: unless-stopped
+    networks:
+      - fsc-network
+
+  backend:
+    image: python:3.13-slim
+    container_name: fsc-backend
+    restart: unless-stopped
+    networks:
+      - fsc-network
+
+  worker:
+    image: python:3.13-slim
+    container_name: fsc-worker
+    restart: unless-stopped
+    networks:
+      - fsc-network
+
+  postgres:
+    image: postgres:17
+    container_name: fsc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: fsc
+      POSTGRES_USER: fsc
+      POSTGRES_PASSWORD: fsc_change_me
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fsc-network
+
+  redis:
+    image: redis:8-alpine
+    container_name: fsc-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - fsc-network
+
+networks:
+  fsc-network:
+
+volumes:
+  postgres_data:
+  redis_data:
+  nginx_data:
