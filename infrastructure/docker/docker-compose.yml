@@ -19,9 +19,13 @@ services:
       - fsc-network
 
   backend:
-    image: python:3.13-slim
     container_name: fsc-backend
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
     restart: unless-stopped
+    ports:
+      - "8000:8000"
     networks:
       - fsc-network
 
