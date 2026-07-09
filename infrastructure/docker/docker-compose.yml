@@ -24,6 +24,8 @@ services:
       context: ../../backend
       dockerfile: Dockerfile
     restart: unless-stopped
+    env_file:
+      - ../../backend/.env
     ports:
       - "8000:8000"
     networks:
@@ -40,10 +42,8 @@ services:
     image: postgres:17
     container_name: fsc-postgres
     restart: unless-stopped
-    environment:
-      POSTGRES_DB: fsc
-      POSTGRES_USER: fsc
-      POSTGRES_PASSWORD: fsc_change_me
+    env_file:
+      - ../../backend/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
