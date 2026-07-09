@@ -28,4 +28,5 @@ backups/
 *.pid
 
 # Environment
+.env
 backend/.env
