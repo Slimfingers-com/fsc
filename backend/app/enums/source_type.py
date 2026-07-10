@@ -1,0 +1,14 @@
+from enum import Enum
+
+
+class SourceType(str, Enum):
+    NEWS = "NEWS"
+    AGENCY = "AGENCY"
+    REGIONAL = "REGIONAL"
+    ALTERNATIVE = "ALTERNATIVE"
+    PRIMARY_SOURCE = "PRIMARY_SOURCE"
+    NGO = "NGO"
+    COMPANY = "COMPANY"
+    ACADEMIC = "ACADEMIC"
+    THINK_TANK = "THINK_TANK"
+    SIGNAL = "SIGNAL"

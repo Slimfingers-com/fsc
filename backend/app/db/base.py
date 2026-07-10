@@ -31,6 +31,7 @@ class BaseModel(Base):
         DateTime(timezone=True),
         nullable=False,
         server_default=func.now(),
+        onupdate=func.now(),
     )
 
     deleted_at: Mapped[Optional[datetime]] = mapped_column(
