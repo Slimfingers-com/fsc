@@ -1,3 +1,4 @@
+from typing import TYPE_CHECKING
 from sqlalchemy import (
     Boolean,
     CheckConstraint,
@@ -7,12 +8,14 @@ from sqlalchemy import (
     Text,
     text,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
 from app.enums.coverage_scope import CoverageScope
 from app.enums.source_type import SourceType
 
+if TYPE_CHECKING:
+    from app.models.feed import Feed
 
 class Source(BaseModel):
     __tablename__ = "sources"
@@ -37,6 +40,13 @@ class Source(BaseModel):
         nullable=False,
     )
 
+    normalized_name: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+        unique=True,
+        index=True,
+    )
+
     slug: Mapped[str] = mapped_column(
         String(255),
         nullable=False,
@@ -52,11 +62,6 @@ class Source(BaseModel):
     url: Mapped[str] = mapped_column(
         Text,
         nullable=False,
-    )
-
-    rss_url: Mapped[str | None] = mapped_column(
-        Text,
-        nullable=True,
     )
 
     api_url: Mapped[str | None] = mapped_column(
@@ -128,4 +133,9 @@ class Source(BaseModel):
         nullable=False,
         default=3,
         server_default=text("3"),
+    )
+
+    feeds: Mapped[list["Feed"]] = relationship(
+        back_populates="source",
+        cascade="all, delete-orphan",
     )

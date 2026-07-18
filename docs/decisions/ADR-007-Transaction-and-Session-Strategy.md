@@ -4,28 +4,39 @@ Status: Accepted
 
 ## Entscheidung
 
-FSC verwendet folgende Datenzugriffsstrategie:
+FSC verwendet folgende Datenzugriffs- und Transaktionsstrategie.
 
 ### Session Lifecycle
 
-- Eine Datenbank-Session pro Request
-- Die Session wird nach Abschluss des Requests geschlossen
+- Eine Datenbank-Session pro Request, Job oder Kommando
+- Die Session wird nach Abschluss zuverlässig geschlossen
+- Bei unbehandelten Fehlern erfolgt ein Rollback
 
 ### Repository Layer
 
 - Repositorys führen ausschließlich Datenzugriffe aus
 - Repositorys führen keine Commits oder Rollbacks aus
+- Repositorys dürfen `flush()` auslösen, wenn eine Operation Datenbankwerte wie UUIDs benötigt
 
 ### Service Layer
 
 - Services enthalten Geschäftslogik
-- Services sind für Commit und Rollback verantwortlich
+- Services führen keine Commits oder Rollbacks aus
+- Services dürfen mehrere Repository-Operationen innerhalb einer gemeinsamen Transaktion ausführen
+- Services verwenden `flush()`, wenn Datenbankänderungen vor dem Commit geprüft oder weiterverarbeitet werden müssen
+
+### Transaction Boundary
+
+- Der aufrufende Anwendungsfall kontrolliert die Transaktion
+- API-Endpunkte, Worker-Jobs, Importprozesse oder Command-Handler entscheiden über Commit und Rollback
+- Mehrere Service-Aufrufe können dadurch atomar in einer gemeinsamen Transaktion ausgeführt werden
 
 ### API Layer
 
 - APIs validieren Eingaben
-- APIs übersetzen Ergebnisse in HTTP-Antworten
-- APIs enthalten keine Geschäftslogik
+- APIs übersetzen Ergebnisse und Domain-Exceptions in HTTP-Antworten
+- APIs enthalten keine fachliche Geschäftslogik
+- APIs committen nur nach erfolgreichem Abschluss des gesamten Anwendungsfalls
 
 ### Soft Delete
 
@@ -35,17 +46,19 @@ FSC verwendet folgende Datenzugriffsstrategie:
 
 ## Begründung
 
-Diese Trennung ermöglicht:
+Die Trennung ermöglicht:
 
+- atomare Änderungen über mehrere Services und Repositorys
+- gemeinsame Transaktionen für Geschäftsänderung und Audit-Eintrag
+- saubere Batch-Importe
 - klare Verantwortlichkeiten
-- konsistente Transaktionen
 - bessere Testbarkeit
-- spätere Erweiterbarkeit
+- kontrollierte Rollbacks
 
 ## Konsequenzen
 
-Repositorys bleiben einfach und wiederverwendbar.
+Ein Service-Aufruf allein speichert Änderungen noch nicht dauerhaft.
 
-Komplexe Vorgänge können mehrere Repository-Operationen innerhalb einer gemeinsamen Transaktion ausführen.
+Der Aufrufer muss nach erfolgreichem Abschluss explizit committen.
 
-Historische Daten bleiben nachvollziehbar.
+Bei Fehlern muss die gesamte Transaktion zurückgerollt werden.
