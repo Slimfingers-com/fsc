@@ -22,6 +22,11 @@ class Settings(BaseSettings):
     search_worker_batch_limit: int = 100
     search_default_page_size: int = 20
     search_max_page_size: int = 100
+    entity_topic_worker_poll_interval_seconds: float = 60.0
+    entity_topic_worker_batch_limit: int = 100
+    entity_topic_max_topics_per_article: int = 10
+    entity_topic_min_entity_confidence: float = 0.65
+    entity_topic_min_topic_confidence: float = 0.6
 
     model_config = SettingsConfigDict(
         extra="ignore"

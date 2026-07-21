@@ -81,6 +81,22 @@ services:
     networks:
       - fsc-network
 
+  entity-topic-worker:
+    container_name: fsc-entity-topic-worker
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    command: ["python", "-m", "app.workers.entity_topic_main"]
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    volumes:
+      - ../../backend:/app
+    depends_on:
+      - postgres
+    networks:
+      - fsc-network
+
   postgres:
     image: postgres:17
     container_name: fsc-postgres

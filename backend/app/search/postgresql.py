@@ -8,6 +8,8 @@ from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
 from app.search.provider import SearchFilters, SearchHit, SearchPage, SearchProvider, SearchSort
+from app.models.entity import ArticleEntity
+from app.models.topic import ArticleTopic, Topic
 
 
 class PostgreSQLFullTextSearchProvider(SearchProvider):
@@ -44,6 +46,14 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
             conditions.append(SearchDocument.published_at >= filters.published_from)
         if filters.published_to:
             conditions.append(SearchDocument.published_at <= filters.published_to)
+        if filters.entity_id:
+            conditions.append(select(ArticleEntity.id).where(ArticleEntity.article_id == Article.id, ArticleEntity.entity_id == filters.entity_id).exists())
+        if filters.entity_type:
+            conditions.append(select(ArticleEntity.id).where(ArticleEntity.article_id == Article.id, ArticleEntity.entity_type == filters.entity_type).exists())
+        if filters.topic_id:
+            conditions.append(select(ArticleTopic.id).where(ArticleTopic.article_id == Article.id, ArticleTopic.topic_id == filters.topic_id).exists())
+        if filters.topic_slug:
+            conditions.append(select(ArticleTopic.id).join(Topic).where(ArticleTopic.article_id == Article.id, Topic.slug == filters.topic_slug, Topic.deleted_at.is_(None)).exists())
 
         base = (
             select(SearchDocument)

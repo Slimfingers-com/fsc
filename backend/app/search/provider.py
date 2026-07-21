@@ -17,6 +17,10 @@ class SearchFilters:
     source_slug: str | None = None
     published_from: datetime | None = None
     published_to: datetime | None = None
+    entity_id: UUID | None = None
+    entity_type: str | None = None
+    topic_id: UUID | None = None
+    topic_slug: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
