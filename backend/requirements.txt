@@ -6,6 +6,6 @@ psycopg[binary]
 alembic
 
 pydantic-settings
-
-pytest
-httpx2
+httpx>=0.27,<1
+feedparser>=6.0.11,<7
+pytest>=8,<9

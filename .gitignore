@@ -31,3 +31,5 @@ backups/
 # Environment
 .env
 backend/.env
+
+.backups/
