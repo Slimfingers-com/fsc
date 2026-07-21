@@ -11,6 +11,7 @@ from app.enums.article_identity_type import ArticleIdentityType
 
 if TYPE_CHECKING:
     from app.models.feed import Feed
+    from app.models.search_document import SearchDocument
 
 
 class Article(BaseModel):
@@ -73,3 +74,8 @@ class Article(BaseModel):
     )
 
     feed: Mapped["Feed"] = relationship(back_populates="articles")
+    search_document: Mapped["SearchDocument | None"] = relationship(
+        back_populates="article",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )

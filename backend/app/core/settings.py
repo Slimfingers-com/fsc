@@ -18,6 +18,10 @@ class Settings(BaseSettings):
     feed_worker_batch_limit: int = 100
     content_worker_poll_interval_seconds: float = 60.0
     content_worker_batch_limit: int = 100
+    search_worker_poll_interval_seconds: float = 60.0
+    search_worker_batch_limit: int = 100
+    search_default_page_size: int = 20
+    search_max_page_size: int = 100
 
     model_config = SettingsConfigDict(
         extra="ignore"
