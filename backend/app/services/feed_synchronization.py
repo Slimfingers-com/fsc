@@ -1,9 +1,10 @@
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from enum import Enum
 from typing import Callable
-from uuid import UUID
+from uuid import UUID, uuid4
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.ingestion import (
@@ -145,12 +146,20 @@ class FeedSynchronizationRunner:
         *,
         feed_repository: FeedRepository | None = None,
         synchronization_service: FeedSynchronizationService | None = None,
+        claim_ttl_seconds: float = 300,
+        worker_id: str | None = None,
+        clock: Callable[[], datetime] | None = None,
     ) -> None:
+        if claim_ttl_seconds <= 0:
+            raise ValueError("claim_ttl_seconds must be greater than zero")
         self.session_factory = session_factory
         self.feed_repository = feed_repository or FeedRepository()
         self.synchronization_service = (
             synchronization_service or FeedSynchronizationService()
         )
+        self.claim_ttl_seconds = claim_ttl_seconds
+        self.worker_id = worker_id or str(uuid4())
+        self.clock = clock or (lambda: datetime.now(UTC))
 
     def run_due(
         self,
@@ -158,33 +167,61 @@ class FeedSynchronizationRunner:
         now: datetime | None = None,
         limit: int = 100,
     ) -> FeedSynchronizationBatchResult:
-        run_at = now or datetime.now(UTC)
+        run_at = now or self.clock()
         with self.session_factory() as discovery_db:
-            feed_ids = [
-                feed.id
-                for feed in self.feed_repository.list_due_active(
+            with discovery_db.begin():
+                feed_ids = self.feed_repository.claim_due_active(
                     discovery_db,
                     now=run_at,
+                    claim_expires_at=run_at + timedelta(seconds=self.claim_ttl_seconds),
+                    claimed_by=self.worker_id,
                     limit=limit,
                 )
-            ]
 
         results: list[FeedSynchronizationResult] = []
         for feed_id in feed_ids:
             with self.session_factory() as db:
                 try:
-                    feed = self.feed_repository.get_by_id(db, feed_id)
-                    if feed is None or not feed.active:
-                        continue
-                    result = self.synchronization_service.synchronize(
-                        db,
-                        feed=feed,
-                        synchronized_at=run_at,
-                    )
-                    db.commit()
-                    results.append(result)
+                    with db.begin():
+                        feed = db.scalar(
+                            select(Feed)
+                            .where(
+                                Feed.id == feed_id,
+                                Feed.claimed_by == self.worker_id,
+                            )
+                            .with_for_update()
+                        )
+                        if (
+                            feed is None
+                            or not feed.active
+                            or feed.claim_expires_at is None
+                            or feed.claim_expires_at <= self.clock()
+                        ):
+                            continue
+                        result = self.synchronization_service.synchronize(
+                            db,
+                            feed=feed,
+                            synchronized_at=run_at,
+                        )
+                        feed.claimed_at = None
+                        feed.claimed_by = None
+                        feed.claim_expires_at = None
+                        results.append(result)
                 except Exception:
                     db.rollback()
+                    with db.begin():
+                        feed = db.scalar(
+                            select(Feed)
+                            .where(
+                                Feed.id == feed_id,
+                                Feed.claimed_by == self.worker_id,
+                            )
+                            .with_for_update()
+                        )
+                        if feed is not None:
+                            feed.claimed_at = None
+                            feed.claimed_by = None
+                            feed.claim_expires_at = None
                     raise
 
         return FeedSynchronizationBatchResult(

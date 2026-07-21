@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     feed_worker_poll_interval_seconds: float = 60.0
     feed_worker_batch_limit: int = 100
+    feed_worker_claim_ttl_seconds: float = 300.0
     content_worker_poll_interval_seconds: float = 60.0
     content_worker_batch_limit: int = 100
     search_worker_poll_interval_seconds: float = 60.0

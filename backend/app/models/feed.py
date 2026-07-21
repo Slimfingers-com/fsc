@@ -117,6 +117,16 @@ class Feed(BaseModel):
         nullable=True,
     )
 
+    claimed_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    claimed_by: Mapped[str | None] = mapped_column(
+        String(100), nullable=True, index=True
+    )
+    claim_expires_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True, index=True
+    )
+
     source: Mapped["Source"] = relationship(
         back_populates="feeds",
     )
