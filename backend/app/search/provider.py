@@ -4,9 +4,6 @@ from datetime import datetime
 from enum import StrEnum
 from uuid import UUID
 
-from sqlalchemy.orm import Session
-
-
 class SearchSort(StrEnum):
     RELEVANCE = "relevance"
     NEWEST = "newest"
@@ -48,9 +45,7 @@ class SearchPage:
 class SearchProvider(ABC):
     @abstractmethod
     def search(
-        self,
-        db: Session,
-        *,
+        self, *,
         query: str | None,
         filters: SearchFilters,
         sort: SearchSort,

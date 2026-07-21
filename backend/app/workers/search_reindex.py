@@ -22,7 +22,10 @@ class SearchReindexWorker:
 
     def run_once(self):
         result = self.runner.run_pending(limit=self.batch_limit)
-        logger.info("Search reindex completed: processed=%s created=%s updated=%s", result.processed, result.created, result.updated)
+        logger.info(
+            "Search reindex completed: processed=%s created=%s updated=%s deleted=%s",
+            result.processed, result.created, result.updated, result.deleted,
+        )
         return result
 
     def run_forever(self) -> None:

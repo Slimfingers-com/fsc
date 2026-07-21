@@ -27,7 +27,7 @@ def upgrade() -> None:
         sa.Column("url", sa.Text(), nullable=True),
         sa.Column("language_code", sa.String(length=16), nullable=True),
         sa.Column("published_at", sa.DateTime(timezone=True), nullable=True),
-        sa.Column("content_hash", sa.String(length=64), nullable=False),
+        sa.Column("document_hash", sa.String(length=64), nullable=False),
         sa.Column("builder_version", sa.Integer(), nullable=False),
         sa.Column("indexed_at", sa.DateTime(timezone=True), nullable=False),
         sa.Column(
@@ -53,6 +53,7 @@ def upgrade() -> None:
     op.create_index("ix_search_documents_source_slug", "search_documents", ["source_slug"])
     op.create_index("ix_search_documents_language_code", "search_documents", ["language_code"])
     op.create_index("ix_search_documents_published_at", "search_documents", ["published_at"])
+    op.create_index("ix_search_documents_document_hash", "search_documents", ["document_hash"])
     op.create_index("ix_search_documents_search_vector", "search_documents", ["search_vector"], postgresql_using="gin")
 
 

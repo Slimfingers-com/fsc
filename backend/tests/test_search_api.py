@@ -26,6 +26,7 @@ def add_indexed_article(db, *, source_name, source_slug, title, body, language, 
     db.flush()
     SearchIndexingService().index_article(db, article)
     db.flush()
+    return article
 
 
 def test_search_api_full_text_filters_sort_and_pagination(client, db):
@@ -41,6 +42,7 @@ def test_search_api_full_text_filters_sort_and_pagination(client, db):
     assert data["pages"] == 2
     assert len(data["items"]) == 1
     assert data["items"][0]["source_slug"] == "alpha"
+    assert "<mark>" in data["items"][0]["excerpt"]
 
     filtered = client.get("/search", params={"source": "beta"})
     assert filtered.status_code == 200
@@ -51,3 +53,21 @@ def test_search_api_full_text_filters_sort_and_pagination(client, db):
 def test_search_api_rejects_invalid_pagination(client):
     response = client.get("/search", params={"page": 0})
     assert response.status_code == 422
+
+
+def test_search_excludes_deleted_and_inactive_entities(client, db):
+    now = datetime.now(UTC)
+    entities = []
+    for slug in ("active", "article-deleted", "feed-inactive", "source-deleted"):
+        article = add_indexed_article(
+            db, source_name=slug, source_slug=slug, title="Visible topic",
+            body="Searchable body", language="en", published_at=now,
+        )
+        entities.append(article)
+    entities[1].deleted_at = now
+    entities[2].feed.active = False
+    entities[3].feed.source.deleted_at = now
+    db.flush()
+    response = client.get("/search", params={"q": "searchable"})
+    assert response.status_code == 200
+    assert [item["source_slug"] for item in response.json()["items"]] == ["active"]

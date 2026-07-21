@@ -31,7 +31,7 @@ class SearchDocument(BaseModel):
     url: Mapped[str | None] = mapped_column(Text, nullable=True)
     language_code: Mapped[str | None] = mapped_column(String(16), nullable=True, index=True)
     published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
-    content_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    document_hash: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
     builder_version: Mapped[int] = mapped_column(Integer, nullable=False)
     indexed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     search_vector: Mapped[object] = mapped_column(

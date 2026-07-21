@@ -13,8 +13,12 @@ class StubRepository:
         self.existing = existing
         self.added = []
 
-    def get_by_article_id(self, db, article_id):
+    def get_by_article_id(self, db, article_id, *, include_deleted=False):
         return self.existing
+
+    def hard_delete(self, db, document):
+        self.existing = None
+
 
     def add(self, db, document):
         self.added.append(document)
@@ -41,6 +45,7 @@ def test_index_article_creates_missing_document():
 
 def test_index_article_updates_existing_document():
     existing = type("Document", (), {})()
+    existing.deleted_at = None
     repository = StubRepository(existing)
     service = SearchIndexingService(repository=repository, builder=SearchDocumentBuilder())
     assert service.index_article(object(), make_article()) is False

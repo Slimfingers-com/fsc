@@ -13,6 +13,7 @@ class SearchIndexBatchResult:
     processed: int
     created: int
     updated: int
+    deleted: int = 0
 
 
 class SearchIndexingService:
@@ -22,8 +23,12 @@ class SearchIndexingService:
 
     def index_article(self, db: Session, article: Article) -> bool:
         data = self.builder.build(article)
-        document = self.repository.get_by_article_id(db, data.article_id)
+        document = self.repository.get_by_article_id(db, data.article_id, include_deleted=True)
         values = asdict(data)
+        if document is not None and document.deleted_at is not None:
+            self.repository.hard_delete(db, document)
+            db.flush()
+            document = None
         if document is None:
             self.repository.add(db, SearchDocument(**values))
             return True
@@ -42,8 +47,12 @@ class SearchIndexingRunner:
             raise ValueError("limit must be greater than zero")
         with self.session_factory() as db:
             with db.begin():
+                deleted = self.service.repository.delete_ineligible(db)
                 articles = self.service.repository.list_pending_articles(
                     db, builder_version=self.service.builder.VERSION, limit=limit
                 )
                 created = sum(self.service.index_article(db, article) for article in articles)
-            return SearchIndexBatchResult(processed=len(articles), created=created, updated=len(articles) - created)
+            return SearchIndexBatchResult(
+                processed=len(articles), created=created,
+                updated=len(articles) - created, deleted=deleted,
+            )

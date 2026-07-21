@@ -13,9 +13,6 @@ from app.search.postgresql import PostgreSQLFullTextSearchProvider
 from app.search.provider import SearchFilters, SearchSort
 
 router = APIRouter(prefix="/search", tags=["search"])
-provider = PostgreSQLFullTextSearchProvider()
-
-
 @router.get("", response_model=SearchPageRead)
 def search(
     q: Annotated[str | None, Query(max_length=500)] = None,
@@ -31,8 +28,7 @@ def search(
 ):
     size = page_size or settings.search_default_page_size
     size = min(size, settings.search_max_page_size)
-    result = provider.search(
-        db,
+    result = PostgreSQLFullTextSearchProvider(db).search(
         query=q,
         filters=SearchFilters(
             language_code=language,
