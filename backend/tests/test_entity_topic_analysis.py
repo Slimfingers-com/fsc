@@ -2,7 +2,7 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 from app.analysis.normalization import normalize_name, normalize_topic, stable_slug
-from app.analysis.provider import ArticleAnalysisInput, EntityType
+from app.analysis.provider import ArticleAnalysisInput, EntityType, TextPart
 from app.analysis.rule_based import RuleBasedEntityTopicAnalyzer
 from app.models.article import Article
 from app.services.entity_topic_analysis import EntityTopicAnalysisService
@@ -44,3 +44,14 @@ def test_rule_provider_is_deterministic_and_topics_are_significant():
     assert analyzer.analyze(data) == analyzer.analyze(data)
     assert any("climate" in topic.name for topic in analyzer.analyze(data).topics)
     assert not any(topic.name in {"the", "and"} for topic in analyzer.analyze(data).topics)
+
+
+def test_offsets_are_field_relative_for_unicode_and_empty_title():
+    analyzer = RuleBasedEntityTopicAnalyzer()
+    data = ArticleAnalysisInput(uuid4(), "", "Élodie Müller traf Élodie Müller in Berlin.", "de", None)
+    mentions = analyzer.analyze(data).entities
+    people = [mention for mention in mentions if mention.mention_text == "Élodie Müller"]
+    assert [(mention.text_part, mention.start_offset, mention.end_offset) for mention in people] == [
+        (TextPart.BODY, 0, 13), (TextPart.BODY, 19, 32),
+    ]
+    assert all(data.normalized_text[item.start_offset:item.end_offset] == item.mention_text for item in people)

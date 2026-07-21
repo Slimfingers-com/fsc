@@ -19,7 +19,7 @@ class EntityTopicWorker:
 
     def run_once(self):
         result = self.runner.run_pending(limit=self.batch_limit)
-        logger.info("Entity/topic analysis completed: processed=%s failed=%s", result.processed, result.failed)
+        logger.info("Entity/topic analysis completed: selected=%s processed=%s skipped=%s failed=%s", result.selected, result.processed, result.skipped, result.failed)
         return result
 
     def run_forever(self) -> None:

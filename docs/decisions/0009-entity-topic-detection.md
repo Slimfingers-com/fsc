@@ -12,7 +12,13 @@ Normalized articles need reproducible entity mentions and reusable topics withou
 
 FSC exposes a SQLAlchemy-free `EntityTopicAnalyzer` contract using immutable dataclasses. The initial `local-rules` provider is deterministic and versioned. A SHA-256 analysis hash covers normalized title/text, language, provider, and version. A polling worker selects eligible active articles with `FOR UPDATE SKIP LOCKED`; each article is committed independently. Provider output is computed before prior associations are replaced, so failures retain the last successful result.
 
-Entities are resolved by normalized name plus type, with aliases considered only inside the same type. Topics use conservative normalization and stable slugs. Soft-deleted canonical records do not block new active records; partial unique indexes enforce active uniqueness. Mention rows retain offsets and permit repeated mentions while PostgreSQL 17 `NULLS NOT DISTINCT` prevents duplicate offset-less mentions.
+Entities are resolved by normalized name plus type. Canonical names and aliases are represented in the indexed `entity_aliases` table; lookup first checks the canonical-name index and then an exact normalized alias/type index. Soft-deleted aliases and entities are ignored. If an alias maps to multiple active entities of the same type, resolution returns no entity rather than choosing arbitrarily. The JSONB alias representation is migrated and removed.
+
+Entity and topic creation uses PostgreSQL `INSERT ... ON CONFLICT DO NOTHING` followed by an exact reload, preserving the outer article transaction during concurrent creation. Topic slugs normally use the readable normalized slug. A genuine slug collision uses the readable slug plus a deterministic hash of the normalized topic name, so distinct Unicode names are not merged.
+
+Worker eligibility is entirely database-queryable. The persisted identity consists of content hash, normalization version, provider, analyzer version, and configuration version. A deterministic `FOR UPDATE SKIP LOCKED` query selects only mismatches, eliminating fixed-prefix scans. Workers re-lock each article and distinguish selected, processed, skipped-after-race, and failed metrics.
+
+Mention offsets are Unicode code-point indexes relative to one explicit `text_part`: `title` references `normalized_title`, and `body` references `normalized_text`. Start is inclusive and end exclusive. Both offsets are null or both present; non-null offsets are non-negative, ordered, and verified against `mention_text` before persistence. Sentence indexes are field-relative and zero-based.
 
 ## Consequences and limits
 

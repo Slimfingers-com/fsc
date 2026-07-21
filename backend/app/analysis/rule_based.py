@@ -2,7 +2,7 @@ import re
 from collections import Counter
 
 from app.analysis.normalization import normalize_topic
-from app.analysis.provider import AnalysisResult, ArticleAnalysisInput, EntityMentionResult, EntityTopicAnalyzer, EntityType, TopicResult
+from app.analysis.provider import AnalysisResult, ArticleAnalysisInput, EntityMentionResult, EntityTopicAnalyzer, EntityType, TextPart, TopicResult
 
 _STOP = {"the", "a", "an", "and", "or", "of", "in", "on", "for", "to", "from", "with", "der", "die", "das", "ein", "eine", "und", "oder", "von", "im", "in", "zu", "mit", "für", "ist", "are", "was", "were", "this", "that", "said"}
 _ORG = {"inc", "corp", "corporation", "company", "ltd", "llc", "gmbh", "ag", "se", "university", "ministerium", "ministry", "foundation", "bank", "group"}
@@ -15,29 +15,30 @@ class RuleBasedEntityTopicAnalyzer(EntityTopicAnalyzer):
     version = "1.0.0"
 
     def analyze(self, article: ArticleAnalysisInput) -> AnalysisResult:
-        text = f"{article.title}\n{article.normalized_text}".strip()
         entities: list[EntityMentionResult] = []
-        sentences = list(re.finditer(r"(?:^|(?<=[.!?])\s+)([^.!?]+)", text))
-        pattern = re.compile(r"\b(?:[A-ZÄÖÜ][\wÄÖÜäöüß'’-]+)(?:\s+(?:[A-ZÄÖÜ][\wÄÖÜäöüß'’-]+|&)){0,4}\b")
-        for sentence_index, sentence in enumerate(sentences):
-            for match in pattern.finditer(sentence.group(1)):
-                mention = match.group(0).strip()
-                tokens = mention.casefold().split()
-                if not tokens or (len(tokens) == 1 and tokens[0] in _STOP):
-                    continue
-                if any(token.rstrip(".") in _ORG for token in tokens):
-                    entity_type, confidence = EntityType.ORGANIZATION, 0.9
-                elif mention.casefold() in _LOC:
-                    entity_type, confidence = EntityType.LOCATION, 0.88
-                elif any(token in _EVENT for token in tokens):
-                    entity_type, confidence = EntityType.EVENT, 0.82
-                elif len(tokens) >= 2:
-                    entity_type, confidence = EntityType.PERSON, 0.78
-                else:
-                    entity_type, confidence = EntityType.OTHER, 0.62
-                start = sentence.start(1) + match.start()
-                entities.append(EntityMentionResult(mention, mention, entity_type, confidence, min(1.0, 0.45 + len(tokens) * 0.12), start, start + len(mention), sentence_index))
+        pattern = re.compile(r"\b(?:[A-ZÀ-ÖØ-Þ][\w'’-]+)(?:\s+(?:[A-ZÀ-ÖØ-Þ][\w'’-]+|&)){0,4}\b")
+        for text_part, field_text in ((TextPart.TITLE, article.title), (TextPart.BODY, article.normalized_text)):
+            sentences = list(re.finditer(r"(?:^|(?<=[.!?])\s+)([^.!?]+)", field_text))
+            for sentence_index, sentence in enumerate(sentences):
+                for match in pattern.finditer(sentence.group(1)):
+                    mention = match.group(0).strip()
+                    tokens = mention.casefold().split()
+                    if not tokens or (len(tokens) == 1 and tokens[0] in _STOP):
+                        continue
+                    if any(token.rstrip(".") in _ORG for token in tokens):
+                        entity_type, confidence = EntityType.ORGANIZATION, 0.9
+                    elif mention.casefold() in _LOC:
+                        entity_type, confidence = EntityType.LOCATION, 0.88
+                    elif any(token in _EVENT for token in tokens):
+                        entity_type, confidence = EntityType.EVENT, 0.82
+                    elif len(tokens) >= 2:
+                        entity_type, confidence = EntityType.PERSON, 0.78
+                    else:
+                        entity_type, confidence = EntityType.OTHER, 0.62
+                    start = sentence.start(1) + match.start()
+                    entities.append(EntityMentionResult(mention, mention, entity_type, confidence, min(1.0, 0.45 + len(tokens) * 0.12), text_part, start, start + len(mention), sentence_index))
 
+        text = f"{article.title} {article.normalized_text}".strip()
         words = [normalize_topic(word) for word in re.findall(r"\b[^\W\d_][\w-]{3,}\b", text.casefold(), re.UNICODE)]
         counts = Counter(word for word in words if word and word not in _STOP and len(word) >= 4)
         phrases = Counter()

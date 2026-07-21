@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 
-from app.analysis.provider import EntityType
+from app.analysis.provider import EntityType, TextPart
 
 
 class MentionRead(BaseModel):
@@ -11,6 +11,7 @@ class MentionRead(BaseModel):
     mention_text: str
     confidence: float
     salience: float
+    text_part: TextPart
     start_offset: int | None
     end_offset: int | None
     sentence_index: int | None

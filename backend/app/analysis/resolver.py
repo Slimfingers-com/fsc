@@ -1,10 +1,12 @@
+from __future__ import annotations
+
+import hashlib
+
 from sqlalchemy.orm import Session
 
 from app.analysis.normalization import normalize_name, normalize_topic, stable_slug
 from app.analysis.provider import EntityMentionResult, TopicResult
-from app.models.entity import Entity
-from app.models.topic import Topic
-from app.repositories.entity_topic import EntityTopicRepository
+from app.repositories.entity_topic import AmbiguousEntityAliasError, EntityTopicRepository
 
 
 class EntityResolver:
@@ -16,13 +18,13 @@ class EntityResolver:
         normalized = normalize_name(result.canonical_name)
         if not normalized or result.confidence < self.min_confidence:
             return None
-        entity = self.repository.find_entity(db, normalized, result.entity_type)
+        try:
+            entity = self.repository.find_entity(db, normalized, result.entity_type)
+        except AmbiguousEntityAliasError:
+            return None
         if entity:
             return entity
-        entity = Entity(canonical_name=" ".join(result.canonical_name.split()), normalized_name=normalized, entity_type=result.entity_type, aliases=[])
-        db.add(entity)
-        db.flush()
-        return entity
+        return self.repository.create_or_get_entity(db, canonical_name=" ".join(result.canonical_name.split()), normalized_name=normalized, entity_type=result.entity_type)
 
 
 class TopicResolver:
@@ -39,7 +41,7 @@ class TopicResolver:
         topic = self.repository.find_topic(db, normalized)
         if topic:
             return topic
-        topic = Topic(name=" ".join(result.name.split()), normalized_name=normalized, slug=stable_slug(normalized))
-        db.add(topic)
-        db.flush()
-        return topic
+        name = " ".join(result.name.split())
+        slug = stable_slug(normalized)
+        collision_slug = f"{slug}--{hashlib.sha256(normalized.encode()).hexdigest()[:10]}"
+        return self.repository.create_or_get_topic(db, name=name, normalized_name=normalized, slug=slug, collision_slug=collision_slug)

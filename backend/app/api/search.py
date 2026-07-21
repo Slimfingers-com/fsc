@@ -11,6 +11,7 @@ from app.db.session import get_db
 from app.schemas.search import SearchPageRead
 from app.search.postgresql import PostgreSQLFullTextSearchProvider
 from app.search.provider import SearchFilters, SearchSort
+from app.analysis.provider import EntityType
 
 router = APIRouter(prefix="/search", tags=["search"])
 @router.get("", response_model=SearchPageRead)
@@ -22,9 +23,9 @@ def search(
     published_from: datetime | None = None,
     published_to: datetime | None = None,
     entity_id: UUID | None = None,
-    entity_type: str | None = None,
+    entity_type: EntityType | None = None,
     topic_id: UUID | None = None,
-    topic: str | None = None,
+    topic_slug: Annotated[str | None, Query(max_length=500)] = None,
     sort: SearchSort = SearchSort.RELEVANCE,
     page: Annotated[int, Query(ge=1)] = 1,
     page_size: Annotated[int | None, Query(ge=1)] = None,
@@ -43,7 +44,7 @@ def search(
             entity_id=entity_id,
             entity_type=entity_type,
             topic_id=topic_id,
-            topic_slug=topic,
+            topic_slug=topic_slug,
         ),
         sort=sort,
         page=page,

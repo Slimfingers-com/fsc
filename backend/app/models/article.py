@@ -76,6 +76,10 @@ class Article(BaseModel):
     )
     entity_topic_analysis_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     entity_topic_analysis_version: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    entity_topic_analysis_provider: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    entity_topic_analysis_config_version: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    entity_topic_analysis_content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    entity_topic_analysis_normalization_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
     entity_topic_analyzed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
     entity_topic_analysis_error: Mapped[str | None] = mapped_column(Text, nullable=True)
 

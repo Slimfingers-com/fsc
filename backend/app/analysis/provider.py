@@ -14,6 +14,11 @@ class EntityType(StrEnum):
     OTHER = "other"
 
 
+class TextPart(StrEnum):
+    TITLE = "title"
+    BODY = "body"
+
+
 @dataclass(frozen=True, slots=True)
 class ArticleAnalysisInput:
     article_id: UUID
@@ -31,6 +36,7 @@ class EntityMentionResult:
     entity_type: EntityType
     confidence: float
     salience: float
+    text_part: TextPart
     start_offset: int | None = None
     end_offset: int | None = None
     sentence_index: int | None = None

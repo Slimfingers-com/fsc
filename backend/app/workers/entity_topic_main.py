@@ -2,11 +2,14 @@ import logging
 
 from app.core.settings import settings
 from app.workers.entity_topic import EntityTopicWorker
+from app.services.entity_topic_analysis import EntityTopicAnalysisRunner, EntityTopicAnalysisService
+from app.db.session import SessionLocal
 
 
 def main() -> None:
     logging.basicConfig(level=settings.log_level)
-    worker = EntityTopicWorker(poll_interval_seconds=settings.entity_topic_worker_poll_interval_seconds, batch_limit=settings.entity_topic_worker_batch_limit)
+    service = EntityTopicAnalysisService(min_entity_confidence=settings.entity_topic_min_entity_confidence, min_topic_confidence=settings.entity_topic_min_topic_confidence, max_topics=settings.entity_topic_max_topics_per_article)
+    worker = EntityTopicWorker(poll_interval_seconds=settings.entity_topic_worker_poll_interval_seconds, batch_limit=settings.entity_topic_worker_batch_limit, runner=EntityTopicAnalysisRunner(SessionLocal, service))
     worker.install_signal_handlers()
     worker.run_forever()
 
