@@ -13,6 +13,10 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     openai_api_key: str = ""
 
+    log_level: str = "INFO"
+    feed_worker_poll_interval_seconds: float = 60.0
+    feed_worker_batch_limit: int = 100
+
     model_config = SettingsConfigDict(
         extra="ignore"
     )

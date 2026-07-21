@@ -34,9 +34,18 @@ services:
       - fsc-network
 
   worker:
-    image: python:3.13-slim
     container_name: fsc-worker
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    command: ["python", "-m", "app.workers.main"]
     restart: unless-stopped
+    env_file:
+      - ../../.env
+    volumes:
+      - ../../backend:/app
+    depends_on:
+      - postgres
     networks:
       - fsc-network
 
