@@ -19,6 +19,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import BaseModel
 
 if TYPE_CHECKING:
+    from app.models.article import Article
     from app.models.source import Source
 
 
@@ -118,4 +119,9 @@ class Feed(BaseModel):
 
     source: Mapped["Source"] = relationship(
         back_populates="feeds",
+    )
+
+    articles: Mapped[list["Article"]] = relationship(
+        back_populates="feed",
+        cascade="all, delete-orphan",
     )
