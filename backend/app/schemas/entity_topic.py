@@ -11,7 +11,7 @@ class MentionRead(BaseModel):
     mention_text: str
     confidence: float
     salience: float
-    text_part: TextPart
+    text_source: TextPart
     start_offset: int | None
     end_offset: int | None
     sentence_index: int | None

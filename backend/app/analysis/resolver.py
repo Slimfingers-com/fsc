@@ -1,12 +1,17 @@
 from __future__ import annotations
 
 import hashlib
+from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import Session
 
 from app.analysis.normalization import normalize_name, normalize_topic, stable_slug
 from app.analysis.provider import EntityMentionResult, TopicResult
 from app.repositories.entity_topic import AmbiguousEntityAliasError, EntityTopicRepository
+
+if TYPE_CHECKING:
+    from app.models.entity import Entity
+    from app.models.topic import Topic
 
 
 class EntityResolver:

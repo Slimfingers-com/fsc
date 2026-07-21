@@ -27,6 +27,9 @@ class Settings(BaseSettings):
     entity_topic_max_topics_per_article: int = 10
     entity_topic_min_entity_confidence: float = 0.65
     entity_topic_min_topic_confidence: float = 0.6
+    entity_topic_worker_claim_ttl_seconds: float = 300.0
+    entity_topic_retry_base_seconds: float = 30.0
+    entity_topic_retry_max_seconds: float = 3600.0
 
     model_config = SettingsConfigDict(
         extra="ignore"
@@ -44,4 +47,4 @@ class Settings(BaseSettings):
         )
 
 
-settings = Settings()
+settings = Settings()  # type: ignore[call-arg]

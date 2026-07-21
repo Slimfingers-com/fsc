@@ -31,7 +31,7 @@ def _entity_read(entity) -> EntityRead:
 
 @router.get("/articles/{article_id}/entities", response_model=list[ArticleEntityRead])
 def article_entities(article_id: UUID, db: Session = Depends(get_db)):
-    rows = db.execute(select(ArticleEntity).options(selectinload(ArticleEntity.entity)).join(Article).join(Feed).join(Source).where(Article.id == article_id, *_active_article_conditions()).order_by(ArticleEntity.entity_id, ArticleEntity.start_offset.nullslast(), ArticleEntity.id)).scalars().all()
+    rows = db.execute(select(ArticleEntity).options(selectinload(ArticleEntity.entity)).join(Article).join(Feed).join(Source).join(ArticleEntity.entity).where(Article.id == article_id, *_active_article_conditions(), ArticleEntity.entity.has(deleted_at=None)).order_by(ArticleEntity.entity_id, ArticleEntity.start_offset.nullslast(), ArticleEntity.id)).scalars().all()
     if not rows and not db.scalar(select(Article.id).join(Feed).join(Source).where(Article.id == article_id, *_active_article_conditions())):
         raise HTTPException(404, "Article not found")
     grouped: dict[UUID, ArticleEntityRead] = {}
@@ -42,7 +42,7 @@ def article_entities(article_id: UUID, db: Session = Depends(get_db)):
 
 @router.get("/articles/{article_id}/topics", response_model=list[ArticleTopicRead])
 def article_topics(article_id: UUID, db: Session = Depends(get_db)):
-    rows = db.scalars(select(ArticleTopic).options(selectinload(ArticleTopic.topic)).join(Article).join(Feed).join(Source).where(Article.id == article_id, *_active_article_conditions()).order_by(ArticleTopic.relevance.desc(), ArticleTopic.topic_id)).all()
+    rows = db.scalars(select(ArticleTopic).options(selectinload(ArticleTopic.topic)).join(Article).join(Feed).join(Source).where(Article.id == article_id, *_active_article_conditions(), ArticleTopic.topic.has(deleted_at=None)).order_by(ArticleTopic.relevance.desc(), ArticleTopic.topic_id)).all()
     if not rows and not db.scalar(select(Article.id).join(Feed).join(Source).where(Article.id == article_id, *_active_article_conditions())):
         raise HTTPException(404, "Article not found")
     return [ArticleTopicRead(id=row.topic.id, name=row.topic.name, slug=row.topic.slug, relevance=row.relevance, confidence=row.confidence) for row in rows]

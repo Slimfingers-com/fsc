@@ -7,7 +7,7 @@ import pytest
 from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 
-from app.analysis.provider import EntityMentionResult, EntityType, TextPart, TopicResult
+from app.analysis.provider import AnalysisResult, EntityMentionResult, EntityTopicAnalyzer, EntityType, TextPart, TopicResult
 from app.analysis.resolver import EntityResolver, TopicResolver
 from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.source_type import SourceType
@@ -17,7 +17,7 @@ from app.models.topic import Topic
 from app.models.feed import Feed
 from app.models.source import Source
 from app.repositories.entity_topic import EntityTopicRepository
-from app.services.entity_topic_analysis import EntityTopicAnalysisService
+from app.services.entity_topic_analysis import EntityTopicAnalysisRunner, EntityTopicAnalysisService
 from tests.conftest import TestSessionLocal
 
 
@@ -40,42 +40,72 @@ def mark_current(article: Article, service: EntityTopicAnalysisService) -> None:
     article.entity_topic_analysis_config_version = service.config_version
 
 
+class EmptyAnalyzer(EntityTopicAnalyzer):
+    provider = "claim-test"
+    version = "1"
+
+    def analyze(self, article):
+        return AnalysisResult((), ())
+
+
+class PoisonAnalyzer(EntityTopicAnalyzer):
+    provider = "poison-test"
+    version = "1"
+
+    def analyze(self, article):
+        raise RuntimeError("poison article")
+
+
+def committed_articles(count: int) -> tuple[list, object]:
+    with TestSessionLocal.begin() as session:
+        articles = make_articles(session, count)
+        return [article.id for article in articles], articles[0].feed.source_id
+
+
+def cleanup_source(source_id) -> None:
+    with TestSessionLocal.begin() as session:
+        session.execute(delete(Source).where(Source.id == source_id))
+
+
 def test_current_prefix_cannot_starve_later_pending_articles(db):
     service = EntityTopicAnalysisService()
+    now = datetime.now(UTC)
     articles = make_articles(db, 10)
     for article in articles[:9]:
         mark_current(article, service)
     db.flush()
-    selected = service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1)
+    selected = service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1, now=now)
     assert [article.id for article in selected] == [articles[9].id]
 
 
 def test_more_than_four_batches_are_eventually_reachable(db):
     service = EntityTopicAnalysisService()
+    now = datetime.now(UTC)
     articles = make_articles(db, 9)
     reached = []
     for _ in articles:
-        selected = service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1)
+        selected = service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1, now=now)
         assert len(selected) == 1
         reached.append(selected[0].id)
         mark_current(selected[0], service)
         db.flush()
     assert reached == [article.id for article in articles]
-    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1) == []
+    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1, now=now) == []
 
 
 def test_content_and_analyzer_identity_control_pending_state(db):
     service = EntityTopicAnalysisService()
+    now = datetime.now(UTC)
     article = make_articles(db, 1)[0]
     mark_current(article, service)
     db.flush()
-    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1) == []
+    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1, now=now) == []
     article.content_hash = "f" * 64
     db.flush()
-    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1) == [article]
+    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version=service.analyzer.version, config_version=service.config_version, limit=1, now=now) == [article]
     mark_current(article, service)
     db.flush()
-    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version="next", config_version=service.config_version, limit=1) == [article]
+    assert service.repository.list_pending_articles(db, provider=service.analyzer.provider, version="next", config_version=service.config_version, limit=1, now=now) == [article]
 
 
 def test_ambiguous_and_soft_deleted_aliases_are_not_arbitrarily_reused(db):
@@ -130,7 +160,68 @@ def test_offset_constraints_are_database_enforced(db):
     entity = Entity(canonical_name="Constraint", normalized_name=f"constraint-{uuid4().hex}", entity_type=EntityType.OTHER)
     db.add(entity)
     db.flush()
-    invalid = ArticleEntity(article_id=article.id, entity_id=entity.id, mention_text="x", normalized_mention="x", entity_type=entity.entity_type, text_part=TextPart.BODY, start_offset=2, end_offset=1, confidence=.9, salience=.9, extraction_provider="test", extraction_version="1")
+    invalid = ArticleEntity(article_id=article.id, entity_id=entity.id, mention_text="x", normalized_mention="x", entity_type=entity.entity_type, text_source=TextPart.BODY, start_offset=2, end_offset=1, confidence=.9, salience=.9, extraction_provider="test", extraction_version="1")
     with pytest.raises(IntegrityError), db.begin_nested():
         db.add(invalid)
         db.flush()
+
+
+def test_two_parallel_workers_claim_each_article_once():
+    article_ids, source_id = committed_articles(6)
+    try:
+        runners = [EntityTopicAnalysisRunner(TestSessionLocal, EntityTopicAnalysisService(analyzer=EmptyAnalyzer()), worker_id=f"worker-{index}") for index in range(2)]
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            results = list(pool.map(lambda runner: runner.run_pending(limit=6), runners))
+        assert sum(result.selected for result in results) == 6
+        assert sum(result.processed for result in results) == 6
+        assert sum(result.skipped for result in results) == 0
+        with TestSessionLocal() as session:
+            articles = list(session.scalars(select(Article).where(Article.id.in_(article_ids))).all())
+            assert all(article.entity_topic_analysis_provider == EmptyAnalyzer.provider for article in articles)
+            assert all(article.entity_topic_claimed_by is None for article in articles)
+    finally:
+        cleanup_source(source_id)
+
+
+def test_skip_locked_claim_skips_row_locked_by_another_transaction():
+    article_ids, source_id = committed_articles(3)
+    repository = EntityTopicRepository()
+    now = datetime.now(UTC)
+    first = TestSessionLocal()
+    second = TestSessionLocal()
+    try:
+        first.begin()
+        first.scalar(select(Article).where(Article.id == article_ids[0]).with_for_update())
+        with second.begin():
+            claimed = repository.claim_pending_articles(second, provider=EmptyAnalyzer.provider, version=EmptyAnalyzer.version, config_version="1", limit=3, now=now, claim_expires_at=now + timedelta(minutes=5), claimed_by="second")
+        assert article_ids[0] not in claimed
+        assert set(claimed) == set(article_ids[1:])
+    finally:
+        first.rollback()
+        first.close()
+        second.close()
+        cleanup_source(source_id)
+
+
+def test_poison_article_uses_exponential_retry_backoff():
+    article_ids, source_id = committed_articles(1)
+    moment = [datetime.now(UTC)]
+    runner = EntityTopicAnalysisRunner(TestSessionLocal, EntityTopicAnalysisService(analyzer=PoisonAnalyzer()), worker_id="poison-worker", retry_base_seconds=10, retry_max_seconds=60, clock=lambda: moment[0])
+    try:
+        first = runner.run_pending(limit=1)
+        assert (first.selected, first.processed, first.failed) == (1, 0, 1)
+        with TestSessionLocal() as session:
+            article = session.get(Article, article_ids[0])
+            assert article.entity_topic_attempt_count == 1
+            assert article.entity_topic_retry_after == moment[0] + timedelta(seconds=10)
+            assert article.entity_topic_claimed_by is None
+        assert runner.run_pending(limit=1).selected == 0
+        moment[0] += timedelta(seconds=11)
+        second = runner.run_pending(limit=1)
+        assert second.failed == 1
+        with TestSessionLocal() as session:
+            article = session.get(Article, article_ids[0])
+            assert article.entity_topic_attempt_count == 2
+            assert article.entity_topic_retry_after == moment[0] + timedelta(seconds=20)
+    finally:
+        cleanup_source(source_id)

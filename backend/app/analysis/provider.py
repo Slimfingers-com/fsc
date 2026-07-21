@@ -31,12 +31,18 @@ class ArticleAnalysisInput:
 
 @dataclass(frozen=True, slots=True)
 class EntityMentionResult:
+    """One mention in a single normalized field.
+
+    ``text_source`` selects normalized title or body. Offsets are zero-based
+    Unicode-codepoint indexes using Python string semantics; start is inclusive
+    and end is exclusive. Both offsets must be set together or both be ``None``.
+    """
     canonical_name: str
     mention_text: str
     entity_type: EntityType
     confidence: float
     salience: float
-    text_part: TextPart
+    text_source: TextPart
     start_offset: int | None = None
     end_offset: int | None = None
     sentence_index: int | None = None

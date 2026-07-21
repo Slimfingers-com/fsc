@@ -80,6 +80,11 @@ class Article(BaseModel):
     entity_topic_analysis_config_version: Mapped[str | None] = mapped_column(String(100), nullable=True)
     entity_topic_analysis_content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
     entity_topic_analysis_normalization_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    entity_topic_claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    entity_topic_claimed_by: Mapped[str | None] = mapped_column(String(100), nullable=True, index=True)
+    entity_topic_claim_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    entity_topic_attempt_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    entity_topic_retry_after: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
     entity_topic_analyzed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
     entity_topic_analysis_error: Mapped[str | None] = mapped_column(Text, nullable=True)
 

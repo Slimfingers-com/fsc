@@ -1,5 +1,6 @@
 from datetime import UTC, datetime
 
+import pytest
 from sqlalchemy import func, select
 
 from app.analysis.provider import AnalysisResult, EntityMentionResult, EntityTopicAnalyzer, EntityType, TextPart, TopicResult
@@ -23,6 +24,13 @@ class FixedAnalyzer(EntityTopicAnalyzer):
             (EntityMentionResult("OpenAI", "OpenAI", EntityType.ORGANIZATION, .95, .9, TextPart.TITLE, 0, 6, 0), EntityMentionResult("OpenAI", "OpenAI", EntityType.ORGANIZATION, .95, .8, TextPart.BODY, 21, 27, 1)),
             (TopicResult("Artificial Intelligence", .9, .95), TopicResult("Artificial Intelligences", .8, .9)),
         )
+
+
+class InvalidOffsetAnalyzer(FixedAnalyzer):
+    version = "invalid"
+
+    def analyze(self, article):
+        return AnalysisResult((EntityMentionResult("OpenAI", "wrong", EntityType.ORGANIZATION, .9, .9, TextPart.BODY, 0, 5, 0),), ())
 
 
 def create_article(db):
@@ -78,7 +86,7 @@ def test_api_and_search_filters(db, client):
     entity = db.scalar(select(Entity).where(Entity.normalized_name == "openai"))
     topic = db.scalar(select(Topic).where(Topic.normalized_name == "artificial intelligence"))
     mentions = client.get(f"/articles/{article.id}/entities").json()[0]["mentions"]
-    assert {(mention["text_part"], mention["start_offset"]) for mention in mentions} == {("title", 0), ("body", 21)}
+    assert {(mention["text_source"], mention["start_offset"]) for mention in mentions} == {("title", 0), ("body", 21)}
     assert client.get(f"/entities/{entity.id}").json()["article_count"] == 1
     assert client.get(f"/topics/{topic.id}").json()["article_count"] == 1
     assert client.get("/entities", params={"entity_type": "organization", "query": "openai"}).json()["total"] == 1
@@ -87,3 +95,23 @@ def test_api_and_search_filters(db, client):
     assert client.get("/search", params={"entity_type": "not-a-type"}).status_code == 422
     assert client.get("/entities", params={"query": "x" * 501}).status_code == 422
     assert client.get("/topics", params={"query": "x" * 501}).status_code == 422
+
+
+def test_invalid_provider_result_preserves_previous_analysis(db):
+    article = create_article(db)
+    EntityTopicAnalysisService(analyzer=FixedAnalyzer()).analyze_article(db, article)
+    previous_ids = set(db.scalars(select(ArticleEntity.id).where(ArticleEntity.article_id == article.id)).all())
+    with pytest.raises(ValueError, match="do not match"):
+        EntityTopicAnalysisService(analyzer=InvalidOffsetAnalyzer()).analyze_article(db, article)
+    assert set(db.scalars(select(ArticleEntity.id).where(ArticleEntity.article_id == article.id)).all()) == previous_ids
+
+
+def test_article_endpoints_exclude_soft_deleted_entities_and_topics(db, client):
+    article = create_article(db)
+    EntityTopicAnalysisService(analyzer=FixedAnalyzer()).analyze_article(db, article)
+    entity = db.scalar(select(Entity).where(Entity.normalized_name == "openai"))
+    topic = db.scalar(select(Topic).where(Topic.normalized_name == "artificial intelligence"))
+    entity.deleted_at = topic.deleted_at = datetime.now(UTC)
+    db.flush()
+    assert client.get(f"/articles/{article.id}/entities").json() == []
+    assert client.get(f"/articles/{article.id}/topics").json() == []

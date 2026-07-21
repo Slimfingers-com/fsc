@@ -17,7 +17,7 @@ class RuleBasedEntityTopicAnalyzer(EntityTopicAnalyzer):
     def analyze(self, article: ArticleAnalysisInput) -> AnalysisResult:
         entities: list[EntityMentionResult] = []
         pattern = re.compile(r"\b(?:[A-ZÀ-ÖØ-Þ][\w'’-]+)(?:\s+(?:[A-ZÀ-ÖØ-Þ][\w'’-]+|&)){0,4}\b")
-        for text_part, field_text in ((TextPart.TITLE, article.title), (TextPart.BODY, article.normalized_text)):
+        for text_source, field_text in ((TextPart.TITLE, article.title), (TextPart.BODY, article.normalized_text)):
             sentences = list(re.finditer(r"(?:^|(?<=[.!?])\s+)([^.!?]+)", field_text))
             for sentence_index, sentence in enumerate(sentences):
                 for match in pattern.finditer(sentence.group(1)):
@@ -36,12 +36,12 @@ class RuleBasedEntityTopicAnalyzer(EntityTopicAnalyzer):
                     else:
                         entity_type, confidence = EntityType.OTHER, 0.62
                     start = sentence.start(1) + match.start()
-                    entities.append(EntityMentionResult(mention, mention, entity_type, confidence, min(1.0, 0.45 + len(tokens) * 0.12), text_part, start, start + len(mention), sentence_index))
+                    entities.append(EntityMentionResult(mention, mention, entity_type, confidence, min(1.0, 0.45 + len(tokens) * 0.12), text_source, start, start + len(mention), sentence_index))
 
         text = f"{article.title} {article.normalized_text}".strip()
         words = [normalize_topic(word) for word in re.findall(r"\b[^\W\d_][\w-]{3,}\b", text.casefold(), re.UNICODE)]
         counts = Counter(word for word in words if word and word not in _STOP and len(word) >= 4)
-        phrases = Counter()
+        phrases: Counter[str] = Counter()
         significant = [w for w in words if w and w not in _STOP and len(w) >= 4]
         for left, right in zip(significant, significant[1:]):
             if left != right:

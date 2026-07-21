@@ -1,6 +1,7 @@
 import re
 
 from sqlalchemy import Float, cast, func, literal, literal_column, select
+from sqlalchemy.sql.elements import ColumnElement
 from sqlalchemy.orm import Session
 
 from app.models.search_document import SearchDocument
@@ -16,7 +17,7 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
     def __init__(self, db: Session, *, text_config: str = "simple") -> None:
         if not re.fullmatch(r"[a-z_]+", text_config):
             raise ValueError("text_config must be a PostgreSQL text search configuration name")
-        self.text_config = literal_column(f"'{text_config}'::regconfig")
+        self.text_config: ColumnElement = literal_column(f"'{text_config}'::regconfig")
         self.db = db
 
     def search(self, *, query: str | None, filters: SearchFilters, sort: SearchSort, page: int, page_size: int) -> SearchPage:
@@ -26,7 +27,7 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
             cast(func.ts_rank_cd(SearchDocument.search_vector, tsquery), Float)
             if tsquery is not None else literal(0.0, type_=Float)
         )
-        conditions = [
+        conditions: list[ColumnElement[bool]] = [
             SearchDocument.deleted_at.is_(None),
             Article.deleted_at.is_(None),
             Feed.deleted_at.is_(None),

@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 
 from app.core.settings import settings
 from app.db.session import get_db
-from app.schemas.search import SearchPageRead
+from app.schemas.search import SearchHitRead, SearchPageRead
 from app.search.postgresql import PostgreSQLFullTextSearchProvider
 from app.search.provider import SearchFilters, SearchSort
 from app.analysis.provider import EntityType
@@ -51,7 +51,7 @@ def search(
         page_size=size,
     )
     return SearchPageRead(
-        items=result.items,
+        items=[SearchHitRead.model_validate(item) for item in result.items],
         total=result.total,
         page=result.page,
         page_size=result.page_size,

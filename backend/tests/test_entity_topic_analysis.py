@@ -51,7 +51,14 @@ def test_offsets_are_field_relative_for_unicode_and_empty_title():
     data = ArticleAnalysisInput(uuid4(), "", "Élodie Müller traf Élodie Müller in Berlin.", "de", None)
     mentions = analyzer.analyze(data).entities
     people = [mention for mention in mentions if mention.mention_text == "Élodie Müller"]
-    assert [(mention.text_part, mention.start_offset, mention.end_offset) for mention in people] == [
+    assert [(mention.text_source, mention.start_offset, mention.end_offset) for mention in people] == [
         (TextPart.BODY, 0, 13), (TextPart.BODY, 19, 32),
     ]
     assert all(data.normalized_text[item.start_offset:item.end_offset] == item.mention_text for item in people)
+
+
+def test_offsets_count_emoji_as_one_python_codepoint():
+    data = ArticleAnalysisInput(uuid4(), "🚀 OpenAI GmbH", "", "en", None)
+    mention = next(item for item in RuleBasedEntityTopicAnalyzer().analyze(data).entities if item.mention_text == "OpenAI GmbH")
+    assert (mention.text_source, mention.start_offset, mention.end_offset) == (TextPart.TITLE, 2, 13)
+    assert data.title[mention.start_offset:mention.end_offset] == mention.mention_text
