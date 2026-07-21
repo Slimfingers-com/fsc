@@ -178,3 +178,34 @@ def test_fetch_metadata_updates_feed(db):
     assert feed.last_success_at == fetched_at
     assert feed.last_error_at is None
     assert feed.last_error_message is None
+
+
+def test_content_change_invalidates_normalization(db):
+    feed = create_feed(db)
+    service = FeedPersistenceService()
+    service.persist(db, feed=feed, parsed_feed=parsed_feed(parsed_entry()))
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    article.normalized_title = "Original title"
+    article.normalized_text = "Original content"
+    article.language_code = "en"
+    article.word_count = 2
+    article.reading_time_minutes = 1
+    article.content_hash = "a" * 64
+    article.normalization_version = 1
+    article.normalized_at = datetime.now(UTC)
+
+    result = service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(parsed_entry(content="<p>Changed content</p>")),
+    )
+
+    assert result.updated == 1
+    assert article.normalized_title is None
+    assert article.normalized_text is None
+    assert article.language_code is None
+    assert article.word_count is None
+    assert article.reading_time_minutes is None
+    assert article.content_hash is None
+    assert article.normalization_version is None
+    assert article.normalized_at is None

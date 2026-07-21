@@ -141,10 +141,23 @@ class FeedPersistenceService:
         }
 
         changed = False
+        normalization_input_changed = False
         for field, value in values.items():
             if getattr(article, field) != value:
                 setattr(article, field, value)
                 changed = True
+                if field in {"title", "summary", "content"}:
+                    normalization_input_changed = True
+
+        if normalization_input_changed:
+            article.normalized_title = None
+            article.normalized_text = None
+            article.language_code = None
+            article.word_count = None
+            article.reading_time_minutes = None
+            article.content_hash = None
+            article.normalization_version = None
+            article.normalized_at = None
 
         if (
             identity.identity_type is ArticleIdentityType.GUID
