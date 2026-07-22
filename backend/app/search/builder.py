@@ -34,12 +34,14 @@ class SearchDocumentBuilder:
         if article.id is None or article.content_hash is None or article.normalized_at is None:
             raise ValueError("article must be persisted and normalized before indexing")
         source = article.feed.source
+        title = article.normalized_title or ""
+        body = article.normalized_text or ""
         values = {
             "source_id": str(source.id),
             "source_name": source.name,
             "source_slug": source.slug,
-            "title": article.normalized_title or "",
-            "body": article.normalized_text or "",
+            "title": title,
+            "body": body,
             "url": article.link,
             "language_code": article.language_code,
             "published_at": self._serialize_datetime(article.published_at),
@@ -49,8 +51,8 @@ class SearchDocumentBuilder:
             source_id=source.id,
             source_name=source.name,
             source_slug=source.slug,
-            title=values["title"],
-            body=values["body"],
+            title=title,
+            body=body,
             url=article.link,
             language_code=article.language_code,
             published_at=article.published_at,

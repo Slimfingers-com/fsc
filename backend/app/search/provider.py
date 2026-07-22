@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from enum import StrEnum
 from uuid import UUID
+from app.analysis.provider import EntityType
 
 class SearchSort(StrEnum):
     RELEVANCE = "relevance"
@@ -17,6 +18,10 @@ class SearchFilters:
     source_slug: str | None = None
     published_from: datetime | None = None
     published_to: datetime | None = None
+    entity_id: UUID | None = None
+    entity_type: EntityType | None = None
+    topic_id: UUID | None = None
+    topic_slug: str | None = None
 
 
 @dataclass(frozen=True, slots=True)

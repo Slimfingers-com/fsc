@@ -12,6 +12,8 @@ from app.enums.article_identity_type import ArticleIdentityType
 if TYPE_CHECKING:
     from app.models.feed import Feed
     from app.models.search_document import SearchDocument
+    from app.models.entity import ArticleEntity
+    from app.models.topic import ArticleTopic
 
 
 class Article(BaseModel):
@@ -72,6 +74,19 @@ class Article(BaseModel):
         nullable=True,
         index=True,
     )
+    entity_topic_analysis_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
+    entity_topic_analysis_version: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    entity_topic_analysis_provider: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    entity_topic_analysis_config_version: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    entity_topic_analysis_content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    entity_topic_analysis_normalization_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    entity_topic_claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    entity_topic_claimed_by: Mapped[str | None] = mapped_column(String(100), nullable=True, index=True)
+    entity_topic_claim_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    entity_topic_attempt_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    entity_topic_retry_after: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    entity_topic_analyzed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    entity_topic_analysis_error: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     feed: Mapped["Feed"] = relationship(back_populates="articles")
     search_document: Mapped["SearchDocument | None"] = relationship(
@@ -79,3 +94,5 @@ class Article(BaseModel):
         cascade="all, delete-orphan",
         uselist=False,
     )
+    entity_mentions: Mapped[list["ArticleEntity"]] = relationship(back_populates="article", cascade="all, delete-orphan")
+    topics: Mapped[list["ArticleTopic"]] = relationship(back_populates="article", cascade="all, delete-orphan")

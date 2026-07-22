@@ -12,7 +12,7 @@ def normalize_feed_datetime(
         return None
 
     try:
-        timestamp = calendar.timegm(value)
+        timestamp = calendar.timegm(tuple(value))
         return datetime.fromtimestamp(timestamp, tz=timezone.utc)
     except (TypeError, ValueError, OverflowError):
         return None

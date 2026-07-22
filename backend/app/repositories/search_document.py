@@ -1,6 +1,8 @@
 from uuid import UUID
+from typing import cast
 
 from sqlalchemy import delete, func, or_, select
+from sqlalchemy.engine import CursorResult
 from sqlalchemy.orm import Session, joinedload
 
 from app.models.article import Article
@@ -45,7 +47,7 @@ class SearchDocumentRepository(BaseRepository[SearchDocument]):
                 or_(SearchDocument.deleted_at.is_not(None), ~eligible_article)
             )
         )
-        return result.rowcount or 0
+        return cast(CursorResult, result).rowcount or 0
 
     def list_pending_articles(self, db: Session, *, builder_version: int, limit: int) -> list[Article]:
         statement = (

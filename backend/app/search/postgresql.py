@@ -1,6 +1,7 @@
 import re
 
 from sqlalchemy import Float, cast, func, literal, literal_column, select
+from sqlalchemy.sql.elements import ColumnElement
 from sqlalchemy.orm import Session
 
 from app.models.search_document import SearchDocument
@@ -8,13 +9,15 @@ from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
 from app.search.provider import SearchFilters, SearchHit, SearchPage, SearchProvider, SearchSort
+from app.models.entity import ArticleEntity
+from app.models.topic import ArticleTopic, Topic
 
 
 class PostgreSQLFullTextSearchProvider(SearchProvider):
     def __init__(self, db: Session, *, text_config: str = "simple") -> None:
         if not re.fullmatch(r"[a-z_]+", text_config):
             raise ValueError("text_config must be a PostgreSQL text search configuration name")
-        self.text_config = literal_column(f"'{text_config}'::regconfig")
+        self.text_config: ColumnElement = literal_column(f"'{text_config}'::regconfig")
         self.db = db
 
     def search(self, *, query: str | None, filters: SearchFilters, sort: SearchSort, page: int, page_size: int) -> SearchPage:
@@ -24,7 +27,7 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
             cast(func.ts_rank_cd(SearchDocument.search_vector, tsquery), Float)
             if tsquery is not None else literal(0.0, type_=Float)
         )
-        conditions = [
+        conditions: list[ColumnElement[bool]] = [
             SearchDocument.deleted_at.is_(None),
             Article.deleted_at.is_(None),
             Feed.deleted_at.is_(None),
@@ -44,6 +47,14 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
             conditions.append(SearchDocument.published_at >= filters.published_from)
         if filters.published_to:
             conditions.append(SearchDocument.published_at <= filters.published_to)
+        if filters.entity_id:
+            conditions.append(select(ArticleEntity.id).where(ArticleEntity.article_id == Article.id, ArticleEntity.entity_id == filters.entity_id, ArticleEntity.deleted_at.is_(None)).exists())
+        if filters.entity_type:
+            conditions.append(select(ArticleEntity.id).where(ArticleEntity.article_id == Article.id, ArticleEntity.entity_type == filters.entity_type, ArticleEntity.deleted_at.is_(None)).exists())
+        if filters.topic_id:
+            conditions.append(select(ArticleTopic.id).where(ArticleTopic.article_id == Article.id, ArticleTopic.topic_id == filters.topic_id, ArticleTopic.deleted_at.is_(None)).exists())
+        if filters.topic_slug:
+            conditions.append(select(ArticleTopic.id).join(Topic).where(ArticleTopic.article_id == Article.id, Topic.slug == filters.topic_slug, ArticleTopic.deleted_at.is_(None), Topic.deleted_at.is_(None)).exists())
 
         base = (
             select(SearchDocument)

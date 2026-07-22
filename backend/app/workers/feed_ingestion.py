@@ -8,6 +8,7 @@ from datetime import UTC, datetime
 from types import FrameType
 from typing import Callable
 
+from app.core.settings import settings
 from app.db.session import SessionLocal
 from app.services.feed_synchronization import (
     FeedSynchronizationBatchResult,
@@ -43,7 +44,10 @@ class FeedIngestionWorker:
 
         self.poll_interval_seconds = poll_interval_seconds
         self.batch_limit = batch_limit
-        self.runner = runner or FeedSynchronizationRunner(SessionLocal)
+        self.runner = runner or FeedSynchronizationRunner(
+            SessionLocal,
+            claim_ttl_seconds=settings.feed_worker_claim_ttl_seconds,
+        )
         self.stop_event = stop_event or threading.Event()
         self.clock = clock or (lambda: datetime.now(UTC))
 

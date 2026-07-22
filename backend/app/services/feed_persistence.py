@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
+from sqlalchemy import select
+from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
 from app.core.article_identity import ArticleIdentity, build_article_identity
@@ -44,11 +46,15 @@ class FeedPersistenceService:
             article = self._find_existing(db, feed, entry, identity)
 
             if article is None:
-                self.article_repository.add(
-                    db,
-                    self._new_article(feed, entry, identity),
+                article, was_inserted = self._create_or_get(
+                    db, feed, entry, identity
                 )
-                inserted += 1
+                if was_inserted:
+                    inserted += 1
+                elif self._apply_entry(article, entry, identity):
+                    updated += 1
+                else:
+                    unchanged += 1
             elif self._apply_entry(article, entry, identity):
                 updated += 1
             else:
@@ -69,6 +75,50 @@ class FeedPersistenceService:
             updated=updated,
             unchanged=unchanged,
         )
+
+    def _create_or_get(
+        self,
+        db: Session,
+        feed: Feed,
+        entry: ParsedFeedEntry,
+        identity: ArticleIdentity,
+    ) -> tuple[Article, bool]:
+        values = {
+            "feed_id": feed.id,
+            "identity_type": identity.identity_type,
+            "identity_key": identity.identity_key,
+            "guid": self._clean(entry.external_id),
+            "link": self._clean(entry.link),
+            "title": self._clean(entry.title),
+            "summary": entry.summary,
+            "content": entry.content,
+            "author": self._clean(entry.author),
+            "published_at": entry.published_at,
+            "source_updated_at": entry.updated_at,
+        }
+        article_id = db.scalar(
+            insert(Article)
+            .values(**values)
+            .on_conflict_do_nothing(
+                constraint="uq_articles_feed_id_identity_key"
+            )
+            .returning(Article.id)
+        )
+        if article_id is not None:
+            article = db.get(Article, article_id)
+            assert article is not None
+            return article, True
+
+        article = db.scalar(
+            select(Article).where(
+                Article.feed_id == feed.id,
+                Article.identity_key == identity.identity_key,
+                Article.deleted_at.is_(None),
+            )
+        )
+        if article is None:
+            raise RuntimeError("conflicting article could not be reloaded")
+        return article, False
 
     def _find_existing(
         self,
@@ -101,26 +151,6 @@ class FeedPersistenceService:
             db,
             feed_id=feed.id,
             identity_key=identity.identity_key,
-        )
-
-    @staticmethod
-    def _new_article(
-        feed: Feed,
-        entry: ParsedFeedEntry,
-        identity: ArticleIdentity,
-    ) -> Article:
-        return Article(
-            feed=feed,
-            identity_type=identity.identity_type,
-            identity_key=identity.identity_key,
-            guid=FeedPersistenceService._clean(entry.external_id),
-            link=FeedPersistenceService._clean(entry.link),
-            title=FeedPersistenceService._clean(entry.title),
-            summary=entry.summary,
-            content=entry.content,
-            author=FeedPersistenceService._clean(entry.author),
-            published_at=entry.published_at,
-            source_updated_at=entry.updated_at,
         )
 
     @staticmethod
