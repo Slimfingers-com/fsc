@@ -115,3 +115,34 @@ def test_article_endpoints_exclude_soft_deleted_entities_and_topics(db, client):
     db.flush()
     assert client.get(f"/articles/{article.id}/entities").json() == []
     assert client.get(f"/articles/{article.id}/topics").json() == []
+
+
+def test_search_filters_exclude_soft_deleted_article_associations(db, client):
+    article = create_article(db)
+    EntityTopicAnalysisService(analyzer=FixedAnalyzer()).analyze_article(db, article)
+    SearchIndexingService().index_article(db, article)
+    entity = db.scalar(select(Entity).where(Entity.normalized_name == "openai"))
+    topic = db.scalar(
+        select(Topic).where(Topic.normalized_name == "artificial intelligence")
+    )
+    deleted_at = datetime.now(UTC)
+    for mention in db.scalars(
+        select(ArticleEntity).where(ArticleEntity.article_id == article.id)
+    ):
+        mention.deleted_at = deleted_at
+    association = db.scalar(
+        select(ArticleTopic).where(ArticleTopic.article_id == article.id)
+    )
+    association.deleted_at = deleted_at
+    db.flush()
+
+    filters = (
+        {"entity_id": str(entity.id)},
+        {"entity_type": entity.entity_type.value},
+        {"topic_id": str(topic.id)},
+        {"topic_slug": topic.slug},
+    )
+    for params in filters:
+        response = client.get("/search", params=params)
+        assert response.status_code == 200
+        assert response.json()["total"] == 0

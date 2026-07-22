@@ -81,7 +81,7 @@ class EntityTopicRepository:
     def claim_pending_articles(self, db: Session, *, provider: str, version: str, config_version: str, limit: int, now: datetime, claim_expires_at: datetime, claimed_by: str) -> list[UUID]:
         ids = list(db.scalars(select(Article.id).join(Feed).join(Source).where(
             *self._pending_conditions(provider=provider, version=version, config_version=config_version, now=now),
-        ).order_by(Article.created_at, Article.id).limit(limit).with_for_update(skip_locked=True)).all())
+        ).order_by(Article.created_at, Article.id).limit(limit).with_for_update(skip_locked=True, of=Article)).all())
         if ids:
             db.execute(update(Article).where(Article.id.in_(ids)).values(entity_topic_claimed_at=now, entity_topic_claimed_by=claimed_by, entity_topic_claim_expires_at=claim_expires_at))
         return ids

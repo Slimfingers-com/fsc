@@ -203,6 +203,46 @@ def test_skip_locked_claim_skips_row_locked_by_another_transaction():
         cleanup_source(source_id)
 
 
+def test_parallel_workers_claim_different_articles_from_same_feed():
+    article_ids, source_id = committed_articles(4)
+    repository = EntityTopicRepository()
+    now = datetime.now(UTC)
+    barrier = Barrier(2)
+
+    def claim(worker_id: str):
+        with TestSessionLocal() as session:
+            with session.begin():
+                claimed = repository.claim_pending_articles(
+                    session,
+                    provider=EmptyAnalyzer.provider,
+                    version=EmptyAnalyzer.version,
+                    config_version="1",
+                    limit=1,
+                    now=now,
+                    claim_expires_at=now + timedelta(minutes=5),
+                    claimed_by=worker_id,
+                )
+                barrier.wait()
+                return claimed
+
+    try:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            claims = list(pool.map(claim, ("worker-one", "worker-two")))
+        flattened = [article_id for claimed in claims for article_id in claimed]
+        assert all(len(claimed) == 1 for claimed in claims)
+        assert len(flattened) == len(set(flattened)) == 2
+        assert set(flattened).issubset(set(article_ids))
+        with TestSessionLocal() as session:
+            feed_ids = set(
+                session.scalars(
+                    select(Article.feed_id).where(Article.id.in_(flattened))
+                ).all()
+            )
+            assert len(feed_ids) == 1
+    finally:
+        cleanup_source(source_id)
+
+
 def test_poison_article_uses_exponential_retry_backoff():
     article_ids, source_id = committed_articles(1)
     moment = [datetime.now(UTC)]
