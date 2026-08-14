@@ -20,12 +20,14 @@ from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.article_pipeline import ArticlePipeline
 from app.enums.source_type import SourceType
 from app.models.article import Article
-from app.models.article_processing import ArticleProcessingRun, ArticleProcessingState
+from app.models.article_processing import (
+    ArticleProcessingRun,
+    ArticleProcessingState,
+)
 from app.models.entity import ArticleEntity, Entity, EntityAlias
 from app.models.feed import Feed
 from app.models.source import Source
 from app.models.topic import ArticleTopic, Topic
-from app.repositories.entity_topic import EntityTopicRepository
 from app.services.entity_topic_analysis import (
     EntityTopicAnalysisRunner,
     EntityTopicAnalysisService,
@@ -33,7 +35,10 @@ from app.services.entity_topic_analysis import (
 from tests.conftest import TestSessionLocal
 
 
-def make_articles(db, count: int) -> list[Article]:
+def make_articles(
+    db,
+    count: int,
+) -> list[Article]:
     token = uuid4().hex
 
     source = Source(
@@ -63,7 +68,12 @@ def make_articles(db, count: int) -> list[Article]:
             content_hash=f"{index:064x}",
             normalization_version=1,
             normalized_at=now,
-            created_at=now + timedelta(microseconds=index),
+            created_at=(
+                now
+                + timedelta(
+                    microseconds=index
+                )
+            ),
         )
         for index in range(count)
     ]
@@ -74,25 +84,15 @@ def make_articles(db, count: int) -> list[Article]:
     return articles
 
 
-def mark_current(
-    article: Article,
-    service: EntityTopicAnalysisService,
-) -> None:
-    article.entity_topic_analysis_content_hash = article.content_hash
-    article.entity_topic_analysis_normalization_version = (
-        article.normalization_version
-    )
-    article.entity_topic_analysis_provider = service.analyzer.provider
-    article.entity_topic_analysis_version = service.analyzer.version
-    article.entity_topic_analysis_config_version = service.config_version
-
-
 class EmptyAnalyzer(EntityTopicAnalyzer):
     provider = "claim-test"
     version = "1"
 
     def analyze(self, article):
-        return AnalysisResult((), ())
+        return AnalysisResult(
+            (),
+            (),
+        )
 
 
 class PoisonAnalyzer(EntityTopicAnalyzer):
@@ -100,7 +100,9 @@ class PoisonAnalyzer(EntityTopicAnalyzer):
     version = "1"
 
     def analyze(self, article):
-        raise RuntimeError("poison article")
+        raise RuntimeError(
+            "poison article"
+        )
 
 
 class ResultAnalyzer(EntityTopicAnalyzer):
@@ -132,7 +134,9 @@ class ResultAnalyzer(EntityTopicAnalyzer):
         )
 
 
-def committed_articles(count: int) -> tuple[list, object]:
+def committed_articles(
+    count: int,
+) -> tuple[list, object]:
     with TestSessionLocal.begin() as session:
         articles = make_articles(
             session,
@@ -140,20 +144,33 @@ def committed_articles(count: int) -> tuple[list, object]:
         )
 
         return (
-            [article.id for article in articles],
+            [
+                article.id
+                for article in articles
+            ],
             articles[0].feed.source_id,
         )
 
 
-def cleanup_source(source_id) -> None:
+def cleanup_source(
+    source_id,
+) -> None:
     with TestSessionLocal.begin() as session:
-        article_ids = select(Article.id).join(Feed).where(
+        article_ids = select(
+            Article.id
+        ).join(
+            Feed
+        ).where(
             Feed.source_id == source_id
         )
 
         session.execute(
-            delete(ArticleProcessingRun).where(
-                ArticleProcessingRun.article_id.in_(article_ids)
+            delete(
+                ArticleProcessingRun
+            ).where(
+                ArticleProcessingRun.article_id.in_(
+                    article_ids
+                )
             )
         )
 
@@ -164,147 +181,120 @@ def cleanup_source(source_id) -> None:
         )
 
 
-def test_current_prefix_cannot_starve_later_pending_articles(db):
-    service = EntityTopicAnalysisService()
-    now = datetime.now(UTC)
-    articles = make_articles(db, 10)
-
-    for article in articles[:9]:
-        mark_current(
-            article,
-            service,
-        )
-
-    db.flush()
-
-    selected = service.repository.list_pending_articles(
-        db,
-        provider=service.analyzer.provider,
-        version=service.analyzer.version,
-        config_version=service.config_version,
-        limit=1,
-        now=now,
+def test_analysis_hash_tracks_actual_analysis_input():
+    service = EntityTopicAnalysisService(
+        analyzer=EmptyAnalyzer()
     )
 
-    assert [article.id for article in selected] == [
-        articles[9].id
-    ]
+    article = Article(
+        id=uuid4(),
+        feed_id=uuid4(),
+        identity_type=ArticleIdentityType.DERIVED,
+        identity_key="a" * 64,
+        normalized_title="Title",
+        normalized_text="Body",
+        language_code="en",
+    )
 
+    original = service.analysis_hash(
+        article
+    )
 
-def test_more_than_four_batches_are_eventually_reachable(db):
-    service = EntityTopicAnalysisService()
-    now = datetime.now(UTC)
-    articles = make_articles(db, 9)
+    article.normalized_text = (
+        "Changed body"
+    )
 
-    reached = []
+    changed_text = service.analysis_hash(
+        article
+    )
 
-    for _ in articles:
-        selected = service.repository.list_pending_articles(
-            db,
-            provider=service.analyzer.provider,
-            version=service.analyzer.version,
-            config_version=service.config_version,
-            limit=1,
-            now=now,
+    article.normalized_text = "Body"
+    article.language_code = "de"
+
+    changed_language = (
+        service.analysis_hash(
+            article
         )
+    )
 
-        assert len(selected) == 1
+    assert len(
+        {
+            original,
+            changed_text,
+            changed_language,
+        }
+    ) == 3
 
-        reached.append(
-            selected[0].id
-        )
 
-        mark_current(
-            selected[0],
-            service,
-        )
+def test_candidate_contains_complete_processing_identity():
+    service = EntityTopicAnalysisService(
+        analyzer=EmptyAnalyzer(),
+        config_version="config-2",
+    )
 
-        db.flush()
+    article = Article(
+        id=uuid4(),
+        feed_id=uuid4(),
+        identity_type=ArticleIdentityType.DERIVED,
+        identity_key="b" * 64,
+        normalized_title="Title",
+        normalized_text="Body",
+        language_code="en",
+    )
 
-    assert reached == [
-        article.id
-        for article in articles
-    ]
+    candidate = service.candidate(
+        article
+    )
 
     assert (
-        service.repository.list_pending_articles(
-            db,
-            provider=service.analyzer.provider,
-            version=service.analyzer.version,
-            config_version=service.config_version,
-            limit=1,
-            now=now,
-        )
-        == []
+        candidate.article_id
+        == article.id
     )
-
-
-def test_content_and_analyzer_identity_control_pending_state(db):
-    service = EntityTopicAnalysisService()
-    now = datetime.now(UTC)
-    article = make_articles(db, 1)[0]
-
-    mark_current(
-        article,
-        service,
-    )
-
-    db.flush()
-
     assert (
-        service.repository.list_pending_articles(
-            db,
-            provider=service.analyzer.provider,
-            version=service.analyzer.version,
-            config_version=service.config_version,
-            limit=1,
-            now=now,
+        candidate.input_hash
+        == service.analysis_hash(
+            article
         )
-        == []
+    )
+    assert (
+        candidate.provider
+        == EmptyAnalyzer.provider
+    )
+    assert (
+        candidate.provider_version
+        == EmptyAnalyzer.version
+    )
+    assert (
+        candidate.configuration_version
+        == "config-2"
     )
 
-    article.content_hash = "f" * 64
-    db.flush()
 
-    assert service.repository.list_pending_articles(
-        db,
-        provider=service.analyzer.provider,
-        version=service.analyzer.version,
-        config_version=service.config_version,
-        limit=1,
-        now=now,
-    ) == [article]
-
-    mark_current(
-        article,
-        service,
+def test_ambiguous_and_soft_deleted_aliases_are_not_arbitrarily_reused(
+    db,
+):
+    alias = (
+        f"shared-{uuid4().hex}"
     )
-
-    db.flush()
-
-    assert service.repository.list_pending_articles(
-        db,
-        provider=service.analyzer.provider,
-        version="next",
-        config_version=service.config_version,
-        limit=1,
-        now=now,
-    ) == [article]
-
-
-def test_ambiguous_and_soft_deleted_aliases_are_not_arbitrarily_reused(db):
-    alias = f"shared-{uuid4().hex}"
 
     entities = [
         Entity(
-            canonical_name=f"Entity {index}",
-            normalized_name=f"entity-{uuid4().hex}",
-            entity_type=EntityType.ORGANIZATION,
+            canonical_name=(
+                f"Entity {index}"
+            ),
+            normalized_name=(
+                f"entity-{uuid4().hex}"
+            ),
+            entity_type=(
+                EntityType.ORGANIZATION
+            ),
         )
         for index in range(2)
     ]
 
-    db.add_all(entities)
+    db.add_all(
+        entities
+    )
     db.flush()
 
     db.add_all(
@@ -313,7 +303,9 @@ def test_ambiguous_and_soft_deleted_aliases_are_not_arbitrarily_reused(db):
                 entity_id=entity.id,
                 original_alias=alias,
                 normalized_alias=alias,
-                entity_type=EntityType.ORGANIZATION,
+                entity_type=(
+                    EntityType.ORGANIZATION
+                ),
             )
             for entity in entities
         ]
@@ -339,7 +331,10 @@ def test_ambiguous_and_soft_deleted_aliases_are_not_arbitrarily_reused(db):
         is None
     )
 
-    entities[1].deleted_at = datetime.now(UTC)
+    entities[1].deleted_at = (
+        datetime.now(UTC)
+    )
+
     db.flush()
 
     assert (
@@ -353,8 +348,13 @@ def test_ambiguous_and_soft_deleted_aliases_are_not_arbitrarily_reused(db):
     )
 
 
-def _concurrent_resolve(kind: str) -> list:
-    normalized = f"concurrent-{uuid4().hex}"
+def _concurrent_resolve(
+    kind: str,
+) -> list:
+    normalized = (
+        f"concurrent-{uuid4().hex}"
+    )
+
     barrier = Barrier(2)
 
     def resolve():
@@ -363,30 +363,39 @@ def _concurrent_resolve(kind: str) -> list:
 
             with session.begin():
                 if kind == "entity":
-                    value = EntityResolver().resolve(
-                        session,
-                        EntityMentionResult(
-                            normalized,
-                            normalized,
-                            EntityType.ORGANIZATION,
-                            0.99,
-                            0.9,
-                            TextPart.BODY,
-                        ),
+                    value = (
+                        EntityResolver()
+                        .resolve(
+                            session,
+                            EntityMentionResult(
+                                normalized,
+                                normalized,
+                                EntityType.ORGANIZATION,
+                                0.99,
+                                0.9,
+                                TextPart.BODY,
+                            ),
+                        )
                     )
+
                 else:
-                    value = TopicResolver().resolve(
-                        session,
-                        TopicResult(
-                            normalized,
-                            0.9,
-                            0.99,
-                        ),
+                    value = (
+                        TopicResolver()
+                        .resolve(
+                            session,
+                            TopicResult(
+                                normalized,
+                                0.9,
+                                0.99,
+                            ),
+                        )
                     )
 
                 return value.id
 
-    with ThreadPoolExecutor(max_workers=2) as pool:
+    with ThreadPoolExecutor(
+        max_workers=2
+    ) as pool:
         ids = list(
             pool.map(
                 lambda _: resolve(),
@@ -413,17 +422,27 @@ def _concurrent_resolve(kind: str) -> list:
 
 @pytest.mark.parametrize(
     "kind",
-    ["entity", "topic"],
+    [
+        "entity",
+        "topic",
+    ],
 )
 def test_concurrent_resolution_returns_one_record_without_integrity_error(
     kind,
 ):
-    ids = _concurrent_resolve(kind)
+    ids = _concurrent_resolve(
+        kind
+    )
 
-    assert ids[0] == ids[1]
+    assert (
+        ids[0]
+        == ids[1]
+    )
 
 
-def test_unicode_slug_collisions_do_not_merge_different_topics(db):
+def test_unicode_slug_collisions_do_not_merge_different_topics(
+    db,
+):
     resolver = TopicResolver()
 
     first = resolver.resolve(
@@ -444,20 +463,38 @@ def test_unicode_slug_collisions_do_not_merge_different_topics(db):
         ),
     )
 
-    assert first.id != second.id
-    assert first.slug != second.slug
+    assert (
+        first.id
+        != second.id
+    )
+
+    assert (
+        first.slug
+        != second.slug
+    )
 
 
-def test_offset_constraints_are_database_enforced(db):
-    article = make_articles(db, 1)[0]
+def test_offset_constraints_are_database_enforced(
+    db,
+):
+    article = make_articles(
+        db,
+        1,
+    )[0]
 
     entity = Entity(
         canonical_name="Constraint",
-        normalized_name=f"constraint-{uuid4().hex}",
-        entity_type=EntityType.OTHER,
+        normalized_name=(
+            f"constraint-{uuid4().hex}"
+        ),
+        entity_type=(
+            EntityType.OTHER
+        ),
     )
 
-    db.add(entity)
+    db.add(
+        entity
+    )
     db.flush()
 
     invalid = ArticleEntity(
@@ -475,31 +512,45 @@ def test_offset_constraints_are_database_enforced(db):
         extraction_version="1",
     )
 
-    with pytest.raises(IntegrityError), db.begin_nested():
-        db.add(invalid)
+    with pytest.raises(
+        IntegrityError
+    ), db.begin_nested():
+        db.add(
+            invalid
+        )
         db.flush()
 
 
 def test_two_parallel_workers_process_each_article_once():
-    article_ids, source_id = committed_articles(6)
+    article_ids, source_id = (
+        committed_articles(6)
+    )
 
     try:
         runners = [
             EntityTopicAnalysisRunner(
                 TestSessionLocal,
                 EntityTopicAnalysisService(
-                    analyzer=EmptyAnalyzer()
+                    analyzer=(
+                        EmptyAnalyzer()
+                    )
                 ),
-                worker_id=f"worker-{index}",
+                worker_id=(
+                    f"worker-{index}"
+                ),
             )
             for index in range(2)
         ]
 
-        with ThreadPoolExecutor(max_workers=2) as pool:
+        with ThreadPoolExecutor(
+            max_workers=2
+        ) as pool:
             results = list(
                 pool.map(
-                    lambda runner: runner.run_pending(
-                        limit=6
+                    lambda runner: (
+                        runner.run_pending(
+                            limit=6
+                        )
                     ),
                     runners,
                 )
@@ -549,8 +600,15 @@ def test_two_parallel_workers_process_each_article_once():
                 )
             )
 
-            assert len(states) == 6
-            assert len(runs) == 6
+            assert (
+                len(states)
+                == 6
+            )
+
+            assert (
+                len(runs)
+                == 6
+            )
 
             assert all(
                 state.processed_provider
@@ -564,44 +622,68 @@ def test_two_parallel_workers_process_each_article_once():
             )
 
             assert all(
-                run.outcome == "succeeded"
+                run.outcome
+                == "succeeded"
                 for run in runs
             )
 
     finally:
-        cleanup_source(source_id)
+        cleanup_source(
+            source_id
+        )
 
 
 def test_parallel_workers_can_process_articles_from_same_feed():
-    article_ids, source_id = committed_articles(4)
+    article_ids, source_id = (
+        committed_articles(4)
+    )
 
     barrier = Barrier(2)
 
-    class BarrierAnalyzer(EntityTopicAnalyzer):
-        provider = "same-feed-test"
+    class BarrierAnalyzer(
+        EntityTopicAnalyzer
+    ):
+        provider = (
+            "same-feed-test"
+        )
         version = "1"
 
-        def analyze(self, article):
+        def analyze(
+            self,
+            article,
+        ):
             barrier.wait()
-            return AnalysisResult((), ())
+
+            return AnalysisResult(
+                (),
+                (),
+            )
 
     try:
         runners = [
             EntityTopicAnalysisRunner(
                 TestSessionLocal,
                 EntityTopicAnalysisService(
-                    analyzer=BarrierAnalyzer()
+                    analyzer=(
+                        BarrierAnalyzer()
+                    )
                 ),
-                worker_id=f"worker-{index}",
+                worker_id=(
+                    f"worker-{index}"
+                ),
             )
             for index in range(2)
         ]
 
-        with ThreadPoolExecutor(max_workers=2) as pool:
+        with ThreadPoolExecutor(
+            max_workers=2
+        ) as pool:
             results = list(
                 pool.map(
-                    lambda runner: runner.run_pending(
-                        limit=1
+                    lambda runner: (
+                        runner.run_pending(
+                            limit=1
+                        )
                     ),
                     runners,
                 )
@@ -632,7 +714,11 @@ def test_parallel_workers_can_process_articles_from_same_feed():
                 )
             )
 
-            assert len(runs) == 2
+            assert (
+                len(runs)
+                == 2
+            )
+
             assert len(
                 {
                     run.article_id
@@ -641,11 +727,15 @@ def test_parallel_workers_can_process_articles_from_same_feed():
             ) == 2
 
     finally:
-        cleanup_source(source_id)
+        cleanup_source(
+            source_id
+        )
 
 
 def test_poison_article_uses_generic_exponential_retry_backoff():
-    article_ids, source_id = committed_articles(1)
+    article_ids, source_id = (
+        committed_articles(1)
+    )
 
     moment = [
         datetime.now(UTC)
@@ -654,9 +744,13 @@ def test_poison_article_uses_generic_exponential_retry_backoff():
     runner = EntityTopicAnalysisRunner(
         TestSessionLocal,
         EntityTopicAnalysisService(
-            analyzer=PoisonAnalyzer()
+            analyzer=(
+                PoisonAnalyzer()
+            )
         ),
-        worker_id="poison-worker",
+        worker_id=(
+            "poison-worker"
+        ),
         retry_base_seconds=10,
         retry_max_seconds=60,
         clock=lambda: moment[0],
@@ -693,7 +787,8 @@ def test_poison_article_uses_generic_exponential_retry_backoff():
                 session.scalars(
                     select(
                         ArticleProcessingRun
-                    ).where(
+                    )
+                    .where(
                         ArticleProcessingRun.article_id
                         == article_ids[0],
                     )
@@ -703,17 +798,43 @@ def test_poison_article_uses_generic_exponential_retry_backoff():
                 )
             )
 
-            assert state.attempt_count == 1
-            assert state.retry_after == (
-                moment[0]
-                + timedelta(seconds=10)
+            assert (
+                state.attempt_count
+                == 1
             )
-            assert state.claimed_by is None
-            assert state.last_error_code == "RuntimeError"
 
-            assert len(runs) == 1
-            assert runs[0].outcome == "failed"
-            assert runs[0].attempt_number == 1
+            assert (
+                state.retry_after
+                == moment[0]
+                + timedelta(
+                    seconds=10
+                )
+            )
+
+            assert (
+                state.claimed_by
+                is None
+            )
+
+            assert (
+                state.last_error_code
+                == "RuntimeError"
+            )
+
+            assert (
+                len(runs)
+                == 1
+            )
+
+            assert (
+                runs[0].outcome
+                == "failed"
+            )
+
+            assert (
+                runs[0].attempt_number
+                == 1
+            )
 
         assert (
             runner.run_pending(
@@ -730,7 +851,10 @@ def test_poison_article_uses_generic_exponential_retry_backoff():
             limit=1
         )
 
-        assert second.failed == 1
+        assert (
+            second.failed
+            == 1
+        )
 
         with TestSessionLocal() as session:
             state = session.scalar(
@@ -748,7 +872,8 @@ def test_poison_article_uses_generic_exponential_retry_backoff():
                 session.scalars(
                     select(
                         ArticleProcessingRun
-                    ).where(
+                    )
+                    .where(
                         ArticleProcessingRun.article_id
                         == article_ids[0],
                     )
@@ -758,28 +883,48 @@ def test_poison_article_uses_generic_exponential_retry_backoff():
                 )
             )
 
-            assert state.attempt_count == 2
-            assert state.retry_after == (
-                moment[0]
-                + timedelta(seconds=20)
+            assert (
+                state.attempt_count
+                == 2
             )
 
-            assert len(runs) == 2
+            assert (
+                state.retry_after
+                == moment[0]
+                + timedelta(
+                    seconds=20
+                )
+            )
+
+            assert (
+                len(runs)
+                == 2
+            )
+
             assert [
                 run.attempt_number
                 for run in runs
-            ] == [1, 2]
+            ] == [
+                1,
+                2,
+            ]
+
             assert all(
-                run.outcome == "failed"
+                run.outcome
+                == "failed"
                 for run in runs
             )
 
     finally:
-        cleanup_source(source_id)
+        cleanup_source(
+            source_id
+        )
 
 
 def test_entity_topic_results_reference_successful_processing_run():
-    article_ids, source_id = committed_articles(1)
+    article_ids, source_id = (
+        committed_articles(1)
+    )
 
     try:
         with TestSessionLocal.begin() as session:
@@ -788,23 +933,34 @@ def test_entity_topic_results_reference_successful_processing_run():
                 article_ids[0],
             )
 
-            article.normalized_title = "OpenAI"
-            article.normalized_text = "OpenAI builds systems."
+            article.normalized_title = (
+                "OpenAI"
+            )
+            article.normalized_text = (
+                "OpenAI builds systems."
+            )
             article.language_code = "en"
 
         runner = EntityTopicAnalysisRunner(
             TestSessionLocal,
             EntityTopicAnalysisService(
-                analyzer=ResultAnalyzer()
+                analyzer=(
+                    ResultAnalyzer()
+                )
             ),
-            worker_id="result-worker",
+            worker_id=(
+                "result-worker"
+            ),
         )
 
         result = runner.run_pending(
             limit=1
         )
 
-        assert result.processed == 1
+        assert (
+            result.processed
+            == 1
+        )
 
         with TestSessionLocal() as session:
             run = session.scalar(
@@ -840,8 +996,14 @@ def test_entity_topic_results_reference_successful_processing_run():
                 )
             )
 
-            assert run is not None
-            assert run.outcome == "succeeded"
+            assert (
+                run is not None
+            )
+
+            assert (
+                run.outcome
+                == "succeeded"
+            )
 
             assert mentions
             assert topics
@@ -859,4 +1021,6 @@ def test_entity_topic_results_reference_successful_processing_run():
             )
 
     finally:
-        cleanup_source(source_id)
+        cleanup_source(
+            source_id
+        )

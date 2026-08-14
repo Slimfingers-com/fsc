@@ -364,31 +364,6 @@ class EntityTopicAnalysisService:
                 )
             )
 
-        # Transitional compatibility until the legacy entity/topic
-        # worker-state columns are removed.
-        article.entity_topic_analysis_hash = (
-            prepared.expected_hash
-        )
-        article.entity_topic_analysis_version = (
-            self.analyzer.version
-        )
-        article.entity_topic_analysis_provider = (
-            self.analyzer.provider
-        )
-        article.entity_topic_analysis_config_version = (
-            self.config_version
-        )
-        article.entity_topic_analysis_content_hash = (
-            article.content_hash
-        )
-        article.entity_topic_analysis_normalization_version = (
-            article.normalization_version
-        )
-        article.entity_topic_analyzed_at = datetime.now(
-            UTC
-        )
-        article.entity_topic_analysis_error = None
-
         db.flush()
 
     def analyze_article(
@@ -397,18 +372,10 @@ class EntityTopicAnalysisService:
         article: Article,
         *,
         processing_run_id: UUID | None = None,
-        force: bool = False,
     ) -> bool:
         prepared = self.prepare_analysis(
             article
         )
-
-        if (
-            not force
-            and article.entity_topic_analysis_hash
-            == prepared.expected_hash
-        ):
-            return False
 
         result = self.run_provider(
             prepared
@@ -441,8 +408,7 @@ class EntityTopicAnalysisRunner:
         if (
             claim_ttl_seconds <= 0
             or retry_base_seconds <= 0
-            or retry_max_seconds
-            < retry_base_seconds
+            or retry_max_seconds < retry_base_seconds
         ):
             raise ValueError(
                 "claim and retry timing settings are invalid"
@@ -458,15 +424,9 @@ class EntityTopicAnalysisRunner:
             or ArticleProcessingRepository()
         )
 
-        self.claim_ttl_seconds = (
-            claim_ttl_seconds
-        )
-        self.retry_base_seconds = (
-            retry_base_seconds
-        )
-        self.retry_max_seconds = (
-            retry_max_seconds
-        )
+        self.claim_ttl_seconds = claim_ttl_seconds
+        self.retry_base_seconds = retry_base_seconds
+        self.retry_max_seconds = retry_max_seconds
 
         self.worker_id = (
             worker_id
@@ -580,9 +540,7 @@ class EntityTopicAnalysisRunner:
                 )
             )
 
-            last_article = (
-                articles[-1]
-            )
+            last_article = articles[-1]
             last_created_at = (
                 last_article.created_at
             )
@@ -743,12 +701,8 @@ class EntityTopicAnalysisRunner:
                             )
                         )
 
-                        state_id = (
-                            state.id
-                        )
-                        run_id = (
-                            run.id
-                        )
+                        state_id = state.id
+                        run_id = run.id
                         attempt_number = (
                             run.attempt_number
                         )
@@ -797,9 +751,7 @@ class EntityTopicAnalysisRunner:
                             "Entity/topic article analysis failed",
                             extra={
                                 "article_id": (
-                                    str(
-                                        article_id
-                                    )
+                                    str(article_id)
                                 ),
                                 "provider": (
                                     self.service
@@ -812,9 +764,7 @@ class EntityTopicAnalysisRunner:
                                     .version
                                 ),
                                 "processing_run_id": (
-                                    str(
-                                        run_id
-                                    )
+                                    str(run_id)
                                 ),
                             },
                         )
@@ -840,12 +790,8 @@ class EntityTopicAnalysisRunner:
                                 self.processing_repository
                                 .heartbeat(
                                     db,
-                                    state_id=(
-                                        state_id
-                                    ),
-                                    run_id=(
-                                        run_id
-                                    ),
+                                    state_id=state_id,
+                                    run_id=run_id,
                                     worker_id=(
                                         self.worker_id
                                     ),
@@ -859,10 +805,8 @@ class EntityTopicAnalysisRunner:
                             )
 
                             if not lease_valid:
-                                raise (
-                                    ArticleProcessingLeaseLostError(
-                                        "processing lease is no longer valid"
-                                    )
+                                raise ArticleProcessingLeaseLostError(
+                                    "processing lease is no longer valid"
                                 )
 
                             article = db.scalar(
@@ -877,10 +821,8 @@ class EntityTopicAnalysisRunner:
                             )
 
                             if article is None:
-                                raise (
-                                    ArticleProcessingLeaseLostError(
-                                        "article no longer exists"
-                                    )
+                                raise ArticleProcessingLeaseLostError(
+                                    "article no longer exists"
                                 )
 
                             self.service.persist_result(
@@ -888,18 +830,14 @@ class EntityTopicAnalysisRunner:
                                 article,
                                 prepared=prepared,
                                 result=result,
-                                processing_run_id=(
-                                    run_id
-                                ),
+                                processing_run_id=run_id,
                             )
 
                             self.processing_repository.complete(
                                 db,
                                 state_id=state_id,
                                 run_id=run_id,
-                                worker_id=(
-                                    self.worker_id
-                                ),
+                                worker_id=self.worker_id,
                                 now=self.clock(),
                             )
 
@@ -913,9 +851,7 @@ class EntityTopicAnalysisRunner:
                                 db,
                                 run_id=run_id,
                                 now=self.clock(),
-                                error_message=(
-                                    str(exc)
-                                ),
+                                error_message=str(exc),
                             )
 
                         skipped += 1
@@ -947,9 +883,7 @@ class EntityTopicAnalysisRunner:
                             "Entity/topic result persistence failed",
                             extra={
                                 "article_id": (
-                                    str(
-                                        article_id
-                                    )
+                                    str(article_id)
                                 ),
                                 "provider": (
                                     self.service
@@ -962,9 +896,7 @@ class EntityTopicAnalysisRunner:
                                     .version
                                 ),
                                 "processing_run_id": (
-                                    str(
-                                        run_id
-                                    )
+                                    str(run_id)
                                 ),
                             },
                         )
