@@ -72,24 +72,6 @@ class ArticleRepository(BaseRepository[Article]):
                 Article.created_at.desc(),
             )
         )
-        return list(db.scalars(statement).all())
-
-    def list_pending_normalization(
-        self,
-        db: Session,
-        *,
-        normalization_version: int,
-        limit: int,
-    ) -> list[Article]:
-        statement = (
-            select(Article)
-            .where(Article.deleted_at.is_(None))
-            .where(
-                (Article.normalization_version.is_(None))
-                | (Article.normalization_version < normalization_version)
-            )
-            .order_by(Article.created_at.asc())
-            .limit(limit)
-            .with_for_update(skip_locked=True)
+        return list(
+            db.scalars(statement).all()
         )
-        return list(db.scalars(statement).all())
