@@ -93,24 +93,49 @@ class ArticleProcessingState(BaseModel):
         nullable=False,
         index=True,
     )
-    pipeline: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
+    pipeline: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+        index=True,
+    )
 
-    processed_input_hash: Mapped[str | None] = mapped_column(String(64))
-    processed_provider: Mapped[str | None] = mapped_column(String(100))
-    processed_provider_version: Mapped[str | None] = mapped_column(String(100))
-    processed_configuration_version: Mapped[str | None] = mapped_column(String(100))
+    processed_input_hash: Mapped[str | None] = mapped_column(
+        String(64)
+    )
+    processed_provider: Mapped[str | None] = mapped_column(
+        String(100)
+    )
+    processed_provider_version: Mapped[str | None] = mapped_column(
+        String(100)
+    )
+    processed_configuration_version: Mapped[str | None] = mapped_column(
+        String(100)
+    )
     last_processed_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
         index=True,
     )
 
-    claimed_input_hash: Mapped[str | None] = mapped_column(String(64))
-    claimed_provider: Mapped[str | None] = mapped_column(String(100))
-    claimed_provider_version: Mapped[str | None] = mapped_column(String(100))
-    claimed_configuration_version: Mapped[str | None] = mapped_column(String(100))
+    claimed_input_hash: Mapped[str | None] = mapped_column(
+        String(64)
+    )
+    claimed_provider: Mapped[str | None] = mapped_column(
+        String(100)
+    )
+    claimed_provider_version: Mapped[str | None] = mapped_column(
+        String(100)
+    )
+    claimed_configuration_version: Mapped[str | None] = mapped_column(
+        String(100)
+    )
 
-    claimed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    claimed_by: Mapped[str | None] = mapped_column(String(100), index=True)
+    claimed_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
+    claimed_by: Mapped[str | None] = mapped_column(
+        String(100),
+        index=True,
+    )
     claim_expires_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
         index=True,
@@ -126,13 +151,23 @@ class ArticleProcessingState(BaseModel):
         DateTime(timezone=True),
         index=True,
     )
-    last_started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_started_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
 
-    last_error_code: Mapped[str | None] = mapped_column(String(100))
-    last_error_message: Mapped[str | None] = mapped_column(Text)
-    last_error_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_error_code: Mapped[str | None] = mapped_column(
+        String(100)
+    )
+    last_error_message: Mapped[str | None] = mapped_column(
+        Text
+    )
+    last_error_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
 
-    article: Mapped["Article"] = relationship(back_populates="processing_states")
+    article: Mapped["Article"] = relationship(
+        back_populates="processing_states"
+    )
     runs: Mapped[list["ArticleProcessingRun"]] = relationship(
         back_populates="processing_state"
     )
@@ -142,6 +177,12 @@ class ArticleProcessingRun(Base):
     __tablename__ = "article_processing_runs"
 
     __table_args__ = (
+        Index(
+            "uq_article_processing_runs_state_attempt",
+            "processing_state_id",
+            "attempt_number",
+            unique=True,
+        ),
         CheckConstraint(
             "attempt_number > 0",
             name="ck_article_processing_runs_attempt_number_positive",
@@ -182,30 +223,65 @@ class ArticleProcessingRun(Base):
 
     processing_state_id: Mapped[UUID | None] = mapped_column(
         PG_UUID(as_uuid=True),
-        ForeignKey("article_processing_states.id", ondelete="SET NULL"),
+        ForeignKey(
+            "article_processing_states.id",
+            ondelete="SET NULL",
+        ),
         nullable=True,
         index=True,
     )
 
-    pipeline: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
-    input_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    pipeline: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+        index=True,
+    )
+    input_hash: Mapped[str] = mapped_column(
+        String(64),
+        nullable=False,
+    )
 
-    provider: Mapped[str] = mapped_column(String(100), nullable=False)
-    provider_version: Mapped[str] = mapped_column(String(100), nullable=False)
-    configuration_version: Mapped[str] = mapped_column(String(100), nullable=False)
+    provider: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )
+    provider_version: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )
+    configuration_version: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+    )
 
-    worker_id: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
-    attempt_number: Mapped[int] = mapped_column(Integer, nullable=False)
+    worker_id: Mapped[str] = mapped_column(
+        String(100),
+        nullable=False,
+        index=True,
+    )
+    attempt_number: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+    )
 
     started_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
     )
-    finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
-    outcome: Mapped[str | None] = mapped_column(String(50), index=True)
+    finished_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
+    outcome: Mapped[str | None] = mapped_column(
+        String(50),
+        index=True,
+    )
 
-    error_code: Mapped[str | None] = mapped_column(String(100))
-    error_message: Mapped[str | None] = mapped_column(Text)
+    error_code: Mapped[str | None] = mapped_column(
+        String(100)
+    )
+    error_message: Mapped[str | None] = mapped_column(
+        Text
+    )
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
@@ -213,7 +289,9 @@ class ArticleProcessingRun(Base):
         server_default=func.now(),
     )
 
-    article: Mapped["Article"] = relationship(back_populates="processing_runs")
+    article: Mapped["Article"] = relationship(
+        back_populates="processing_runs"
+    )
     processing_state: Mapped["ArticleProcessingState | None"] = relationship(
         back_populates="runs"
     )

@@ -22,13 +22,13 @@ from app.analysis.resolver import EntityResolver, TopicResolver
 from app.analysis.rule_based import RuleBasedEntityTopicAnalyzer
 from app.enums.article_pipeline import ArticlePipeline
 from app.models.article import Article
-from app.models.article_processing import ArticleProcessingState
 from app.models.entity import ArticleEntity
 from app.models.feed import Feed
 from app.models.source import Source
 from app.models.topic import ArticleTopic
 from app.repositories.article_processing import (
     ArticleProcessingCandidate,
+    ArticleProcessingClaim,
     ArticleProcessingLeaseLostError,
     ArticleProcessingRepository,
 )
@@ -80,7 +80,10 @@ class EntityTopicAnalysisService:
         self.max_topics = max_topics
         self.config_version = config_version
 
-    def analysis_hash(self, article: Article) -> str:
+    def analysis_hash(
+        self,
+        article: Article,
+    ) -> str:
         payload = [
             article.normalized_title or "",
             article.normalized_text or "",
@@ -445,8 +448,8 @@ class EntityTopicAnalysisRunner:
         *,
         limit: int,
         now: datetime,
-    ) -> list[UUID]:
-        claimed: list[UUID] = []
+    ) -> list[ArticleProcessingClaim]:
+        claims: list[ArticleProcessingClaim] = []
 
         page_size = max(
             100,
@@ -456,7 +459,7 @@ class EntityTopicAnalysisRunner:
         last_created_at = None
         last_article_id = None
 
-        while len(claimed) < limit:
+        while len(claims) < limit:
             conditions = [
                 Article.deleted_at.is_(None),
                 Article.normalized_at.is_not(None),
@@ -514,10 +517,10 @@ class EntityTopicAnalysisRunner:
 
             remaining = (
                 limit
-                - len(claimed)
+                - len(claims)
             )
 
-            claimed.extend(
+            claims.extend(
                 self.processing_repository.claim_candidates(
                     db,
                     pipeline=(
@@ -551,7 +554,7 @@ class EntityTopicAnalysisRunner:
             if len(articles) < page_size:
                 break
 
-        return claimed
+        return claims
 
     def _record_failure(
         self,
@@ -625,18 +628,13 @@ class EntityTopicAnalysisRunner:
             claim_now = self.clock()
 
             with db.begin():
-                article_ids = (
-                    self._claim_pending(
-                        db,
-                        limit=limit,
-                        now=claim_now,
-                    )
+                claims = self._claim_pending(
+                    db,
+                    limit=limit,
+                    now=claim_now,
                 )
 
-            for article_id in article_ids:
-                state_id: UUID | None = None
-                run_id: UUID | None = None
-                attempt_number = 0
+            for claim in claims:
                 prepared: (
                     PreparedEntityTopicAnalysis
                     | None
@@ -647,65 +645,43 @@ class EntityTopicAnalysisRunner:
                         article = db.scalar(
                             select(
                                 Article
-                            ).where(
+                            )
+                            .join(Feed)
+                            .join(Source)
+                            .where(
                                 Article.id
-                                == article_id,
+                                == claim.article_id,
                                 Article.deleted_at
                                 .is_(None),
-                            )
-                        )
-
-                        state = db.scalar(
-                            select(
-                                ArticleProcessingState
-                            ).where(
-                                ArticleProcessingState
-                                .article_id
-                                == article_id,
-                                ArticleProcessingState
-                                .pipeline
-                                == ArticlePipeline
-                                .ENTITY_TOPIC
-                                .value,
-                                ArticleProcessingState
-                                .deleted_at
+                                Article.normalized_at
+                                .is_not(None),
+                                Article.normalized_text
+                                .is_not(None),
+                                Feed.deleted_at
                                 .is_(None),
-                                ArticleProcessingState
-                                .claimed_by
-                                == self.worker_id,
+                                Feed.active
+                                .is_(True),
+                                Source.deleted_at
+                                .is_(None),
+                                Source.active
+                                .is_(True),
                             )
                         )
 
-                        if (
-                            article is None
-                            or state is None
-                        ):
+                        if article is None:
+                            self.processing_repository.skip(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=self.clock(),
+                                reason=(
+                                    "article became ineligible "
+                                    "after entity/topic claim"
+                                ),
+                            )
                             skipped += 1
                             continue
-
-                        started_at = (
-                            self.clock()
-                        )
-
-                        run = (
-                            self.processing_repository
-                            .start_run(
-                                db,
-                                state=state,
-                                worker_id=(
-                                    self.worker_id
-                                ),
-                                started_at=(
-                                    started_at
-                                ),
-                            )
-                        )
-
-                        state_id = state.id
-                        run_id = run.id
-                        attempt_number = (
-                            run.attempt_number
-                        )
 
                         prepared = (
                             self.service
@@ -714,8 +690,6 @@ class EntityTopicAnalysisRunner:
                             )
                         )
 
-                    assert state_id is not None
-                    assert run_id is not None
                     assert prepared is not None
 
                     try:
@@ -734,10 +708,10 @@ class EntityTopicAnalysisRunner:
                         with db.begin():
                             self._record_failure(
                                 db,
-                                state_id=state_id,
-                                run_id=run_id,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
                                 attempt_number=(
-                                    attempt_number
+                                    claim.attempt_number
                                 ),
                                 failure_time=(
                                     failure_time
@@ -751,7 +725,9 @@ class EntityTopicAnalysisRunner:
                             "Entity/topic article analysis failed",
                             extra={
                                 "article_id": (
-                                    str(article_id)
+                                    str(
+                                        claim.article_id
+                                    )
                                 ),
                                 "provider": (
                                     self.service
@@ -764,7 +740,9 @@ class EntityTopicAnalysisRunner:
                                     .version
                                 ),
                                 "processing_run_id": (
-                                    str(run_id)
+                                    str(
+                                        claim.run_id
+                                    )
                                 ),
                             },
                         )
@@ -790,8 +768,8 @@ class EntityTopicAnalysisRunner:
                                 self.processing_repository
                                 .heartbeat(
                                     db,
-                                    state_id=state_id,
-                                    run_id=run_id,
+                                    state_id=claim.state_id,
+                                    run_id=claim.run_id,
                                     worker_id=(
                                         self.worker_id
                                     ),
@@ -812,31 +790,58 @@ class EntityTopicAnalysisRunner:
                             article = db.scalar(
                                 select(
                                     Article
-                                ).where(
+                                )
+                                .join(Feed)
+                                .join(Source)
+                                .where(
                                     Article.id
-                                    == article_id,
+                                    == claim.article_id,
                                     Article.deleted_at
                                     .is_(None),
+                                    Article.normalized_at
+                                    .is_not(None),
+                                    Article.normalized_text
+                                    .is_not(None),
+                                    Feed.deleted_at
+                                    .is_(None),
+                                    Feed.active
+                                    .is_(True),
+                                    Source.deleted_at
+                                    .is_(None),
+                                    Source.active
+                                    .is_(True),
                                 )
                             )
 
                             if article is None:
-                                raise ArticleProcessingLeaseLostError(
-                                    "article no longer exists"
+                                self.processing_repository.skip(
+                                    db,
+                                    state_id=claim.state_id,
+                                    run_id=claim.run_id,
+                                    worker_id=self.worker_id,
+                                    now=self.clock(),
+                                    reason=(
+                                        "article became ineligible "
+                                        "before entity/topic persistence"
+                                    ),
                                 )
+                                skipped += 1
+                                continue
 
                             self.service.persist_result(
                                 db,
                                 article,
                                 prepared=prepared,
                                 result=result,
-                                processing_run_id=run_id,
+                                processing_run_id=(
+                                    claim.run_id
+                                ),
                             )
 
                             self.processing_repository.complete(
                                 db,
-                                state_id=state_id,
-                                run_id=run_id,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
                                 worker_id=self.worker_id,
                                 now=self.clock(),
                             )
@@ -849,7 +854,7 @@ class EntityTopicAnalysisRunner:
                         with db.begin():
                             self.processing_repository.mark_lease_lost(
                                 db,
-                                run_id=run_id,
+                                run_id=claim.run_id,
                                 now=self.clock(),
                                 error_message=str(exc),
                             )
@@ -866,10 +871,10 @@ class EntityTopicAnalysisRunner:
                         with db.begin():
                             self._record_failure(
                                 db,
-                                state_id=state_id,
-                                run_id=run_id,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
                                 attempt_number=(
-                                    attempt_number
+                                    claim.attempt_number
                                 ),
                                 failure_time=(
                                     failure_time
@@ -883,7 +888,9 @@ class EntityTopicAnalysisRunner:
                             "Entity/topic result persistence failed",
                             extra={
                                 "article_id": (
-                                    str(article_id)
+                                    str(
+                                        claim.article_id
+                                    )
                                 ),
                                 "provider": (
                                     self.service
@@ -896,7 +903,9 @@ class EntityTopicAnalysisRunner:
                                     .version
                                 ),
                                 "processing_run_id": (
-                                    str(run_id)
+                                    str(
+                                        claim.run_id
+                                    )
                                 ),
                             },
                         )
@@ -905,7 +914,7 @@ class EntityTopicAnalysisRunner:
                     skipped += 1
 
         return AnalysisBatchResult(
-            selected=len(article_ids),
+            selected=len(claims),
             processed=processed,
             skipped=skipped,
             failed=failed,
