@@ -166,6 +166,26 @@ def cleanup_source(
 
         session.execute(
             delete(
+                ArticleEntity
+            ).where(
+                ArticleEntity.article_id.in_(
+                    article_ids
+                )
+            )
+        )
+
+        session.execute(
+            delete(
+                ArticleTopic
+            ).where(
+                ArticleTopic.article_id.in_(
+                    article_ids
+                )
+            )
+        )
+
+        session.execute(
+            delete(
                 ArticleProcessingRun
             ).where(
                 ArticleProcessingRun.article_id.in_(
