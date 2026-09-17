@@ -188,12 +188,3 @@ def downgrade() -> None:
         "article_entities",
         "processing_run_id",
     )
-
-    op.execute(
-        sa.text(
-            """
-            DELETE FROM article_processing_states
-            WHERE pipeline = 'entity_topic'
-            """
-        )
-    )
