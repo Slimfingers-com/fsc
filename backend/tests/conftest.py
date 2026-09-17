@@ -1,9 +1,11 @@
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session, sessionmaker
 
+import app.models  # noqa: F401
 from app.core.settings import settings
+from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
 
@@ -29,11 +31,45 @@ TestSessionLocal = sessionmaker(
 )
 
 
+def _truncate_database() -> None:
+    table_names = ", ".join(
+        f'"{table.name}"'
+        for table in reversed(
+            Base.metadata.sorted_tables
+        )
+    )
+
+    if not table_names:
+        return
+
+    with test_engine.begin() as connection:
+        connection.execute(
+            text(
+                f"TRUNCATE TABLE "
+                f"{table_names} "
+                f"RESTART IDENTITY CASCADE"
+            )
+        )
+
+
+@pytest.fixture(autouse=True)
+def clean_database():
+    _truncate_database()
+
+    yield
+
+    _truncate_database()
+
+
 @pytest.fixture()
-def db() -> Session:
+def db(
+    clean_database,
+) -> Session:
     connection = test_engine.connect()
     transaction = connection.begin()
-    session = TestSessionLocal(bind=connection)
+    session = TestSessionLocal(
+        bind=connection
+    )
 
     try:
         yield session
@@ -48,7 +84,9 @@ def client(db):
     def override_get_db():
         yield db
 
-    app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[
+        get_db
+    ] = override_get_db
 
     try:
         with TestClient(app) as test_client:
