@@ -187,3 +187,95 @@ def test_concurrent_article_insert_reloads_conflicting_row():
             assert len(articles) == 1
     finally:
         _cleanup_source(source_id)
+
+def test_feed_claim_excludes_inactive_source():
+    feed_ids, source_id = _committed_feeds(
+        1
+    )
+    now = datetime.now(UTC)
+
+    try:
+        with TestSessionLocal.begin() as db:
+            source = db.get(
+                Source,
+                source_id,
+            )
+            source.active = False
+
+        with TestSessionLocal.begin() as db:
+            claimed = FeedRepository().claim_due_active(
+                db,
+                now=now,
+                claim_expires_at=(
+                    now
+                    + timedelta(minutes=5)
+                ),
+                claimed_by="inactive-source-worker",
+                limit=1,
+            )
+
+        assert claimed == []
+
+    finally:
+        _cleanup_source(
+            source_id
+        )
+
+
+def test_runner_releases_claim_when_source_is_deactivated_after_claim():
+    feed_ids, source_id = _committed_feeds(
+        1
+    )
+
+    class DeactivateAfterClaimRepository(
+        FeedRepository
+    ):
+        def claim_due_active(
+            self,
+            db,
+            **kwargs,
+        ):
+            claimed = super().claim_due_active(
+                db,
+                **kwargs,
+            )
+
+            source = db.get(
+                Source,
+                source_id,
+            )
+            source.active = False
+
+            return claimed
+
+    try:
+        runner = FeedSynchronizationRunner(
+            TestSessionLocal,
+            feed_repository=(
+                DeactivateAfterClaimRepository()
+            ),
+            synchronization_service=(
+                RecordingSynchronizationService()
+            ),
+            worker_id="source-deactivated-worker",
+        )
+
+        result = runner.run_due(
+            limit=1
+        )
+
+        assert result.processed == 0
+
+        with TestSessionLocal() as db:
+            feed = db.get(
+                Feed,
+                feed_ids[0],
+            )
+            assert feed.claimed_at is None
+            assert feed.claimed_by is None
+            assert feed.claim_expires_at is None
+
+    finally:
+        _cleanup_source(
+            source_id
+        )

@@ -75,6 +75,15 @@ class FakeStoryRepository:
     ):
         return self.has_other_memberships
 
+    def deactivate_story_if_orphan(
+        self,
+        db,
+        *,
+        story_id,
+        now,
+    ):
+        return True
+
     def create_story(
         self,
         db,
@@ -161,6 +170,7 @@ def make_prepared(
 
     return PreparedStoryClustering(
         article_title="Bundestag in Berlin",
+        input_hash="prepared-input-hash",
         article=article,
         candidates=candidates,
     )
@@ -304,6 +314,10 @@ def test_apply_result_moves_article_from_multi_member_story_on_no_match():
 
     old_story_id = uuid4()
 
+    repository.target_story = SimpleNamespace(
+        id=old_story_id,
+        language_code="de",
+    )
     repository.active_membership = SimpleNamespace(
         id=uuid4(),
         story_id=old_story_id,

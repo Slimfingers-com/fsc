@@ -111,10 +111,32 @@ def test_article_endpoints_exclude_soft_deleted_entities_and_topics(db, client):
     EntityTopicAnalysisService(analyzer=FixedAnalyzer()).analyze_article(db, article)
     entity = db.scalar(select(Entity).where(Entity.normalized_name == "openai"))
     topic = db.scalar(select(Topic).where(Topic.normalized_name == "artificial intelligence"))
+    SearchIndexingService().index_article(
+        db,
+        article,
+    )
     entity.deleted_at = topic.deleted_at = datetime.now(UTC)
     db.flush()
-    assert client.get(f"/articles/{article.id}/entities").json() == []
-    assert client.get(f"/articles/{article.id}/topics").json() == []
+
+    assert client.get(
+        f"/articles/{article.id}/entities"
+    ).json() == []
+    assert client.get(
+        f"/articles/{article.id}/topics"
+    ).json() == []
+
+    for params in (
+        {"entity_id": str(entity.id)},
+        {"entity_type": entity.entity_type.value},
+        {"topic_id": str(topic.id)},
+        {"topic_slug": topic.slug},
+    ):
+        response = client.get(
+            "/search",
+            params=params,
+        )
+        assert response.status_code == 200
+        assert response.json()["total"] == 0
 
 
 def test_search_filters_exclude_soft_deleted_article_associations(db, client):
@@ -136,6 +158,19 @@ def test_search_filters_exclude_soft_deleted_article_associations(db, client):
     association.deleted_at = deleted_at
     db.flush()
 
+    assert client.get(
+        f"/articles/{article.id}/entities"
+    ).json() == []
+    assert client.get(
+        f"/articles/{article.id}/topics"
+    ).json() == []
+    assert client.get(
+        f"/entities/{entity.id}"
+    ).json()["article_count"] == 0
+    assert client.get(
+        f"/topics/{topic.id}"
+    ).json()["article_count"] == 0
+
     filters = (
         {"entity_id": str(entity.id)},
         {"entity_type": entity.entity_type.value},
@@ -146,3 +181,46 @@ def test_search_filters_exclude_soft_deleted_article_associations(db, client):
         response = client.get("/search", params=params)
         assert response.status_code == 200
         assert response.json()["total"] == 0
+
+def test_entity_topic_api_hides_associations_while_normalization_is_invalid(
+    db,
+    client,
+):
+    article = create_article(db)
+    EntityTopicAnalysisService(
+        analyzer=FixedAnalyzer()
+    ).analyze_article(
+        db,
+        article,
+    )
+    db.flush()
+
+    entity = db.scalar(
+        select(Entity).where(
+            Entity.normalized_name
+            == "openai"
+        )
+    )
+    topic = db.scalar(
+        select(Topic).where(
+            Topic.normalized_name
+            == "artificial intelligence"
+        )
+    )
+
+    article.normalized_at = None
+    article.normalized_text = None
+    db.flush()
+
+    assert client.get(
+        f"/articles/{article.id}/entities"
+    ).json() == []
+    assert client.get(
+        f"/articles/{article.id}/topics"
+    ).json() == []
+    assert client.get(
+        f"/entities/{entity.id}"
+    ).json()["article_count"] == 0
+    assert client.get(
+        f"/topics/{topic.id}"
+    ).json()["article_count"] == 0

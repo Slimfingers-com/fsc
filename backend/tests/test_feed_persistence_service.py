@@ -209,3 +209,207 @@ def test_content_change_invalidates_normalization(db):
     assert article.content_hash is None
     assert article.normalization_version is None
     assert article.normalized_at is None
+
+def test_different_guids_with_same_link_remain_distinct_articles(
+    db,
+):
+    feed = create_feed(db)
+    service = FeedPersistenceService()
+
+    first = parsed_entry(
+        external_id="guid-one",
+        link="https://example.com/shared",
+        title="First",
+    )
+    second = parsed_entry(
+        external_id="guid-two",
+        link="https://example.com/shared",
+        title="Second",
+    )
+
+    result = service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            first,
+            second,
+        ),
+    )
+
+    articles = ArticleRepository().list_by_feed(
+        db,
+        feed.id,
+    )
+
+    assert result.inserted == 2
+    assert len(articles) == 2
+    assert {
+        article.guid
+        for article in articles
+    } == {
+        "guid-one",
+        "guid-two",
+    }
+
+
+def test_derived_identity_upgrades_when_link_appears(
+    db,
+):
+    feed = create_feed(db)
+    service = FeedPersistenceService()
+
+    entry_without_ids = parsed_entry(
+        external_id=None,
+        link=None,
+    )
+
+    service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            entry_without_ids
+        ),
+    )
+
+    original = (
+        ArticleRepository()
+        .list_by_feed(
+            db,
+            feed.id,
+        )[0]
+    )
+    original_id = original.id
+    assert (
+        original.identity_type
+        is ArticleIdentityType.DERIVED
+    )
+
+    result = service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(
+                external_id=None,
+                link="https://example.com/new-link",
+            )
+        ),
+    )
+
+    articles = ArticleRepository().list_by_feed(
+        db,
+        feed.id,
+    )
+
+    assert result.inserted == 0
+    assert result.updated == 1
+    assert len(articles) == 1
+    assert articles[0].id == original_id
+    assert (
+        articles[0].identity_type
+        is ArticleIdentityType.LINK
+    )
+
+
+def test_derived_identity_upgrades_when_guid_appears(
+    db,
+):
+    feed = create_feed(db)
+    service = FeedPersistenceService()
+
+    service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(
+                external_id=None,
+                link=None,
+            )
+        ),
+    )
+
+    original_id = (
+        ArticleRepository()
+        .list_by_feed(
+            db,
+            feed.id,
+        )[0]
+        .id
+    )
+
+    result = service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(
+                external_id="later-guid",
+                link=None,
+            )
+        ),
+    )
+
+    articles = ArticleRepository().list_by_feed(
+        db,
+        feed.id,
+    )
+
+    assert result.inserted == 0
+    assert result.updated == 1
+    assert len(articles) == 1
+    assert articles[0].id == original_id
+    assert (
+        articles[0].identity_type
+        is ArticleIdentityType.GUID
+    )
+
+def test_link_only_entry_does_not_merge_ambiguous_guid_rows(
+    db,
+):
+    feed = create_feed(db)
+    service = FeedPersistenceService()
+
+    service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(
+                external_id="guid-one",
+                link="https://example.com/shared-link",
+                title="First",
+            ),
+            parsed_entry(
+                external_id="guid-two",
+                link="https://example.com/shared-link",
+                title="Second",
+            ),
+        ),
+    )
+
+    result = service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(
+                external_id=None,
+                link="https://example.com/shared-link",
+                title="Link only",
+            )
+        ),
+    )
+
+    articles = ArticleRepository().list_by_feed(
+        db,
+        feed.id,
+    )
+
+    assert result.inserted == 1
+    assert len(articles) == 3
+    assert sum(
+        article.identity_type
+        is ArticleIdentityType.GUID
+        for article in articles
+    ) == 2
+    assert sum(
+        article.identity_type
+        is ArticleIdentityType.LINK
+        for article in articles
+    ) == 1

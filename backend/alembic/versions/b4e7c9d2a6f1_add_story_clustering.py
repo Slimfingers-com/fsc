@@ -264,4 +264,20 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     op.drop_table("story_articles")
+
+    connection = op.get_bind()
+
+    connection.execute(
+        sa.text(
+            "DELETE FROM article_processing_runs "
+            "WHERE pipeline = 'story_clustering'"
+        )
+    )
+    connection.execute(
+        sa.text(
+            "DELETE FROM article_processing_states "
+            "WHERE pipeline = 'story_clustering'"
+        )
+    )
+
     op.drop_table("stories")

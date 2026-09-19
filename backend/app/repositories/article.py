@@ -49,14 +49,22 @@ class ArticleRepository(BaseRepository[Article]):
         feed_id: UUID,
         link: str,
     ) -> Article | None:
-        statement = (
-            select(Article)
-            .where(Article.feed_id == feed_id)
-            .where(Article.link == link)
-            .where(Article.deleted_at.is_(None))
-            .limit(1)
+        matches = list(
+            db.scalars(
+                select(Article)
+                .where(Article.feed_id == feed_id)
+                .where(Article.link == link)
+                .where(Article.deleted_at.is_(None))
+                .order_by(Article.id)
+                .limit(2)
+            ).all()
         )
-        return db.scalar(statement)
+
+        return (
+            matches[0]
+            if len(matches) == 1
+            else None
+        )
 
     def list_by_feed(
         self,

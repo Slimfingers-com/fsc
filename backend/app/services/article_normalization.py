@@ -316,9 +316,16 @@ class ArticleNormalizationRunner:
                 try:
                     with db.begin():
                         article = db.scalar(
-                            select(Article).where(
+                            select(Article)
+                            .where(
                                 Article.id == claim.article_id,
                                 Article.deleted_at.is_(None),
+                            )
+                            .with_for_update(
+                                of=Article
+                            )
+                            .execution_options(
+                                populate_existing=True
                             )
                         )
 
@@ -332,6 +339,24 @@ class ArticleNormalizationRunner:
                                 reason=(
                                     "article became ineligible "
                                     "after normalization claim"
+                                ),
+                            )
+                            continue
+
+                        if not claim.matches_candidate(
+                            self.service.candidate(
+                                article
+                            )
+                        ):
+                            self.processing_repository.skip(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=self.clock(),
+                                reason=(
+                                    "normalization input "
+                                    "changed after claim"
                                 ),
                             )
                             continue

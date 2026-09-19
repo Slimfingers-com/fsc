@@ -1,6 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
+from secrets import compare_digest
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, Header, HTTPException
 from sqlalchemy.orm import Session
 
+from app.core.settings import settings
 from app.db.session import get_db
 from app.schemas.source import SourceCreate, SourceRead
 from app.services.source import SourceService
@@ -11,6 +15,37 @@ router = APIRouter(
 )
 
 service = SourceService()
+
+
+def require_source_admin(
+    x_fsc_admin_key: Annotated[
+        str | None,
+        Header(alias="X-FSC-Admin-Key"),
+    ] = None,
+) -> None:
+    expected = settings.source_admin_api_key
+
+    if not expected:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Source administration is not configured."
+            ),
+        )
+
+    if (
+        x_fsc_admin_key is None
+        or not compare_digest(
+            x_fsc_admin_key,
+            expected,
+        )
+    ):
+        raise HTTPException(
+            status_code=401,
+            detail=(
+                "Invalid or missing source admin API key."
+            ),
+        )
 
 
 @router.get(
@@ -50,6 +85,9 @@ def list_sources(
 def create_source(
     data: SourceCreate,
     db: Session = Depends(get_db),
+    _admin: None = Depends(
+        require_source_admin
+    ),
 ):
     source = service.create_source(
         db=db,

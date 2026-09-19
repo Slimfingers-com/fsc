@@ -1,7 +1,27 @@
+import pytest
+
+from app.core.settings import settings
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate
 from app.schemas.source import SourceCreate
 from app.services.source import SourceService
+
+
+ADMIN_KEY = "test-source-admin-key"
+ADMIN_HEADERS = {
+    "X-FSC-Admin-Key": ADMIN_KEY,
+}
+
+
+@pytest.fixture(autouse=True)
+def configure_source_admin_key(
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        settings,
+        "source_admin_api_key",
+        ADMIN_KEY,
+    )
 
 
 def test_get_source_by_slug(client, db):
@@ -103,6 +123,7 @@ def test_list_sources(client, db):
 def test_create_source(client):
     response = client.post(
         "/sources",
+        headers=ADMIN_HEADERS,
         json={
             "name": "Reuters",
             "url": "https://www.reuters.com",
@@ -154,6 +175,7 @@ def test_create_source(client):
 def test_create_source_without_feeds(client):
     response = client.post(
         "/sources",
+        headers=ADMIN_HEADERS,
         json={
             "name": "Example News",
             "url": "https://example.com",
@@ -179,6 +201,7 @@ def test_create_duplicate_source_returns_409(client):
 
     first_response = client.post(
         "/sources",
+        headers=ADMIN_HEADERS,
         json=payload,
     )
 
@@ -186,6 +209,7 @@ def test_create_duplicate_source_returns_409(client):
 
     second_response = client.post(
         "/sources",
+        headers=ADMIN_HEADERS,
         json=payload,
     )
 
@@ -193,3 +217,72 @@ def test_create_duplicate_source_returns_409(client):
     assert second_response.json() == {
         "detail": 'Die Quelle "Reuters" existiert bereits.',
     }
+
+def test_create_source_requires_admin_key(
+    client,
+):
+    response = client.post(
+        "/sources",
+        json={
+            "name": "Unauthorized",
+            "url": "https://unauthorized.example.com",
+            "source_type": "NEWS",
+        },
+    )
+
+    assert response.status_code == 401
+
+
+def test_create_source_fails_closed_when_admin_key_is_not_configured(
+    client,
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        settings,
+        "source_admin_api_key",
+        "",
+    )
+
+    response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "No Admin Config",
+            "url": "https://no-admin.example.com",
+            "source_type": "NEWS",
+        },
+    )
+
+    assert response.status_code == 503
+
+
+def test_source_business_rule_violation_returns_422(
+    client,
+):
+    response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Duplicate Feed Names",
+            "url": "https://duplicate-feed.example.com",
+            "source_type": "NEWS",
+            "feeds": [
+                {
+                    "name": "Main",
+                    "url": (
+                        "https://duplicate-feed.example.com/"
+                        "one.xml"
+                    ),
+                },
+                {
+                    "name": "main",
+                    "url": (
+                        "https://duplicate-feed.example.com/"
+                        "two.xml"
+                    ),
+                },
+            ],
+        },
+    )
+
+    assert response.status_code == 422

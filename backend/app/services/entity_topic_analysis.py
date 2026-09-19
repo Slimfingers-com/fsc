@@ -67,6 +67,19 @@ class EntityTopicAnalysisService:
         max_topics: int = 10,
         config_version: str = CONFIG_VERSION,
     ) -> None:
+        if not 0 <= min_entity_confidence <= 1:
+            raise ValueError(
+                "min_entity_confidence must be between zero and one"
+            )
+        if not 0 <= min_topic_confidence <= 1:
+            raise ValueError(
+                "min_topic_confidence must be between zero and one"
+            )
+        if max_topics <= 0:
+            raise ValueError(
+                "max_topics must be greater than zero"
+            )
+
         self.analyzer = analyzer or RuleBasedEntityTopicAnalyzer()
         self.repository = repository or EntityTopicRepository()
         self.entity_resolver = EntityResolver(
@@ -80,6 +93,48 @@ class EntityTopicAnalysisService:
         self.max_topics = max_topics
         self.config_version = config_version
 
+    @property
+    def processing_configuration_version(
+        self,
+    ) -> str:
+        payload = {
+            "base_version": self.config_version,
+            "min_entity_confidence": (
+                self.entity_resolver.min_confidence
+            ),
+            "min_topic_confidence": (
+                self.topic_resolver.min_confidence
+            ),
+            "max_topics": self.max_topics,
+        }
+
+        return hashlib.sha256(
+            json.dumps(
+                payload,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+
+    @staticmethod
+    def _datetime_identity(
+        value: datetime | None,
+    ) -> str | None:
+        if value is None:
+            return None
+
+        if value.tzinfo is None:
+            value = value.replace(
+                tzinfo=UTC
+            )
+
+        return value.astimezone(
+            UTC
+        ).isoformat(
+            timespec="microseconds"
+        )
+
     def analysis_hash(
         self,
         article: Article,
@@ -88,9 +143,15 @@ class EntityTopicAnalysisService:
             article.normalized_title or "",
             article.normalized_text or "",
             article.language_code or "",
+            article.content_hash or "",
+            article.normalization_version,
+            self._datetime_identity(
+                article.published_at
+            ),
+            str(article.feed_id),
             self.analyzer.provider,
             self.analyzer.version,
-            self.config_version,
+            self.processing_configuration_version,
         ]
 
         return hashlib.sha256(
@@ -110,7 +171,9 @@ class EntityTopicAnalysisService:
             input_hash=self.analysis_hash(article),
             provider=self.analyzer.provider,
             provider_version=self.analyzer.version,
-            configuration_version=self.config_version,
+            configuration_version=(
+                self.processing_configuration_version
+            ),
         )
 
     def prepare_analysis(
@@ -666,6 +729,12 @@ class EntityTopicAnalysisRunner:
                                 Source.active
                                 .is_(True),
                             )
+                            .with_for_update(
+                                of=Article
+                            )
+                            .execution_options(
+                                populate_existing=True
+                            )
                         )
 
                         if article is None:
@@ -678,6 +747,25 @@ class EntityTopicAnalysisRunner:
                                 reason=(
                                     "article became ineligible "
                                     "after entity/topic claim"
+                                ),
+                            )
+                            skipped += 1
+                            continue
+
+                        if not claim.matches_candidate(
+                            self.service.candidate(
+                                article
+                            )
+                        ):
+                            self.processing_repository.skip(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=self.clock(),
+                                reason=(
+                                    "entity/topic input "
+                                    "changed after claim"
                                 ),
                             )
                             skipped += 1
@@ -811,6 +899,12 @@ class EntityTopicAnalysisRunner:
                                     Source.active
                                     .is_(True),
                                 )
+                                .with_for_update(
+                                    of=Article
+                                )
+                                .execution_options(
+                                    populate_existing=True
+                                )
                             )
 
                             if article is None:
@@ -823,6 +917,31 @@ class EntityTopicAnalysisRunner:
                                     reason=(
                                         "article became ineligible "
                                         "before entity/topic persistence"
+                                    ),
+                                )
+                                skipped += 1
+                                continue
+
+                            if (
+                                not claim.matches_candidate(
+                                    self.service.candidate(
+                                        article
+                                    )
+                                )
+                                or self.service.analysis_hash(
+                                    article
+                                )
+                                != prepared.expected_hash
+                            ):
+                                self.processing_repository.skip(
+                                    db,
+                                    state_id=claim.state_id,
+                                    run_id=claim.run_id,
+                                    worker_id=self.worker_id,
+                                    now=self.clock(),
+                                    reason=(
+                                        "entity/topic input changed "
+                                        "before result persistence"
                                     ),
                                 )
                                 skipped += 1

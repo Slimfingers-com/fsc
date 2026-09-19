@@ -2,7 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
-from sqlalchemy import func, select
+from sqlalchemy import func, select, text
 
 from app.clustering.rule_based import RuleBasedStoryClusterer
 from app.enums.article_identity_type import ArticleIdentityType
@@ -87,6 +87,7 @@ def make_runner(
     worker_id: str,
     clock=None,
     claim_ttl_seconds: float = 300,
+    candidate_limit: int = 100,
 ) -> StoryClusteringRunner:
     service = StoryClusteringService(
         clusterer=RuleBasedStoryClusterer(),
@@ -99,7 +100,7 @@ def make_runner(
         clock=clock,
         claim_ttl_seconds=claim_ttl_seconds,
         window_hours=24.0,
-        candidate_limit=100,
+        candidate_limit=candidate_limit,
     )
 
 
@@ -644,3 +645,339 @@ def test_runner_acquires_story_lock_before_processing_heartbeat(
     )
 
     assert "lock" in events[:heartbeat_index]
+
+def test_runner_skips_claim_when_input_changes_before_processing(
+    monkeypatch,
+):
+    article_id = create_committed_articles(
+        1
+    )[0]
+
+    runner = make_runner(
+        worker_id="changed-input-worker",
+    )
+
+    original_claim_pending = (
+        runner._claim_pending
+    )
+
+    def claim_then_change(
+        db,
+        *,
+        limit,
+        now,
+    ):
+        claims = original_claim_pending(
+            db,
+            limit=limit,
+            now=now,
+        )
+
+        with TestSessionLocal.begin() as other_db:
+            article = other_db.get(
+                Article,
+                article_id,
+            )
+
+            article.title = (
+                "Changed after story claim"
+            )
+            article.normalized_title = (
+                "changed after story claim"
+            )
+
+        return claims
+
+    monkeypatch.setattr(
+        runner,
+        "_claim_pending",
+        claim_then_change,
+    )
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert (
+        result.selected,
+        result.processed,
+        result.skipped,
+        result.failed,
+    ) == (
+        1,
+        0,
+        1,
+        0,
+    )
+
+    with TestSessionLocal() as db:
+        state = db.scalar(
+            select(
+                ArticleProcessingState
+            ).where(
+                ArticleProcessingState.article_id
+                == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+            )
+        )
+
+        run = db.scalar(
+            select(
+                ArticleProcessingRun
+            ).where(
+                ArticleProcessingRun.article_id
+                == article_id,
+                ArticleProcessingRun.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+            )
+        )
+
+        membership_count = db.scalar(
+            select(func.count())
+            .select_from(StoryArticle)
+        )
+
+        assert state is not None
+        assert run is not None
+
+        assert state.claimed_by is None
+        assert state.processed_input_hash is None
+        assert run.outcome == "skipped"
+        assert membership_count == 0
+
+def test_runner_deactivates_old_story_immediately_after_story_move():
+    article_ids = create_committed_articles(
+        2
+    )
+
+    moving_article_id = article_ids[1]
+
+    with TestSessionLocal.begin() as db:
+        article = db.get(
+            Article,
+            moving_article_id,
+        )
+
+        article.title = "Completely unrelated report"
+        article.normalized_title = (
+            "completely unrelated report"
+        )
+
+    runner = make_runner(
+        worker_id="story-move-worker",
+    )
+
+    first = runner.run_pending(
+        limit=2
+    )
+
+    assert first.processed == 2
+
+    with TestSessionLocal() as db:
+        membership = db.scalar(
+            select(
+                StoryArticle
+            ).where(
+                StoryArticle.article_id
+                == moving_article_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        assert membership is not None
+        old_story_id = membership.story_id
+
+    with TestSessionLocal.begin() as db:
+        article = db.get(
+            Article,
+            moving_article_id,
+        )
+
+        article.title = "Berlin election update"
+        article.normalized_title = (
+            "berlin election update"
+        )
+
+    second = runner.run_pending(
+        limit=1
+    )
+
+    assert second.processed == 1
+
+    with TestSessionLocal() as db:
+        active_membership = db.scalar(
+            select(
+                StoryArticle
+            ).where(
+                StoryArticle.article_id
+                == moving_article_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        old_story = db.get(
+            Story,
+            old_story_id,
+        )
+
+        assert active_membership is not None
+        assert (
+            active_membership.story_id
+            != old_story_id
+        )
+
+        assert old_story is not None
+        assert old_story.deleted_at is not None
+
+def test_candidate_limit_does_not_allow_one_story_to_hide_another():
+    article_ids = create_committed_articles(
+        4
+    )
+
+    exact_article_id = article_ids[0]
+
+    with TestSessionLocal.begin() as db:
+        exact_article = db.get(
+            Article,
+            exact_article_id,
+        )
+        exact_article.published_at = (
+            exact_article.published_at
+            - timedelta(hours=1)
+        )
+
+        for article_id in article_ids[1:]:
+            article = db.get(
+                Article,
+                article_id,
+            )
+
+            article.title = (
+                "Berlin economy outlook"
+            )
+            article.normalized_title = (
+                "berlin economy outlook"
+            )
+
+    runner = make_runner(
+        worker_id="candidate-fairness-worker",
+        candidate_limit=2,
+    )
+
+    initial = runner.run_pending(
+        limit=4
+    )
+
+    assert initial.processed == 4
+
+    with TestSessionLocal() as db:
+        exact_membership = db.scalar(
+            select(
+                StoryArticle
+            ).where(
+                StoryArticle.article_id
+                == exact_article_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        assert exact_membership is not None
+        exact_story_id = (
+            exact_membership.story_id
+        )
+
+    query_article_id = (
+        create_committed_articles(
+            1
+        )[0]
+    )
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert result.processed == 1
+
+    with TestSessionLocal() as db:
+        query_membership = db.scalar(
+            select(
+                StoryArticle
+            ).where(
+                StoryArticle.article_id
+                == query_article_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        assert query_membership is not None
+        assert (
+            query_membership.story_id
+            == exact_story_id
+        )
+        assert (
+            query_membership.match_kind
+            == "matched"
+        )
+
+def test_runner_releases_story_lock_before_claim_scan(
+    monkeypatch,
+):
+    create_committed_articles(
+        1
+    )
+
+    runner = make_runner(
+        worker_id="claim-scope-worker",
+    )
+
+    original_claim_pending = (
+        runner._claim_pending
+    )
+
+    def claim_pending(
+        db,
+        *,
+        limit,
+        now,
+    ):
+        with TestSessionLocal.begin() as other_db:
+            acquired = other_db.scalar(
+                text(
+                    "SELECT pg_try_advisory_xact_lock(:lock_key)"
+                ),
+                {
+                    "lock_key": (
+                        runner.service.repository
+                        .CLUSTERING_LOCK_KEY
+                    )
+                },
+            )
+
+            assert acquired is True
+
+        return original_claim_pending(
+            db,
+            limit=limit,
+            now=now,
+        )
+
+    monkeypatch.setattr(
+        runner,
+        "_claim_pending",
+        claim_pending,
+    )
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert result.processed == 1

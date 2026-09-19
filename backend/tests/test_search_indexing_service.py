@@ -373,3 +373,138 @@ def test_reactivated_feed_is_reindexed():
             run.attempt_number
             for run in runs
         ] == [1, 2]
+
+def test_runner_skips_claim_when_search_input_changes_in_other_transaction(
+    monkeypatch,
+):
+    article_id, _, _ = _create_normalized_article()
+
+    runner = SearchIndexingRunner(
+        TestSessionLocal,
+        worker_id="search-input-race",
+    )
+
+    original_claim_pending = runner._claim_pending
+
+    def claim_then_change(
+        db,
+        *,
+        limit,
+        now,
+    ):
+        claims = original_claim_pending(
+            db,
+            limit=limit,
+            now=now,
+        )
+
+        with TestSessionLocal.begin() as other_db:
+            article = other_db.get(
+                Article,
+                article_id,
+            )
+            article.link = (
+                "https://changed.example.test/article"
+            )
+
+        return claims
+
+    monkeypatch.setattr(
+        runner,
+        "_claim_pending",
+        claim_then_change,
+    )
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert result.processed == 0
+
+    with TestSessionLocal() as db:
+        document = db.scalar(
+            select(
+                SearchDocument
+            ).where(
+                SearchDocument.article_id
+                == article_id
+            )
+        )
+        state = db.scalar(
+            select(
+                ArticleProcessingState
+            ).where(
+                ArticleProcessingState.article_id
+                == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.SEARCH_INDEXING.value,
+            )
+        )
+        run = db.scalar(
+            select(
+                ArticleProcessingRun
+            ).where(
+                ArticleProcessingRun.article_id
+                == article_id,
+                ArticleProcessingRun.pipeline
+                == ArticlePipeline.SEARCH_INDEXING.value,
+            )
+        )
+
+        assert document is None
+        assert state is not None
+        assert state.processed_input_hash is None
+        assert run is not None
+        assert run.outcome == "skipped"
+
+
+def test_runner_removes_document_when_normalization_becomes_invalid():
+    article_id, _, _ = _create_normalized_article()
+
+    runner = SearchIndexingRunner(
+        TestSessionLocal,
+        worker_id="search-invalid-normalization",
+    )
+
+    assert runner.run_pending(
+        limit=1
+    ).created == 1
+
+    with TestSessionLocal.begin() as db:
+        article = db.get(
+            Article,
+            article_id,
+        )
+        article.normalized_at = None
+        article.content_hash = None
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert result.deleted == 1
+    assert result.processed == 0
+
+    with TestSessionLocal() as db:
+        assert (
+            SearchDocumentRepository()
+            .get_by_article_id(
+                db,
+                article_id,
+            )
+            is None
+        )
+
+        state = db.scalar(
+            select(
+                ArticleProcessingState
+            ).where(
+                ArticleProcessingState.article_id
+                == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.SEARCH_INDEXING.value,
+            )
+        )
+
+        assert state is not None
+        assert state.processed_input_hash is None

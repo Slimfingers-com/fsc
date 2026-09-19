@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import TYPE_CHECKING
 from uuid import UUID
 
-from sqlalchemy import Computed, DateTime, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import Computed, DateTime, ForeignKey, Index, Integer, String, Text, UniqueConstraint
 from sqlalchemy.dialects.postgresql import TSVECTOR, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -15,7 +15,15 @@ if TYPE_CHECKING:
 class SearchDocument(BaseModel):
     __tablename__ = "search_documents"
     __table_args__ = (
-        UniqueConstraint("article_id", name="uq_search_documents_article_id"),
+        UniqueConstraint(
+            "article_id",
+            name="uq_search_documents_article_id",
+        ),
+        Index(
+            "ix_search_documents_search_vector",
+            "search_vector",
+            postgresql_using="gin",
+        ),
     )
 
     article_id: Mapped[UUID] = mapped_column(

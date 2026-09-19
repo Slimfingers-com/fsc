@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from uuid import UUID
 
-from sqlalchemy import exists, or_, select, text, update
+from sqlalchemy import exists, func, or_, select, text, update
 from sqlalchemy.orm import Session
 
 from app.clustering.provider import (
@@ -245,56 +245,82 @@ class StoryRepository:
                 == article.language_code
             )
 
+        ranked_candidates = (
+            select(
+                StoryArticle.id.label(
+                    "membership_id"
+                ),
+                StoryArticle.article_time.label(
+                    "article_time"
+                ),
+                func.row_number()
+                .over(
+                    partition_by=StoryArticle.story_id,
+                    order_by=(
+                        StoryArticle.article_time.desc(),
+                        StoryArticle.id,
+                    ),
+                )
+                .label("story_rank"),
+            )
+            .join(
+                Story,
+                Story.id
+                == StoryArticle.story_id,
+            )
+            .join(
+                Article,
+                Article.id
+                == StoryArticle.article_id,
+            )
+            .join(
+                Feed,
+                Feed.id
+                == Article.feed_id,
+            )
+            .join(
+                Source,
+                Source.id
+                == Feed.source_id,
+            )
+            .where(
+                StoryArticle.deleted_at.is_(None),
+                Story.deleted_at.is_(None),
+                language_condition,
+                Article.deleted_at.is_(None),
+                Article.normalized_at.is_not(None),
+                Article.normalized_text.is_not(None),
+                Feed.deleted_at.is_(None),
+                Feed.active.is_(True),
+                Source.deleted_at.is_(None),
+                Source.active.is_(True),
+                StoryArticle.article_id
+                != article.article_id,
+                StoryArticle.article_time
+                >= article.article_time - window,
+                StoryArticle.article_time
+                <= article.article_time + window,
+                or_(*overlap_conditions),
+            )
+            .subquery()
+        )
+
         memberships = list(
             db.scalars(
                 select(StoryArticle)
                 .join(
-                    Story,
-                    Story.id
-                    == StoryArticle.story_id,
-                )
-                .join(
-                    Article,
-                    Article.id
-                    == StoryArticle.article_id,
-                )
-                .join(
-                    Feed,
-                    Feed.id
-                    == Article.feed_id,
-                )
-                .join(
-                    Source,
-                    Source.id
-                    == Feed.source_id,
-                )
-                .where(
-                    StoryArticle.deleted_at.is_(None),
-                    Story.deleted_at.is_(None),
-                    language_condition,
-                    Article.deleted_at.is_(None),
-                    Article.normalized_at.is_not(None),
-                    Article.normalized_text.is_not(None),
-                    Feed.deleted_at.is_(None),
-                    Feed.active.is_(True),
-                    Source.deleted_at.is_(None),
-                    Source.active.is_(True),
-                    StoryArticle.article_id
-                    != article.article_id,
-                    StoryArticle.article_time
-                    >= article.article_time - window,
-                    StoryArticle.article_time
-                    <= article.article_time + window,
-                    or_(*overlap_conditions),
+                    ranked_candidates,
+                    ranked_candidates.c.membership_id
+                    == StoryArticle.id,
                 )
                 .order_by(
-                    StoryArticle.article_time.desc(),
+                    ranked_candidates.c.story_rank,
+                    ranked_candidates.c.article_time.desc(),
                     StoryArticle.id,
                 )
                 .limit(limit)
             ).all()
         )
-
         return tuple(
             StoryCandidate(
                 story_id=membership.story_id,
@@ -414,6 +440,38 @@ class StoryRepository:
         db.flush()
 
         return membership
+
+    def deactivate_story_if_orphan(
+        self,
+        db: Session,
+        *,
+        story_id: UUID,
+        now: datetime,
+    ) -> bool:
+        active_membership = exists(
+            select(StoryArticle.id).where(
+                StoryArticle.story_id
+                == story_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        result = db.execute(
+            update(Story)
+            .where(
+                Story.id == story_id,
+                Story.deleted_at.is_(None),
+                ~active_membership,
+            )
+            .values(
+                deleted_at=now,
+                updated_at=now,
+            )
+        )
+
+        return (result.rowcount or 0) == 1
 
     def deactivate_ineligible_memberships(
         self,

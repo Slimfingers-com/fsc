@@ -35,9 +35,14 @@ from app.repositories.story import StoryRepository
 logger = logging.getLogger(__name__)
 
 
+class StoryClusteringInputChangedError(RuntimeError):
+    pass
+
+
 @dataclass(frozen=True, slots=True)
 class PreparedStoryClustering:
     article_title: str | None
+    input_hash: str
     article: StoryClusteringInput
     candidates: tuple[StoryCandidate, ...]
 
@@ -218,6 +223,12 @@ class StoryClusteringService:
                 Source.deleted_at.is_(None),
                 Source.active.is_(True),
             )
+            .with_for_update(
+                of=Article
+            )
+            .execution_options(
+                populate_existing=True
+            )
         )
 
         if article is None:
@@ -228,6 +239,19 @@ class StoryClusteringService:
                 db,
                 [article.id],
             )
+        )
+
+        entity_ids = entity_ids_by_article[
+            article.id
+        ]
+        topic_ids = topic_ids_by_article[
+            article.id
+        ]
+
+        input_hash = self.clustering_hash(
+            article,
+            entity_ids=entity_ids,
+            topic_ids=topic_ids,
         )
 
         feature_title = (
@@ -245,12 +269,8 @@ class StoryClusteringService:
             title_terms=extract_title_terms(
                 feature_title
             ),
-            entity_ids=entity_ids_by_article[
-                article.id
-            ],
-            topic_ids=topic_ids_by_article[
-                article.id
-            ],
+            entity_ids=entity_ids,
+            topic_ids=topic_ids,
         )
 
         candidates = self.repository.list_candidates(
@@ -262,6 +282,7 @@ class StoryClusteringService:
 
         return PreparedStoryClustering(
             article_title=article.title,
+            input_hash=input_hash,
             article=clustering_input,
             candidates=candidates,
         )
@@ -284,6 +305,7 @@ class StoryClusteringService:
         clustered_at: datetime,
         window_hours: float,
         candidate_limit: int,
+        expected_input_hash: str | None = None,
     ) -> AppliedStoryClustering | None:
         self.repository.acquire_clustering_lock(db)
 
@@ -296,6 +318,15 @@ class StoryClusteringService:
 
         if prepared is None:
             return None
+
+        if (
+            expected_input_hash is not None
+            and prepared.input_hash
+            != expected_input_hash
+        ):
+            raise StoryClusteringInputChangedError(
+                "story clustering input changed after claim"
+            )
 
         result = self.cluster(prepared)
 
@@ -481,6 +512,17 @@ class StoryClusteringService:
             match_details=match_details,
             clustered_at=clustered_at,
         )
+
+        if (
+            existing is not None
+            and existing.story_id
+            != membership.story_id
+        ):
+            self.repository.deactivate_story_if_orphan(
+                db,
+                story_id=existing.story_id,
+                now=clustered_at,
+            )
 
         return AppliedStoryClustering(
             story_id=membership.story_id,
@@ -780,6 +822,7 @@ class StoryClusteringRunner:
                     now=claim_now,
                 )
 
+            with db.begin():
                 claims = self._claim_pending(
                     db,
                     limit=limit,
@@ -819,14 +862,30 @@ class StoryClusteringRunner:
                                 "processing lease is no longer valid"
                             )
 
-                        applied = self.service.cluster_article(
-                            db,
-                            article_id=claim.article_id,
-                            processing_run_id=claim.run_id,
-                            clustered_at=processing_time,
-                            window_hours=self.window_hours,
-                            candidate_limit=self.candidate_limit,
-                        )
+                        try:
+                            applied = self.service.cluster_article(
+                                db,
+                                article_id=claim.article_id,
+                                processing_run_id=claim.run_id,
+                                clustered_at=processing_time,
+                                window_hours=self.window_hours,
+                                candidate_limit=self.candidate_limit,
+                                expected_input_hash=claim.input_hash,
+                            )
+                        except StoryClusteringInputChangedError:
+                            self.processing_repository.skip(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=self.clock(),
+                                reason=(
+                                    "story clustering input "
+                                    "changed after claim"
+                                ),
+                            )
+                            skipped += 1
+                            continue
 
                         if applied is None:
                             self.processing_repository.skip(

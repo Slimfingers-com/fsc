@@ -50,6 +50,8 @@ class SearchDocumentRepository(BaseRepository[SearchDocument]):
             .where(
                 Article.id == SearchDocument.article_id,
                 Article.deleted_at.is_(None),
+                Article.normalized_at.is_not(None),
+                Article.content_hash.is_not(None),
                 Feed.deleted_at.is_(None),
                 Feed.active.is_(True),
                 Source.deleted_at.is_(None),

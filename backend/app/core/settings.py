@@ -1,3 +1,4 @@
+from sqlalchemy.engine import URL
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,6 +10,7 @@ class Settings(BaseSettings):
     database_password: str
 
     secret_key: str
+    source_admin_api_key: str = ""
 
     gemini_api_key: str = ""
     openai_api_key: str = ""
@@ -47,13 +49,15 @@ class Settings(BaseSettings):
 
     @property
     def database_url(self) -> str:
-        return (
-            f"postgresql+psycopg://"
-            f"{self.database_user}:"
-            f"{self.database_password}@"
-            f"{self.database_host}:"
-            f"{self.database_port}/"
-            f"{self.database_name}"
+        return URL.create(
+            "postgresql+psycopg",
+            username=self.database_user,
+            password=self.database_password,
+            host=self.database_host,
+            port=self.database_port,
+            database=self.database_name,
+        ).render_as_string(
+            hide_password=False
         )
 
 

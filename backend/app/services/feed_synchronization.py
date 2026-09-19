@@ -14,6 +14,7 @@ from app.ingestion import (
     IngestionError,
 )
 from app.models.feed import Feed
+from app.models.source import Source
 from app.repositories.feed import FeedRepository
 from app.services.feed_persistence import FeedPersistenceResult, FeedPersistenceService
 
@@ -189,14 +190,41 @@ class FeedSynchronizationRunner:
                                 Feed.id == feed_id,
                                 Feed.claimed_by == self.worker_id,
                             )
-                            .with_for_update()
+                            .with_for_update(
+                                of=Feed
+                            )
                         )
+
+                        if feed is None:
+                            continue
+
+                        source_is_active = (
+                            db.scalar(
+                                select(Source.id).where(
+                                    Source.id
+                                    == feed.source_id,
+                                    Source.active.is_(
+                                        True
+                                    ),
+                                    Source.deleted_at.is_(
+                                        None
+                                    ),
+                                )
+                            )
+                            is not None
+                        )
+
                         if (
-                            feed is None
+                            feed.deleted_at is not None
                             or not feed.active
+                            or not source_is_active
                             or feed.claim_expires_at is None
-                            or feed.claim_expires_at <= self.clock()
+                            or feed.claim_expires_at
+                            <= self.clock()
                         ):
+                            feed.claimed_at = None
+                            feed.claimed_by = None
+                            feed.claim_expires_at = None
                             continue
                         result = self.synchronization_service.synchronize(
                             db,
@@ -216,7 +244,9 @@ class FeedSynchronizationRunner:
                                 Feed.id == feed_id,
                                 Feed.claimed_by == self.worker_id,
                             )
-                            .with_for_update()
+                            .with_for_update(
+                                of=Feed
+                            )
                         )
                         if feed is not None:
                             feed.claimed_at = None

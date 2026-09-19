@@ -3,7 +3,10 @@ from fastapi.responses import JSONResponse
 from sqlalchemy import text
 
 from app.api.router import api_router
-from app.core.exceptions import DuplicateSourceError
+from app.core.exceptions import (
+    BusinessRuleViolationError,
+    DuplicateSourceError,
+)
 from app.db.session import SessionLocal
 
 app = FastAPI(
@@ -21,6 +24,21 @@ async def duplicate_source_exception_handler(
 ):
     return JSONResponse(
         status_code=409,
+        content={
+            "detail": str(exc),
+        },
+    )
+
+
+@app.exception_handler(
+    BusinessRuleViolationError
+)
+async def business_rule_violation_exception_handler(
+    request: Request,
+    exc: BusinessRuleViolationError,
+):
+    return JSONResponse(
+        status_code=422,
         content={
             "detail": str(exc),
         },

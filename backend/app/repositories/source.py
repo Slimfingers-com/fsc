@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
+from app.models.feed import Feed
 from app.models.source import Source
 from app.repositories.base import BaseRepository
 
@@ -16,7 +17,16 @@ class SourceRepository(BaseRepository[Source]):
     ) -> Source | None:
         statement = (
             select(Source)
-            .options(selectinload(Source.feeds))
+            .options(
+                selectinload(
+                    Source.feeds.and_(
+                        Feed.deleted_at.is_(None)
+                    )
+                )
+            )
+            .execution_options(
+                populate_existing=True
+            )
             .where(Source.slug == slug)
             .where(Source.deleted_at.is_(None))
         )
@@ -70,7 +80,16 @@ class SourceRepository(BaseRepository[Source]):
     ) -> list[Source]:
         statement = (
             select(Source)
-            .options(selectinload(Source.feeds))
+            .options(
+                selectinload(
+                    Source.feeds.and_(
+                        Feed.deleted_at.is_(None)
+                    )
+                )
+            )
+            .execution_options(
+                populate_existing=True
+            )
             .where(Source.active.is_(True))
             .where(Source.deleted_at.is_(None))
             .order_by(Source.name)
