@@ -37,6 +37,7 @@ class SearchHit:
     language_code: str | None
     published_at: datetime | None
     relevance: float
+    story_id: UUID | None = None
 
 
 @dataclass(frozen=True, slots=True)
