@@ -24,6 +24,13 @@ class RuleBasedStoryClusterer(StoryClusterer):
 
         self.min_similarity = min_similarity
 
+    def configuration(
+        self,
+    ) -> dict[str, object]:
+        return {
+            "min_similarity": self.min_similarity,
+        }
+
     @staticmethod
     def _jaccard(
         left: tuple[object, ...],

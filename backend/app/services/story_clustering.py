@@ -1,3 +1,5 @@
+import hashlib
+import json
 from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
@@ -5,7 +7,10 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.clustering.features import extract_title_terms
+from app.clustering.features import (
+    TITLE_FEATURE_VERSION,
+    extract_title_terms,
+)
 from app.clustering.provider import (
     StoryCandidate,
     StoryClusterer,
@@ -15,6 +20,9 @@ from app.clustering.provider import (
 from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
+from app.repositories.article_processing import (
+    ArticleProcessingCandidate,
+)
 from app.repositories.story import StoryRepository
 
 
@@ -34,14 +42,136 @@ class AppliedStoryClustering:
 
 
 class StoryClusteringService:
+    CONFIG_VERSION = "1"
+
     def __init__(
         self,
         *,
         clusterer: StoryClusterer,
         repository: StoryRepository | None = None,
+        config_version: str = CONFIG_VERSION,
     ) -> None:
+        if not config_version:
+            raise ValueError(
+                "config_version must not be empty"
+            )
+
         self.clusterer = clusterer
         self.repository = repository or StoryRepository()
+        self.config_version = config_version
+
+    def processing_configuration_version(
+        self,
+        *,
+        window_hours: float,
+        candidate_limit: int,
+    ) -> str:
+        if window_hours <= 0:
+            raise ValueError(
+                "window_hours must be greater than zero"
+            )
+
+        if candidate_limit <= 0:
+            raise ValueError(
+                "candidate_limit must be greater than zero"
+            )
+
+        payload = {
+            "service_config_version": self.config_version,
+            "title_feature_version": TITLE_FEATURE_VERSION,
+            "clusterer_configuration": (
+                self.clusterer.configuration()
+            ),
+            "window_hours": window_hours,
+            "candidate_limit": candidate_limit,
+        }
+
+        return hashlib.sha256(
+            json.dumps(
+                payload,
+                ensure_ascii=False,
+                separators=(",", ":"),
+                sort_keys=True,
+            ).encode()
+        ).hexdigest()
+
+    def clustering_hash(
+        self,
+        article: Article,
+        *,
+        entity_ids: tuple[UUID, ...],
+        topic_ids: tuple[UUID, ...],
+    ) -> str:
+        feature_title = (
+            article.normalized_title
+            or article.title
+        )
+
+        article_time = (
+            article.published_at
+            or article.created_at
+        )
+
+        payload = {
+            "article_title": article.title or "",
+            "article_time": article_time.isoformat(),
+            "language_code": article.language_code or "",
+            "title_feature_version": TITLE_FEATURE_VERSION,
+            "title_terms": list(
+                extract_title_terms(
+                    feature_title
+                )
+            ),
+            "entity_ids": [
+                str(value)
+                for value in sorted(
+                    entity_ids,
+                    key=str,
+                )
+            ],
+            "topic_ids": [
+                str(value)
+                for value in sorted(
+                    topic_ids,
+                    key=str,
+                )
+            ],
+        }
+
+        return hashlib.sha256(
+            json.dumps(
+                payload,
+                ensure_ascii=False,
+                separators=(",", ":"),
+                sort_keys=True,
+            ).encode()
+        ).hexdigest()
+
+    def candidate(
+        self,
+        article: Article,
+        *,
+        entity_ids: tuple[UUID, ...],
+        topic_ids: tuple[UUID, ...],
+        window_hours: float,
+        candidate_limit: int,
+    ) -> ArticleProcessingCandidate:
+        return ArticleProcessingCandidate(
+            article_id=article.id,
+            input_hash=self.clustering_hash(
+                article,
+                entity_ids=entity_ids,
+                topic_ids=topic_ids,
+            ),
+            provider=self.clusterer.provider,
+            provider_version=self.clusterer.version,
+            configuration_version=(
+                self.processing_configuration_version(
+                    window_hours=window_hours,
+                    candidate_limit=candidate_limit,
+                )
+            ),
+        )
 
     def prepare(
         self,
@@ -212,6 +342,7 @@ class StoryClusteringService:
                 "clusterer returned a story "
                 "outside the candidate set"
             )
+
     def _apply_result_locked(
         self,
         db: Session,
@@ -221,8 +352,6 @@ class StoryClusteringService:
         processing_run_id: UUID,
         clustered_at: datetime,
     ) -> AppliedStoryClustering:
-
-
         existing_run_membership = (
             self.repository.get_membership_by_processing_run(
                 db,

@@ -10,6 +10,7 @@ from app.clustering.provider import (
     StoryClusteringInput,
     StoryClusteringResult,
 )
+from app.clustering.rule_based import RuleBasedStoryClusterer
 from app.services.story_clustering import (
     PreparedStoryClustering,
     StoryClusteringService,
@@ -518,3 +519,220 @@ def test_cluster_article_acquires_lock_before_preparing(
         "cluster",
         "apply",
     ]
+
+def make_processing_article():
+    created_at = datetime(
+        2026,
+        9,
+        19,
+        10,
+        0,
+        tzinfo=UTC,
+    )
+
+    return SimpleNamespace(
+        id=uuid4(),
+        title="Bundestag in Berlin",
+        normalized_title="bundestag berlin",
+        language_code="de",
+        published_at=None,
+        created_at=created_at,
+    )
+
+
+def test_clustering_hash_tracks_feature_input():
+    service = StoryClusteringService(
+        clusterer=StubClusterer(
+            make_result()
+        ),
+    )
+
+    article = make_processing_article()
+    entity_id = uuid4()
+    topic_id = uuid4()
+
+    original = service.clustering_hash(
+        article,
+        entity_ids=(entity_id,),
+        topic_ids=(topic_id,),
+    )
+
+    article.normalized_title = (
+        "bundestag wahl berlin"
+    )
+
+    changed_title = service.clustering_hash(
+        article,
+        entity_ids=(entity_id,),
+        topic_ids=(topic_id,),
+    )
+
+    article.normalized_title = (
+        "bundestag berlin"
+    )
+
+    changed_entities = service.clustering_hash(
+        article,
+        entity_ids=(uuid4(),),
+        topic_ids=(topic_id,),
+    )
+
+    changed_topics = service.clustering_hash(
+        article,
+        entity_ids=(entity_id,),
+        topic_ids=(uuid4(),),
+    )
+
+    assert len(
+        {
+            original,
+            changed_title,
+            changed_entities,
+            changed_topics,
+        }
+    ) == 4
+
+
+def test_clustering_hash_is_independent_of_feature_order():
+    service = StoryClusteringService(
+        clusterer=StubClusterer(
+            make_result()
+        ),
+    )
+
+    article = make_processing_article()
+
+    first_entity = uuid4()
+    second_entity = uuid4()
+    first_topic = uuid4()
+    second_topic = uuid4()
+
+    first = service.clustering_hash(
+        article,
+        entity_ids=(
+            first_entity,
+            second_entity,
+        ),
+        topic_ids=(
+            first_topic,
+            second_topic,
+        ),
+    )
+
+    second = service.clustering_hash(
+        article,
+        entity_ids=(
+            second_entity,
+            first_entity,
+        ),
+        topic_ids=(
+            second_topic,
+            first_topic,
+        ),
+    )
+
+    assert first == second
+
+
+def test_candidate_contains_complete_processing_identity():
+    service = StoryClusteringService(
+        clusterer=StubClusterer(
+            make_result()
+        ),
+        config_version="config-2",
+    )
+
+    article = make_processing_article()
+    entity_ids = (uuid4(),)
+    topic_ids = (uuid4(),)
+
+    candidate = service.candidate(
+        article,
+        entity_ids=entity_ids,
+        topic_ids=topic_ids,
+        window_hours=48.0,
+        candidate_limit=250,
+    )
+
+    assert candidate.article_id == article.id
+    assert candidate.input_hash == (
+        service.clustering_hash(
+            article,
+            entity_ids=entity_ids,
+            topic_ids=topic_ids,
+        )
+    )
+    assert candidate.provider == "test"
+    assert candidate.provider_version == "1"
+    assert candidate.configuration_version == (
+        service.processing_configuration_version(
+            window_hours=48.0,
+            candidate_limit=250,
+        )
+    )
+
+
+def test_processing_configuration_tracks_clustering_settings():
+    service = StoryClusteringService(
+        clusterer=StubClusterer(
+            make_result()
+        ),
+    )
+
+    original = (
+        service.processing_configuration_version(
+            window_hours=24.0,
+            candidate_limit=100,
+        )
+    )
+
+    changed_window = (
+        service.processing_configuration_version(
+            window_hours=48.0,
+            candidate_limit=100,
+        )
+    )
+
+    changed_limit = (
+        service.processing_configuration_version(
+            window_hours=24.0,
+            candidate_limit=200,
+        )
+    )
+
+    assert len(
+        {
+            original,
+            changed_window,
+            changed_limit,
+        }
+    ) == 3
+
+def test_processing_configuration_tracks_clusterer_configuration():
+    first = StoryClusteringService(
+        clusterer=RuleBasedStoryClusterer(
+            min_similarity=0.45,
+        ),
+    )
+
+    second = StoryClusteringService(
+        clusterer=RuleBasedStoryClusterer(
+            min_similarity=0.50,
+        ),
+    )
+
+    first_version = (
+        first.processing_configuration_version(
+            window_hours=24.0,
+            candidate_limit=100,
+        )
+    )
+
+    second_version = (
+        second.processing_configuration_version(
+            window_hours=24.0,
+            candidate_limit=100,
+        )
+    )
+
+    assert first_version != second_version

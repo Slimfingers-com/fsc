@@ -38,6 +38,11 @@ class StoryClusterer(ABC):
     provider: str
     version: str
 
+    def configuration(
+        self,
+    ) -> dict[str, object]:
+        return {}
+
     @abstractmethod
     def cluster(
         self,
