@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
 from enum import StrEnum
@@ -52,6 +53,7 @@ class StoryArticleItem:
     article_id: UUID
     title: str | None
     url: str | None
+    published_at: datetime | None
     article_time: datetime
     source_id: UUID
     source_name: str
@@ -93,3 +95,21 @@ class StoryPage:
     total: int
     page: int
     page_size: int
+
+
+class StoryReadProvider(ABC):
+    @abstractmethod
+    def list_stories(
+        self,
+        *,
+        filters: StoryFilters,
+        sort: StorySort,
+        page: int,
+        page_size: int,
+    ) -> StoryPage: ...
+
+    @abstractmethod
+    def get_story(
+        self,
+        story_id: UUID,
+    ) -> StoryDetail | None: ...

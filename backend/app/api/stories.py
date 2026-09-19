@@ -1,4 +1,3 @@
-from datetime import datetime
 from math import ceil
 from typing import Annotated
 from uuid import UUID
@@ -9,6 +8,7 @@ from fastapi import (
     HTTPException,
     Query,
 )
+from pydantic import AwareDatetime
 from sqlalchemy.orm import Session
 
 from app.analysis.provider import EntityType
@@ -51,8 +51,8 @@ def list_stories(
         str | None,
         Query(min_length=1, max_length=255),
     ] = None,
-    published_from: datetime | None = None,
-    published_to: datetime | None = None,
+    published_from: AwareDatetime | None = None,
+    published_to: AwareDatetime | None = None,
     entity_id: UUID | None = None,
     entity_type: EntityType | None = None,
     topic_id: UUID | None = None,

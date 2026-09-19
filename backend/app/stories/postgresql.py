@@ -15,6 +15,7 @@ from app.stories.provider import (
     StoryEntity,
     StoryFilters,
     StoryPage,
+    StoryReadProvider,
     StorySort,
     StorySource,
     StorySummary,
@@ -22,7 +23,7 @@ from app.stories.provider import (
 )
 
 
-class PostgreSQLStoryReadProvider:
+class PostgreSQLStoryReadProvider(StoryReadProvider):
     def __init__(self, db: Session) -> None:
         self.db = db
 
@@ -33,8 +34,12 @@ class PostgreSQLStoryReadProvider:
                 StoryArticle.id.label("membership_id"),
                 StoryArticle.story_id.label("story_id"),
                 StoryArticle.article_id.label("article_id"),
-                StoryArticle.article_title.label("article_title"),
-                StoryArticle.article_time.label("article_time"),
+                Article.title.label("article_title"),
+                Article.published_at.label("published_at"),
+                func.coalesce(
+                    Article.published_at,
+                    Article.created_at,
+                ).label("article_time"),
                 StoryArticle.similarity_score.label("similarity_score"),
                 StoryArticle.match_kind.label("match_kind"),
                 StoryArticle.match_details.label("match_details"),
@@ -128,67 +133,70 @@ class PostgreSQLStoryReadProvider:
             filters.entity_id is not None
             or filters.entity_type is not None
         ):
-            statement = (
-                statement
-                .join(
-                    ArticleEntity,
-                    ArticleEntity.article_id
-                    == eligible.c.article_id,
-                )
+            entity_match = (
+                select(ArticleEntity.id)
                 .join(
                     Entity,
                     Entity.id
                     == ArticleEntity.entity_id,
                 )
                 .where(
+                    ArticleEntity.article_id
+                    == eligible.c.article_id,
                     ArticleEntity.deleted_at.is_(None),
                     Entity.deleted_at.is_(None),
                 )
             )
 
             if filters.entity_id is not None:
-                statement = statement.where(
+                entity_match = entity_match.where(
                     ArticleEntity.entity_id
                     == filters.entity_id
                 )
 
             if filters.entity_type is not None:
-                statement = statement.where(
+                entity_match = entity_match.where(
                     ArticleEntity.entity_type
                     == filters.entity_type
                 )
+
+            statement = statement.where(
+                entity_match.exists()
+            )
 
         if (
             filters.topic_id is not None
             or filters.topic_slug is not None
         ):
-            statement = (
-                statement
-                .join(
-                    ArticleTopic,
-                    ArticleTopic.article_id
-                    == eligible.c.article_id,
-                )
+            topic_match = (
+                select(ArticleTopic.id)
                 .join(
                     Topic,
                     Topic.id == ArticleTopic.topic_id,
                 )
                 .where(
+                    ArticleTopic.article_id
+                    == eligible.c.article_id,
                     ArticleTopic.deleted_at.is_(None),
                     Topic.deleted_at.is_(None),
                 )
             )
 
             if filters.topic_id is not None:
-                statement = statement.where(
+                topic_match = topic_match.where(
                     ArticleTopic.topic_id
                     == filters.topic_id
                 )
 
             if filters.topic_slug is not None:
-                statement = statement.where(
-                    Topic.slug == filters.topic_slug
+                topic_match = topic_match.where(
+                    Topic.slug
+                    == filters.topic_slug
                 )
+
+            statement = statement.where(
+                topic_match.exists()
+            )
 
         if filters.source_id is not None:
             statement = statement.where(
@@ -204,17 +212,62 @@ class PostgreSQLStoryReadProvider:
 
         if filters.published_from is not None:
             statement = statement.where(
-                eligible.c.article_time
+                eligible.c.published_at
                 >= filters.published_from
             )
 
         if filters.published_to is not None:
             statement = statement.where(
-                eligible.c.article_time
+                eligible.c.published_at
                 <= filters.published_to
             )
 
         return statement.distinct()
+
+    @staticmethod
+    def _validate_request(
+        *,
+        filters: StoryFilters,
+        page: int,
+        page_size: int,
+    ) -> None:
+        if (
+            page <= 0
+            or page_size <= 0
+            or filters.min_articles <= 0
+            or filters.min_sources <= 0
+        ):
+            raise ValueError(
+                "story pagination and minimum counts "
+                "must be greater than zero"
+            )
+
+        for value in (
+            filters.published_from,
+            filters.published_to,
+        ):
+            if (
+                value is not None
+                and (
+                    value.tzinfo is None
+                    or value.utcoffset() is None
+                )
+            ):
+                raise ValueError(
+                    "story publication filters must "
+                    "include a timezone offset"
+                )
+
+        if (
+            filters.published_from is not None
+            and filters.published_to is not None
+            and filters.published_from
+            > filters.published_to
+        ):
+            raise ValueError(
+                "published_from must not be later "
+                "than published_to"
+            )
 
     def list_stories(
         self,
@@ -224,6 +277,12 @@ class PostgreSQLStoryReadProvider:
         page: int,
         page_size: int,
     ) -> StoryPage:
+        self._validate_request(
+            filters=filters,
+            page=page,
+            page_size=page_size,
+        )
+
         eligible = self._eligible_memberships()
         summary = self._summary_cte(eligible)
         representative = (
@@ -396,6 +455,7 @@ class PostgreSQLStoryReadProvider:
                 eligible.c.article_id,
                 eligible.c.article_title,
                 eligible.c.url,
+                eligible.c.published_at,
                 eligible.c.article_time,
                 eligible.c.source_id,
                 eligible.c.source_name,
@@ -545,6 +605,7 @@ class PostgreSQLStoryReadProvider:
                     article_id=value.article_id,
                     title=value.article_title,
                     url=value.url,
+                    published_at=value.published_at,
                     article_time=value.article_time,
                     source_id=value.source_id,
                     source_name=(

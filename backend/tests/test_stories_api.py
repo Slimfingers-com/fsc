@@ -2,6 +2,7 @@ from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
 from app.analysis.provider import EntityType, TextPart
+from app.core.settings import settings
 from app.enums.article_identity_type import (
     ArticleIdentityType,
 )
@@ -148,21 +149,30 @@ def add_entity(
     article,
     name="Berlin",
     entity_type=EntityType.LOCATION,
+    entity=None,
+    normalized_mention=None,
 ):
-    entity = Entity(
-        canonical_name=name,
-        normalized_name=name.casefold(),
-        entity_type=entity_type,
-    )
-    db.add(entity)
-    db.flush()
+    if entity is None:
+        entity = Entity(
+            canonical_name=name,
+            normalized_name=name.casefold(),
+            entity_type=entity_type,
+        )
+        db.add(entity)
+        db.flush()
+    else:
+        name = entity.canonical_name
+        entity_type = entity.entity_type
 
     mention = ArticleEntity(
         article=article,
         entity=entity,
         processing_run_id=None,
         mention_text=name,
-        normalized_mention=name.casefold(),
+        normalized_mention=(
+            normalized_mention
+            or name.casefold()
+        ),
         entity_type=entity_type,
         text_source=TextPart.TITLE,
         start_offset=None,
@@ -184,14 +194,16 @@ def add_topic(
     article,
     name="Politik",
     slug="politik",
+    topic=None,
 ):
-    topic = Topic(
-        name=name,
-        normalized_name=name.casefold(),
-        slug=slug,
-    )
-    db.add(topic)
-    db.flush()
+    if topic is None:
+        topic = Topic(
+            name=name,
+            normalized_name=name.casefold(),
+            slug=slug,
+        )
+        db.add(topic)
+        db.flush()
 
     relation = ArticleTopic(
         article=article,
@@ -298,6 +310,15 @@ def test_story_list_summary_sort_and_pagination(
         "story_id"
     ] == str(recent_story.id)
 
+    oldest = client.get(
+        "/stories",
+        params={"sort": "oldest"},
+    )
+    assert oldest.status_code == 200
+    assert oldest.json()["items"][0][
+        "story_id"
+    ] == str(older_story.id)
+
 
 def test_story_list_filters(
     client,
@@ -403,6 +424,87 @@ def test_story_list_filters(
         ] == str(story.id)
 
 
+def test_story_combined_membership_filters_require_one_article(
+    client,
+    db,
+):
+    now = datetime.now(UTC)
+    _, feed = add_source(
+        db,
+        name="Alpha",
+        slug="alpha",
+    )
+    story = add_story(db)
+
+    first = add_article(
+        db,
+        feed=feed,
+        title="First",
+        language="de",
+        published_at=now,
+    )
+    second = add_article(
+        db,
+        feed=feed,
+        title="Second",
+        language="de",
+        published_at=now + timedelta(minutes=1),
+    )
+    add_membership(
+        db,
+        story=story,
+        article=first,
+    )
+    add_membership(
+        db,
+        story=story,
+        article=second,
+        match_kind="matched",
+        similarity=0.8,
+    )
+
+    entity = add_entity(
+        db,
+        article=first,
+        name="Berlin",
+    )
+    topic = add_topic(
+        db,
+        article=second,
+        name="Politik",
+        slug="politik",
+    )
+
+    separated = client.get(
+        "/stories",
+        params={
+            "entity_id": str(entity.id),
+            "topic_id": str(topic.id),
+        },
+    )
+    assert separated.status_code == 200
+    assert separated.json()["total"] == 0
+
+    add_topic(
+        db,
+        article=first,
+        topic=topic,
+    )
+
+    combined = client.get(
+        "/stories",
+        params={
+            "entity_id": str(entity.id),
+            "topic_id": str(topic.id),
+        },
+    )
+    assert combined.status_code == 200
+    assert combined.json()["total"] == 1
+    assert combined.json()["items"][0][
+        "story_id"
+    ] == str(story.id)
+
+
 def test_story_detail_contains_current_evidence(
     client,
     db,
@@ -494,6 +596,9 @@ def test_story_detail_contains_current_evidence(
         matched.id
     )
     assert latest_data["source_slug"] == "beta"
+    assert latest_data["published_at"] == (
+        latest.published_at.isoformat()
+    )
     assert latest_data["match_kind"] == "matched"
     assert latest_data["similarity_score"] == 0.72
     assert latest_data["match_details"][
@@ -669,6 +774,329 @@ def test_story_detail_ignores_deleted_entity_topic_links(
     assert topic.id is not None
 
 
+def test_story_reads_use_current_article_metadata(
+    client,
+    db,
+):
+    now = datetime.now(UTC)
+    _, feed = add_source(
+        db,
+        name="Alpha",
+        slug="alpha",
+    )
+    story = add_story(db)
+    article = add_article(
+        db,
+        feed=feed,
+        title="Original title",
+        language="de",
+        published_at=now,
+    )
+    add_membership(
+        db,
+        story=story,
+        article=article,
+    )
+
+    article.title = "Updated title"
+    article.normalized_title = "updated title"
+    article.published_at = (
+        now + timedelta(hours=2)
+    )
+    db.flush()
+
+    listed = client.get("/stories")
+    assert listed.status_code == 200
+    assert listed.json()["items"][0][
+        "title"
+    ] == "Updated title"
+
+    detail = client.get(
+        f"/stories/{story.id}"
+    )
+    assert detail.status_code == 200
+    item = detail.json()["articles"][0]
+    assert item["title"] == "Updated title"
+    assert item["published_at"] == (
+        article.published_at.isoformat()
+    )
+    assert item["article_time"] == (
+        article.published_at.isoformat()
+    )
+
+    old_window = client.get(
+        "/stories",
+        params={
+            "published_from": (
+                now - timedelta(minutes=1)
+            ).isoformat(),
+            "published_to": (
+                now + timedelta(minutes=1)
+            ).isoformat(),
+        },
+    )
+    assert old_window.status_code == 200
+    assert old_window.json()["total"] == 0
+
+    current_window = client.get(
+        "/stories",
+        params={
+            "published_from": (
+                article.published_at
+                - timedelta(minutes=1)
+            ).isoformat(),
+            "published_to": (
+                article.published_at
+                + timedelta(minutes=1)
+            ).isoformat(),
+        },
+    )
+    assert current_window.status_code == 200
+    assert current_window.json()["total"] == 1
+
+
+def test_story_reads_exclude_other_ineligible_states(
+    client,
+    db,
+):
+    now = datetime.now(UTC)
+
+    def create_case(
+        slug,
+        mutate,
+    ):
+        source, feed = add_source(
+            db,
+            name=slug,
+            slug=slug,
+        )
+        story = add_story(db)
+        article = add_article(
+            db,
+            feed=feed,
+            title=slug,
+            language="de",
+            published_at=now,
+        )
+        membership = add_membership(
+            db,
+            story=story,
+            article=article,
+        )
+        mutate(
+            source,
+            feed,
+            article,
+            story,
+            membership,
+        )
+        return story
+
+    visible_story = create_case(
+        "visible-case",
+        lambda *_: None,
+    )
+    hidden_stories = [
+        create_case(
+            "feed-inactive-case",
+            lambda _s, feed, _a, _st, _m: (
+                setattr(feed, "active", False)
+            ),
+        ),
+        create_case(
+            "article-deleted-case",
+            lambda _s, _f, article, _st, _m: (
+                setattr(article, "deleted_at", now)
+            ),
+        ),
+        create_case(
+            "article-not-normalized-case",
+            lambda _s, _f, article, _st, _m: (
+                setattr(article, "normalized_at", None)
+            ),
+        ),
+        create_case(
+            "membership-deleted-case",
+            lambda _s, _f, _a, _st, membership: (
+                setattr(membership, "deleted_at", now)
+            ),
+        ),
+        create_case(
+            "story-deleted-case",
+            lambda _s, _f, _a, story, _m: (
+                setattr(story, "deleted_at", now)
+            ),
+        ),
+    ]
+    db.flush()
+
+    listed = client.get("/stories")
+    assert listed.status_code == 200
+    assert listed.json()["total"] == 1
+    assert listed.json()["items"][0][
+        "story_id"
+    ] == str(visible_story.id)
+
+    for story in hidden_stories:
+        detail = client.get(
+            f"/stories/{story.id}"
+        )
+        assert detail.status_code == 404
+
+
+def test_story_detail_aggregates_distinct_features(
+    client,
+    db,
+):
+    now = datetime.now(UTC)
+    _, feed = add_source(
+        db,
+        name="Alpha",
+        slug="alpha",
+    )
+    story = add_story(db)
+
+    first = add_article(
+        db,
+        feed=feed,
+        title="First",
+        language="de",
+        published_at=now,
+    )
+    second = add_article(
+        db,
+        feed=feed,
+        title="Second",
+        language="de",
+        published_at=now + timedelta(minutes=1),
+    )
+    add_membership(
+        db,
+        story=story,
+        article=first,
+    )
+    add_membership(
+        db,
+        story=story,
+        article=second,
+        match_kind="matched",
+        similarity=0.8,
+    )
+
+    entity = add_entity(
+        db,
+        article=first,
+        name="Berlin",
+    )
+    add_entity(
+        db,
+        article=first,
+        entity=entity,
+        normalized_mention="berlin-city",
+    )
+    add_entity(
+        db,
+        article=second,
+        entity=entity,
+    )
+
+    topic = add_topic(
+        db,
+        article=first,
+        name="Politik",
+        slug="politik",
+    )
+    add_topic(
+        db,
+        article=second,
+        topic=topic,
+    )
+
+    deleted_entity = add_entity(
+        db,
+        article=first,
+        name="Deleted Entity",
+    )
+    deleted_topic = add_topic(
+        db,
+        article=first,
+        name="Deleted Topic",
+        slug="deleted-topic",
+    )
+    deleted_entity.deleted_at = now
+    deleted_topic.deleted_at = now
+    db.flush()
+
+    response = client.get(
+        f"/stories/{story.id}"
+    )
+    assert response.status_code == 200
+    data = response.json()
+
+    assert data["entities"] == [
+        {
+            "entity_id": str(entity.id),
+            "canonical_name": "Berlin",
+            "entity_type": "location",
+            "article_count": 2,
+        }
+    ]
+    assert data["topics"] == [
+        {
+            "topic_id": str(topic.id),
+            "name": "Politik",
+            "slug": "politik",
+            "article_count": 2,
+        }
+    ]
+
+
+def test_story_page_size_is_capped(
+    client,
+    db,
+    monkeypatch,
+):
+    now = datetime.now(UTC)
+    _, feed = add_source(
+        db,
+        name="Alpha",
+        slug="alpha",
+    )
+
+    for index in range(2):
+        story = add_story(db)
+        article = add_article(
+            db,
+            feed=feed,
+            title=f"Story {index}",
+            language="de",
+            published_at=(
+                now + timedelta(minutes=index)
+            ),
+        )
+        add_membership(
+            db,
+            story=story,
+            article=article,
+        )
+
+    monkeypatch.setattr(
+        settings,
+        "story_max_page_size",
+        1,
+    )
+
+    response = client.get(
+        "/stories",
+        params={"page_size": 100},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["page_size"] == 1
+    assert data["pages"] == 2
+    assert len(data["items"]) == 1
+
+
 def test_story_api_validation_and_not_found(
     client,
 ):
@@ -683,6 +1111,16 @@ def test_story_api_validation_and_not_found(
         params={"min_sources": 0},
     )
     assert invalid_min.status_code == 422
+
+    naive_time = client.get(
+        "/stories",
+        params={
+            "published_from": (
+                "2026-09-19T00:00:00"
+            ),
+        },
+    )
+    assert naive_time.status_code == 422
 
     invalid_range = client.get(
         "/stories",

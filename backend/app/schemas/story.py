@@ -1,7 +1,8 @@
 from datetime import datetime
+from typing import Literal
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from app.analysis.provider import EntityType
 
@@ -12,8 +13,8 @@ class StorySummaryRead(BaseModel):
     story_id: UUID
     title: str | None
     language_code: str | None
-    article_count: int
-    source_count: int
+    article_count: int = Field(ge=1)
+    source_count: int = Field(ge=1)
     first_article_at: datetime
     last_article_at: datetime
 
@@ -24,7 +25,7 @@ class StorySourceRead(BaseModel):
     source_id: UUID
     name: str
     slug: str
-    article_count: int
+    article_count: int = Field(ge=1)
 
 
 class StoryArticleRead(BaseModel):
@@ -34,12 +35,13 @@ class StoryArticleRead(BaseModel):
     article_id: UUID
     title: str | None
     url: str | None
+    published_at: datetime | None
     article_time: datetime
     source_id: UUID
     source_name: str
     source_slug: str
-    match_kind: str
-    similarity_score: float
+    match_kind: Literal["created", "matched", "retained"]
+    similarity_score: float = Field(ge=0.0, le=1.0)
     match_details: dict[str, object] | None
     clustered_at: datetime
 
@@ -50,7 +52,7 @@ class StoryEntityRead(BaseModel):
     entity_id: UUID
     canonical_name: str
     entity_type: EntityType
-    article_count: int
+    article_count: int = Field(ge=1)
 
 
 class StoryTopicRead(BaseModel):
@@ -59,7 +61,7 @@ class StoryTopicRead(BaseModel):
     topic_id: UUID
     name: str
     slug: str
-    article_count: int
+    article_count: int = Field(ge=1)
 
 
 class StoryDetailRead(StorySummaryRead):

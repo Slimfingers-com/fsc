@@ -8,6 +8,7 @@ from app.models.search_document import SearchDocument
 from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.story import Story, StoryArticle
 from app.search.provider import SearchFilters, SearchHit, SearchPage, SearchProvider, SearchSort
 from app.models.entity import ArticleEntity, Entity
 from app.models.topic import ArticleTopic, Topic
@@ -121,6 +122,21 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
         total = self.db.scalar(
             select(func.count()).select_from(base.where(*conditions).subquery())
         ) or 0
+        story_id = (
+            select(StoryArticle.story_id)
+            .join(
+                Story,
+                Story.id == StoryArticle.story_id,
+            )
+            .where(
+                StoryArticle.article_id == Article.id,
+                StoryArticle.deleted_at.is_(None),
+                Story.deleted_at.is_(None),
+            )
+            .correlate(Article)
+            .scalar_subquery()
+        )
+
         excerpt = (
             func.ts_headline(
                 self.text_config,
@@ -131,7 +147,12 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
             if tsquery is not None else func.left(SearchDocument.body, 300)
         )
         statement = (
-            select(SearchDocument, relevance.label("relevance"), excerpt.label("excerpt"))
+            select(
+                SearchDocument,
+                relevance.label("relevance"),
+                excerpt.label("excerpt"),
+                story_id.label("story_id"),
+            )
             .join(Article, Article.id == SearchDocument.article_id)
             .join(Feed, Feed.id == Article.feed_id)
             .join(Source, Source.id == Feed.source_id)
@@ -157,7 +178,13 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
                 language_code=document.language_code,
                 published_at=document.published_at,
                 relevance=float(rank),
+                story_id=active_story_id,
             )
-            for document, rank, excerpt_text in rows
+            for (
+                document,
+                rank,
+                excerpt_text,
+                active_story_id,
+            ) in rows
         ]
         return SearchPage(items=items, total=total, page=page, page_size=page_size)

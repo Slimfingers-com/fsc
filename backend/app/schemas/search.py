@@ -18,6 +18,7 @@ class SearchHitRead(BaseModel):
     language_code: str | None
     published_at: datetime | None
     relevance: float
+    story_id: UUID | None
 
 
 class SearchPageRead(BaseModel):
