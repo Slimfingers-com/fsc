@@ -237,3 +237,84 @@ def test_runner_does_not_process_unchanged_article_twice():
         )
 
         assert len(runs) == 1
+
+def test_runner_skips_claim_when_raw_input_changes_in_other_transaction(
+    monkeypatch,
+):
+    article_id = _create_article()
+
+    runner = ArticleNormalizationRunner(
+        TestSessionLocal,
+        worker_id="normalizer-input-race",
+    )
+
+    original_claim_pending = runner._claim_pending
+
+    def claim_then_change(
+        db,
+        *,
+        limit,
+        now,
+    ):
+        claims = original_claim_pending(
+            db,
+            limit=limit,
+            now=now,
+        )
+
+        with TestSessionLocal.begin() as other_db:
+            article = other_db.get(
+                Article,
+                article_id,
+            )
+            article.content = (
+                "<p>Changed after claim in another "
+                "transaction.</p>"
+            )
+
+        return claims
+
+    monkeypatch.setattr(
+        runner,
+        "_claim_pending",
+        claim_then_change,
+    )
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert result.processed == 0
+
+    with TestSessionLocal() as db:
+        article = db.get(
+            Article,
+            article_id,
+        )
+        state = db.scalar(
+            select(
+                ArticleProcessingState
+            ).where(
+                ArticleProcessingState.article_id
+                == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.NORMALIZATION.value,
+            )
+        )
+        run = db.scalar(
+            select(
+                ArticleProcessingRun
+            ).where(
+                ArticleProcessingRun.article_id
+                == article_id,
+                ArticleProcessingRun.pipeline
+                == ArticlePipeline.NORMALIZATION.value,
+            )
+        )
+
+        assert article.normalized_at is None
+        assert state is not None
+        assert state.processed_input_hash is None
+        assert state.claimed_by is None
+        assert run is not None
+        assert run.outcome == "skipped"

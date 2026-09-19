@@ -145,13 +145,49 @@ class FeedPersistenceService:
                 link=link,
             )
             if article is not None:
+                if (
+                    guid
+                    and article.identity_type
+                    is ArticleIdentityType.GUID
+                ):
+                    return None
                 return article
 
-        return self.article_repository.get_by_identity(
+        article = self.article_repository.get_by_identity(
             db,
             feed_id=feed.id,
             identity_key=identity.identity_key,
         )
+
+        if article is not None:
+            return article
+
+        if identity.identity_type is not ArticleIdentityType.DERIVED:
+            derived_entry = ParsedFeedEntry(
+                external_id=None,
+                title=entry.title,
+                link=None,
+                summary=entry.summary,
+                content=entry.content,
+                author=entry.author,
+                published_at=entry.published_at,
+                updated_at=entry.updated_at,
+                categories=entry.categories,
+                enclosures=entry.enclosures,
+            )
+            derived_identity = build_article_identity(
+                derived_entry
+            )
+
+            return self.article_repository.get_by_identity(
+                db,
+                feed_id=feed.id,
+                identity_key=(
+                    derived_identity.identity_key
+                ),
+            )
+
+        return None
 
     @staticmethod
     def _apply_entry(
@@ -189,10 +225,22 @@ class FeedPersistenceService:
             article.normalization_version = None
             article.normalized_at = None
 
-        if (
-            identity.identity_type is ArticleIdentityType.GUID
-            and article.identity_type is not ArticleIdentityType.GUID
-        ):
+        should_upgrade_identity = (
+            (
+                identity.identity_type
+                is ArticleIdentityType.GUID
+                and article.identity_type
+                is not ArticleIdentityType.GUID
+            )
+            or (
+                identity.identity_type
+                is ArticleIdentityType.LINK
+                and article.identity_type
+                is ArticleIdentityType.DERIVED
+            )
+        )
+
+        if should_upgrade_identity:
             article.identity_type = identity.identity_type
             article.identity_key = identity.identity_key
             changed = True

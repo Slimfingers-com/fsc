@@ -361,6 +361,12 @@ class SearchIndexingRunner:
                                     Feed.source
                                 )
                             )
+                            .with_for_update(
+                                of=Article
+                            )
+                            .execution_options(
+                                populate_existing=True
+                            )
                         )
 
                         if article is None:
@@ -373,6 +379,24 @@ class SearchIndexingRunner:
                                 reason=(
                                     "article became ineligible "
                                     "after search indexing claim"
+                                ),
+                            )
+                            continue
+
+                        if not claim.matches_candidate(
+                            self.service.candidate(
+                                article
+                            )
+                        ):
+                            self.processing_repository.skip(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=self.clock(),
+                                reason=(
+                                    "search indexing input "
+                                    "changed after claim"
                                 ),
                             )
                             continue

@@ -25,6 +25,7 @@ if TYPE_CHECKING:
     from app.models.entity import ArticleEntity
     from app.models.feed import Feed
     from app.models.search_document import SearchDocument
+    from app.models.story import StoryArticle
     from app.models.topic import ArticleTopic
 
 
@@ -150,6 +151,11 @@ class Article(BaseModel):
     )
 
     topics: Mapped[list["ArticleTopic"]] = relationship(
+        back_populates="article",
+        cascade="all, delete-orphan",
+    )
+
+    story_memberships: Mapped[list["StoryArticle"]] = relationship(
         back_populates="article",
         cascade="all, delete-orphan",
     )

@@ -225,6 +225,19 @@ def test_claim_atomically_creates_state_lease_and_run():
             claim = claims[0]
 
             assert claim.article_id == article_ids[0]
+            assert claim.input_hash == candidate.input_hash
+            assert claim.provider == candidate.provider
+            assert (
+                claim.provider_version
+                == candidate.provider_version
+            )
+            assert (
+                claim.configuration_version
+                == candidate.configuration_version
+            )
+            assert claim.matches_candidate(
+                candidate
+            )
             assert claim.attempt_number == 1
 
             state = db.get(

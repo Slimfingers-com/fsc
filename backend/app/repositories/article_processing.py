@@ -28,9 +28,26 @@ class ArticleProcessingCandidate:
 @dataclass(frozen=True, slots=True)
 class ArticleProcessingClaim:
     article_id: UUID
+    input_hash: str
+    provider: str
+    provider_version: str
+    configuration_version: str
     state_id: UUID
     run_id: UUID
     attempt_number: int
+
+    def matches_candidate(
+        self,
+        candidate: ArticleProcessingCandidate,
+    ) -> bool:
+        return (
+            self.article_id == candidate.article_id
+            and self.input_hash == candidate.input_hash
+            and self.provider == candidate.provider
+            and self.provider_version == candidate.provider_version
+            and self.configuration_version
+            == candidate.configuration_version
+        )
 
 
 class ArticleProcessingRepository:
@@ -240,6 +257,12 @@ class ArticleProcessingRepository:
             claims.append(
                 ArticleProcessingClaim(
                     article_id=state.article_id,
+                    input_hash=candidate.input_hash,
+                    provider=candidate.provider,
+                    provider_version=candidate.provider_version,
+                    configuration_version=(
+                        candidate.configuration_version
+                    ),
                     state_id=state.id,
                     run_id=run.id,
                     attempt_number=state.attempt_count,

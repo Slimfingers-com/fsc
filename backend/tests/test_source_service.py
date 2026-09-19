@@ -1,3 +1,5 @@
+from datetime import UTC, datetime
+
 import pytest
 
 from app.core.exceptions import DuplicateSourceError
@@ -129,3 +131,60 @@ def test_list_active_sources(db):
 
     assert sources == [active_source]
     assert len(sources[0].feeds) == 1
+
+def test_source_reads_exclude_soft_deleted_feeds(
+    db,
+):
+    service = SourceService()
+
+    source = service.create_source(
+        db,
+        SourceCreate(
+            name="Soft Delete News",
+            url="https://soft-delete.example.com",
+            source_type=SourceType.NEWS,
+            feeds=[
+                FeedCreate(
+                    name="Visible",
+                    url=(
+                        "https://soft-delete.example.com/"
+                        "visible.xml"
+                    ),
+                ),
+                FeedCreate(
+                    name="Deleted",
+                    url=(
+                        "https://soft-delete.example.com/"
+                        "deleted.xml"
+                    ),
+                ),
+            ],
+        ),
+    )
+
+    source.feeds[1].deleted_at = (
+        datetime.now(UTC)
+    )
+    db.flush()
+
+    by_slug = service.get_by_slug(
+        db,
+        source.slug,
+    )
+    listed = service.list_active(
+        db
+    )
+
+    assert by_slug is not None
+    assert [
+        feed.name
+        for feed in by_slug.feeds
+    ] == [
+        "Visible",
+    ]
+    assert [
+        feed.name
+        for feed in listed[0].feeds
+    ] == [
+        "Visible",
+    ]

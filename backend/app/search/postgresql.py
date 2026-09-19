@@ -9,7 +9,7 @@ from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
 from app.search.provider import SearchFilters, SearchHit, SearchPage, SearchProvider, SearchSort
-from app.models.entity import ArticleEntity
+from app.models.entity import ArticleEntity, Entity
 from app.models.topic import ArticleTopic, Topic
 
 
@@ -30,6 +30,8 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
         conditions: list[ColumnElement[bool]] = [
             SearchDocument.deleted_at.is_(None),
             Article.deleted_at.is_(None),
+            Article.normalized_at.is_not(None),
+            Article.content_hash.is_not(None),
             Feed.deleted_at.is_(None),
             Feed.active.is_(True),
             Source.deleted_at.is_(None),
@@ -48,11 +50,65 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
         if filters.published_to:
             conditions.append(SearchDocument.published_at <= filters.published_to)
         if filters.entity_id:
-            conditions.append(select(ArticleEntity.id).where(ArticleEntity.article_id == Article.id, ArticleEntity.entity_id == filters.entity_id, ArticleEntity.deleted_at.is_(None)).exists())
+            conditions.append(
+                select(ArticleEntity.id)
+                .join(
+                    Entity,
+                    Entity.id
+                    == ArticleEntity.entity_id,
+                )
+                .where(
+                    ArticleEntity.article_id
+                    == Article.id,
+                    ArticleEntity.entity_id
+                    == filters.entity_id,
+                    ArticleEntity.deleted_at.is_(
+                        None
+                    ),
+                    Entity.deleted_at.is_(None),
+                )
+                .exists()
+            )
         if filters.entity_type:
-            conditions.append(select(ArticleEntity.id).where(ArticleEntity.article_id == Article.id, ArticleEntity.entity_type == filters.entity_type, ArticleEntity.deleted_at.is_(None)).exists())
+            conditions.append(
+                select(ArticleEntity.id)
+                .join(
+                    Entity,
+                    Entity.id
+                    == ArticleEntity.entity_id,
+                )
+                .where(
+                    ArticleEntity.article_id
+                    == Article.id,
+                    ArticleEntity.entity_type
+                    == filters.entity_type,
+                    ArticleEntity.deleted_at.is_(
+                        None
+                    ),
+                    Entity.deleted_at.is_(None),
+                )
+                .exists()
+            )
         if filters.topic_id:
-            conditions.append(select(ArticleTopic.id).where(ArticleTopic.article_id == Article.id, ArticleTopic.topic_id == filters.topic_id, ArticleTopic.deleted_at.is_(None)).exists())
+            conditions.append(
+                select(ArticleTopic.id)
+                .join(
+                    Topic,
+                    Topic.id
+                    == ArticleTopic.topic_id,
+                )
+                .where(
+                    ArticleTopic.article_id
+                    == Article.id,
+                    ArticleTopic.topic_id
+                    == filters.topic_id,
+                    ArticleTopic.deleted_at.is_(
+                        None
+                    ),
+                    Topic.deleted_at.is_(None),
+                )
+                .exists()
+            )
         if filters.topic_slug:
             conditions.append(select(ArticleTopic.id).join(Topic).where(ArticleTopic.article_id == Article.id, Topic.slug == filters.topic_slug, ArticleTopic.deleted_at.is_(None), Topic.deleted_at.is_(None)).exists())
 

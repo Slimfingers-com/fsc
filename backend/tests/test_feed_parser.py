@@ -23,6 +23,7 @@ def fetched(content: bytes | None, status_code: int = 200) -> FeedFetchResult:
     )
 
 
+@pytest.mark.filterwarnings("error::DeprecationWarning")
 def test_parse_rss2():
     xml = b'''<?xml version="1.0"?>
     <rss version="2.0"><channel>
@@ -51,6 +52,7 @@ def test_parse_rss2():
     assert entry.enclosures[0].length_bytes == 123
 
 
+@pytest.mark.filterwarnings("error::DeprecationWarning")
 def test_parse_atom():
     xml = b'''<?xml version="1.0" encoding="utf-8"?>
     <feed xmlns="http://www.w3.org/2005/Atom">

@@ -5,6 +5,7 @@ from sqlalchemy import select, text, update
 from sqlalchemy.orm import Session
 
 from app.models.feed import Feed
+from app.models.source import Source
 from app.repositories.base import BaseRepository
 
 
@@ -29,13 +30,22 @@ class FeedRepository(BaseRepository[Feed]):
         )
         due_feed_ids = (
             select(Feed.id)
+            .join(
+                Source,
+                Source.id == Feed.source_id,
+            )
             .where(Feed.active.is_(True))
             .where(Feed.deleted_at.is_(None))
+            .where(Source.active.is_(True))
+            .where(Source.deleted_at.is_(None))
             .where((Feed.last_fetched_at.is_(None)) | (due_at <= now))
             .where((Feed.claim_expires_at.is_(None)) | (Feed.claim_expires_at <= now))
             .order_by(Feed.priority.asc(), Feed.last_fetched_at.asc().nullsfirst())
             .limit(limit)
-            .with_for_update(skip_locked=True)
+            .with_for_update(
+                skip_locked=True,
+                of=Feed,
+            )
             .cte("due_feed_ids")
         )
         statement = (

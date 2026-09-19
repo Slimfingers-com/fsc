@@ -286,7 +286,7 @@ def test_candidate_contains_complete_processing_identity():
     )
     assert (
         candidate.configuration_version
-        == "config-2"
+        == service.processing_configuration_version
     )
 
 
@@ -1039,6 +1039,175 @@ def test_entity_topic_results_reference_successful_processing_run():
                 == run.id
                 for topic in topics
             )
+
+    finally:
+        cleanup_source(
+            source_id
+        )
+
+def test_analysis_identity_tracks_published_time_and_threshold_config():
+    article = Article(
+        id=uuid4(),
+        feed_id=uuid4(),
+        identity_type=ArticleIdentityType.DERIVED,
+        identity_key="c" * 64,
+        normalized_title="Title",
+        normalized_text="Body",
+        language_code="en",
+        content_hash="a" * 64,
+        normalization_version=1,
+        published_at=datetime(
+            2026,
+            7,
+            21,
+            tzinfo=UTC,
+        ),
+    )
+
+    first = EntityTopicAnalysisService(
+        analyzer=EmptyAnalyzer(),
+        min_entity_confidence=0.65,
+        min_topic_confidence=0.6,
+        max_topics=10,
+    )
+    changed_config = EntityTopicAnalysisService(
+        analyzer=EmptyAnalyzer(),
+        min_entity_confidence=0.7,
+        min_topic_confidence=0.6,
+        max_topics=10,
+    )
+
+    first_candidate = first.candidate(
+        article
+    )
+
+    article.normalization_version = 2
+    changed_normalization_candidate = (
+        first.candidate(article)
+    )
+    article.normalization_version = 1
+
+    article.content_hash = "b" * 64
+    changed_content_hash_candidate = (
+        first.candidate(article)
+    )
+    article.content_hash = "a" * 64
+
+    article.published_at = (
+        article.published_at
+        + timedelta(seconds=1)
+    )
+
+    changed_time_candidate = (
+        first.candidate(article)
+    )
+    changed_config_candidate = (
+        changed_config.candidate(article)
+    )
+
+    assert (
+        first_candidate.input_hash
+        != changed_normalization_candidate.input_hash
+    )
+    assert (
+        first_candidate.input_hash
+        != changed_content_hash_candidate.input_hash
+    )
+    assert (
+        first_candidate.input_hash
+        != changed_time_candidate.input_hash
+    )
+    assert (
+        first_candidate.configuration_version
+        != changed_config_candidate.configuration_version
+    )
+    assert (
+        first_candidate.input_hash
+        != changed_config_candidate.input_hash
+    )
+
+
+def test_runner_discards_provider_result_when_input_changes_during_analysis():
+    article_ids, source_id = committed_articles(
+        1
+    )
+    article_id = article_ids[0]
+
+    class MutatingAnalyzer(
+        EmptyAnalyzer
+    ):
+        provider = "input-race-test"
+
+        def analyze(
+            self,
+            article,
+        ):
+            with TestSessionLocal.begin() as db:
+                current = db.get(
+                    Article,
+                    article.article_id,
+                )
+                current.normalized_text = (
+                    "Changed while provider runs"
+                )
+
+            return AnalysisResult(
+                (),
+                (),
+            )
+
+    try:
+        runner = EntityTopicAnalysisRunner(
+            TestSessionLocal,
+            EntityTopicAnalysisService(
+                analyzer=MutatingAnalyzer()
+            ),
+            worker_id="entity-input-race",
+        )
+
+        result = runner.run_pending(
+            limit=1
+        )
+
+        assert (
+            result.selected,
+            result.processed,
+            result.skipped,
+            result.failed,
+        ) == (
+            1,
+            0,
+            1,
+            0,
+        )
+
+        with TestSessionLocal() as db:
+            state = db.scalar(
+                select(
+                    ArticleProcessingState
+                ).where(
+                    ArticleProcessingState.article_id
+                    == article_id,
+                    ArticleProcessingState.pipeline
+                    == ArticlePipeline.ENTITY_TOPIC.value,
+                )
+            )
+            run = db.scalar(
+                select(
+                    ArticleProcessingRun
+                ).where(
+                    ArticleProcessingRun.article_id
+                    == article_id,
+                    ArticleProcessingRun.pipeline
+                    == ArticlePipeline.ENTITY_TOPIC.value,
+                )
+            )
+
+            assert state is not None
+            assert state.processed_input_hash is None
+            assert state.claimed_by is None
+            assert run is not None
+            assert run.outcome == "skipped"
 
     finally:
         cleanup_source(
