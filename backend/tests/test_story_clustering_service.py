@@ -433,3 +433,88 @@ def test_apply_result_rejects_invalid_similarity_score(
         )
 
     assert repository.lock_acquired is False
+
+def test_cluster_article_acquires_lock_before_preparing(
+    monkeypatch,
+):
+    repository = FakeStoryRepository()
+    result = make_result()
+    service = make_service(
+        repository,
+        result,
+    )
+
+    prepared = make_prepared()
+    events = []
+
+    def acquire_lock(db):
+        events.append("lock")
+
+    def prepare(
+        db,
+        *,
+        article_id,
+        window_hours,
+        candidate_limit,
+    ):
+        events.append("prepare")
+        return prepared
+
+    def cluster(value):
+        events.append("cluster")
+        assert value is prepared
+        return result
+
+    def apply_locked(
+        db,
+        *,
+        prepared,
+        result,
+        processing_run_id,
+        clustered_at,
+    ):
+        events.append("apply")
+        return SimpleNamespace(
+            story_id=uuid4(),
+            membership_id=uuid4(),
+            changed=True,
+            match_kind="created",
+        )
+
+    monkeypatch.setattr(
+        repository,
+        "acquire_clustering_lock",
+        acquire_lock,
+    )
+    monkeypatch.setattr(
+        service,
+        "prepare",
+        prepare,
+    )
+    monkeypatch.setattr(
+        service,
+        "cluster",
+        cluster,
+    )
+    monkeypatch.setattr(
+        service,
+        "_apply_result_locked",
+        apply_locked,
+    )
+
+    applied = service.cluster_article(
+        object(),
+        article_id=prepared.article.article_id,
+        processing_run_id=uuid4(),
+        clustered_at=datetime.now(UTC),
+        window_hours=24.0,
+        candidate_limit=100,
+    )
+
+    assert applied is not None
+    assert events == [
+        "lock",
+        "prepare",
+        "cluster",
+        "apply",
+    ]

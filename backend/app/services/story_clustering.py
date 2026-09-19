@@ -128,6 +128,43 @@ class StoryClusteringService:
             prepared.candidates,
         )
 
+    def cluster_article(
+        self,
+        db: Session,
+        *,
+        article_id: UUID,
+        processing_run_id: UUID,
+        clustered_at: datetime,
+        window_hours: float,
+        candidate_limit: int,
+    ) -> AppliedStoryClustering | None:
+        self.repository.acquire_clustering_lock(db)
+
+        prepared = self.prepare(
+            db,
+            article_id=article_id,
+            window_hours=window_hours,
+            candidate_limit=candidate_limit,
+        )
+
+        if prepared is None:
+            return None
+
+        result = self.cluster(prepared)
+
+        self._validate_result(
+            prepared,
+            result,
+        )
+
+        return self._apply_result_locked(
+            db,
+            prepared=prepared,
+            result=result,
+            processing_run_id=processing_run_id,
+            clustered_at=clustered_at,
+        )
+
     def apply_result(
         self,
         db: Session,
@@ -137,24 +174,54 @@ class StoryClusteringService:
         processing_run_id: UUID,
         clustered_at: datetime,
     ) -> AppliedStoryClustering:
+        self._validate_result(
+            prepared,
+            result,
+        )
+
+        self.repository.acquire_clustering_lock(db)
+
+        return self._apply_result_locked(
+            db,
+            prepared=prepared,
+            result=result,
+            processing_run_id=processing_run_id,
+            clustered_at=clustered_at,
+        )
+
+    @staticmethod
+    def _validate_result(
+        prepared: PreparedStoryClustering,
+        result: StoryClusteringResult,
+    ) -> None:
         if not 0.0 <= result.similarity_score <= 1.0:
             raise ValueError(
                 "similarity_score must be between zero and one"
             )
 
-        if result.story_id is not None:
-            candidate_story_ids = {
-                candidate.story_id
-                for candidate in prepared.candidates
-            }
+        if result.story_id is None:
+            return
 
-            if result.story_id not in candidate_story_ids:
-                raise ValueError(
-                    "clusterer returned a story "
-                    "outside the candidate set"
-                )
+        candidate_story_ids = {
+            candidate.story_id
+            for candidate in prepared.candidates
+        }
 
-        self.repository.acquire_clustering_lock(db)
+        if result.story_id not in candidate_story_ids:
+            raise ValueError(
+                "clusterer returned a story "
+                "outside the candidate set"
+            )
+    def _apply_result_locked(
+        self,
+        db: Session,
+        *,
+        prepared: PreparedStoryClustering,
+        result: StoryClusteringResult,
+        processing_run_id: UUID,
+        clustered_at: datetime,
+    ) -> AppliedStoryClustering:
+
 
         existing_run_membership = (
             self.repository.get_membership_by_processing_run(
