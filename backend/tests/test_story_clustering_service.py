@@ -40,6 +40,7 @@ class FakeStoryRepository:
         self.run_membership = None
         self.active_membership = None
         self.target_story = None
+        self.created_story = None
 
         self.lock_acquired = False
         self.create_story_called = False
@@ -92,13 +93,13 @@ class FakeStoryRepository:
     ):
         self.create_story_called = True
 
-        if self.target_story is None:
-            self.target_story = SimpleNamespace(
+        if self.created_story is None:
+            self.created_story = SimpleNamespace(
                 id=uuid4(),
                 language_code=language_code,
             )
 
-        return self.target_story
+        return self.created_story
 
     def get_story(
         self,
