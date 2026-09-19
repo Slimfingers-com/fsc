@@ -1,11 +1,13 @@
 import hashlib
 import json
+import logging
 from dataclasses import dataclass
-from datetime import datetime
-from uuid import UUID
+from datetime import UTC, datetime, timedelta
+from typing import Callable
+from uuid import UUID, uuid4
 
-from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy import and_, or_, select
+from sqlalchemy.orm import Session, sessionmaker
 
 from app.clustering.features import (
     TITLE_FEATURE_VERSION,
@@ -17,13 +19,20 @@ from app.clustering.provider import (
     StoryClusteringInput,
     StoryClusteringResult,
 )
+from app.enums.article_pipeline import ArticlePipeline
 from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
 from app.repositories.article_processing import (
     ArticleProcessingCandidate,
+    ArticleProcessingClaim,
+    ArticleProcessingLeaseLostError,
+    ArticleProcessingRepository,
 )
 from app.repositories.story import StoryRepository
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True, slots=True)
@@ -39,6 +48,14 @@ class AppliedStoryClustering:
     membership_id: UUID
     changed: bool
     match_kind: str
+
+
+@dataclass(frozen=True, slots=True)
+class StoryClusteringBatchResult:
+    selected: int
+    processed: int
+    skipped: int
+    failed: int
 
 
 class StoryClusteringService:
@@ -418,7 +435,6 @@ class StoryClusteringService:
             result
         )
 
-
         membership = self.repository.replace_membership(
             db,
             story_id=target_story_id,
@@ -462,3 +478,371 @@ class StoryClusteringService:
         )
 
         return details
+
+class StoryClusteringRunner:
+    def __init__(
+        self,
+        session_factory: sessionmaker[Session],
+        service: StoryClusteringService,
+        processing_repository: ArticleProcessingRepository | None = None,
+        *,
+        claim_ttl_seconds: float = 300,
+        retry_base_seconds: float = 30,
+        retry_max_seconds: float = 3600,
+        window_hours: float,
+        candidate_limit: int,
+        worker_id: str | None = None,
+        clock: Callable[[], datetime] | None = None,
+    ) -> None:
+        if (
+            claim_ttl_seconds <= 0
+            or retry_base_seconds <= 0
+            or retry_max_seconds < retry_base_seconds
+            or window_hours <= 0
+            or candidate_limit <= 0
+        ):
+            raise ValueError(
+                "story clustering runner settings are invalid"
+            )
+
+        self.session_factory = session_factory
+        self.service = service
+        self.processing_repository = (
+            processing_repository
+            or ArticleProcessingRepository()
+        )
+
+        self.claim_ttl_seconds = claim_ttl_seconds
+        self.retry_base_seconds = retry_base_seconds
+        self.retry_max_seconds = retry_max_seconds
+        self.window_hours = window_hours
+        self.candidate_limit = candidate_limit
+
+        self.worker_id = worker_id or str(uuid4())
+        self.clock = clock or (
+            lambda: datetime.now(UTC)
+        )
+
+    def _claim_pending(
+        self,
+        db: Session,
+        *,
+        limit: int,
+        now: datetime,
+    ) -> list[ArticleProcessingClaim]:
+        claims: list[ArticleProcessingClaim] = []
+
+        page_size = max(
+            100,
+            limit * 4,
+        )
+
+        last_created_at = None
+        last_article_id = None
+
+        while len(claims) < limit:
+            conditions = [
+                Article.deleted_at.is_(None),
+                Article.normalized_at.is_not(None),
+                Article.normalized_text.is_not(None),
+                Feed.deleted_at.is_(None),
+                Feed.active.is_(True),
+                Source.deleted_at.is_(None),
+                Source.active.is_(True),
+            ]
+
+            if (
+                last_created_at is not None
+                and last_article_id is not None
+            ):
+                conditions.append(
+                    or_(
+                        Article.created_at
+                        > last_created_at,
+                        and_(
+                            Article.created_at
+                            == last_created_at,
+                            Article.id
+                            > last_article_id,
+                        ),
+                    )
+                )
+
+            articles = list(
+                db.scalars(
+                    select(Article)
+                    .join(Feed)
+                    .join(Source)
+                    .where(*conditions)
+                    .order_by(
+                        Article.created_at,
+                        Article.id,
+                    )
+                    .limit(page_size)
+                ).all()
+            )
+
+            if not articles:
+                break
+
+            article_ids = [
+                article.id
+                for article in articles
+            ]
+
+            (
+                entity_ids_by_article,
+                topic_ids_by_article,
+            ) = self.service.repository.load_feature_ids(
+                db,
+                article_ids,
+            )
+
+            candidates = [
+                self.service.candidate(
+                    article,
+                    entity_ids=(
+                        entity_ids_by_article[
+                            article.id
+                        ]
+                    ),
+                    topic_ids=(
+                        topic_ids_by_article[
+                            article.id
+                        ]
+                    ),
+                    window_hours=self.window_hours,
+                    candidate_limit=self.candidate_limit,
+                )
+                for article in articles
+            ]
+
+            remaining = limit - len(claims)
+
+            claims.extend(
+                self.processing_repository.claim_candidates(
+                    db,
+                    pipeline=(
+                        ArticlePipeline
+                        .STORY_CLUSTERING
+                        .value
+                    ),
+                    candidates=candidates,
+                    worker_id=self.worker_id,
+                    now=now,
+                    claim_expires_at=(
+                        now
+                        + timedelta(
+                            seconds=(
+                                self.claim_ttl_seconds
+                            )
+                        )
+                    ),
+                    limit=remaining,
+                )
+            )
+
+            last_article = articles[-1]
+            last_created_at = (
+                last_article.created_at
+            )
+            last_article_id = (
+                last_article.id
+            )
+
+            if len(articles) < page_size:
+                break
+
+        return claims
+
+    def _record_failure(
+        self,
+        db: Session,
+        *,
+        claim: ArticleProcessingClaim,
+        failure_time: datetime,
+        exc: Exception,
+    ) -> None:
+        delay = min(
+            self.retry_max_seconds,
+            self.retry_base_seconds
+            * (
+                2
+                ** max(
+                    claim.attempt_number - 1,
+                    0,
+                )
+            ),
+        )
+
+        try:
+            self.processing_repository.fail(
+                db,
+                state_id=claim.state_id,
+                run_id=claim.run_id,
+                worker_id=self.worker_id,
+                now=failure_time,
+                retry_after=(
+                    failure_time
+                    + timedelta(
+                        seconds=delay
+                    )
+                ),
+                error_code=type(exc).__name__,
+                error_message=str(exc)[:2000],
+            )
+
+        except ArticleProcessingLeaseLostError:
+            self.processing_repository.mark_lease_lost(
+                db,
+                run_id=claim.run_id,
+                now=failure_time,
+                error_message=(
+                    "processing lease expired while "
+                    "handling story clustering failure"
+                ),
+            )
+
+    def run_pending(
+        self,
+        *,
+        limit: int,
+    ) -> StoryClusteringBatchResult:
+        if limit <= 0:
+            raise ValueError(
+                "limit must be greater than zero"
+            )
+
+        processed = 0
+        skipped = 0
+        failed = 0
+
+        with self.session_factory() as db:
+            claim_now = self.clock()
+
+            with db.begin():
+                claims = self._claim_pending(
+                    db,
+                    limit=limit,
+                    now=claim_now,
+                )
+
+            for claim in claims:
+                try:
+                    with db.begin():
+                        processing_time = self.clock()
+
+                        lease_valid = (
+                            self.processing_repository
+                            .heartbeat(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=processing_time,
+                                claim_expires_at=(
+                                    processing_time
+                                    + timedelta(
+                                        seconds=(
+                                            self.claim_ttl_seconds
+                                        )
+                                    )
+                                ),
+                            )
+                        )
+
+                        if not lease_valid:
+                            raise ArticleProcessingLeaseLostError(
+                                "processing lease is no longer valid"
+                            )
+
+                        applied = self.service.cluster_article(
+                            db,
+                            article_id=claim.article_id,
+                            processing_run_id=claim.run_id,
+                            clustered_at=processing_time,
+                            window_hours=self.window_hours,
+                            candidate_limit=self.candidate_limit,
+                        )
+
+                        if applied is None:
+                            self.processing_repository.skip(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=self.clock(),
+                                reason=(
+                                    "article became ineligible "
+                                    "after story clustering claim"
+                                ),
+                            )
+                            skipped += 1
+                            continue
+
+                        self.processing_repository.complete(
+                            db,
+                            state_id=claim.state_id,
+                            run_id=claim.run_id,
+                            worker_id=self.worker_id,
+                            now=self.clock(),
+                        )
+
+                    processed += 1
+
+                except ArticleProcessingLeaseLostError as exc:
+                    db.rollback()
+
+                    with db.begin():
+                        self.processing_repository.mark_lease_lost(
+                            db,
+                            run_id=claim.run_id,
+                            now=self.clock(),
+                            error_message=str(exc),
+                        )
+
+                    skipped += 1
+
+                except Exception as exc:
+                    db.rollback()
+
+                    failure_time = self.clock()
+
+                    with db.begin():
+                        self._record_failure(
+                            db,
+                            claim=claim,
+                            failure_time=failure_time,
+                            exc=exc,
+                        )
+
+                    failed += 1
+
+                    logger.exception(
+                        "Story clustering failed",
+                        extra={
+                            "article_id": str(
+                                claim.article_id
+                            ),
+                            "provider": (
+                                self.service
+                                .clusterer
+                                .provider
+                            ),
+                            "version": (
+                                self.service
+                                .clusterer
+                                .version
+                            ),
+                            "processing_run_id": str(
+                                claim.run_id
+                            ),
+                        },
+                    )
+
+        return StoryClusteringBatchResult(
+            selected=len(claims),
+            processed=processed,
+            skipped=skipped,
+            failed=failed,
+        )
