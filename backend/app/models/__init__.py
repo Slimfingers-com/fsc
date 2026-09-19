@@ -4,6 +4,7 @@ from app.models.entity import ArticleEntity, Entity, EntityAlias
 from app.models.feed import Feed
 from app.models.search_document import SearchDocument
 from app.models.source import Source
+from app.models.story import Story, StoryArticle
 from app.models.topic import ArticleTopic, Topic
 
 __all__ = [
@@ -18,4 +19,6 @@ __all__ = [
     "ArticleEntity",
     "Topic",
     "ArticleTopic",
+    "Story",
+    "StoryArticle",
 ]
