@@ -335,6 +335,11 @@ def test_story_list_filters(
         name="Beta",
         slug="beta",
     )
+    _, gamma_feed = add_source(
+        db,
+        name="Gamma",
+        slug="gamma",
+    )
 
     story = add_story(db, language="de")
     alpha_article = add_article(
@@ -381,7 +386,7 @@ def test_story_list_filters(
     )
     other_article = add_article(
         db,
-        feed=alpha_feed,
+        feed=gamma_feed,
         title="Other",
         language="en",
         published_at=now - timedelta(days=5),
@@ -596,9 +601,9 @@ def test_story_detail_contains_current_evidence(
         matched.id
     )
     assert latest_data["source_slug"] == "beta"
-    assert latest_data["published_at"] == (
-        latest.published_at.isoformat()
-    )
+    assert datetime.fromisoformat(
+        latest_data["published_at"]
+    ) == latest.published_at
     assert latest_data["match_kind"] == "matched"
     assert latest_data["similarity_score"] == 0.72
     assert latest_data["match_details"][
@@ -817,12 +822,12 @@ def test_story_reads_use_current_article_metadata(
     assert detail.status_code == 200
     item = detail.json()["articles"][0]
     assert item["title"] == "Updated title"
-    assert item["published_at"] == (
-        article.published_at.isoformat()
-    )
-    assert item["article_time"] == (
-        article.published_at.isoformat()
-    )
+    assert datetime.fromisoformat(
+        item["published_at"]
+    ) == article.published_at
+    assert datetime.fromisoformat(
+        item["article_time"]
+    ) == article.published_at
 
     old_window = client.get(
         "/stories",
