@@ -45,6 +45,7 @@ class FakeStoryRepository:
         self.create_story_called = False
         self.replace_membership_called = False
         self.replace_kwargs = None
+        self.has_other_memberships = False
 
     def acquire_clustering_lock(self, db) -> None:
         self.lock_acquired = True
@@ -64,6 +65,15 @@ class FakeStoryRepository:
         for_update=False,
     ):
         return self.active_membership
+
+    def has_other_active_memberships(
+        self,
+        db,
+        *,
+        story_id,
+        article_id,
+    ):
+        return self.has_other_memberships
 
     def create_story(
         self,
@@ -247,6 +257,78 @@ def test_apply_result_creates_new_story_when_no_match():
         == processing_run_id
     )
     assert repository.replace_kwargs["match_kind"] == "created"
+
+
+def test_apply_result_retains_singleton_story_when_no_match():
+    repository = FakeStoryRepository()
+
+    story_id = uuid4()
+
+    repository.target_story = SimpleNamespace(
+        id=story_id,
+        language_code="de",
+    )
+    repository.active_membership = SimpleNamespace(
+        id=uuid4(),
+        story_id=story_id,
+        match_kind="created",
+    )
+
+    result = make_result()
+
+    service = make_service(
+        repository,
+        result,
+    )
+
+    applied = service.apply_result(
+        object(),
+        prepared=make_prepared(),
+        result=result,
+        processing_run_id=uuid4(),
+        clustered_at=datetime.now(UTC),
+    )
+
+    assert applied.story_id == story_id
+    assert applied.match_kind == "retained"
+    assert repository.create_story_called is False
+    assert repository.replace_membership_called is True
+    assert (
+        repository.replace_kwargs["match_kind"]
+        == "retained"
+    )
+
+
+def test_apply_result_moves_article_from_multi_member_story_on_no_match():
+    repository = FakeStoryRepository()
+
+    old_story_id = uuid4()
+
+    repository.active_membership = SimpleNamespace(
+        id=uuid4(),
+        story_id=old_story_id,
+        match_kind="matched",
+    )
+    repository.has_other_memberships = True
+
+    result = make_result()
+
+    service = make_service(
+        repository,
+        result,
+    )
+
+    applied = service.apply_result(
+        object(),
+        prepared=make_prepared(),
+        result=result,
+        processing_run_id=uuid4(),
+        clustered_at=datetime.now(UTC),
+    )
+
+    assert applied.story_id != old_story_id
+    assert applied.match_kind == "created"
+    assert repository.create_story_called is True
 
 
 def test_apply_result_matches_existing_candidate_story():

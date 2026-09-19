@@ -499,3 +499,148 @@ def test_runner_reclusters_article_after_feed_is_reactivated():
         assert state is not None
         assert state.processed_input_hash is not None
         assert state.last_processed_at is not None
+
+def test_runner_preserves_singleton_story_on_reprocessing_without_match():
+    article_id = create_committed_articles(
+        1
+    )[0]
+
+    runner = make_runner(
+        worker_id="singleton-worker",
+    )
+
+    first = runner.run_pending(
+        limit=1
+    )
+
+    assert first.processed == 1
+
+    with TestSessionLocal() as db:
+        first_membership = db.scalar(
+            select(
+                StoryArticle
+            ).where(
+                StoryArticle.article_id
+                == article_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        assert first_membership is not None
+        original_story_id = (
+            first_membership.story_id
+        )
+
+    with TestSessionLocal.begin() as db:
+        article = db.get(
+            Article,
+            article_id,
+        )
+
+        article.title = (
+            "Completely changed singleton title"
+        )
+        article.normalized_title = (
+            "completely changed singleton title"
+        )
+
+    second = runner.run_pending(
+        limit=1
+    )
+
+    assert second.processed == 1
+
+    with TestSessionLocal() as db:
+        active_membership = db.scalar(
+            select(
+                StoryArticle
+            ).where(
+                StoryArticle.article_id
+                == article_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        memberships = list(
+            db.scalars(
+                select(
+                    StoryArticle
+                ).where(
+                    StoryArticle.article_id
+                    == article_id
+                )
+            )
+        )
+
+        assert active_membership is not None
+        assert (
+            active_membership.story_id
+            == original_story_id
+        )
+        assert (
+            active_membership.match_kind
+            == "retained"
+        )
+        assert len(memberships) == 2
+
+def test_runner_acquires_story_lock_before_processing_heartbeat(
+    monkeypatch,
+):
+    article_id = create_committed_articles(
+        1
+    )[0]
+
+    runner = make_runner(
+        worker_id="lock-order-worker",
+    )
+
+    events = []
+
+    original_lock = (
+        runner.service.repository
+        .acquire_clustering_lock
+    )
+
+    original_heartbeat = (
+        runner.processing_repository
+        .heartbeat
+    )
+
+    def acquire_lock(db):
+        events.append("lock")
+        return original_lock(db)
+
+    def heartbeat(db, **kwargs):
+        events.append("heartbeat")
+        return original_heartbeat(
+            db,
+            **kwargs,
+        )
+
+    monkeypatch.setattr(
+        runner.service.repository,
+        "acquire_clustering_lock",
+        acquire_lock,
+    )
+
+    monkeypatch.setattr(
+        runner.processing_repository,
+        "heartbeat",
+        heartbeat,
+    )
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert result.processed == 1
+
+    heartbeat_index = events.index(
+        "heartbeat"
+    )
+
+    assert "lock" in events[:heartbeat_index]

@@ -391,14 +391,45 @@ class StoryClusteringService:
         )
 
         if result.story_id is None:
-            target_story = self.repository.create_story(
-                db,
-                language_code=(
-                    prepared.article.language_code
-                ),
-            )
-            target_story_id = target_story.id
-            match_kind = "created"
+            retained_story = None
+
+            if existing is not None:
+                existing_story = (
+                    self.repository.get_story(
+                        db,
+                        existing.story_id,
+                        for_update=True,
+                    )
+                )
+
+                if (
+                    existing_story is not None
+                    and existing_story.language_code
+                    == prepared.article.language_code
+                    and not self.repository.has_other_active_memberships(
+                        db,
+                        story_id=existing.story_id,
+                        article_id=(
+                            prepared.article.article_id
+                        ),
+                    )
+                ):
+                    retained_story = existing_story
+
+            if retained_story is not None:
+                target_story_id = retained_story.id
+                match_kind = "retained"
+            else:
+                target_story = (
+                    self.repository.create_story(
+                        db,
+                        language_code=(
+                            prepared.article.language_code
+                        ),
+                    )
+                )
+                target_story_id = target_story.id
+                match_kind = "created"
         else:
             target_story = self.repository.get_story(
                 db,
@@ -759,6 +790,10 @@ class StoryClusteringRunner:
                 try:
                     with db.begin():
                         processing_time = self.clock()
+
+                        self.service.repository.acquire_clustering_lock(
+                            db
+                        )
 
                         lease_valid = (
                             self.processing_repository

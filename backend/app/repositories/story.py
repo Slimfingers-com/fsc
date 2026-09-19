@@ -314,6 +314,29 @@ class StoryRepository:
             for membership in memberships
         )
 
+    def has_other_active_memberships(
+        self,
+        db: Session,
+        *,
+        story_id: UUID,
+        article_id: UUID,
+    ) -> bool:
+        return bool(
+            db.scalar(
+                select(
+                    exists().where(
+                        StoryArticle.story_id
+                        == story_id,
+                        StoryArticle.article_id
+                        != article_id,
+                        StoryArticle.deleted_at.is_(
+                            None
+                        ),
+                    )
+                )
+            )
+        )
+
     def create_story(
         self,
         db: Session,
