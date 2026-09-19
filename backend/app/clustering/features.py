@@ -24,7 +24,7 @@ _STOPWORDS = frozenset(
         "eine",
         "einer",
         "eines",
-        "fÃ¼r",
+        "für",
         "hat",
         "ist",
         "mit",
