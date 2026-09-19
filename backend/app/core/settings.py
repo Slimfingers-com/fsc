@@ -32,6 +32,15 @@ class Settings(BaseSettings):
     entity_topic_retry_base_seconds: float = 30.0
     entity_topic_retry_max_seconds: float = 3600.0
 
+    story_clustering_worker_poll_interval_seconds: float = 60.0
+    story_clustering_worker_batch_limit: int = 100
+    story_clustering_worker_claim_ttl_seconds: float = 300.0
+    story_clustering_retry_base_seconds: float = 30.0
+    story_clustering_retry_max_seconds: float = 3600.0
+    story_clustering_window_hours: float = 48.0
+    story_clustering_candidate_limit: int = 250
+    story_clustering_min_similarity: float = 0.45
+
     model_config = SettingsConfigDict(
         extra="ignore"
     )

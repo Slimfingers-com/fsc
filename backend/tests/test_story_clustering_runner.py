@@ -372,7 +372,7 @@ def test_parallel_workers_cluster_same_story_from_same_feed():
             for run in runs
         )
 
-def test_runner_deactivates_ineligible_membership_and_orphan_story():
+def test_runner_reclusters_article_after_feed_is_reactivated():
     article_id = create_committed_articles(
         1
     )[0]
@@ -393,9 +393,12 @@ def test_runner_deactivates_ineligible_membership_and_orphan_story():
             article_id,
         )
 
-        article.deleted_at = datetime.now(
-            UTC
+        feed = db.get(
+            Feed,
+            article.feed_id,
         )
+
+        feed.active = False
 
     second = runner.run_pending(
         limit=1
@@ -423,3 +426,76 @@ def test_runner_deactivates_ineligible_membership_and_orphan_story():
 
         assert story is not None
         assert story.deleted_at is not None
+
+        state = db.scalar(
+            select(
+                ArticleProcessingState
+            ).where(
+                ArticleProcessingState.article_id
+                == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+            )
+        )
+
+        assert state is not None
+        assert state.processed_input_hash is None
+        assert state.last_processed_at is None
+
+    with TestSessionLocal.begin() as db:
+        article = db.get(
+            Article,
+            article_id,
+        )
+
+        feed = db.get(
+            Feed,
+            article.feed_id,
+        )
+
+        feed.active = True
+
+    third = runner.run_pending(
+        limit=1
+    )
+
+    assert (
+        third.selected,
+        third.processed,
+        third.skipped,
+        third.failed,
+    ) == (
+        1,
+        1,
+        0,
+        0,
+    )
+
+    with TestSessionLocal() as db:
+        active_membership_count = db.scalar(
+            select(func.count())
+            .select_from(StoryArticle)
+            .where(
+                StoryArticle.article_id
+                == article_id,
+                StoryArticle.deleted_at.is_(
+                    None
+                ),
+            )
+        )
+
+        state = db.scalar(
+            select(
+                ArticleProcessingState
+            ).where(
+                ArticleProcessingState.article_id
+                == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+            )
+        )
+
+        assert active_membership_count == 1
+        assert state is not None
+        assert state.processed_input_hash is not None
+        assert state.last_processed_at is not None

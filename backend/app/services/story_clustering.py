@@ -725,10 +725,24 @@ class StoryClusteringRunner:
                     db
                 )
 
-                self.service.repository.deactivate_ineligible_memberships(
-                    db,
-                    now=claim_now,
+                deactivated_article_ids = (
+                    self.service.repository
+                    .deactivate_ineligible_memberships(
+                        db,
+                        now=claim_now,
+                    )
                 )
+
+                if deactivated_article_ids:
+                    self.processing_repository.invalidate_processed(
+                        db,
+                        pipeline=(
+                            ArticlePipeline
+                            .STORY_CLUSTERING
+                            .value
+                        ),
+                        article_ids=deactivated_article_ids,
+                    )
 
                 self.service.repository.deactivate_orphan_stories(
                     db,
