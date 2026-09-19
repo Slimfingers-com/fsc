@@ -371,3 +371,55 @@ def test_parallel_workers_cluster_same_story_from_same_feed():
             run.outcome == "succeeded"
             for run in runs
         )
+
+def test_runner_deactivates_ineligible_membership_and_orphan_story():
+    article_id = create_committed_articles(
+        1
+    )[0]
+
+    runner = make_runner(
+        worker_id="cleanup-worker",
+    )
+
+    first = runner.run_pending(
+        limit=1
+    )
+
+    assert first.processed == 1
+
+    with TestSessionLocal.begin() as db:
+        article = db.get(
+            Article,
+            article_id,
+        )
+
+        article.deleted_at = datetime.now(
+            UTC
+        )
+
+    second = runner.run_pending(
+        limit=1
+    )
+
+    assert second.selected == 0
+
+    with TestSessionLocal() as db:
+        membership = db.scalar(
+            select(
+                StoryArticle
+            ).where(
+                StoryArticle.article_id
+                == article_id
+            )
+        )
+
+        assert membership is not None
+        assert membership.deleted_at is not None
+
+        story = db.get(
+            Story,
+            membership.story_id,
+        )
+
+        assert story is not None
+        assert story.deleted_at is not None

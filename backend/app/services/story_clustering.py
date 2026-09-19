@@ -721,6 +721,20 @@ class StoryClusteringRunner:
             claim_now = self.clock()
 
             with db.begin():
+                self.service.repository.acquire_clustering_lock(
+                    db
+                )
+
+                self.service.repository.deactivate_ineligible_memberships(
+                    db,
+                    now=claim_now,
+                )
+
+                self.service.repository.deactivate_orphan_stories(
+                    db,
+                    now=claim_now,
+                )
+
                 claims = self._claim_pending(
                     db,
                     limit=limit,
