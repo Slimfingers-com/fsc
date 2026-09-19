@@ -7,6 +7,7 @@ alembic==1.20.0
 
 pydantic-settings==2.15.0
 httpx==0.28.1
+httpx2==2.13.0
 feedparser==6.0.14
 pytest==9.1.1
 beautifulsoup4==4.15.0

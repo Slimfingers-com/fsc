@@ -42,14 +42,35 @@ class FakeStoryRepository:
         self.target_story = None
         self.created_story = None
 
+        self.coordination_lock_acquired = False
         self.lock_acquired = False
+        self.lock_language_code = None
         self.create_story_called = False
         self.replace_membership_called = False
         self.replace_kwargs = None
         self.has_other_memberships = False
 
-    def acquire_clustering_lock(self, db) -> None:
+    def acquire_processing_coordination_lock(
+        self,
+        db,
+    ) -> None:
+        self.coordination_lock_acquired = True
+
+    def acquire_clustering_lock(
+        self,
+        db,
+        *,
+        language_code,
+    ) -> None:
         self.lock_acquired = True
+        self.lock_language_code = language_code
+
+    def get_clustering_language(
+        self,
+        db,
+        article_id,
+    ):
+        return True, "de"
 
     def get_membership_by_processing_run(
         self,
@@ -545,8 +566,24 @@ def test_cluster_article_acquires_lock_before_preparing(
     prepared = make_prepared()
     events = []
 
-    def acquire_lock(db):
-        events.append("lock")
+    def acquire_coordination_lock(db):
+        events.append("coordination")
+
+    def get_language(
+        db,
+        article_id,
+    ):
+        events.append("language")
+        return True, "de"
+
+    def acquire_lock(
+        db,
+        *,
+        language_code,
+    ):
+        events.append(
+            f"lock:{language_code}"
+        )
 
     def prepare(
         db,
@@ -581,6 +618,16 @@ def test_cluster_article_acquires_lock_before_preparing(
 
     monkeypatch.setattr(
         repository,
+        "acquire_processing_coordination_lock",
+        acquire_coordination_lock,
+    )
+    monkeypatch.setattr(
+        repository,
+        "get_clustering_language",
+        get_language,
+    )
+    monkeypatch.setattr(
+        repository,
         "acquire_clustering_lock",
         acquire_lock,
     )
@@ -611,7 +658,9 @@ def test_cluster_article_acquires_lock_before_preparing(
 
     assert applied is not None
     assert events == [
-        "lock",
+        "coordination",
+        "language",
+        "lock:de",
         "prepare",
         "cluster",
         "apply",

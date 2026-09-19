@@ -16,6 +16,7 @@ from app.models.article_processing import (
 from app.models.feed import Feed
 from app.models.source import Source
 from app.models.story import Story, StoryArticle
+from app.repositories.story import StoryRepository
 from app.services.story_clustering import (
     StoryClusteringRunner,
     StoryClusteringService,
@@ -603,7 +604,7 @@ def test_runner_acquires_story_lock_before_processing_heartbeat(
 
     original_lock = (
         runner.service.repository
-        .acquire_clustering_lock
+        .acquire_processing_coordination_lock
     )
 
     original_heartbeat = (
@@ -624,7 +625,7 @@ def test_runner_acquires_story_lock_before_processing_heartbeat(
 
     monkeypatch.setattr(
         runner.service.repository,
-        "acquire_clustering_lock",
+        "acquire_processing_coordination_lock",
         acquire_lock,
     )
 
@@ -645,6 +646,83 @@ def test_runner_acquires_story_lock_before_processing_heartbeat(
     )
 
     assert "lock" in events[:heartbeat_index]
+
+def test_story_partition_locks_allow_different_languages_in_parallel():
+    repository = StoryRepository()
+
+    english_lock = (
+        repository.clustering_partition_lock_key(
+            "en"
+        )
+    )
+    german_lock = (
+        repository.clustering_partition_lock_key(
+            "de"
+        )
+    )
+
+    assert english_lock != german_lock
+
+    with TestSessionLocal.begin() as first_db:
+        repository.acquire_processing_coordination_lock(
+            first_db
+        )
+        repository.acquire_clustering_lock(
+            first_db,
+            language_code="en",
+        )
+
+        with TestSessionLocal.begin() as second_db:
+            shared_coordination = second_db.scalar(
+                text(
+                    "SELECT "
+                    "pg_try_advisory_xact_lock_shared"
+                    "(:lock_key)"
+                ),
+                {
+                    "lock_key": (
+                        repository.CLUSTERING_LOCK_KEY
+                    )
+                },
+            )
+            german_acquired = second_db.scalar(
+                text(
+                    "SELECT "
+                    "pg_try_advisory_xact_lock"
+                    "(:lock_key)"
+                ),
+                {
+                    "lock_key": german_lock,
+                },
+            )
+            english_acquired = second_db.scalar(
+                text(
+                    "SELECT "
+                    "pg_try_advisory_xact_lock"
+                    "(:lock_key)"
+                ),
+                {
+                    "lock_key": english_lock,
+                },
+            )
+            cleanup_acquired = second_db.scalar(
+                text(
+                    "SELECT "
+                    "pg_try_advisory_xact_lock"
+                    "(:lock_key)"
+                ),
+                {
+                    "lock_key": (
+                        repository.CLUSTERING_LOCK_KEY
+                    )
+                },
+            )
+
+            assert shared_coordination is True
+            assert german_acquired is True
+            assert english_acquired is False
+            assert cleanup_acquired is False
+
 
 def test_runner_skips_claim_when_input_changes_before_processing(
     monkeypatch,

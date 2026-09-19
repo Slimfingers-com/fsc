@@ -1,3 +1,4 @@
+import hashlib
 from datetime import datetime, timedelta
 from uuid import UUID
 
@@ -19,7 +20,43 @@ from app.models.topic import ArticleTopic, Topic
 class StoryRepository:
     CLUSTERING_LOCK_KEY = 0x46534353544F5259
 
-    def acquire_clustering_lock(
+    @staticmethod
+    def clustering_partition_lock_key(
+        language_code: str | None,
+    ) -> int:
+        partition = (
+            language_code
+            if language_code is not None
+            else "<none>"
+        )
+        digest = hashlib.sha256(
+            (
+                "fsc:story-clustering:"
+                + partition
+            ).encode("utf-8")
+        ).digest()
+
+        return int.from_bytes(
+            digest[:8],
+            "big",
+            signed=True,
+        )
+
+    def acquire_processing_coordination_lock(
+        self,
+        db: Session,
+    ) -> None:
+        db.execute(
+            text(
+                "SELECT "
+                "pg_advisory_xact_lock_shared(:lock_key)"
+            ),
+            {
+                "lock_key": self.CLUSTERING_LOCK_KEY,
+            },
+        )
+
+    def acquire_cleanup_lock(
         self,
         db: Session,
     ) -> None:
@@ -31,6 +68,59 @@ class StoryRepository:
                 "lock_key": self.CLUSTERING_LOCK_KEY,
             },
         )
+
+    def acquire_clustering_lock(
+        self,
+        db: Session,
+        *,
+        language_code: str | None,
+    ) -> None:
+        db.execute(
+            text(
+                "SELECT pg_advisory_xact_lock(:lock_key)"
+            ),
+            {
+                "lock_key": (
+                    self.clustering_partition_lock_key(
+                        language_code
+                    )
+                ),
+            },
+        )
+
+    def get_clustering_language(
+        self,
+        db: Session,
+        article_id: UUID,
+    ) -> tuple[bool, str | None]:
+        row = db.execute(
+            select(
+                Article.language_code
+            )
+            .join(
+                Feed,
+                Feed.id == Article.feed_id,
+            )
+            .join(
+                Source,
+                Source.id == Feed.source_id,
+            )
+            .where(
+                Article.id == article_id,
+                Article.deleted_at.is_(None),
+                Article.normalized_at.is_not(None),
+                Article.normalized_text.is_not(None),
+                Feed.deleted_at.is_(None),
+                Feed.active.is_(True),
+                Source.deleted_at.is_(None),
+                Source.active.is_(True),
+            )
+        ).one_or_none()
+
+        if row is None:
+            return False, None
+
+        return True, row[0]
 
     def get_story(
         self,

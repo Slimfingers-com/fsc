@@ -307,7 +307,24 @@ class StoryClusteringService:
         candidate_limit: int,
         expected_input_hash: str | None = None,
     ) -> AppliedStoryClustering | None:
-        self.repository.acquire_clustering_lock(db)
+        self.repository.acquire_processing_coordination_lock(
+            db
+        )
+
+        eligible, lock_language_code = (
+            self.repository.get_clustering_language(
+                db,
+                article_id,
+            )
+        )
+
+        if not eligible:
+            return None
+
+        self.repository.acquire_clustering_lock(
+            db,
+            language_code=lock_language_code,
+        )
 
         prepared = self.prepare(
             db,
@@ -318,6 +335,15 @@ class StoryClusteringService:
 
         if prepared is None:
             return None
+
+        if (
+            prepared.article.language_code
+            != lock_language_code
+        ):
+            raise StoryClusteringInputChangedError(
+                "story clustering language changed "
+                "while acquiring its partition lock"
+            )
 
         if (
             expected_input_hash is not None
@@ -357,7 +383,13 @@ class StoryClusteringService:
             result,
         )
 
-        self.repository.acquire_clustering_lock(db)
+        self.repository.acquire_processing_coordination_lock(
+            db
+        )
+        self.repository.acquire_clustering_lock(
+            db,
+            language_code=prepared.article.language_code,
+        )
 
         return self._apply_result_locked(
             db,
@@ -794,7 +826,7 @@ class StoryClusteringRunner:
             claim_now = self.clock()
 
             with db.begin():
-                self.service.repository.acquire_clustering_lock(
+                self.service.repository.acquire_cleanup_lock(
                     db
                 )
 
@@ -834,7 +866,7 @@ class StoryClusteringRunner:
                     with db.begin():
                         processing_time = self.clock()
 
-                        self.service.repository.acquire_clustering_lock(
+                        self.service.repository.acquire_processing_coordination_lock(
                             db
                         )
 

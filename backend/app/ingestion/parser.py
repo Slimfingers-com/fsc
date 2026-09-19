@@ -47,7 +47,11 @@ class FeedParser:
             ),
             language=self._text(feed.get("language")),
             updated_at=normalize_feed_datetime(
-                feed.get("updated_parsed") or feed.get("published_parsed")
+                self._first_present(
+                    feed,
+                    "updated_parsed",
+                    "published_parsed",
+                )
             ),
             entries=tuple(
                 self._parse_entry(entry)
@@ -78,10 +82,18 @@ class FeedParser:
             content=self._entry_content(entry),
             author=self._entry_author(entry),
             published_at=normalize_feed_datetime(
-                entry.get("published_parsed") or entry.get("created_parsed")
+                self._first_present(
+                    entry,
+                    "published_parsed",
+                    "created_parsed",
+                )
             ),
             updated_at=normalize_feed_datetime(
-                entry.get("updated_parsed") or entry.get("modified_parsed")
+                self._first_present(
+                    entry,
+                    "updated_parsed",
+                    "modified_parsed",
+                )
             ),
             categories=self._categories(entry),
             enclosures=self._enclosures(entry),
@@ -165,6 +177,18 @@ class FeedParser:
                 )
             )
         return tuple(result)
+
+    @staticmethod
+    def _first_present(
+        mapping: Mapping[str, Any],
+        *keys: str,
+    ) -> Any:
+        for key in keys:
+            if key in mapping:
+                value = mapping[key]
+                if value:
+                    return value
+        return None
 
     @staticmethod
     def _warnings(document: Mapping[str, Any]) -> tuple[str, ...]:
