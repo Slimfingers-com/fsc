@@ -115,17 +115,12 @@ def assert_flush_fails(
     db,
     obj,
 ):
-    savepoint = db.begin_nested()
-    db.add(obj)
-    try:
-        with pytest.raises(
-            IntegrityError
-        ):
+    with pytest.raises(
+        IntegrityError
+    ):
+        with db.begin_nested():
+            db.add(obj)
             db.flush()
-    finally:
-        if savepoint.is_active:
-            savepoint.rollback()
-
 
 def test_claim_constraints_reject_invalid_confidence_and_span(
     db,
