@@ -113,6 +113,22 @@ services:
     networks:
       - fsc-network
 
+  claim-worker:
+    container_name: fsc-claim-worker
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    command: ["python", "-m", "app.workers.claim_main"]
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    volumes:
+      - ../../backend:/app
+    depends_on:
+      - postgres
+    networks:
+      - fsc-network
+
   postgres:
     image: postgres:17
     container_name: fsc-postgres

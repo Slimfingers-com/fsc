@@ -20,6 +20,12 @@ Configure the worker with `ENTITY_TOPIC_WORKER_POLL_INTERVAL_SECONDS`, `ENTITY_T
 
 Entity aliases use indexed normalized rows rather than JSONB scans. Ambiguous aliases are deliberately unresolved. Entity/topic creation is concurrency-safe through PostgreSQL upserts, and topic slug collisions receive a deterministic hash suffix. Mention offsets are zero-based Unicode code-point offsets with an exclusive end, relative to the returned `text_source` (`title` or `body`).
 
+## Claim Extraction
+
+`python -m app.workers.claim_main` extracts article-scoped factual claims from eligible normalized articles. The baseline `local-rules` provider is deterministic and conservative; it stores exact normalized-field spans, confidence and processing provenance without pretending to perform cross-source semantic claim matching.
+
+Current claims are available through `/articles/{id}/claims`, `/claims/{claim_id}`, and `/stories/{story_id}/claims`. Reprocessing soft-deletes superseded claim rows and writes a new auditable generation linked to the generic `ArticleProcessingRun`. Provider failures and stale inputs preserve the last successful active claims. See [ADR 0012](docs/decisions/0012-claim-extraction.md).
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh

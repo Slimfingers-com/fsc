@@ -45,6 +45,16 @@ class Settings(BaseSettings):
     story_clustering_candidate_limit: int = 250
     story_clustering_min_similarity: float = 0.45
 
+    claim_extraction_worker_poll_interval_seconds: float = 60.0
+    claim_extraction_worker_batch_limit: int = 100
+    claim_extraction_worker_claim_ttl_seconds: float = 300.0
+    claim_extraction_retry_base_seconds: float = 30.0
+    claim_extraction_retry_max_seconds: float = 3600.0
+    claim_extraction_min_confidence: float = 0.6
+    claim_extraction_max_claims_per_article: int = 30
+    claim_default_page_size: int = 50
+    claim_max_page_size: int = 200
+
     model_config = SettingsConfigDict(
         extra="ignore"
     )

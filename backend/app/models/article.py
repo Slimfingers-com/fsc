@@ -22,6 +22,7 @@ if TYPE_CHECKING:
         ArticleProcessingRun,
         ArticleProcessingState,
     )
+    from app.models.claim import ArticleClaim
     from app.models.entity import ArticleEntity
     from app.models.feed import Feed
     from app.models.search_document import SearchDocument
@@ -156,6 +157,11 @@ class Article(BaseModel):
     )
 
     story_memberships: Mapped[list["StoryArticle"]] = relationship(
+        back_populates="article",
+        cascade="all, delete-orphan",
+    )
+
+    claims: Mapped[list["ArticleClaim"]] = relationship(
         back_populates="article",
         cascade="all, delete-orphan",
     )
