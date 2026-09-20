@@ -1,5 +1,6 @@
 from app.models.article import Article
 from app.models.article_processing import ArticleProcessingRun, ArticleProcessingState
+from app.models.claim import ArticleClaim
 from app.models.entity import ArticleEntity, Entity, EntityAlias
 from app.models.feed import Feed
 from app.models.search_document import SearchDocument
@@ -9,6 +10,7 @@ from app.models.topic import ArticleTopic, Topic
 
 __all__ = [
     "Article",
+    "ArticleClaim",
     "ArticleProcessingRun",
     "ArticleProcessingState",
     "Feed",
