@@ -64,7 +64,7 @@ def _base_statement(story_id: UUID):
             Article.id == StoryEvidence.article_id,
         )
         .join(Feed, Feed.id == Article.feed_id)
-        .join(Source, Source.id == StoryEvidence.source_id)
+        .join(Source, Source.id == Feed.source_id)
         .join(
             StoryArticle,
             (StoryArticle.story_id == story_id)
@@ -80,6 +80,7 @@ def _base_statement(story_id: UUID):
             Article.normalized_at.is_not(None),
             Article.normalized_text.is_not(None),
             StoryArticle.deleted_at.is_(None),
+            StoryEvidence.source_id == Source.id,
             Feed.deleted_at.is_(None),
             Feed.active.is_(True),
             Source.deleted_at.is_(None),
