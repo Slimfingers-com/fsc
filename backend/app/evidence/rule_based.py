@@ -32,8 +32,6 @@ class RuleBasedEvidenceAnalyzer(EvidenceAnalyzer):
         title = (item.article_title or "").casefold()
         text = item.article_text.casefold()
 
-        if item.direct_quote_text is not None:
-            return EvidenceKind.DIRECT_QUOTE
         if any(token in title or token in text[:1000] for token in _PRESS_RELEASE):
             return EvidenceKind.PRESS_RELEASE
         if item.source_type == "ACADEMIC":
@@ -57,47 +55,57 @@ class RuleBasedEvidenceAnalyzer(EvidenceAnalyzer):
     ) -> StoryEvidenceAnalysisResult:
         evidence = []
         links = []
+        evidence_index = 0
 
-        for index, item in enumerate(
-            sorted(
-                story.claims,
-                key=lambda value: (
-                    str(value.claim_group_id),
-                    str(value.article_id),
-                    str(value.claim_id),
-                ),
+        for item in sorted(
+            story.claims,
+            key=lambda value: (
+                str(value.claim_group_id),
+                str(value.article_id),
+                str(value.claim_id),
             ),
-            start=1,
         ):
-            kind = self._kind(item)
-            key = f"evidence-{index:05d}"
-            confidence = 1.0
-            evidence.append(
-                EvidenceItemResult(
-                    key=key,
-                    claim_id=item.claim_id,
-                    evidence_kind=kind,
-                    evidence_text=(
-                        item.direct_quote_text
-                        if kind == EvidenceKind.DIRECT_QUOTE
-                        and item.direct_quote_text is not None
-                        else item.claim_text
-                    ),
-                    confidence=confidence,
+            if item.direct_quote_texts:
+                candidates = tuple(
+                    (
+                        EvidenceKind.DIRECT_QUOTE,
+                        quote,
+                    )
+                    for quote in item.direct_quote_texts
                 )
-            )
-            links.append(
-                ClaimEvidenceLinkResult(
-                    claim_group_id=item.claim_group_id,
-                    evidence_key=key,
-                    relation_kind=(
-                        EvidenceRelationKind.CONTEXT
-                        if kind == EvidenceKind.CONTEXT
-                        else EvidenceRelationKind.SUPPORTS
+            else:
+                candidates = (
+                    (
+                        self._kind(item),
+                        item.claim_text,
                     ),
-                    confidence=confidence,
                 )
-            )
+
+            for kind, evidence_text in candidates:
+                evidence_index += 1
+                key = f"evidence-{evidence_index:05d}"
+                confidence = 1.0
+                evidence.append(
+                    EvidenceItemResult(
+                        key=key,
+                        claim_id=item.claim_id,
+                        evidence_kind=kind,
+                        evidence_text=evidence_text,
+                        confidence=confidence,
+                    )
+                )
+                links.append(
+                    ClaimEvidenceLinkResult(
+                        claim_group_id=item.claim_group_id,
+                        evidence_key=key,
+                        relation_kind=(
+                            EvidenceRelationKind.CONTEXT
+                            if kind == EvidenceKind.CONTEXT
+                            else EvidenceRelationKind.SUPPORTS
+                        ),
+                        confidence=confidence,
+                    )
+                )
 
         return StoryEvidenceAnalysisResult(
             evidence=tuple(evidence),
