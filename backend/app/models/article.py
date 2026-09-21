@@ -25,6 +25,7 @@ if TYPE_CHECKING:
     from app.models.claim import ArticleClaim
     from app.models.entity import ArticleEntity
     from app.models.feed import Feed
+    from app.models.perspective import ArticlePerspective
     from app.models.search_document import SearchDocument
     from app.models.story import StoryArticle
     from app.models.topic import ArticleTopic
@@ -162,6 +163,11 @@ class Article(BaseModel):
     )
 
     claims: Mapped[list["ArticleClaim"]] = relationship(
+        back_populates="article",
+        cascade="all, delete-orphan",
+    )
+
+    perspectives: Mapped[list["ArticlePerspective"]] = relationship(
         back_populates="article",
         cascade="all, delete-orphan",
     )

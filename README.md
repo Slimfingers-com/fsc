@@ -26,6 +26,12 @@ Entity aliases use indexed normalized rows rather than JSONB scans. Ambiguous al
 
 Current claims are available through `/articles/{id}/claims`, `/claims/{claim_id}`, and `/stories/{story_id}/claims`. Reprocessing soft-deletes superseded claim rows and writes a new auditable generation linked to the generic `ArticleProcessingRun`. Provider failures and stale inputs preserve the last successful active claims. See [ADR 0012](docs/decisions/0012-claim-extraction.md).
 
+## Perspective Attribution
+
+`python -m app.workers.perspective_main` attributes active article claims to explicit known entity mentions where the normalized text provides supported reporting evidence. Results are classified as `quoted`, `reported`, or `unattributed`; this stage does not infer political ideology, truth, agreement, contradiction or source bias.
+
+Current perspectives are available through `/articles/{id}/perspectives`, `/claims/{claim_id}/perspectives`, and `/stories/{story_id}/perspectives`. The processing identity includes the complete active claim and entity-mention generations, and finalization locks and revalidates both upstream inputs before replacing the previous active perspective generation. See [ADR 0013](docs/decisions/0013-perspective-attribution.md).
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh

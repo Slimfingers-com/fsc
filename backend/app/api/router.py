@@ -2,6 +2,7 @@ from fastapi import APIRouter
 
 from app.api.claims import router as claims_router
 from app.api.entity_topic import router as entity_topic_router
+from app.api.perspectives import router as perspectives_router
 from app.api.search import router as search_router
 from app.api.sources import router as sources_router
 from app.api.stories import router as stories_router
@@ -13,3 +14,4 @@ api_router.include_router(search_router)
 api_router.include_router(entity_topic_router)
 api_router.include_router(stories_router)
 api_router.include_router(claims_router)
+api_router.include_router(perspectives_router)
