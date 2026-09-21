@@ -137,7 +137,7 @@ def test_invalid_provider_group_link_is_rejected(db):
         )
 
 
-def test_duplicate_claim_evidence_is_rejected(db):
+def test_duplicate_semantic_evidence_is_rejected(db):
     data = build_evidence_story(db)
     service = EvidenceService()
     snapshot = service.load_snapshot(
@@ -170,7 +170,7 @@ def test_duplicate_claim_evidence_is_rejected(db):
 
     with pytest.raises(
         ValueError,
-        match="more than one evidence item",
+        match="duplicate semantic evidence item",
     ):
         service._validate_result(
             prepared=prepared,
@@ -192,3 +192,54 @@ def test_snapshot_rejects_ineligible_group_representative(db):
     )
 
     assert snapshot is None
+
+
+
+def test_multiple_distinct_evidence_items_for_one_claim_are_valid(db):
+    data = build_evidence_story(db)
+    service = EvidenceService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+    prepared = service.prepare(snapshot)
+    claim = prepared.analysis_input.claims[0]
+
+    result = StoryEvidenceAnalysisResult(
+        evidence=(
+            EvidenceItemResult(
+                key="a",
+                claim_id=claim.claim_id,
+                evidence_kind=EvidenceKind.DIRECT_QUOTE,
+                evidence_text="First quote.",
+                confidence=1.0,
+            ),
+            EvidenceItemResult(
+                key="b",
+                claim_id=claim.claim_id,
+                evidence_kind=EvidenceKind.DIRECT_QUOTE,
+                evidence_text="Second quote.",
+                confidence=1.0,
+            ),
+        ),
+        links=(
+            ClaimEvidenceLinkResult(
+                claim_group_id=claim.claim_group_id,
+                evidence_key="a",
+                relation_kind=EvidenceRelationKind.SUPPORTS,
+                confidence=1.0,
+            ),
+            ClaimEvidenceLinkResult(
+                claim_group_id=claim.claim_group_id,
+                evidence_key="b",
+                relation_kind=EvidenceRelationKind.SUPPORTS,
+                confidence=1.0,
+            ),
+        ),
+    )
+
+    service._validate_result(
+        prepared=prepared,
+        result=result,
+    )
