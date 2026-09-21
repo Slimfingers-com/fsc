@@ -123,3 +123,57 @@ def test_low_overlap_claims_remain_separate():
     )
 
     assert len(result.groups) == 2
+
+
+def test_role_reversal_does_not_share_group():
+    first = make_claim(
+        "Alice attacked Bob."
+    )
+    second = make_claim(
+        "Bob attacked Alice."
+    )
+
+    result = analyze(
+        first,
+        second,
+    )
+
+    assert len(result.groups) == 2
+
+
+def test_role_reversal_with_negation_does_not_create_contradiction():
+    first = make_claim(
+        "Alice never attacked Bob."
+    )
+    second = make_claim(
+        "Bob attacked Alice."
+    )
+
+    result = analyze(
+        first,
+        second,
+    )
+
+    assert len(result.groups) == 2
+    assert result.relations == ()
+
+
+def test_german_negation_creates_contradiction_for_same_ordered_claim():
+    first = make_claim(
+        "Der Plan beginnt am Montag."
+    )
+    second = make_claim(
+        "Der Plan beginnt nicht am Montag."
+    )
+
+    result = analyze(
+        first,
+        second,
+    )
+
+    assert len(result.groups) == 2
+    assert len(result.relations) == 1
+    assert (
+        result.relations[0].relation_kind
+        == ClaimRelationKind.CONTRADICTS
+    )
