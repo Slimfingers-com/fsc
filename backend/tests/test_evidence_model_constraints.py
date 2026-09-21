@@ -39,6 +39,7 @@ def make_evidence(data, run, *, confidence=0.9):
         source_id=data["sources"][0].id,
         evidence_kind=EvidenceKind.INDEPENDENT_REPORTING,
         evidence_text=data["claims"][0].claim_text,
+        evidence_hash="a" * 64,
         confidence=confidence,
         analysis_provider="test",
         analysis_version="1",
@@ -60,7 +61,7 @@ def test_evidence_confidence_constraint(db):
         db.flush()
 
 
-def test_only_one_active_evidence_item_per_story_claim(db):
+def test_duplicate_active_evidence_hash_per_story_claim_is_rejected(db):
     data = build_evidence_story(db)
     run = add_run(db, data["story"])
     first = make_evidence(data, run)
@@ -92,6 +93,7 @@ def test_only_one_active_evidence_item_per_story_claim(db):
             source_id=data["sources"][0].id,
             evidence_kind=EvidenceKind.INDEPENDENT_REPORTING,
             evidence_text=data["claims"][0].claim_text,
+            evidence_hash="a" * 64,
             confidence=0.9,
             analysis_provider="test",
             analysis_version="1",
