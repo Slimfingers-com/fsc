@@ -1,3 +1,5 @@
+import pytest
+
 from concurrent.futures import (
     ThreadPoolExecutor,
 )
@@ -10,6 +12,7 @@ from app.models.story_processing import (
 )
 from app.repositories.story_processing import (
     StoryProcessingCandidate,
+    StoryProcessingLeaseLostError,
     StoryProcessingRepository,
 )
 from tests.conftest import (
@@ -201,3 +204,121 @@ def test_expired_lease_is_marked_lost_on_reclaim():
             second.attempt_number
             == 2
         )
+
+
+
+def test_heartbeat_rejects_run_pipeline_mismatch():
+    story_id = create_stories(
+        1
+    )[0]
+    now = datetime.now(UTC)
+
+    with TestSessionLocal.begin() as db:
+        claim = (
+            StoryProcessingRepository()
+            .claim_candidates(
+                db,
+                pipeline="claim_relations",
+                candidates=[
+                    make_candidate(
+                        story_id
+                    )
+                ],
+                worker_id="worker",
+                now=now,
+                claim_expires_at=(
+                    now
+                    + timedelta(
+                        minutes=5
+                    )
+                ),
+                limit=1,
+            )[0]
+        )
+        run = db.get(
+            StoryProcessingRun,
+            claim.run_id,
+        )
+        assert run is not None
+        run.pipeline = "wrong_pipeline"
+        db.flush()
+
+        ok = (
+            StoryProcessingRepository()
+            .heartbeat(
+                db,
+                state_id=claim.state_id,
+                run_id=claim.run_id,
+                worker_id="worker",
+                now=(
+                    now
+                    + timedelta(
+                        seconds=1
+                    )
+                ),
+                claim_expires_at=(
+                    now
+                    + timedelta(
+                        minutes=10
+                    )
+                ),
+            )
+        )
+
+        assert ok is False
+
+
+def test_complete_rejects_run_story_mismatch():
+    story_id, other_story_id = create_stories(
+        2
+    )
+    now = datetime.now(UTC)
+
+    with TestSessionLocal.begin() as db:
+        claim = (
+            StoryProcessingRepository()
+            .claim_candidates(
+                db,
+                pipeline="claim_relations",
+                candidates=[
+                    make_candidate(
+                        story_id
+                    )
+                ],
+                worker_id="worker",
+                now=now,
+                claim_expires_at=(
+                    now
+                    + timedelta(
+                        minutes=5
+                    )
+                ),
+                limit=1,
+            )[0]
+        )
+        run = db.get(
+            StoryProcessingRun,
+            claim.run_id,
+        )
+        assert run is not None
+        run.story_id = other_story_id
+        db.flush()
+
+        with pytest.raises(
+            StoryProcessingLeaseLostError
+        ):
+            (
+                StoryProcessingRepository()
+                .complete(
+                    db,
+                    state_id=claim.state_id,
+                    run_id=claim.run_id,
+                    worker_id="worker",
+                    now=(
+                        now
+                        + timedelta(
+                            seconds=1
+                        )
+                    ),
+                )
+            )
