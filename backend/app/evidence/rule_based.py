@@ -32,7 +32,7 @@ class RuleBasedEvidenceAnalyzer(EvidenceAnalyzer):
         title = (item.article_title or "").casefold()
         text = item.article_text.casefold()
 
-        if item.has_direct_quote:
+        if item.direct_quote_text is not None:
             return EvidenceKind.DIRECT_QUOTE
         if any(token in title or token in text[:1000] for token in _PRESS_RELEASE):
             return EvidenceKind.PRESS_RELEASE
@@ -77,7 +77,12 @@ class RuleBasedEvidenceAnalyzer(EvidenceAnalyzer):
                     key=key,
                     claim_id=item.claim_id,
                     evidence_kind=kind,
-                    evidence_text=item.claim_text,
+                    evidence_text=(
+                        item.direct_quote_text
+                        if kind == EvidenceKind.DIRECT_QUOTE
+                        and item.direct_quote_text is not None
+                        else item.claim_text
+                    ),
                     confidence=confidence,
                 )
             )
