@@ -176,3 +176,19 @@ def test_duplicate_claim_evidence_is_rejected(db):
             prepared=prepared,
             result=result,
         )
+
+
+
+def test_snapshot_rejects_ineligible_group_representative(db):
+    data = build_evidence_story(db)
+    service = EvidenceService()
+
+    data["sources"][0].active = False
+    db.flush()
+
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+
+    assert snapshot is None
