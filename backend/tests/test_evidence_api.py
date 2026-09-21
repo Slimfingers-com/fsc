@@ -66,7 +66,7 @@ def test_story_and_group_evidence_endpoints(client, db):
     assert group_response.json()["total"] == 1
 
 
-def test_evidence_reads_hide_inactive_source(client, db):
+def test_evidence_reads_hide_group_with_ineligible_representative(client, db):
     data = build_evidence_story(db)
     persist_evidence(db, data)
 
@@ -77,7 +77,7 @@ def test_evidence_reads_hide_inactive_source(client, db):
         f"/stories/{data['story'].id}/evidence"
     )
     assert response.status_code == 200
-    assert response.json()["total"] == 1
+    assert response.json()["total"] == 0
 
 
 def test_missing_story_and_group_return_404(client):
