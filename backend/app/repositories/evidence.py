@@ -23,7 +23,7 @@ class EvidenceClaimRow:
     claim: ArticleClaim
     article: Article
     source: Source
-    has_direct_quote: bool
+    direct_quote_text: str | None
 
 
 class EvidenceRepository:
@@ -107,12 +107,16 @@ class EvidenceRepository:
         story_id: UUID,
         for_update: bool = False,
     ) -> list[EvidenceClaimRow]:
-        direct_quote = exists(
-            select(ArticlePerspective.id).where(
+        direct_quote_text = (
+            select(ArticlePerspective.evidence_text)
+            .where(
                 ArticlePerspective.claim_id == ArticleClaim.id,
                 ArticlePerspective.deleted_at.is_(None),
                 ArticlePerspective.perspective_kind == PerspectiveKind.QUOTED,
             )
+            .order_by(ArticlePerspective.id)
+            .limit(1)
+            .scalar_subquery()
         )
         statement = (
             select(
@@ -121,7 +125,7 @@ class EvidenceRepository:
                 ArticleClaim,
                 Article,
                 Source,
-                direct_quote.label("has_direct_quote"),
+                direct_quote_text.label("direct_quote_text"),
             )
             .join(
                 StoryClaimGroupMember,
@@ -168,7 +172,7 @@ class EvidenceRepository:
                 claim=row[2],
                 article=row[3],
                 source=row[4],
-                has_direct_quote=bool(row.has_direct_quote),
+                direct_quote_text=row.direct_quote_text,
             )
             for row in db.execute(statement).all()
         ]
