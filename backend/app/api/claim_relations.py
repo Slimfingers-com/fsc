@@ -70,6 +70,48 @@ def _story_exists(db: Session, story_id: UUID) -> bool:
     )
 
 
+def _eligible_representative(group_alias, story_id: UUID):
+    representative = aliased(ArticleClaim)
+    article = aliased(Article)
+    feed = aliased(Feed)
+    source = aliased(Source)
+    membership = aliased(StoryArticle)
+
+    return exists(
+        select(representative.id)
+        .join(
+            article,
+            article.id == representative.article_id,
+        )
+        .join(
+            feed,
+            feed.id == article.feed_id,
+        )
+        .join(
+            source,
+            source.id == feed.source_id,
+        )
+        .join(
+            membership,
+            (membership.article_id == article.id)
+            & (membership.story_id == story_id),
+        )
+        .where(
+            group_alias.story_id == story_id,
+            representative.id == group_alias.representative_claim_id,
+            representative.deleted_at.is_(None),
+            membership.deleted_at.is_(None),
+            article.deleted_at.is_(None),
+            article.normalized_at.is_not(None),
+            article.normalized_text.is_not(None),
+            feed.deleted_at.is_(None),
+            feed.active.is_(True),
+            source.deleted_at.is_(None),
+            source.active.is_(True),
+        )
+    )
+
+
 def _group_summary_statement(story_id: UUID):
     representative = aliased(ArticleClaim)
 
@@ -146,6 +188,10 @@ def _group_summary_statement(story_id: UUID):
             ),
             representative.deleted_at.is_(
                 None
+            ),
+            _eligible_representative(
+                StoryClaimGroup,
+                story_id,
             ),
             ArticleClaim.deleted_at.is_(
                 None
@@ -524,64 +570,6 @@ def story_claim_relations(
         ArticleClaim
     )
 
-    def eligible_representative(
-        group_alias,
-    ):
-        return exists(
-            select(ArticleClaim.id)
-            .join(
-                Article,
-                Article.id
-                == ArticleClaim.article_id,
-            )
-            .join(
-                Feed,
-                Feed.id
-                == Article.feed_id,
-            )
-            .join(
-                Source,
-                Source.id
-                == Feed.source_id,
-            )
-            .join(
-                StoryArticle,
-                (
-                    StoryArticle.article_id
-                    == Article.id
-                )
-                & (
-                    StoryArticle.story_id
-                    == story_id
-                ),
-            )
-            .where(
-                group_alias.story_id
-                == story_id,
-                ArticleClaim.id
-                == group_alias.representative_claim_id,
-                ArticleClaim.deleted_at.is_(
-                    None
-                ),
-                StoryArticle.deleted_at.is_(
-                    None
-                ),
-                Article.deleted_at.is_(
-                    None
-                ),
-                Article.normalized_at.is_not(
-                    None
-                ),
-                Article.normalized_text.is_not(
-                    None
-                ),
-                Feed.deleted_at.is_(None),
-                Feed.active.is_(True),
-                Source.deleted_at.is_(None),
-                Source.active.is_(True),
-            )
-        )
-
     conditions = [
         StoryClaimRelation.story_id
         == story_id,
@@ -596,11 +584,13 @@ def story_claim_relations(
         right_claim.deleted_at.is_(
             None
         ),
-        eligible_representative(
-            left
+        _eligible_representative(
+            left,
+            story_id,
         ),
-        eligible_representative(
-            right
+        _eligible_representative(
+            right,
+            story_id,
         ),
         StoryClaimRelation.confidence
         >= min_confidence,
