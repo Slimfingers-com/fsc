@@ -74,6 +74,14 @@ class Settings(BaseSettings):
     claim_relation_default_page_size: int = 50
     claim_relation_max_page_size: int = 200
 
+    evidence_worker_poll_interval_seconds: float = 60.0
+    evidence_worker_batch_limit: int = 50
+    evidence_worker_claim_ttl_seconds: float = 300.0
+    evidence_retry_base_seconds: float = 30.0
+    evidence_retry_max_seconds: float = 3600.0
+    evidence_default_page_size: int = 50
+    evidence_max_page_size: int = 200
+
     model_config = SettingsConfigDict(
         extra="ignore"
     )
