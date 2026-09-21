@@ -55,6 +55,15 @@ class Settings(BaseSettings):
     claim_default_page_size: int = 50
     claim_max_page_size: int = 200
 
+    perspective_analysis_worker_poll_interval_seconds: float = 60.0
+    perspective_analysis_worker_batch_limit: int = 100
+    perspective_analysis_worker_claim_ttl_seconds: float = 300.0
+    perspective_analysis_retry_base_seconds: float = 30.0
+    perspective_analysis_retry_max_seconds: float = 3600.0
+    perspective_analysis_min_confidence: float = 0.6
+    perspective_default_page_size: int = 50
+    perspective_max_page_size: int = 200
+
     model_config = SettingsConfigDict(
         extra="ignore"
     )

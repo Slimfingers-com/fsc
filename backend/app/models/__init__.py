@@ -3,6 +3,7 @@ from app.models.article_processing import ArticleProcessingRun, ArticleProcessin
 from app.models.claim import ArticleClaim
 from app.models.entity import ArticleEntity, Entity, EntityAlias
 from app.models.feed import Feed
+from app.models.perspective import ArticlePerspective
 from app.models.search_document import SearchDocument
 from app.models.source import Source
 from app.models.story import Story, StoryArticle
@@ -11,6 +12,7 @@ from app.models.topic import ArticleTopic, Topic
 __all__ = [
     "Article",
     "ArticleClaim",
+    "ArticlePerspective",
     "ArticleProcessingRun",
     "ArticleProcessingState",
     "Feed",
