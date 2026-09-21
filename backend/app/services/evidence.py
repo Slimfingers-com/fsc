@@ -154,6 +154,13 @@ class EvidenceService:
         if grouped_claim_ids != active_claim_ids:
             return None
 
+        representative_ids = {
+            row.group.representative_claim_id
+            for row in rows
+        }
+        if not representative_ids.issubset(grouped_claim_ids):
+            return None
+
         return EvidenceSnapshot(
             story=story,
             memberships=tuple(memberships),
