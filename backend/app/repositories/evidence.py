@@ -111,6 +111,7 @@ class EvidenceRepository:
             select(ArticlePerspective.evidence_text)
             .where(
                 ArticlePerspective.claim_id == ArticleClaim.id,
+                ArticlePerspective.article_id == ArticleClaim.article_id,
                 ArticlePerspective.deleted_at.is_(None),
                 ArticlePerspective.perspective_kind == PerspectiveKind.QUOTED,
             )
