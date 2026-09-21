@@ -23,7 +23,6 @@ class EvidenceClaimRow:
     claim: ArticleClaim
     article: Article
     source: Source
-    direct_quote_text: str | None
 
 
 class EvidenceRepository:
@@ -107,18 +106,6 @@ class EvidenceRepository:
         story_id: UUID,
         for_update: bool = False,
     ) -> list[EvidenceClaimRow]:
-        direct_quote_text = (
-            select(ArticlePerspective.evidence_text)
-            .where(
-                ArticlePerspective.claim_id == ArticleClaim.id,
-                ArticlePerspective.article_id == ArticleClaim.article_id,
-                ArticlePerspective.deleted_at.is_(None),
-                ArticlePerspective.perspective_kind == PerspectiveKind.QUOTED,
-            )
-            .order_by(ArticlePerspective.id)
-            .limit(1)
-            .scalar_subquery()
-        )
         statement = (
             select(
                 StoryClaimGroup,
@@ -126,7 +113,6 @@ class EvidenceRepository:
                 ArticleClaim,
                 Article,
                 Source,
-                direct_quote_text.label("direct_quote_text"),
             )
             .join(
                 StoryClaimGroupMember,
@@ -173,10 +159,53 @@ class EvidenceRepository:
                 claim=row[2],
                 article=row[3],
                 source=row[4],
-                direct_quote_text=row.direct_quote_text,
             )
             for row in db.execute(statement).all()
         ]
+
+
+    def load_direct_quotes(
+        self,
+        db: Session,
+        *,
+        claim_ids: list[UUID],
+    ) -> dict[UUID, tuple[str, ...]]:
+        if not claim_ids:
+            return {}
+
+        rows = db.execute(
+            select(
+                ArticlePerspective.claim_id,
+                ArticlePerspective.evidence_text,
+            )
+            .join(
+                ArticleClaim,
+                ArticleClaim.id == ArticlePerspective.claim_id,
+            )
+            .where(
+                ArticlePerspective.claim_id.in_(claim_ids),
+                ArticlePerspective.article_id == ArticleClaim.article_id,
+                ArticlePerspective.deleted_at.is_(None),
+                ArticleClaim.deleted_at.is_(None),
+                ArticlePerspective.perspective_kind == PerspectiveKind.QUOTED,
+            )
+            .order_by(
+                ArticlePerspective.claim_id,
+                ArticlePerspective.id,
+            )
+        ).all()
+
+        result: dict[UUID, list[str]] = {}
+        for claim_id, evidence_text in rows:
+            result.setdefault(
+                claim_id,
+                [],
+            ).append(evidence_text)
+
+        return {
+            claim_id: tuple(values)
+            for claim_id, values in result.items()
+        }
 
     def replace_story_results(
         self,
