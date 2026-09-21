@@ -341,6 +341,41 @@ def test_claim_relation_reads_hide_ineligible_representative(client, db):
     assert relations.json()["total"] == 0
 
 
+
+def test_claim_group_reads_hide_group_when_only_representative_is_ineligible(
+    client,
+    db,
+):
+    data = build_story_results(db)
+    story = data["story"]
+
+    data["alpha_source"].active = False
+    db.flush()
+
+    groups = client.get(
+        f"/stories/{story.id}/claim-groups"
+    )
+    assert groups.status_code == 200
+    payload = groups.json()
+    assert payload["total"] == 1
+    assert {
+        item["id"]
+        for item in payload["items"]
+    } == {
+        str(data["negative"].id)
+    }
+
+    detail = client.get(
+        f"/claim-groups/{data['positive'].id}"
+    )
+    assert detail.status_code == 404
+
+    relations = client.get(
+        f"/stories/{story.id}/claim-relations"
+    )
+    assert relations.status_code == 200
+    assert relations.json()["total"] == 0
+
 def test_missing_story_and_group_return_404(client):
     missing = uuid4()
 
