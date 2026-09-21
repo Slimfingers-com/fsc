@@ -56,6 +56,11 @@ def upgrade() -> None:
             nullable=False,
         ),
         sa.Column(
+            "evidence_hash",
+            sa.String(length=64),
+            nullable=False,
+        ),
+        sa.Column(
             "confidence",
             sa.Float(),
             nullable=False,
@@ -126,7 +131,8 @@ def upgrade() -> None:
         sa.UniqueConstraint(
             "processing_run_id",
             "claim_id",
-            name="uq_story_evidence_run_claim",
+            "evidence_hash",
+            name="uq_story_evidence_run_claim_hash",
         ),
         sa.CheckConstraint(
             "confidence BETWEEN 0 AND 1",
@@ -148,6 +154,7 @@ def upgrade() -> None:
         "article_id",
         "source_id",
         "evidence_kind",
+        "evidence_hash",
     ):
         op.create_index(
             f"ix_story_evidence_{column}",
@@ -156,9 +163,9 @@ def upgrade() -> None:
         )
 
     op.create_index(
-        "uq_story_evidence_active_story_claim",
+        "uq_story_evidence_active_story_claim_hash",
         "story_evidence",
-        ["story_id", "claim_id"],
+        ["story_id", "claim_id", "evidence_hash"],
         unique=True,
         postgresql_where=sa.text("deleted_at IS NULL"),
     )
@@ -295,10 +302,11 @@ def downgrade() -> None:
     op.drop_table("story_claim_evidence")
 
     op.drop_index(
-        "uq_story_evidence_active_story_claim",
+        "uq_story_evidence_active_story_claim_hash",
         table_name="story_evidence",
     )
     for column in (
+        "evidence_hash",
         "evidence_kind",
         "source_id",
         "article_id",
