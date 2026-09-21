@@ -3,6 +3,7 @@ from concurrent.futures import (
 )
 from datetime import UTC, datetime
 import hashlib
+import threading
 from uuid import uuid4
 
 from sqlalchemy import func, select
@@ -37,6 +38,9 @@ from app.models.story import Story, StoryArticle
 from app.models.story_processing import (
     StoryProcessingRun,
     StoryProcessingState,
+)
+from app.repositories.story import (
+    StoryRepository,
 )
 from app.services.claim_relations import (
     ClaimRelationRunner,
@@ -598,3 +602,177 @@ def test_runner_deactivates_groups_when_claims_disappear():
             state.processed_input_hash
             is None
         )
+
+
+
+def test_claim_relation_finalization_blocks_claim_extraction_article_lock():
+    story_ids, claim_ids = (
+        create_committed_stories(
+            1
+        )
+    )
+    story_id = story_ids[0]
+
+    with TestSessionLocal() as db:
+        claim = db.get(
+            ArticleClaim,
+            claim_ids[0],
+        )
+        assert claim is not None
+        article_id = claim.article_id
+
+    locks_held = threading.Event()
+    release_locks = threading.Event()
+    extraction_acquired = threading.Event()
+
+    def hold_claim_relation_finalization_locks():
+        with TestSessionLocal.begin() as db:
+            story_repository = StoryRepository()
+            story_repository.acquire_processing_coordination_lock(
+                db
+            )
+            story_repository.acquire_clustering_lock(
+                db,
+                language_code="en",
+            )
+            snapshot = (
+                ClaimRelationService()
+                .load_snapshot(
+                    db,
+                    story_id=story_id,
+                    for_update=True,
+                    lock_articles=True,
+                )
+            )
+            assert snapshot is not None
+            locks_held.set()
+            assert release_locks.wait(
+                timeout=5
+            )
+
+    def acquire_claim_extraction_article_lock():
+        assert locks_held.wait(
+            timeout=5
+        )
+        with TestSessionLocal.begin() as db:
+            db.scalar(
+                select(
+                    Article
+                )
+                .where(
+                    Article.id == article_id
+                )
+                .with_for_update(
+                    of=Article
+                )
+            )
+            extraction_acquired.set()
+
+    with ThreadPoolExecutor(
+        max_workers=2
+    ) as executor:
+        relation_future = executor.submit(
+            hold_claim_relation_finalization_locks
+        )
+        extraction_future = executor.submit(
+            acquire_claim_extraction_article_lock
+        )
+
+        assert locks_held.wait(
+            timeout=5
+        )
+        assert not extraction_acquired.wait(
+            timeout=0.25
+        )
+
+        release_locks.set()
+
+        relation_future.result(
+            timeout=5
+        )
+        extraction_future.result(
+            timeout=5
+        )
+
+    assert extraction_acquired.is_set()
+
+
+def test_claim_relation_finalization_blocks_story_clustering_partition_lock():
+    story_ids, _ = (
+        create_committed_stories(
+            1
+        )
+    )
+    story_id = story_ids[0]
+
+    locks_held = threading.Event()
+    release_locks = threading.Event()
+    clustering_acquired = threading.Event()
+
+    def hold_claim_relation_finalization_locks():
+        with TestSessionLocal.begin() as db:
+            story_repository = StoryRepository()
+            story_repository.acquire_processing_coordination_lock(
+                db
+            )
+            story_repository.acquire_clustering_lock(
+                db,
+                language_code="en",
+            )
+            snapshot = (
+                ClaimRelationService()
+                .load_snapshot(
+                    db,
+                    story_id=story_id,
+                    for_update=True,
+                    lock_articles=True,
+                )
+            )
+            assert snapshot is not None
+            locks_held.set()
+            assert release_locks.wait(
+                timeout=5
+            )
+
+    def acquire_story_clustering_locks():
+        assert locks_held.wait(
+            timeout=5
+        )
+        with TestSessionLocal.begin() as db:
+            story_repository = StoryRepository()
+            story_repository.acquire_processing_coordination_lock(
+                db
+            )
+            story_repository.acquire_clustering_lock(
+                db,
+                language_code="en",
+            )
+            clustering_acquired.set()
+
+    with ThreadPoolExecutor(
+        max_workers=2
+    ) as executor:
+        relation_future = executor.submit(
+            hold_claim_relation_finalization_locks
+        )
+        clustering_future = executor.submit(
+            acquire_story_clustering_locks
+        )
+
+        assert locks_held.wait(
+            timeout=5
+        )
+        assert not clustering_acquired.wait(
+            timeout=0.25
+        )
+
+        release_locks.set()
+
+        relation_future.result(
+            timeout=5
+        )
+        clustering_future.result(
+            timeout=5
+        )
+
+    assert clustering_acquired.is_set()
