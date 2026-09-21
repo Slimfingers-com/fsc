@@ -34,12 +34,14 @@ class StoryEvidence(BaseModel):
         UniqueConstraint(
             "processing_run_id",
             "claim_id",
-            name="uq_story_evidence_run_claim",
+            "evidence_hash",
+            name="uq_story_evidence_run_claim_hash",
         ),
         Index(
-            "uq_story_evidence_active_story_claim",
+            "uq_story_evidence_active_story_claim_hash",
             "story_id",
             "claim_id",
+            "evidence_hash",
             unique=True,
             postgresql_where=text("deleted_at IS NULL"),
         ),
@@ -94,6 +96,11 @@ class StoryEvidence(BaseModel):
     evidence_text: Mapped[str] = mapped_column(
         Text,
         nullable=False,
+    )
+    evidence_hash: Mapped[str] = mapped_column(
+        String(64),
+        nullable=False,
+        index=True,
     )
     confidence: Mapped[float] = mapped_column(
         nullable=False,
