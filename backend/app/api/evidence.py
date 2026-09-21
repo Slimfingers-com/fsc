@@ -54,7 +54,7 @@ def _story_exists(db: Session, story_id: UUID) -> bool:
     )
 
 
-def _eligible_representative(story_id: UUID):
+def _eligible_representative(story_id):
     representative = aliased(ArticleClaim)
     article = aliased(Article)
     feed = aliased(Feed)
@@ -279,6 +279,9 @@ def claim_group_evidence(
         select(StoryClaimGroup).where(
             StoryClaimGroup.id == group_id,
             StoryClaimGroup.deleted_at.is_(None),
+            _eligible_representative(
+                StoryClaimGroup.story_id
+            ),
         )
     )
     if group is None:
