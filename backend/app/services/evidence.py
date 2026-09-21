@@ -211,7 +211,7 @@ class EvidenceService:
                 row.article.link or "",
                 str(row.source.id),
                 row.source.source_type.value,
-                row.has_direct_quote,
+                row.direct_quote_text or "",
             ]
             for row in snapshot.rows
         ]
@@ -261,7 +261,7 @@ class EvidenceService:
                 article_title=row.article.title,
                 article_text=row.article.normalized_text or "",
                 article_url=row.article.link,
-                has_direct_quote=row.has_direct_quote,
+                direct_quote_text=row.direct_quote_text,
             )
             for row in snapshot.rows
         )
