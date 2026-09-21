@@ -31,7 +31,7 @@ class ClaimEvidenceInput:
     article_title: str | None
     article_text: str
     article_url: str | None
-    has_direct_quote: bool
+    direct_quote_text: str | None
 
 
 @dataclass(frozen=True, slots=True)
