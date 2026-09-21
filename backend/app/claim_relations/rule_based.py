@@ -1,4 +1,5 @@
 import re
+from difflib import SequenceMatcher
 
 from app.claim_relations.provider import (
     ClaimGroupMatchKind,
@@ -62,19 +63,23 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         return token in _NEGATIONS or token.endswith("n't")
 
     @classmethod
-    def _features(cls, value: str) -> tuple[frozenset[str], bool, tuple[str, ...]]:
+    def _features(
+        cls,
+        value: str,
+    ) -> tuple[frozenset[str], tuple[str, ...], bool, tuple[str, ...]]:
         tokens = cls._tokens(value)
         negative = any(cls._is_negation(token) for token in tokens)
-        content = frozenset(
+        ordered_content = tuple(
             token
             for token in tokens
             if token not in _STOP and not cls._is_negation(token)
         )
+        content = frozenset(ordered_content)
         numbers = tuple(
             match.group(0).replace(",", ".")
             for match in _NUMBER.finditer(value.casefold())
         )
-        return content, negative, numbers
+        return content, ordered_content, negative, numbers
 
     @staticmethod
     def _jaccard(left: frozenset[str], right: frozenset[str]) -> float:
@@ -90,11 +95,29 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         left: StoryClaimInput,
         right: StoryClaimInput,
     ) -> tuple[float, bool, bool]:
-        left_tokens, left_negative, left_numbers = cls._features(left.normalized_claim)
-        right_tokens, right_negative, right_numbers = cls._features(right.normalized_claim)
+        (
+            left_tokens,
+            left_ordered,
+            left_negative,
+            left_numbers,
+        ) = cls._features(left.normalized_claim)
+        (
+            right_tokens,
+            right_ordered,
+            right_negative,
+            right_numbers,
+        ) = cls._features(right.normalized_claim)
         if left_numbers != right_numbers:
             return 0.0, left_negative, right_negative
-        return cls._jaccard(left_tokens, right_tokens), left_negative, right_negative
+
+        lexical_score = cls._jaccard(left_tokens, right_tokens)
+        order_score = SequenceMatcher(
+            None,
+            left_ordered,
+            right_ordered,
+            autojunk=False,
+        ).ratio()
+        return min(lexical_score, order_score), left_negative, right_negative
 
     def analyze(self, story: StoryClaimAnalysisInput) -> StoryClaimAnalysisResult:
         claims = sorted(
