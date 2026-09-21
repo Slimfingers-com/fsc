@@ -127,11 +127,13 @@ class RuleBasedPerspectiveAnalyzer(PerspectiveAnalyzer):
             )
         ]
 
-        has_after_verb = bool(
-            _REPORT_VERB.search(after)
+        after_head = after.lstrip(
+            " \t,:;-–—"
         )
-        has_before_verb = bool(
-            _REPORT_VERB.search(before)
+        has_after_verb = bool(
+            _REPORT_VERB.match(
+                after_head
+            )
         )
         has_prefix = bool(
             _REPORT_PREFIX.search(before)
@@ -139,7 +141,6 @@ class RuleBasedPerspectiveAnalyzer(PerspectiveAnalyzer):
 
         if not (
             has_after_verb
-            or has_before_verb
             or has_prefix
         ):
             return None

@@ -162,7 +162,10 @@ def article_perspectives(
                 *_article_conditions(),
             )
             .order_by(
-                ArticlePerspective.claim_id,
+                ArticleClaim.text_source,
+                ArticleClaim.sentence_index,
+                ArticleClaim.start_offset,
+                ArticleClaim.id,
                 ArticlePerspective.perspective_kind,
                 ArticlePerspective.start_offset,
                 ArticlePerspective.id,
@@ -223,6 +226,13 @@ def claim_perspectives(
                 ArticleClaim.id
                 == ArticlePerspective.claim_id,
             )
+            .join(
+                Article,
+                Article.id
+                == ArticlePerspective.article_id,
+            )
+            .join(Feed)
+            .join(Source)
             .where(
                 ArticlePerspective.claim_id
                 == claim_id,
@@ -234,6 +244,7 @@ def claim_perspectives(
                 ),
                 ArticleClaim.article_id
                 == ArticlePerspective.article_id,
+                *_article_conditions(),
             )
             .order_by(
                 ArticlePerspective.perspective_kind,
@@ -451,7 +462,10 @@ def story_perspectives(
             .nullslast(),
             Article.created_at.desc(),
             Article.id,
-            ArticlePerspective.claim_id,
+            ArticleClaim.text_source,
+            ArticleClaim.sentence_index,
+            ArticleClaim.start_offset,
+            ArticleClaim.id,
             ArticlePerspective.perspective_kind,
             ArticlePerspective.start_offset,
             ArticlePerspective.id,

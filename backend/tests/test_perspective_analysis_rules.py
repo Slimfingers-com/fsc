@@ -158,3 +158,67 @@ def test_rule_based_falls_back_to_unattributed():
         item.holder_mention_id
         is None
     )
+
+def test_rule_based_does_not_attribute_distant_reporting_verb_to_earlier_entity():
+    text = (
+        "Alice Smith attended while Bob Jones said "
+        "the climate plan will begin Monday."
+    )
+    article, claim_id, _ = _input(
+        text
+    )
+    bob_mention_id = uuid4()
+    bob_entity_id = uuid4()
+    bob_start = text.index(
+        "Bob Jones"
+    )
+
+    article = PerspectiveAnalysisInput(
+        article_id=article.article_id,
+        title=article.title,
+        normalized_text=(
+            article.normalized_text
+        ),
+        language_code=(
+            article.language_code
+        ),
+        claims=article.claims,
+        entity_mentions=(
+            article.entity_mentions[0],
+            PerspectiveEntityMentionInput(
+                mention_id=bob_mention_id,
+                entity_id=bob_entity_id,
+                mention_text="Bob Jones",
+                entity_type=(
+                    EntityType.PERSON
+                ),
+                text_source=(
+                    TextPart.BODY
+                ),
+                start_offset=bob_start,
+                end_offset=(
+                    bob_start
+                    + len("Bob Jones")
+                ),
+                sentence_index=0,
+                confidence=0.9,
+                salience=0.9,
+            ),
+        ),
+    )
+
+    item = (
+        RuleBasedPerspectiveAnalyzer()
+        .analyze(article)
+        .attributions[0]
+    )
+
+    assert item.claim_id == claim_id
+    assert (
+        item.perspective_kind
+        == PerspectiveKind.REPORTED
+    )
+    assert (
+        item.holder_mention_id
+        == bob_mention_id
+    )
