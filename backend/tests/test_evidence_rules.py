@@ -27,7 +27,7 @@ def make_claim(
         article_title=title,
         article_text=text,
         article_url="https://example.test/article",
-        has_direct_quote=quoted,
+        direct_quote_text=("Direct quoted statement." if quoted else None),
     )
 
 
@@ -78,6 +78,7 @@ def test_direct_quote_takes_precedence():
         )
     )
     assert result.evidence[0].evidence_kind == EvidenceKind.DIRECT_QUOTE
+    assert result.evidence[0].evidence_text == "Direct quoted statement."
 
 
 def test_press_release_is_detected():
