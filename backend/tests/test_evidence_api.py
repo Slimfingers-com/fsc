@@ -79,6 +79,11 @@ def test_evidence_reads_hide_group_with_ineligible_representative(client, db):
     assert response.status_code == 200
     assert response.json()["total"] == 0
 
+    group_response = client.get(
+        f"/claim-groups/{data['group'].id}/evidence"
+    )
+    assert group_response.status_code == 404
+
 
 def test_missing_story_and_group_return_404(client):
     from uuid import uuid4
