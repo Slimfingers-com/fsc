@@ -52,6 +52,10 @@ class EvidenceSnapshot:
     story: Story
     memberships: tuple[EligibleStoryMembership, ...]
     rows: tuple[EvidenceClaimRow, ...]
+    direct_quotes: tuple[
+        tuple[UUID, tuple[str, ...]],
+        ...
+    ]
 
 
 @dataclass(frozen=True, slots=True)
@@ -161,10 +165,24 @@ class EvidenceService:
         if not representative_ids.issubset(grouped_claim_ids):
             return None
 
+        direct_quotes = self.repository.load_direct_quotes(
+            db,
+            claim_ids=sorted(
+                grouped_claim_ids,
+                key=str,
+            ),
+        )
+
         return EvidenceSnapshot(
             story=story,
             memberships=tuple(memberships),
             rows=tuple(rows),
+            direct_quotes=tuple(
+                sorted(
+                    direct_quotes.items(),
+                    key=lambda item: str(item[0]),
+                )
+            ),
         )
 
     def analysis_hash(
@@ -191,6 +209,10 @@ class EvidenceService:
             )
         ]
 
+        direct_quote_map = dict(
+            snapshot.direct_quotes
+        )
+
         evidence_input_identity = [
             [
                 str(row.group.id),
@@ -211,7 +233,12 @@ class EvidenceService:
                 row.article.link or "",
                 str(row.source.id),
                 row.source.source_type.value,
-                row.direct_quote_text or "",
+                list(
+                    direct_quote_map.get(
+                        row.claim.id,
+                        (),
+                    )
+                ),
             ]
             for row in snapshot.rows
         ]
@@ -249,6 +276,9 @@ class EvidenceService:
         self,
         snapshot: EvidenceSnapshot,
     ) -> PreparedEvidenceAnalysis:
+        direct_quote_map = dict(
+            snapshot.direct_quotes
+        )
         claims = tuple(
             ClaimEvidenceInput(
                 claim_id=row.claim.id,
@@ -261,7 +291,12 @@ class EvidenceService:
                 article_title=row.article.title,
                 article_text=row.article.normalized_text or "",
                 article_url=row.article.link,
-                direct_quote_text=row.direct_quote_text,
+                direct_quote_texts=(
+                    direct_quote_map.get(
+                        row.claim.id,
+                        (),
+                    )
+                ),
             )
             for row in snapshot.rows
         )
@@ -288,7 +323,9 @@ class EvidenceService:
             for item in prepared.analysis_input.claims
         }
         evidence_by_key = {}
-        seen_claims: set[UUID] = set()
+        seen_evidence: set[
+            tuple[UUID, EvidenceKind, str]
+        ] = set()
 
         for item in result.evidence:
             if not item.key.strip():
@@ -297,8 +334,6 @@ class EvidenceService:
                 raise ValueError("duplicate evidence key")
             if item.claim_id not in input_by_claim:
                 raise ValueError("evidence references an unknown claim")
-            if item.claim_id in seen_claims:
-                raise ValueError("claim produced more than one evidence item")
             if not isinstance(item.evidence_kind, EvidenceKind):
                 raise ValueError("evidence kind is invalid")
             if not item.evidence_text.strip():
@@ -310,13 +345,17 @@ class EvidenceService:
                 raise ValueError(
                     "evidence confidence must be between zero and one"
                 )
-            evidence_by_key[item.key] = item
-            seen_claims.add(item.claim_id)
-
-        if seen_claims != set(input_by_claim):
-            raise ValueError(
-                "evidence result must classify every input claim exactly once"
+            semantic_key = (
+                item.claim_id,
+                item.evidence_kind,
+                item.evidence_text.strip(),
             )
+            if semantic_key in seen_evidence:
+                raise ValueError(
+                    "duplicate semantic evidence item"
+                )
+            seen_evidence.add(semantic_key)
+            evidence_by_key[item.key] = item
 
         linked_keys: set[str] = set()
         for link in result.links:
@@ -423,6 +462,13 @@ class EvidenceService:
             key=lambda value: value.key,
         ):
             source = input_by_claim[item.claim_id]
+            evidence_hash = hashlib.sha256(
+                (
+                    item.evidence_kind.value
+                    + "\0"
+                    + item.evidence_text.strip()
+                ).encode("utf-8")
+            ).hexdigest()
             evidence = StoryEvidence(
                 story_id=snapshot.story.id,
                 processing_run_id=processing_run_id,
@@ -431,6 +477,7 @@ class EvidenceService:
                 source_id=source.source_id,
                 evidence_kind=item.evidence_kind,
                 evidence_text=item.evidence_text,
+                evidence_hash=evidence_hash,
                 confidence=item.confidence,
                 analysis_provider=self.analyzer.provider,
                 analysis_version=self.analyzer.version,
