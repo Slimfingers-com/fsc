@@ -38,6 +38,13 @@ Current perspectives are available through `/articles/{id}/perspectives`, `/clai
 
 Current results are available through `/stories/{id}/claim-groups`, `/claim-groups/{id}`, and `/stories/{id}/claim-relations`. Story-scoped durable processing leases and finalization locks coordinate with story clustering and claim extraction. See [ADR 0014](docs/decisions/0014-cross-source-claim-relations.md).
 
+
+## Evidence Analysis
+
+`python -m app.workers.evidence_main` classifies traceable evidence attached to the current story claim-group generation. Evidence types include primary sources, official data, studies, direct quotes, press releases, independent reporting and contextual material. Evidence links use `supports` or `context`; they do not represent a truth score or a verdict on factual correctness.
+
+Current evidence is available through `/stories/{id}/evidence` and `/claim-groups/{id}/evidence`. The processing identity includes the active claim-group generation and all article/source inputs used by the evidence provider. See [ADR 0015](docs/decisions/0015-evidence-analysis.md).
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh
