@@ -31,7 +31,7 @@ class ClaimEvidenceInput:
     article_title: str | None
     article_text: str
     article_url: str | None
-    direct_quote_text: str | None
+    direct_quote_texts: tuple[str, ...]
 
 
 @dataclass(frozen=True, slots=True)
