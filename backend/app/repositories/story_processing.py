@@ -199,6 +199,8 @@ class StoryProcessingRepository:
             update(StoryProcessingState)
             .where(
                 StoryProcessingState.id == state_id,
+                StoryProcessingState.story_id == run.story_id,
+                StoryProcessingState.pipeline == run.pipeline,
                 StoryProcessingState.deleted_at.is_(None),
                 StoryProcessingState.claimed_by == worker_id,
                 StoryProcessingState.claim_expires_at > now,
@@ -296,7 +298,12 @@ class StoryProcessingRepository:
 
     @staticmethod
     def _assert_valid_lease(*, state: StoryProcessingState, worker_id: str, now: datetime) -> None:
-        if state.claimed_by != worker_id or state.claim_expires_at is None or state.claim_expires_at <= now:
+        if (
+            state.claimed_by != worker_id
+            or state.claimed_at is None
+            or state.claim_expires_at is None
+            or state.claim_expires_at <= now
+        ):
             raise StoryProcessingLeaseLostError("processing lease is no longer valid")
 
     @staticmethod
@@ -305,6 +312,8 @@ class StoryProcessingRepository:
         if (
             run is None
             or run.processing_state_id != state.id
+            or run.story_id != state.story_id
+            or run.pipeline != state.pipeline
             or run.worker_id != worker_id
             or run.attempt_number != state.attempt_count
             or run.finished_at is not None
