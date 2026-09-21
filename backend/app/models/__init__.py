@@ -6,6 +6,7 @@ from app.models.claim_relation import (
     StoryClaimGroupMember,
     StoryClaimRelation,
 )
+from app.models.evidence import StoryClaimEvidence, StoryEvidence
 from app.models.entity import ArticleEntity, Entity, EntityAlias
 from app.models.feed import Feed
 from app.models.perspective import ArticlePerspective
@@ -36,4 +37,6 @@ __all__ = [
     "StoryClaimGroup",
     "StoryClaimGroupMember",
     "StoryClaimRelation",
+    "StoryEvidence",
+    "StoryClaimEvidence",
 ]
