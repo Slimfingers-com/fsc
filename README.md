@@ -32,6 +32,12 @@ Current claims are available through `/articles/{id}/claims`, `/claims/{claim_id
 
 Current perspectives are available through `/articles/{id}/perspectives`, `/claims/{claim_id}/perspectives`, and `/stories/{story_id}/perspectives`. The processing identity includes the complete active claim and entity-mention generations, and finalization locks and revalidates both upstream inputs before replacing the previous active perspective generation. See [ADR 0013](docs/decisions/0013-perspective-attribution.md).
 
+## Cross-Source Claim Groups & Relations
+
+`python -m app.workers.claim_relation_main` groups active claims within each story into story-scoped semantic claim groups and records explicit contradictions between groups. Agreement is represented by multiple current claims and independent sources in one group rather than pairwise agreement edges. The deterministic baseline uses conservative lexical overlap, explicit negation and numeric compatibility; it does not assess truth, evidence quality or consensus.
+
+Current results are available through `/stories/{id}/claim-groups`, `/claim-groups/{id}`, and `/stories/{id}/claim-relations`. Story-scoped durable processing leases and finalization locks coordinate with story clustering and claim extraction. See [ADR 0014](docs/decisions/0014-cross-source-claim-relations.md).
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh

@@ -64,6 +64,16 @@ class Settings(BaseSettings):
     perspective_default_page_size: int = 50
     perspective_max_page_size: int = 200
 
+    claim_relation_worker_poll_interval_seconds: float = 60.0
+    claim_relation_worker_batch_limit: int = 50
+    claim_relation_worker_claim_ttl_seconds: float = 300.0
+    claim_relation_retry_base_seconds: float = 30.0
+    claim_relation_retry_max_seconds: float = 3600.0
+    claim_relation_group_similarity_threshold: float = 0.82
+    claim_relation_contradiction_similarity_threshold: float = 0.82
+    claim_relation_default_page_size: int = 50
+    claim_relation_max_page_size: int = 200
+
     model_config = SettingsConfigDict(
         extra="ignore"
     )

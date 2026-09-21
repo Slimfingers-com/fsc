@@ -23,6 +23,10 @@ from app.db.base import BaseModel
 if TYPE_CHECKING:
     from app.models.article import Article
     from app.models.article_processing import ArticleProcessingRun
+    from app.models.story_processing import (
+        StoryProcessingRun,
+        StoryProcessingState,
+    )
 
 
 class Story(BaseModel):
@@ -44,6 +48,15 @@ class Story(BaseModel):
     memberships: Mapped[list["StoryArticle"]] = relationship(
         back_populates="story",
         cascade="all, delete-orphan",
+    )
+
+    processing_states: Mapped[list["StoryProcessingState"]] = relationship(
+        back_populates="story",
+        cascade="all, delete-orphan",
+    )
+
+    processing_runs: Mapped[list["StoryProcessingRun"]] = relationship(
+        back_populates="story",
     )
 
 

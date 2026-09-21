@@ -1,12 +1,18 @@
 from app.models.article import Article
 from app.models.article_processing import ArticleProcessingRun, ArticleProcessingState
 from app.models.claim import ArticleClaim
+from app.models.claim_relation import (
+    StoryClaimGroup,
+    StoryClaimGroupMember,
+    StoryClaimRelation,
+)
 from app.models.entity import ArticleEntity, Entity, EntityAlias
 from app.models.feed import Feed
 from app.models.perspective import ArticlePerspective
 from app.models.search_document import SearchDocument
 from app.models.source import Source
 from app.models.story import Story, StoryArticle
+from app.models.story_processing import StoryProcessingRun, StoryProcessingState
 from app.models.topic import ArticleTopic, Topic
 
 __all__ = [
@@ -25,4 +31,9 @@ __all__ = [
     "ArticleTopic",
     "Story",
     "StoryArticle",
+    "StoryProcessingState",
+    "StoryProcessingRun",
+    "StoryClaimGroup",
+    "StoryClaimGroupMember",
+    "StoryClaimRelation",
 ]
