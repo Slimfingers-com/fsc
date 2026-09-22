@@ -364,7 +364,8 @@
     "Curation reduced the 56-title verification queue to 50 without changing political labels to manufacture balance. Six lower-incremental-value titles remain documented as deferred candidates.",
     "Final 50 working distribution: radical_left 3, left_liberal 16, liberal_centre 16, conservative 8, right 6, radical_right 1. This asymmetry is preserved as an observed consequence of the relevance-weighted shortlist, not corrected by quota.",
     "Verification is batched operationally only; country batches do not create country quotas or separate catalogs.",
-    "Current-form checks must override legacy database descriptions when a title changed frequency or stopped print."
+    "Current-form checks must override legacy database descriptions when a title changed frequency or stopped print.",
+    "France/Italy/Spain form pass populated for the retained shortlist. El Salto is treated as a periodical rather than a daily/weekly newspaper; Valeurs actuelles and Rivarol as weekly print products."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -1185,7 +1186,7 @@
         "IT",
         "ES"
       ],
-      "status": "research_in_progress",
+      "status": "form_pass_complete_provenance_metrics_next",
       "focus": "print status, publication form, political provenance, circulation"
     },
     {
@@ -1220,5 +1221,79 @@
       ],
       "status": "queued"
     }
-  ]
+  ],
+  "form_verification": {
+    "L'Humanité": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Il Manifesto": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "El Salto": {
+      "publication_form": "periodical",
+      "status": "working_verified"
+    },
+    "Le Monde": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Libération": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "la Repubblica": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Il Fatto Quotidiano": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "El País": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Les Echos": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Corriere della Sera": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Il Sole 24 Ore": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "La Vanguardia": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Le Figaro": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "El Mundo": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "ABC": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Valeurs actuelles": {
+      "publication_form": "weekly_newspaper",
+      "status": "working_verified"
+    },
+    "Il Giornale": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Rivarol": {
+      "publication_form": "weekly_newspaper",
+      "status": "working_verified"
+    }
+  }
 }
