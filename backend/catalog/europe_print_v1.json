@@ -361,7 +361,8 @@
     "Remaining four provisional placements now have Eurotopics provenance: La Libre Belgique liberal, Suomen Kuvalehti liberal, Jutarnji list liberal, and Adevărul liberal-conservative. The initial 53-title set plus Rivarol and Sieci therefore has a working political placement for every retained title.",
     "Implementation rule: external political classifications are stored as attributed classifier records with source URL and date, not as FSC-authored factual verdicts.",
     "Verification queue generated from the political review so every shortlisted title can receive explicit current print evidence and provenance before promotion.",
-    "Curation reduced the 56-title verification queue to 50 without changing political labels to manufacture balance. Six lower-incremental-value titles remain documented as deferred candidates."
+    "Curation reduced the 56-title verification queue to 50 without changing political labels to manufacture balance. Six lower-incremental-value titles remain documented as deferred candidates.",
+    "Final 50 working distribution: radical_left 3, left_liberal 16, liberal_centre 16, conservative 8, right 6, radical_right 1. This asymmetry is preserved as an observed consequence of the relevance-weighted shortlist, not corrected by quota."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -604,7 +605,15 @@
     "metrics_enrichment": "pending",
     "implementation": "pending",
     "shortlist_size": 50,
-    "shortlist_curation": "complete"
+    "shortlist_curation": "complete",
+    "political_distribution": {
+      "radical_left": 3,
+      "left_liberal": 16,
+      "liberal_centre": 16,
+      "conservative": 8,
+      "right": 6,
+      "radical_right": 1
+    }
   },
   "verification_queue": [
     {
