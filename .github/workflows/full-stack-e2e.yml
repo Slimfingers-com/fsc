@@ -42,20 +42,20 @@ jobs:
 
       - name: Build production images
         run: |
-          docker compose -f infrastructure/docker/docker-compose.yml build backend frontend
+          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml build backend frontend
 
       - name: Start PostgreSQL
         run: |
-          docker compose -f infrastructure/docker/docker-compose.yml up -d --wait postgres
+          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d --wait postgres
 
       - name: Apply migrations from backend image
         run: |
-          docker compose -f infrastructure/docker/docker-compose.yml run --rm backend alembic upgrade head
-          docker compose -f infrastructure/docker/docker-compose.yml run --rm backend alembic current
+          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm backend alembic upgrade head
+          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm backend alembic current
 
       - name: Start production web stack
         run: |
-          docker compose -f infrastructure/docker/docker-compose.yml up -d --wait nginx
+          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d --wait nginx
 
       - name: Verify health and correlation
         run: |
@@ -88,22 +88,22 @@ jobs:
       - name: Verify application containers run non-root
         run: |
           backend_uid="$(
-            docker compose -f infrastructure/docker/docker-compose.yml               exec -T backend id -u
+            docker compose --env-file .env -f infrastructure/docker/docker-compose.yml               exec -T backend id -u
           )"
           frontend_uid="$(
-            docker compose -f infrastructure/docker/docker-compose.yml               exec -T frontend id -u
+            docker compose --env-file .env -f infrastructure/docker/docker-compose.yml               exec -T frontend id -u
           )"
           test "$backend_uid" != "0"
           test "$frontend_uid" != "0"
 
       - name: Show stack state
         if: always()
-        run: docker compose -f infrastructure/docker/docker-compose.yml ps
+        run: docker compose --env-file .env -f infrastructure/docker/docker-compose.yml ps
 
       - name: Show logs on failure
         if: failure()
-        run: docker compose -f infrastructure/docker/docker-compose.yml logs --no-color
+        run: docker compose --env-file .env -f infrastructure/docker/docker-compose.yml logs --no-color
 
       - name: Tear down
         if: always()
-        run: docker compose -f infrastructure/docker/docker-compose.yml down -v --remove-orphans
+        run: docker compose --env-file .env -f infrastructure/docker/docker-compose.yml down -v --remove-orphans
