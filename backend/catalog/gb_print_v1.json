@@ -1,0 +1,61 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "languages": [
+    "en",
+    "cy"
+  ],
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_targets": {
+    "newspaper_or_weekly_min": 3,
+    "magazine_or_periodical_min": 3
+  },
+  "regional_scope": [
+    "England",
+    "Scotland",
+    "Wales",
+    "Northern Ireland"
+  ],
+  "edition_policy": "brand_as_source_print_products_as_outlets",
+  "notes": [
+    "Coverage targets are research goals, not quotas. Genuine asymmetries remain visible and require coverage_exception rather than reclassification.",
+    "Political orientation and radicality require attributed provenance; constitutional position (for example unionist or pro-independence) is recorded separately and is not mapped automatically onto the left-right axis.",
+    "Party press is an independent dimension and is not a political group.",
+    "Sunday products are modeled as outlets/editions of the same source brand where applicable."
+  ],
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical left",
+      "entries": []
+    },
+    {
+      "key": "left_liberal",
+      "label": "left liberal",
+      "entries": []
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal centre",
+      "entries": []
+    },
+    {
+      "key": "conservative",
+      "label": "conservative",
+      "entries": []
+    },
+    {
+      "key": "right",
+      "label": "right",
+      "entries": []
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right",
+      "entries": []
+    }
+  ],
+  "unclassified_entries": []
+}
