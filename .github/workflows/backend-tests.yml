@@ -69,4 +69,4 @@ jobs:
         run: alembic upgrade head
 
       - name: Run tests
-        run: pytest -q
+        run: pytest -q -W error
