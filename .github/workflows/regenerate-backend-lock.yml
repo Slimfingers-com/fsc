@@ -1,0 +1,43 @@
+name: Regenerate Backend Lock
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "backend/requirements.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Resolve in clean virtual environment
+        run: |
+          python -m venv .lock-venv
+          .lock-venv/bin/python -m pip install --upgrade pip
+          .lock-venv/bin/pip install -r backend/requirements.txt
+          .lock-venv/bin/pip freeze --local | LC_ALL=C sort > backend/requirements.lock
+
+      - name: Commit clean dependency lock
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add backend/requirements.lock
+          if git diff --cached --quiet; then
+            echo "Backend dependency lock is already current."
+            exit 0
+          fi
+          git commit -m "Regenerate clean backend dependency lock"
+          git push origin HEAD:${{ github.head_ref }}
