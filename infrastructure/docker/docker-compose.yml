@@ -129,6 +129,24 @@ services:
     networks:
       - fsc-network
 
+  semantic-worker:
+    container_name: fsc-semantic-worker
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    command: ["python", "-m", "app.workers.semantic_main"]
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+    logging: *default-logging
+    env_file:
+      - ../../.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - fsc-network
+
   story-worker:
     container_name: fsc-story-worker
     build:
