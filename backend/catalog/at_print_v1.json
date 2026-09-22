@@ -844,108 +844,104 @@
           "metrics": []
         }
       ]
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "kronen-zeitung",
+      "name": "Kronen Zeitung",
+      "homepage": "https://www.krone.at/",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "boulevard",
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
+        {
+          "metric_kind": "sold_circulation",
+          "value": 507735,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "2026-H1_Mo-Sa",
+          "measurement_body": "ÖAK",
+          "source_url": "https://business.krone.at/portfolio/print/national",
+          "audited": true,
+          "retrieved_at": "2026-09-22T17:10:00Z",
+          "notes": "Publisher media page; includes 59,143 ePaper."
+        },
+        {
+          "metric_kind": "print_readers",
+          "value": 1546000,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MA-2025_Mo-So",
+          "measurement_body": "Media-Analyse 2025",
+          "source_url": "https://business.krone.at/portfolio/print/national",
+          "audited": false,
+          "retrieved_at": "2026-09-22T17:10:00Z",
+          "notes": null
+        }
+      ]
     },
     {
-      "key": "boulevard",
-      "label": "boulevard / mass-reach format",
-      "group_kind": "format",
-      "coverage_exception": "Boulevard is a media-format dimension, not a political orientation. These entries are included for reach and agenda-setting relevance without forcing a left/right classification.",
-      "entries": [
+      "key": "heute",
+      "name": "Heute",
+      "homepage": "https://www.heute.at/",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "boulevard"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
         {
-          "key": "kronen-zeitung",
-          "name": "Kronen Zeitung",
-          "homepage": "https://www.krone.at/",
-          "publication_form": "daily_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [
-            "boulevard"
-          ],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "sold_circulation",
-              "value": 507735,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "2026-H1_Mo-Sa",
-              "measurement_body": "ÖAK",
-              "source_url": "https://business.krone.at/portfolio/print/national",
-              "audited": true,
-              "retrieved_at": "2026-09-22T17:10:00Z",
-              "notes": "Publisher media page; includes 59,143 ePaper."
-            },
-            {
-              "metric_kind": "print_readers",
-              "value": 1546000,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MA-2025_Mo-So",
-              "measurement_body": "Media-Analyse 2025",
-              "source_url": "https://business.krone.at/portfolio/print/national",
-              "audited": false,
-              "retrieved_at": "2026-09-22T17:10:00Z",
-              "notes": null
-            }
-          ]
-        },
+          "metric_kind": "distributed_circulation",
+          "value": 501409,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "2026-H1",
+          "measurement_body": "ÖAK",
+          "source_url": "https://www.ots.at/presseaussendung/OTS_20260819_OTS0063/oeak-1-hj-2026-heute-auflage-durchbricht-500000-stueck-marke-und-ist-oesterreichs-nr-1-gratistageszeitung",
+          "audited": true,
+          "retrieved_at": "2026-09-22T17:10:00Z",
+          "notes": "Distributed daily circulation; includes 74,630 e-paper."
+        }
+      ]
+    },
+    {
+      "key": "oesterreich-oe24",
+      "name": "ÖSTERREICH / oe24",
+      "homepage": "https://www.oe24.at/",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "boulevard",
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
         {
-          "key": "heute",
-          "name": "Heute",
-          "homepage": "https://www.heute.at/",
-          "publication_form": "daily_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [
-            "boulevard"
-          ],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "distributed_circulation",
-              "value": 501409,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "2026-H1",
-              "measurement_body": "ÖAK",
-              "source_url": "https://www.ots.at/presseaussendung/OTS_20260819_OTS0063/oeak-1-hj-2026-heute-auflage-durchbricht-500000-stueck-marke-und-ist-oesterreichs-nr-1-gratistageszeitung",
-              "audited": true,
-              "retrieved_at": "2026-09-22T17:10:00Z",
-              "notes": "Distributed daily circulation; includes 74,630 e-paper."
-            }
-          ]
-        },
-        {
-          "key": "oesterreich-oe24",
-          "name": "ÖSTERREICH / oe24",
-          "homepage": "https://www.oe24.at/",
-          "publication_form": "daily_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [
-            "boulevard"
-          ],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "print_readers",
-              "value": 979000,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MA-2025_crossmedia_plus",
-              "measurement_body": "Media-Analyse 2025",
-              "source_url": "https://www.ots.at/presseaussendung/OTS_20260409_OTS0077/media-analyse-2025-sensationelle-979000-leserinnen-fuer-oesterreichoe24-in-der-neuen-crossmediareach",
-              "audited": false,
-              "retrieved_at": "2026-09-22T17:10:00Z",
-              "notes": "Cross-media reach includes print, online and newsletter; not a print-only circulation metric."
-            }
-          ]
+          "metric_kind": "print_readers",
+          "value": 979000,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MA-2025_crossmedia_plus",
+          "measurement_body": "Media-Analyse 2025",
+          "source_url": "https://www.ots.at/presseaussendung/OTS_20260409_OTS0077/media-analyse-2025-sensationelle-979000-leserinnen-fuer-oesterreichoe24-in-der-neuen-crossmediareach",
+          "audited": false,
+          "retrieved_at": "2026-09-22T17:10:00Z",
+          "notes": "Cross-media reach includes print, online and newsletter; not a print-only circulation metric."
         }
       ]
     }
