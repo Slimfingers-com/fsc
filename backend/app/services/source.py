@@ -9,12 +9,17 @@ from app.core.slug import generate_slug
 from app.core.source_identity import normalize_source_name
 from app.models.feed import Feed
 from app.models.source import Source
-from app.models.source_metadata import SourceClassification, SourceMetric
+from app.models.source_metadata import (
+    SourceClassification,
+    SourceMetric,
+    SourceOutlet,
+)
 from app.repositories.source import SourceRepository
 from app.schemas.source import SourceCreate
 from app.schemas.source_metadata import (
     SourceClassificationCreate,
     SourceMetricCreate,
+    SourceOutletCreate,
 )
 
 
@@ -61,6 +66,7 @@ class SourceService:
             )
 
         self._validate_feeds(data)
+        self._validate_outlets(data)
 
         slug = base_slug
         suffix = 2
@@ -80,9 +86,6 @@ class SourceService:
             coverage_scope=data.coverage_scope,
             country=data.country,
             language=data.language,
-            media_category=data.media_category,
-            publication_form=data.publication_form,
-            publication_frequency=data.publication_frequency,
             ownership=data.ownership,
             funding_model=data.funding_model,
             paywall=data.paywall,
@@ -99,6 +102,19 @@ class SourceService:
                     fetch_interval_minutes=feed.fetch_interval_minutes,
                 )
                 for feed in data.feeds
+            ],
+            outlets=[
+                SourceOutlet(
+                    name=outlet.name.strip(),
+                    media_category=outlet.media_category,
+                    publication_form=outlet.publication_form,
+                    publication_frequency=outlet.publication_frequency,
+                    language=outlet.language,
+                    url=str(outlet.url) if outlet.url else None,
+                    is_primary=outlet.is_primary,
+                    active=outlet.active,
+                )
+                for outlet in data.outlets
             ],
         )
 
@@ -131,9 +147,53 @@ class SourceService:
                     "Feed-Namen müssen innerhalb einer Quelle eindeutig sein."
                 ) from exc
 
+            if constraint_name == "uq_source_outlet_source_name":
+                raise BusinessRuleViolationError(
+                    "Outlet-Namen müssen innerhalb einer Quelle eindeutig sein."
+                ) from exc
+
             raise
 
         return source
+
+    def create_outlet(
+        self,
+        db: Session,
+        source: Source,
+        data: SourceOutletCreate,
+    ) -> SourceOutlet:
+        outlet = SourceOutlet(
+            source_id=source.id,
+            name=data.name.strip(),
+            media_category=data.media_category,
+            publication_form=data.publication_form,
+            publication_frequency=data.publication_frequency,
+            language=data.language,
+            url=str(data.url) if data.url else None,
+            is_primary=data.is_primary,
+            active=data.active,
+        )
+
+        try:
+            self.repository.add_outlet(db, outlet)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_source_outlet_source_name":
+                raise BusinessRuleViolationError(
+                    "Dieses Outlet existiert für die Quelle bereits."
+                ) from exc
+            if constraint_name == "ck_source_outlet_name_nonempty":
+                raise BusinessRuleViolationError(
+                    "Ein Outlet-Name darf nicht leer sein."
+                ) from exc
+            raise
+
+        return outlet
 
     def create_classification(
         self,
@@ -186,8 +246,19 @@ class SourceService:
         source: Source,
         data: SourceMetricCreate,
     ) -> SourceMetric:
+        if data.outlet_id is not None:
+            outlet = self.repository.get_active_outlet(
+                db,
+                data.outlet_id,
+            )
+            if outlet is None or outlet.source_id != source.id:
+                raise BusinessRuleViolationError(
+                    "Das angegebene Outlet gehört nicht zu dieser Quelle."
+                )
+
         metric = SourceMetric(
             source_id=source.id,
+            outlet_id=data.outlet_id,
             metric_kind=data.metric_kind,
             value=data.value,
             unit=data.unit.strip(),
@@ -259,3 +330,23 @@ class SourceService:
 
             feed_names.add(normalized_feed_name)
             feed_urls.add(feed_url)
+
+    @staticmethod
+    def _validate_outlets(
+        data: SourceCreate,
+    ) -> None:
+        names: set[str] = set()
+
+        for outlet in data.outlets:
+            name = outlet.name.strip()
+            if not name:
+                raise BusinessRuleViolationError(
+                    "Ein Outlet-Name darf nicht nur aus Leerzeichen bestehen."
+                )
+
+            normalized = name.casefold()
+            if normalized in names:
+                raise BusinessRuleViolationError(
+                    "Outlet-Namen müssen innerhalb einer Quelle eindeutig sein."
+                )
+            names.add(normalized)
