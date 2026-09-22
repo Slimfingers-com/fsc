@@ -9,6 +9,7 @@ CATALOG_FILES = {
     "DE": CATALOG_DIR / "de_print_v1.json",
     "AT": CATALOG_DIR / "at_print_v1.json",
     "CH": CATALOG_DIR / "ch_print_v1.json",
+    "GB": CATALOG_DIR / "gb_print_v1.json",
 }
 
 ALLOWED_FORMS = {
@@ -210,3 +211,25 @@ def test_party_press_is_a_separate_dimension() -> None:
     for country in CATALOG_FILES:
         catalog = load_catalog(country)
         assert "party_press" not in {group["key"] for group in catalog["groups"]}
+
+
+def test_gb_catalog_covers_constituent_countries_and_welsh() -> None:
+    catalog = load_catalog("GB")
+    assert set(catalog["regional_scope"]) == {"England", "Scotland", "Wales", "Northern Ireland"}
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog.get("unclassified_entries", [])
+    assert {entry["subnational_region"] for entry in entries} == {"England", "Scotland", "Wales", "Northern Ireland"}
+    assert {"en", "cy"} <= {entry["language"] for entry in entries}
+
+
+def test_gb_constitutional_position_is_not_forced_onto_left_right_axis() -> None:
+    catalog = load_catalog("GB")
+    unclassified = {entry["name"]: entry for entry in catalog.get("unclassified_entries", [])}
+    assert "The Irish News" in unclassified
+    assert "News Letter" in unclassified
+    for name in ("The Irish News", "News Letter"):
+        assert "politically_unclassified" in unclassified[name]["format_tags"]
+
+
+def test_gb_sunday_editions_use_brand_outlet_policy() -> None:
+    catalog = load_catalog("GB")
+    assert catalog["edition_policy"] == "brand_as_source_print_products_as_outlets"
