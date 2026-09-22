@@ -89,9 +89,48 @@ jobs:
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml \
             run --rm backend python -c "import importlib.util; assert importlib.util.find_spec('pytest') is None"
 
-      - name: Start production web stack
+      - name: Start production stack
         run: |
-          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d --wait nginx
+          compose=(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml)
+          "${compose[@]}" up -d
+
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:8000/health/ready >/dev/null \
+              && curl --fail --silent http://127.0.0.1:8080/ >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "Production stack did not become ready." >&2
+          exit 1
+
+      - name: Verify workers are running without HTTP healthchecks
+        run: |
+          compose=(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml)
+          workers=(
+            worker
+            content-worker
+            search-worker
+            entity-topic-worker
+            story-worker
+            claim-worker
+            perspective-worker
+            claim-relation-worker
+            evidence-worker
+            consensus-worker
+            coverage-worker
+          )
+          for worker in "${workers[@]}"; do
+            test "$(
+              "${compose[@]}" ps -q "$worker" |
+                xargs docker inspect --format '{{.State.Running}}'
+            )" = "true"
+            test "$(
+              "${compose[@]}" ps -q "$worker" |
+                xargs docker inspect --format '{{json .Config.Healthcheck.Test}}'
+            )" = '["NONE"]'
+          done
 
       - name: Verify health and correlation
         run: |
