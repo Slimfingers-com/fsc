@@ -535,3 +535,85 @@ def test_fetch_rejects_oversized_response():
                     "https://example.com/feed"
                 )
             )
+
+
+
+def test_fetch_prefers_public_ipv4_when_dns_returns_both_families():
+    def resolver(
+        hostname: str,
+        port: int,
+    ):
+        assert hostname == "example.com"
+        return (
+            "2606:4700:4700::1111",
+            "1.1.1.1",
+        )
+
+    def handler(
+        request: httpx.Request,
+    ) -> httpx.Response:
+        assert request.url.host == "1.1.1.1"
+        return httpx.Response(
+            200,
+            content=b"<rss/>",
+            request=request,
+        )
+
+    with httpx.Client(
+        transport=httpx.MockTransport(
+            handler
+        )
+    ) as client:
+        FeedFetcher(
+            client,
+            resolver=resolver,
+        ).fetch(
+            FeedFetchRequest(
+                "https://example.com/feed"
+            )
+        )
+
+
+def test_fetch_normalizes_unicode_hostname_to_idna():
+    def resolver(
+        hostname: str,
+        port: int,
+    ):
+        assert (
+            hostname
+            == "xn--bcher-kva.example"
+        )
+        return ("1.1.1.1",)
+
+    def handler(
+        request: httpx.Request,
+    ) -> httpx.Response:
+        assert (
+            request.headers["host"]
+            == "xn--bcher-kva.example"
+        )
+        assert (
+            request.extensions[
+                "sni_hostname"
+            ]
+            == "xn--bcher-kva.example"
+        )
+        return httpx.Response(
+            200,
+            content=b"<rss/>",
+            request=request,
+        )
+
+    with httpx.Client(
+        transport=httpx.MockTransport(
+            handler
+        )
+    ) as client:
+        FeedFetcher(
+            client,
+            resolver=resolver,
+        ).fetch(
+            FeedFetchRequest(
+                "https://bücher.example/feed"
+            )
+        )
