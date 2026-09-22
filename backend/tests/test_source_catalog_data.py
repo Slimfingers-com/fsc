@@ -79,3 +79,27 @@ def test_country_block_contains_no_at_or_ch_titles() -> None:
     }
 
     assert actual.isdisjoint(excluded)
+
+
+def test_catalog_metadata_records_are_provenance_complete() -> None:
+    catalog = load_catalog()
+
+    for group in catalog["groups"]:
+        for entry in group["entries"]:
+            for classification in entry["classifications"]:
+                assert classification["dimension"]
+                assert classification["value"]
+                assert classification["classifier_type"]
+                assert classification["classifier_name"]
+                assert classification["source_url"].startswith("https://")
+                assert classification["reference_date"]
+                assert classification["retrieved_at"]
+
+            for metric in entry["metrics"]:
+                assert metric["metric_kind"]
+                assert metric["value"] >= 0
+                assert metric["unit"]
+                assert metric["reference_period"]
+                assert metric["measurement_body"]
+                assert metric["source_url"].startswith("https://")
+                assert metric["retrieved_at"]
