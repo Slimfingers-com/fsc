@@ -1,0 +1,109 @@
+name: Full Stack E2E
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+      - "frontend/**"
+      - "infrastructure/docker/**"
+      - ".github/workflows/full-stack-e2e.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+      - "frontend/**"
+      - "infrastructure/docker/**"
+      - ".github/workflows/full-stack-e2e.yml"
+
+jobs:
+  full-stack-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Write E2E environment
+        run: |
+          cat > .env <<'EOF'
+          DATABASE_HOST=postgres
+          DATABASE_PORT=5432
+          DATABASE_NAME=fsc_e2e
+          DATABASE_USER=fsc
+          DATABASE_PASSWORD=fsc-e2e-password
+          SECRET_KEY=fsc-e2e-secret-key
+          GEMINI_API_KEY=
+          OPENAI_API_KEY=
+          EOF
+
+      - name: Build production images
+        run: |
+          docker compose -f infrastructure/docker/docker-compose.yml build backend frontend
+
+      - name: Start PostgreSQL
+        run: |
+          docker compose -f infrastructure/docker/docker-compose.yml up -d --wait postgres
+
+      - name: Apply migrations from backend image
+        run: |
+          docker compose -f infrastructure/docker/docker-compose.yml run --rm backend alembic upgrade head
+          docker compose -f infrastructure/docker/docker-compose.yml run --rm backend alembic current
+
+      - name: Start production web stack
+        run: |
+          docker compose -f infrastructure/docker/docker-compose.yml up -d --wait nginx
+
+      - name: Verify health and correlation
+        run: |
+          ready="$(curl --fail --silent http://127.0.0.1:8000/health/ready)"
+          echo "$ready" | grep -F '"status":"ready"'
+
+          headers="$(mktemp)"
+          curl --fail --silent --dump-header "$headers"             -H 'X-Request-ID: e2e-request-id'             http://127.0.0.1:8000/health/live >/dev/null
+          grep -Fi 'X-Request-ID: e2e-request-id' "$headers"
+          grep -Fi 'X-Content-Type-Options: nosniff' "$headers"
+
+      - name: Verify rendered Next.js routes through Nginx
+        run: |
+          home="$(curl --fail --silent http://127.0.0.1:8080/)"
+          echo "$home" | grep -F 'Artikel finden.'
+          echo "$home" | grep -F 'Neueste Artikel'
+
+          stories="$(curl --fail --silent http://127.0.0.1:8080/stories)"
+          echo "$stories" | grep -F 'Story-Cluster'
+          echo "$stories" | grep -F '0 Stories'
+
+      - name: Verify frontend security headers
+        run: |
+          headers="$(mktemp)"
+          curl --fail --silent --dump-header "$headers"             http://127.0.0.1:8080/ >/dev/null
+          grep -Fi 'Content-Security-Policy:' "$headers"
+          grep -Fi 'X-Content-Type-Options: nosniff' "$headers"
+          grep -Fi 'X-Frame-Options: DENY' "$headers"
+
+      - name: Verify application containers run non-root
+        run: |
+          backend_uid="$(
+            docker compose -f infrastructure/docker/docker-compose.yml               exec -T backend id -u
+          )"
+          frontend_uid="$(
+            docker compose -f infrastructure/docker/docker-compose.yml               exec -T frontend id -u
+          )"
+          test "$backend_uid" != "0"
+          test "$frontend_uid" != "0"
+
+      - name: Show stack state
+        if: always()
+        run: docker compose -f infrastructure/docker/docker-compose.yml ps
+
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose -f infrastructure/docker/docker-compose.yml logs --no-color
+
+      - name: Tear down
+        if: always()
+        run: docker compose -f infrastructure/docker/docker-compose.yml down -v --remove-orphans
