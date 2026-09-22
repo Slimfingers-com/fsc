@@ -717,6 +717,10 @@ class CoverageService:
                 processing_run_id=(
                     processing_run_id
                 ),
+                consensus_processing_run_id=(
+                    snapshot
+                    .consensus_processing_run_id
+                ),
                 article_count=(
                     metrics.article_count
                 ),
