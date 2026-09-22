@@ -109,6 +109,17 @@ class SourceOutlet(BaseModel):
         default=False,
         server_default=text("false"),
     )
+    party_press: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
+        server_default=text("false"),
+        index=True,
+    )
+    party_affiliation: Mapped[str | None] = mapped_column(
+        String(255),
+        nullable=True,
+    )
     active: Mapped[bool] = mapped_column(
         Boolean,
         nullable=False,
