@@ -19,7 +19,10 @@ def test_cosine_similarity_handles_equal_and_orthogonal_vectors():
     assert cosine_similarity((1.0, 0.0), (0.0, 1.0)) == pytest.approx(0.0)
 
 
-def test_story_clusterer_matches_cross_language_semantic_candidate():
+@pytest.mark.parametrize("candidate_language", ["en", "fr"])
+def test_story_clusterer_matches_cross_language_semantic_candidate(
+    candidate_language,
+):
     article_id = uuid4()
     story_id = uuid4()
     candidate_article_id = uuid4()
@@ -49,7 +52,7 @@ def test_story_clusterer_matches_cross_language_semantic_candidate():
         title_terms=("budget", "parliament"),
         entity_ids=(),
         topic_ids=(),
-        language_code="en",
+        language_code=candidate_language,
         semantic_embedding=(0.99, 0.05, 0.0),
         semantic_model="test-multilingual",
     )
@@ -63,6 +66,77 @@ def test_story_clusterer_matches_cross_language_semantic_candidate():
     assert result.story_id == story_id
     assert result.similarity_score > 0.99
     assert result.details["semantic_model"] == "test-multilingual"
+
+
+def test_story_clusterer_rejects_unrelated_cross_language_candidate():
+    article = StoryClusteringInput(
+        article_id=uuid4(),
+        language_code="de",
+        article_time=__import__("datetime").datetime(
+            2026, 9, 22, 12, 0,
+            tzinfo=__import__("datetime").UTC,
+        ),
+        title_terms=("haushalt", "bundestag"),
+        entity_ids=(),
+        topic_ids=(),
+        semantic_embedding=(1.0, 0.0, 0.0),
+        semantic_model="test-multilingual",
+    )
+    candidate = StoryCandidate(
+        story_id=uuid4(),
+        membership_id=uuid4(),
+        article_id=uuid4(),
+        article_time=__import__("datetime").datetime(
+            2026, 9, 22, 11, 0,
+            tzinfo=__import__("datetime").UTC,
+        ),
+        title_terms=("football", "championship"),
+        entity_ids=(),
+        topic_ids=(),
+        language_code="en",
+        semantic_embedding=(0.0, 1.0, 0.0),
+        semantic_model="test-multilingual",
+    )
+
+    result = RuleBasedStoryClusterer().cluster(article, (candidate,))
+
+    assert result.story_id is None
+    assert result.similarity_score == 0.0
+
+
+def test_story_clusterer_rejects_incompatible_semantic_model():
+    article = StoryClusteringInput(
+        article_id=uuid4(),
+        language_code="de",
+        article_time=__import__("datetime").datetime(
+            2026, 9, 22, 12, 0,
+            tzinfo=__import__("datetime").UTC,
+        ),
+        title_terms=("haushalt", "bundestag"),
+        entity_ids=(),
+        topic_ids=(),
+        semantic_embedding=(1.0, 0.0, 0.0),
+        semantic_model="model-a",
+    )
+    candidate = StoryCandidate(
+        story_id=uuid4(),
+        membership_id=uuid4(),
+        article_id=uuid4(),
+        article_time=__import__("datetime").datetime(
+            2026, 9, 22, 11, 0,
+            tzinfo=__import__("datetime").UTC,
+        ),
+        title_terms=("budget", "parliament"),
+        entity_ids=(),
+        topic_ids=(),
+        language_code="en",
+        semantic_embedding=(1.0, 0.0, 0.0),
+        semantic_model="model-b",
+    )
+
+    result = RuleBasedStoryClusterer().cluster(article, (candidate,))
+
+    assert result.story_id is None
 
 
 def _claim(
