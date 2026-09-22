@@ -300,6 +300,10 @@ Boulevard is a **format dimension**, not a political orientation.
 
 The print editions of **20 Minuten / 20 minutes / 20 minuti ended in December 2025**. They therefore do not belong in the active 2026 Swiss print catalog, even though their digital brands remain relevant for a later digital-media block.
 
+## Coverage policy
+
+The target of at least 3–5 titles per political segment and publication-form group is a **research coverage goal, not a quota**. FSC retains genuine market asymmetries when fewer reliably classifiable active print titles exist. Titles must not be moved, broadened or politically classified merely to satisfy a numeric target. Missing coverage remains explicit and can trigger further source research.
+
 ## Reach and circulation model
 
 Metrics are historical observations, not properties overwritten on the source.

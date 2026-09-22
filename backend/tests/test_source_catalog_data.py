@@ -40,6 +40,8 @@ def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
     assert catalog_languages(catalog)
     assert catalog["media_category"] == "print"
     assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert catalog["coverage_policy"] == "targets_are_goals_not_quotas"
+    assert catalog["coverage_policy_notes"]
 
     keys: set[str] = set()
     names: set[str] = set()
@@ -85,15 +87,9 @@ def test_print_catalog_meets_targets_or_documents_exception(country: str) -> Non
                 assert group.get("coverage_exception")
             continue
 
-        if newspapers < newspaper_min:
+        if newspapers < newspaper_min or magazines < magazine_min:
+            assert catalog["coverage_policy"] == "targets_are_goals_not_quotas"
             assert group.get("coverage_exception")
-        else:
-            assert newspapers >= newspaper_min
-
-        if magazines < magazine_min:
-            assert group.get("coverage_exception")
-        else:
-            assert magazines >= magazine_min
 
 
 def test_country_blocks_do_not_mix_de_at_ch_titles() -> None:
