@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Pagination } from "@/components/pagination";
 import { searchArticles } from "@/lib/api";
-import { cleanSearchParam, formatDate, positivePage } from "@/lib/format";
+import {
+  allowedSearchParam,
+  cleanSearchParam,
+  formatDate,
+  positivePage,
+  safeExternalUrl,
+} from "@/lib/format";
 
 export const metadata: Metadata = { title: "Suche" };
 export const dynamic = "force-dynamic";
@@ -14,7 +20,11 @@ type Props = {
 export default async function SearchPage({ searchParams }: Props) {
   const raw = await searchParams;
   const q = cleanSearchParam(raw.q);
-  const sort = cleanSearchParam(raw.sort) ?? "relevance";
+  const sort = allowedSearchParam(
+    raw.sort,
+    ["relevance", "newest", "oldest"],
+    "relevance",
+  );
   const page = positivePage(cleanSearchParam(raw.page));
   const result = await searchArticles({ q, sort, page });
 
@@ -46,7 +56,9 @@ export default async function SearchPage({ searchParams }: Props) {
           <Link className="text-link" href="/stories">Alle Stories →</Link>
         </div>
         <div className="stack">
-          {result.items.map((hit) => (
+          {result.items.map((hit) => {
+            const externalUrl = safeExternalUrl(hit.url);
+            return (
             <article className="card search-hit" key={hit.document_id}>
               <div className="meta-row">
                 <span>{hit.source_name}</span>
@@ -57,10 +69,11 @@ export default async function SearchPage({ searchParams }: Props) {
               <p>{hit.excerpt}</p>
               <div className="card-actions">
                 {hit.story_id ? <Link className="button" href={`/stories/${hit.story_id}`}>Story öffnen</Link> : null}
-                {hit.url ? <a className="button secondary" href={hit.url} target="_blank" rel="noreferrer">Originalquelle ↗</a> : null}
+                {externalUrl ? <a className="button secondary" href={externalUrl} target="_blank" rel="noopener noreferrer">Originalquelle ↗</a> : null}
               </div>
             </article>
-          ))}
+            );
+          })}
           {result.items.length === 0 ? <div className="empty">Keine Treffer für diese Suche.</div> : null}
         </div>
         <Pagination page={result.page} pages={result.pages} pathname="/" searchParams={{ q, sort }} />
