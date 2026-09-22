@@ -44,6 +44,8 @@ def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
     keys: set[str] = set()
     names: set[str] = set()
 
+    assert all(group["key"] not in {"boulevard", "general_unclassified"} for group in catalog["groups"])
+
     for group in catalog["groups"]:
         assert group["entries"]
         for entry in group["entries"]:
@@ -163,6 +165,9 @@ def test_switzerland_catalog_covers_all_national_languages() -> None:
         entry["language"]
         for group in catalog["groups"]
         for entry in group["entries"]
+    } | {
+        entry["language"]
+        for entry in catalog.get("unclassified_entries", [])
     }
     assert entry_languages == {"de", "fr", "it", "rm"}
 
@@ -173,5 +178,18 @@ def test_inactive_20_minuten_print_is_not_in_switzerland_catalog() -> None:
         entry["name"]
         for group in catalog["groups"]
         for entry in group["entries"]
+    } | {
+        entry["name"]
+        for entry in catalog.get("unclassified_entries", [])
     }
     assert names.isdisjoint({"20 Minuten", "20 minutes", "20 minuti"})
+
+
+def test_non_political_print_attributes_are_not_political_groups() -> None:
+    for country in CATALOG_FILES:
+        catalog = load_catalog(country)
+        group_keys = {group["key"] for group in catalog["groups"]}
+        assert "boulevard" not in group_keys
+        assert "general_unclassified" not in group_keys
+        for entry in catalog.get("unclassified_entries", []):
+            assert set(entry.get("format_tags", [])) & {"boulevard", "politically_unclassified"}
