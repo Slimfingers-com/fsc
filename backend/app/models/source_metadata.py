@@ -13,19 +13,111 @@ from sqlalchemy import (
     String,
     Text,
     UniqueConstraint,
+    text,
 )
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
 from app.enums.source_metadata import (
+    PublicationForm,
     SourceClassificationDimension,
     SourceClassifierType,
+    SourceMedium,
     SourceMetricKind,
 )
 
 if TYPE_CHECKING:
     from app.models.source import Source
+
+
+class SourceOutlet(BaseModel):
+    __tablename__ = "source_outlets"
+
+    __table_args__ = (
+        UniqueConstraint(
+            "source_id",
+            "name",
+            name="uq_source_outlet_source_name",
+        ),
+        CheckConstraint(
+            "media_category IN ("
+            "'print', 'broadcast', 'digital', 'agency', "
+            "'primary_source', 'organization', 'other'"
+            ")",
+            name="ck_source_outlet_media_category",
+        ),
+        CheckConstraint(
+            "publication_form IN ("
+            "'daily_newspaper', 'weekly_newspaper', 'sunday_newspaper', "
+            "'magazine', 'periodical', 'radio', 'television', "
+            "'digital_native', 'news_agency', 'other'"
+            ")",
+            name="ck_source_outlet_publication_form",
+        ),
+        CheckConstraint(
+            "btrim(name) <> ''",
+            name="ck_source_outlet_name_nonempty",
+        ),
+        Index(
+            "ix_source_outlets_source_category_form",
+            "source_id",
+            "media_category",
+            "publication_form",
+        ),
+    )
+
+    source_id: Mapped[UUID] = mapped_column(
+        PG_UUID(as_uuid=True),
+        ForeignKey("sources.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    name: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+    )
+    media_category: Mapped[SourceMedium] = mapped_column(
+        String(30),
+        nullable=False,
+        index=True,
+    )
+    publication_form: Mapped[PublicationForm] = mapped_column(
+        String(40),
+        nullable=False,
+        index=True,
+    )
+    publication_frequency: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
+    )
+    language: Mapped[str | None] = mapped_column(
+        String(10),
+        nullable=True,
+    )
+    url: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True,
+    )
+    is_primary: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
+        server_default=text("false"),
+    )
+    active: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=True,
+        server_default=text("true"),
+    )
+
+    source: Mapped["Source"] = relationship(
+        back_populates="outlets",
+    )
+    metrics: Mapped[list["SourceMetric"]] = relationship(
+        back_populates="outlet",
+    )
 
 
 class SourceClassification(BaseModel):
@@ -195,6 +287,12 @@ class SourceMetric(BaseModel):
         nullable=False,
         index=True,
     )
+    outlet_id: Mapped[UUID | None] = mapped_column(
+        PG_UUID(as_uuid=True),
+        ForeignKey("source_outlets.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True,
+    )
     metric_kind: Mapped[SourceMetricKind] = mapped_column(
         String(50),
         nullable=False,
@@ -238,6 +336,7 @@ class SourceMetric(BaseModel):
         Boolean,
         nullable=False,
         default=False,
+        server_default=text("false"),
     )
     retrieved_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
@@ -249,5 +348,8 @@ class SourceMetric(BaseModel):
     )
 
     source: Mapped["Source"] = relationship(
+        back_populates="metrics",
+    )
+    outlet: Mapped[SourceOutlet | None] = relationship(
         back_populates="metrics",
     )
