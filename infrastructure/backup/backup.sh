@@ -31,7 +31,13 @@ chmod 700 "$BACKUP_DIR"
 
 timestamp="$(date -u +%Y%m%dT%H%M%SZ)"
 target="$BACKUP_DIR/fsc-$timestamp.dump"
-temporary="$target.tmp.$$"
+
+if [[ -e "$target" || -e "$target.sha256" ]]; then
+  echo "Backup target already exists: $target" >&2
+  exit 1
+fi
+
+temporary="$target.tmp.$"
 
 cleanup() {
   rm -f "$temporary"
