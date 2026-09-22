@@ -44,6 +44,7 @@ def test_create_source(db):
     assert source.normalized_name == "reuters"
     assert source.slug == "reuters"
     assert len(source.outlets) == 1
+    assert source.outlets[0].normalized_name == "reuters agency"
     assert source.outlets[0].media_category == SourceMedium.AGENCY
     assert source.outlets[0].publication_form == PublicationForm.NEWS_AGENCY
     assert source.outlets[0].publication_frequency == "continuous"
