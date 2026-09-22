@@ -1,0 +1,124 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "scope": "europe",
+  "country": null,
+  "countries_excluded": [
+    "DE",
+    "AT",
+    "CH",
+    "GB"
+  ],
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "selection_policy": "relevance_and_viewpoint_diversity_not_country_quota",
+  "coverage_policy": "no_country_quotas",
+  "languages": "multilingual",
+  "edition_policy": "brand_as_source_print_products_as_outlets",
+  "notes": [
+    "This catalog covers relevant European print publications outside the separately modeled DE, AT, CH and GB catalogs.",
+    "Country remains metadata on each entry; Europe is one catalog block rather than one catalog per country.",
+    "Selection is based on European relevance, reach, agenda-setting role, and viewpoint diversity. There are no country quotas.",
+    "Political orientation and radicality require attributed provenance; FSC does not infer orientation from nationality, language, constitutional questions, endorsements, or ownership alone.",
+    "Political fringe publications may be included when relevant; sparse viewpoints remain sparse rather than being filled artificially.",
+    "Print activity must be verified; reach and circulation are metadata, never exclusion thresholds."
+  ],
+  "selection_dimensions": [
+    "european_relevance",
+    "national_relevance",
+    "reach_or_circulation",
+    "agenda_setting_role",
+    "viewpoint_diversity",
+    "language_and_geographic_breadth"
+  ],
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical left",
+      "entries": []
+    },
+    {
+      "key": "left_liberal",
+      "label": "left liberal",
+      "entries": []
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal centre",
+      "entries": []
+    },
+    {
+      "key": "conservative",
+      "label": "conservative",
+      "entries": []
+    },
+    {
+      "key": "right",
+      "label": "right",
+      "entries": []
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right",
+      "entries": []
+    }
+  ],
+  "unclassified_entries": [],
+  "research_regions": [
+    {
+      "key": "western_southern_europe",
+      "priority_countries": [
+        "FR",
+        "IT",
+        "ES",
+        "PT"
+      ]
+    },
+    {
+      "key": "central_eastern_europe",
+      "priority_countries": [
+        "PL",
+        "CZ",
+        "HU",
+        "RO"
+      ]
+    },
+    {
+      "key": "benelux",
+      "priority_countries": [
+        "NL",
+        "BE",
+        "LU"
+      ]
+    },
+    {
+      "key": "nordics",
+      "priority_countries": [
+        "DK",
+        "SE",
+        "NO",
+        "FI",
+        "IS"
+      ]
+    },
+    {
+      "key": "southeast_europe",
+      "priority_countries": [
+        "GR",
+        "HR",
+        "RS",
+        "SI"
+      ]
+    },
+    {
+      "key": "european_neighbors",
+      "priority_countries": [
+        "IE"
+      ]
+    }
+  ],
+  "candidate_pool": [],
+  "research_notes": [
+    "Priority-country lists guide research only and are not coverage requirements.",
+    "Candidate review is performed as one European set, not one approval cycle per country."
+  ]
+}
