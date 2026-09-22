@@ -10,7 +10,7 @@
   ],
   "media_category": "print",
   "activation_policy": "catalog_only_until_joint_review",
-  "selection_policy": "broad_relevance_and_viewpoint_diversity_not_fixed_size_or_country_quota",
+  "selection_policy": "curated_european_comparison_set_with_germany_as_more_granular_core_market",
   "coverage_policy": "no_country_quotas",
   "languages": "multilingual",
   "edition_policy": "brand_as_source_print_products_as_outlets",
@@ -23,7 +23,9 @@
     "Print activity must be verified; reach and circulation are metadata, never exclusion thresholds.",
     "There is no target maximum for the European catalog. A larger set is preferred when additional active print titles materially add geographic, linguistic, political, ideological, regional, or audience diversity.",
     "Multiple titles from the same country or political segment are retained when they represent meaningfully different editorial traditions, audiences, regions, or reach profiles; near-duplicates may be pruned.",
-    "Small-circulation publications may remain when they add a materially distinct viewpoint. Large circulation is not required."
+    "Small-circulation publications may remain when they add a materially distinct viewpoint. Large circulation is not required.",
+    "Germany remains intentionally more granular than the rest-of-Europe comparison block. The broad European research pool is not itself the implementation set.",
+    "The 50-70 title range is a curation guideline, not a quota or hard cap. Additional titles require meaningful incremental comparative value."
   ],
   "selection_dimensions": [
     "european_relevance",
@@ -345,6 +347,12 @@
     "20minutos Spain requires current print-frequency verification before promotion; free-paper distribution models can change independently of the digital brand.",
     "Observador Portugal is primarily digital and requires evidence of an active recurring print publication before inclusion.",
     "Political classifications will be stored as source assertions with classifier type/name/date rather than inferred from common descriptions.",
-    "Do not aggressively reduce the broad candidate pool to a small representative sample. Verify and retain additional titles whenever they add meaningful differentiation."
-  ]
+    "Do not aggressively reduce the broad candidate pool to a small representative sample. Verify and retain additional titles whenever they add meaningful differentiation.",
+    "Retain the broad research pool for discovery, then curate approximately 60 titles for implementation. Larger markets may contribute roughly 5-7 titles; medium markets roughly 2-4; smaller markets only particularly relevant titles. These are heuristics, not quotas."
+  ],
+  "target_catalog_size": {
+    "guideline_min": 50,
+    "guideline_max": 70,
+    "hard_cap": false
+  }
 }
