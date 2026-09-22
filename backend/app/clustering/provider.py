@@ -12,6 +12,8 @@ class StoryClusteringInput:
     title_terms: tuple[str, ...]
     entity_ids: tuple[UUID, ...]
     topic_ids: tuple[UUID, ...]
+    semantic_embedding: tuple[float, ...] | None = None
+    semantic_model: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -23,6 +25,9 @@ class StoryCandidate:
     title_terms: tuple[str, ...]
     entity_ids: tuple[UUID, ...]
     topic_ids: tuple[UUID, ...]
+    language_code: str | None = None
+    semantic_embedding: tuple[float, ...] | None = None
+    semantic_model: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
