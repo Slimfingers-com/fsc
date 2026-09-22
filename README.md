@@ -51,6 +51,12 @@ Current evidence is available through `/stories/{id}/evidence` and `/claim-group
 
 Current results are available through `/stories/{id}/consensus` and `/stories/{id}/differences`. See [ADR 0016](docs/decisions/0016-consensus-differences.md).
 
+## Coverage Gaps & Missing Perspectives
+
+`python -m app.workers.coverage_main` derives source/signal coverage distributions and conservative gap markers from the current Consensus generation. It reports limited independent content-source coverage, signal-only attention, and claim groups without attributed perspectives. It does not invent ideological camps or assign a coverage/truth score.
+
+Current results are available through `/stories/{id}/coverage`, `/stories/{id}/coverage-gaps`, and `/stories/{id}/missing-perspectives`. See [ADR 0017](docs/decisions/0017-coverage-gaps.md).
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh
