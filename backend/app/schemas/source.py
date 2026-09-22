@@ -129,7 +129,12 @@ class SourceCreate(BaseModel):
     @field_validator("country")
     @classmethod
     def normalize_country(cls, value: str | None) -> str | None:
-        return value.upper() if value is not None else None
+        if value is None:
+            return None
+        country = value.strip().upper()
+        if len(country) != 2 or not country.isalpha():
+            raise ValueError("country code must contain exactly two letters")
+        return country
 
     @field_validator("language")
     @classmethod
