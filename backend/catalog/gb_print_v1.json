@@ -57,5 +57,6 @@
       "entries": []
     }
   ],
-  "unclassified_entries": []
+  "unclassified_entries": [],
+  "coverage_policy_notes": "Targets are research goals, not quotas. Under-covered groups require a documented coverage_exception; titles are never reclassified to fill a quota."
 }
