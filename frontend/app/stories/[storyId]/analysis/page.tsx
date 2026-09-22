@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ApiError, getStory, getStoryAnalysis } from "@/lib/api";
-import { label, percent } from "@/lib/format";
+import { label, percent, safeExternalUrl } from "@/lib/format";
 import { notFound } from "next/navigation";
 
 export const metadata: Metadata = { title: "Analyse" };
@@ -90,7 +90,9 @@ export default async function AnalysisPage({ params }: Props) {
                   </div>
                   <h3>{group.representative_claim_text}</h3>
                 </div>
-                <span className="confidence">{percent(group.confidence)}</span>
+                <span className="confidence">
+                  Gruppierungs-Konfidenz {percent(group.confidence)}
+                </span>
               </div>
               <div className="mini-metrics">
                 <span>{group.consensus.independent_source_count} unabh. Quellenverbünde</span>
@@ -111,12 +113,15 @@ export default async function AnalysisPage({ params }: Props) {
               <details>
                 <summary>{group.members.length} zugrunde liegende Claims</summary>
                 <div className="member-list">
-                  {group.members.map((member) => (
+                  {group.members.map((member) => {
+                    const externalUrl = safeExternalUrl(member.article_url);
+                    return (
                     <div key={member.claim_id}>
                       <strong>{member.source_name}</strong><span>{member.claim_text}</span>
-                      {member.article_url ? <a href={member.article_url} target="_blank" rel="noreferrer">Artikel ↗</a> : null}
+                      {externalUrl ? <a href={externalUrl} target="_blank" rel="noopener noreferrer">Artikel ↗</a> : null}
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </details>
             </article>
