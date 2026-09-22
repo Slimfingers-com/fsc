@@ -6,6 +6,7 @@ from sqlalchemy import (
     CheckConstraint,
     DateTime,
     ForeignKey,
+    Float,
     Index,
     String,
     Text,
@@ -169,6 +170,15 @@ class StoryArticle(BaseModel):
         ARRAY(PG_UUID(as_uuid=True)),
         nullable=False,
         default=list,
+    )
+
+    semantic_embedding: Mapped[list[float] | None] = mapped_column(
+        ARRAY(Float),
+        nullable=True,
+    )
+    semantic_model: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
     )
 
     similarity_score: Mapped[float] = mapped_column(
