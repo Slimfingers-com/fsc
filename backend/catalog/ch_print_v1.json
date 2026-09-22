@@ -843,232 +843,227 @@
           "metrics": []
         }
       ]
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "la-quotidiana",
+      "name": "La Quotidiana",
+      "homepage": "https://www.suedostschweiz.ch/laquotidiana",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "rm",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
     },
     {
-      "key": "general_unclassified",
-      "label": "general-interest / linguistically important print without forced political classification",
-      "group_kind": "unclassified",
-      "entries": [
+      "key": "schweizer-illustrierte",
+      "name": "Schweizer Illustrierte",
+      "homepage": "https://www.schweizer-illustrierte.ch/",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "de",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
         {
-          "key": "la-quotidiana",
-          "name": "La Quotidiana",
-          "homepage": "https://www.suedostschweiz.ch/laquotidiana",
-          "publication_form": "daily_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "language": "rm",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [],
-          "feeds": [],
-          "classifications": [],
-          "metrics": []
+          "metric_kind": "distributed_circulation",
+          "value": 63422,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "WEMF-2026",
+          "measurement_body": "WEMF",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/schweizer-illustrierte/",
+          "audited": true,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
         },
         {
-          "key": "schweizer-illustrierte",
-          "name": "Schweizer Illustrierte",
-          "homepage": "https://www.schweizer-illustrierte.ch/",
-          "publication_form": "magazine",
-          "form_group": "magazine_or_periodical",
-          "language": "de",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "distributed_circulation",
-              "value": 63422,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "WEMF-2026",
-              "measurement_body": "WEMF",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/schweizer-illustrierte/",
-              "audited": true,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            },
-            {
-              "metric_kind": "print_readers",
-              "value": 295000,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MACH-Basic-2026-1",
-              "measurement_body": "MACH Basic",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/schweizer-illustrierte/",
-              "audited": false,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            }
-          ]
-        },
-        {
-          "key": "lillustre",
-          "name": "L’illustré",
-          "homepage": "https://www.illustre.ch/",
-          "publication_form": "magazine",
-          "form_group": "magazine_or_periodical",
-          "language": "fr",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "distributed_circulation",
-              "value": 57145,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "WEMF-2025",
-              "measurement_body": "WEMF",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/lillustre/",
-              "audited": true,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            },
-            {
-              "metric_kind": "print_readers",
-              "value": 227000,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MACH-Basic-2026-1",
-              "measurement_body": "MACH Basic",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/lillustre/",
-              "audited": false,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            }
-          ]
-        },
-        {
-          "key": "das-magazin",
-          "name": "Das Magazin",
-          "homepage": "https://www.tagesanzeiger.ch/das-magazin",
-          "publication_form": "magazine",
-          "form_group": "magazine_or_periodical",
-          "language": "de",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "distributed_circulation",
-              "value": 159253,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MACH/WEMF-current-media-page",
-              "measurement_body": "Tamedia Advertising",
-              "source_url": "https://advertising.tamedia.ch/brands/das-magazin-print",
-              "audited": false,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": "Current publisher media page labels this value as Auflage; exact audited measurement body is not asserted."
-            },
-            {
-              "metric_kind": "print_readers",
-              "value": 446000,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MACH-Basic-2026-1",
-              "measurement_body": "MACH Basic",
-              "source_url": "https://advertising.tamedia.ch/brands/das-magazin-print",
-              "audited": false,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            }
-          ]
+          "metric_kind": "print_readers",
+          "value": 295000,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MACH-Basic-2026-1",
+          "measurement_body": "MACH Basic",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/schweizer-illustrierte/",
+          "audited": false,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
         }
       ]
     },
     {
-      "key": "boulevard",
-      "label": "boulevard / mass-reach format",
-      "group_kind": "format",
-      "coverage_exception": "The former high-reach 20 Minuten/20 minutes/20 minuti print editions ended in December 2025 and are therefore excluded from the active 2026 print catalog. Two active Blick print titles remain.",
-      "entries": [
+      "key": "lillustre",
+      "name": "L’illustré",
+      "homepage": "https://www.illustre.ch/",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "fr",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
         {
-          "key": "blick",
-          "name": "Blick",
-          "homepage": "https://www.blick.ch/",
-          "publication_form": "daily_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "language": "de",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [
-            "boulevard"
-          ],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "distributed_circulation",
-              "value": 58699,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "WEMF-2026",
-              "measurement_body": "WEMF",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
-              "audited": true,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            },
-            {
-              "metric_kind": "print_readers",
-              "value": 300000,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MACH-Basic-2026-1",
-              "measurement_body": "MACH Basic",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
-              "audited": false,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            }
-          ]
+          "metric_kind": "distributed_circulation",
+          "value": 57145,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "WEMF-2025",
+          "measurement_body": "WEMF",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/lillustre/",
+          "audited": true,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
         },
         {
-          "key": "sonntagsblick",
-          "name": "SonntagsBlick",
-          "homepage": "https://www.blick.ch/sonntagsblick/",
-          "publication_form": "sunday_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "language": "de",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [
-            "boulevard"
-          ],
-          "feeds": [],
-          "classifications": [],
-          "metrics": [
-            {
-              "metric_kind": "distributed_circulation",
-              "value": 66608,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "WEMF-2026",
-              "measurement_body": "WEMF",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
-              "audited": true,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            },
-            {
-              "metric_kind": "print_readers",
-              "value": 265000,
-              "unit": "count",
-              "metric_scope": "source_total",
-              "reference_period": "MACH-Basic-2026-1",
-              "measurement_body": "MACH Basic",
-              "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
-              "audited": false,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": null
-            }
-          ]
+          "metric_kind": "print_readers",
+          "value": 227000,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MACH-Basic-2026-1",
+          "measurement_body": "MACH Basic",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/lillustre/",
+          "audited": false,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
+        }
+      ]
+    },
+    {
+      "key": "das-magazin",
+      "name": "Das Magazin",
+      "homepage": "https://www.tagesanzeiger.ch/das-magazin",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "de",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
+        {
+          "metric_kind": "distributed_circulation",
+          "value": 159253,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MACH/WEMF-current-media-page",
+          "measurement_body": "Tamedia Advertising",
+          "source_url": "https://advertising.tamedia.ch/brands/das-magazin-print",
+          "audited": false,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": "Current publisher media page labels this value as Auflage; exact audited measurement body is not asserted."
+        },
+        {
+          "metric_kind": "print_readers",
+          "value": 446000,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MACH-Basic-2026-1",
+          "measurement_body": "MACH Basic",
+          "source_url": "https://advertising.tamedia.ch/brands/das-magazin-print",
+          "audited": false,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
+        }
+      ]
+    },
+    {
+      "key": "blick",
+      "name": "Blick",
+      "homepage": "https://www.blick.ch/",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "de",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "boulevard"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
+        {
+          "metric_kind": "distributed_circulation",
+          "value": 58699,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "WEMF-2026",
+          "measurement_body": "WEMF",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
+          "audited": true,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
+        },
+        {
+          "metric_kind": "print_readers",
+          "value": 300000,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MACH-Basic-2026-1",
+          "measurement_body": "MACH Basic",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
+          "audited": false,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
+        }
+      ]
+    },
+    {
+      "key": "sonntagsblick",
+      "name": "SonntagsBlick",
+      "homepage": "https://www.blick.ch/sonntagsblick/",
+      "publication_form": "sunday_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "de",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "boulevard"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": [
+        {
+          "metric_kind": "distributed_circulation",
+          "value": 66608,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "WEMF-2026",
+          "measurement_body": "WEMF",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
+          "audited": true,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
+        },
+        {
+          "metric_kind": "print_readers",
+          "value": 265000,
+          "unit": "count",
+          "metric_scope": "source_total",
+          "reference_period": "MACH-Basic-2026-1",
+          "measurement_body": "MACH Basic",
+          "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
+          "audited": false,
+          "retrieved_at": "2026-09-22T18:10:00Z",
+          "notes": null
         }
       ]
     }
