@@ -67,14 +67,14 @@ echo "Validating backup archive..." >&2
 
 echo "Restoring PostgreSQL database..." >&2
 "${compose[@]}" exec -T postgres sh -ec '
-  exec pg_restore
-    --clean
-    --if-exists
-    --create
-    --no-owner
-    --no-privileges
-    --exit-on-error
-    --username="$POSTGRES_USER"
+  exec pg_restore \
+    --clean \
+    --if-exists \
+    --create \
+    --no-owner \
+    --no-privileges \
+    --exit-on-error \
+    --username="$POSTGRES_USER" \
     --dbname=postgres
 ' < "$backup_path"
 
