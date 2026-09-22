@@ -11,7 +11,7 @@ from app.core.settings import settings
 from app.db.session import get_db
 from app.models.article import Article
 from app.models.claim import ArticleClaim
-from app.models.claim_relation import StoryClaimGroup
+from app.models.claim_relation import StoryClaimGroup, StoryClaimGroupMember
 from app.models.consensus import (
     StoryConsensusSummary,
     StoryDifferenceSummary,
@@ -66,6 +66,60 @@ def _eligible_group(group_alias):
     )
 
 
+def _fully_eligible_group(group_alias):
+    member = aliased(StoryClaimGroupMember)
+    claim = aliased(ArticleClaim)
+    article = aliased(Article)
+    feed = aliased(Feed)
+    source = aliased(Source)
+    membership = aliased(StoryArticle)
+
+    ineligible_member = exists(
+        select(member.id)
+        .join(
+            claim,
+            claim.id == member.claim_id,
+        )
+        .join(
+            article,
+            article.id == claim.article_id,
+        )
+        .join(
+            feed,
+            feed.id == article.feed_id,
+        )
+        .join(
+            source,
+            source.id == feed.source_id,
+        )
+        .outerjoin(
+            membership,
+            (membership.story_id == group_alias.story_id)
+            & (membership.article_id == article.id)
+            & (membership.deleted_at.is_(None)),
+        )
+        .where(
+            member.group_id == group_alias.id,
+            member.deleted_at.is_(None),
+            (
+                (claim.deleted_at.is_not(None))
+                | (article.deleted_at.is_not(None))
+                | (article.normalized_at.is_(None))
+                | (article.normalized_text.is_(None))
+                | (feed.deleted_at.is_not(None))
+                | (feed.active.is_(False))
+                | (source.deleted_at.is_not(None))
+                | (source.active.is_(False))
+                | (membership.id.is_(None))
+            ),
+        )
+    )
+    return (
+        _eligible_group(group_alias)
+        & ~ineligible_member
+    )
+
+
 def _story_exists(db: Session, story_id: UUID) -> bool:
     return (
         db.scalar(
@@ -112,7 +166,7 @@ def story_consensus(
             StoryConsensusSummary.deleted_at.is_(None),
             StoryClaimGroup.deleted_at.is_(None),
             representative.deleted_at.is_(None),
-            _eligible_group(StoryClaimGroup),
+            _fully_eligible_group(StoryClaimGroup),
         )
     )
     if consensus_kind is not None:
@@ -206,8 +260,8 @@ def story_differences(
             right.deleted_at.is_(None),
             left_claim.deleted_at.is_(None),
             right_claim.deleted_at.is_(None),
-            _eligible_group(left),
-            _eligible_group(right),
+            _fully_eligible_group(left),
+            _fully_eligible_group(right),
         )
     )
     if difference_kind is not None:
