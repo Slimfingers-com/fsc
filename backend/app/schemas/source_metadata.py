@@ -4,10 +4,38 @@ from uuid import UUID
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, model_validator
 
 from app.enums.source_metadata import (
+    PublicationForm,
     SourceClassificationDimension,
     SourceClassifierType,
+    SourceMedium,
     SourceMetricKind,
 )
+
+
+class SourceOutletCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=255)
+    media_category: SourceMedium
+    publication_form: PublicationForm
+    publication_frequency: str | None = Field(default=None, max_length=100)
+    language: str | None = Field(default=None, min_length=2, max_length=10)
+    url: HttpUrl | None = None
+    is_primary: bool = False
+    active: bool = True
+
+
+class SourceOutletRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    source_id: UUID
+    name: str
+    media_category: SourceMedium
+    publication_form: PublicationForm
+    publication_frequency: str | None
+    language: str | None
+    url: str | None
+    is_primary: bool
+    active: bool
 
 
 class SourceClassificationCreate(BaseModel):
@@ -55,6 +83,7 @@ class SourceClassificationRead(BaseModel):
 
 
 class SourceMetricCreate(BaseModel):
+    outlet_id: UUID | None = None
     metric_kind: SourceMetricKind
     value: int = Field(ge=0)
     unit: str = Field(default="count", min_length=1, max_length=50)
@@ -90,6 +119,7 @@ class SourceMetricRead(BaseModel):
 
     id: UUID
     source_id: UUID
+    outlet_id: UUID | None
     metric_kind: SourceMetricKind
     value: int
     unit: str
