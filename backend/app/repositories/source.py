@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.source_metadata import SourceClassification, SourceMetric
 from app.repositories.base import BaseRepository
 
 
@@ -22,7 +23,17 @@ class SourceRepository(BaseRepository[Source]):
                     Source.feeds.and_(
                         Feed.deleted_at.is_(None)
                     )
-                )
+                ),
+                selectinload(
+                    Source.classifications.and_(
+                        SourceClassification.deleted_at.is_(None)
+                    )
+                ),
+                selectinload(
+                    Source.metrics.and_(
+                        SourceMetric.deleted_at.is_(None)
+                    )
+                ),
             )
             .execution_options(
                 populate_existing=True
@@ -96,3 +107,19 @@ class SourceRepository(BaseRepository[Source]):
         )
 
         return list(db.scalars(statement).all())
+
+    def add_classification(
+        self,
+        db: Session,
+        classification: SourceClassification,
+    ) -> SourceClassification:
+        db.add(classification)
+        return classification
+
+    def add_metric(
+        self,
+        db: Session,
+        metric: SourceMetric,
+    ) -> SourceMetric:
+        db.add(metric)
+        return metric
