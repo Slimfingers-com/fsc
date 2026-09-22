@@ -37,8 +37,8 @@ class SourceOutlet(BaseModel):
     __table_args__ = (
         UniqueConstraint(
             "source_id",
-            "name",
-            name="uq_source_outlet_source_name",
+            "normalized_name",
+            name="uq_source_outlet_source_normalized_name",
         ),
         CheckConstraint(
             "media_category IN ("
@@ -74,6 +74,10 @@ class SourceOutlet(BaseModel):
         index=True,
     )
     name: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+    )
+    normalized_name: Mapped[str] = mapped_column(
         String(255),
         nullable=False,
     )
