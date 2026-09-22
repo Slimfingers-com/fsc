@@ -233,7 +233,7 @@ def test_fetch_maps_connection_error():
     ) as client:
         with pytest.raises(
             FeedConnectionError
-        ):
+        ) as exc:
             fetcher(
                 client
             ).fetch(
@@ -241,6 +241,8 @@ def test_fetch_maps_connection_error():
                     "https://example.com/feed"
                 )
             )
+
+    assert "failed" not in str(exc.value)
 
 
 @pytest.mark.parametrize(
@@ -566,7 +568,9 @@ def test_fetch_prefers_public_ipv4_when_dns_returns_both_families():
     ) as client:
         FeedFetcher(
             client,
-            resolver=resolver,
+            url_policy=FeedUrlPolicy(
+                resolver=resolver
+            ),
         ).fetch(
             FeedFetchRequest(
                 "https://example.com/feed"
@@ -611,7 +615,9 @@ def test_fetch_normalizes_unicode_hostname_to_idna():
     ) as client:
         FeedFetcher(
             client,
-            resolver=resolver,
+            url_policy=FeedUrlPolicy(
+                resolver=resolver
+            ),
         ).fetch(
             FeedFetchRequest(
                 "https://bücher.example/feed"
@@ -667,7 +673,9 @@ def test_fetch_does_not_forward_cookies_between_redirect_hosts():
     ) as client:
         FeedFetcher(
             client,
-            resolver=resolver,
+            url_policy=FeedUrlPolicy(
+                resolver=resolver
+            ),
         ).fetch(
             FeedFetchRequest(
                 "https://a.example/feed"
