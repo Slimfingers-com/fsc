@@ -138,7 +138,13 @@ def test_liveness_and_readiness(
 
 
 
-def test_unhandled_error_keeps_request_context_headers():
+def test_unhandled_error_keeps_request_context_headers(
+    caplog,
+):
+    caplog.set_level(
+        "INFO",
+        logger="app.http",
+    )
     test_app = FastAPI()
     test_app.middleware(
         "http"
@@ -182,4 +188,10 @@ def test_unhandled_error_keeps_request_context_headers():
     assert (
         "sensitive internal detail"
         not in response.text
+    )
+    assert all(
+        "sensitive internal detail"
+        not in record.message
+        for record in caplog.records
+        if record.name == "app.http"
     )
