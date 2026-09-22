@@ -119,3 +119,14 @@ def test_rejects_reverse_reach_period():
             period_end=date(2026, 9, 1),
             evidence_source_name="Publisher",
         )
+
+
+def test_rejects_invalid_source_country_code():
+    with pytest.raises(ValidationError):
+        SourceCreate(
+            name="Invalid Country",
+            url="https://invalid-country.example.test",
+            source_type=SourceType.NEWS,
+            country="D1",
+        )
+
