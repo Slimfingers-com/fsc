@@ -9,6 +9,7 @@ from app.core.slug import generate_slug
 from app.core.source_identity import normalize_source_name
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.source_metadata import SourceClassification, SourceReachMetric
 from app.repositories.source import SourceRepository
 from app.schemas.source import SourceCreate
 
@@ -75,6 +76,9 @@ class SourceService:
             coverage_scope=data.coverage_scope,
             country=data.country,
             language=data.language,
+            media_family=data.media_family,
+            publication_format=data.publication_format,
+            coverage_countries=list(data.coverage_countries),
             ownership=data.ownership,
             funding_model=data.funding_model,
             paywall=data.paywall,
@@ -82,6 +86,32 @@ class SourceService:
             correction_policy=data.correction_policy,
             primary_source_usage=data.primary_source_usage,
             priority_tier=data.priority_tier,
+            classifications=[
+                SourceClassification(
+                    kind=item.kind,
+                    value=item.value,
+                    detail=item.detail,
+                    evidence_source_name=item.evidence_source_name.strip(),
+                    evidence_url=str(item.evidence_url) if item.evidence_url else None,
+                    as_of=item.as_of,
+                    is_primary=item.is_primary,
+                    notes=item.notes,
+                )
+                for item in data.classifications
+            ],
+            reach_metrics=[
+                SourceReachMetric(
+                    metric_type=item.metric_type,
+                    metric_value=item.metric_value,
+                    period_start=item.period_start,
+                    period_end=item.period_end,
+                    evidence_source_name=item.evidence_source_name.strip(),
+                    evidence_url=str(item.evidence_url) if item.evidence_url else None,
+                    audited=item.audited,
+                    notes=item.notes,
+                )
+                for item in data.reach_metrics
+            ],
             feeds=[
                 Feed(
                     name=feed.name.strip(),
