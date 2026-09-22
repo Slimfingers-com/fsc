@@ -22,8 +22,11 @@ describe("server API client", () => {
   it(
     "sends a correlation ID to FastAPI",
     async () => {
-      const fetchMock = vi.fn().mockResolvedValue(
-        new Response(
+      const fetchMock = vi.fn(
+        async (
+          _input: RequestInfo | URL,
+          _init?: RequestInit,
+        ) => new Response(
           JSON.stringify({
             items: [],
             total: 0,
@@ -51,7 +54,6 @@ describe("server API client", () => {
 
       const init = (
         fetchMock.mock.calls[0]?.[1]
-        as RequestInit
       );
       const headers = new Headers(
         init.headers,
