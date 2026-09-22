@@ -71,8 +71,11 @@ class FeedUrlPolicy:
         url: str,
     ) -> ResolvedFeedTarget:
         parsed = self._parse(url)
-        hostname = parsed.hostname
-        assert hostname is not None
+        raw_hostname = parsed.hostname
+        assert raw_hostname is not None
+        hostname = self._ascii_hostname(
+            raw_hostname
+        )
 
         try:
             port = parsed.port
@@ -101,15 +104,25 @@ class FeedUrlPolicy:
             )
         )
 
-        public_address = next(
-            (
+        public_addresses = [
+            address
+            for address in addresses
+            if self._is_public_ip(
                 address
-                for address in addresses
-                if self._is_public_ip(
+            )
+        ]
+        public_addresses.sort(
+            key=lambda address: (
+                ipaddress.ip_address(
                     address
-                )
-            ),
-            None,
+                ).version
+                != 4
+            )
+        )
+        public_address = (
+            public_addresses[0]
+            if public_addresses
+            else None
         )
         if public_address is None:
             raise InvalidFeedUrlError(
@@ -195,6 +208,36 @@ class FeedUrlPolicy:
             )
 
         return parsed
+
+    @staticmethod
+    def _ascii_hostname(
+        hostname: str,
+    ) -> str:
+        if "%" in hostname:
+            raise InvalidFeedUrlError(
+                "Scoped IP addresses are not allowed "
+                "for feed URLs."
+            )
+
+        try:
+            return str(
+                ipaddress.ip_address(
+                    hostname
+                )
+            )
+        except ValueError:
+            pass
+
+        try:
+            return hostname.encode(
+                "idna"
+            ).decode(
+                "ascii"
+            )
+        except UnicodeError as exc:
+            raise InvalidFeedUrlError(
+                "Feed URL contains an invalid hostname."
+            ) from exc
 
     @staticmethod
     def _literal_address(
