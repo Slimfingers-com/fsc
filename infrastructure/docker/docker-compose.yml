@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
     environment:
       FSC_API_URL: http://backend:8000
+      FSC_API_TIMEOUT_MS: 8000
     ports:
       - "3000:3000"
     depends_on:
