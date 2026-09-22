@@ -63,6 +63,20 @@ Current results are available through `/stories/{id}/coverage`, `/stories/{id}/c
 
 See [ADR 0018](docs/decisions/0018-integrated-story-analysis-api.md).
 
+## Web Frontend
+
+The `frontend/` application is a Next.js App Router UI for Search, Story discovery, Story detail and the integrated Story Analysis API. Server Components call FastAPI through `FSC_API_URL`, so browsers do not need direct backend/CORS access. Analysis pages deliberately display only descriptive backend results and never derive their own truth, credibility or political scores.
+
+Local development:
+
+```sh
+cd frontend
+npm install
+FSC_API_URL=http://localhost:8000 npm run dev
+```
+
+Docker Compose builds the standalone Next.js image and exposes it on port `3000`.
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh
