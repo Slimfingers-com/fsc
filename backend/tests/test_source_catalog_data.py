@@ -244,3 +244,10 @@ def test_gb_constitutional_position_is_not_forced_onto_left_right_axis() -> None
 def test_gb_sunday_editions_use_brand_outlet_policy() -> None:
     catalog = load_catalog("GB")
     assert catalog["edition_policy"] == "brand_as_source_print_products_as_outlets"
+
+
+def test_die_tagespost_is_not_marked_as_party_press() -> None:
+    catalog = load_catalog("DE")
+    entries = {entry["name"]: entry for group in catalog["groups"] for entry in group["entries"]}
+    assert entries["Die Tagespost"].get("party_press") is not True
+    assert entries["Die Tagespost"].get("party_affiliation") is None
