@@ -91,6 +91,15 @@ class Settings(BaseSettings):
     consensus_default_page_size: int = 50
     consensus_max_page_size: int = 200
 
+    coverage_worker_poll_interval_seconds: float = 60.0
+    coverage_worker_batch_limit: int = 50
+    coverage_worker_claim_ttl_seconds: float = 300.0
+    coverage_retry_base_seconds: float = 30.0
+    coverage_retry_max_seconds: float = 3600.0
+    coverage_minimum_independent_content_sources: int = 2
+    coverage_default_page_size: int = 50
+    coverage_max_page_size: int = 200
+
     model_config = SettingsConfigDict(
         extra="ignore"
     )
