@@ -185,6 +185,88 @@ class SourceCreate(BaseModel):
         return self
 
 
+class SourceUpdate(BaseModel):
+    description: str | None = None
+    source_type: SourceType | None = None
+    coverage_scope: CoverageScope | None = None
+
+    country: str | None = Field(default=None, min_length=2, max_length=2)
+    language: str | None = Field(default=None, min_length=2, max_length=10)
+    content_languages: list[str] | None = None
+
+    media_family: MediaFamily | None = None
+    publication_format: PublicationFormat | None = None
+    publication_frequency: PublicationFrequency | None = None
+    coverage_countries: list[str] | None = None
+
+    ownership: str | None = None
+    funding_model: str | None = Field(default=None, max_length=100)
+    paywall: bool | None = None
+    active: bool | None = None
+
+    transparency_level: int | None = Field(default=None, ge=0, le=100)
+    correction_policy: str | None = None
+    primary_source_usage: int | None = Field(default=None, ge=0, le=100)
+    priority_tier: int | None = Field(default=None, ge=1, le=4)
+
+    @field_validator("country")
+    @classmethod
+    def normalize_country(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        country = value.strip().upper()
+        if len(country) != 2 or not country.isalpha():
+            raise ValueError("country code must contain exactly two letters")
+        return country
+
+    @field_validator("language")
+    @classmethod
+    def normalize_language(cls, value: str | None) -> str | None:
+        return value.strip().lower() if value is not None else None
+
+    @field_validator("content_languages")
+    @classmethod
+    def normalize_content_languages(
+        cls,
+        values: list[str] | None,
+    ) -> list[str] | None:
+        if values is None:
+            return None
+        normalized: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            language = value.strip().lower()
+            if not 2 <= len(language) <= 10:
+                raise ValueError(
+                    "content language codes must contain between 2 and 10 characters"
+                )
+            if language not in seen:
+                normalized.append(language)
+                seen.add(language)
+        return normalized
+
+    @field_validator("coverage_countries")
+    @classmethod
+    def normalize_coverage_countries(
+        cls,
+        values: list[str] | None,
+    ) -> list[str] | None:
+        if values is None:
+            return None
+        normalized: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            country = value.strip().upper()
+            if len(country) != 2 or not country.isalpha():
+                raise ValueError(
+                    "coverage country codes must contain exactly two letters"
+                )
+            if country not in seen:
+                normalized.append(country)
+                seen.add(country)
+        return normalized
+
+
 class SourceRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
