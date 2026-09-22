@@ -25,7 +25,7 @@
     "Multiple titles from the same country or political segment are retained when they represent meaningfully different editorial traditions, audiences, regions, or reach profiles; near-duplicates may be pruned.",
     "Small-circulation publications may remain when they add a materially distinct viewpoint. Large circulation is not required.",
     "Germany remains intentionally more granular than the rest-of-Europe comparison block. The broad European research pool is not itself the implementation set.",
-    "The 50-70 title range is a curation guideline, not a quota or hard cap. Additional titles require meaningful incremental comparative value."
+    "The approximately 50-title target is a curation guideline, not a quota or hard cap. Additional titles require meaningful incremental comparative value."
   ],
   "selection_dimensions": [
     "european_relevance",
@@ -348,11 +348,167 @@
     "Observador Portugal is primarily digital and requires evidence of an active recurring print publication before inclusion.",
     "Political classifications will be stored as source assertions with classifier type/name/date rather than inferred from common descriptions.",
     "Do not aggressively reduce the broad candidate pool to a small representative sample. Verify and retain additional titles whenever they add meaningful differentiation.",
-    "Retain the broad research pool for discovery, then curate approximately 60 titles for implementation. Larger markets may contribute roughly 5-7 titles; medium markets roughly 2-4; smaller markets only particularly relevant titles. These are heuristics, not quotas."
+    "Retain the broad research pool for discovery, then curate approximately 50 titles for implementation. Larger markets may contribute roughly 5-7 titles; medium markets roughly 2-4; smaller markets only particularly relevant titles. These are heuristics, not quotas.",
+    "Curated shortlist currently contains 53 titles; final verification may move it toward the ~50 target by removing titles that fail active-print, provenance, or incremental-value checks."
   ],
   "target_catalog_size": {
-    "guideline_min": 50,
-    "guideline_max": 70,
+    "guideline_target": 50,
+    "guideline_range": [
+      45,
+      55
+    ],
     "hard_cap": false
-  }
+  },
+  "curated_shortlist": [
+    {
+      "country": "FR",
+      "titles": [
+        "Le Monde",
+        "Le Figaro",
+        "Libération",
+        "L'Humanité",
+        "Les Echos",
+        "Valeurs actuelles"
+      ]
+    },
+    {
+      "country": "IT",
+      "titles": [
+        "Corriere della Sera",
+        "la Repubblica",
+        "Il Sole 24 Ore",
+        "Il Fatto Quotidiano",
+        "Il Giornale",
+        "Il Manifesto"
+      ]
+    },
+    {
+      "country": "ES",
+      "titles": [
+        "El País",
+        "El Mundo",
+        "ABC",
+        "La Vanguardia",
+        "El Salto"
+      ]
+    },
+    {
+      "country": "PL",
+      "titles": [
+        "Gazeta Wyborcza",
+        "Rzeczpospolita",
+        "Polityka",
+        "Do Rzeczy",
+        "Gazeta Polska"
+      ]
+    },
+    {
+      "country": "NL",
+      "titles": [
+        "NRC",
+        "de Volkskrant",
+        "De Telegraaf",
+        "De Groene Amsterdammer"
+      ]
+    },
+    {
+      "country": "BE",
+      "titles": [
+        "De Standaard",
+        "Le Soir",
+        "La Libre Belgique"
+      ]
+    },
+    {
+      "country": "DK",
+      "titles": [
+        "Politiken",
+        "Jyllands-Posten",
+        "Information"
+      ]
+    },
+    {
+      "country": "SE",
+      "titles": [
+        "Dagens Nyheter",
+        "Svenska Dagbladet",
+        "Dagens ETC"
+      ]
+    },
+    {
+      "country": "NO",
+      "titles": [
+        "Aftenposten",
+        "Klassekampen",
+        "Dagens Næringsliv"
+      ]
+    },
+    {
+      "country": "FI",
+      "titles": [
+        "Helsingin Sanomat",
+        "Suomen Kuvalehti"
+      ]
+    },
+    {
+      "country": "IE",
+      "titles": [
+        "The Irish Times",
+        "Irish Independent"
+      ]
+    },
+    {
+      "country": "PT",
+      "titles": [
+        "Público",
+        "Expresso"
+      ]
+    },
+    {
+      "country": "CZ",
+      "titles": [
+        "Hospodářské noviny",
+        "Respekt"
+      ]
+    },
+    {
+      "country": "HU",
+      "titles": [
+        "Népszava",
+        "Magyar Nemzet",
+        "HVG"
+      ]
+    },
+    {
+      "country": "GR",
+      "titles": [
+        "Kathimerini",
+        "Efimerida ton Syntakton"
+      ]
+    },
+    {
+      "country": "RO",
+      "titles": [
+        "Adevărul"
+      ]
+    },
+    {
+      "country": "HR",
+      "titles": [
+        "Jutarnji list"
+      ]
+    },
+    {
+      "country": "RS",
+      "titles": [
+        "Danas"
+      ]
+    },
+    {
+      "country": "SI",
+      "titles": [
+        "Delo"
+      ]
+    }
+  ]
 }
