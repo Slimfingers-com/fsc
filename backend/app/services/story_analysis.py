@@ -214,6 +214,11 @@ class StoryAnalysisService:
         if snapshot is None:
             return None
 
+        initial_input_hash = (
+            self.coverage_service
+            .analysis_hash(snapshot)
+        )
+
         current = self._load_current_coverage(
             db,
             snapshot=snapshot,
@@ -531,7 +536,7 @@ class StoryAnalysisService:
             .consensus_snapshot
             .story
         )
-        return StoryAnalysisRead(
+        response = StoryAnalysisRead(
             story_id=story.id,
             language_code=(
                 story.language_code
@@ -609,3 +614,49 @@ class StoryAnalysisService:
                 for item in gaps
             ],
         )
+
+        fresh_snapshot = (
+            self.coverage_service
+            .load_snapshot(
+                db,
+                story_id=story_id,
+            )
+        )
+        if fresh_snapshot is None:
+            return None
+        if (
+            self.coverage_service
+            .analysis_hash(
+                fresh_snapshot
+            )
+            != initial_input_hash
+        ):
+            return None
+
+        fresh_current = (
+            self._load_current_coverage(
+                db,
+                snapshot=fresh_snapshot,
+            )
+        )
+        if fresh_current is None:
+            return None
+        fresh_coverage, _, _ = (
+            fresh_current
+        )
+        fresh_generations = (
+            self._generation_ids(
+                fresh_snapshot,
+                fresh_coverage,
+            )
+        )
+        if (
+            fresh_generations is None
+            or fresh_generations
+            != generations
+            or fresh_coverage.id
+            != coverage.id
+        ):
+            return None
+
+        return response
