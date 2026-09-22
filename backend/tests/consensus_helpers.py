@@ -59,27 +59,31 @@ def build_consensus_story(
     *,
     same_owner: bool = False,
     contradictory: bool = False,
+    specs=None,
 ):
     ownership_a = "Shared Media Group" if same_owner else "Owner A"
     ownership_b = "Shared Media Group" if same_owner else "Owner B"
     data = build_evidence_story(
         db,
-        specs=[
-            {
-                "source_type": SourceType.NEWS,
-                "claim_text": "The plan begins Monday.",
-                "ownership": ownership_a,
-            },
-            {
-                "source_type": SourceType.AGENCY,
-                "claim_text": (
-                    "The plan does not begin Monday."
-                    if contradictory
-                    else "The plan begins Monday."
-                ),
-                "ownership": ownership_b,
-            },
-        ],
+        specs=(
+            specs
+            or [
+                {
+                    "source_type": SourceType.NEWS,
+                    "claim_text": "The plan begins Monday.",
+                    "ownership": ownership_a,
+                },
+                {
+                    "source_type": SourceType.AGENCY,
+                    "claim_text": (
+                        "The plan does not begin Monday."
+                        if contradictory
+                        else "The plan begins Monday."
+                    ),
+                    "ownership": ownership_b,
+                },
+            ]
+        ),
     )
 
     if contradictory:
