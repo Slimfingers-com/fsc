@@ -286,3 +286,143 @@ def test_source_business_rule_violation_returns_422(
     )
 
     assert response.status_code == 422
+
+
+def test_update_source_metadata(client):
+    created = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Example Weekly",
+            "url": "https://weekly.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    assert created.status_code == 201
+    slug = created.json()["slug"]
+
+    response = client.patch(
+        f"/sources/{slug}",
+        headers=ADMIN_HEADERS,
+        json={
+            "country": "de",
+            "language": "de",
+            "content_languages": ["DE", "en", "de"],
+            "media_family": "PRINT",
+            "publication_format": "WEEKLY_NEWSPAPER",
+            "publication_frequency": "WEEKLY",
+            "coverage_countries": ["de", "AT", "de"],
+            "ownership": "Example Publisher",
+            "paywall": True,
+        },
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["country"] == "DE"
+    assert data["language"] == "de"
+    assert data["content_languages"] == ["de", "en"]
+    assert data["media_family"] == "PRINT"
+    assert data["publication_format"] == "WEEKLY_NEWSPAPER"
+    assert data["publication_frequency"] == "WEEKLY"
+    assert data["coverage_countries"] == ["DE", "AT"]
+    assert data["ownership"] == "Example Publisher"
+    assert data["paywall"] is True
+
+
+def test_source_classification_keeps_history(client):
+    created = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Classification Example",
+            "url": "https://classification.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    slug = created.json()["slug"]
+
+    first = client.post(
+        f"/sources/{slug}/classifications",
+        headers=ADMIN_HEADERS,
+        json={
+            "kind": "POLITICAL_ORIENTATION",
+            "value": "CENTER_RIGHT",
+            "detail": "first sourced classification",
+            "evidence_source_name": "Research A",
+            "as_of": "2025-01-01",
+        },
+    )
+    assert first.status_code == 201
+
+    second = client.post(
+        f"/sources/{slug}/classifications",
+        headers=ADMIN_HEADERS,
+        json={
+            "kind": "POLITICAL_ORIENTATION",
+            "value": "CONSERVATIVE",
+            "detail": "newer sourced classification",
+            "evidence_source_name": "Research B",
+            "as_of": "2026-09-01",
+        },
+    )
+    assert second.status_code == 201
+
+    classifications = second.json()["classifications"]
+    assert len(classifications) == 2
+    by_value = {item["value"]: item for item in classifications}
+    assert by_value["CENTER_RIGHT"]["is_primary"] is False
+    assert by_value["CONSERVATIVE"]["is_primary"] is True
+
+
+def test_add_source_reach_metric_with_quality(client):
+    created = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Reach Example",
+            "url": "https://reach.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    slug = created.json()["slug"]
+
+    response = client.post(
+        f"/sources/{slug}/reach-metrics",
+        headers=ADMIN_HEADERS,
+        json={
+            "metric_type": "PRINT_SOLD_CIRCULATION",
+            "metric_value": 42000,
+            "period_start": "2026-04-01",
+            "period_end": "2026-06-30",
+            "evidence_source_name": "Publisher Media Data",
+            "quality": "PUBLISHER_REPORTED",
+        },
+    )
+
+    assert response.status_code == 201
+    metrics = response.json()["reach_metrics"]
+    assert len(metrics) == 1
+    assert metrics[0]["metric_value"] == 42000
+    assert metrics[0]["quality"] == "PUBLISHER_REPORTED"
+
+
+def test_update_source_requires_admin_key(client):
+    created = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Protected Update",
+            "url": "https://protected-update.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    slug = created.json()["slug"]
+
+    response = client.patch(
+        f"/sources/{slug}",
+        json={"ownership": "Unauthorized Change"},
+    )
+
+    assert response.status_code == 401
+
