@@ -1,0 +1,12 @@
+from enum import Enum
+
+
+class MediaFamily(str, Enum):
+    PRINT = "PRINT"
+    BROADCAST = "BROADCAST"
+    DIGITAL_NATIVE = "DIGITAL_NATIVE"
+    AGENCY = "AGENCY"
+    PRIMARY_SOURCE = "PRIMARY_SOURCE"
+    ORGANIZATION = "ORGANIZATION"
+    ACADEMIC = "ACADEMIC"
+    OTHER = "OTHER"
