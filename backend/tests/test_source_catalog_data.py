@@ -118,6 +118,16 @@ def test_country_blocks_do_not_mix_de_at_ch_titles() -> None:
             "Der Standard",
             "Die Presse",
         },
+        "GB": {
+            "Süddeutsche Zeitung",
+            "Frankfurter Allgemeine Zeitung",
+            "Der Standard",
+            "Die Presse",
+            "Neue Zürcher Zeitung",
+            "Die Weltwoche",
+            "Schweizer Monat",
+            "Schweizerzeit",
+        },
     }
 
     for country in CATALOG_FILES:
