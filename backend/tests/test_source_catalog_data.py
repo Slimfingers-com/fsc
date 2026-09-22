@@ -278,3 +278,10 @@ def test_us_catalog_excludes_discontinued_american_renaissance_print() -> None:
     catalog = load_catalog("US")
     names = {entry["name"] for group in catalog["groups"] for entry in group["entries"]}
     assert "American Renaissance" not in names
+
+
+def test_die_tagespost_is_not_marked_as_party_press() -> None:
+    catalog = load_catalog("DE")
+    entries = {entry["name"]: entry for group in catalog["groups"] for entry in group["entries"]}
+    assert entries["Die Tagespost"].get("party_press") is not True
+    assert entries["Die Tagespost"].get("party_affiliation") is None
