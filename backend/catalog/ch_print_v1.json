@@ -776,15 +776,27 @@
           "metrics": [
             {
               "metric_kind": "print_run",
-              "value": 60000,
+              "value": 50500,
               "unit": "count",
               "metric_scope": "source_total",
               "reference_period": "2026",
-              "measurement_body": "SVP Schweiz",
-              "source_url": "https://www.svp.ch/publikationen/",
+              "measurement_body": "SVP Schweiz Anzeigentarif 2026",
+              "source_url": "https://www.svp.ch/wp-content/uploads/Anzeigentarif-2026_V2.pdf",
               "audited": false,
-              "retrieved_at": "2026-09-22T18:10:00Z",
-              "notes": "Current publisher page states monthly party newspaper with 60,000-copy circulation."
+              "retrieved_at": "2026-09-22T18:25:00Z",
+              "notes": "Publisher 2026 advertising tariff states approximately 50,500 copies. A separate generic publisher page currently states 60,000 copies; the dated 2026 tariff is retained as the catalog metric and the discrepancy is documented."
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 100000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "current_2026",
+              "measurement_body": "SVP Schweiz",
+              "source_url": "https://www.svp.ch/mitmachen/informiert-bleiben/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:25:00Z",
+              "notes": "Publisher states that advertising in SVP-Klartext reaches 100,000 readers."
             }
           ]
         }
