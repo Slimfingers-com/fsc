@@ -45,7 +45,8 @@ COMPOSE="docker compose --env-file .env -f infrastructure/docker/docker-compose.
 $COMPOSE build
 $COMPOSE up -d --wait postgres
 $COMPOSE run --rm backend alembic upgrade head
-$COMPOSE up -d --wait
+$COMPOSE up -d
+$COMPOSE up -d --wait nginx
 ```
 
 Check readiness:
@@ -98,10 +99,13 @@ The restore procedure:
 After verification, start FSC again:
 
 ```sh
-docker compose --env-file .env \
-  -f infrastructure/docker/docker-compose.yml \
-  up -d --wait
+COMPOSE="docker compose --env-file .env -f infrastructure/docker/docker-compose.yml"
+
+$COMPOSE up -d
+$COMPOSE up -d --wait nginx
 ```
+
+Worker services intentionally do not expose HTTP health endpoints. Their inherited backend image healthcheck is disabled in Compose, so `--wait` is applied to the Nginx/frontend/backend/PostgreSQL dependency tree rather than to every worker container.
 
 The Full Stack E2E workflow executes a real backup/restore drill on every relevant change.
 
@@ -121,7 +125,8 @@ COMPOSE="docker compose --env-file .env -f infrastructure/docker/docker-compose.
 $COMPOSE build
 $COMPOSE up -d --wait postgres
 $COMPOSE run --rm backend alembic upgrade head
-$COMPOSE up -d --wait
+$COMPOSE up -d
+$COMPOSE up -d --wait nginx
 ```
 
 Do not rely on application startup to migrate the database.
