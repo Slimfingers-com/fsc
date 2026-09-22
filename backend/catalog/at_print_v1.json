@@ -1,0 +1,953 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "coverage_targets": {
+    "newspaper_or_weekly_min": 3,
+    "magazine_or_periodical_min": 3
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [
+        {
+          "key": "der-funke",
+          "name": "Der Funke",
+          "homepage": "https://derfunke.at/",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "revolutionary_communist",
+              "classifier_type": "self_description",
+              "classifier_name": "Der Funke",
+              "source_url": "https://derfunke.at/abo",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Publisher self-description as a Marxist workers' newspaper for revolutionary communists."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "die-rote-fahne",
+          "name": "Die Rote Fahne",
+          "homepage": "https://www.rotefahne.at/",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "offensiv",
+          "name": "Offensiv",
+          "homepage": "https://sozialistischeoffensive.net/zeitung/",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "in-verteidigung-des-marxismus",
+          "name": "In Verteidigung des Marxismus",
+          "homepage": "https://www.1917-verlag.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "volksstimme",
+          "name": "Volksstimme",
+          "homepage": "https://www.volksstimme.at/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "self_description",
+              "classifier_name": "Volksstimme",
+              "source_url": "https://www.volksstimme.at/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Publisher tagline 'Politik und Kultur: Zwischenrufe links'; self-description, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "die-arbeit-glb",
+          "name": "Die Arbeit",
+          "homepage": "https://www.glb.at/die-arbeit/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "weg-und-ziel",
+          "name": "Weg & Ziel",
+          "homepage": "https://www.kpoe.at/weg-ziel-abo",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "der-standard",
+          "name": "Der Standard",
+          "homepage": "https://www.derstandard.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148488/der-standard",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 54278,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Average sold circulation for first half 2026, as reported from ÖAK data."
+            }
+          ]
+        },
+        {
+          "key": "falter",
+          "name": "Falter",
+          "homepage": "https://www.falter.at/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148484/falter",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "augustin",
+          "name": "Augustin",
+          "homepage": "https://augustin.or.at/",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "datum",
+          "name": "Datum",
+          "homepage": "https://datum.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/149419/oesterreich-politik-und-medien-unter-einer-decke",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "anschlaege",
+          "name": "an.schläge",
+          "homepage": "https://anschlaege.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "arbeit-wirtschaft",
+          "name": "Arbeit&Wirtschaft",
+          "homepage": "https://www.arbeit-wirtschaft.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "mo-magazin",
+          "name": "MO – Magazin für Menschenrechte",
+          "homepage": "https://www.sosmitmensch.at/site/momagazin",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "international",
+          "name": "INTERNATIONAL",
+          "homepage": "https://international.or.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/economically liberal",
+      "entries": [
+        {
+          "key": "kleine-zeitung",
+          "name": "Kleine Zeitung",
+          "homepage": "https://www.kleinezeitung.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/183297/kleine-zeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 235159,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "ooe-nachrichten",
+          "name": "Oberösterreichische Nachrichten",
+          "homepage": "https://www.nachrichten.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 88922,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "tiroler-tageszeitung",
+          "name": "Tiroler Tageszeitung",
+          "homepage": "https://www.tt.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 60343,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "vorarlberger-nachrichten",
+          "name": "Vorarlberger Nachrichten",
+          "homepage": "https://www.vn.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 51712,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "profil",
+          "name": "profil",
+          "homepage": "https://www.profil.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148756/profil",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 31466,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2025-07_to_2026-06",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Rolling annual average reported in Aug 2026 article."
+            }
+          ]
+        },
+        {
+          "key": "trend",
+          "name": "trend",
+          "homepage": "https://www.trend.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "economically_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148545/trend",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "der-pragmaticus",
+          "name": "Der Pragmaticus",
+          "homepage": "https://www.derpragmaticus.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "gewinn",
+          "name": "GEWINN",
+          "homepage": "https://www.gewinn.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 45424,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.gewinn.com/mediadaten",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 241000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MA-2025",
+              "measurement_body": "Media-Analyse 2025",
+              "source_url": "https://www.gewinn.com/mediadaten",
+              "audited": false,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Publisher media page reports MA 2025 reach."
+            }
+          ]
+        },
+        {
+          "key": "news",
+          "name": "NEWS",
+          "homepage": "https://www.news.at/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative/christian",
+      "coverage_exception": "Austria has several nationally relevant conservative/christian newspapers but fewer clearly classifiable general-political print magazines. Do not force-fit lifestyle or association magazines.",
+      "entries": [
+        {
+          "key": "die-presse",
+          "name": "Die Presse",
+          "homepage": "https://www.diepresse.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148502/die-presse",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 65698,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "kurier",
+          "name": "Kurier",
+          "homepage": "https://kurier.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148660/kurier",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 87361,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "salzburger-nachrichten",
+          "name": "Salzburger Nachrichten",
+          "homepage": "https://www.sn.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "christian",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148777/salzburger-nachrichten",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 56028,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.derstandard.de/story/3000000336035/auflagenkontrolle-weist-dem-standard-rund-54000-verkaufte-exemplare-aus",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "die-furche",
+          "name": "Die Furche",
+          "homepage": "https://www.furche.at/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "christian",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148499/die-furche",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "bauernzeitung",
+          "name": "Österreichische BauernZeitung",
+          "homepage": "https://www.bauernzeitung.at/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "coverage_exception": "The general-interest Austrian right-wing print market is smaller than the mainstream market. Party/regional publications may be cataloged, but magazines are not relabelled as newspapers to hit a quota.",
+      "entries": [
+        {
+          "key": "zurzeit",
+          "name": "ZurZeit",
+          "homepage": "https://zurzeit.at/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "value_conservative_liberal",
+              "classifier_type": "self_description",
+              "classifier_name": "ZurZeit",
+              "source_url": "https://zurzeit.at/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Publisher self-description as a wertkonservatives und freisinniges Wochenblatt."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "neue-freie-zeitung",
+          "name": "Neue Freie Zeitung",
+          "homepage": "https://nfz.fpoe.at/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "party_press_fpo",
+              "classifier_type": "publisher",
+              "classifier_name": "Neue Freie Zeitung / FPÖ",
+              "source_url": "https://www.nfz.at/footermenue/impressum",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Imprint states that NFZ is the information paper of the Freedom Party of Austria (FPÖ) and its parliamentary group."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "kaerntner-nachrichten",
+          "name": "Kärntner Nachrichten",
+          "homepage": "https://www.fpoe-ktn.at/zeitungen",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "freilich",
+          "name": "FREILICH",
+          "homepage": "https://www.freilich-magazin.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "self_description",
+              "classifier_name": "FREILICH / Edition Kontext GmbH",
+              "source_url": "https://www.freilich-magazin.com/impressum",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Publisher imprint describes FREILICH as a conservative opinion magazine."
+            }
+          ],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "coverage_exception": "Current Austrian externally classified extreme-right print is predominantly magazine/periodical rather than newspaper-form. Record the asymmetry instead of inventing newspaper equivalents.",
+      "entries": [
+        {
+          "key": "info-direkt",
+          "name": "Info-DIREKT",
+          "homepage": "https://www.info-direkt.eu/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "radicality",
+              "value": "externally_classified_extreme_right",
+              "classifier_type": "academic",
+              "classifier_name": "Dokumentationsarchiv des österreichischen Widerstandes (DÖW)",
+              "source_url": "https://www.doew.at/erkennen/rechtsextremismus/rechtsextreme-organisationen/info-direkt",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "DÖW characterizes Info-DIREKT as a genuinely extreme-right print medium; external classification, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "der-eckart",
+          "name": "Der Eckart",
+          "homepage": "https://oelm.at/eckart/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "radicality",
+              "value": "externally_classified_extreme_right_context",
+              "classifier_type": "academic",
+              "classifier_name": "Dokumentationsarchiv des österreichischen Widerstandes (DÖW)",
+              "source_url": "https://www.doew.at/erkennen/rechtsextremismus/rechtsextreme-organisationen/schutzverein-oesterreichische-landsmannschaft-oelm",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "DÖW classifies publisher ÖLM as extreme-right and identifies Der Eckart as its central periodical; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "abendland",
+          "name": "Abendland",
+          "homepage": "https://www.abendland.at/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "boulevard",
+      "label": "boulevard / mass-reach format",
+      "group_kind": "format",
+      "coverage_exception": "Boulevard is a media-format dimension, not a political orientation. These entries are included for reach and agenda-setting relevance without forcing a left/right classification.",
+      "entries": [
+        {
+          "key": "kronen-zeitung",
+          "name": "Kronen Zeitung",
+          "homepage": "https://www.krone.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "sold_circulation",
+              "value": 507735,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1_Mo-Sa",
+              "measurement_body": "ÖAK",
+              "source_url": "https://business.krone.at/portfolio/print/national",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Publisher media page; includes 59,143 ePaper."
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 1546000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MA-2025_Mo-So",
+              "measurement_body": "Media-Analyse 2025",
+              "source_url": "https://business.krone.at/portfolio/print/national",
+              "audited": false,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "heute",
+          "name": "Heute",
+          "homepage": "https://www.heute.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 501409,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-H1",
+              "measurement_body": "ÖAK",
+              "source_url": "https://www.ots.at/presseaussendung/OTS_20260819_OTS0063/oeak-1-hj-2026-heute-auflage-durchbricht-500000-stueck-marke-und-ist-oesterreichs-nr-1-gratistageszeitung",
+              "audited": true,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Distributed daily circulation; includes 74,630 e-paper."
+            }
+          ]
+        },
+        {
+          "key": "oesterreich-oe24",
+          "name": "ÖSTERREICH / oe24",
+          "homepage": "https://www.oe24.at/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "print_readers",
+              "value": 979000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MA-2025_crossmedia_plus",
+              "measurement_body": "Media-Analyse 2025",
+              "source_url": "https://www.ots.at/presseaussendung/OTS_20260409_OTS0077/media-analyse-2025-sensationelle-979000-leserinnen-fuer-oesterreichoe24-in-der-neuen-crossmediareach",
+              "audited": false,
+              "retrieved_at": "2026-09-22T17:10:00Z",
+              "notes": "Cross-media reach includes print, online and newsletter; not a print-only circulation metric."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -116,6 +116,96 @@ The two excluded rows are retained only to make the country-boundary decision ex
 
 This segment is genuinely magazine-heavy in the current German print market. FSC records that asymmetry rather than reclassifying magazines as newspapers merely to reach a numerical quota.
 
+## Austria (AT)
+
+### Print
+
+Austria is a separate country block. German, Swiss and Austrian titles are never merged into a single national catalog merely because they share a language.
+
+All entries below are catalog candidates only; no feed is activated by catalog inclusion.
+
+#### A. Radical / system-oppositional left
+
+| Title | Publication form | Notes |
+| --- | --- | --- |
+| Der Funke | newspaper / periodical | active 2026; self-described revolutionary-communist workers' newspaper |
+| Die Rote Fahne | newspaper / periodical | active print 2026 |
+| Offensiv | newspaper / periodical | active 2026; irregular publication |
+| In Verteidigung des Marxismus | magazine | active print 2026 |
+| Volksstimme | periodical | active 2026; self-description "Zwischenrufe links" |
+| Die Arbeit | quarterly magazine | GLB trade-union publication |
+| Weg & Ziel | magazine | re-launched in print in 2026 by KPÖ |
+
+#### B. Left / centre-left / left-liberal
+
+| Title | Publication form | Notes |
+| --- | --- | --- |
+| Der Standard | daily newspaper | euro|topics: linksliberal; current ÖAK metric recorded |
+| Falter | weekly newspaper | euro|topics: linksliberal |
+| Augustin | street newspaper | Vienna social/street newspaper |
+| Datum | magazine | euro|topics: linksliberal |
+| an.schläge | magazine | feminist print magazine, seven 2026 issues |
+| Arbeit&Wirtschaft | magazine | six print issues/year; labour perspective |
+| MO – Magazin für Menschenrechte | quarterly magazine | SOS Mitmensch; 2026 media data available |
+| INTERNATIONAL | magazine | six print issues/year; international affairs |
+
+#### C. Liberal / centre / economically liberal
+
+| Title | Publication form | Notes |
+| --- | --- | --- |
+| Kleine Zeitung | daily newspaper | euro|topics: liberal; current ÖAK metric recorded |
+| Oberösterreichische Nachrichten | daily newspaper | independent regional daily; current ÖAK metric recorded |
+| Tiroler Tageszeitung | daily newspaper | current ÖAK metric recorded |
+| Vorarlberger Nachrichten | daily newspaper | current ÖAK metric recorded |
+| profil | weekly magazine | euro|topics: liberal; current ÖAK metric recorded |
+| trend | magazine | euro|topics: economically liberal |
+| Der Pragmaticus | magazine | active 2026 print |
+| GEWINN | magazine | current ÖAK and Media-Analyse metrics recorded |
+| NEWS | magazine | active print |
+
+#### D. Conservative / liberal-conservative / Christian
+
+| Title | Publication form | Notes |
+| --- | --- | --- |
+| Die Presse | daily newspaper | euro|topics: liberal-conservative; current ÖAK metric recorded |
+| Kurier | daily newspaper | euro|topics: liberal-conservative; current ÖAK metric recorded |
+| Salzburger Nachrichten | daily newspaper | euro|topics: Christian; current ÖAK metric recorded |
+| Die Furche | weekly newspaper | euro|topics: Christian |
+| Österreichische BauernZeitung | weekly newspaper | active 2026 |
+
+The nationally relevant conservative/christian Austrian print market contains substantially more newspapers than clearly classifiable general-political magazines. FSC records the gap instead of filling it with lifestyle or association magazines.
+
+#### E. Right / right-conservative / right-libertarian
+
+| Title | Publication form | Notes |
+| --- | --- | --- |
+| ZurZeit | weekly newspaper | self-description: wertkonservativ and freisinnig |
+| Neue Freie Zeitung | weekly newspaper | FPÖ party newspaper; imprint documents ownership/role |
+| Kärntner Nachrichten | periodical | FPÖ Kärnten publication; current print status to be rechecked before activation |
+| FREILICH | bimonthly magazine | publisher self-description: conservative opinion magazine |
+
+The general-interest Austrian right-wing print market is smaller than the mainstream market. Party/regional publications may be cataloged, but magazines are not relabelled as newspapers to meet a quota.
+
+#### F. Radical right / externally classified extreme-right spectrum
+
+| Title | Publication form | Notes |
+| --- | --- | --- |
+| Info-DIREKT | magazine | DÖW externally classifies the publication as extreme-right |
+| Der Eckart | magazine | DÖW classifies publisher ÖLM as extreme-right and identifies Der Eckart as its periodical |
+| Abendland | periodical | current print/activity and classification provenance to be rechecked before activation |
+
+This segment is predominantly magazine/periodical-form in the current Austrian print market. The catalog records that asymmetry explicitly.
+
+#### G. Boulevard / mass reach
+
+Boulevard is a **format dimension**, not a political orientation.
+
+| Title | Publication form | Notes |
+| --- | --- | --- |
+| Kronen Zeitung | daily newspaper / boulevard | very high national reach; current ÖAK/MA metrics recorded |
+| Heute | free daily / boulevard | 501,409 distributed copies in ÖAK H1 2026 |
+| ÖSTERREICH / oe24 | paid + free daily hybrid / boulevard | current 2026 print operation and cross-media metrics recorded |
+
 ## Reach and circulation model
 
 Metrics are historical observations, not properties overwritten on the source.
