@@ -1,0 +1,666 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "coverage_targets": {
+    "newspaper_or_weekly_min": 3,
+    "magazine_or_periodical_min": 3
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [
+        {
+          "key": "junge-welt",
+          "name": "junge Welt",
+          "homepage": "https://www.jungewelt.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "unsere-zeit",
+          "name": "Unsere Zeit",
+          "homepage": "https://www.unsere-zeit.de/",
+          "publication_form": "weekly_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "analyse-und-kritik",
+          "name": "analyse & kritik",
+          "homepage": "https://www.akweb.de/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "soz",
+          "name": "Sozialistische Zeitung (SoZ)",
+          "homepage": "https://www.sozonline.de/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "graswurzelrevolution",
+          "name": "Graswurzelrevolution",
+          "homepage": "https://www.graswurzel.net/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "jacobin-de",
+          "name": "Jacobin Deutschland",
+          "homepage": "https://jacobin.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "antifaschistisches-infoblatt",
+          "name": "Antifaschistisches Infoblatt",
+          "homepage": "https://antifainfoblatt.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "rote-hilfe-zeitung",
+          "name": "Rote Hilfe Zeitung",
+          "homepage": "https://rote-hilfe.de/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "marxistische-blaetter",
+          "name": "Marxistische Blätter",
+          "homepage": "https://www.marxistische-blaetter.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "gegenstandpunkt",
+          "name": "GegenStandpunkt",
+          "homepage": "https://de.gegenstandpunkt.com/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "taz",
+          "name": "taz",
+          "homepage": "https://taz.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "sueddeutsche",
+          "name": "Süddeutsche Zeitung",
+          "homepage": "https://www.sueddeutsche.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "frankfurter-rundschau",
+          "name": "Frankfurter Rundschau",
+          "homepage": "https://www.fr.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "die-zeit",
+          "name": "DIE ZEIT",
+          "homepage": "https://www.zeit.de/",
+          "publication_form": "weekly_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "der-freitag",
+          "name": "der Freitag",
+          "homepage": "https://www.freitag.de/",
+          "publication_form": "weekly_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "nd",
+          "name": "nd / Neues Deutschland",
+          "homepage": "https://www.nd-aktuell.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "der-spiegel",
+          "name": "DER SPIEGEL",
+          "homepage": "https://www.spiegel.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "blaetter",
+          "name": "Blätter für deutsche und internationale Politik",
+          "homepage": "https://www.blaetter.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "publik-forum",
+          "name": "Publik-Forum",
+          "homepage": "https://www.publik-forum.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "stern",
+          "name": "stern",
+          "homepage": "https://www.stern.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "iz3w",
+          "name": "iz3w",
+          "homepage": "https://www.iz3w.org/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/economically liberal",
+      "entries": [
+        {
+          "key": "tagesspiegel",
+          "name": "Der Tagesspiegel",
+          "homepage": "https://www.tagesspiegel.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "handelsblatt",
+          "name": "Handelsblatt",
+          "homepage": "https://www.handelsblatt.com/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "stuttgarter-zeitung",
+          "name": "Stuttgarter Zeitung",
+          "homepage": "https://www.stuttgarter-zeitung.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "augsburger-allgemeine",
+          "name": "Augsburger Allgemeine",
+          "homepage": "https://www.augsburger-allgemeine.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "koelner-stadt-anzeiger",
+          "name": "Kölner Stadt-Anzeiger",
+          "homepage": "https://www.ksta.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "rheinische-post",
+          "name": "Rheinische Post",
+          "homepage": "https://rp-online.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "wirtschaftswoche",
+          "name": "WirtschaftsWoche",
+          "homepage": "https://www.wiwo.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "capital",
+          "name": "Capital",
+          "homepage": "https://www.capital.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "brand-eins",
+          "name": "brand eins",
+          "homepage": "https://www.brandeins.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "manager-magazin",
+          "name": "manager magazin",
+          "homepage": "https://www.manager-magazin.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "merkur-zeitschrift",
+          "name": "MERKUR",
+          "homepage": "https://www.merkur-zeitschrift.de/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "key": "faz",
+          "name": "Frankfurter Allgemeine Zeitung",
+          "homepage": "https://www.faz.net/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "welt",
+          "name": "WELT",
+          "homepage": "https://www.welt.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "bild",
+          "name": "BILD",
+          "homepage": "https://www.bild.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "muenchner-merkur",
+          "name": "Münchner Merkur",
+          "homepage": "https://www.merkur.de/",
+          "publication_form": "daily_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "die-tagespost",
+          "name": "Die Tagespost",
+          "homepage": "https://www.die-tagespost.de/",
+          "publication_form": "weekly_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "focus",
+          "name": "FOCUS",
+          "homepage": "https://www.focus.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "cicero",
+          "name": "Cicero",
+          "homepage": "https://www.cicero.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "die-politische-meinung",
+          "name": "Die Politische Meinung",
+          "homepage": "https://www.kas.de/de/web/die-politische-meinung",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "junge-freiheit",
+          "name": "Junge Freiheit",
+          "homepage": "https://jungefreiheit.de/",
+          "publication_form": "weekly_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "preussische-allgemeine",
+          "name": "Preußische Allgemeine Zeitung",
+          "homepage": "https://paz.de/",
+          "publication_form": "weekly_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "epoch-times-de",
+          "name": "Epoch Times Deutschland",
+          "homepage": "https://www.epochtimes.de/",
+          "publication_form": "weekly_newspaper",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "tichys-einblick",
+          "name": "Tichys Einblick",
+          "homepage": "https://www.tichyseinblick.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "cato",
+          "name": "CATO",
+          "homepage": "https://cato-magazin.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "eigentuemlich-frei",
+          "name": "eigentümlich frei",
+          "homepage": "https://ef-magazin.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "tumult",
+          "name": "TUMULT",
+          "homepage": null,
+          "publication_form": "periodical",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "coverage_exception": "Current German print market is magazine-heavy; newspaper-form titles are scarce. Do not relabel magazines to satisfy the numeric target.",
+      "entries": [
+        {
+          "key": "zuendstoff",
+          "name": "Zündstoff",
+          "homepage": "https://zuendstoff-nachrichten.de/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "stimme-deutschlands",
+          "name": "Stimme Deutschlands",
+          "homepage": null,
+          "publication_form": "periodical",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "compact",
+          "name": "COMPACT",
+          "homepage": "https://www.compact-online.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "sezession",
+          "name": "Sezession",
+          "homepage": "https://sezession.de/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "zuerst",
+          "name": "ZUERST!",
+          "homepage": "https://zuerst.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "aufgewacht-deutsche-stimme",
+          "name": "AUFGEWACHT – DIE DEUTSCHE STIMME",
+          "homepage": "https://deutsche-stimme.de/",
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "ns-heute",
+          "name": "N.S. Heute",
+          "homepage": null,
+          "publication_form": "magazine",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "volk-in-bewegung",
+          "name": "Volk in Bewegung – Der Reichsbote",
+          "homepage": "https://nordlandverlag.com/",
+          "publication_form": "periodical",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "unabhaengige-nachrichten",
+          "name": "Unabhängige Nachrichten",
+          "homepage": null,
+          "publication_form": "periodical",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ]
+    }
+  ]
+}
