@@ -13,6 +13,8 @@ from pydantic import (
 from app.enums.coverage_scope import CoverageScope
 from app.enums.media_family import MediaFamily
 from app.enums.publication_format import PublicationFormat
+from app.enums.publication_frequency import PublicationFrequency
+from app.enums.reach_metric_quality import ReachMetricQuality
 from app.enums.reach_metric_type import ReachMetricType
 from app.enums.source_classification import (
     PoliticalOrientation,
@@ -63,7 +65,7 @@ class SourceReachMetricCreate(BaseModel):
     period_end: date | None = None
     evidence_source_name: str = Field(min_length=1, max_length=255)
     evidence_url: HttpUrl | None = None
-    audited: bool = False
+    quality: ReachMetricQuality = ReachMetricQuality.OTHER
     notes: str | None = None
 
     @model_validator(mode="after")
@@ -87,7 +89,7 @@ class SourceReachMetricRead(BaseModel):
     period_end: date | None
     evidence_source_name: str
     evidence_url: str | None
-    audited: bool
+    quality: ReachMetricQuality
     notes: str | None
 
 
@@ -105,6 +107,7 @@ class SourceCreate(BaseModel):
     language: str | None = Field(default=None, min_length=2, max_length=10)
     media_family: MediaFamily | None = None
     publication_format: PublicationFormat | None = None
+    publication_frequency: PublicationFrequency | None = None
     coverage_countries: list[str] = Field(default_factory=list)
 
     ownership: str | None = None
@@ -177,6 +180,7 @@ class SourceRead(BaseModel):
     language: str | None
     media_family: MediaFamily | None
     publication_format: PublicationFormat | None
+    publication_frequency: PublicationFrequency | None
     coverage_countries: list[str]
 
     ownership: str | None
