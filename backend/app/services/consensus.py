@@ -227,6 +227,14 @@ class ConsensusService:
         )
 
     @staticmethod
+    def _enum_value(value) -> str:
+        return (
+            value.value
+            if hasattr(value, "value")
+            else str(value)
+        )
+
+    @staticmethod
     def _independent_source_key(row: ConsensusGroupRow) -> str:
         ownership = (
             (row.source.ownership or "")
@@ -277,12 +285,12 @@ class ConsensusService:
                 str(link.id),
                 str(link.processing_run_id),
                 str(link.claim_group_id),
-                link.relation_kind.value,
+                self._enum_value(link.relation_kind),
                 str(item.id),
                 str(item.processing_run_id),
                 str(item.claim_id),
                 str(item.source_id),
-                item.evidence_kind.value,
+                self._enum_value(item.evidence_kind),
                 item.evidence_hash,
             ]
             for link, item in snapshot.evidence
@@ -297,7 +305,7 @@ class ConsensusService:
                     if item.holder_entity_id is not None
                     else ""
                 ),
-                item.perspective_kind.value,
+                self._enum_value(item.perspective_kind),
             ]
             for item in snapshot.perspectives
         ]
@@ -307,7 +315,7 @@ class ConsensusService:
                 str(item.processing_run_id),
                 str(item.left_group_id),
                 str(item.right_group_id),
-                item.relation_kind.value,
+                self._enum_value(item.relation_kind),
             ]
             for item in snapshot.relations
         ]
