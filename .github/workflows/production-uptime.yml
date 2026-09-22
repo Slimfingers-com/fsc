@@ -1,0 +1,33 @@
+name: Production uptime
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-uptime
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check public homepage
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl             --fail             --silent             --show-error             --location             --retry 2             --retry-delay 2             --max-time 20             https://fsc.eu/             --output /tmp/fsc-home.html
+          grep -Fq 'Story Intelligence' /tmp/fsc-home.html
+          grep -Fq 'Artikel finden. Story verstehen. Unterschiede nachvollziehen.' /tmp/fsc-home.html
+
+      - name: Check stories page
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl             --fail             --silent             --show-error             --location             --retry 2             --retry-delay 2             --max-time 20             https://fsc.eu/stories             --output /tmp/fsc-stories.html
+          grep -Fq 'Story-Cluster' /tmp/fsc-stories.html
