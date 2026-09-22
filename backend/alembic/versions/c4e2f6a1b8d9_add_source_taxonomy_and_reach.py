@@ -33,6 +33,14 @@ publication_format = postgresql.ENUM(
     create_type=False,
 )
 
+publication_frequency = postgresql.ENUM(
+    "CONTINUOUS", "MULTIPLE_DAILY", "DAILY", "MULTIPLE_WEEKLY",
+    "WEEKLY", "BIWEEKLY", "MONTHLY", "BIMONTHLY", "QUARTERLY",
+    "SEMIANNUAL", "ANNUAL", "IRREGULAR", "OTHER",
+    name="publication_frequency",
+    create_type=False,
+)
+
 classification_kind = postgresql.ENUM(
     "POLITICAL_ORIENTATION", "RADICALITY",
     name="source_classification_kind",
@@ -48,13 +56,21 @@ reach_metric_type = postgresql.ENUM(
     create_type=False,
 )
 
+reach_metric_quality = postgresql.ENUM(
+    "AUDITED", "PUBLISHER_REPORTED", "THIRD_PARTY_ESTIMATE", "OTHER",
+    name="reach_metric_quality",
+    create_type=False,
+)
+
 
 def upgrade() -> None:
     bind = op.get_bind()
     media_family.create(bind, checkfirst=True)
     publication_format.create(bind, checkfirst=True)
+    publication_frequency.create(bind, checkfirst=True)
     classification_kind.create(bind, checkfirst=True)
     reach_metric_type.create(bind, checkfirst=True)
+    reach_metric_quality.create(bind, checkfirst=True)
 
     op.add_column(
         "sources",
@@ -63,6 +79,10 @@ def upgrade() -> None:
     op.add_column(
         "sources",
         sa.Column("publication_format", publication_format, nullable=True),
+    )
+    op.add_column(
+        "sources",
+        sa.Column("publication_frequency", publication_frequency, nullable=True),
     )
     op.add_column(
         "sources",
@@ -78,6 +98,11 @@ def upgrade() -> None:
         "ix_sources_publication_format",
         "sources",
         ["publication_format"],
+    )
+    op.create_index(
+        "ix_sources_publication_frequency",
+        "sources",
+        ["publication_frequency"],
     )
 
     op.create_table(
@@ -126,7 +151,12 @@ def upgrade() -> None:
         sa.Column("period_end", sa.Date()),
         sa.Column("evidence_source_name", sa.String(length=255), nullable=False),
         sa.Column("evidence_url", sa.Text()),
-        sa.Column("audited", sa.Boolean(), server_default=sa.text("false"), nullable=False),
+        sa.Column(
+            "quality",
+            reach_metric_quality,
+            server_default=sa.text("'OTHER'"),
+            nullable=False,
+        ),
         sa.Column("notes", sa.Text()),
         sa.Column(
             "id",
@@ -171,14 +201,18 @@ def downgrade() -> None:
         table_name="source_classifications",
     )
     op.drop_table("source_classifications")
+    op.drop_index("ix_sources_publication_frequency", table_name="sources")
     op.drop_index("ix_sources_publication_format", table_name="sources")
     op.drop_index("ix_sources_media_family", table_name="sources")
     op.drop_column("sources", "coverage_countries")
+    op.drop_column("sources", "publication_frequency")
     op.drop_column("sources", "publication_format")
     op.drop_column("sources", "media_family")
 
     bind = op.get_bind()
+    reach_metric_quality.drop(bind, checkfirst=True)
     reach_metric_type.drop(bind, checkfirst=True)
     classification_kind.drop(bind, checkfirst=True)
+    publication_frequency.drop(bind, checkfirst=True)
     publication_format.drop(bind, checkfirst=True)
     media_family.drop(bind, checkfirst=True)
