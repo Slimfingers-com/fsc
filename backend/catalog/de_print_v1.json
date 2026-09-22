@@ -22,7 +22,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "unsere-zeit",
@@ -33,7 +34,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "analyse-und-kritik",
@@ -44,7 +46,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "soz",
@@ -55,7 +58,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "graswurzelrevolution",
@@ -66,7 +70,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "jacobin-de",
@@ -77,7 +82,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "antifaschistisches-infoblatt",
@@ -88,7 +94,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "rote-hilfe-zeitung",
@@ -99,7 +106,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "marxistische-blaetter",
@@ -110,7 +118,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "gegenstandpunkt",
@@ -121,7 +130,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         }
       ]
     },
@@ -138,7 +148,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "sueddeutsche",
@@ -149,7 +160,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "frankfurter-rundschau",
@@ -160,7 +172,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "die-zeit",
@@ -171,7 +184,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "der-freitag",
@@ -182,7 +196,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "nd",
@@ -193,7 +208,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "der-spiegel",
@@ -204,7 +220,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "blaetter",
@@ -215,7 +232,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "publik-forum",
@@ -226,7 +244,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "stern",
@@ -237,7 +256,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "iz3w",
@@ -248,7 +268,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         }
       ]
     },
@@ -265,7 +286,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "handelsblatt",
@@ -276,7 +298,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "stuttgarter-zeitung",
@@ -287,7 +310,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "augsburger-allgemeine",
@@ -298,7 +322,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "koelner-stadt-anzeiger",
@@ -309,7 +334,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "rheinische-post",
@@ -320,7 +346,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "wirtschaftswoche",
@@ -331,7 +358,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "capital",
@@ -342,7 +370,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "brand-eins",
@@ -353,7 +382,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "manager-magazin",
@@ -364,7 +394,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "merkur-zeitschrift",
@@ -375,7 +406,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         }
       ]
     },
@@ -392,7 +424,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "welt",
@@ -403,7 +436,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "bild",
@@ -414,7 +448,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "muenchner-merkur",
@@ -425,7 +460,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "die-tagespost",
@@ -436,7 +472,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "focus",
@@ -447,7 +484,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "cicero",
@@ -458,7 +496,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "die-politische-meinung",
@@ -469,7 +508,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         }
       ]
     },
@@ -486,7 +526,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "preussische-allgemeine",
@@ -497,7 +538,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "epoch-times-de",
@@ -508,7 +550,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "tichys-einblick",
@@ -519,7 +562,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "cato",
@@ -530,7 +574,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "eigentuemlich-frei",
@@ -541,7 +586,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "tumult",
@@ -552,7 +598,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         }
       ]
     },
@@ -570,7 +617,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "stimme-deutschlands",
@@ -581,7 +629,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "compact",
@@ -592,7 +641,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "sezession",
@@ -603,7 +653,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "zuerst",
@@ -614,7 +665,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "aufgewacht-deutsche-stimme",
@@ -625,7 +677,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "ns-heute",
@@ -636,7 +689,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "volk-in-bewegung",
@@ -647,7 +701,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "unabhaengige-nachrichten",
@@ -658,7 +713,8 @@
           "catalog_status": "candidate",
           "feeds": [],
           "classifications": [],
-          "metrics": []
+          "metrics": [],
+          "form_group": "magazine_or_periodical"
         }
       ]
     }
