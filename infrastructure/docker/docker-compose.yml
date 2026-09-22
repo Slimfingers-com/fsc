@@ -12,9 +12,17 @@ services:
       - nginx_data:/etc/nginx/conf.d
 
   frontend:
-    image: node:22-alpine
     container_name: fsc-frontend
+    build:
+      context: ../../frontend
+      dockerfile: Dockerfile
     restart: unless-stopped
+    environment:
+      FSC_API_URL: http://backend:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
     networks:
       - fsc-network
 
