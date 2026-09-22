@@ -64,6 +64,9 @@ class FeedFetcher:
 
         self._client = client or httpx.Client(
             trust_env=False,
+            limits=httpx.Limits(
+                max_keepalive_connections=0,
+            ),
         )
         self._owns_client = client is None
         self._timeout = httpx.Timeout(
@@ -128,7 +131,8 @@ class FeedFetcher:
                 raise FeedConnectionError(
                     "Feed request to "
                     f"{target.logical_url!r} "
-                    f"failed: {exc}."
+                    "failed with "
+                    f"{type(exc).__name__}."
                 ) from exc
 
             if (
@@ -182,6 +186,11 @@ class FeedFetcher:
         *,
         base_headers: dict[str, str],
     ) -> httpx.Response:
+        # Feed retrieval is deliberately anonymous.
+        # Since requests connect to a pinned IP, cookies
+        # must not leak between logical hosts sharing it.
+        self._client.cookies.clear()
+
         headers = {
             **base_headers,
             "Host": target.host_header,
