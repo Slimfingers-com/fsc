@@ -64,6 +64,12 @@ class StoryCoverageSummary(BaseModel):
         nullable=False,
         index=True,
     )
+    consensus_processing_run_id: Mapped[UUID] = mapped_column(
+        PG_UUID(as_uuid=True),
+        ForeignKey("story_processing_runs.id", ondelete="RESTRICT"),
+        nullable=False,
+        index=True,
+    )
     article_count: Mapped[int] = mapped_column(Integer, nullable=False)
     source_count: Mapped[int] = mapped_column(Integer, nullable=False)
     content_source_count: Mapped[int] = mapped_column(Integer, nullable=False)
