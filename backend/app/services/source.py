@@ -9,8 +9,13 @@ from app.core.slug import generate_slug
 from app.core.source_identity import normalize_source_name
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.source_metadata import SourceClassification, SourceMetric
 from app.repositories.source import SourceRepository
 from app.schemas.source import SourceCreate
+from app.schemas.source_metadata import (
+    SourceClassificationCreate,
+    SourceMetricCreate,
+)
 
 
 class SourceService:
@@ -75,6 +80,9 @@ class SourceService:
             coverage_scope=data.coverage_scope,
             country=data.country,
             language=data.language,
+            media_category=data.media_category,
+            publication_form=data.publication_form,
+            publication_frequency=data.publication_frequency,
             ownership=data.ownership,
             funding_model=data.funding_model,
             paywall=data.paywall,
@@ -126,6 +134,99 @@ class SourceService:
             raise
 
         return source
+
+    def create_classification(
+        self,
+        db: Session,
+        source: Source,
+        data: SourceClassificationCreate,
+    ) -> SourceClassification:
+        classification = SourceClassification(
+            source_id=source.id,
+            dimension=data.dimension,
+            value=data.value.strip(),
+            detail=data.detail,
+            classifier_type=data.classifier_type,
+            classifier_name=data.classifier_name.strip(),
+            source_url=str(data.source_url),
+            reference_date=data.reference_date,
+            valid_from=data.valid_from,
+            valid_to=data.valid_to,
+            retrieved_at=data.retrieved_at,
+            notes=data.notes,
+        )
+
+        try:
+            self.repository.add_classification(db, classification)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_source_classification_assertion":
+                raise BusinessRuleViolationError(
+                    "Diese Quellenklassifikation existiert bereits."
+                ) from exc
+            if constraint_name in {
+                "ck_source_classification_value_nonempty",
+                "ck_source_classification_classifier_nonempty",
+            }:
+                raise BusinessRuleViolationError(
+                    "Klassifikationswert und Klassifizierer dürfen nicht leer sein."
+                ) from exc
+            raise
+
+        return classification
+
+    def create_metric(
+        self,
+        db: Session,
+        source: Source,
+        data: SourceMetricCreate,
+    ) -> SourceMetric:
+        metric = SourceMetric(
+            source_id=source.id,
+            metric_kind=data.metric_kind,
+            value=data.value,
+            unit=data.unit.strip(),
+            metric_scope=data.metric_scope.strip(),
+            reference_period=data.reference_period.strip(),
+            period_start=data.period_start,
+            period_end=data.period_end,
+            measurement_body=data.measurement_body.strip(),
+            source_url=str(data.source_url),
+            audited=data.audited,
+            retrieved_at=data.retrieved_at,
+            notes=data.notes,
+        )
+
+        try:
+            self.repository.add_metric(db, metric)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_source_metric_measurement":
+                raise BusinessRuleViolationError(
+                    "Dieser Reichweitenmesswert existiert bereits."
+                ) from exc
+            if constraint_name in {
+                "ck_source_metric_scope_nonempty",
+                "ck_source_metric_unit_nonempty",
+                "ck_source_metric_reference_period_nonempty",
+                "ck_source_metric_measurement_body_nonempty",
+            }:
+                raise BusinessRuleViolationError(
+                    "Messwert-Metadaten dürfen nicht leer sein."
+                ) from exc
+            raise
+
+        return metric
 
     @staticmethod
     def _validate_feeds(
