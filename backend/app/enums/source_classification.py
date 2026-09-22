@@ -1,0 +1,23 @@
+from enum import Enum
+
+
+class SourceClassificationKind(str, Enum):
+    POLITICAL_ORIENTATION = "POLITICAL_ORIENTATION"
+    RADICALITY = "RADICALITY"
+
+
+class PoliticalOrientation(str, Enum):
+    LEFT = "LEFT"
+    CENTER_LEFT = "CENTER_LEFT"
+    CENTER = "CENTER"
+    CENTER_RIGHT = "CENTER_RIGHT"
+    RIGHT = "RIGHT"
+    MIXED = "MIXED"
+    UNCLASSIFIED = "UNCLASSIFIED"
+
+
+class SourceRadicality(str, Enum):
+    MAINSTREAM = "MAINSTREAM"
+    RADICAL = "RADICAL"
+    EXTREMIST_CLASSIFIED = "EXTREMIST_CLASSIFIED"
+    UNCLASSIFIED = "UNCLASSIFIED"
