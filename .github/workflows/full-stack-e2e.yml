@@ -91,10 +91,13 @@ jobs:
 
       - name: Start production stack
         run: |
-          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d --wait
+          compose=(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml)
+          "${compose[@]}" up -d
+          "${compose[@]}" up -d --wait nginx
 
-      - name: Verify worker HTTP healthchecks are disabled
+      - name: Verify workers are running without HTTP healthchecks
         run: |
+          compose=(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml)
           workers=(
             worker
             content-worker
@@ -110,8 +113,12 @@ jobs:
           )
           for worker in "${workers[@]}"; do
             test "$(
-              docker compose --env-file .env -f infrastructure/docker/docker-compose.yml \
-                inspect "$worker" --format '{{json .Config.Healthcheck.Test}}'
+              "${compose[@]}" ps -q "$worker" |
+                xargs docker inspect --format '{{.State.Running}}'
+            )" = "true"
+            test "$(
+              "${compose[@]}" ps -q "$worker" |
+                xargs docker inspect --format '{{json .Config.Healthcheck.Test}}'
             )" = '["NONE"]'
           done
 
