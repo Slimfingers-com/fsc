@@ -94,6 +94,13 @@ class Source(BaseModel):
         nullable=True,
     )
 
+    content_languages: Mapped[list[str]] = mapped_column(
+        ARRAY(String(10)),
+        nullable=False,
+        default=list,
+        server_default=text("'{}'"),
+    )
+
     media_family: Mapped[MediaFamily | None] = mapped_column(
         Enum(MediaFamily, name="media_family"),
         nullable=True,
