@@ -1,0 +1,132 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "scope": "international",
+  "country": null,
+  "countries_excluded": [
+    "DE",
+    "AT",
+    "CH",
+    "GB",
+    "US"
+  ],
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "selection_policy": "relevance_and_viewpoint_diversity_not_country_quota",
+  "coverage_policy": "no_country_quotas",
+  "languages": "multilingual",
+  "edition_policy": "brand_as_source_print_products_as_outlets",
+  "notes": [
+    "This catalog covers internationally relevant print publications outside the separately modeled DE, AT, CH, GB and US catalogs.",
+    "Countries remain metadata on each entry; they are not separate catalog blocks and there is no requirement to represent every country.",
+    "Selection is based on international or regional relevance, reach, agenda-setting role, and viewpoint diversity. Reach is metadata, never an exclusion threshold.",
+    "Political orientation and radicality require attributed provenance; FSC does not infer orientation from country, language, party endorsements, constitutional questions, or ownership alone.",
+    "Political and radical publications may be included when relevant. Sparse viewpoints remain sparse rather than being filled by quota-driven reclassification.",
+    "Print activity must be verified; discontinued print publications are excluded or documented separately.",
+    "Party press remains an independent dimension."
+  ],
+  "selection_dimensions": [
+    "international_relevance",
+    "regional_relevance",
+    "reach_or_circulation",
+    "agenda_setting_role",
+    "viewpoint_diversity",
+    "language_and_geographic_breadth"
+  ],
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical left",
+      "entries": []
+    },
+    {
+      "key": "left_liberal",
+      "label": "left liberal",
+      "entries": []
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal centre",
+      "entries": []
+    },
+    {
+      "key": "conservative",
+      "label": "conservative",
+      "entries": []
+    },
+    {
+      "key": "right",
+      "label": "right",
+      "entries": []
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right",
+      "entries": []
+    }
+  ],
+  "unclassified_entries": [],
+  "research_regions": [
+    {
+      "key": "western_southern_europe",
+      "priority_countries": [
+        "FR",
+        "IT",
+        "ES",
+        "PT"
+      ]
+    },
+    {
+      "key": "central_eastern_europe",
+      "priority_countries": [
+        "PL",
+        "CZ",
+        "HU",
+        "RO"
+      ]
+    },
+    {
+      "key": "benelux_nordics",
+      "priority_countries": [
+        "NL",
+        "BE",
+        "DK",
+        "SE",
+        "NO",
+        "FI"
+      ]
+    },
+    {
+      "key": "americas_outside_us",
+      "priority_countries": [
+        "CA",
+        "MX",
+        "BR",
+        "AR"
+      ]
+    },
+    {
+      "key": "asia_pacific",
+      "priority_countries": [
+        "JP",
+        "KR",
+        "IN",
+        "AU",
+        "NZ"
+      ]
+    },
+    {
+      "key": "middle_east_africa",
+      "priority_countries": [
+        "IL",
+        "TR",
+        "ZA"
+      ]
+    }
+  ],
+  "candidate_pool": [],
+  "research_notes": [
+    "Priority-country lists guide research only; they are not coverage requirements.",
+    "The catalog may contain several titles from a highly relevant media market and none from another country.",
+    "Candidate review is performed as one international set rather than one approval cycle per country."
+  ]
+}
