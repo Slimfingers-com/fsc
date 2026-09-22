@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ApiError, getStory } from "@/lib/api";
-import { formatDate, percent } from "@/lib/format";
+import { formatDate, percent, safeExternalUrl } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ storyId: string }> };
@@ -57,15 +57,18 @@ export default async function StoryPage({ params }: Props) {
       <section className="section">
         <p className="eyebrow">Quellenlage</p><h2>Artikel in dieser Story</h2>
         <div className="stack">
-          {story.articles.map((article) => (
+          {story.articles.map((article) => {
+            const externalUrl = safeExternalUrl(article.url);
+            return (
             <article className="card article-row" key={article.membership_id}>
               <div>
                 <div className="meta-row"><span>{article.source_name}</span><span>{formatDate(article.published_at)}</span><span>{percent(article.similarity_score)} Cluster-Match</span></div>
                 <h3>{article.title ?? "Artikel ohne Titel"}</h3>
               </div>
-              {article.url ? <a className="text-link" href={article.url} target="_blank" rel="noreferrer">Quelle ↗</a> : null}
+              {externalUrl ? <a className="text-link" href={externalUrl} target="_blank" rel="noopener noreferrer">Quelle ↗</a> : null}
             </article>
-          ))}
+            );
+          })}
         </div>
       </section>
     </>
