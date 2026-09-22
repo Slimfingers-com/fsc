@@ -29,34 +29,973 @@
     {
       "key": "radical_left",
       "label": "radical left",
-      "entries": []
+      "entries": [
+        {
+          "key": "morning-star",
+          "name": "Morning Star",
+          "homepage": "https://morningstaronline.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Morning Star",
+              "source_url": "https://morningstaronline.co.uk/about-us",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher self-description; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "socialist-worker",
+          "name": "Socialist Worker",
+          "homepage": "https://socialistworker.co.uk/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "revolutionary_socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Socialist Worker",
+              "source_url": "https://socialistworker.co.uk/socialist-worker/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher self-description; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "weekly-worker",
+          "name": "Weekly Worker",
+          "homepage": "https://weeklyworker.co.uk/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "marxist",
+              "classifier_type": "self_description",
+              "classifier_name": "Weekly Worker",
+              "source_url": "https://weeklyworker.co.uk/worker/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher positioning; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-canary",
+          "name": "The Canary",
+          "homepage": "https://www.thecanary.co/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "left_wing",
+              "classifier_type": "self_description",
+              "classifier_name": "The Canary",
+              "source_url": "https://www.thecanary.co/uk/news/2026/05/23/canary-daily-newspaper/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher describes its new daily print newspaper as left-wing; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "red-pepper",
+          "name": "Red Pepper",
+          "homepage": "https://www.redpepper.org.uk/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "radical_left",
+              "classifier_type": "self_description",
+              "classifier_name": "Red Pepper",
+              "source_url": "https://www.redpepper.org.uk/about/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher describes an independent magazine of the left with socialist, feminist, green and anti-racist politics."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "tribune",
+          "name": "Tribune",
+          "homepage": "https://tribunemag.co.uk/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Tribune",
+              "source_url": "https://tribunemag.co.uk/about",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher self-description; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "new-left-review",
+          "name": "New Left Review",
+          "homepage": "https://newleftreview.org/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "new_left",
+              "classifier_type": "self_description",
+              "classifier_name": "New Left Review",
+              "source_url": "https://newleftreview.org/about",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher/editorial self-positioning; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "international-socialism",
+          "name": "International Socialism",
+          "homepage": "https://isj.org.uk/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "revolutionary_socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "International Socialism",
+              "source_url": "https://isj.org.uk/about/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher self-description; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
     },
     {
       "key": "left_liberal",
       "label": "left liberal",
-      "entries": []
+      "entries": [
+        {
+          "key": "guardian",
+          "name": "The Guardian",
+          "homepage": "https://www.theguardian.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148819/the-guardian",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "daily-mirror",
+          "name": "Daily Mirror",
+          "homepage": "https://www.mirror.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_wing",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148472/daily-mirror",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "daily-record",
+          "name": "Daily Record",
+          "homepage": "https://www.dailyrecord.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "Scotland",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148477/daily-record",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-herald",
+          "name": "The Herald",
+          "homepage": "https://www.heraldscotland.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "Scotland",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148484/the-herald",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-national-scotland",
+          "name": "The National",
+          "homepage": "https://www.thenational.scot/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "Scotland",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "other",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-national-scotland-bias/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External classification; retain classifier provenance."
+            },
+            {
+              "dimension": "media_positioning",
+              "value": "pro_independence",
+              "classifier_type": "self_description",
+              "classifier_name": "The National",
+              "source_url": "https://www.thenational.scot/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Constitutional position is separate from left-right orientation."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "new-statesman",
+          "name": "New Statesman",
+          "homepage": "https://www.newstatesman.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_wing",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148495/new-statesman",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "prospect",
+          "name": "Prospect",
+          "homepage": "https://www.prospectmagazine.co.uk/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148503/prospect",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "guardian-weekly",
+          "name": "The Guardian Weekly",
+          "homepage": "https://www.theguardian.com/weekly",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148819/the-guardian",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Uses the Guardian brand's external orientation classification; edition remains separately modeled."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "new-internationalist",
+          "name": "New Internationalist",
+          "homepage": "https://newint.org/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "progressive",
+              "classifier_type": "self_description",
+              "classifier_name": "New Internationalist",
+              "source_url": "https://newint.org/about",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher self-description; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
     },
     {
       "key": "liberal_centre",
       "label": "liberal centre",
-      "entries": []
+      "entries": [
+        {
+          "key": "financial-times",
+          "name": "Financial Times",
+          "homepage": "https://www.ft.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148542/financial-times",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-economist",
+          "name": "The Economist",
+          "homepage": "https://www.economist.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148484/the-economist",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
     },
     {
       "key": "conservative",
       "label": "conservative",
-      "entries": []
+      "entries": [
+        {
+          "key": "telegraph",
+          "name": "The Telegraph",
+          "homepage": "https://www.telegraph.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148506/the-daily-telegraph",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "times",
+          "name": "The Times",
+          "homepage": "https://www.thetimes.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148526/the-times",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "daily-mail",
+          "name": "Daily Mail",
+          "homepage": "https://www.dailymail.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148475/daily-mail",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-sun",
+          "name": "The Sun",
+          "homepage": "https://www.thesun.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148829/the-sun",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-scotsman",
+          "name": "The Scotsman",
+          "homepage": "https://www.scotsman.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "Scotland",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148493/the-scotsman",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "belfast-telegraph",
+          "name": "Belfast Telegraph",
+          "homepage": "https://www.belfasttelegraph.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "Northern Ireland",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/200190/belfast-telegraph",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            },
+            {
+              "dimension": "media_positioning",
+              "value": "unionist",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/200190/belfast-telegraph",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Constitutional position stored separately from left-right orientation."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-spectator",
+          "name": "The Spectator",
+          "homepage": "https://www.spectator.co.uk/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148501/the-spectator",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "salisbury-review",
+          "name": "The Salisbury Review",
+          "homepage": "https://salisburyreview.com/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "conservative",
+              "classifier_type": "self_description",
+              "classifier_name": "The Salisbury Review",
+              "source_url": "https://salisburyreview.com/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "Publisher describes itself as a quarterly magazine of conservative thought."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
     },
     {
       "key": "right",
       "label": "right",
-      "entries": []
+      "entries": [
+        {
+          "key": "daily-express",
+          "name": "Daily Express",
+          "homepage": "https://www.express.co.uk/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_wing",
+              "classifier_type": "other",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148480/daily-express",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-critic",
+          "name": "The Critic",
+          "homepage": "https://thecritic.co.uk/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "other",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-critic-bias/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External classification; retain classifier provenance."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
     },
     {
       "key": "radical_right",
       "label": "radical right",
-      "entries": []
+      "entries": [
+        {
+          "key": "the-light",
+          "name": "The Light",
+          "homepage": "https://thelightpaper.co.uk/",
+          "publication_form": "monthly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "promotes_far_right_content",
+              "classifier_type": "other",
+              "classifier_name": "HOPE not hate",
+              "source_url": "https://hopenothate.org.uk/wp-content/uploads/2023/10/HnH_Turn-Off-The-Light_2023-09.pdf",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External report documents promotion/platforming of far-right and Holocaust-denial content; this is not an FSC-authored extremism verdict."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "heritage-and-destiny",
+          "name": "Heritage and Destiny",
+          "homepage": "https://www.heritageanddestiny.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "England",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "radicality",
+              "value": "fascist",
+              "classifier_type": "other",
+              "classifier_name": "HOPE not hate",
+              "source_url": "https://hopenothate.org.uk/wp-content/uploads/2025/03/state-of-hate-2025-v9.0.pdf",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T19:10:00Z",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
     }
   ],
-  "unclassified_entries": [],
+  "unclassified_entries": [
+    {
+      "key": "y-cymro",
+      "name": "Y Cymro",
+      "homepage": "https://ycymro.cymru/",
+      "publication_form": "periodical",
+      "form_group": "newspaper_or_weekly",
+      "language": "cy",
+      "subnational_region": "Wales",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "irish-news",
+      "name": "The Irish News",
+      "homepage": "https://www.irishnews.com/",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "subnational_region": "Northern Ireland",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "irish_nationalist",
+          "classifier_type": "other",
+          "classifier_name": "Encyclopaedia / publisher context",
+          "source_url": "https://www.irishnews.com/",
+          "reference_date": "2026-09-22",
+          "retrieved_at": "2026-09-22T19:10:00Z",
+          "notes": "Constitutional/community positioning is not automatically mapped to left-right orientation."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "news-letter",
+      "name": "News Letter",
+      "homepage": "https://www.newsletter.co.uk/",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "subnational_region": "Northern Ireland",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "british_unionist",
+          "classifier_type": "other",
+          "classifier_name": "Publisher context",
+          "source_url": "https://www.newsletter.co.uk/",
+          "reference_date": "2026-09-22",
+          "retrieved_at": "2026-09-22T19:10:00Z",
+          "notes": "Constitutional/community positioning is not automatically mapped to left-right orientation."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "welsh-agenda",
+      "name": "the welsh agenda",
+      "homepage": "https://www.iwa.wales/our-work/themes/the-welsh-agenda/",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "en",
+      "subnational_region": "Wales",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    }
+  ],
   "coverage_policy_notes": "Targets are research goals, not quotas. Under-covered groups require a documented coverage_exception; titles are never reclassified to fill a quota."
 }
