@@ -6,6 +6,7 @@ from app.core.exceptions import DuplicateSourceError
 from app.enums.source_metadata import PublicationForm, SourceMedium
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate
+from app.schemas.source_metadata import SourceOutletCreate
 from app.schemas.source import SourceCreate
 from app.services.source import SourceService
 
@@ -19,9 +20,15 @@ def test_create_source(db):
             name="Reuters",
             url="https://www.reuters.com",
             source_type=SourceType.AGENCY,
-            media_category=SourceMedium.AGENCY,
-            publication_form=PublicationForm.NEWS_AGENCY,
-            publication_frequency="continuous",
+            outlets=[
+                SourceOutletCreate(
+                    name="Reuters Agency",
+                    media_category=SourceMedium.AGENCY,
+                    publication_form=PublicationForm.NEWS_AGENCY,
+                    publication_frequency="continuous",
+                    is_primary=True,
+                ),
+            ],
             feeds=[
                 FeedCreate(
                     name="World News",
@@ -36,9 +43,10 @@ def test_create_source(db):
     assert source.name == "Reuters"
     assert source.normalized_name == "reuters"
     assert source.slug == "reuters"
-    assert source.media_category == SourceMedium.AGENCY
-    assert source.publication_form == PublicationForm.NEWS_AGENCY
-    assert source.publication_frequency == "continuous"
+    assert len(source.outlets) == 1
+    assert source.outlets[0].media_category == SourceMedium.AGENCY
+    assert source.outlets[0].publication_form == PublicationForm.NEWS_AGENCY
+    assert source.outlets[0].publication_frequency == "continuous"
 
     assert len(source.feeds) == 1
     assert source.feeds[0].name == "World News"
