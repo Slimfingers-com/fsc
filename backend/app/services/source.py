@@ -76,6 +76,7 @@ class SourceService:
             coverage_scope=data.coverage_scope,
             country=data.country,
             language=data.language,
+            content_languages=list(data.content_languages),
             media_family=data.media_family,
             publication_format=data.publication_format,
             publication_frequency=data.publication_frequency,
