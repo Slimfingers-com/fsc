@@ -30,16 +30,28 @@ periods. They must not be collapsed into one score or used as an inclusion thres
 
 ## Decision
 
-### Stable source attributes
+### Editorial sources and outlets
 
-Stable catalog properties remain on `Source`. FSC adds optional fields for:
+`Source` represents the editorial brand, publisher, broadcaster, institution or
+other source identity. The existing `SourceType`, `CoverageScope`, country,
+language, ownership and funding fields remain independent dimensions.
 
-- `media_category`;
-- `publication_form`;
-- `publication_frequency`.
+A source may publish through multiple audience products. FSC therefore stores
+media form on versionable `SourceOutlet` records instead of forcing one
+`publication_form` onto the whole source.
 
-The existing `SourceType`, `CoverageScope`, country, language, ownership and
-funding fields remain independent dimensions.
+Each outlet records:
+
+- outlet name;
+- media category;
+- publication form;
+- publication frequency;
+- optional outlet language and URL;
+- whether it is the primary outlet;
+- active state.
+
+This supports, for example, one editorial source with a daily newspaper, a Sunday
+edition and a website without pretending they are three unrelated editorial sources.
 
 ### Classification assertions
 
@@ -72,7 +84,7 @@ a classification is displayed or used.
 FSC stores audience and circulation measurements as `SourceMetric` records instead
 of mutable fields on `Source`.
 
-Each record contains:
+Each record may optionally point to a specific SourceOutlet and contains:
 
 - metric kind;
 - numeric value and unit;
