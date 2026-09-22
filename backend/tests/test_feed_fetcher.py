@@ -222,7 +222,7 @@ def test_fetch_maps_connection_error():
         request: httpx.Request,
     ) -> httpx.Response:
         raise httpx.ConnectError(
-            "failed",
+            "sensitive resolver detail",
             request=request,
         )
 
@@ -242,7 +242,10 @@ def test_fetch_maps_connection_error():
                 )
             )
 
-    assert "failed" not in str(exc.value)
+    assert (
+        "sensitive resolver detail"
+        not in str(exc.value)
+    )
 
 
 @pytest.mark.parametrize(
