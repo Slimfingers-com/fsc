@@ -102,7 +102,12 @@ class StoryCoverageSummary(BaseModel):
     analyzed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
     story: Mapped["Story"] = relationship()
-    processing_run: Mapped["StoryProcessingRun"] = relationship()
+    processing_run: Mapped["StoryProcessingRun"] = relationship(
+        foreign_keys=[processing_run_id]
+    )
+    consensus_processing_run: Mapped["StoryProcessingRun"] = relationship(
+        foreign_keys=[consensus_processing_run_id]
+    )
 
 
 class StoryCoverageGap(BaseModel):
