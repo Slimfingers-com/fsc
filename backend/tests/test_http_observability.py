@@ -1,3 +1,10 @@
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+from app.core.http import (
+    request_context_middleware,
+)
+
 import json
 from uuid import UUID
 
@@ -128,3 +135,51 @@ def test_liveness_and_readiness(
         "status": "ready",
         "database": "connected",
     }
+
+
+
+def test_unhandled_error_keeps_request_context_headers():
+    test_app = FastAPI()
+    test_app.middleware(
+        "http"
+    )(
+        request_context_middleware
+    )
+
+    @test_app.get("/boom")
+    def boom():
+        raise RuntimeError(
+            "sensitive internal detail"
+        )
+
+    with TestClient(
+        test_app
+    ) as test_client:
+        response = test_client.get(
+            "/boom",
+            headers={
+                "X-Request-ID": (
+                    "unhandled-test"
+                ),
+            },
+        )
+
+    assert response.status_code == 500
+    assert response.headers[
+        "X-Request-ID"
+    ] == "unhandled-test"
+    assert response.headers[
+        "X-Content-Type-Options"
+    ] == "nosniff"
+    assert response.json() == {
+        "detail": (
+            "Internal server error."
+        ),
+        "request_id": (
+            "unhandled-test"
+        ),
+    }
+    assert (
+        "sensitive internal detail"
+        not in response.text
+    )
