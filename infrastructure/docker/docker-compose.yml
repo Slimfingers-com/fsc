@@ -220,14 +220,14 @@ services:
     env_file:
       - ../../.env
     environment:
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME:?DATABASE_NAME is required}
+      POSTGRES_USER: ${DATABASE_USER:?DATABASE_USER is required}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?DATABASE_PASSWORD is required}
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}",
+          "pg_isready -U ${DATABASE_USER:?DATABASE_USER is required} -d ${DATABASE_NAME:?DATABASE_NAME is required}",
         ]
       interval: 5s
       timeout: 3s
