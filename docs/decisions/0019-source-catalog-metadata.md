@@ -33,8 +33,7 @@ periods. They must not be collapsed into one score or used as an inclusion thres
 ### Editorial sources and outlets
 
 `Source` represents the editorial brand, publisher, broadcaster, institution or
-other source identity. The existing `SourceType`, `CoverageScope`, country,
-language, ownership and funding fields remain independent dimensions.
+other source identity. The existing `SourceType`, `CoverageScope`, country, language, ownership and funding fields remain independent dimensions. An optional `subnational_region` records a constituent country, state, province or comparable first-level region without overloading the ISO country field.
 
 A source may publish through multiple audience products. FSC therefore stores
 media form on versionable `SourceOutlet` records instead of forcing one
