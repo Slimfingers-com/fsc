@@ -15,7 +15,7 @@ on:
     paths:
       - "backend/**"
       - "frontend/**"
-      - "infrastructure/docker/**"
+      - "infrastructure/**"
       - ".github/workflows/full-stack-e2e.yml"
 
 jobs:
