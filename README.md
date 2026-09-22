@@ -45,6 +45,12 @@ Current results are available through `/stories/{id}/claim-groups`, `/claim-grou
 
 Current evidence is available through `/stories/{id}/evidence` and `/claim-groups/{id}/evidence`. The processing identity includes the active claim-group generation and all article/source inputs used by the evidence provider. See [ADR 0015](docs/decisions/0015-evidence-analysis.md).
 
+## Consensus & Differences
+
+`python -m app.workers.consensus_main` derives structural agreement and contradiction summaries from the current claim-group and evidence generations. Shared consensus requires the same claim group to be represented by at least two independent source owners. Article count alone is never treated as consensus, and no truth score is produced.
+
+Current results are available through `/stories/{id}/consensus` and `/stories/{id}/differences`. See [ADR 0016](docs/decisions/0016-consensus-differences.md).
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh

@@ -1,6 +1,7 @@
 from app.models.article import Article
 from app.models.article_processing import ArticleProcessingRun, ArticleProcessingState
 from app.models.claim import ArticleClaim
+from app.models.consensus import StoryConsensusSummary, StoryDifferenceSummary
 from app.models.claim_relation import (
     StoryClaimGroup,
     StoryClaimGroupMember,
@@ -37,6 +38,8 @@ __all__ = [
     "StoryClaimGroup",
     "StoryClaimGroupMember",
     "StoryClaimRelation",
+    "StoryConsensusSummary",
+    "StoryDifferenceSummary",
     "StoryEvidence",
     "StoryClaimEvidence",
 ]
