@@ -5,6 +5,8 @@ from pydantic import ValidationError
 
 from app.enums.media_family import MediaFamily
 from app.enums.publication_format import PublicationFormat
+from app.enums.publication_frequency import PublicationFrequency
+from app.enums.reach_metric_quality import ReachMetricQuality
 from app.enums.reach_metric_type import ReachMetricType
 from app.enums.source_classification import SourceClassificationKind
 from app.enums.source_type import SourceType
@@ -28,6 +30,7 @@ def test_source_metadata_round_trip(db):
             language="de",
             media_family=MediaFamily.PRINT,
             publication_format=PublicationFormat.WEEKLY_NEWSPAPER,
+            publication_frequency=PublicationFrequency.WEEKLY,
             coverage_countries=["de", "AT", "de"],
             classifications=[
                 SourceClassificationCreate(
@@ -53,7 +56,7 @@ def test_source_metadata_round_trip(db):
                     period_end=date(2026, 6, 30),
                     evidence_source_name="IVW",
                     evidence_url="https://ivw.example.test",
-                    audited=True,
+                    quality=ReachMetricQuality.AUDITED,
                 )
             ],
         ),
@@ -65,12 +68,13 @@ def test_source_metadata_round_trip(db):
     assert loaded.country == "CH"
     assert loaded.media_family == MediaFamily.PRINT
     assert loaded.publication_format == PublicationFormat.WEEKLY_NEWSPAPER
+    assert loaded.publication_frequency == PublicationFrequency.WEEKLY
     assert loaded.coverage_countries == ["DE", "AT"]
     assert len(loaded.classifications) == 2
     assert loaded.classifications[0].evidence_source_name == "Example Research"
     assert len(loaded.reach_metrics) == 1
     assert loaded.reach_metrics[0].metric_value == 123456
-    assert loaded.reach_metrics[0].audited is True
+    assert loaded.reach_metrics[0].quality == ReachMetricQuality.AUDITED
 
 
 def test_rejects_unknown_classification_value():
