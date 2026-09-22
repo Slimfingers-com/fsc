@@ -265,12 +265,14 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint(
             "source_id",
+            "outlet_id",
             "metric_kind",
             "metric_scope",
             "reference_period",
             "measurement_body",
             "value",
             name="uq_source_metric_measurement",
+            postgresql_nulls_not_distinct=True,
         ),
         sa.CheckConstraint(
             "metric_kind IN ("
