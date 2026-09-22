@@ -945,5 +945,7 @@
         }
       ]
     }
-  ]
+  ],
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Coverage minima guide research only. FSC does not force, invent, or broaden a political classification to satisfy a numeric target; documented market asymmetries are retained."
 }
