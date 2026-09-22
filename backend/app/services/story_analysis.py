@@ -166,6 +166,19 @@ class StoryAnalysisService:
         if len(group_run_ids) != 1:
             return None
 
+        claim_relations_run_id = next(
+            iter(group_run_ids)
+        )
+        member_run_ids = {
+            row.member.processing_run_id
+            for row
+            in snapshot.consensus_snapshot.rows
+        }
+        if member_run_ids != {
+            claim_relations_run_id
+        }:
+            return None
+
         evidence_run_ids = {
             evidence.processing_run_id
             for _, evidence
@@ -183,8 +196,8 @@ class StoryAnalysisService:
             return None
 
         return StoryAnalysisGenerationRead(
-            claim_relations_run_id=next(
-                iter(group_run_ids)
+            claim_relations_run_id=(
+                claim_relations_run_id
             ),
             evidence_run_id=next(
                 iter(evidence_run_ids)
@@ -614,6 +627,10 @@ class StoryAnalysisService:
                 for item in gaps
             ],
         )
+
+        # Force a true READ COMMITTED re-read rather than
+        # reusing stale ORM instances from SQLAlchemy's identity map.
+        db.expire_all()
 
         fresh_snapshot = (
             self.coverage_service
