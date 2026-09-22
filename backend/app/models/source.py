@@ -8,14 +8,18 @@ from sqlalchemy import (
     Text,
     text,
 )
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
 from app.enums.coverage_scope import CoverageScope
+from app.enums.media_family import MediaFamily
+from app.enums.publication_format import PublicationFormat
 from app.enums.source_type import SourceType
 
 if TYPE_CHECKING:
     from app.models.feed import Feed
+    from app.models.source_metadata import SourceClassification, SourceReachMetric
 
 class Source(BaseModel):
     __tablename__ = "sources"
@@ -89,6 +93,25 @@ class Source(BaseModel):
         nullable=True,
     )
 
+    media_family: Mapped[MediaFamily | None] = mapped_column(
+        Enum(MediaFamily, name="media_family"),
+        nullable=True,
+        index=True,
+    )
+
+    publication_format: Mapped[PublicationFormat | None] = mapped_column(
+        Enum(PublicationFormat, name="publication_format"),
+        nullable=True,
+        index=True,
+    )
+
+    coverage_countries: Mapped[list[str]] = mapped_column(
+        ARRAY(String(2)),
+        nullable=False,
+        default=list,
+        server_default=text("'{}'"),
+    )
+
     ownership: Mapped[str | None] = mapped_column(
         Text,
         nullable=True,
@@ -133,6 +156,18 @@ class Source(BaseModel):
         nullable=False,
         default=3,
         server_default=text("3"),
+    )
+
+    classifications: Mapped[list["SourceClassification"]] = relationship(
+        back_populates="source",
+        cascade="all, delete-orphan",
+        order_by="SourceClassification.created_at",
+    )
+
+    reach_metrics: Mapped[list["SourceReachMetric"]] = relationship(
+        back_populates="source",
+        cascade="all, delete-orphan",
+        order_by="SourceReachMetric.created_at",
     )
 
     feeds: Mapped[list["Feed"]] = relationship(
