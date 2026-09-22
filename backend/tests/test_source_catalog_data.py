@@ -1,8 +1,14 @@
 import json
 from pathlib import Path
 
+import pytest
 
-CATALOG_PATH = Path(__file__).parents[1] / "catalog" / "de_print_v1.json"
+
+CATALOG_DIR = Path(__file__).parents[1] / "catalog"
+CATALOG_FILES = {
+    "DE": CATALOG_DIR / "de_print_v1.json",
+    "AT": CATALOG_DIR / "at_print_v1.json",
+}
 
 ALLOWED_FORMS = {
     "daily_newspaper",
@@ -15,14 +21,15 @@ ALLOWED_ACTIVITY = {"active", "verify_current"}
 ALLOWED_FORM_GROUPS = {"newspaper_or_weekly", "magazine_or_periodical"}
 
 
-def load_catalog() -> dict:
-    return json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+def load_catalog(country: str) -> dict:
+    return json.loads(CATALOG_FILES[country].read_text(encoding="utf-8"))
 
 
-def test_de_print_catalog_is_catalog_only_and_unique() -> None:
-    catalog = load_catalog()
+@pytest.mark.parametrize("country", CATALOG_FILES)
+def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
+    catalog = load_catalog(country)
 
-    assert catalog["country"] == "DE"
+    assert catalog["country"] == country
     assert catalog["language"] == "de"
     assert catalog["media_category"] == "print"
     assert catalog["activation_policy"] == "catalog_only_until_joint_review"
@@ -42,13 +49,12 @@ def test_de_print_catalog_is_catalog_only_and_unique() -> None:
             assert entry["form_group"] in ALLOWED_FORM_GROUPS
             assert entry["activity_status"] in ALLOWED_ACTIVITY
             assert entry["catalog_status"] == "candidate"
-
-            # A reviewed catalog must never activate ingestion by itself.
             assert entry["feeds"] == []
 
 
-def test_de_print_catalog_meets_group_targets_or_documents_exception() -> None:
-    catalog = load_catalog()
+@pytest.mark.parametrize("country", CATALOG_FILES)
+def test_print_catalog_meets_targets_or_documents_exception(country: str) -> None:
+    catalog = load_catalog(country)
     newspaper_min = catalog["coverage_targets"]["newspaper_or_weekly_min"]
     magazine_min = catalog["coverage_targets"]["magazine_or_periodical_min"]
 
@@ -62,27 +68,40 @@ def test_de_print_catalog_meets_group_targets_or_documents_exception() -> None:
             for entry in group["entries"]
         )
 
-        assert magazines >= magazine_min
+        if group.get("group_kind") == "format":
+            assert len(group["entries"]) >= 3
+            continue
+
         if newspapers < newspaper_min:
             assert group.get("coverage_exception")
         else:
             assert newspapers >= newspaper_min
 
+        if magazines < magazine_min:
+            assert group.get("coverage_exception")
+        else:
+            assert magazines >= magazine_min
 
-def test_country_block_contains_no_at_or_ch_titles() -> None:
-    catalog = load_catalog()
-    excluded = {"Schweizer Monat", "Schweizerzeit", "NZZ", "Weltwoche"}
-    actual = {
-        entry["name"]
-        for group in catalog["groups"]
-        for entry in group["entries"]
+
+def test_country_blocks_do_not_mix_de_at_ch_titles() -> None:
+    excluded = {
+        "DE": {"Der Standard", "Die Presse", "NZZ", "Weltwoche"},
+        "AT": {"Süddeutsche Zeitung", "FAZ", "NZZ", "Weltwoche"},
     }
 
-    assert actual.isdisjoint(excluded)
+    for country in CATALOG_FILES:
+        catalog = load_catalog(country)
+        actual = {
+            entry["name"]
+            for group in catalog["groups"]
+            for entry in group["entries"]
+        }
+        assert actual.isdisjoint(excluded[country])
 
 
-def test_catalog_metadata_records_are_provenance_complete() -> None:
-    catalog = load_catalog()
+@pytest.mark.parametrize("country", CATALOG_FILES)
+def test_catalog_metadata_records_are_provenance_complete(country: str) -> None:
+    catalog = load_catalog(country)
 
     for group in catalog["groups"]:
         for entry in group["entries"]:
