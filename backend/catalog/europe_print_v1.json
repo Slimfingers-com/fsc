@@ -358,7 +358,8 @@
     "Najwyższy Czas! remains a research candidate rather than promoted shortlist item: an August 2026 physical issue is listed by Empik and the publisher self-describes it as socially conservative/economically liberal, but stronger external placement is needed before deciding right vs radical-right.",
     "Verified examples strengthen the taxonomy: Eurotopics labels L'Humanité far-left, Le Monde centre-left, Le Figaro liberal-conservative, Les Echos liberal, Corriere della Sera liberal-conservative, El Mundo conservative, Politiken centre-left, and Kathimerini liberal-conservative.",
     "The current working distribution is intentionally asymmetric: radical-left and radical-right are sparse because the ~50-title Europe block is a relevance-weighted comparison set, not a six-way quota.",
-    "Remaining four provisional placements now have Eurotopics provenance: La Libre Belgique liberal, Suomen Kuvalehti liberal, Jutarnji list liberal, and Adevărul liberal-conservative. The initial 53-title set plus Rivarol and Sieci therefore has a working political placement for every retained title."
+    "Remaining four provisional placements now have Eurotopics provenance: La Libre Belgique liberal, Suomen Kuvalehti liberal, Jutarnji list liberal, and Adevărul liberal-conservative. The initial 53-title set plus Rivarol and Sieci therefore has a working political placement for every retained title.",
+    "Implementation rule: external political classifications are stored as attributed classifier records with source URL and date, not as FSC-authored factual verdicts."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -596,7 +597,7 @@
   },
   "review_status": {
     "shortlist_political_mapping": "complete",
-    "entry_level_provenance": "in_progress",
+    "entry_level_provenance": "in_progress_batch_1",
     "active_print_verification": "in_progress",
     "metrics_enrichment": "pending",
     "implementation": "pending"
