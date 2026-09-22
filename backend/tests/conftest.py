@@ -1,3 +1,24 @@
+import anyio.abc
+from anyio.from_thread import BlockingPortal
+
+
+def _install_starlette_anyio_compatibility() -> None:
+    # Starlette 1.6.0 still references the deprecated
+    # anyio.abc.BlockingPortal alias at import time.
+    # Its current source already uses anyio.from_thread.BlockingPortal.
+    # Provide the new class under the legacy attribute without touching
+    # warning filters until the fix is included in a Starlette release.
+    if (
+        "BlockingPortal"
+        not in anyio.abc.__dict__
+    ):
+        anyio.abc.__dict__[
+            "BlockingPortal"
+        ] = BlockingPortal
+
+
+_install_starlette_anyio_compatibility()
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, text
