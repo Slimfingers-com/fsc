@@ -31,6 +31,7 @@ def test_source_outlet_rejects_invalid_media_category(db):
         SourceOutlet(
             source_id=source.id,
             name="Invalid outlet",
+            normalized_name="invalid outlet",
             media_category="invalid",
             publication_form="magazine",
             active=True,
@@ -131,6 +132,7 @@ def test_source_metric_uniqueness_is_scoped_by_outlet(db):
     first_outlet = SourceOutlet(
         source_id=source.id,
         name="Daily",
+        normalized_name="daily",
         media_category="print",
         publication_form="daily_newspaper",
         active=True,
@@ -138,6 +140,7 @@ def test_source_metric_uniqueness_is_scoped_by_outlet(db):
     second_outlet = SourceOutlet(
         source_id=source.id,
         name="Sunday",
+        normalized_name="sunday",
         media_category="print",
         publication_form="sunday_newspaper",
         active=True,
