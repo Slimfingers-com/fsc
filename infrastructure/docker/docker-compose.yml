@@ -1,15 +1,19 @@
 name: fsc
 
 services:
-
   nginx:
     image: nginx:stable
     container_name: fsc-nginx
     restart: unless-stopped
+    ports:
+      - "${FSC_HTTP_PORT:-8080}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      frontend:
+        condition: service_healthy
     networks:
       - fsc-network
-    volumes:
-      - nginx_data:/etc/nginx/conf.d
 
   frontend:
     container_name: fsc-frontend
@@ -21,9 +25,10 @@ services:
       FSC_API_URL: http://backend:8000
       FSC_API_TIMEOUT_MS: 8000
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -36,9 +41,10 @@ services:
     env_file:
       - ../../.env
     ports:
-      - "8000:8000"
-    volumes:
-      - ../../backend:/app
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -51,10 +57,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -67,10 +72,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -83,10 +87,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -99,10 +102,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -115,10 +117,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -131,10 +132,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -147,10 +147,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -163,10 +162,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -179,10 +177,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -195,10 +192,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -211,10 +207,9 @@ services:
     restart: unless-stopped
     env_file:
       - ../../.env
-    volumes:
-      - ../../backend:/app
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - fsc-network
 
@@ -225,9 +220,19 @@ services:
     env_file:
       - ../../.env
     environment:
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME:?DATABASE_NAME is required}
+      POSTGRES_USER: ${DATABASE_USER:?DATABASE_USER is required}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?DATABASE_PASSWORD is required}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${DATABASE_USER:?DATABASE_USER is required} -d ${DATABASE_NAME:?DATABASE_NAME is required}",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -237,6 +242,11 @@ services:
     image: redis:8-alpine
     container_name: fsc-redis
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
     volumes:
       - redis_data:/data
     networks:
@@ -248,4 +258,3 @@ networks:
 volumes:
   postgres_data:
   redis_data:
-  nginx_data:

@@ -195,3 +195,24 @@ def test_unhandled_error_keeps_request_context_headers(
         for record in caplog.records
         if record.name == "app.http"
     )
+
+
+
+def test_readiness_rejects_outdated_schema(
+    client,
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        "app.main.database_schema_is_current",
+        lambda db: False,
+    )
+
+    response = client.get(
+        "/health/ready"
+    )
+
+    assert response.status_code == 503
+    assert response.json() == {
+        "status": "not_ready",
+        "database": "schema_outdated",
+    }

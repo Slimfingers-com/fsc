@@ -11,6 +11,9 @@ from app.db.session import SessionLocal
 from app.core.http import (
     request_context_middleware,
 )
+from app.core.readiness import (
+    database_schema_is_current,
+)
 
 app = FastAPI(
     title="FSC API",
@@ -82,12 +85,28 @@ def readiness():
     try:
         with SessionLocal() as db:
             db.execute(text("SELECT 1"))
+            schema_current = (
+                database_schema_is_current(
+                    db
+                )
+            )
     except Exception:
         return JSONResponse(
             status_code=503,
             content={
                 "status": "not_ready",
                 "database": "error",
+            },
+        )
+
+    if not schema_current:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "status": "not_ready",
+                "database": (
+                    "schema_outdated"
+                ),
             },
         )
 
