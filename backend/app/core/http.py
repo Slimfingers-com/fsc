@@ -76,7 +76,7 @@ async def request_context_middleware(
                 request
             )
         except Exception as exc:
-            logger.exception(
+            logger.error(
                 json.dumps(
                     {
                         "event": (
