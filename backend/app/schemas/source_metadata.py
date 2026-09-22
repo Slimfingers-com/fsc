@@ -1,4 +1,5 @@
 from datetime import UTC, date, datetime
+from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, model_validator
 
@@ -38,6 +39,8 @@ class SourceClassificationCreate(BaseModel):
 class SourceClassificationRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
+    id: UUID
+    source_id: UUID
     dimension: SourceClassificationDimension
     value: str
     detail: str | None
@@ -85,6 +88,8 @@ class SourceMetricCreate(BaseModel):
 class SourceMetricRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
+    id: UUID
+    source_id: UUID
     metric_kind: SourceMetricKind
     value: int
     unit: str
