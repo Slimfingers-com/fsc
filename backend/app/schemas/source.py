@@ -5,6 +5,12 @@ from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 from app.enums.coverage_scope import CoverageScope
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate, FeedRead
+from app.schemas.source_metadata import (
+    SourceClassificationRead,
+    SourceMetricRead,
+    SourceOutletCreate,
+    SourceOutletRead,
+)
 
 
 class SourceCreate(BaseModel):
@@ -30,6 +36,7 @@ class SourceCreate(BaseModel):
     priority_tier: int = Field(default=3, ge=1, le=4)
 
     feeds: list[FeedCreate] = Field(default_factory=list)
+    outlets: list[SourceOutletCreate] = Field(default_factory=list)
 
 
 class SourceRead(BaseModel):
@@ -63,3 +70,9 @@ class SourceRead(BaseModel):
     priority_tier: int
 
     feeds: list[FeedRead]
+
+
+class SourceDetailRead(SourceRead):
+    outlets: list[SourceOutletRead]
+    classifications: list[SourceClassificationRead]
+    metrics: list[SourceMetricRead]

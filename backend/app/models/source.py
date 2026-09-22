@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+
 from sqlalchemy import (
     Boolean,
     CheckConstraint,
@@ -16,6 +17,12 @@ from app.enums.source_type import SourceType
 
 if TYPE_CHECKING:
     from app.models.feed import Feed
+    from app.models.source_metadata import (
+        SourceClassification,
+        SourceMetric,
+        SourceOutlet,
+    )
+
 
 class Source(BaseModel):
     __tablename__ = "sources"
@@ -136,6 +143,21 @@ class Source(BaseModel):
     )
 
     feeds: Mapped[list["Feed"]] = relationship(
+        back_populates="source",
+        cascade="all, delete-orphan",
+    )
+
+    outlets: Mapped[list["SourceOutlet"]] = relationship(
+        back_populates="source",
+        cascade="all, delete-orphan",
+    )
+
+    classifications: Mapped[list["SourceClassification"]] = relationship(
+        back_populates="source",
+        cascade="all, delete-orphan",
+    )
+
+    metrics: Mapped[list["SourceMetric"]] = relationship(
         back_populates="source",
         cascade="all, delete-orphan",
     )

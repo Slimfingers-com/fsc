@@ -9,8 +9,18 @@ from app.core.slug import generate_slug
 from app.core.source_identity import normalize_source_name
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.source_metadata import (
+    SourceClassification,
+    SourceMetric,
+    SourceOutlet,
+)
 from app.repositories.source import SourceRepository
 from app.schemas.source import SourceCreate
+from app.schemas.source_metadata import (
+    SourceClassificationCreate,
+    SourceMetricCreate,
+    SourceOutletCreate,
+)
 
 
 class SourceService:
@@ -56,6 +66,7 @@ class SourceService:
             )
 
         self._validate_feeds(data)
+        self._validate_outlets(data)
 
         slug = base_slug
         suffix = 2
@@ -92,6 +103,20 @@ class SourceService:
                 )
                 for feed in data.feeds
             ],
+            outlets=[
+                SourceOutlet(
+                    name=outlet.name.strip(),
+                    normalized_name=normalize_source_name(outlet.name),
+                    media_category=outlet.media_category,
+                    publication_form=outlet.publication_form,
+                    publication_frequency=outlet.publication_frequency,
+                    language=outlet.language,
+                    url=str(outlet.url) if outlet.url else None,
+                    is_primary=outlet.is_primary,
+                    active=outlet.active,
+                )
+                for outlet in data.outlets
+            ],
         )
 
         try:
@@ -123,9 +148,158 @@ class SourceService:
                     "Feed-Namen müssen innerhalb einer Quelle eindeutig sein."
                 ) from exc
 
+            if constraint_name == "uq_source_outlet_source_normalized_name":
+                raise BusinessRuleViolationError(
+                    "Outlet-Namen müssen innerhalb einer Quelle eindeutig sein."
+                ) from exc
+
             raise
 
         return source
+
+    def create_outlet(
+        self,
+        db: Session,
+        source: Source,
+        data: SourceOutletCreate,
+    ) -> SourceOutlet:
+        outlet = SourceOutlet(
+            source_id=source.id,
+            name=data.name.strip(),
+            normalized_name=normalize_source_name(data.name),
+            media_category=data.media_category,
+            publication_form=data.publication_form,
+            publication_frequency=data.publication_frequency,
+            language=data.language,
+            url=str(data.url) if data.url else None,
+            is_primary=data.is_primary,
+            active=data.active,
+        )
+
+        try:
+            self.repository.add_outlet(db, outlet)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_source_outlet_source_normalized_name":
+                raise BusinessRuleViolationError(
+                    "Dieses Outlet existiert für die Quelle bereits."
+                ) from exc
+            if constraint_name == "ck_source_outlet_name_nonempty":
+                raise BusinessRuleViolationError(
+                    "Ein Outlet-Name darf nicht leer sein."
+                ) from exc
+            raise
+
+        return outlet
+
+    def create_classification(
+        self,
+        db: Session,
+        source: Source,
+        data: SourceClassificationCreate,
+    ) -> SourceClassification:
+        classification = SourceClassification(
+            source_id=source.id,
+            dimension=data.dimension,
+            value=data.value.strip(),
+            detail=data.detail,
+            classifier_type=data.classifier_type,
+            classifier_name=data.classifier_name.strip(),
+            source_url=str(data.source_url),
+            reference_date=data.reference_date,
+            valid_from=data.valid_from,
+            valid_to=data.valid_to,
+            retrieved_at=data.retrieved_at,
+            notes=data.notes,
+        )
+
+        try:
+            self.repository.add_classification(db, classification)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_source_classification_assertion":
+                raise BusinessRuleViolationError(
+                    "Diese Quellenklassifikation existiert bereits."
+                ) from exc
+            if constraint_name in {
+                "ck_source_classification_value_nonempty",
+                "ck_source_classification_classifier_nonempty",
+            }:
+                raise BusinessRuleViolationError(
+                    "Klassifikationswert und Klassifizierer dürfen nicht leer sein."
+                ) from exc
+            raise
+
+        return classification
+
+    def create_metric(
+        self,
+        db: Session,
+        source: Source,
+        data: SourceMetricCreate,
+    ) -> SourceMetric:
+        if data.outlet_id is not None:
+            outlet = self.repository.get_active_outlet(
+                db,
+                data.outlet_id,
+            )
+            if outlet is None or outlet.source_id != source.id:
+                raise BusinessRuleViolationError(
+                    "Das angegebene Outlet gehört nicht zu dieser Quelle."
+                )
+
+        metric = SourceMetric(
+            source_id=source.id,
+            outlet_id=data.outlet_id,
+            metric_kind=data.metric_kind,
+            value=data.value,
+            unit=data.unit.strip(),
+            metric_scope=data.metric_scope.strip(),
+            reference_period=data.reference_period.strip(),
+            period_start=data.period_start,
+            period_end=data.period_end,
+            measurement_body=data.measurement_body.strip(),
+            source_url=str(data.source_url),
+            audited=data.audited,
+            retrieved_at=data.retrieved_at,
+            notes=data.notes,
+        )
+
+        try:
+            self.repository.add_metric(db, metric)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_source_metric_measurement":
+                raise BusinessRuleViolationError(
+                    "Dieser Reichweitenmesswert existiert bereits."
+                ) from exc
+            if constraint_name in {
+                "ck_source_metric_scope_nonempty",
+                "ck_source_metric_unit_nonempty",
+                "ck_source_metric_reference_period_nonempty",
+                "ck_source_metric_measurement_body_nonempty",
+            }:
+                raise BusinessRuleViolationError(
+                    "Messwert-Metadaten dürfen nicht leer sein."
+                ) from exc
+            raise
+
+        return metric
 
     @staticmethod
     def _validate_feeds(
@@ -158,3 +332,23 @@ class SourceService:
 
             feed_names.add(normalized_feed_name)
             feed_urls.add(feed_url)
+
+    @staticmethod
+    def _validate_outlets(
+        data: SourceCreate,
+    ) -> None:
+        names: set[str] = set()
+
+        for outlet in data.outlets:
+            name = outlet.name.strip()
+            if not name:
+                raise BusinessRuleViolationError(
+                    "Ein Outlet-Name darf nicht nur aus Leerzeichen bestehen."
+                )
+
+            normalized = normalize_source_name(name)
+            if normalized in names:
+                raise BusinessRuleViolationError(
+                    "Outlet-Namen müssen innerhalb einer Quelle eindeutig sein."
+                )
+            names.add(normalized)

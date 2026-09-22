@@ -6,7 +6,15 @@ from sqlalchemy.orm import Session
 
 from app.core.settings import settings
 from app.db.session import get_db
-from app.schemas.source import SourceCreate, SourceRead
+from app.schemas.source import SourceCreate, SourceDetailRead, SourceRead
+from app.schemas.source_metadata import (
+    SourceClassificationCreate,
+    SourceClassificationRead,
+    SourceMetricCreate,
+    SourceMetricRead,
+    SourceOutletCreate,
+    SourceOutletRead,
+)
 from app.services.source import SourceService
 
 router = APIRouter(
@@ -50,7 +58,7 @@ def require_source_admin(
 
 @router.get(
     "/{slug}",
-    response_model=SourceRead,
+    response_model=SourceDetailRead,
 )
 def get_source(
     slug: str,
@@ -98,3 +106,90 @@ def create_source(
     db.refresh(source)
 
     return source
+
+
+@router.post(
+    "/{slug}/outlets",
+    response_model=SourceOutletRead,
+    status_code=201,
+)
+def create_source_outlet(
+    slug: str,
+    data: SourceOutletCreate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.get_by_slug(db, slug)
+
+    if source is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Source not found.",
+        )
+
+    outlet = service.create_outlet(
+        db,
+        source,
+        data,
+    )
+    db.commit()
+    db.refresh(outlet)
+    return outlet
+
+
+@router.post(
+    "/{slug}/classifications",
+    response_model=SourceClassificationRead,
+    status_code=201,
+)
+def create_source_classification(
+    slug: str,
+    data: SourceClassificationCreate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.get_by_slug(db, slug)
+
+    if source is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Source not found.",
+        )
+
+    classification = service.create_classification(
+        db,
+        source,
+        data,
+    )
+    db.commit()
+    db.refresh(classification)
+    return classification
+
+
+@router.post(
+    "/{slug}/metrics",
+    response_model=SourceMetricRead,
+    status_code=201,
+)
+def create_source_metric(
+    slug: str,
+    data: SourceMetricCreate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.get_by_slug(db, slug)
+
+    if source is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Source not found.",
+        )
+
+    metric = service.create_metric(
+        db,
+        source,
+        data,
+    )
+    db.commit()
+    db.refresh(metric)
+    return metric
