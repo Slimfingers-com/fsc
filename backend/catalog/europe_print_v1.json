@@ -355,7 +355,9 @@
     "Current sourced examples: Eurotopics classifies El Mundo conservative, El País centre-left, Il Giornale right-wing, Il Manifesto left-wing, Corriere della Sera liberal-conservative, De Volkskrant centre-left, NRC liberal, De Telegraaf right-wing, De Groene Amsterdammer left-wing, Jyllands-Posten liberal-conservative, and Efimerida ton Syntakton centre-left.",
     "Rivarol added as a distinct French radical-right print voice: current September 2026 paper issues verify active weekly print; Le Monde describes it as an extreme-right and antisemitic weekly. Classification will be attributed, not asserted by FSC.",
     "Sieci added to the Polish right-side comparison set. Eurotopics lists it as nationalist and Springer research discusses it among Polish right-wing magazines; current print status still requires final publisher/distribution verification.",
-    "Najwyższy Czas! remains a research candidate rather than promoted shortlist item: an August 2026 physical issue is listed by Empik and the publisher self-describes it as socially conservative/economically liberal, but stronger external placement is needed before deciding right vs radical-right."
+    "Najwyższy Czas! remains a research candidate rather than promoted shortlist item: an August 2026 physical issue is listed by Empik and the publisher self-describes it as socially conservative/economically liberal, but stronger external placement is needed before deciding right vs radical-right.",
+    "Verified examples strengthen the taxonomy: Eurotopics labels L'Humanité far-left, Le Monde centre-left, Le Figaro liberal-conservative, Les Echos liberal, Corriere della Sera liberal-conservative, El Mundo conservative, Politiken centre-left, and Kathimerini liberal-conservative.",
+    "The current working distribution is intentionally asymmetric: radical-left and radical-right are sparse because the ~50-title Europe block is a relevance-weighted comparison set, not a six-way quota."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -579,8 +581,8 @@
       "Il Giornale",
       "Gazeta Polska",
       "Do Rzeczy",
-      "De Telegraaf",
-      "Sieci"
+      "Sieci",
+      "De Telegraaf"
     ],
     "radical_right": [
       "Rivarol"
