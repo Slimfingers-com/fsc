@@ -137,5 +137,8 @@ def build_consensus_story(
         data["second_group"] = second_group
         data["relation"] = relation
 
-    persist_current_evidence(db, data)
+    data["evidence_run"] = persist_current_evidence(
+        db,
+        data,
+    )
     return data
