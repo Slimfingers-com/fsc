@@ -6,7 +6,7 @@ from time import perf_counter
 from uuid import uuid4
 
 from fastapi import Request
-from starlette.responses import Response
+from starlette.responses import JSONResponse, Response
 
 
 logger = logging.getLogger("app.http")
@@ -69,21 +69,44 @@ async def request_context_middleware(
     )
     request.state.request_id = request_id
     started = perf_counter()
-    status_code = 500
 
     try:
-        response = await call_next(
-            request
-        )
-        status_code = (
-            response.status_code
-        )
+        try:
+            response = await call_next(
+                request
+            )
+        except Exception as exc:
+            logger.exception(
+                json.dumps(
+                    {
+                        "event": (
+                            "http_unhandled_exception"
+                        ),
+                        "request_id": request_id,
+                        "method": request.method,
+                        "path": request.url.path,
+                        "error_type": (
+                            type(exc).__name__
+                        ),
+                    },
+                    separators=(",", ":"),
+                )
+            )
+            response = JSONResponse(
+                status_code=500,
+                content={
+                    "detail": (
+                        "Internal server error."
+                    ),
+                    "request_id": request_id,
+                },
+            )
+
         response.headers[
             "X-Request-ID"
         ] = request_id
         security_headers(response)
-        return response
-    finally:
+
         duration_ms = (
             perf_counter() - started
         ) * 1000
@@ -94,7 +117,9 @@ async def request_context_middleware(
                     "request_id": request_id,
                     "method": request.method,
                     "path": request.url.path,
-                    "status": status_code,
+                    "status": (
+                        response.status_code
+                    ),
                     "duration_ms": round(
                         duration_ms,
                         2,
@@ -103,6 +128,8 @@ async def request_context_middleware(
                 separators=(",", ":"),
             )
         )
+        return response
+    finally:
         request_id_context.reset(
             token
         )
