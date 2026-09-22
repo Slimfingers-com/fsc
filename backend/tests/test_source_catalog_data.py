@@ -10,6 +10,7 @@ CATALOG_FILES = {
     "AT": CATALOG_DIR / "at_print_v1.json",
     "CH": CATALOG_DIR / "ch_print_v1.json",
     "GB": CATALOG_DIR / "gb_print_v1.json",
+    "US": CATALOG_DIR / "us_print_v1.json",
 }
 
 ALLOWED_FORMS = {
@@ -128,6 +129,18 @@ def test_country_blocks_do_not_mix_de_at_ch_titles() -> None:
             "Schweizer Monat",
             "Schweizerzeit",
         },
+        "US": {
+            "Süddeutsche Zeitung",
+            "Frankfurter Allgemeine Zeitung",
+            "Der Standard",
+            "Die Presse",
+            "Neue Zürcher Zeitung",
+            "Die Weltwoche",
+            "Schweizer Monat",
+            "Schweizerzeit",
+            "The Guardian",
+            "The Telegraph",
+        },
     }
 
     for country in CATALOG_FILES:
@@ -244,3 +257,24 @@ def test_gb_constitutional_position_is_not_forced_onto_left_right_axis() -> None
 def test_gb_sunday_editions_use_brand_outlet_policy() -> None:
     catalog = load_catalog("GB")
     assert catalog["edition_policy"] == "brand_as_source_print_products_as_outlets"
+
+
+def test_us_catalog_keeps_sparse_groups_as_documented_exceptions() -> None:
+    catalog = load_catalog("US")
+    groups = {group["key"]: group for group in catalog["groups"]}
+    for key in ("radical_left", "liberal_centre", "conservative", "right", "radical_right"):
+        assert groups[key].get("coverage_exception")
+
+
+def test_us_spanish_print_can_remain_politically_unclassified() -> None:
+    catalog = load_catalog("US")
+    unclassified = {entry["name"]: entry for entry in catalog.get("unclassified_entries", [])}
+    assert "La Opinión" in unclassified
+    assert unclassified["La Opinión"]["language"] == "es"
+    assert "politically_unclassified" in unclassified["La Opinión"]["format_tags"]
+
+
+def test_us_catalog_excludes_discontinued_american_renaissance_print() -> None:
+    catalog = load_catalog("US")
+    names = {entry["name"] for group in catalog["groups"] for entry in group["entries"]}
+    assert "American Renaissance" not in names
