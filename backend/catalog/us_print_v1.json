@@ -1,0 +1,794 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "languages": [
+    "en",
+    "es"
+  ],
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Targets are research goals, not quotas. Under-covered groups require a documented coverage_exception; titles are never reclassified to fill a quota.",
+  "coverage_targets": {
+    "newspaper_or_weekly_min": 3,
+    "magazine_or_periodical_min": 3
+  },
+  "regional_scope": [
+    "national",
+    "state",
+    "regional"
+  ],
+  "edition_policy": "brand_as_source_print_products_as_outlets",
+  "notes": [
+    "Political orientation and radicality require attributed provenance; FSC does not convert editorial endorsements or party preference into an unsourced political classification.",
+    "Party press is an independent dimension and is not a political group.",
+    "Reach and circulation are metadata, never inclusion thresholds.",
+    "English- and Spanish-language print publications are in scope."
+  ],
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical left",
+      "entries": [
+        {
+          "key": "workers-world",
+          "name": "Workers World",
+          "homepage": "https://www.workers.org/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "revolutionary_socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Workers World",
+              "source_url": "https://www.workers.org/about-workers-world/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "socialist-alternative",
+          "name": "Socialist Alternative",
+          "homepage": "https://www.socialistalternative.org/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Socialist Alternative",
+              "source_url": "https://www.socialistalternative.org/about/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "challenge",
+          "name": "Challenge",
+          "homepage": "https://www.plp.org/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "communist",
+              "classifier_type": "self_description",
+              "classifier_name": "Progressive Labor Party",
+              "source_url": "https://www.plp.org/about-plp",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "jacobin",
+          "name": "Jacobin",
+          "homepage": "https://jacobin.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Jacobin",
+              "source_url": "https://jacobin.com/about",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "monthly-review",
+          "name": "Monthly Review",
+          "homepage": "https://monthlyreview.org/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Monthly Review",
+              "source_url": "https://monthlyreview.org/about/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left liberal",
+      "entries": [
+        {
+          "key": "new-york-times",
+          "name": "The New York Times",
+          "homepage": "https://www.nytimes.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/new-york-times-news-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "washington-post",
+          "name": "The Washington Post",
+          "homepage": "https://www.washingtonpost.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "District of Columbia",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/washington-post-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "usa-today",
+          "name": "USA Today",
+          "homepage": "https://www.usatoday.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/usa-today-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "los-angeles-times",
+          "name": "Los Angeles Times",
+          "homepage": "https://www.latimes.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "California",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/los-angeles-times-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-nation",
+          "name": "The Nation",
+          "homepage": "https://www.thenation.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/nation-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "mother-jones",
+          "name": "Mother Jones",
+          "homepage": "https://www.motherjones.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "California",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/mother-jones-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-new-republic",
+          "name": "The New Republic",
+          "homepage": "https://newrepublic.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "District of Columbia",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/new-republic",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-atlantic",
+          "name": "The Atlantic",
+          "homepage": "https://www.theatlantic.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "District of Columbia",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/atlantic",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "in-these-times",
+          "name": "In These Times",
+          "homepage": "https://inthesetimes.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "Illinois",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "progressive",
+              "classifier_type": "self_description",
+              "classifier_name": "In These Times",
+              "source_url": "https://inthesetimes.com/about",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "current-affairs",
+          "name": "Current Affairs",
+          "homepage": "https://www.currentaffairs.org/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "Louisiana",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "left",
+              "classifier_type": "self_description",
+              "classifier_name": "Current Affairs",
+              "source_url": "https://www.currentaffairs.org/about",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "dissent",
+          "name": "Dissent",
+          "homepage": "https://www.dissentmagazine.org/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "left",
+              "classifier_type": "self_description",
+              "classifier_name": "Dissent",
+              "source_url": "https://www.dissentmagazine.org/about/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal centre",
+      "entries": [
+        {
+          "key": "wall-street-journal",
+          "name": "The Wall Street Journal",
+          "homepage": "https://www.wsj.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "center",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/wall-street-journal-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "reason",
+          "name": "Reason",
+          "homepage": "https://reason.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "center",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/reason",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "newsweek",
+          "name": "Newsweek",
+          "homepage": "https://www.newsweek.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "center",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/newsweek",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative",
+      "entries": [
+        {
+          "key": "washington-times",
+          "name": "The Washington Times",
+          "homepage": "https://www.washingtontimes.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "District of Columbia",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_right",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/washington-times-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "epoch-times-us",
+          "name": "The Epoch Times",
+          "homepage": "https://www.theepochtimes.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_right",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/epoch-times-media-bias",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "national-review",
+          "name": "National Review",
+          "homepage": "https://www.nationalreview.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/national-review",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "washington-examiner",
+          "name": "Washington Examiner",
+          "homepage": "https://www.washingtonexaminer.com/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "District of Columbia",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_right",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/washington-examiner",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "print_distribution",
+              "value": 45000,
+              "unit": "copies_per_issue",
+              "reference_period": "2026 media kit",
+              "measurement_body": "Washington Examiner",
+              "source_url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/WEX-Media-Kit_2026.pdf",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Publisher-reported weekly print distribution; 44 issues in 2026."
+            }
+          ]
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
+    },
+    {
+      "key": "right",
+      "label": "right",
+      "entries": [
+        {
+          "key": "new-york-post",
+          "name": "New York Post",
+          "homepage": "https://nypost.com/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "New York",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/new-york-post",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right",
+      "entries": [
+        {
+          "key": "american-free-press",
+          "name": "American Free Press",
+          "homepage": "https://americanfreepress.net/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "radicality",
+              "value": "right_wing_extremist",
+              "classifier_type": "other",
+              "classifier_name": "Anti-Defamation League",
+              "source_url": "https://www.adl.org/resources/backgrounder/american-free-press",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "barnes-review",
+          "name": "The Barnes Review",
+          "homepage": "https://barnesreview.org/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "subnational_region": "national",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "radicality",
+              "value": "right_wing_extremist",
+              "classifier_type": "other",
+              "classifier_name": "Anti-Defamation League",
+              "source_url": "https://www.adl.org/resources/backgrounder/barnes-review",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T20:15:00Z",
+              "notes": "Attributed source classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Fewer than three currently verified active print titles are retained in one or both form groups. FSC preserves the researched asymmetry rather than reclassifying titles to meet a quota."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "la-opinion",
+      "name": "La Opinión",
+      "homepage": "https://laopinion.com/",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "es",
+      "subnational_region": "California",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    }
+  ],
+  "research_notes": [
+    "American Renaissance is excluded from the active-print candidate pool because its publisher states the monthly print magazine ended in January 2012.",
+    "Workers World remains an active print candidate: its publisher offers a monthly mailed 12-page print paper and current 2026 PDF issues.",
+    "Jacobin remains an active print candidate: its publisher offers a four-issue annual Print + Digital subscription in 2026.",
+    "La Opinión remains an active Spanish-language print candidate: its publisher describes it as the most-read Spanish-language print newspaper in the United States.",
+    "Puerto Rico legacy titles El Nuevo Día and Primera Hora require time-sensitive handling because their publishers announced print cessation in September 2026; they must not be treated as stable active-print candidates.",
+    "Current 2026 third-party classifications support New York Times, Washington Post and USA Today as lean-left; Wall Street Journal news as center; Reason and Newsweek as center; Washington Examiner, National Review and Epoch Times as lean-right; New York Post news as right. These are candidate-level provenance assertions, not FSC judgments.",
+    "ADL identifies The Barnes Review and American Free Press as right-wing extremist publications carrying Holocaust-denial content; SPLC separately documents The Barnes Review as extremist. Both still offer active print subscriptions in 2026.",
+    "US right and radical-right print form groups remain sparse; coverage exceptions are preferable to moving lean-right/conservative publications solely to satisfy targets.",
+    "Washington Examiner is an active weekly print magazine in 2026; its 2026 media kit reports 44 issues and 45,000 copies weekly.",
+    "The Nation, In These Times, Current Affairs, Jacobin, Dissent and National Review all have verified active 2026 print editions/subscriptions.",
+    "Current Affairs publishes six print issues per year in 2026 and describes itself as a left magazine; In These Times publishes 10 print issues per year in 2026.",
+    "The Atlantic is rated Left by AllSides as of 2026; The Nation is rated Left. These classifications are stored as external assertions rather than FSC labels.",
+    "Los Angeles Times is rated Lean Left by AllSides and remains a candidate for left-liberal newspaper coverage.",
+    "Washington Times is rated Lean Right by AllSides and remains a conservative/lean-right candidate.",
+    "Catalyst was removed from the immediate candidate pool pending stronger verification of an active 2026 US print subscription/product."
+  ]
+}
