@@ -29,6 +29,7 @@ class SourceOutletRead(BaseModel):
     id: UUID
     source_id: UUID
     name: str
+    normalized_name: str
     media_category: SourceMedium
     publication_form: PublicationForm
     publication_frequency: str | None
