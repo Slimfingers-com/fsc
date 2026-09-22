@@ -129,4 +129,3 @@ def test_rejects_invalid_source_country_code():
             source_type=SourceType.NEWS,
             country="D1",
         )
-
