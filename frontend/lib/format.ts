@@ -48,3 +48,24 @@ export function positivePage(value: string | undefined): number {
   const parsed = Number.parseInt(value ?? "1", 10);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
 }
+
+export function allowedSearchParam(
+  value: string | string[] | undefined,
+  allowed: readonly string[],
+  fallback: string,
+): string {
+  const cleaned = cleanSearchParam(value);
+  return cleaned && allowed.includes(cleaned) ? cleaned : fallback;
+}
+
+export function safeExternalUrl(value: string | null): string | null {
+  if (!value) return null;
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "http:" || parsed.protocol === "https:"
+      ? parsed.toString()
+      : null;
+  } catch {
+    return null;
+  }
+}
