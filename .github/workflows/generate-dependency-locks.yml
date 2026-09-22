@@ -1,0 +1,45 @@
+name: Generate Dependency Locks
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "frontend/package.json"
+      - "backend/requirements.txt"
+      - ".github/workflows/generate-dependency-locks.yml"
+
+jobs:
+  generate-locks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Resolve frontend lockfile
+        working-directory: frontend
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Resolve backend lockfile
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip freeze --local | LC_ALL=C sort > backend/requirements.lock
+
+      - name: Upload lockfiles
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-locks
+          path: |
+            frontend/package-lock.json
+            backend/requirements.lock
+          if-no-files-found: error
+          retention-days: 1
