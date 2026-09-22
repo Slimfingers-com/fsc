@@ -352,7 +352,10 @@
     "Curated shortlist currently contains 53 titles; final verification may move it toward the ~50 target by removing titles that fail active-print, provenance, or incremental-value checks.",
     "Political review confirms an expected mainstream/centre-left concentration in the first shortlist. Relevant right and radical-right active print candidates must be researched rather than moving conservative titles into harder-right groups.",
     "Hungary changed materially in July 2026: Eurotopics reports no political daily print newspapers remain; Magyar Nemzet moved to weekly and Népszava ended its daily print edition. Publication forms must reflect current 2026 status.",
-    "Current sourced examples: Eurotopics classifies El Mundo conservative, El País centre-left, Il Giornale right-wing, Il Manifesto left-wing, Corriere della Sera liberal-conservative, De Volkskrant centre-left, NRC liberal, De Telegraaf right-wing, De Groene Amsterdammer left-wing, Jyllands-Posten liberal-conservative, and Efimerida ton Syntakton centre-left."
+    "Current sourced examples: Eurotopics classifies El Mundo conservative, El País centre-left, Il Giornale right-wing, Il Manifesto left-wing, Corriere della Sera liberal-conservative, De Volkskrant centre-left, NRC liberal, De Telegraaf right-wing, De Groene Amsterdammer left-wing, Jyllands-Posten liberal-conservative, and Efimerida ton Syntakton centre-left.",
+    "Rivarol added as a distinct French radical-right print voice: current September 2026 paper issues verify active weekly print; Le Monde describes it as an extreme-right and antisemitic weekly. Classification will be attributed, not asserted by FSC.",
+    "Sieci added to the Polish right-side comparison set. Eurotopics lists it as nationalist and Springer research discusses it among Polish right-wing magazines; current print status still requires final publisher/distribution verification.",
+    "Najwyższy Czas! remains a research candidate rather than promoted shortlist item: an August 2026 physical issue is listed by Empik and the publisher self-describes it as socially conservative/economically liberal, but stronger external placement is needed before deciding right vs radical-right."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -371,7 +374,8 @@
         "Libération",
         "L'Humanité",
         "Les Echos",
-        "Valeurs actuelles"
+        "Valeurs actuelles",
+        "Rivarol"
       ]
     },
     {
@@ -402,7 +406,8 @@
         "Rzeczpospolita",
         "Polityka",
         "Do Rzeczy",
-        "Gazeta Polska"
+        "Gazeta Polska",
+        "Sieci"
       ]
     },
     {
@@ -574,9 +579,12 @@
       "Il Giornale",
       "Gazeta Polska",
       "Do Rzeczy",
-      "De Telegraaf"
+      "De Telegraaf",
+      "Sieci"
     ],
-    "radical_right": [],
+    "radical_right": [
+      "Rivarol"
+    ],
     "needs_more_provenance": [
       "La Libre Belgique",
       "Suomen Kuvalehti",
