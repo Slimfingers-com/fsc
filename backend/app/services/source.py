@@ -78,6 +78,7 @@ class SourceService:
             language=data.language,
             media_family=data.media_family,
             publication_format=data.publication_format,
+            publication_frequency=data.publication_frequency,
             coverage_countries=list(data.coverage_countries),
             ownership=data.ownership,
             funding_model=data.funding_model,
@@ -107,7 +108,7 @@ class SourceService:
                     period_end=item.period_end,
                     evidence_source_name=item.evidence_source_name.strip(),
                     evidence_url=str(item.evidence_url) if item.evidence_url else None,
-                    audited=item.audited,
+                    quality=item.quality,
                     notes=item.notes,
                 )
                 for item in data.reach_metrics
