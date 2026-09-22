@@ -1,8 +1,11 @@
 from datetime import UTC, datetime
 
 from app.enums.story_pipeline import StoryPipeline
+from app.models.claim_relation import StoryClaimGroupMember
 from app.models.evidence import StoryEvidence
+from app.models.source import Source
 from app.models.story_processing import StoryProcessingRun
+from tests.conftest import TestSessionLocal
 from tests.coverage_helpers import (
     build_complete_analysis_story,
     build_coverage_story,
@@ -238,4 +241,113 @@ def test_story_analysis_rejects_change_during_composition(
     )
 
     assert calls >= 2
+    assert response.status_code == 404
+
+
+
+def test_story_analysis_rejects_external_commit_during_composition(
+    monkeypatch,
+):
+    with TestSessionLocal.begin() as setup_db:
+        data = build_complete_analysis_story(
+            setup_db
+        )
+        story_id = data["story"].id
+        source_id = data["sources"][0].id
+
+    from app.api.story_analysis import service
+
+    original = (
+        service.coverage_service
+        .load_snapshot
+    )
+    calls = 0
+
+    def changing_snapshot(
+        session,
+        *,
+        story_id,
+        **kwargs,
+    ):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            with TestSessionLocal.begin() as external_db:
+                source = external_db.get(
+                    Source,
+                    source_id,
+                )
+                assert source is not None
+                source.country = "DE"
+        return original(
+            session,
+            story_id=story_id,
+            **kwargs,
+        )
+
+    monkeypatch.setattr(
+        service.coverage_service,
+        "load_snapshot",
+        changing_snapshot,
+    )
+
+    with TestSessionLocal() as request_db:
+        result = service.load(
+            request_db,
+            story_id=story_id,
+        )
+
+    assert calls >= 2
+    assert result is None
+
+
+def test_story_analysis_rejects_mixed_claim_group_member_generation(
+    client,
+    db,
+):
+    data = build_complete_analysis_story(
+        db
+    )
+
+    replacement = StoryProcessingRun(
+        story_id=data["story"].id,
+        processing_state_id=None,
+        pipeline=(
+            StoryPipeline
+            .CLAIM_RELATIONS
+            .value
+        ),
+        input_hash="r" * 64,
+        provider="test",
+        provider_version="1",
+        configuration_version="mixed",
+        worker_id="test",
+        attempt_number=2,
+        started_at=datetime.now(UTC),
+        finished_at=datetime.now(UTC),
+        outcome="succeeded",
+    )
+    db.add(replacement)
+    db.flush()
+
+    member = (
+        db.query(
+            StoryClaimGroupMember
+        )
+        .filter(
+            StoryClaimGroupMember.deleted_at
+            .is_(None)
+        )
+        .first()
+    )
+    assert member is not None
+    member.processing_run_id = (
+        replacement.id
+    )
+    db.flush()
+
+    response = client.get(
+        f"/stories/{data['story'].id}/analysis"
+    )
+
     assert response.status_code == 404
