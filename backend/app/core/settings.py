@@ -36,6 +36,16 @@ class Settings(BaseSettings):
     entity_topic_retry_base_seconds: float = 30.0
     entity_topic_retry_max_seconds: float = 3600.0
 
+    semantic_embedding_enabled: bool = False
+    semantic_embedding_model: str = "text-embedding-3-small"
+    semantic_embedding_timeout_seconds: float = 30.0
+    semantic_embedding_max_article_characters: int = 12000
+    semantic_embedding_worker_poll_interval_seconds: float = 60.0
+    semantic_embedding_worker_batch_limit: int = 25
+    semantic_embedding_worker_claim_ttl_seconds: float = 300.0
+    semantic_embedding_retry_base_seconds: float = 30.0
+    semantic_embedding_retry_max_seconds: float = 3600.0
+
     story_clustering_worker_poll_interval_seconds: float = 60.0
     story_clustering_worker_batch_limit: int = 100
     story_clustering_worker_claim_ttl_seconds: float = 300.0
@@ -44,6 +54,7 @@ class Settings(BaseSettings):
     story_clustering_window_hours: float = 48.0
     story_clustering_candidate_limit: int = 250
     story_clustering_min_similarity: float = 0.45
+    story_clustering_semantic_similarity_threshold: float = 0.72
 
     claim_extraction_worker_poll_interval_seconds: float = 60.0
     claim_extraction_worker_batch_limit: int = 100

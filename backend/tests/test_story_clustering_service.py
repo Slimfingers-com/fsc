@@ -49,6 +49,7 @@ class FakeStoryRepository:
         self.replace_membership_called = False
         self.replace_kwargs = None
         self.has_other_memberships = False
+        self.refreshed_story_ids = []
 
     def acquire_processing_coordination_lock(
         self,
@@ -65,12 +66,12 @@ class FakeStoryRepository:
         self.lock_acquired = True
         self.lock_language_code = language_code
 
-    def get_clustering_language(
+    def get_clustering_partition(
         self,
         db,
         article_id,
     ):
-        return True, "de"
+        return True, "language:de"
 
     def get_membership_by_processing_run(
         self,
@@ -150,6 +151,15 @@ class FakeStoryRepository:
             story_id=kwargs["story_id"],
             match_kind=kwargs["match_kind"],
         )
+
+    def refresh_story_language(
+        self,
+        db,
+        *,
+        story_id,
+    ):
+        self.refreshed_story_ids.append(story_id)
+        return "mul"
 
 
 def make_prepared(
@@ -482,7 +492,7 @@ def test_apply_result_rejects_story_outside_candidate_set():
     assert repository.replace_membership_called is False
 
 
-def test_apply_result_rejects_language_mismatch():
+def test_apply_result_allows_cross_language_candidate_story():
     repository = FakeStoryRepository()
 
     story_id = uuid4()
@@ -506,19 +516,17 @@ def test_apply_result_rejects_language_mismatch():
         result,
     )
 
-    with pytest.raises(
-        ValueError,
-        match="language does not match",
-    ):
-        service.apply_result(
-            object(),
-            prepared=prepared,
-            result=result,
-            processing_run_id=uuid4(),
-            clustered_at=datetime.now(UTC),
-        )
+    applied = service.apply_result(
+        object(),
+        prepared=prepared,
+        result=result,
+        processing_run_id=uuid4(),
+        clustered_at=datetime.now(UTC),
+    )
 
-    assert repository.replace_membership_called is False
+    assert applied.story_id == story_id
+    assert repository.replace_membership_called is True
+    assert repository.refreshed_story_ids == [story_id]
 
 
 @pytest.mark.parametrize(
@@ -569,12 +577,12 @@ def test_cluster_article_acquires_lock_before_preparing(
     def acquire_coordination_lock(db):
         events.append("coordination")
 
-    def get_language(
+    def get_partition(
         db,
         article_id,
     ):
-        events.append("language")
-        return True, "de"
+        events.append("partition")
+        return True, "language:de"
 
     def acquire_lock(
         db,
@@ -623,8 +631,8 @@ def test_cluster_article_acquires_lock_before_preparing(
     )
     monkeypatch.setattr(
         repository,
-        "get_clustering_language",
-        get_language,
+        "get_clustering_partition",
+        get_partition,
     )
     monkeypatch.setattr(
         repository,
@@ -659,8 +667,8 @@ def test_cluster_article_acquires_lock_before_preparing(
     assert applied is not None
     assert events == [
         "coordination",
-        "language",
-        "lock:de",
+        "partition",
+        "lock:language:de",
         "prepare",
         "cluster",
         "apply",
@@ -681,6 +689,9 @@ def make_processing_article():
         title="Bundestag in Berlin",
         normalized_title="bundestag berlin",
         language_code="de",
+        semantic_model=None,
+        semantic_input_hash=None,
+        semantic_embedding=None,
         published_at=None,
         created_at=created_at,
     )
@@ -882,3 +893,26 @@ def test_processing_configuration_tracks_clusterer_configuration():
     )
 
     assert first_version != second_version
+
+
+def test_prepare_carries_semantic_features_into_cluster_input():
+    article = make_processing_article()
+    article.normalized_at = datetime.now(UTC)
+    article.normalized_text = "Bundestag beschlie??t Haushalt."
+    article.semantic_embedding = [0.9, 0.1, 0.0]
+    article.semantic_model = "test-multilingual"
+    repository = SimpleNamespace(
+        load_feature_ids=lambda db, ids: ({article.id: ()}, {article.id: ()}),
+        list_candidates=lambda db, **kwargs: (),
+    )
+    db = SimpleNamespace(scalar=lambda statement: article)
+    service = StoryClusteringService(
+        repository=repository,
+        clusterer=StubClusterer(make_result()),
+    )
+    prepared = service.prepare(
+        db, article_id=article.id, window_hours=24.0, candidate_limit=100
+    )
+    assert prepared is not None
+    assert prepared.article.semantic_embedding == (0.9, 0.1, 0.0)
+    assert prepared.article.semantic_model == "test-multilingual"

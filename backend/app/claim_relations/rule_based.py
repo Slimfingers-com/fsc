@@ -1,6 +1,7 @@
 import re
 from difflib import SequenceMatcher
 
+from app.semantic.provider import cosine_similarity
 from app.claim_relations.provider import (
     ClaimGroupMatchKind,
     ClaimGroupMemberResult,
@@ -26,12 +27,17 @@ _STOP = {
 _NEGATIONS = {
     "not", "no", "never", "without", "neither", "nor",
     "nicht", "kein", "keine", "keinen", "keinem", "keiner", "nie", "niemals",
+    "ne", "pas", "jamais", "aucun", "aucune",
+    "no", "nunca", "ningun", "ningún", "ninguna",
+    "non", "mai", "nessun", "nessuna",
+    "niet", "geen", "nooit",
+    "nie", "żaden", "zadna", "żadna",
 }
 
 
 class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
     provider = "local-rules"
-    version = "1.0.0"
+    version = "2.0.0"
 
     def __init__(
         self,
@@ -94,7 +100,7 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         cls,
         left: StoryClaimInput,
         right: StoryClaimInput,
-    ) -> tuple[float, bool, bool]:
+    ) -> tuple[float, bool, bool, bool]:
         (
             left_tokens,
             left_ordered,
@@ -108,7 +114,7 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
             right_numbers,
         ) = cls._features(right.normalized_claim)
         if left_numbers != right_numbers:
-            return 0.0, left_negative, right_negative
+            return 0.0, left_negative, right_negative, False
 
         lexical_score = cls._jaccard(left_tokens, right_tokens)
         order_score = SequenceMatcher(
@@ -117,7 +123,30 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
             right_ordered,
             autojunk=False,
         ).ratio()
-        return min(lexical_score, order_score), left_negative, right_negative
+        lexical_similarity = min(lexical_score, order_score)
+
+        semantic_similarity = 0.0
+        if (
+            left.semantic_embedding
+            and right.semantic_embedding
+            and left.semantic_model
+            and left.semantic_model == right.semantic_model
+        ):
+            semantic_similarity = max(
+                0.0,
+                cosine_similarity(
+                    left.semantic_embedding,
+                    right.semantic_embedding,
+                ),
+            )
+
+        semantic_used = semantic_similarity > lexical_similarity
+        return (
+            max(lexical_similarity, semantic_similarity),
+            left_negative,
+            right_negative,
+            semantic_used,
+        )
 
     def analyze(self, story: StoryClaimAnalysisInput) -> StoryClaimAnalysisResult:
         claims = sorted(
@@ -138,7 +167,12 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                     score = 1.0
                     kind = ClaimGroupMatchKind.EXACT
                 else:
-                    score, claim_negative, representative_negative = self._similarity(
+                    (
+                        score,
+                        claim_negative,
+                        representative_negative,
+                        semantic_used,
+                    ) = self._similarity(
                         claim,
                         representative,
                     )
@@ -146,7 +180,11 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                         continue
                     if score < self.group_similarity_threshold:
                         continue
-                    kind = ClaimGroupMatchKind.LEXICAL
+                    kind = (
+                        ClaimGroupMatchKind.SEMANTIC
+                        if semantic_used
+                        else ClaimGroupMatchKind.LEXICAL
+                    )
 
                 if score > best_score:
                     best_index = index
@@ -187,7 +225,12 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         relations: list[ClaimGroupRelationResult] = []
         for left_index, left in enumerate(groups):
             for right in groups[left_index + 1:]:
-                score, left_negative, right_negative = self._similarity(
+                (
+                    score,
+                    left_negative,
+                    right_negative,
+                    _semantic_used,
+                ) = self._similarity(
                     representatives[left.key],
                     representatives[right.key],
                 )

@@ -7,6 +7,7 @@ from uuid import UUID
 class ClaimGroupMatchKind(StrEnum):
     EXACT = "exact"
     LEXICAL = "lexical"
+    SEMANTIC = "semantic"
 
 
 class ClaimRelationKind(StrEnum):
@@ -22,6 +23,8 @@ class StoryClaimInput:
     normalized_claim: str
     claim_hash: str
     confidence: float
+    semantic_embedding: tuple[float, ...] | None = None
+    semantic_model: str | None = None
 
 
 @dataclass(frozen=True, slots=True)

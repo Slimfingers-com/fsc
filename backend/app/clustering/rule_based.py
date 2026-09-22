@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from app.semantic.provider import cosine_similarity
 from app.clustering.provider import (
     StoryCandidate,
     StoryClusterer,
@@ -10,25 +11,35 @@ from app.clustering.provider import (
 
 class RuleBasedStoryClusterer(StoryClusterer):
     provider = "local-rules"
-    version = "1"
+    version = "2"
 
     def __init__(
         self,
         *,
         min_similarity: float = 0.45,
+        semantic_similarity_threshold: float = 0.72,
     ) -> None:
         if not 0 <= min_similarity <= 1:
             raise ValueError(
                 "min_similarity must be between 0 and 1"
             )
 
+        if not 0 <= semantic_similarity_threshold <= 1:
+            raise ValueError(
+                "semantic_similarity_threshold must be between 0 and 1"
+            )
+
         self.min_similarity = min_similarity
+        self.semantic_similarity_threshold = semantic_similarity_threshold
 
     def configuration(
         self,
     ) -> dict[str, object]:
         return {
             "min_similarity": self.min_similarity,
+            "semantic_similarity_threshold": (
+                self.semantic_similarity_threshold
+            ),
         }
 
     @staticmethod
@@ -84,6 +95,26 @@ class RuleBasedStoryClusterer(StoryClusterer):
             candidate.topic_ids,
         )
 
+        semantic_similarity = 0.0
+        semantic_match = False
+        if (
+            article.semantic_embedding
+            and candidate.semantic_embedding
+            and article.semantic_model
+            and article.semantic_model == candidate.semantic_model
+        ):
+            semantic_similarity = max(
+                0.0,
+                cosine_similarity(
+                    article.semantic_embedding,
+                    candidate.semantic_embedding,
+                ),
+            )
+            semantic_match = (
+                semantic_similarity
+                >= self.semantic_similarity_threshold
+            )
+
         strong_title_match = (
             title_similarity >= 0.50
         )
@@ -99,6 +130,7 @@ class RuleBasedStoryClusterer(StoryClusterer):
             strong_title_match
             or entity_title_match
             or multi_entity_match
+            or semantic_match
         ):
             return None
 
@@ -111,6 +143,7 @@ class RuleBasedStoryClusterer(StoryClusterer):
         similarity = max(
             title_similarity,
             weighted_similarity,
+            semantic_similarity,
         )
 
         if similarity < self.min_similarity:
@@ -124,6 +157,12 @@ class RuleBasedStoryClusterer(StoryClusterer):
                 "topic_similarity": topic_similarity,
                 "shared_entities": shared_entities,
                 "shared_topics": shared_topics,
+                "semantic_similarity": semantic_similarity,
+                "semantic_model": (
+                    article.semantic_model
+                    if semantic_match
+                    else None
+                ),
             },
         )
 

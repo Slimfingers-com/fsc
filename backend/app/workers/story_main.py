@@ -27,6 +27,9 @@ def main() -> None:
         min_similarity=(
             settings.story_clustering_min_similarity
         ),
+        semantic_similarity_threshold=(
+            settings.story_clustering_semantic_similarity_threshold
+        ),
     )
 
     service = StoryClusteringService(

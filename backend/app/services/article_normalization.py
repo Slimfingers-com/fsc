@@ -116,6 +116,12 @@ class ArticleNormalizationService:
         for key, value in values.items():
             setattr(article, key, value)
 
+        if changed:
+            article.semantic_embedding = None
+            article.semantic_model = None
+            article.semantic_input_hash = None
+            article.semantic_embedded_at = None
+
         article.normalized_at = self.clock()
 
         return changed

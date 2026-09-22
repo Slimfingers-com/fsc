@@ -64,7 +64,7 @@ class StoryClusteringBatchResult:
 
 
 class StoryClusteringService:
-    CONFIG_VERSION = "1"
+    CONFIG_VERSION = "2"
 
     def __init__(
         self,
@@ -138,6 +138,8 @@ class StoryClusteringService:
             "article_title": article.title or "",
             "article_time": article_time.isoformat(),
             "language_code": article.language_code or "",
+            "semantic_model": article.semantic_model or "",
+            "semantic_input_hash": article.semantic_input_hash or "",
             "title_feature_version": TITLE_FEATURE_VERSION,
             "title_terms": list(
                 extract_title_terms(
@@ -271,6 +273,12 @@ class StoryClusteringService:
             ),
             entity_ids=entity_ids,
             topic_ids=topic_ids,
+            semantic_embedding=(
+                tuple(article.semantic_embedding)
+                if article.semantic_embedding
+                else None
+            ),
+            semantic_model=article.semantic_model,
         )
 
         candidates = self.repository.list_candidates(
@@ -296,6 +304,18 @@ class StoryClusteringService:
             prepared.candidates,
         )
 
+    @staticmethod
+    def _partition_for_input(
+        article: StoryClusteringInput,
+    ) -> str:
+        if article.semantic_embedding and article.semantic_model:
+            return f"semantic:{article.semantic_model}"
+        return (
+            f"language:{article.language_code}"
+            if article.language_code is not None
+            else "language:<none>"
+        )
+
     def cluster_article(
         self,
         db: Session,
@@ -311,8 +331,8 @@ class StoryClusteringService:
             db
         )
 
-        eligible, lock_language_code = (
-            self.repository.get_clustering_language(
+        eligible, lock_partition = (
+            self.repository.get_clustering_partition(
                 db,
                 article_id,
             )
@@ -323,7 +343,7 @@ class StoryClusteringService:
 
         self.repository.acquire_clustering_lock(
             db,
-            language_code=lock_language_code,
+            language_code=lock_partition,
         )
 
         prepared = self.prepare(
@@ -337,12 +357,12 @@ class StoryClusteringService:
             return None
 
         if (
-            prepared.article.language_code
-            != lock_language_code
+            self._partition_for_input(prepared.article)
+            != lock_partition
         ):
             raise StoryClusteringInputChangedError(
-                "story clustering language changed "
-                "while acquiring its partition lock"
+                "story clustering partition changed "
+                "while acquiring its lock"
             )
 
         if (
@@ -388,7 +408,9 @@ class StoryClusteringService:
         )
         self.repository.acquire_clustering_lock(
             db,
-            language_code=prepared.article.language_code,
+            language_code=self._partition_for_input(
+                prepared.article
+            ),
         )
 
         return self._apply_result_locked(
@@ -467,8 +489,6 @@ class StoryClusteringService:
 
                 if (
                     existing_story is not None
-                    and existing_story.language_code
-                    == prepared.article.language_code
                     and not self.repository.has_other_active_memberships(
                         db,
                         story_id=existing.story_id,
@@ -505,15 +525,6 @@ class StoryClusteringService:
                     "clusterer target story is not active"
                 )
 
-            if (
-                target_story.language_code
-                != prepared.article.language_code
-            ):
-                raise ValueError(
-                    "clusterer target story language "
-                    "does not match article language"
-                )
-
             target_story_id = target_story.id
 
             if (
@@ -539,10 +550,17 @@ class StoryClusteringService:
             title_terms=prepared.article.title_terms,
             entity_ids=prepared.article.entity_ids,
             topic_ids=prepared.article.topic_ids,
+            semantic_embedding=prepared.article.semantic_embedding,
+            semantic_model=prepared.article.semantic_model,
             similarity_score=result.similarity_score,
             match_kind=match_kind,
             match_details=match_details,
             clustered_at=clustered_at,
+        )
+
+        self.repository.refresh_story_language(
+            db,
+            story_id=membership.story_id,
         )
 
         if (
@@ -550,11 +568,16 @@ class StoryClusteringService:
             and existing.story_id
             != membership.story_id
         ):
-            self.repository.deactivate_story_if_orphan(
+            deactivated = self.repository.deactivate_story_if_orphan(
                 db,
                 story_id=existing.story_id,
                 now=clustered_at,
             )
+            if not deactivated:
+                self.repository.refresh_story_language(
+                    db,
+                    story_id=existing.story_id,
+                )
 
         return AppliedStoryClustering(
             story_id=membership.story_id,

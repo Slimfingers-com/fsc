@@ -6,12 +6,13 @@ from sqlalchemy import (
     DateTime,
     Enum,
     ForeignKey,
+    Float,
     Integer,
     String,
     Text,
     UniqueConstraint,
 )
-from sqlalchemy.dialects.postgresql import UUID as PG_UUID
+from sqlalchemy.dialects.postgresql import ARRAY, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
@@ -135,6 +136,24 @@ class Article(BaseModel):
         DateTime(timezone=True),
         nullable=True,
         index=True,
+    )
+
+    semantic_embedding: Mapped[list[float] | None] = mapped_column(
+        ARRAY(Float),
+        nullable=True,
+    )
+    semantic_model: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
+    )
+    semantic_input_hash: Mapped[str | None] = mapped_column(
+        String(64),
+        nullable=True,
+        index=True,
+    )
+    semantic_embedded_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True,
     )
 
     feed: Mapped["Feed"] = relationship(
