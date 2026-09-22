@@ -190,6 +190,8 @@ class ClaimRelationService:
                 claim.confidence,
                 claim.extraction_provider,
                 claim.extraction_version,
+                claim.semantic_model or "",
+                claim.semantic_input_hash or "",
             ]
             for claim in sorted(
                 snapshot.claims,
@@ -248,6 +250,12 @@ class ClaimRelationService:
                 normalized_claim=claim.normalized_claim,
                 claim_hash=claim.claim_hash,
                 confidence=claim.confidence,
+                semantic_embedding=(
+                    tuple(claim.semantic_embedding)
+                    if claim.semantic_embedding
+                    else None
+                ),
+                semantic_model=claim.semantic_model,
             )
             for claim in sorted(
                 snapshot.claims,
