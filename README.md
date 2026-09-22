@@ -57,6 +57,12 @@ Current results are available through `/stories/{id}/consensus` and `/stories/{i
 
 Current results are available through `/stories/{id}/coverage`, `/stories/{id}/coverage-gaps`, and `/stories/{id}/missing-perspectives`. See [ADR 0017](docs/decisions/0017-coverage-gaps.md).
 
+## Integrated Story Analysis
+
+`GET /stories/{id}/analysis` exposes one generation-consistent Story/Debate analysis view. It composes current Claim Groups and members, Evidence, Consensus, Differences, Coverage Gaps and Missing Perspectives and includes the processing-run IDs used for each analysis generation. The endpoint never mixes stale generations; when a complete current view is unavailable it returns 404 rather than returning partial analysis.
+
+See [ADR 0018](docs/decisions/0018-integrated-story-analysis-api.md).
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh

@@ -10,6 +10,7 @@ from app.api.perspectives import router as perspectives_router
 from app.api.search import router as search_router
 from app.api.sources import router as sources_router
 from app.api.stories import router as stories_router
+from app.api.story_analysis import router as story_analysis_router
 
 api_router = APIRouter()
 
@@ -18,6 +19,7 @@ api_router.include_router(search_router)
 api_router.include_router(entity_topic_router)
 api_router.include_router(evidence_router)
 api_router.include_router(stories_router)
+api_router.include_router(story_analysis_router)
 api_router.include_router(claims_router)
 api_router.include_router(claim_relations_router)
 api_router.include_router(consensus_router)
