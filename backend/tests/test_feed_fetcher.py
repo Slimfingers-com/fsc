@@ -617,3 +617,61 @@ def test_fetch_normalizes_unicode_hostname_to_idna():
                 "https://bücher.example/feed"
             )
         )
+
+
+
+def test_fetch_does_not_forward_cookies_between_redirect_hosts():
+    calls = 0
+
+    def resolver(
+        hostname: str,
+        port: int,
+    ):
+        assert hostname in {
+            "a.example",
+            "b.example",
+        }
+        return ("1.1.1.1",)
+
+    def handler(
+        request: httpx.Request,
+    ) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        assert "cookie" not in request.headers
+
+        if calls == 1:
+            return httpx.Response(
+                302,
+                headers={
+                    "location": (
+                        "https://b.example/feed"
+                    ),
+                    "set-cookie": (
+                        "session=secret; Path=/"
+                    ),
+                },
+                request=request,
+            )
+
+        return httpx.Response(
+            200,
+            content=b"<rss/>",
+            request=request,
+        )
+
+    with httpx.Client(
+        transport=httpx.MockTransport(
+            handler
+        )
+    ) as client:
+        FeedFetcher(
+            client,
+            resolver=resolver,
+        ).fetch(
+            FeedFetchRequest(
+                "https://a.example/feed"
+            )
+        )
+
+    assert calls == 2
