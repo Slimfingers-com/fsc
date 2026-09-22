@@ -1,15 +1,3 @@
-import warnings
-
-warnings.filterwarnings(
-    "ignore",
-    message=(
-        r"The anyio\.abc\.BlockingPortal alias is deprecated, "
-        r"use anyio\.from_thread\.BlockingPortal instead\."
-    ),
-    category=DeprecationWarning,
-    module=r"starlette\.testclient",
-)
-
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, text
@@ -79,15 +67,21 @@ def db(
 ) -> Session:
     connection = test_engine.connect()
     transaction = connection.begin()
-    session = TestSessionLocal(
-        bind=connection
+    session = Session(
+        bind=connection,
+        autoflush=False,
+        expire_on_commit=False,
+        join_transaction_mode=(
+            "create_savepoint"
+        ),
     )
 
     try:
         yield session
     finally:
         session.close()
-        transaction.rollback()
+        if transaction.is_active:
+            transaction.rollback()
         connection.close()
 
 
