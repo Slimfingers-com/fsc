@@ -1,0 +1,112 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CA",
+  "languages": [
+    "en",
+    "fr"
+  ],
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Targets are research goals, not quotas. Under-covered groups require a documented coverage_exception; titles are never reclassified to fill a quota.",
+  "coverage_targets": {
+    "newspaper_or_weekly_min": 3,
+    "magazine_or_periodical_min": 3
+  },
+  "regional_scope": [
+    "national",
+    "province",
+    "regional"
+  ],
+  "edition_policy": "brand_as_source_print_products_as_outlets",
+  "notes": [
+    "Political orientation and radicality require attributed provenance; FSC does not infer political position from geography or language.",
+    "English- and French-language Canadian print publications are in scope.",
+    "Party press is an independent dimension and is not a political group.",
+    "Reach and circulation are metadata, never inclusion thresholds."
+  ],
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical left",
+      "entries": []
+    },
+    {
+      "key": "left_liberal",
+      "label": "left liberal",
+      "entries": []
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal centre",
+      "entries": []
+    },
+    {
+      "key": "conservative",
+      "label": "conservative",
+      "entries": []
+    },
+    {
+      "key": "right",
+      "label": "right",
+      "entries": []
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right",
+      "entries": []
+    }
+  ],
+  "unclassified_entries": [],
+  "candidate_pool": {
+    "radical_left": {
+      "newspaper_or_weekly": [],
+      "magazine_or_periodical": [
+        "Canadian Dimension"
+      ]
+    },
+    "left_liberal": {
+      "newspaper_or_weekly": [
+        "Toronto Star",
+        "Le Devoir"
+      ],
+      "magazine_or_periodical": [
+        "The Walrus",
+        "Maisonneuve"
+      ]
+    },
+    "liberal_centre": {
+      "newspaper_or_weekly": [
+        "The Globe and Mail",
+        "La Presse"
+      ],
+      "magazine_or_periodical": [
+        "Maclean's"
+      ]
+    },
+    "conservative": {
+      "newspaper_or_weekly": [
+        "National Post",
+        "Toronto Sun"
+      ],
+      "magazine_or_periodical": [
+        "The Dorchester Review"
+      ]
+    },
+    "right": {
+      "newspaper_or_weekly": [],
+      "magazine_or_periodical": [
+        "The Western Standard"
+      ]
+    },
+    "radical_right": {
+      "newspaper_or_weekly": [],
+      "magazine_or_periodical": []
+    }
+  },
+  "research_notes": [
+    "Initial Canada candidate pool only; every political placement requires source-level verification before implementation.",
+    "French-language Quebec titles are included without mapping Quebec sovereignty/federalism positions automatically onto the left-right axis.",
+    "Sparse groups will use coverage_exception rather than quota-driven reclassification."
+  ]
+}
