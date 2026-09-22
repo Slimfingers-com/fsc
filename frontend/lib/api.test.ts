@@ -55,6 +55,11 @@ describe("server API client", () => {
       const init = (
         fetchMock.mock.calls[0]?.[1]
       );
+      if (!init) {
+        throw new Error(
+          "fetch init missing",
+        );
+      }
       const headers = new Headers(
         init.headers,
       );
@@ -111,9 +116,18 @@ describe("server API client", () => {
         ),
       });
 
-      const log = JSON.parse(
+      const rawLog = (
         consoleError.mock.calls[0]?.[0]
-        as string,
+      );
+      if (
+        typeof rawLog !== "string"
+      ) {
+        throw new Error(
+          "structured log missing",
+        );
+      }
+      const log = JSON.parse(
+        rawLog,
       );
       expect(
         log.event,
