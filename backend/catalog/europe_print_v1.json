@@ -362,7 +362,9 @@
     "Implementation rule: external political classifications are stored as attributed classifier records with source URL and date, not as FSC-authored factual verdicts.",
     "Verification queue generated from the political review so every shortlisted title can receive explicit current print evidence and provenance before promotion.",
     "Curation reduced the 56-title verification queue to 50 without changing political labels to manufacture balance. Six lower-incremental-value titles remain documented as deferred candidates.",
-    "Final 50 working distribution: radical_left 3, left_liberal 16, liberal_centre 16, conservative 8, right 6, radical_right 1. This asymmetry is preserved as an observed consequence of the relevance-weighted shortlist, not corrected by quota."
+    "Final 50 working distribution: radical_left 3, left_liberal 16, liberal_centre 16, conservative 8, right 6, radical_right 1. This asymmetry is preserved as an observed consequence of the relevance-weighted shortlist, not corrected by quota.",
+    "Verification is batched operationally only; country batches do not create country quotas or separate catalogs.",
+    "Current-form checks must override legacy database descriptions when a title changed frequency or stopped print."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -1173,6 +1175,50 @@
     {
       "name": "Expresso",
       "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    }
+  ],
+  "verification_batches": [
+    {
+      "batch": 1,
+      "countries": [
+        "FR",
+        "IT",
+        "ES"
+      ],
+      "status": "research_in_progress",
+      "focus": "print status, publication form, political provenance, circulation"
+    },
+    {
+      "batch": 2,
+      "countries": [
+        "PL",
+        "NL",
+        "BE"
+      ],
+      "status": "queued"
+    },
+    {
+      "batch": 3,
+      "countries": [
+        "DK",
+        "SE",
+        "NO",
+        "FI"
+      ],
+      "status": "queued"
+    },
+    {
+      "batch": 4,
+      "countries": [
+        "IE",
+        "PT",
+        "CZ",
+        "HU",
+        "GR",
+        "RS",
+        "SI"
+      ],
+      "status": "queued"
     }
   ]
 }
