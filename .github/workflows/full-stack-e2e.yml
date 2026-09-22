@@ -75,7 +75,7 @@ jobs:
 
           stories="$(curl --fail --silent http://127.0.0.1:8080/stories)"
           echo "$stories" | grep -F 'Story-Cluster'
-          echo "$stories" | grep -F '0 Stories'
+          echo "$stories" | grep -F 'Mind. Quellen'
 
       - name: Verify frontend security headers
         run: |
