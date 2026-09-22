@@ -21,7 +21,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "radicality",
+              "value": "externally_classified_left_extremist_context",
+              "classifier_type": "academic",
+              "classifier_name": "Rudolf van Hüllen / Bundeszentrale für politische Bildung",
+              "source_url": "https://www.bpb.de/themen/linksextremismus/dossier-linksextremismus/33630/linksextreme-medien/",
+              "reference_date": "2014-12-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Historical external classification recorded with date; not an FSC-generated label."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -45,7 +56,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "radicality",
+              "value": "externally_classified_left_extremist_context",
+              "classifier_type": "academic",
+              "classifier_name": "Rudolf van Hüllen / Bundeszentrale für politische Bildung",
+              "source_url": "https://www.bpb.de/themen/linksextremismus/dossier-linksextremismus/33630/linksextreme-medien/",
+              "reference_date": "2014-12-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Historical external classification recorded with date; not an FSC-generated label."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -147,7 +169,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148812/taz-die-tageszeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -159,7 +192,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148780/sueddeutsche-zeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -171,7 +215,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148549/frankfurter-rundschau",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -183,7 +238,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148505/die-zeit",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -195,7 +261,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148485/der-freitag",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -207,7 +284,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/272998/neues-deutschland",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -219,7 +307,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148789/der-spiegel",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "magazine_or_periodical"
         },
@@ -285,7 +384,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148489/der-tagesspiegel",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -297,7 +407,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "economically_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148558/handelsblatt",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -309,7 +430,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148795/stuttgarter-zeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -423,7 +555,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148548/frankfurter-allgemeine-zeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -435,7 +578,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148503/die-welt",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -447,7 +601,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148423/bild",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -483,7 +648,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148544/focus",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "magazine_or_periodical"
         },
@@ -495,7 +671,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148458/cicero",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Living media-database snapshot; attribution is external, not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "magazine_or_periodical"
         },
@@ -525,7 +712,28 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_conservative",
+              "classifier_type": "other",
+              "classifier_name": "Bundeszentrale für politische Bildung",
+              "source_url": "https://www.bpb.de/themen/rechtsextremismus/dossier-rechtsextremismus/230035/der-rechte-rand-des-politischen-systems-der-bundesrepublik/",
+              "reference_date": "2016-01-01",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "Approximate article-year reference; exact publication date should be normalized before database import."
+            },
+            {
+              "dimension": "media_positioning",
+              "value": "radical_nationalist_opposition",
+              "classifier_type": "academic",
+              "classifier_name": "Gideon Botsch / Bundeszentrale für politische Bildung",
+              "source_url": "https://www.bpb.de/themen/rechtsextremismus/dossier-rechtsextremismus/230020/die-junge-freiheit-sprachrohr-einer-radikal-nationalistischen-opposition/",
+              "reference_date": "2017-01-11",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "External author's characterization; not an FSC assessment."
+            }
+          ],
           "metrics": [],
           "form_group": "newspaper_or_weekly"
         },
@@ -585,7 +793,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_libertarian",
+              "classifier_type": "other",
+              "classifier_name": "Bundeszentrale für politische Bildung",
+              "source_url": "https://www.bpb.de/themen/rechtsextremismus/dossier-rechtsextremismus/239620/was-liest-der-rechte-rand-der-blaetterwald/",
+              "reference_date": "2016-01-01",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "bpb article reports third-party descriptions including 'rechtslibertär'; exact article date should be normalized before database import."
+            }
+          ],
           "metrics": [],
           "form_group": "magazine_or_periodical"
         },
@@ -640,7 +859,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "new_right",
+              "classifier_type": "other",
+              "classifier_name": "Bundeszentrale für politische Bildung",
+              "source_url": "https://www.bpb.de/themen/parteien/rechtspopulismus/556195/begriffe-der-aeusseren-rechten/",
+              "reference_date": "2024-01-01",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "External positioning from bpb overview; exact article date should be normalized before database import."
+            }
+          ],
           "metrics": [],
           "form_group": "magazine_or_periodical"
         },
@@ -652,7 +882,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "feeds": [],
-          "classifications": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "new_right",
+              "classifier_type": "other",
+              "classifier_name": "Bundeszentrale für politische Bildung",
+              "source_url": "https://www.bpb.de/themen/rechtsextremismus/dossier-rechtsextremismus/284268/was-die-neue-rechte-ist-und-was-nicht/",
+              "reference_date": "2019-01-01",
+              "retrieved_at": "2026-09-22T16:55:00Z",
+              "notes": "External positioning from bpb article; exact article date should be normalized before database import."
+            }
+          ],
           "metrics": [],
           "form_group": "magazine_or_periodical"
         },
