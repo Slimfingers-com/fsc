@@ -1,7 +1,7 @@
 """add party press outlet dimension
 
 Revision ID: f6a9c2e7b1d4
-Revises: a2d9e6b4c7f1
+Revises: a4c8e6f1b2d7
 """
 
 from collections.abc import Sequence
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 
 
 revision: str = "f6a9c2e7b1d4"
-down_revision: str | None = "a2d9e6b4c7f1"
+down_revision: str | None = "a4c8e6f1b2d7"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
