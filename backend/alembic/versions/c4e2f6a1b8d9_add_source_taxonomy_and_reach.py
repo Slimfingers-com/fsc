@@ -21,6 +21,7 @@ media_family = postgresql.ENUM(
     "PRINT", "BROADCAST", "DIGITAL_NATIVE", "AGENCY",
     "PRIMARY_SOURCE", "ORGANIZATION", "ACADEMIC", "OTHER",
     name="media_family",
+    create_type=False,
 )
 
 publication_format = postgresql.ENUM(
@@ -29,11 +30,13 @@ publication_format = postgresql.ENUM(
     "TELEVISION", "ONLINE_NEWS", "NEWS_AGENCY", "NEWSLETTER",
     "PODCAST", "OTHER",
     name="publication_format",
+    create_type=False,
 )
 
 classification_kind = postgresql.ENUM(
     "POLITICAL_ORIENTATION", "RADICALITY",
     name="source_classification_kind",
+    create_type=False,
 )
 
 reach_metric_type = postgresql.ENUM(
@@ -42,6 +45,7 @@ reach_metric_type = postgresql.ENUM(
     "PAID_DIGITAL_SUBSCRIBERS", "SOCIAL_FOLLOWERS", "VIDEO_VIEWS",
     "OTHER",
     name="reach_metric_type",
+    create_type=False,
 )
 
 
