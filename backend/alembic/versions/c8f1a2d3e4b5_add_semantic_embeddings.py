@@ -1,7 +1,7 @@
 """add semantic embeddings for multilingual analysis
 
 Revision ID: c8f1a2d3e4b5
-Revises: c4e2f6a1b8d9
+Revises: c3f8a6d2e1b4
 """
 
 from collections.abc import Sequence
@@ -12,7 +12,7 @@ from sqlalchemy.dialects import postgresql
 
 
 revision: str = "c8f1a2d3e4b5"
-down_revision: str | None = "c4e2f6a1b8d9"
+down_revision: str | None = "c3f8a6d2e1b4"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
