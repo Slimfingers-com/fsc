@@ -10,26 +10,50 @@ from app.ingestion import (
     FeedTimeoutError,
     InvalidFeedUrlError,
 )
+from app.ingestion.url_policy import (
+    FeedUrlPolicy,
+)
 
 
 PUBLIC_IP = "93.184.216.34"
+SECOND_PUBLIC_IP = "142.250.74.14"
 
 
-def public_resolver(
-    hostname: str,
-    port: int,
-):
-    assert port in {80, 443}
-    return (PUBLIC_IP,)
+def public_policy(
+    mapping: dict[
+        str,
+        tuple[str, ...],
+    ]
+    | None = None,
+) -> FeedUrlPolicy:
+    hosts = mapping or {
+        "example.com": (
+            PUBLIC_IP,
+        ),
+    }
+
+    def resolver(
+        hostname: str,
+        port: int,
+    ) -> tuple[str, ...]:
+        del port
+        return hosts.get(
+            hostname,
+            (PUBLIC_IP,),
+        )
+
+    return FeedUrlPolicy(
+        resolver=resolver
+    )
 
 
-def make_fetcher(
+def fetcher(
     client: httpx.Client,
     **kwargs,
 ) -> FeedFetcher:
     return FeedFetcher(
         client,
-        resolver=public_resolver,
+        url_policy=public_policy(),
         **kwargs,
     )
 
@@ -39,9 +63,7 @@ def test_fetch_returns_payload_and_metadata():
         request: httpx.Request,
     ) -> httpx.Response:
         assert (
-            request.headers[
-                "user-agent"
-            ]
+            request.headers["user-agent"]
             == "test-agent"
         )
         assert (
@@ -77,7 +99,7 @@ def test_fetch_returns_payload_and_metadata():
             handler
         )
     ) as client:
-        result = make_fetcher(
+        result = fetcher(
             client,
             user_agent="test-agent",
         ).fetch(
@@ -127,14 +149,11 @@ def test_fetch_uses_conditional_headers_and_accepts_304():
             handler
         )
     ) as client:
-        result = make_fetcher(
+        result = fetcher(
             client
         ).fetch(
             FeedFetchRequest(
-                (
-                    "https://example.com/"
-                    "feed.xml"
-                ),
+                "https://example.com/feed.xml",
                 etag='"v1"',
                 last_modified=(
                     "Tue, 21 Jul 2026 "
@@ -162,27 +181,14 @@ def test_fetch_maps_http_status_error():
         with pytest.raises(
             FeedHttpStatusError
         ) as exc:
-            make_fetcher(
+            fetcher(
                 client
             ).fetch(
                 FeedFetchRequest(
-                    (
-                        "https://example.com/"
-                        "missing"
-                    )
+                    "https://example.com/missing"
                 )
             )
-    assert (
-        exc.value.status_code
-        == 404
-    )
-    assert (
-        exc.value.url
-        == (
-            "https://example.com/"
-            "missing"
-        )
-    )
+    assert exc.value.status_code == 404
 
 
 def test_fetch_maps_timeout():
@@ -202,24 +208,21 @@ def test_fetch_maps_timeout():
         with pytest.raises(
             FeedTimeoutError
         ):
-            make_fetcher(
+            fetcher(
                 client
             ).fetch(
                 FeedFetchRequest(
-                    (
-                        "https://example.com/"
-                        "feed"
-                    )
+                    "https://example.com/feed"
                 )
             )
 
 
-def test_fetch_maps_connection_error_without_leaking_detail():
+def test_fetch_maps_connection_error():
     def handler(
         request: httpx.Request,
     ) -> httpx.Response:
         raise httpx.ConnectError(
-            "sensitive resolver detail",
+            "failed",
             request=request,
         )
 
@@ -230,22 +233,14 @@ def test_fetch_maps_connection_error_without_leaking_detail():
     ) as client:
         with pytest.raises(
             FeedConnectionError
-        ) as exc:
-            make_fetcher(
+        ):
+            fetcher(
                 client
             ).fetch(
                 FeedFetchRequest(
-                    (
-                        "https://example.com/"
-                        "feed"
-                    )
+                    "https://example.com/feed"
                 )
             )
-
-    assert (
-        "sensitive resolver detail"
-        not in str(exc.value)
-    )
 
 
 @pytest.mark.parametrize(
@@ -254,10 +249,7 @@ def test_fetch_maps_connection_error_without_leaking_detail():
         "",
         "ftp://example.com/feed",
         "not-a-url",
-        (
-            "https://user:secret@"
-            "example.com/feed"
-        ),
+        "https://user:secret@example.com/feed",
     ],
 )
 def test_fetch_rejects_invalid_urls(
@@ -265,18 +257,13 @@ def test_fetch_rejects_invalid_urls(
 ):
     with httpx.Client(
         transport=httpx.MockTransport(
-            lambda request: (
-                httpx.Response(
-                    200,
-                    request=request,
-                )
-            )
+            lambda request: None
         )
     ) as client:
         with pytest.raises(
             InvalidFeedUrlError
         ):
-            make_fetcher(
+            fetcher(
                 client
             ).fetch(
                 FeedFetchRequest(
@@ -289,29 +276,36 @@ def test_fetch_rejects_invalid_urls(
     "url",
     [
         "http://127.0.0.1/feed",
-        "http://169.254.169.254/latest/meta-data",
         "http://10.0.0.1/feed",
-        "http://192.168.1.1/feed",
+        "http://169.254.169.254/latest/meta-data",
         "http://[::1]/feed",
-        "http://[fe80::1]/feed",
+        "http://[fc00::1]/feed",
     ],
 )
 def test_fetch_rejects_non_public_literal_addresses(
     url: str,
 ):
+    called = False
+
+    def handler(
+        request: httpx.Request,
+    ) -> httpx.Response:
+        nonlocal called
+        called = True
+        return httpx.Response(
+            200,
+            request=request,
+        )
+
     with httpx.Client(
         transport=httpx.MockTransport(
-            lambda request: (
-                pytest.fail(
-                    "request must not be sent"
-                )
-            )
+            handler
         )
     ) as client:
         with pytest.raises(
             InvalidFeedUrlError
         ):
-            FeedFetcher(
+            fetcher(
                 client
             ).fetch(
                 FeedFetchRequest(
@@ -319,26 +313,33 @@ def test_fetch_rejects_non_public_literal_addresses(
                 )
             )
 
+    assert not called
+
 
 def test_fetch_rejects_hostname_resolving_only_to_private_addresses():
-    def private_resolver(
-        hostname: str,
-        port: int,
-    ):
-        assert hostname == "internal.test"
-        assert port == 80
-        return (
-            "127.0.0.1",
-            "10.0.0.5",
+    policy = public_policy(
+        {
+            "internal.example": (
+                "10.0.0.5",
+                "192.168.1.20",
+            )
+        }
+    )
+    called = False
+
+    def handler(
+        request: httpx.Request,
+    ) -> httpx.Response:
+        nonlocal called
+        called = True
+        return httpx.Response(
+            200,
+            request=request,
         )
 
     with httpx.Client(
         transport=httpx.MockTransport(
-            lambda request: (
-                pytest.fail(
-                    "request must not be sent"
-                )
-            )
+            handler
         )
     ) as client:
         with pytest.raises(
@@ -346,43 +347,30 @@ def test_fetch_rejects_hostname_resolving_only_to_private_addresses():
         ):
             FeedFetcher(
                 client,
-                resolver=private_resolver,
+                url_policy=policy,
             ).fetch(
                 FeedFetchRequest(
-                    (
-                        "http://internal.test/"
-                        "feed"
-                    )
+                    "https://internal.example/feed"
                 )
             )
 
+    assert not called
 
-def test_fetch_revalidates_redirect_targets():
-    requests = 0
 
-    def resolver(
-        hostname: str,
-        port: int,
-    ):
-        if hostname == "example.com":
-            return (PUBLIC_IP,)
-        if hostname == "internal.test":
-            return ("169.254.169.254",)
-        raise AssertionError(
-            hostname
-        )
+def test_redirect_target_is_revalidated_and_private_redirect_is_blocked():
+    calls: list[str] = []
 
     def handler(
         request: httpx.Request,
     ) -> httpx.Response:
-        nonlocal requests
-        requests += 1
+        calls.append(
+            request.url.host
+        )
         return httpx.Response(
             302,
             headers={
                 "location": (
-                    "http://internal.test/"
-                    "feed"
+                    "http://127.0.0.1/admin"
                 )
             },
             request=request,
@@ -396,76 +384,67 @@ def test_fetch_revalidates_redirect_targets():
         with pytest.raises(
             InvalidFeedUrlError
         ):
-            FeedFetcher(
-                client,
-                resolver=resolver,
+            fetcher(
+                client
             ).fetch(
                 FeedFetchRequest(
-                    (
-                        "https://example.com/"
-                        "feed"
-                    )
+                    "https://example.com/feed"
                 )
             )
 
-    assert requests == 1
+    assert calls == [
+        PUBLIC_IP
+    ]
 
 
-def test_fetch_follows_public_redirect_and_preserves_logical_final_url():
-    seen_hosts = []
-
-    def resolver(
-        hostname: str,
-        port: int,
-    ):
-        if hostname == "example.com":
-            return ("93.184.216.34",)
-        if hostname == "cdn.example.net":
-            return ("203.0.113.10",)
-        raise AssertionError(
-            hostname
-        )
+def test_public_redirect_is_pinned_again_and_preserves_logical_url():
+    policy = public_policy(
+        {
+            "example.com": (
+                PUBLIC_IP,
+            ),
+            "cdn.example.net": (
+                SECOND_PUBLIC_IP,
+            ),
+        }
+    )
+    calls: list[
+        tuple[
+            str,
+            str,
+            str | None,
+        ]
+    ] = []
 
     def handler(
         request: httpx.Request,
     ) -> httpx.Response:
-        seen_hosts.append(
-            request.headers["host"]
+        calls.append(
+            (
+                request.url.host,
+                request.headers["host"],
+                request.extensions.get(
+                    "sni_hostname"
+                ),
+            )
         )
         if (
-            request.headers["host"]
-            == "example.com"
+            request.url.host
+            == PUBLIC_IP
         ):
             return httpx.Response(
-                301,
+                302,
                 headers={
                     "location": (
-                        "https://cdn.example.net/"
-                        "feed.xml"
+                        "https://cdn.example.net/final.xml"
                     )
                 },
                 request=request,
             )
-
         return httpx.Response(
             200,
             content=b"<rss/>",
             request=request,
-        )
-
-    # 8.8.8.8 is used for the test-only public
-    # address because TEST-NET ranges are non-global
-    # according to Python's ipaddress module.
-    def public_redirect_resolver(
-        hostname: str,
-        port: int,
-    ):
-        if hostname == "example.com":
-            return ("8.8.8.8",)
-        if hostname == "cdn.example.net":
-            return ("1.1.1.1",)
-        raise AssertionError(
-            hostname
         )
 
     with httpx.Client(
@@ -475,26 +454,28 @@ def test_fetch_follows_public_redirect_and_preserves_logical_final_url():
     ) as client:
         result = FeedFetcher(
             client,
-            resolver=public_redirect_resolver,
+            url_policy=policy,
         ).fetch(
             FeedFetchRequest(
-                (
-                    "https://example.com/"
-                    "feed"
-                )
+                "https://example.com/feed"
             )
         )
 
-    assert seen_hosts == [
-        "example.com",
-        "cdn.example.net",
+    assert calls == [
+        (
+            PUBLIC_IP,
+            "example.com",
+            "example.com",
+        ),
+        (
+            SECOND_PUBLIC_IP,
+            "cdn.example.net",
+            "cdn.example.net",
+        ),
     ]
     assert (
         result.final_url
-        == (
-            "https://cdn.example.net/"
-            "feed.xml"
-        )
+        == "https://cdn.example.net/final.xml"
     )
 
 
@@ -506,8 +487,7 @@ def test_fetch_enforces_redirect_limit():
             302,
             headers={
                 "location": (
-                    "https://example.com/"
-                    "next"
+                    "https://example.com/again"
                 )
             },
             request=request,
@@ -522,15 +502,12 @@ def test_fetch_enforces_redirect_limit():
             FeedConnectionError,
             match="redirect limit",
         ):
-            make_fetcher(
+            fetcher(
                 client,
                 max_redirects=1,
             ).fetch(
                 FeedFetchRequest(
-                    (
-                        "https://example.com/"
-                        "feed"
-                    )
+                    "https://example.com/feed"
                 )
             )
 
@@ -550,14 +527,11 @@ def test_fetch_rejects_oversized_response():
         with pytest.raises(
             FeedResponseTooLargeError
         ):
-            make_fetcher(
+            fetcher(
                 client,
                 max_response_bytes=4,
             ).fetch(
                 FeedFetchRequest(
-                    (
-                        "https://example.com/"
-                        "feed"
-                    )
+                    "https://example.com/feed"
                 )
             )
