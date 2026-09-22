@@ -182,6 +182,19 @@ class ConsensusService:
         if evidence_claim_ids != grouped_claim_ids:
             return None
 
+        current_group_by_claim = {
+            row.claim.id: row.group.id
+            for row in rows
+        }
+        if any(
+            link.claim_group_id
+            != current_group_by_claim.get(
+                evidence_item.claim_id
+            )
+            for link, evidence_item in evidence
+        ):
+            return None
+
         perspectives = self.repository.load_active_perspectives(
             db,
             claim_ids=sorted(
@@ -642,6 +655,14 @@ class ConsensusRunner:
         worker_id: str | None = None,
         clock: Callable[[], datetime] | None = None,
     ) -> None:
+        if (
+            claim_ttl_seconds <= 0
+            or retry_base_seconds <= 0
+            or retry_max_seconds < retry_base_seconds
+        ):
+            raise ValueError(
+                "consensus worker timing settings are invalid"
+            )
         self.session_factory = session_factory
         self.service = service or ConsensusService()
         self.processing_repository = (
@@ -661,40 +682,56 @@ class ConsensusRunner:
         limit: int,
         now: datetime,
     ) -> list[StoryProcessingClaim]:
-        claimed = []
-        stories = self.service.repository.list_candidate_stories(
-            db,
-            after_created_at=None,
-            after_id=None,
-            limit=max(50, limit * 4),
-        )
-        candidates = []
-        for story in stories:
-            snapshot = self.service.load_snapshot(
+        claimed: list[StoryProcessingClaim] = []
+        page_size = max(50, limit * 4)
+        last_created_at = None
+        last_story_id = None
+
+        while len(claimed) < limit:
+            stories = self.service.repository.list_candidate_stories(
                 db,
-                story_id=story.id,
+                after_created_at=last_created_at,
+                after_id=last_story_id,
+                limit=page_size,
             )
-            if snapshot is not None:
-                candidates.append(
-                    self.service.candidate(snapshot)
-                )
-        if candidates:
-            claimed.extend(
-                self.processing_repository.claim_candidates(
+            if not stories:
+                break
+
+            candidates = []
+            for story in stories:
+                snapshot = self.service.load_snapshot(
                     db,
-                    pipeline=StoryPipeline.CONSENSUS_ANALYSIS.value,
-                    candidates=candidates,
-                    worker_id=self.worker_id,
-                    now=now,
-                    claim_expires_at=(
-                        now
-                        + timedelta(
-                            seconds=self.claim_ttl_seconds
-                        )
-                    ),
-                    limit=limit,
+                    story_id=story.id,
                 )
-            )
+                if snapshot is not None:
+                    candidates.append(
+                        self.service.candidate(snapshot)
+                    )
+
+            if candidates:
+                claimed.extend(
+                    self.processing_repository.claim_candidates(
+                        db,
+                        pipeline=StoryPipeline.CONSENSUS_ANALYSIS.value,
+                        candidates=candidates,
+                        worker_id=self.worker_id,
+                        now=now,
+                        claim_expires_at=(
+                            now
+                            + timedelta(
+                                seconds=self.claim_ttl_seconds
+                            )
+                        ),
+                        limit=limit - len(claimed),
+                    )
+                )
+
+            last = stories[-1]
+            last_created_at = last.created_at
+            last_story_id = last.id
+            if len(stories) < page_size:
+                break
+
         return claimed
 
     def run_pending(
