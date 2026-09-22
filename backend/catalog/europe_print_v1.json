@@ -335,6 +335,10 @@
     "Priority-country lists guide research only and are not coverage requirements.",
     "Candidate review is performed as one European set, not one approval cycle per country.",
     "Initial broad European pool deliberately over-inclusive; active print status, political provenance, relevance and duplication are verified before promotion to entries.",
-    "Major national agenda-setting titles are considered alongside ideologically distinctive and fringe publications; neither reach nor ideology alone guarantees inclusion."
+    "Major national agenda-setting titles are considered alongside ideologically distinctive and fringe publications; neither reach nor ideology alone guarantees inclusion.",
+    "Lidové noviny requires exclusion/current-status verification: its daily print edition ceased in 2024, so it must not be promoted as an active daily without evidence of a current print product.",
+    "20minutos Spain requires current print-frequency verification before promotion; free-paper distribution models can change independently of the digital brand.",
+    "Observador Portugal is primarily digital and requires evidence of an active recurring print publication before inclusion.",
+    "Political classifications will be stored as source assertions with classifier type/name/date rather than inferred from common descriptions."
   ]
 }
