@@ -15,6 +15,7 @@ from app.db.base import BaseModel
 from app.enums.coverage_scope import CoverageScope
 from app.enums.media_family import MediaFamily
 from app.enums.publication_format import PublicationFormat
+from app.enums.publication_frequency import PublicationFrequency
 from app.enums.source_type import SourceType
 
 if TYPE_CHECKING:
@@ -101,6 +102,12 @@ class Source(BaseModel):
 
     publication_format: Mapped[PublicationFormat | None] = mapped_column(
         Enum(PublicationFormat, name="publication_format"),
+        nullable=True,
+        index=True,
+    )
+
+    publication_frequency: Mapped[PublicationFrequency | None] = mapped_column(
+        Enum(PublicationFrequency, name="publication_frequency"),
         nullable=True,
         index=True,
     )
