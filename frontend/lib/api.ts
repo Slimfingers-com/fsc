@@ -37,8 +37,7 @@ export class ApiError extends Error {
   }
 }
 
-function logFailure(
-  *,
+function logFailure({
   requestId,
   path,
   status,
