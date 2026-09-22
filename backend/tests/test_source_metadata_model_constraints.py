@@ -9,7 +9,7 @@ from app.enums.source_metadata import (
     SourceMetricKind,
 )
 from app.enums.source_type import SourceType
-from app.models.source_metadata import SourceClassification, SourceMetric
+from app.models.source_metadata import SourceClassification, SourceMetric, SourceOutlet
 from app.schemas.source import SourceCreate
 from app.services.source import SourceService
 
@@ -23,6 +23,22 @@ def make_source(db):
             source_type=SourceType.NEWS,
         ),
     )
+
+
+def test_source_outlet_rejects_invalid_media_category(db):
+    source = make_source(db)
+    db.add(
+        SourceOutlet(
+            source_id=source.id,
+            name="Invalid outlet",
+            media_category="invalid",
+            publication_form="magazine",
+            active=True,
+        )
+    )
+
+    with pytest.raises(IntegrityError):
+        db.flush()
 
 
 def test_source_classification_rejects_invalid_dimension(db):
