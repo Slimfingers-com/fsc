@@ -893,3 +893,26 @@ def test_processing_configuration_tracks_clusterer_configuration():
     )
 
     assert first_version != second_version
+
+
+def test_prepare_carries_semantic_features_into_cluster_input():
+    article = make_processing_article()
+    article.normalized_at = datetime.now(UTC)
+    article.normalized_text = "Bundestag beschlie??t Haushalt."
+    article.semantic_embedding = [0.9, 0.1, 0.0]
+    article.semantic_model = "test-multilingual"
+    repository = SimpleNamespace(
+        load_feature_ids=lambda db, ids: ({article.id: ()}, {article.id: ()}),
+        list_candidates=lambda db, **kwargs: (),
+    )
+    db = SimpleNamespace(scalar=lambda statement: article)
+    service = StoryClusteringService(
+        repository=repository,
+        clusterer=StubClusterer(make_result()),
+    )
+    prepared = service.prepare(
+        db, article_id=article.id, window_hours=24.0, candidate_limit=100
+    )
+    assert prepared is not None
+    assert prepared.article.semantic_embedding == (0.9, 0.1, 0.0)
+    assert prepared.article.semantic_model == "test-multilingual"

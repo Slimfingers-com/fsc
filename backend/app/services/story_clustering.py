@@ -273,6 +273,12 @@ class StoryClusteringService:
             ),
             entity_ids=entity_ids,
             topic_ids=topic_ids,
+            semantic_embedding=(
+                tuple(article.semantic_embedding)
+                if article.semantic_embedding
+                else None
+            ),
+            semantic_model=article.semantic_model,
         )
 
         candidates = self.repository.list_candidates(
