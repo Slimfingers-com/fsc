@@ -2,7 +2,7 @@
 
 FSC ist eine Plattform zur transparenten Analyse öffentlicher Debatten.
 
-Current release candidate: `1.0.0-rc.1`. The canonical project version is stored in `VERSION`; release notes are in [docs/operations/release-1.0.0-rc.1.md](docs/operations/release-1.0.0-rc.1.md).
+Current release candidate: `1.0.0-rc.2`. The canonical project version is stored in `VERSION`; release notes are in [docs/operations/release-1.0.0-rc.2.md](docs/operations/release-1.0.0-rc.2.md).
 
 Ziel ist es, Ereignisse nicht nur als Nachrichten darzustellen, sondern Perspektiven, Claims, Evidenz, Konsens, Unterschiede, Coverage Gaps und fehlende Perspektiven sichtbar zu machen.
 
