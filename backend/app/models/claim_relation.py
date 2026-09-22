@@ -74,7 +74,7 @@ class StoryClaimGroupMember(BaseModel):
             name="ck_story_claim_group_members_similarity",
         ),
         CheckConstraint(
-            "match_kind IN ('exact', 'lexical')",
+            "match_kind IN ('exact', 'lexical', 'semantic')",
             name="ck_story_claim_group_members_match_kind",
         ),
     )
