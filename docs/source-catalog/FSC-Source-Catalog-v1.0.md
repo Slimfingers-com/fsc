@@ -206,6 +206,100 @@ Boulevard is a **format dimension**, not a political orientation.
 | Heute | free daily / boulevard | 501,409 distributed copies in ÖAK H1 2026 |
 | ÖSTERREICH / oe24 | paid + free daily hybrid / boulevard | current 2026 print operation and cross-media metrics recorded |
 
+## Switzerland (CH)
+
+### Print
+
+Switzerland is a separate multilingual country block. Each catalog entry stores its own article/publication language; the initial print catalog covers German, French, Italian and Romansh.
+
+All entries below are catalog candidates only; no feed is activated by catalog inclusion.
+
+#### A. Radical / system-oppositional left
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| solidaritéS | fr | periodical / newspaper | anticapitalist, feminist, ecosocialist self-positioning; active 2026 |
+| Voix Populaire | fr | magazine | affiliated with Romandy labour/POP structures |
+| WIDERSPRUCH | de | periodical | self-description: Beiträge zu sozialistischer Politik |
+| Neue Wege | de | magazine | religious-socialist / critical tradition; active 2026 |
+
+The current Swiss radical-left print market is predominantly periodical/magazine-form. FSC records the real asymmetry rather than relabelling titles.
+
+#### B. Left / centre-left / left-liberal
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| WOZ – Die Wochenzeitung | de | weekly newspaper | euro|topics: left |
+| Tages-Anzeiger | de | daily newspaper | euro|topics: left-liberal |
+| Le Courrier | fr | daily newspaper | euro|topics: left |
+| Le Temps | fr | daily newspaper | euro|topics: left-liberal |
+| Tribune de Genève | fr | daily newspaper | euro|topics: left-liberal |
+| laRegione | it | daily newspaper | euro|topics: left-liberal |
+| SonntagsZeitung | de | Sunday newspaper | euro|topics: left-liberal |
+| Le Matin Dimanche | fr | Sunday newspaper | euro|topics: left-liberal |
+| Beobachter | de | magazine | euro|topics: left-liberal |
+
+#### C. Liberal / centre / economically liberal
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| Aargauer Zeitung | de | daily newspaper | euro|topics: liberal |
+| NZZ am Sonntag | de | Sunday newspaper | euro|topics: liberal |
+| Handelszeitung | de | weekly newspaper | euro|topics: economically liberal |
+| Corriere del Ticino | it | daily newspaper | euro|topics: liberal |
+| Schweizer Monat | de | magazine | liberal publisher self-positioning; active 2026 |
+| Nebelspalter | de | magazine | publisher self-positioning: liberal / bourgeois |
+| BILANZ | de | magazine | current WEMF/MACH metrics recorded |
+| PME | fr | magazine | current WEMF/MACH metrics recorded |
+
+#### D. Conservative / liberal-conservative / bourgeois-conservative
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| Neue Zürcher Zeitung | de | daily newspaper | euro|topics: liberal-conservative |
+| Luzerner Zeitung | de | daily newspaper | euro|topics: liberal-conservative |
+| St. Galler Tagblatt | de | daily newspaper | euro|topics: liberal-conservative |
+| Schweizerzeit | de | magazine | publisher self-description: bürgerlich-konservativ; monthly print since 2026 |
+
+The current general-political Swiss conservative magazine market is smaller than the newspaper market; the catalog keeps that gap explicit.
+
+#### E. Right / right-conservative / party press
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| Die Weltwoche | de | weekly newspaper | euro|topics: right |
+| SVP-Klartext | de | party newspaper / periodical | current SVP party newspaper; dated 2026 tariff reports about 50,500 copies and publisher page reports 100,000 readers |
+
+#### F. Far-right / radical-right external positioning
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| Schweizer Demokrat | de | party newspaper / periodical | Historisches Lexikon der Schweiz historically locates the party far right; current party newspaper remains active |
+
+The historical "far right" positioning is stored as attributed external metadata. It is **not** treated as synonymous with a current official extremist classification.
+
+#### G. General-interest / linguistically important print
+
+No political classification is forced when reliable provenance is absent or unnecessary for the catalog role.
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| La Quotidiana | rm | daily newspaper | only Romansh daily newspaper; ensures Romansh representation |
+| Schweizer Illustrierte | de | magazine | current WEMF/MACH metrics recorded |
+| L’illustré | fr | magazine | current WEMF/MACH metrics recorded |
+| Das Magazin | de | weekly magazine | current publisher/MACH metrics recorded |
+
+#### H. Boulevard / mass reach
+
+Boulevard is a **format dimension**, not a political orientation.
+
+| Title | Language | Publication form | Notes |
+| --- | --- | --- | --- |
+| Blick | de | daily newspaper / boulevard | current WEMF/MACH metrics recorded |
+| SonntagsBlick | de | Sunday newspaper / boulevard | current WEMF/MACH metrics recorded |
+
+The print editions of **20 Minuten / 20 minutes / 20 minuti ended in December 2025**. They therefore do not belong in the active 2026 Swiss print catalog, even though their digital brands remain relevant for a later digital-media block.
+
 ## Reach and circulation model
 
 Metrics are historical observations, not properties overwritten on the source.
@@ -248,21 +342,25 @@ Required provenance:
 
 Self-description, media-database classification, academic classification, public-authority classification and court findings remain distinguishable.
 
-## Country blocks after DE
+## Country-block progress
 
-The same taxonomy is applied independently to:
+Completed print country blocks:
 
-1. Austria (AT)
-2. Switzerland (CH)
-3. United Kingdom (GB)
-4. United States (US)
-5. Canada (CA)
-6. France (FR)
-7. Italy (IT)
-8. Spain (ES)
-9. Poland (PL)
-10. Benelux and Nordic countries as separate country records
-11. further internationally relevant countries
+1. Germany (DE)
+2. Austria (AT)
+3. Switzerland (CH)
+
+The same taxonomy is applied next to:
+
+1. United Kingdom (GB)
+2. United States (US)
+3. Canada (CA)
+4. France (FR)
+5. Italy (IT)
+6. Spain (ES)
+7. Poland (PL)
+8. Benelux and Nordic countries as separate country records
+9. further internationally relevant countries
 
 Foreign-language media are not deferred. FSC v1.0 cross-language story matching is part of the current product scope.
 
