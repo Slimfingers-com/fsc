@@ -28,6 +28,7 @@ def test_source_metadata_round_trip(db):
             source_type=SourceType.NEWS,
             country="ch",
             language="de",
+            content_languages=["DE", "en", "de"],
             media_family=MediaFamily.PRINT,
             publication_format=PublicationFormat.WEEKLY_NEWSPAPER,
             publication_frequency=PublicationFrequency.WEEKLY,
@@ -66,6 +67,8 @@ def test_source_metadata_round_trip(db):
     loaded = service.get_by_slug(db, source.slug)
     assert loaded is not None
     assert loaded.country == "CH"
+    assert loaded.language == "de"
+    assert loaded.content_languages == ["de", "en"]
     assert loaded.media_family == MediaFamily.PRINT
     assert loaded.publication_format == PublicationFormat.WEEKLY_NEWSPAPER
     assert loaded.publication_frequency == PublicationFrequency.WEEKLY
