@@ -1,0 +1,1064 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm"
+  ],
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "coverage_targets": {
+    "newspaper_or_weekly_min": 3,
+    "magazine_or_periodical_min": 3
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "coverage_exception": "The active Swiss radical-left print landscape is predominantly periodical/magazine-form. Only one current newspaper-form title was verified; FSC records the real asymmetry.",
+      "entries": [
+        {
+          "key": "solidarites",
+          "name": "solidaritéS",
+          "homepage": "https://solidarites.ch/",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "anticapitalist_feminist_ecosocialist",
+              "classifier_type": "self_description",
+              "classifier_name": "solidaritéS",
+              "source_url": "https://solidarites.ch/a-propos/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Publisher/movement self-description; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "print_run",
+              "value": 5000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026-06",
+              "measurement_body": "publisher imprint",
+              "source_url": "https://solidarites.ch/wp-content/uploads/2026/06/solidarites-465-web.pdf",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Issue 465 imprint states 5,000 copies and 17 issues/year."
+            }
+          ]
+        },
+        {
+          "key": "voix-populaire",
+          "name": "Voix Populaire",
+          "homepage": "https://voixpopulaire.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "party_affiliated_labour_left",
+              "classifier_type": "publisher",
+              "classifier_name": "Voix Populaire",
+              "source_url": "https://voixpopulaire.ch/a-propos/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Publisher states affiliation with the Romandy sections of Parti Suisse du Travail / Parti Ouvrier Populaire."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "widerspruch",
+          "name": "WIDERSPRUCH",
+          "homepage": "https://widerspruch.ch/",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "socialist_politics",
+              "classifier_type": "self_description",
+              "classifier_name": "WIDERSPRUCH",
+              "source_url": "https://widerspruch.ch/impressum",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Self-description: 'Beiträge zu sozialistischer Politik'; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "neue-wege",
+          "name": "Neue Wege",
+          "homepage": "https://www.neuewege.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "religious_socialist",
+              "classifier_type": "self_description",
+              "classifier_name": "Neue Wege",
+              "source_url": "https://www.neuewege.ch/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "The publication identifies with Religion/Sozialismus/Kritik; current print activity independently confirmed for 2026."
+            }
+          ],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "coverage_exception": "Switzerland has many verified left/left-liberal newspaper titles across language regions, but fewer general-political print magazines with a reliable external orientation classification.",
+      "entries": [
+        {
+          "key": "woz",
+          "name": "WOZ – Die Wochenzeitung",
+          "homepage": "https://www.woz.ch/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148866/woz-die-wochenzeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "tages-anzeiger",
+          "name": "Tages-Anzeiger",
+          "homepage": "https://www.tagesanzeiger.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148807/tages-anzeiger",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "le-courrier",
+          "name": "Le Courrier",
+          "homepage": "https://lecourrier.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148599/le-courrier",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "le-temps",
+          "name": "Le Temps",
+          "homepage": "https://www.letemps.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148665/le-temps",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "tribune-de-geneve",
+          "name": "Tribune de Genève",
+          "homepage": "https://www.tdg.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148827/tribune-de-geneve",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "la-regione",
+          "name": "laRegione",
+          "homepage": "https://www.laregione.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148743/la-regione-ticino",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "sonntagszeitung",
+          "name": "SonntagsZeitung",
+          "homepage": "https://www.tagesanzeiger.ch/sonntagszeitung",
+          "publication_form": "sunday_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148791/sonntagszeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "le-matin-dimanche",
+          "name": "Le Matin Dimanche",
+          "homepage": "https://epaper.lematindimanche.ch/",
+          "publication_form": "sunday_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/289196/le-matin-dimanche",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "beobachter",
+          "name": "Beobachter",
+          "homepage": "https://www.beobachter.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148418/beobachter",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/economically liberal",
+      "entries": [
+        {
+          "key": "aargauer-zeitung",
+          "name": "Aargauer Zeitung",
+          "homepage": "https://www.aargauerzeitung.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148401/aargauer-zeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "nzz-am-sonntag",
+          "name": "NZZ am Sonntag",
+          "homepage": "https://magazin.nzz.ch/nzz-am-sonntag",
+          "publication_form": "sunday_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148603/nzz-am-sonntag",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "handelszeitung",
+          "name": "Handelszeitung",
+          "homepage": "https://www.handelszeitung.ch/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "economically_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148601/handelszeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "corriere-del-ticino",
+          "name": "Corriere del Ticino",
+          "homepage": "https://www.cdt.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148465/corriere-del-ticino",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "schweizer-monat",
+          "name": "Schweizer Monat",
+          "homepage": "https://schweizermonat.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "self_description",
+              "classifier_name": "Schweizer Monat",
+              "source_url": "https://schweizermonat.ch/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Publisher/editorial self-positioning in the liberal tradition; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "nebelspalter",
+          "name": "Nebelspalter",
+          "homepage": "https://www.nebelspalter.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_bourgeois",
+              "classifier_type": "self_description",
+              "classifier_name": "Nebelspalter",
+              "source_url": "https://www.nebelspalter.ch/ueber-uns/um-was-es-uns-geht",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Self-description: 'liberal, dass es kracht' and 'bürgerlich im ursprünglichen Sinne'; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "print_run",
+              "value": 18000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2025-08",
+              "measurement_body": "Nebelspalter",
+              "source_url": "https://www.nebelspalter.ch/ueber-uns/in-eigener-sache",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Publisher statement from 2025; retained with date, not presented as a 2026 audited circulation."
+            }
+          ]
+        },
+        {
+          "key": "bilanz",
+          "name": "BILANZ",
+          "homepage": "https://www.bilanz.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 32369,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "WEMF-2025",
+              "measurement_body": "WEMF",
+              "source_url": "https://www.ringier-advertising.ch/content/uploads/2026/03/FS_Bilanz_Themenuebersicht_2026_de.pdf",
+              "audited": true,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 125000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH-Basic-2026-1",
+              "measurement_body": "MACH Basic",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/bilanz/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "pme",
+          "name": "PME",
+          "homepage": "https://www.pme.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 16838,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "WEMF-2025",
+              "measurement_body": "WEMF",
+              "source_url": "https://www.ringier-advertising.ch/content/uploads/2026/03/FS_PME_Specialuebersicht_2026_fr.pdf",
+              "audited": true,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 34000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH-Basic-2026-1",
+              "measurement_body": "MACH Basic",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/pme/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative/bourgeois-conservative",
+      "coverage_exception": "Three independently classified conservative/liberal-conservative newspapers are verified, but the current Swiss political magazine market has fewer clearly classifiable conservative print titles.",
+      "entries": [
+        {
+          "key": "nzz",
+          "name": "Neue Zürcher Zeitung",
+          "homepage": "https://www.nzz.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148731/neue-zuercher-zeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "luzerner-zeitung",
+          "name": "Luzerner Zeitung",
+          "homepage": "https://www.luzernerzeitung.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148602/luzerner-zeitung",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "st-galler-tagblatt",
+          "name": "St. Galler Tagblatt",
+          "homepage": "https://www.tagblatt.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148551/st-galler-tagblatt",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "schweizerzeit",
+          "name": "Schweizerzeit",
+          "homepage": "https://schweizerzeit.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "bourgeois_conservative",
+              "classifier_type": "self_description",
+              "classifier_name": "Schweizerzeit Verlags AG",
+              "source_url": "https://schweizerzeit.ch/ueber-uns/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Publisher self-description: bürgerlich-konservative Grundhaltung; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/party press",
+      "coverage_exception": "The verified Swiss right-wing print set is newspaper/party-paper heavy. FSC does not reclassify liberal or conservative magazines as right-wing merely to meet a quota.",
+      "entries": [
+        {
+          "key": "weltwoche",
+          "name": "Die Weltwoche",
+          "homepage": "https://weltwoche.ch/",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148504/weltwoche",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Living media-database snapshot; external attribution, not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "svp-klartext",
+          "name": "SVP-Klartext",
+          "homepage": "https://www.svp.ch/parteizeitung/",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "party_press_svp",
+              "classifier_type": "publisher",
+              "classifier_name": "SVP Schweiz",
+              "source_url": "https://www.svp.ch/parteizeitung/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "SVP identifies SVP-Klartext as its party newspaper; this records publisher relationship, not an FSC ideological score."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "print_run",
+              "value": 60000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "2026",
+              "measurement_body": "SVP Schweiz",
+              "source_url": "https://www.svp.ch/publikationen/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Current publisher page states monthly party newspaper with 60,000-copy circulation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "far-right/radical-right external positioning",
+      "coverage_exception": "Only one active Swiss newspaper-form title with a sufficiently documented external far-right historical positioning was retained. 'Far right' is stored as attributed positioning and is not treated as synonymous with an official extremist classification.",
+      "entries": [
+        {
+          "key": "schweizer-demokrat",
+          "name": "Schweizer Demokrat",
+          "homepage": "https://www.schweizer-demokraten.ch/de/",
+          "publication_form": "periodical",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "far_right",
+              "classifier_type": "academic",
+              "classifier_name": "Historisches Lexikon der Schweiz",
+              "source_url": "https://hls-dhs-dss.ch/de/articles/017409/2017-03-20/",
+              "reference_date": "2017-03-20",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "HLS describes the Schweizer Demokraten historically as ideologically positioned far right. This is dated external attribution and is not treated as an official extremist classification."
+            },
+            {
+              "dimension": "media_positioning",
+              "value": "party_press_schweizer_demokraten",
+              "classifier_type": "publisher",
+              "classifier_name": "Schweizer Demokraten",
+              "source_url": "https://www.schweizer-demokraten.ch/de/",
+              "reference_date": "2026-09-22",
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Current party site offers subscriptions to the newspaper Schweizer Demokrat."
+            }
+          ],
+          "metrics": []
+        }
+      ]
+    },
+    {
+      "key": "general_unclassified",
+      "label": "general-interest / linguistically important print without forced political classification",
+      "group_kind": "unclassified",
+      "entries": [
+        {
+          "key": "la-quotidiana",
+          "name": "La Quotidiana",
+          "homepage": "https://www.suedostschweiz.ch/laquotidiana",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "rm",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "schweizer-illustrierte",
+          "name": "Schweizer Illustrierte",
+          "homepage": "https://www.schweizer-illustrierte.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 63422,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "WEMF-2026",
+              "measurement_body": "WEMF",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/schweizer-illustrierte/",
+              "audited": true,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 295000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH-Basic-2026-1",
+              "measurement_body": "MACH Basic",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/schweizer-illustrierte/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "lillustre",
+          "name": "L’illustré",
+          "homepage": "https://www.illustre.ch/",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 57145,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "WEMF-2025",
+              "measurement_body": "WEMF",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/lillustre/",
+              "audited": true,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 227000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH-Basic-2026-1",
+              "measurement_body": "MACH Basic",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/lillustre/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "das-magazin",
+          "name": "Das Magazin",
+          "homepage": "https://www.tagesanzeiger.ch/das-magazin",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 159253,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH/WEMF-current-media-page",
+              "measurement_body": "Tamedia Advertising",
+              "source_url": "https://advertising.tamedia.ch/brands/das-magazin-print",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": "Current publisher media page labels this value as Auflage; exact audited measurement body is not asserted."
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 446000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH-Basic-2026-1",
+              "measurement_body": "MACH Basic",
+              "source_url": "https://advertising.tamedia.ch/brands/das-magazin-print",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "boulevard",
+      "label": "boulevard / mass-reach format",
+      "group_kind": "format",
+      "coverage_exception": "The former high-reach 20 Minuten/20 minutes/20 minuti print editions ended in December 2025 and are therefore excluded from the active 2026 print catalog. Two active Blick print titles remain.",
+      "entries": [
+        {
+          "key": "blick",
+          "name": "Blick",
+          "homepage": "https://www.blick.ch/",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 58699,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "WEMF-2026",
+              "measurement_body": "WEMF",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
+              "audited": true,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 300000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH-Basic-2026-1",
+              "measurement_body": "MACH Basic",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            }
+          ]
+        },
+        {
+          "key": "sonntagsblick",
+          "name": "SonntagsBlick",
+          "homepage": "https://www.blick.ch/sonntagsblick/",
+          "publication_form": "sunday_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "boulevard"
+          ],
+          "feeds": [],
+          "classifications": [],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 66608,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "WEMF-2026",
+              "measurement_body": "WEMF",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
+              "audited": true,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            },
+            {
+              "metric_kind": "print_readers",
+              "value": 265000,
+              "unit": "count",
+              "metric_scope": "source_total",
+              "reference_period": "MACH-Basic-2026-1",
+              "measurement_body": "MACH Basic",
+              "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
+              "audited": false,
+              "retrieved_at": "2026-09-22T18:10:00Z",
+              "notes": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
