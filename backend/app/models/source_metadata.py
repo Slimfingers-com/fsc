@@ -18,6 +18,7 @@ from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
+from app.enums.reach_metric_quality import ReachMetricQuality
 from app.enums.reach_metric_type import ReachMetricType
 from app.enums.source_classification import SourceClassificationKind
 
@@ -115,11 +116,11 @@ class SourceReachMetric(BaseModel):
         nullable=False,
     )
     evidence_url: Mapped[str | None] = mapped_column(Text, nullable=True)
-    audited: Mapped[bool] = mapped_column(
-        Boolean,
+    quality: Mapped[ReachMetricQuality] = mapped_column(
+        Enum(ReachMetricQuality, name="reach_metric_quality"),
         nullable=False,
-        default=False,
-        server_default=text("false"),
+        default=ReachMetricQuality.OTHER,
+        server_default=text("'OTHER'"),
     )
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
 
