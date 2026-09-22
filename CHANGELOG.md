@@ -2,6 +2,17 @@
 
 All notable FSC release changes are documented here.
 
+## [1.0.0-rc.2] - 2026-09-22
+
+### Fixed
+- Disabled the backend image's HTTP readiness healthcheck for non-HTTP worker containers.
+- Full Stack E2E now starts the complete production Compose stack with `--wait`, so inherited worker healthcheck regressions fail CI.
+- Added an explicit assertion that every worker overrides the backend HTTP healthcheck with Docker's disabled healthcheck.
+
+### Deployment note
+- `1.0.0-rc.1` remains published for traceability but should not be promoted further.
+- `1.0.0-rc.2` supersedes rc.1 after the production acceptance run exposed the inherited worker healthcheck defect.
+
 ## [1.0.0-rc.1] - 2026-09-22
 
 ### Added
