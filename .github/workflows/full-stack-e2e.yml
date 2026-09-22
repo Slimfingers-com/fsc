@@ -40,6 +40,11 @@ jobs:
           OPENAI_API_KEY=
           EOF
 
+      - name: Validate operations shell scripts
+        run: |
+          bash -n infrastructure/backup/backup.sh
+          bash -n infrastructure/backup/restore.sh
+
       - name: Build production images
         run: |
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml build backend frontend
