@@ -68,7 +68,12 @@
     "ADL identifies The Barnes Review and American Free Press as right-wing extremist publications carrying Holocaust-denial content; SPLC separately documents The Barnes Review as extremist. Both still offer active print subscriptions in 2026.",
     "US right and radical-right print form groups remain sparse; coverage exceptions are preferable to moving lean-right/conservative publications solely to satisfy targets.",
     "Washington Examiner is an active weekly print magazine in 2026; its 2026 media kit reports 44 issues and 45,000 copies weekly.",
-    "The Nation, In These Times, Current Affairs, Jacobin, Dissent and National Review all have verified active 2026 print editions/subscriptions."
+    "The Nation, In These Times, Current Affairs, Jacobin, Dissent and National Review all have verified active 2026 print editions/subscriptions.",
+    "Current Affairs publishes six print issues per year in 2026 and describes itself as a left magazine; In These Times publishes 10 print issues per year in 2026.",
+    "The Atlantic is rated Left by AllSides as of 2026; The Nation is rated Left. These classifications are stored as external assertions rather than FSC labels.",
+    "Los Angeles Times is rated Lean Left by AllSides and remains a candidate for left-liberal newspaper coverage.",
+    "Washington Times is rated Lean Right by AllSides and remains a conservative/lean-right candidate.",
+    "Catalyst was removed from the immediate candidate pool pending stronger verification of an active 2026 US print subscription/product."
   ],
   "candidate_pool": {
     "radical_left": {
@@ -79,8 +84,7 @@
       ],
       "magazine_or_periodical": [
         "Jacobin",
-        "Monthly Review",
-        "Catalyst"
+        "Monthly Review"
       ]
     },
     "left_liberal": {
