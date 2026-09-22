@@ -177,6 +177,22 @@ services:
     networks:
       - fsc-network
 
+  consensus-worker:
+    container_name: fsc-consensus-worker
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    command: ["python", "-m", "app.workers.consensus_main"]
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    volumes:
+      - ../../backend:/app
+    depends_on:
+      - postgres
+    networks:
+      - fsc-network
+
   postgres:
     image: postgres:17
     container_name: fsc-postgres
