@@ -105,6 +105,7 @@ class SourceCreate(BaseModel):
 
     country: str | None = Field(default=None, min_length=2, max_length=2)
     language: str | None = Field(default=None, min_length=2, max_length=10)
+    content_languages: list[str] = Field(default_factory=list)
     media_family: MediaFamily | None = None
     publication_format: PublicationFormat | None = None
     publication_frequency: PublicationFrequency | None = None
@@ -130,6 +131,27 @@ class SourceCreate(BaseModel):
     def normalize_country(cls, value: str | None) -> str | None:
         return value.upper() if value is not None else None
 
+    @field_validator("language")
+    @classmethod
+    def normalize_language(cls, value: str | None) -> str | None:
+        return value.strip().lower() if value is not None else None
+
+    @field_validator("content_languages")
+    @classmethod
+    def normalize_content_languages(cls, values: list[str]) -> list[str]:
+        normalized: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            language = value.strip().lower()
+            if not 2 <= len(language) <= 10:
+                raise ValueError(
+                    "content language codes must contain between 2 and 10 characters"
+                )
+            if language not in seen:
+                normalized.append(language)
+                seen.add(language)
+        return normalized
+
     @field_validator("coverage_countries")
     @classmethod
     def normalize_coverage_countries(cls, values: list[str]) -> list[str]:
@@ -148,6 +170,9 @@ class SourceCreate(BaseModel):
 
     @model_validator(mode="after")
     def validate_primary_classifications(self):
+        if self.language is not None and self.language not in self.content_languages:
+            self.content_languages.insert(0, self.language)
+
         primary_kinds: set[SourceClassificationKind] = set()
         for classification in self.classifications:
             if not classification.is_primary:
@@ -178,6 +203,7 @@ class SourceRead(BaseModel):
 
     country: str | None
     language: str | None
+    content_languages: list[str]
     media_family: MediaFamily | None
     publication_format: PublicationFormat | None
     publication_frequency: PublicationFrequency | None
