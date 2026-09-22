@@ -188,3 +188,54 @@ def test_missing_story_returns_404(
     assert response.json()["detail"] == (
         "Story not found."
     )
+
+
+
+def test_story_analysis_rejects_change_during_composition(
+    client,
+    db,
+    monkeypatch,
+):
+    data = build_complete_analysis_story(
+        db
+    )
+
+    from app.api.story_analysis import service
+
+    original = (
+        service.coverage_service
+        .load_snapshot
+    )
+    calls = 0
+
+    def changing_snapshot(
+        session,
+        *,
+        story_id,
+        **kwargs,
+    ):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            data["sources"][0].country = (
+                "DE"
+            )
+            session.flush()
+        return original(
+            session,
+            story_id=story_id,
+            **kwargs,
+        )
+
+    monkeypatch.setattr(
+        service.coverage_service,
+        "load_snapshot",
+        changing_snapshot,
+    )
+
+    response = client.get(
+        f"/stories/{data['story'].id}/analysis"
+    )
+
+    assert calls >= 2
+    assert response.status_code == 404
