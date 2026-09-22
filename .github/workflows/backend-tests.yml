@@ -52,6 +52,9 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements.lock
 
+      - name: Verify dependency lock
+        run: python scripts/verify_requirements_lock.py
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
