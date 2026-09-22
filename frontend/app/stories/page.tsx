@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Pagination } from "@/components/pagination";
 import { listStories } from "@/lib/api";
-import { cleanSearchParam, formatDate, positivePage } from "@/lib/format";
+import {
+  allowedSearchParam,
+  cleanSearchParam,
+  formatDate,
+  positivePage,
+} from "@/lib/format";
 
 export const metadata: Metadata = { title: "Stories" };
 export const dynamic = "force-dynamic";
@@ -13,7 +18,11 @@ type Props = {
 
 export default async function StoriesPage({ searchParams }: Props) {
   const raw = await searchParams;
-  const sort = cleanSearchParam(raw.sort) ?? "newest";
+  const sort = allowedSearchParam(
+    raw.sort,
+    ["newest", "oldest", "largest"],
+    "newest",
+  );
   const page = positivePage(cleanSearchParam(raw.page));
   const minSources = positivePage(cleanSearchParam(raw.min_sources));
   const result = await listStories({ sort, page, minSources });
