@@ -89,9 +89,31 @@ jobs:
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml \
             run --rm backend python -c "import importlib.util; assert importlib.util.find_spec('pytest') is None"
 
-      - name: Start production web stack
+      - name: Start production stack
         run: |
-          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d --wait nginx
+          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d --wait
+
+      - name: Verify worker HTTP healthchecks are disabled
+        run: |
+          workers=(
+            worker
+            content-worker
+            search-worker
+            entity-topic-worker
+            story-worker
+            claim-worker
+            perspective-worker
+            claim-relation-worker
+            evidence-worker
+            consensus-worker
+            coverage-worker
+          )
+          for worker in "${workers[@]}"; do
+            test "$(
+              docker compose --env-file .env -f infrastructure/docker/docker-compose.yml \
+                inspect "$worker" --format '{{json .Config.Healthcheck.Test}}'
+            )" = '["NONE"]'
+          done
 
       - name: Verify health and correlation
         run: |
