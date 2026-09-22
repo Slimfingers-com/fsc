@@ -74,6 +74,19 @@ def upgrade() -> None:
 
     op.add_column(
         "sources",
+        sa.Column(
+            "content_languages",
+            postgresql.ARRAY(sa.String(length=10)),
+            server_default=sa.text("'{}'"),
+            nullable=False,
+        ),
+    )
+    op.execute(
+        "UPDATE sources SET content_languages = ARRAY[language] "
+        "WHERE language IS NOT NULL"
+    )
+    op.add_column(
+        "sources",
         sa.Column("media_family", media_family, nullable=True),
     )
     op.add_column(
@@ -208,6 +221,7 @@ def downgrade() -> None:
     op.drop_column("sources", "publication_frequency")
     op.drop_column("sources", "publication_format")
     op.drop_column("sources", "media_family")
+    op.drop_column("sources", "content_languages")
 
     bind = op.get_bind()
     reach_metric_quality.drop(bind, checkfirst=True)
