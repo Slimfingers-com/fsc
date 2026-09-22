@@ -36,7 +36,22 @@ jobs:
       - name: Verify release metadata
         run: python scripts/verify_release_version.py
 
+      - name: Check whether this version is already published
+        id: existing
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          tag="v$version"
+          if gh release view "$tag" --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "Release $tag already exists; nothing to publish."
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Wait for all release gates on the same commit
+        if: steps.existing.outputs.published != 'true'
         env:
           GH_REPO: ${{ github.repository }}
         run: |
@@ -55,7 +70,7 @@ jobs:
           repository = os.environ["GH_REPO"]
           sha = os.environ["RELEASE_SHA"]
 
-          for attempt in range(60):
+          for _ in range(60):
               raw = subprocess.check_output(
                   [
                       "gh",
@@ -125,7 +140,8 @@ jobs:
               )
           PY
 
-      - name: Publish GitHub prerelease
+      - name: Publish GitHub release
+        if: steps.existing.outputs.published != 'true'
         env:
           GH_REPO: ${{ github.repository }}
         run: |
@@ -135,23 +151,16 @@ jobs:
 
           python scripts/verify_release_version.py --tag "$tag"
 
-          if gh release view "$tag" --repo "$GH_REPO" >/dev/null 2>&1; then
-            tag_sha="$(
-              gh api                 "/repos/$GH_REPO/git/ref/tags/$tag"                 --jq '.object.sha'
-            )"
-            test "$tag_sha" = "$RELEASE_SHA"
-            echo "Release $tag already exists at the tested commit."
-            exit 0
-          fi
-
-          prerelease=()
+          args=()
           case "$version" in
-            *-*) prerelease=(--prerelease) ;;
+            *-*) args+=(--prerelease) ;;
+            *) args+=(--latest) ;;
           esac
 
-          gh release create "$tag"             --repo "$GH_REPO"             --target "$RELEASE_SHA"             --title "FSC $version"             --notes-file "$notes"             "${prerelease[@]}"
+          gh release create "$tag"             --repo "$GH_REPO"             --target "$RELEASE_SHA"             --title "FSC $version"             --notes-file "$notes"             "${args[@]}"
 
-      - name: Verify published tag and release
+      - name: Verify newly published tag and release
+        if: steps.existing.outputs.published != 'true'
         env:
           GH_REPO: ${{ github.repository }}
         run: |
@@ -162,9 +171,10 @@ jobs:
           )"
           test "$tag_sha" = "$RELEASE_SHA"
 
-          gh release view "$tag"             --repo "$GH_REPO"             --json tagName,isPrerelease             --jq '
-              select(
-                .tagName == "'"$tag"'"
-                and .isPrerelease == true
-              )
-            ' >/dev/null
+          prerelease="$(
+            gh release view "$tag"               --repo "$GH_REPO"               --json isPrerelease               --jq '.isPrerelease'
+          )"
+          case "$version" in
+            *-*) test "$prerelease" = "true" ;;
+            *) test "$prerelease" = "false" ;;
+          esac
