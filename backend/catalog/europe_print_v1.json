@@ -349,7 +349,10 @@
     "Political classifications will be stored as source assertions with classifier type/name/date rather than inferred from common descriptions.",
     "Do not aggressively reduce the broad candidate pool to a small representative sample. Verify and retain additional titles whenever they add meaningful differentiation.",
     "Retain the broad research pool for discovery, then curate approximately 50 titles for implementation. Larger markets may contribute roughly 5-7 titles; medium markets roughly 2-4; smaller markets only particularly relevant titles. These are heuristics, not quotas.",
-    "Curated shortlist currently contains 53 titles; final verification may move it toward the ~50 target by removing titles that fail active-print, provenance, or incremental-value checks."
+    "Curated shortlist currently contains 53 titles; final verification may move it toward the ~50 target by removing titles that fail active-print, provenance, or incremental-value checks.",
+    "Political review confirms an expected mainstream/centre-left concentration in the first shortlist. Relevant right and radical-right active print candidates must be researched rather than moving conservative titles into harder-right groups.",
+    "Hungary changed materially in July 2026: Eurotopics reports no political daily print newspapers remain; Magyar Nemzet moved to weekly and Népszava ended its daily print edition. Publication forms must reflect current 2026 status.",
+    "Current sourced examples: Eurotopics classifies El Mundo conservative, El País centre-left, Il Giornale right-wing, Il Manifesto left-wing, Corriere della Sera liberal-conservative, De Volkskrant centre-left, NRC liberal, De Telegraaf right-wing, De Groene Amsterdammer left-wing, Jyllands-Posten liberal-conservative, and Efimerida ton Syntakton centre-left."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -510,5 +513,75 @@
         "Delo"
       ]
     }
-  ]
+  ],
+  "political_review": {
+    "policy": "Working mapping only. Promotion requires provenance on each entry; no balancing by forced reclassification.",
+    "radical_left": [
+      "L'Humanité",
+      "Il Manifesto",
+      "El Salto"
+    ],
+    "left_liberal": [
+      "Le Monde",
+      "Libération",
+      "la Repubblica",
+      "Il Fatto Quotidiano",
+      "El País",
+      "Gazeta Wyborcza",
+      "de Volkskrant",
+      "De Groene Amsterdammer",
+      "Politiken",
+      "Information",
+      "Dagens ETC",
+      "Klassekampen",
+      "Népszava",
+      "HVG",
+      "Efimerida ton Syntakton",
+      "Danas"
+    ],
+    "liberal_centre": [
+      "Les Echos",
+      "Corriere della Sera",
+      "Il Sole 24 Ore",
+      "La Vanguardia",
+      "Rzeczpospolita",
+      "NRC",
+      "De Standaard",
+      "Le Soir",
+      "Dagens Nyheter",
+      "Dagens Næringsliv",
+      "Helsingin Sanomat",
+      "The Irish Times",
+      "Público",
+      "Hospodářské noviny",
+      "Respekt",
+      "Delo"
+    ],
+    "conservative": [
+      "Le Figaro",
+      "El Mundo",
+      "ABC",
+      "Jyllands-Posten",
+      "Svenska Dagbladet",
+      "Aftenposten",
+      "Irish Independent",
+      "Expresso",
+      "Magyar Nemzet",
+      "Kathimerini"
+    ],
+    "right": [
+      "Valeurs actuelles",
+      "Il Giornale",
+      "Gazeta Polska",
+      "Do Rzeczy",
+      "De Telegraaf"
+    ],
+    "radical_right": [],
+    "needs_more_provenance": [
+      "La Libre Belgique",
+      "Suomen Kuvalehti",
+      "Adevărul",
+      "Jutarnji list"
+    ]
+  }
 }
