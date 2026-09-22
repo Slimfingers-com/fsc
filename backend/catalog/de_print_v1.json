@@ -638,7 +638,9 @@
           "feeds": [],
           "classifications": [],
           "metrics": [],
-          "form_group": "newspaper_or_weekly"
+          "form_group": "newspaper_or_weekly",
+          "party_press": true,
+          "party_affiliation": null
         },
         {
           "key": "focus",

@@ -736,7 +736,9 @@
               "notes": "Imprint states that NFZ is the information paper of the Freedom Party of Austria (FPÖ) and its parliamentary group."
             }
           ],
-          "metrics": []
+          "metrics": [],
+          "party_press": true,
+          "party_affiliation": "FPÖ"
         },
         {
           "key": "kaerntner-nachrichten",
