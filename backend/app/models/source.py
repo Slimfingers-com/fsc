@@ -91,6 +91,12 @@ class Source(BaseModel):
         nullable=True,
     )
 
+    subnational_region: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
+        index=True,
+    )
+
     language: Mapped[str | None] = mapped_column(
         String(10),
         nullable=True,
