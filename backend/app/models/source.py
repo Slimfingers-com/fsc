@@ -13,12 +13,15 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
 from app.enums.coverage_scope import CoverageScope
-from app.enums.source_metadata import PublicationForm, SourceMedium
 from app.enums.source_type import SourceType
 
 if TYPE_CHECKING:
     from app.models.feed import Feed
-    from app.models.source_metadata import SourceClassification, SourceMetric
+    from app.models.source_metadata import (
+        SourceClassification,
+        SourceMetric,
+        SourceOutlet,
+    )
 
 
 class Source(BaseModel):
@@ -36,21 +39,6 @@ class Source(BaseModel):
         CheckConstraint(
             "priority_tier BETWEEN 1 AND 4",
             name="ck_sources_priority_tier_range",
-        ),
-        CheckConstraint(
-            "media_category IS NULL OR media_category IN ("
-            "'print', 'broadcast', 'digital', 'agency', "
-            "'primary_source', 'organization', 'other'"
-            ")",
-            name="ck_sources_media_category",
-        ),
-        CheckConstraint(
-            "publication_form IS NULL OR publication_form IN ("
-            "'daily_newspaper', 'weekly_newspaper', 'sunday_newspaper', "
-            "'magazine', 'periodical', 'radio', 'television', "
-            "'digital_native', 'news_agency', 'other'"
-            ")",
-            name="ck_sources_publication_form",
         ),
     )
 
@@ -108,23 +96,6 @@ class Source(BaseModel):
         nullable=True,
     )
 
-    media_category: Mapped[SourceMedium | None] = mapped_column(
-        String(30),
-        nullable=True,
-        index=True,
-    )
-
-    publication_form: Mapped[PublicationForm | None] = mapped_column(
-        String(40),
-        nullable=True,
-        index=True,
-    )
-
-    publication_frequency: Mapped[str | None] = mapped_column(
-        String(100),
-        nullable=True,
-    )
-
     ownership: Mapped[str | None] = mapped_column(
         Text,
         nullable=True,
@@ -172,6 +143,11 @@ class Source(BaseModel):
     )
 
     feeds: Mapped[list["Feed"]] = relationship(
+        back_populates="source",
+        cascade="all, delete-orphan",
+    )
+
+    outlets: Mapped[list["SourceOutlet"]] = relationship(
         back_populates="source",
         cascade="all, delete-orphan",
     )
