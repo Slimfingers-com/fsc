@@ -22,6 +22,7 @@ def upgrade() -> None:
         "source_outlets",
         sa.Column("source_id", postgresql.UUID(as_uuid=True), nullable=False),
         sa.Column("name", sa.String(length=255), nullable=False),
+        sa.Column("normalized_name", sa.String(length=255), nullable=False),
         sa.Column("media_category", sa.String(length=30), nullable=False),
         sa.Column("publication_form", sa.String(length=40), nullable=False),
         sa.Column("publication_frequency", sa.String(length=100), nullable=True),
@@ -66,8 +67,8 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint(
             "source_id",
-            "name",
-            name="uq_source_outlet_source_name",
+            "normalized_name",
+            name="uq_source_outlet_source_normalized_name",
         ),
         sa.CheckConstraint(
             "media_category IN ("
