@@ -77,6 +77,12 @@ FSC_API_URL=http://localhost:8000 npm run dev
 
 Docker Compose builds the standalone Next.js image and exposes it on port `3000`.
 
+## Runtime Hardening & Observability
+
+Every HTTP response carries a bounded `X-Request-ID`; valid incoming IDs are propagated to support cross-service tracing. FastAPI writes one structured `app.http` log record with method, path, status and duration for each request without logging query strings. `/health/live` reports process liveness and `/health/ready` verifies database readiness.
+
+The Next.js server forwards correlation IDs to FastAPI, logs backend failures/timeouts without search parameters, and uses `FSC_API_TIMEOUT_MS` (default 8000 ms). Both FastAPI and Next.js set defensive response headers; the frontend additionally applies a Content Security Policy. Loading and generic error states avoid rendering partial analysis.
+
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh
