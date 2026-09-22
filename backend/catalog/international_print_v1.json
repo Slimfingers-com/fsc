@@ -16,7 +16,7 @@
   "languages": "multilingual",
   "edition_policy": "brand_as_source_print_products_as_outlets",
   "notes": [
-    "This catalog covers internationally relevant print publications outside the separately modeled DE, AT, CH, GB and US catalogs.",
+    "This catalog covers internationally relevant print publications outside Europe and outside the separately modeled US catalog.",
     "Countries remain metadata on each entry; they are not separate catalog blocks and there is no requirement to represent every country.",
     "Selection is based on international or regional relevance, reach, agenda-setting role, and viewpoint diversity. Reach is metadata, never an exclusion threshold.",
     "Political orientation and radicality require attributed provenance; FSC does not infer orientation from country, language, party endorsements, constitutional questions, or ownership alone.",
@@ -67,35 +67,6 @@
   "unclassified_entries": [],
   "research_regions": [
     {
-      "key": "western_southern_europe",
-      "priority_countries": [
-        "FR",
-        "IT",
-        "ES",
-        "PT"
-      ]
-    },
-    {
-      "key": "central_eastern_europe",
-      "priority_countries": [
-        "PL",
-        "CZ",
-        "HU",
-        "RO"
-      ]
-    },
-    {
-      "key": "benelux_nordics",
-      "priority_countries": [
-        "NL",
-        "BE",
-        "DK",
-        "SE",
-        "NO",
-        "FI"
-      ]
-    },
-    {
       "key": "americas_outside_us",
       "priority_countries": [
         "CA",
@@ -119,7 +90,9 @@
       "priority_countries": [
         "IL",
         "TR",
-        "ZA"
+        "ZA",
+        "NG",
+        "EG"
       ]
     }
   ],
