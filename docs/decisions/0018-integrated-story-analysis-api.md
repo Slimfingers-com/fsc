@@ -50,9 +50,16 @@ In addition, the composition layer verifies that:
   current Coverage snapshot;
 - active Coverage Gaps and Missing Perspectives belong to the same Coverage run.
 
-If any of these invariants fail, or a required downstream generation has not yet been
-produced, the endpoint returns 404 with `Current story analysis is not available.`
-It does not return a partial or mixed-generation analysis.
+After composition, the complete Coverage/Consensus snapshot is loaded and hashed again.
+The response is returned only when the final input hash, all four generation IDs and
+the active Coverage summary are unchanged. This optimistic end-to-end revalidation
+detects an upstream commit that occurs while the multi-query response is being built
+without holding long-lived global processing locks.
+
+If any invariant or final revalidation fails, or a required downstream generation has
+not yet been produced, the endpoint returns 404 with
+`Current story analysis is not available.` It does not return a partial or
+mixed-generation analysis.
 
 The response includes descriptive confidence values that already exist on Claim Groups
 and Evidence links. It does not add a truth, credibility, political-neutrality or
