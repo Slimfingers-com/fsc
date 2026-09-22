@@ -48,9 +48,10 @@ def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
     names: set[str] = set()
 
     assert all(group["key"] not in {"boulevard", "general_unclassified"} for group in catalog["groups"])
+    assert catalog["groups"]
 
     for group in catalog["groups"]:
-        assert group["entries"]
+        assert isinstance(group["entries"], list)
         for entry in group["entries"]:
             assert entry["key"] not in keys
             assert entry["name"].casefold() not in names
