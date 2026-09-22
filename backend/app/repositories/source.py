@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.source_metadata import SourceClassification, SourceReachMetric
 from app.repositories.base import BaseRepository
 
 
@@ -22,7 +23,17 @@ class SourceRepository(BaseRepository[Source]):
                     Source.feeds.and_(
                         Feed.deleted_at.is_(None)
                     )
-                )
+                ),
+                selectinload(
+                    Source.classifications.and_(
+                        SourceClassification.deleted_at.is_(None)
+                    )
+                ),
+                selectinload(
+                    Source.reach_metrics.and_(
+                        SourceReachMetric.deleted_at.is_(None)
+                    )
+                ),
             )
             .execution_options(
                 populate_existing=True
@@ -85,7 +96,17 @@ class SourceRepository(BaseRepository[Source]):
                     Source.feeds.and_(
                         Feed.deleted_at.is_(None)
                     )
-                )
+                ),
+                selectinload(
+                    Source.classifications.and_(
+                        SourceClassification.deleted_at.is_(None)
+                    )
+                ),
+                selectinload(
+                    Source.reach_metrics.and_(
+                        SourceReachMetric.deleted_at.is_(None)
+                    )
+                ),
             )
             .execution_options(
                 populate_existing=True
