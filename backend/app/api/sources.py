@@ -12,6 +12,8 @@ from app.schemas.source_metadata import (
     SourceClassificationRead,
     SourceMetricCreate,
     SourceMetricRead,
+    SourceOutletCreate,
+    SourceOutletRead,
 )
 from app.services.source import SourceService
 
@@ -104,6 +106,35 @@ def create_source(
     db.refresh(source)
 
     return source
+
+
+@router.post(
+    "/{slug}/outlets",
+    response_model=SourceOutletRead,
+    status_code=201,
+)
+def create_source_outlet(
+    slug: str,
+    data: SourceOutletCreate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.get_by_slug(db, slug)
+
+    if source is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Source not found.",
+        )
+
+    outlet = service.create_outlet(
+        db,
+        source,
+        data,
+    )
+    db.commit()
+    db.refresh(outlet)
+    return outlet
 
 
 @router.post(
