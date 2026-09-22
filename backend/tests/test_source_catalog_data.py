@@ -189,3 +189,24 @@ def test_non_political_print_attributes_are_not_political_groups() -> None:
         assert "general_unclassified" not in group_keys
         for entry in catalog.get("unclassified_entries", []):
             assert set(entry.get("format_tags", [])) & {"boulevard", "politically_unclassified"}
+
+
+def test_party_press_is_a_separate_dimension() -> None:
+    expected = {
+        "AT": {"Neue Freie Zeitung": "FPÖ"},
+        "CH": {"SVP-Klartext": "SVP", "Schweizer Demokrat": "Schweizer Demokraten"},
+    }
+    for country, titles in expected.items():
+        catalog = load_catalog(country)
+        entries = {
+            entry["name"]: entry
+            for group in catalog["groups"]
+            for entry in group["entries"]
+        }
+        for name, affiliation in titles.items():
+            assert entries[name]["party_press"] is True
+            assert entries[name]["party_affiliation"] == affiliation
+
+    for country in CATALOG_FILES:
+        catalog = load_catalog(country)
+        assert "party_press" not in {group["key"] for group in catalog["groups"]}
