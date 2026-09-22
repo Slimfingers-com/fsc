@@ -8,10 +8,17 @@ from app.core.exceptions import (
     DuplicateSourceError,
 )
 from app.db.session import SessionLocal
+from app.core.http import (
+    request_context_middleware,
+)
 
 app = FastAPI(
     title="FSC API",
     version="0.1.0",
+)
+
+app.middleware("http")(
+    request_context_middleware
 )
 
 app.include_router(api_router)
@@ -59,4 +66,32 @@ def health():
     return {
         "status": "ok",
         "database": database_status,
+    }
+
+
+
+@app.get("/health/live")
+def liveness():
+    return {
+        "status": "ok",
+    }
+
+
+@app.get("/health/ready")
+def readiness():
+    try:
+        with SessionLocal() as db:
+            db.execute(text("SELECT 1"))
+    except Exception:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "status": "not_ready",
+                "database": "error",
+            },
+        )
+
+    return {
+        "status": "ready",
+        "database": "connected",
     }
