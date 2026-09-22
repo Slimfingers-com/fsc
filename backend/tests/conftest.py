@@ -1,14 +1,23 @@
-import warnings
+import anyio.abc
+from anyio.from_thread import BlockingPortal
 
-warnings.filterwarnings(
-    "ignore",
-    message=(
-        r"The anyio\.abc\.BlockingPortal alias is deprecated, "
-        r"use anyio\.from_thread\.BlockingPortal instead\."
-    ),
-    category=DeprecationWarning,
-    module=r"starlette\.testclient",
-)
+
+def _install_starlette_anyio_compatibility() -> None:
+    # Starlette 1.6.0 still references the deprecated
+    # anyio.abc.BlockingPortal alias at import time.
+    # Its current source already uses anyio.from_thread.BlockingPortal.
+    # Provide the new class under the legacy attribute without touching
+    # warning filters until the fix is included in a Starlette release.
+    if (
+        "BlockingPortal"
+        not in anyio.abc.__dict__
+    ):
+        anyio.abc.__dict__[
+            "BlockingPortal"
+        ] = BlockingPortal
+
+
+_install_starlette_anyio_compatibility()
 
 import pytest
 from fastapi.testclient import TestClient
@@ -79,15 +88,21 @@ def db(
 ) -> Session:
     connection = test_engine.connect()
     transaction = connection.begin()
-    session = TestSessionLocal(
-        bind=connection
+    session = Session(
+        bind=connection,
+        autoflush=False,
+        expire_on_commit=False,
+        join_transaction_mode=(
+            "create_savepoint"
+        ),
     )
 
     try:
         yield session
     finally:
         session.close()
-        transaction.rollback()
+        if transaction.is_active:
+            transaction.rollback()
         connection.close()
 
 

@@ -7,7 +7,7 @@ on:
     paths:
       - "backend/**"
       - "frontend/**"
-      - "infrastructure/docker/**"
+      - "infrastructure/**"
       - ".github/workflows/full-stack-e2e.yml"
   push:
     branches:
@@ -15,7 +15,7 @@ on:
     paths:
       - "backend/**"
       - "frontend/**"
-      - "infrastructure/docker/**"
+      - "infrastructure/**"
       - ".github/workflows/full-stack-e2e.yml"
 
 jobs:
@@ -40,6 +40,11 @@ jobs:
           OPENAI_API_KEY=
           EOF
 
+      - name: Validate operations shell scripts
+        run: |
+          bash -n infrastructure/backup/backup.sh
+          bash -n infrastructure/backup/restore.sh
+
       - name: Build production images
         run: |
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml build backend frontend
@@ -52,6 +57,40 @@ jobs:
         run: |
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm backend alembic upgrade head
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm backend alembic current
+
+      - name: Verify PostgreSQL backup and restore drill
+        run: |
+          compose=(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml)
+
+          cat <<'SQL' | "${compose[@]}" exec -T postgres sh -ec 'exec psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+          CREATE TABLE e2e_backup_probe (value text NOT NULL);
+          INSERT INTO e2e_backup_probe(value) VALUES ('restored');
+          SQL
+
+          backup_path="$(
+            FSC_BACKUP_DIR="$RUNNER_TEMP/fsc-backups" \
+              bash infrastructure/backup/backup.sh
+          )"
+          test -s "$backup_path"
+          test -s "$backup_path.sha256"
+
+          cat <<'SQL' | "${compose[@]}" exec -T postgres sh -ec 'exec psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+          DROP TABLE e2e_backup_probe;
+          SQL
+
+          FSC_RESTORE_CONFIRM=RESTORE \
+            bash infrastructure/backup/restore.sh "$backup_path"
+
+          value="$(
+            "${compose[@]}" exec -T postgres sh -ec \
+              'exec psql -At -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT value FROM e2e_backup_probe;"'
+          )"
+          test "$value" = "restored"
+
+      - name: Verify production backend excludes test tooling
+        run: |
+          docker compose --env-file .env -f infrastructure/docker/docker-compose.yml \
+            run --rm backend python -c "import importlib.util; assert importlib.util.find_spec('pytest') is None"
 
       - name: Start production web stack
         run: |
@@ -76,6 +115,19 @@ jobs:
           stories="$(curl --fail --silent http://127.0.0.1:8080/stories)"
           echo "$stories" | grep -F 'Story-Cluster'
           echo "$stories" | grep -F 'Mind. Quellen'
+
+      - name: Verify Nginx is published on loopback only
+        run: |
+          published="$(
+            docker compose --env-file .env -f infrastructure/docker/docker-compose.yml port nginx 80
+          )"
+          case "$published" in
+            127.0.0.1:*) ;;
+            *)
+              echo "Unexpected Nginx publication: $published" >&2
+              exit 1
+              ;;
+          esac
 
       - name: Verify frontend security headers
         run: |

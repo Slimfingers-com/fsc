@@ -1,3 +1,9 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 name: fsc
 
 services:
@@ -5,8 +11,9 @@ services:
     image: nginx:stable
     container_name: fsc-nginx
     restart: unless-stopped
+    logging: *default-logging
     ports:
-      - "${FSC_HTTP_PORT:-8080}:80"
+      - "127.0.0.1:${FSC_HTTP_PORT:-8080}:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
@@ -21,6 +28,7 @@ services:
       context: ../../frontend
       dockerfile: Dockerfile
     restart: unless-stopped
+    logging: *default-logging
     environment:
       FSC_API_URL: http://backend:8000
       FSC_API_TIMEOUT_MS: 8000
@@ -38,6 +46,7 @@ services:
       context: ../../backend
       dockerfile: Dockerfile
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     ports:
@@ -55,6 +64,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -70,6 +80,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.content_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -85,6 +96,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.search_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -100,6 +112,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.entity_topic_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -115,6 +128,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.story_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -130,6 +144,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.claim_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -145,6 +160,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.perspective_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -160,6 +176,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.claim_relation_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -175,6 +192,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.evidence_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -190,6 +208,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.consensus_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -205,6 +224,7 @@ services:
       dockerfile: Dockerfile
     command: ["python", "-m", "app.workers.coverage_main"]
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     depends_on:
@@ -217,6 +237,7 @@ services:
     image: postgres:17
     container_name: fsc-postgres
     restart: unless-stopped
+    logging: *default-logging
     env_file:
       - ../../.env
     environment:
@@ -242,6 +263,7 @@ services:
     image: redis:8-alpine
     container_name: fsc-redis
     restart: unless-stopped
+    logging: *default-logging
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
