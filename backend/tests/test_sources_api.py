@@ -425,4 +425,3 @@ def test_update_source_requires_admin_key(client):
     )
 
     assert response.status_code == 401
-

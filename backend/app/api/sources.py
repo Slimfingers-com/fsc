@@ -171,4 +171,3 @@ def add_source_reach_metric(
 
     db.commit()
     return service.get_by_slug(db, slug)
-
