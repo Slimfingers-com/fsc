@@ -10,6 +10,7 @@ on:
       - "scripts/verify_release_version.py"
       - "docs/operations/release-*.md"
       - ".github/workflows/release-metadata.yml"
+      - ".github/workflows/publish-release.yml"
   push:
     branches:
       - main

@@ -1,0 +1,180 @@
+name: Publish Release
+
+on:
+  workflow_run:
+    workflows:
+      - "Full Stack E2E"
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+
+    steps:
+      - name: Checkout tested commit
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Verify release metadata
+        run: python scripts/verify_release_version.py
+
+      - name: Check whether this version is already published
+        id: existing
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          tag="v$version"
+          if gh release view "$tag" --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "Release $tag already exists; nothing to publish."
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Wait for all release gates on the same commit
+        if: steps.existing.outputs.published != 'true'
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import subprocess
+          import time
+
+          required = {
+              "Backend Tests",
+              "Frontend Tests",
+              "Full Stack E2E",
+              "Release Metadata",
+          }
+          repository = os.environ["GH_REPO"]
+          sha = os.environ["RELEASE_SHA"]
+
+          for _ in range(60):
+              raw = subprocess.check_output(
+                  [
+                      "gh",
+                      "api",
+                      "--method",
+                      "GET",
+                      f"/repos/{repository}/actions/runs",
+                      "-f",
+                      f"head_sha={sha}",
+                      "-f",
+                      "event=push",
+                      "-f",
+                      "per_page=100",
+                  ],
+                  text=True,
+              )
+              runs = json.loads(raw)["workflow_runs"]
+
+              latest = {}
+              for run in runs:
+                  name = run["name"]
+                  if name not in required:
+                      continue
+                  current = latest.get(name)
+                  if (
+                      current is None
+                      or run["created_at"] > current["created_at"]
+                  ):
+                      latest[name] = run
+
+              missing = sorted(required - set(latest))
+              failed = sorted(
+                  name
+                  for name, run in latest.items()
+                  if (
+                      run["status"] == "completed"
+                      and run["conclusion"] != "success"
+                  )
+              )
+              pending = sorted(
+                  name
+                  for name, run in latest.items()
+                  if run["status"] != "completed"
+              )
+
+              if failed:
+                  raise SystemExit(
+                      "Release gate failed: "
+                      + ", ".join(failed)
+                  )
+              if not missing and not pending:
+                  print(
+                      "All release gates passed for "
+                      + sha
+                  )
+                  break
+
+              print(
+                  "Waiting for release gates: "
+                  f"missing={missing}, pending={pending}"
+              )
+              time.sleep(5)
+          else:
+              raise SystemExit(
+                  "Timed out waiting for release gates "
+                  f"for {sha}"
+              )
+          PY
+
+      - name: Publish GitHub release
+        if: steps.existing.outputs.published != 'true'
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          tag="v$version"
+          notes="docs/operations/release-$version.md"
+
+          python scripts/verify_release_version.py --tag "$tag"
+
+          args=()
+          case "$version" in
+            *-*) args+=(--prerelease) ;;
+            *) args+=(--latest) ;;
+          esac
+
+          gh release create "$tag"             --repo "$GH_REPO"             --target "$RELEASE_SHA"             --title "FSC $version"             --notes-file "$notes"             "${args[@]}"
+
+      - name: Verify newly published tag and release
+        if: steps.existing.outputs.published != 'true'
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          tag="v$version"
+          tag_sha="$(
+            gh api               "/repos/$GH_REPO/git/ref/tags/$tag"               --jq '.object.sha'
+          )"
+          test "$tag_sha" = "$RELEASE_SHA"
+
+          prerelease="$(
+            gh release view "$tag"               --repo "$GH_REPO"               --json isPrerelease               --jq '.isPrerelease'
+          )"
+          case "$version" in
+            *-*) test "$prerelease" = "true" ;;
+            *) test "$prerelease" = "false" ;;
+          esac
