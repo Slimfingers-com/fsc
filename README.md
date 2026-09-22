@@ -71,7 +71,7 @@ Local development:
 
 ```sh
 cd frontend
-npm install
+npm ci
 FSC_API_URL=http://localhost:8000 npm run dev
 ```
 
@@ -91,3 +91,10 @@ docker compose --env-file .env -f infrastructure/docker/docker-compose.yml exec 
 docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm -e DATABASE_NAME=fsc_test backend alembic upgrade head
 docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm -e DATABASE_NAME=fsc_test backend pytest -q
 ```
+
+
+## Production Operations
+
+The bundled Compose stack is secure-by-default for a single-host deployment: its HTTP entry point binds to loopback and must sit behind TLS termination. PostgreSQL backup/restore, upgrades, rollback guidance, secret handling and the release checklist are documented in [docs/operations/production.md](docs/operations/production.md).
+
+Source administration is disabled when `SOURCE_ADMIN_API_KEY` is empty. Configure a strong random key only when administrative source creation is required.
