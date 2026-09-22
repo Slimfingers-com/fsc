@@ -10,7 +10,7 @@
   ],
   "media_category": "print",
   "activation_policy": "catalog_only_until_joint_review",
-  "selection_policy": "relevance_and_viewpoint_diversity_not_country_quota",
+  "selection_policy": "broad_relevance_and_viewpoint_diversity_not_fixed_size_or_country_quota",
   "coverage_policy": "no_country_quotas",
   "languages": "multilingual",
   "edition_policy": "brand_as_source_print_products_as_outlets",
@@ -20,7 +20,10 @@
     "Selection is based on European relevance, reach, agenda-setting role, and viewpoint diversity. There are no country quotas.",
     "Political orientation and radicality require attributed provenance; FSC does not infer orientation from nationality, language, constitutional questions, endorsements, or ownership alone.",
     "Political fringe publications may be included when relevant; sparse viewpoints remain sparse rather than being filled artificially.",
-    "Print activity must be verified; reach and circulation are metadata, never exclusion thresholds."
+    "Print activity must be verified; reach and circulation are metadata, never exclusion thresholds.",
+    "There is no target maximum for the European catalog. A larger set is preferred when additional active print titles materially add geographic, linguistic, political, ideological, regional, or audience diversity.",
+    "Multiple titles from the same country or political segment are retained when they represent meaningfully different editorial traditions, audiences, regions, or reach profiles; near-duplicates may be pruned.",
+    "Small-circulation publications may remain when they add a materially distinct viewpoint. Large circulation is not required."
   ],
   "selection_dimensions": [
     "european_relevance",
@@ -28,7 +31,9 @@
     "reach_or_circulation",
     "agenda_setting_role",
     "viewpoint_diversity",
-    "language_and_geographic_breadth"
+    "language_and_geographic_breadth",
+    "distinct_editorial_tradition",
+    "minority_or_regional_voice"
   ],
   "groups": [
     {
@@ -339,6 +344,7 @@
     "Lidové noviny requires exclusion/current-status verification: its daily print edition ceased in 2024, so it must not be promoted as an active daily without evidence of a current print product.",
     "20minutos Spain requires current print-frequency verification before promotion; free-paper distribution models can change independently of the digital brand.",
     "Observador Portugal is primarily digital and requires evidence of an active recurring print publication before inclusion.",
-    "Political classifications will be stored as source assertions with classifier type/name/date rather than inferred from common descriptions."
+    "Political classifications will be stored as source assertions with classifier type/name/date rather than inferred from common descriptions.",
+    "Do not aggressively reduce the broad candidate pool to a small representative sample. Verify and retain additional titles whenever they add meaningful differentiation."
   ]
 }
