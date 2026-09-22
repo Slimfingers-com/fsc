@@ -13,6 +13,19 @@ const API_URL = (
   ?? "http://localhost:8000"
 ).replace(/\/$/, "");
 
+const configuredTimeout = Number.parseInt(
+  process.env.FSC_API_TIMEOUT_MS
+  ?? "8000",
+  10,
+);
+const API_TIMEOUT_MS = (
+  Number.isFinite(configuredTimeout)
+  && configuredTimeout >= 250
+  && configuredTimeout <= 60_000
+)
+  ? configuredTimeout
+  : 8_000;
+
 export class ApiError extends Error {
   constructor(
     public readonly status: number,
@@ -69,7 +82,7 @@ async function request<T>(
       {
         cache: "no-store",
         signal: AbortSignal.timeout(
-          8_000
+          API_TIMEOUT_MS
         ),
         headers: {
           Accept: "application/json",
