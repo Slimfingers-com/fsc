@@ -3,12 +3,13 @@ from uuid import UUID
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
 from app.enums.coverage_scope import CoverageScope
-from app.enums.source_metadata import PublicationForm, SourceMedium
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate, FeedRead
 from app.schemas.source_metadata import (
     SourceClassificationRead,
     SourceMetricRead,
+    SourceOutletCreate,
+    SourceOutletRead,
 )
 
 
@@ -25,10 +26,6 @@ class SourceCreate(BaseModel):
     country: str | None = Field(default=None, min_length=2, max_length=2)
     language: str | None = Field(default=None, min_length=2, max_length=10)
 
-    media_category: SourceMedium | None = None
-    publication_form: PublicationForm | None = None
-    publication_frequency: str | None = Field(default=None, max_length=100)
-
     ownership: str | None = None
     funding_model: str | None = Field(default=None, max_length=100)
 
@@ -39,6 +36,7 @@ class SourceCreate(BaseModel):
     priority_tier: int = Field(default=3, ge=1, le=4)
 
     feeds: list[FeedCreate] = Field(default_factory=list)
+    outlets: list[SourceOutletCreate] = Field(default_factory=list)
 
 
 class SourceRead(BaseModel):
@@ -60,10 +58,6 @@ class SourceRead(BaseModel):
     country: str | None
     language: str | None
 
-    media_category: SourceMedium | None
-    publication_form: PublicationForm | None
-    publication_frequency: str | None
-
     ownership: str | None
     funding_model: str | None
 
@@ -79,5 +73,6 @@ class SourceRead(BaseModel):
 
 
 class SourceDetailRead(SourceRead):
+    outlets: list[SourceOutletRead]
     classifications: list[SourceClassificationRead]
     metrics: list[SourceMetricRead]
