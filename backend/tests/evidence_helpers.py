@@ -74,6 +74,7 @@ def build_evidence_story(
             slug=slug,
             url=f"https://{slug}.test",
             source_type=spec["source_type"],
+            ownership=spec.get("ownership"),
         )
         feed = Feed(
             source=source,
