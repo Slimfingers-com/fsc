@@ -86,8 +86,8 @@ The Next.js server forwards correlation IDs to FastAPI, logs backend failures/ti
 For a CI-friendly PostgreSQL run from the repository root:
 
 ```sh
-docker compose -f infrastructure/docker/docker-compose.yml up -d postgres
-docker compose -f infrastructure/docker/docker-compose.yml exec postgres createdb -U "$DATABASE_USER" fsc_test
-docker compose -f infrastructure/docker/docker-compose.yml run --rm -e DATABASE_NAME=fsc_test backend alembic upgrade head
-docker compose -f infrastructure/docker/docker-compose.yml run --rm -e DATABASE_NAME=fsc_test backend pytest -q
+docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d postgres
+docker compose --env-file .env -f infrastructure/docker/docker-compose.yml exec postgres createdb -U "$DATABASE_USER" fsc_test
+docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm -e DATABASE_NAME=fsc_test backend alembic upgrade head
+docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm -e DATABASE_NAME=fsc_test backend pytest -q
 ```
