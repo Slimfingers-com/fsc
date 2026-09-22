@@ -11,7 +11,12 @@ from app.models.feed import Feed
 from app.models.source import Source
 from app.models.source_metadata import SourceClassification, SourceReachMetric
 from app.repositories.source import SourceRepository
-from app.schemas.source import SourceCreate
+from app.schemas.source import (
+    SourceClassificationCreate,
+    SourceCreate,
+    SourceReachMetricCreate,
+    SourceUpdate,
+)
 
 
 class SourceService:
@@ -157,6 +162,117 @@ class SourceService:
 
             raise
 
+        return source
+
+    def update_source(
+        self,
+        db: Session,
+        *,
+        slug: str,
+        data: SourceUpdate,
+    ) -> Source | None:
+        source = self.get_by_slug(db, slug)
+        if source is None:
+            return None
+
+        fields = data.model_fields_set
+        simple_fields = (
+            "description",
+            "source_type",
+            "coverage_scope",
+            "country",
+            "media_family",
+            "publication_format",
+            "publication_frequency",
+            "ownership",
+            "funding_model",
+            "paywall",
+            "active",
+            "transparency_level",
+            "correction_policy",
+            "primary_source_usage",
+            "priority_tier",
+        )
+        for field in simple_fields:
+            if field in fields:
+                setattr(source, field, getattr(data, field))
+
+        if "language" in fields:
+            source.language = data.language
+
+        if "content_languages" in fields:
+            source.content_languages = list(data.content_languages or [])
+        elif "language" in fields and data.language is not None:
+            languages = list(source.content_languages)
+            if data.language not in languages:
+                languages.insert(0, data.language)
+            source.content_languages = languages
+
+        if "coverage_countries" in fields:
+            source.coverage_countries = list(data.coverage_countries or [])
+
+        self.repository.flush(db)
+        return source
+
+    def add_classification(
+        self,
+        db: Session,
+        *,
+        slug: str,
+        data: SourceClassificationCreate,
+    ) -> Source | None:
+        source = self.get_by_slug(db, slug)
+        if source is None:
+            return None
+
+        if data.is_primary:
+            changed = False
+            for existing in source.classifications:
+                if existing.kind == data.kind and existing.is_primary:
+                    existing.is_primary = False
+                    changed = True
+            if changed:
+                self.repository.flush(db)
+
+        source.classifications.append(
+            SourceClassification(
+                kind=data.kind,
+                value=data.value,
+                detail=data.detail,
+                evidence_source_name=data.evidence_source_name.strip(),
+                evidence_url=str(data.evidence_url) if data.evidence_url else None,
+                as_of=data.as_of,
+                is_primary=data.is_primary,
+                notes=data.notes,
+            )
+        )
+        self.repository.flush(db)
+        return source
+
+    def add_reach_metric(
+        self,
+        db: Session,
+        *,
+        slug: str,
+        data: SourceReachMetricCreate,
+    ) -> Source | None:
+        source = self.get_by_slug(db, slug)
+        if source is None:
+            return None
+
+        source.reach_metrics.append(
+            SourceReachMetric(
+                metric_type=data.metric_type,
+                metric_value=data.metric_value,
+                period_start=data.period_start,
+                period_end=data.period_end,
+                evidence_source_name=data.evidence_source_name.strip(),
+                evidence_url=str(data.evidence_url) if data.evidence_url else None,
+                quality=data.quality,
+                notes=data.notes,
+            )
+        )
+        self.repository.flush(db)
         return source
 
     @staticmethod
