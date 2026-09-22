@@ -6,13 +6,14 @@ on:
       - "frontend/**"
       - ".github/workflows/frontend-tests.yml"
       - ".github/workflows/publish-release.yml"
-      - ".github/workflows/publish-release.yml"
       - "infrastructure/docker/docker-compose.yml"
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - "frontend/**"
       - ".github/workflows/frontend-tests.yml"
+      - ".github/workflows/publish-release.yml"
 
 jobs:
   frontend-tests:
