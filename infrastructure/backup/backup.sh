@@ -43,12 +43,12 @@ echo "Ensuring PostgreSQL is healthy..." >&2
 
 echo "Creating PostgreSQL backup..." >&2
 "${compose[@]}" exec -T postgres sh -ec '
-  exec pg_dump
-    --format=custom
-    --create
-    --no-owner
-    --no-privileges
-    --username="$POSTGRES_USER"
+  exec pg_dump \
+    --format=custom \
+    --create \
+    --no-owner \
+    --no-privileges \
+    --username="$POSTGRES_USER" \
     --dbname="$POSTGRES_DB"
 ' > "$temporary"
 
