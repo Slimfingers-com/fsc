@@ -106,6 +106,7 @@ class SourceService:
             outlets=[
                 SourceOutlet(
                     name=outlet.name.strip(),
+                    normalized_name=normalize_source_name(outlet.name),
                     media_category=outlet.media_category,
                     publication_form=outlet.publication_form,
                     publication_frequency=outlet.publication_frequency,
@@ -147,7 +148,7 @@ class SourceService:
                     "Feed-Namen müssen innerhalb einer Quelle eindeutig sein."
                 ) from exc
 
-            if constraint_name == "uq_source_outlet_source_name":
+            if constraint_name == "uq_source_outlet_source_normalized_name":
                 raise BusinessRuleViolationError(
                     "Outlet-Namen müssen innerhalb einer Quelle eindeutig sein."
                 ) from exc
@@ -165,6 +166,7 @@ class SourceService:
         outlet = SourceOutlet(
             source_id=source.id,
             name=data.name.strip(),
+            normalized_name=normalize_source_name(data.name),
             media_category=data.media_category,
             publication_form=data.publication_form,
             publication_frequency=data.publication_frequency,
@@ -183,7 +185,7 @@ class SourceService:
                 "constraint_name",
                 None,
             )
-            if constraint_name == "uq_source_outlet_source_name":
+            if constraint_name == "uq_source_outlet_source_normalized_name":
                 raise BusinessRuleViolationError(
                     "Dieses Outlet existiert für die Quelle bereits."
                 ) from exc
@@ -344,7 +346,7 @@ class SourceService:
                     "Ein Outlet-Name darf nicht nur aus Leerzeichen bestehen."
                 )
 
-            normalized = name.casefold()
+            normalized = normalize_source_name(name)
             if normalized in names:
                 raise BusinessRuleViolationError(
                     "Outlet-Namen müssen innerhalb einer Quelle eindeutig sein."
