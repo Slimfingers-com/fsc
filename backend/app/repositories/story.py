@@ -122,6 +122,50 @@ class StoryRepository:
 
         return True, row[0]
 
+    def get_clustering_partition(
+        self,
+        db: Session,
+        article_id: UUID,
+    ) -> tuple[bool, str | None]:
+        row = db.execute(
+            select(
+                Article.language_code,
+                Article.semantic_model,
+                Article.semantic_embedding,
+            )
+            .join(
+                Feed,
+                Feed.id == Article.feed_id,
+            )
+            .join(
+                Source,
+                Source.id == Feed.source_id,
+            )
+            .where(
+                Article.id == article_id,
+                Article.deleted_at.is_(None),
+                Article.normalized_at.is_not(None),
+                Article.normalized_text.is_not(None),
+                Feed.deleted_at.is_(None),
+                Feed.active.is_(True),
+                Source.deleted_at.is_(None),
+                Source.active.is_(True),
+            )
+        ).one_or_none()
+
+        if row is None:
+            return False, None
+
+        language_code, semantic_model, semantic_embedding = row
+        if semantic_model and semantic_embedding:
+            return True, f"semantic:{semantic_model}"
+
+        return True, (
+            f"language:{language_code}"
+            if language_code is not None
+            else "language:<none>"
+        )
+
     def get_story(
         self,
         db: Session,
@@ -318,21 +362,31 @@ class StoryRepository:
                 )
             )
 
-        if not overlap_conditions:
+        semantic_enabled = bool(
+            article.semantic_embedding
+            and article.semantic_model
+        )
+
+        if not semantic_enabled and not overlap_conditions:
             return ()
 
         window = timedelta(
             hours=window_hours
         )
 
-        if article.language_code is None:
-            language_condition = (
-                Story.language_code.is_(None)
-            )
-        else:
-            language_condition = (
-                Story.language_code
-                == article.language_code
+        candidate_conditions = []
+        if not semantic_enabled:
+            if article.language_code is None:
+                candidate_conditions.append(
+                    Story.language_code.is_(None)
+                )
+            else:
+                candidate_conditions.append(
+                    Story.language_code
+                    == article.language_code
+                )
+            candidate_conditions.append(
+                or_(*overlap_conditions)
             )
 
         ranked_candidates = (
@@ -376,7 +430,7 @@ class StoryRepository:
             .where(
                 StoryArticle.deleted_at.is_(None),
                 Story.deleted_at.is_(None),
-                language_condition,
+                *candidate_conditions,
                 Article.deleted_at.is_(None),
                 Article.normalized_at.is_not(None),
                 Article.normalized_text.is_not(None),
@@ -390,7 +444,6 @@ class StoryRepository:
                 >= article.article_time - window,
                 StoryArticle.article_time
                 <= article.article_time + window,
-                or_(*overlap_conditions),
             )
             .subquery()
         )
@@ -426,6 +479,12 @@ class StoryRepository:
                 topic_ids=tuple(
                     membership.topic_ids
                 ),
+                semantic_embedding=(
+                    tuple(membership.semantic_embedding)
+                    if membership.semantic_embedding
+                    else None
+                ),
+                semantic_model=membership.semantic_model,
             )
             for membership in memberships
         )
@@ -484,6 +543,8 @@ class StoryRepository:
         match_kind: str,
         match_details: dict[str, object] | None,
         clustered_at: datetime,
+        semantic_embedding: tuple[float, ...] | None = None,
+        semantic_model: str | None = None,
     ) -> StoryArticle:
         story = self.get_story(
             db,
@@ -520,6 +581,12 @@ class StoryRepository:
             title_terms=list(title_terms),
             entity_ids=list(entity_ids),
             topic_ids=list(topic_ids),
+            semantic_embedding=(
+                list(semantic_embedding)
+                if semantic_embedding is not None
+                else None
+            ),
+            semantic_model=semantic_model,
             similarity_score=similarity_score,
             match_kind=match_kind,
             match_details=match_details,
@@ -530,6 +597,45 @@ class StoryRepository:
         db.flush()
 
         return membership
+
+    def refresh_story_language(
+        self,
+        db: Session,
+        *,
+        story_id: UUID,
+    ) -> str | None:
+        story = self.get_story(
+            db,
+            story_id,
+            for_update=True,
+        )
+        if story is None:
+            raise ValueError("target story is not active")
+
+        languages = set(
+            db.scalars(
+                select(Article.language_code)
+                .join(
+                    StoryArticle,
+                    StoryArticle.article_id == Article.id,
+                )
+                .where(
+                    StoryArticle.story_id == story_id,
+                    StoryArticle.deleted_at.is_(None),
+                    Article.deleted_at.is_(None),
+                )
+            ).all()
+        )
+
+        if not languages:
+            language_code = None
+        elif len(languages) == 1:
+            language_code = next(iter(languages))
+        else:
+            language_code = "mul"
+
+        story.language_code = language_code
+        return language_code
 
     def deactivate_story_if_orphan(
         self,
