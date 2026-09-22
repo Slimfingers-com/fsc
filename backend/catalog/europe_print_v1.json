@@ -360,7 +360,8 @@
     "The current working distribution is intentionally asymmetric: radical-left and radical-right are sparse because the ~50-title Europe block is a relevance-weighted comparison set, not a six-way quota.",
     "Remaining four provisional placements now have Eurotopics provenance: La Libre Belgique liberal, Suomen Kuvalehti liberal, Jutarnji list liberal, and Adevărul liberal-conservative. The initial 53-title set plus Rivarol and Sieci therefore has a working political placement for every retained title.",
     "Implementation rule: external political classifications are stored as attributed classifier records with source URL and date, not as FSC-authored factual verdicts.",
-    "Verification queue generated from the political review so every shortlisted title can receive explicit current print evidence and provenance before promotion."
+    "Verification queue generated from the political review so every shortlisted title can receive explicit current print evidence and provenance before promotion.",
+    "Curation reduced the 56-title verification queue to 50 without changing political labels to manufacture balance. Six lower-incremental-value titles remain documented as deferred candidates."
   ],
   "target_catalog_size": {
     "guideline_target": 50,
@@ -601,7 +602,9 @@
     "entry_level_provenance": "in_progress_batch_1",
     "active_print_verification": "in_progress",
     "metrics_enrichment": "pending",
-    "implementation": "pending"
+    "implementation": "pending",
+    "shortlist_size": 50,
+    "shortlist_curation": "complete"
   },
   "verification_queue": [
     {
@@ -883,6 +886,284 @@
       "name": "Rivarol",
       "country": "FR",
       "working_group": "radical_right"
+    }
+  ],
+  "final_shortlist": [
+    {
+      "name": "L'Humanité",
+      "country": "FR",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "Il Manifesto",
+      "country": "IT",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "El Salto",
+      "country": "ES",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "Le Monde",
+      "country": "FR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Libération",
+      "country": "FR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "la Repubblica",
+      "country": "IT",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Il Fatto Quotidiano",
+      "country": "IT",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "El País",
+      "country": "ES",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Gazeta Wyborcza",
+      "country": "PL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "de Volkskrant",
+      "country": "NL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "De Groene Amsterdammer",
+      "country": "NL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Politiken",
+      "country": "DK",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Information",
+      "country": "DK",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Dagens ETC",
+      "country": "SE",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Klassekampen",
+      "country": "NO",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Népszava",
+      "country": "HU",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "HVG",
+      "country": "HU",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Efimerida ton Syntakton",
+      "country": "GR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Danas",
+      "country": "RS",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Les Echos",
+      "country": "FR",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Corriere della Sera",
+      "country": "IT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Il Sole 24 Ore",
+      "country": "IT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "La Vanguardia",
+      "country": "ES",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Rzeczpospolita",
+      "country": "PL",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "NRC",
+      "country": "NL",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "De Standaard",
+      "country": "BE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Le Soir",
+      "country": "BE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Dagens Nyheter",
+      "country": "SE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Dagens Næringsliv",
+      "country": "NO",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Helsingin Sanomat",
+      "country": "FI",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "The Irish Times",
+      "country": "IE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Público",
+      "country": "PT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Hospodářské noviny",
+      "country": "CZ",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Respekt",
+      "country": "CZ",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Delo",
+      "country": "SI",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Le Figaro",
+      "country": "FR",
+      "working_group": "conservative"
+    },
+    {
+      "name": "El Mundo",
+      "country": "ES",
+      "working_group": "conservative"
+    },
+    {
+      "name": "ABC",
+      "country": "ES",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Jyllands-Posten",
+      "country": "DK",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Svenska Dagbladet",
+      "country": "SE",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Aftenposten",
+      "country": "NO",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Magyar Nemzet",
+      "country": "HU",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Kathimerini",
+      "country": "GR",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Valeurs actuelles",
+      "country": "FR",
+      "working_group": "right"
+    },
+    {
+      "name": "Il Giornale",
+      "country": "IT",
+      "working_group": "right"
+    },
+    {
+      "name": "Gazeta Polska",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "Do Rzeczy",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "Sieci",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "De Telegraaf",
+      "country": "NL",
+      "working_group": "right"
+    },
+    {
+      "name": "Rivarol",
+      "country": "FR",
+      "working_group": "radical_right"
+    }
+  ],
+  "deferred_candidates": [
+    {
+      "name": "La Libre Belgique",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Suomen Kuvalehti",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Jutarnji list",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Adevărul",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Irish Independent",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Expresso",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
     }
   ]
 }
