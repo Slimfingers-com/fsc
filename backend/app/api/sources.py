@@ -6,7 +6,13 @@ from sqlalchemy.orm import Session
 
 from app.core.settings import settings
 from app.db.session import get_db
-from app.schemas.source import SourceCreate, SourceRead
+from app.schemas.source import (
+    SourceClassificationCreate,
+    SourceCreate,
+    SourceReachMetricCreate,
+    SourceRead,
+    SourceUpdate,
+)
 from app.services.source import SourceService
 
 router = APIRouter(
@@ -98,3 +104,71 @@ def create_source(
     db.refresh(source)
 
     return source
+
+@router.patch(
+    "/{slug}",
+    response_model=SourceRead,
+)
+def update_source(
+    slug: str,
+    data: SourceUpdate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.update_source(
+        db,
+        slug=slug,
+        data=data,
+    )
+    if source is None:
+        raise HTTPException(status_code=404, detail="Source not found.")
+
+    db.commit()
+    return service.get_by_slug(db, slug)
+
+
+@router.post(
+    "/{slug}/classifications",
+    response_model=SourceRead,
+    status_code=201,
+)
+def add_source_classification(
+    slug: str,
+    data: SourceClassificationCreate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.add_classification(
+        db,
+        slug=slug,
+        data=data,
+    )
+    if source is None:
+        raise HTTPException(status_code=404, detail="Source not found.")
+
+    db.commit()
+    return service.get_by_slug(db, slug)
+
+
+@router.post(
+    "/{slug}/reach-metrics",
+    response_model=SourceRead,
+    status_code=201,
+)
+def add_source_reach_metric(
+    slug: str,
+    data: SourceReachMetricCreate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.add_reach_metric(
+        db,
+        slug=slug,
+        data=data,
+    )
+    if source is None:
+        raise HTTPException(status_code=404, detail="Source not found.")
+
+    db.commit()
+    return service.get_by_slug(db, slug)
+
