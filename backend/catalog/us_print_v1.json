@@ -63,6 +63,75 @@
     "Workers World remains an active print candidate: its publisher offers a monthly mailed 12-page print paper and current 2026 PDF issues.",
     "Jacobin remains an active print candidate: its publisher offers a four-issue annual Print + Digital subscription in 2026.",
     "La Opinión remains an active Spanish-language print candidate: its publisher describes it as the most-read Spanish-language print newspaper in the United States.",
-    "Puerto Rico legacy titles El Nuevo Día and Primera Hora require time-sensitive handling because their publishers announced print cessation in September 2026; they must not be treated as stable active-print candidates."
-  ]
+    "Puerto Rico legacy titles El Nuevo Día and Primera Hora require time-sensitive handling because their publishers announced print cessation in September 2026; they must not be treated as stable active-print candidates.",
+    "Current 2026 third-party classifications support New York Times, Washington Post and USA Today as lean-left; Wall Street Journal news as center; Reason and Newsweek as center; Washington Examiner, National Review and Epoch Times as lean-right; New York Post news as right. These are candidate-level provenance assertions, not FSC judgments.",
+    "ADL identifies The Barnes Review and American Free Press as right-wing extremist publications carrying Holocaust-denial content; SPLC separately documents The Barnes Review as extremist. Both still offer active print subscriptions in 2026.",
+    "US right and radical-right print form groups remain sparse; coverage exceptions are preferable to moving lean-right/conservative publications solely to satisfy targets.",
+    "Washington Examiner is an active weekly print magazine in 2026; its 2026 media kit reports 44 issues and 45,000 copies weekly.",
+    "The Nation, In These Times, Current Affairs, Jacobin, Dissent and National Review all have verified active 2026 print editions/subscriptions."
+  ],
+  "candidate_pool": {
+    "radical_left": {
+      "newspaper_or_weekly": [
+        "Workers World",
+        "Socialist Alternative",
+        "Challenge"
+      ],
+      "magazine_or_periodical": [
+        "Jacobin",
+        "Monthly Review",
+        "Catalyst"
+      ]
+    },
+    "left_liberal": {
+      "newspaper_or_weekly": [
+        "The New York Times",
+        "The Washington Post",
+        "USA Today",
+        "Los Angeles Times"
+      ],
+      "magazine_or_periodical": [
+        "The Nation",
+        "Mother Jones",
+        "The New Republic",
+        "The Atlantic",
+        "In These Times",
+        "Current Affairs",
+        "Dissent"
+      ]
+    },
+    "liberal_centre": {
+      "newspaper_or_weekly": [
+        "The Wall Street Journal"
+      ],
+      "magazine_or_periodical": [
+        "Reason",
+        "Newsweek"
+      ]
+    },
+    "conservative": {
+      "newspaper_or_weekly": [
+        "The Washington Times",
+        "The Epoch Times"
+      ],
+      "magazine_or_periodical": [
+        "National Review",
+        "Washington Examiner"
+      ]
+    },
+    "right": {
+      "newspaper_or_weekly": [
+        "New York Post"
+      ],
+      "magazine_or_periodical": []
+    },
+    "radical_right": {
+      "newspaper_or_weekly": [
+        "American Free Press"
+      ],
+      "magazine_or_periodical": [
+        "The Barnes Review"
+      ]
+    }
+  }
 }
