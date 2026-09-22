@@ -18,44 +18,96 @@ depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
-    op.add_column(
-        "sources",
-        sa.Column("media_category", sa.String(length=30), nullable=True),
-    )
-    op.add_column(
-        "sources",
-        sa.Column("publication_form", sa.String(length=40), nullable=True),
-    )
-    op.add_column(
-        "sources",
+    op.create_table(
+        "source_outlets",
+        sa.Column("source_id", postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column("name", sa.String(length=255), nullable=False),
+        sa.Column("media_category", sa.String(length=30), nullable=False),
+        sa.Column("publication_form", sa.String(length=40), nullable=False),
         sa.Column("publication_frequency", sa.String(length=100), nullable=True),
-    )
-    op.create_check_constraint(
-        "ck_sources_media_category",
-        "sources",
-        "media_category IS NULL OR media_category IN ("
-        "'print', 'broadcast', 'digital', 'agency', "
-        "'primary_source', 'organization', 'other'"
-        ")",
-    )
-    op.create_check_constraint(
-        "ck_sources_publication_form",
-        "sources",
-        "publication_form IS NULL OR publication_form IN ("
-        "'daily_newspaper', 'weekly_newspaper', 'sunday_newspaper', "
-        "'magazine', 'periodical', 'radio', 'television', "
-        "'digital_native', 'news_agency', 'other'"
-        ")",
+        sa.Column("language", sa.String(length=10), nullable=True),
+        sa.Column("url", sa.Text(), nullable=True),
+        sa.Column(
+            "is_primary",
+            sa.Boolean(),
+            server_default=sa.text("false"),
+            nullable=False,
+        ),
+        sa.Column(
+            "active",
+            sa.Boolean(),
+            server_default=sa.text("true"),
+            nullable=False,
+        ),
+        sa.Column(
+            "id",
+            postgresql.UUID(as_uuid=True),
+            server_default=sa.text("gen_random_uuid()"),
+            nullable=False,
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column("deleted_at", sa.DateTime(timezone=True), nullable=True),
+        sa.ForeignKeyConstraint(
+            ["source_id"],
+            ["sources.id"],
+            ondelete="CASCADE",
+        ),
+        sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint(
+            "source_id",
+            "name",
+            name="uq_source_outlet_source_name",
+        ),
+        sa.CheckConstraint(
+            "media_category IN ("
+            "'print', 'broadcast', 'digital', 'agency', "
+            "'primary_source', 'organization', 'other'"
+            ")",
+            name="ck_source_outlet_media_category",
+        ),
+        sa.CheckConstraint(
+            "publication_form IN ("
+            "'daily_newspaper', 'weekly_newspaper', 'sunday_newspaper', "
+            "'magazine', 'periodical', 'radio', 'television', "
+            "'digital_native', 'news_agency', 'other'"
+            ")",
+            name="ck_source_outlet_publication_form",
+        ),
+        sa.CheckConstraint(
+            "btrim(name) <> ''",
+            name="ck_source_outlet_name_nonempty",
+        ),
     )
     op.create_index(
-        "ix_sources_media_category",
-        "sources",
+        "ix_source_outlets_source_id",
+        "source_outlets",
+        ["source_id"],
+    )
+    op.create_index(
+        "ix_source_outlets_media_category",
+        "source_outlets",
         ["media_category"],
     )
     op.create_index(
-        "ix_sources_publication_form",
-        "sources",
+        "ix_source_outlets_publication_form",
+        "source_outlets",
         ["publication_form"],
+    )
+    op.create_index(
+        "ix_source_outlets_source_category_form",
+        "source_outlets",
+        ["source_id", "media_category", "publication_form"],
     )
 
     op.create_table(
@@ -162,6 +214,7 @@ def upgrade() -> None:
     op.create_table(
         "source_metrics",
         sa.Column("source_id", postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column("outlet_id", postgresql.UUID(as_uuid=True), nullable=True),
         sa.Column("metric_kind", sa.String(length=50), nullable=False),
         sa.Column("value", sa.BigInteger(), nullable=False),
         sa.Column("unit", sa.String(length=50), nullable=False),
@@ -202,6 +255,11 @@ def upgrade() -> None:
             ["source_id"],
             ["sources.id"],
             ondelete="CASCADE",
+        ),
+        sa.ForeignKeyConstraint(
+            ["outlet_id"],
+            ["source_outlets.id"],
+            ondelete="SET NULL",
         ),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint(
@@ -254,6 +312,11 @@ def upgrade() -> None:
         ["source_id"],
     )
     op.create_index(
+        "ix_source_metrics_outlet_id",
+        "source_metrics",
+        ["outlet_id"],
+    )
+    op.create_index(
         "ix_source_metrics_metric_kind",
         "source_metrics",
         ["metric_kind"],
@@ -271,6 +334,7 @@ def downgrade() -> None:
         table_name="source_metrics",
     )
     op.drop_index("ix_source_metrics_metric_kind", table_name="source_metrics")
+    op.drop_index("ix_source_metrics_outlet_id", table_name="source_metrics")
     op.drop_index("ix_source_metrics_source_id", table_name="source_metrics")
     op.drop_table("source_metrics")
 
@@ -296,18 +360,17 @@ def downgrade() -> None:
     )
     op.drop_table("source_classifications")
 
-    op.drop_index("ix_sources_publication_form", table_name="sources")
-    op.drop_index("ix_sources_media_category", table_name="sources")
-    op.drop_constraint(
-        "ck_sources_publication_form",
-        "sources",
-        type_="check",
+    op.drop_index(
+        "ix_source_outlets_source_category_form",
+        table_name="source_outlets",
     )
-    op.drop_constraint(
-        "ck_sources_media_category",
-        "sources",
-        type_="check",
+    op.drop_index(
+        "ix_source_outlets_publication_form",
+        table_name="source_outlets",
     )
-    op.drop_column("sources", "publication_frequency")
-    op.drop_column("sources", "publication_form")
-    op.drop_column("sources", "media_category")
+    op.drop_index(
+        "ix_source_outlets_media_category",
+        table_name="source_outlets",
+    )
+    op.drop_index("ix_source_outlets_source_id", table_name="source_outlets")
+    op.drop_table("source_outlets")
