@@ -1,0 +1,388 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "scope": "national",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "one_editorial_source_multiple_programmes_and_channels_as_outlets",
+  "regional_policy": "regional_broadcast_sources_are_excluded_from_this_catalog_and_reviewed_in_a_separate_at_regional_block",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Research target is 3–5 editorially independent Sources per political planning segment and per broadcast form (television/radio). Genuine national-market gaps remain explicit. Programmes, channels and sub-brands of one newsroom do not count as independent Sources.",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "Planning placement in A–F is not itself a persisted FSC political classification. SourceClassification records remain attributed to external classifiers; religion or public-service status is never converted automatically into a political classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No suitable nationally oriented Austrian television or radio newsroom identified in the approved AT-national candidate scope. Regional/free radio is reviewed separately."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [],
+      "coverage_exception": "No editorially independent national Austrian broadcast Source is assigned here. FM4 has a progressive programme identity but is an outlet of the cross-media ORF Information Source and is not counted as an independent Source."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "orf-information",
+          "name": "ORF Information",
+          "homepage": "https://orf.at/",
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "outlets": [
+            {
+              "key": "orf-1",
+              "name": "ORF 1",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://on.orf.at/"
+            },
+            {
+              "key": "orf-2",
+              "name": "ORF 2",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://on.orf.at/"
+            },
+            {
+              "key": "orf-iii",
+              "name": "ORF III",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://on.orf.at/"
+            },
+            {
+              "key": "oe1",
+              "name": "Ö1",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://oe1.orf.at/"
+            },
+            {
+              "key": "oe3",
+              "name": "Ö3",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://oe3.orf.at/"
+            },
+            {
+              "key": "fm4",
+              "name": "FM4",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://fm4.orf.at/"
+            }
+          ],
+          "notes": [
+            "Since 2022 the ORF multimedial newsroom bundles current news production across television, radio and online. ORF television channels and national radio programmes therefore count as outlets of one editorial Source for FSC independence counting.",
+            "Placement in the C planning segment reflects its public-service reference role and is not a persisted political classification."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "prosiebensat1-puls4-newsroom",
+          "name": "ProSiebenSat.1 PULS 4 Newsroom",
+          "homepage": "https://www.puls24.at/",
+          "classification_status": "unclassified_research_candidate",
+          "outlets": [
+            {
+              "key": "puls-24",
+              "name": "PULS 24",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.puls24.at/"
+            },
+            {
+              "key": "puls-4",
+              "name": "PULS 4",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.puls4.com/"
+            },
+            {
+              "key": "atv",
+              "name": "ATV",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.atv.at/"
+            }
+          ],
+          "notes": [
+            "The ProSiebenSat.1 PULS 4 newsroom centrally coordinates the current-news editorial units serving PULS 24, PULS 4 and ATV. These channels must not be counted as independent Sources.",
+            "Political orientation remains unclassified pending sufficient independent external provenance."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "inforadio-at",
+          "name": "inforadio",
+          "homepage": "https://inforadio.at/",
+          "classification_status": "unclassified_research_candidate",
+          "outlets": [
+            {
+              "key": "inforadio-at-national",
+              "name": "inforadio",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://inforadio.at/"
+            }
+          ],
+          "notes": [
+            "National Austrian information-radio candidate operated by nonstopnews.at GmbH and distributed nationwide via DAB+.",
+            "Political orientation remains unclassified."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "kronehit",
+          "name": "kronehit",
+          "homepage": "https://www.kronehit.at/",
+          "classification_status": "unclassified_research_candidate",
+          "outlets": [
+            {
+              "key": "kronehit-national",
+              "name": "kronehit",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.kronehit.at/"
+            }
+          ],
+          "notes": [
+            "Nationally relevant Austrian private-radio newsroom. Music-focused sub-brands and DAB+ channels do not create additional independent FSC Sources.",
+            "Political orientation remains unclassified."
+          ]
+        }
+      ],
+      "coverage_exception": "The segment contains the main public-service/commercial reference newsrooms and national radio candidates. Television and radio reach the research minimum only when editorial Source identity is respected; programme brands are not split into extra Sources."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative research pool",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "catholic_christian",
+              "classifier_type": "self_description",
+              "classifier_name": "Radio Maria Österreich",
+              "source_url": "https://www.radiomaria.at/programm/programmsaeulen/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T11:45:00Z",
+              "notes": "Religious self-positioning is recorded separately. It does not itself establish a political FSC classification."
+            }
+          ],
+          "metrics": [],
+          "key": "radio-maria-oesterreich",
+          "name": "Radio Maria Österreich",
+          "homepage": "https://www.radiomaria.at/",
+          "classification_status": "thematic_candidate_not_political_classification",
+          "outlets": [
+            {
+              "key": "radio-maria-oesterreich-national",
+              "name": "Radio Maria Österreich",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.radiomaria.at/"
+            }
+          ],
+          "notes": [
+            "Included because politics, medicine, family and society recur in the editorial programme, including the explicitly gesellschaftspolitisch described Zeit-Panorama.",
+            "Religious identity is not automatically treated as conservative political orientation."
+          ]
+        }
+      ],
+      "coverage_exception": "Only one approved national radio Source is retained in this research pool, and there is no approved independent national television Source in D. Religious identity does not justify filling the segment artificially."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_wing_leaning",
+              "classifier_type": "academic_industry_report",
+              "classifier_name": "Reuters Institute Digital News Report 2022 – Austria",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2022/austria",
+              "reference_date": "2022-06-15",
+              "retrieved_at": "2026-09-23T11:45:00Z",
+              "notes": "Reuters Institute describes ServusTV as a right-wing leaning channel. A second independent source is still required for persisted FSC political-group assignment."
+            }
+          ],
+          "metrics": [],
+          "key": "servustv",
+          "name": "ServusTV",
+          "homepage": "https://www.servustv.com/",
+          "classification_status": "single_external_source_needs_second_source",
+          "outlets": [
+            {
+              "key": "servustv-at",
+              "name": "ServusTV",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.servustv.com/"
+            }
+          ],
+          "notes": [
+            "National Austrian television Source with recurring news, politics and society coverage.",
+            "E is a research-planning placement; the single external orientation source is not sufficient for a persisted FSC political classification."
+          ]
+        }
+      ],
+      "coverage_exception": "One approved national television Source is retained in E. No separate national Austrian radio newsroom currently meets the approved research criteria for this segment."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_extremist_alternative_media_spectrum",
+              "classifier_type": "research_institute",
+              "classifier_name": "Dokumentationsarchiv des österreichischen Widerstandes (DÖW)",
+              "source_url": "https://www.doew.at/neues/doew-praesentiert-rechtsextremismusbericht-2024",
+              "reference_date": "2025-01-22",
+              "retrieved_at": "2026-09-23T11:45:00Z",
+              "notes": "The DÖW Rechtsextremismusbericht treats AUF1 in its analysis of right-extremist actors and alternative media."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_extremist_suspected_case",
+              "classifier_type": "state_security_report",
+              "classifier_name": "Bundesamt für Verfassungsschutz (Germany)",
+              "source_url": "https://www.verfassungsschutz.de/SharedDocs/publikationen/DE/verfassungsschutzberichte/2025-06-10-verfassungsschutzbericht-2024.pdf",
+              "reference_date": "2025-06-10",
+              "retrieved_at": "2026-09-23T11:45:00Z",
+              "notes": "The German federal Verfassungsschutzbericht 2024 has a dedicated section on AUF1 as a right-extremist suspected case. This is independent of the Austrian DÖW classification."
+            }
+          ],
+          "metrics": [],
+          "key": "auf1",
+          "name": "AUF1",
+          "homepage": "https://auf1.tv/",
+          "classification_status": "two_source_direction_confirmed",
+          "outlets": [
+            {
+              "key": "auf1-tv",
+              "name": "AUF1",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://auf1.tv/"
+            }
+          ],
+          "notes": [
+            "Austrian editorial Source headquartered in Austria and explicitly operated as Alternatives und Unabhängiges Fernsehen.",
+            "Two independent external sources materially agree on right-extremist-spectrum placement; the exact legal/status terminology differs and is preserved per classifier."
+          ]
+        }
+      ],
+      "coverage_exception": "One approved national Austrian television Source has sufficient external provenance for F. No independent national radio Source is added merely to meet the 3–5 research target."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "feeds": [],
+      "classifications": [],
+      "metrics": [],
+      "key": "oe24-broadcast",
+      "name": "ÖSTERREICH / oe24",
+      "homepage": "https://www.oe24.at/",
+      "existing_source_key": "oesterreich-oe24",
+      "classification_status": "unclassified_research_candidate",
+      "outlets": [
+        {
+          "key": "oe24-tv",
+          "name": "oe24.TV",
+          "publication_form": "television",
+          "scope": "national",
+          "homepage": "https://www.oe24.at/"
+        },
+        {
+          "key": "oe24-radio",
+          "name": "oe24 RADIO",
+          "publication_form": "radio",
+          "scope": "national",
+          "homepage": "https://www.oe24.at/"
+        }
+      ],
+      "notes": [
+        "oe24.TV and oe24 RADIO extend the existing ÖSTERREICH / oe24 Source from the AT print catalog; they must not create duplicate Sources.",
+        "The oe24 Media Group explicitly bundles print, online, TV and radio under one multi-channel brand.",
+        "No A–F planning position is fixed until sufficient independent political-orientation provenance is available."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "ERF Süd",
+      "reason": "Deferred as an Austrian Source because ERF Medien Österreich states that the programme currently comes predominantly from South Tyrol and Germany and only intends to expand Austrian productions. National DAB+ carriage does not by itself establish an independent Austrian editorial Source."
+    },
+    {
+      "name": "Kontrafunk",
+      "reason": "Already one cross-border editorial Source in the DE broadcast catalog; Austrian carriage or Austria-focused programming must not create a duplicate Austrian Source."
+    },
+    {
+      "name": "Klassik Radio",
+      "reason": "National DAB+ distribution in Austria does not turn the existing German editorial Source into a separate Austrian Source."
+    },
+    {
+      "name": "Krone.tv",
+      "reason": "Potential outlet extension of the existing Kronen Zeitung Source rather than a new Source. It is not part of the jointly approved AT-national broadcast core and is deferred for later cross-media outlet review."
+    }
+  ],
+  "approved_candidate_count": 8,
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+}

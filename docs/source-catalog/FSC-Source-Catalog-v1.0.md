@@ -238,6 +238,38 @@ Boulevard is a **format dimension**, not a political orientation.
 | Heute | free daily / boulevard | 501,409 distributed copies in ÖAK H1 2026 |
 | ÖSTERREICH / oe24 | paid + free daily hybrid / boulevard | current 2026 print operation and cross-media metrics recorded |
 
+### National broadcast candidate core
+
+Television and radio are reviewed separately, but FSC counts **editorially independent Sources**, not channels or programmes. The research target remains 3–5 Sources per A–F planning segment and broadcast form; it is a goal, never a quota. Genuine Austrian market gaps remain explicit.
+
+The jointly approved AT-national core contains eight editorial Sources:
+
+| Planning segment | Television Sources | Radio Sources |
+| --- | --- | --- |
+| A radical/system-oppositional left | explicit market gap | explicit market gap |
+| B left/centre-left/left-liberal | explicit market gap | explicit market gap; FM4 is an ORF outlet, not an independent Source |
+| C liberal/centre | ORF Information, ProSiebenSat.1 PULS 4 Newsroom | ORF Information, inforadio, kronehit |
+| D conservative/liberal-conservative research pool | explicit market gap | Radio Maria Österreich |
+| E right/right-conservative/right-libertarian | ServusTV | explicit market gap |
+| F radical right / externally classified extreme-right spectrum | AUF1 | explicit market gap |
+
+The planning table is not itself a persisted FSC ideology classification. Persisted political group assignment still requires at least two independent external sources that materially agree in left/right direction.
+
+Specific identity rules:
+
+- **ORF Information** is one cross-media Source. The ORF multimedial newsroom bundles current news production across television, radio and online; ORF 1, ORF 2, ORF III, Ö1, Ö3 and FM4 are outlets/programmes for FSC independence counting.
+- **ProSiebenSat.1 PULS 4 Newsroom** is one Source for the centrally coordinated current-news operation serving PULS 24, PULS 4 and ATV.
+- **ÖSTERREICH / oe24** already exists in the AT print catalog. **oe24.TV** and **oe24 RADIO** extend that same Source and therefore do not create a ninth Source. Its political A–F placement remains explicitly unclassified until sufficient independent provenance exists.
+- **Radio Maria Österreich** enters the research pool because politics and society recur in its editorial programme. Catholic/religious identity is stored separately and is not automatically converted into a political classification.
+- **ServusTV** has one external right-leaning classification in the current provenance set. Its E position is research planning only; it does not yet satisfy the two-source rule for persisted political assignment.
+- **AUF1** has two independent external sources materially agreeing on right-extremist-spectrum placement; the exact terminology used by each classifier remains preserved.
+- **ERF Süd** is deferred as an Austrian Source because ERF Medien Österreich states that the programme currently comes predominantly from South Tyrol and Germany. National Austrian DAB+ carriage alone does not establish an independent Austrian newsroom.
+- **Kontrafunk** and **Klassik Radio** are not duplicated into Austria merely because they are receivable there.
+- **Krone.tv** is deferred for a later cross-media outlet review of the existing Kronen Zeitung Source rather than being created as an independent Source.
+- Regional Austrian television and radio remain outside this national block and will be reviewed separately.
+
+No feed is activated by inclusion in this catalog.
+
 ## Switzerland (CH)
 
 ### Print
@@ -417,6 +449,7 @@ Completed catalog blocks:
 6. Europe comparison set outside DE/AT/CH/GB
 7. Germany-focused international comparison set outside Europe and the US
 8. Germany national broadcast candidate core (TV and radio; regional broadcast separate)
+9. Austria national broadcast candidate core (TV and radio; regional broadcast separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
