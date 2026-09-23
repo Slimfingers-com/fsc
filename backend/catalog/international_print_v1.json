@@ -119,7 +119,18 @@
               "notes": "Academic content analysis describes CartaCapital's editorial discourse as more to the left; direction agrees with MBFC Left. External classification; not an FSC assessment."
             }
           ],
-          "metrics": []
+          "metrics": [
+            {
+              "metric_kind": "print_subscribers_minimum",
+              "value": 7000,
+              "unit": "subscribers",
+              "reference_period": "current media kit retrieved 2026-09-23",
+              "measurement_body": "CartaCapital Media Kit",
+              "source_url": "https://negocios.cartacapital.com.br/",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Publisher states more than 7,000 print subscribers; value is stored as a lower bound."
+            }
+          ]
         },
         {
           "key": "asahi-shimbun",
@@ -155,7 +166,18 @@
               "notes": "Reuters Institute calls Asahi Shimbun Japan's leading liberal daily; direction agrees with MBFC Left-Center. External classification; not an FSC assessment."
             }
           ],
-          "metrics": []
+          "metrics": [
+            {
+              "metric_kind": "circulation_approximate",
+              "value": 3000000,
+              "unit": "copies",
+              "reference_period": "2025",
+              "measurement_body": "Reuters Institute for the Study of Journalism",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/japan",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Reuters Institute states print circulation is about ten times the roughly 300,000 digital subscriptions; stored explicitly as approximate."
+            }
+          ]
         },
         {
           "key": "the-hindu",
@@ -382,7 +404,17 @@
               "notes": "Reuters Institute describes Yomiuri Shimbun as a conservative daily; direction agrees with MBFC Right-Center. External classification; not an FSC assessment."
             }
           ],
-          "metrics": []
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 5700000,
+              "unit": "copies",
+              "reference_period": "2025",
+              "measurement_body": "Reuters Institute for the Study of Journalism",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/japan",
+              "retrieved_at": "2026-09-23T09:34:00+02:00"
+            }
+          ]
         },
         {
           "key": "clarin",
@@ -821,7 +853,17 @@
       ],
       "feeds": [],
       "classifications": [],
-      "metrics": []
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 1300000,
+          "unit": "copies",
+          "reference_period": "2025 report / 2024 milestone context",
+          "measurement_body": "Reuters Institute for the Study of Journalism",
+          "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/japan",
+          "retrieved_at": "2026-09-23T09:34:00+02:00"
+        }
+      ]
     },
     {
       "key": "the-times-of-india",
@@ -1129,7 +1171,17 @@
           "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
         }
       ],
-      "metrics": []
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 23000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/149664",
+          "retrieved_at": "2026-09-23T09:34:00+02:00"
+        }
+      ]
     },
     {
       "key": "sozcu",
@@ -1157,7 +1209,17 @@
           "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
         }
       ],
-      "metrics": []
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 175000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148786/soezcue",
+          "retrieved_at": "2026-09-23T09:34:00+02:00"
+        }
+      ]
     },
     {
       "key": "sabah",
@@ -1185,7 +1247,17 @@
           "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
         }
       ],
-      "metrics": []
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 188000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148776/sabah",
+          "retrieved_at": "2026-09-23T09:34:00+02:00"
+        }
+      ]
     },
     {
       "key": "mail-and-guardian",
@@ -1441,7 +1513,7 @@
     "candidate_pool": "broad_pool_complete",
     "political_mapping": "decision_2_two_source_threshold",
     "active_print_verification": "partial",
-    "metrics_enrichment": "pending",
+    "metrics_enrichment": "partial",
     "implementation": "structured_shortlist_seeded",
     "curation": "40_title_shortlist_complete",
     "provenance_enrichment": "two_source_assignments_expanded"
