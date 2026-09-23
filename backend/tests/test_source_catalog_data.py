@@ -475,3 +475,27 @@ def test_international_core_is_germany_focused_and_deferred_is_explicit() -> Non
     assert all(item["reason"] for item in catalog["deferred_candidates"])
     assert {entry["country"] for entry in entries}.isdisjoint({"TW", "HK"})
     assert catalog["review_status"]["scope"] == "decision_c_no_taiwan_hong_kong_currently"
+
+
+def test_print_products_are_not_duplicate_sources() -> None:
+    gb = load_catalog("GB")
+    gb_entries = [entry for group in gb["groups"] for entry in group["entries"]] + gb.get("unclassified_entries", [])
+    gb_by_name = {entry["name"]: entry for entry in gb_entries}
+    assert "The Guardian Weekly" not in gb_by_name
+    assert {outlet["name"] for outlet in gb_by_name["The Guardian"]["outlets"]} == {
+        "The Guardian",
+        "The Guardian Weekly",
+    }
+
+    ch = load_catalog("CH")
+    ch_entries = [entry for group in ch["groups"] for entry in group["entries"]] + ch.get("unclassified_entries", [])
+    ch_by_name = {entry["name"]: entry for entry in ch_entries}
+    assert "SonntagsBlick" not in ch_by_name
+    assert {outlet["name"] for outlet in ch_by_name["Blick"]["outlets"]} == {
+        "Blick",
+        "SonntagsBlick",
+    }
+    assert {metric.get("outlet_name") for metric in ch_by_name["Blick"]["metrics"]} == {
+        "Blick",
+        "SonntagsBlick",
+    }

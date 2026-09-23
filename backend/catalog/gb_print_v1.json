@@ -270,7 +270,28 @@
               "notes": "External media-database classification; not an FSC assessment."
             }
           ],
-          "metrics": []
+          "metrics": [],
+          "outlets": [
+            {
+              "name": "The Guardian",
+              "publication_form": "daily_newspaper",
+              "language": "en",
+              "url": "https://www.theguardian.com/",
+              "is_primary": true,
+              "active": true
+            },
+            {
+              "name": "The Guardian Weekly",
+              "publication_form": "magazine",
+              "language": "en",
+              "url": "https://www.theguardian.com/weekly",
+              "is_primary": false,
+              "active": true
+            }
+          ],
+          "notes": [
+            "The Guardian Weekly is modeled as an outlet/product of the same editorial source, not as an independent Source."
+          ]
         },
         {
           "key": "daily-mirror",
@@ -438,32 +459,6 @@
               "reference_date": "2026-09-22",
               "retrieved_at": "2026-09-22T19:10:00Z",
               "notes": "External media-database classification; not an FSC assessment."
-            }
-          ],
-          "metrics": []
-        },
-        {
-          "key": "guardian-weekly",
-          "name": "The Guardian Weekly",
-          "homepage": "https://www.theguardian.com/weekly",
-          "publication_form": "magazine",
-          "form_group": "magazine_or_periodical",
-          "language": "en",
-          "subnational_region": "England",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [],
-          "feeds": [],
-          "classifications": [
-            {
-              "dimension": "editorial_orientation",
-              "value": "centre_left",
-              "classifier_type": "other",
-              "classifier_name": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148819/the-guardian",
-              "reference_date": "2026-09-22",
-              "retrieved_at": "2026-09-22T19:10:00Z",
-              "notes": "Uses the Guardian brand's external orientation classification; edition remains separately modeled."
             }
           ],
           "metrics": []
@@ -997,5 +992,6 @@
       "metrics": []
     }
   ],
-  "coverage_policy_notes": "Targets are research goals, not quotas. Under-covered groups require a documented coverage_exception; titles are never reclassified to fill a quota."
+  "coverage_policy_notes": "Targets are research goals, not quotas. Under-covered groups require a documented coverage_exception; titles are never reclassified to fill a quota.",
+  "source_identity_policy": "one_editorial_source_multiple_products_as_outlets"
 }
