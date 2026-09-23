@@ -92,13 +92,145 @@
       ]
     }
   ],
-  "candidate_pool": [],
+  "candidate_pool": [
+    {
+      "country": "CA",
+      "titles": [
+        "The Globe and Mail",
+        "Toronto Star",
+        "National Post",
+        "Le Devoir",
+        "Maclean's"
+      ]
+    },
+    {
+      "country": "MX",
+      "titles": [
+        "El Universal",
+        "Reforma",
+        "La Jornada",
+        "Milenio"
+      ]
+    },
+    {
+      "country": "BR",
+      "titles": [
+        "Folha de S.Paulo",
+        "O Estado de S. Paulo",
+        "O Globo",
+        "CartaCapital",
+        "Veja"
+      ]
+    },
+    {
+      "country": "AR",
+      "titles": [
+        "Clarín",
+        "La Nación",
+        "Página/12"
+      ]
+    },
+    {
+      "country": "JP",
+      "titles": [
+        "Yomiuri Shimbun",
+        "Asahi Shimbun",
+        "Mainichi Shimbun",
+        "Nikkei",
+        "Sankei Shimbun"
+      ]
+    },
+    {
+      "country": "KR",
+      "titles": [
+        "Chosun Ilbo",
+        "JoongAng Ilbo",
+        "Dong-A Ilbo",
+        "Hankyoreh",
+        "Kyunghyang Shinmun"
+      ]
+    },
+    {
+      "country": "IN",
+      "titles": [
+        "The Hindu",
+        "The Times of India",
+        "The Indian Express",
+        "Hindustan Times",
+        "The Telegraph India"
+      ]
+    },
+    {
+      "country": "AU",
+      "titles": [
+        "The Australian",
+        "The Sydney Morning Herald",
+        "The Age",
+        "Australian Financial Review",
+        "The Saturday Paper"
+      ]
+    },
+    {
+      "country": "NZ",
+      "titles": [
+        "The New Zealand Herald",
+        "The Post",
+        "Otago Daily Times"
+      ]
+    },
+    {
+      "country": "IL",
+      "titles": [
+        "Haaretz",
+        "The Jerusalem Post",
+        "Israel Hayom",
+        "Yedioth Ahronoth"
+      ]
+    },
+    {
+      "country": "TR",
+      "titles": [
+        "Hürriyet",
+        "Cumhuriyet",
+        "Sözcü",
+        "Sabah",
+        "Yeni Şafak"
+      ]
+    },
+    {
+      "country": "ZA",
+      "titles": [
+        "Mail & Guardian",
+        "Business Day",
+        "Daily Maverick",
+        "Sunday Times"
+      ]
+    },
+    {
+      "country": "NG",
+      "titles": [
+        "The Punch",
+        "The Guardian Nigeria",
+        "Vanguard",
+        "ThisDay"
+      ]
+    },
+    {
+      "country": "EG",
+      "titles": [
+        "Al-Ahram",
+        "Al-Masry Al-Youm",
+        "Al-Shorouk"
+      ]
+    }
+  ],
   "research_notes": [
     "Priority-country lists guide research only; they are not coverage requirements.",
     "The catalog may contain several titles from a highly relevant media market and none from another country.",
     "Candidate review is performed as one international set rather than one approval cycle per country.",
     "Europe is excluded as a region rather than by enumerating European country codes; DE/AT/CH/GB are therefore covered transitively by the Europe exclusion.",
-    "Initial implementation size is a working guideline only and may change during candidate review."
+    "Initial implementation size is a working guideline only and may change during candidate review.",
+    "Initial broad pool intentionally exceeds the implementation target; candidates will be reduced by current print status, international/regional relevance, provenance quality and incremental viewpoint value."
   ],
   "regions_excluded": [
     "Europe"
@@ -110,5 +242,12 @@
       45
     ],
     "hard_cap": false
+  },
+  "review_status": {
+    "candidate_pool": "broad_pool_complete",
+    "political_mapping": "pending",
+    "active_print_verification": "pending",
+    "metrics_enrichment": "pending",
+    "implementation": "pending"
   }
 }
