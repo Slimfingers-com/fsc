@@ -603,9 +603,9 @@
   },
   "review_status": {
     "shortlist_political_mapping": "complete",
-    "entry_level_provenance": "10_of_50_verified",
+    "entry_level_provenance": "18_of_50_verified",
     "active_print_verification": "in_progress",
-    "metrics_enrichment": "10_of_50_baseline_metrics",
+    "metrics_enrichment": "18_of_50_baseline_metrics",
     "implementation": "pending",
     "shortlist_size": 50,
     "shortlist_curation": "complete",
@@ -1196,7 +1196,7 @@
         "NL",
         "BE"
       ],
-      "status": "queued"
+      "status": "8_titles_verified_remaining_polish_right_titles"
     },
     {
       "batch": 3,
@@ -1554,6 +1554,214 @@
         "publication_form": "daily_newspaper",
         "frequency": "daily",
         "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Gazeta Wyborcza": {
+      "country": "PL",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 48133,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "Monday to Saturday",
+        "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Rzeczpospolita": {
+      "country": "PL",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 34057,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "Monday to Saturday",
+        "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "de Volkskrant": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 206000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "NRC": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148739/nrc",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 145000,
+          "unit": "copies",
+          "reference_period": "2019",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148739/nrc"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148739/nrc",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "De Telegraaf": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "right_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 300000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "De Groene Amsterdammer": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "left_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 28000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "magazine",
+        "frequency": "weekly",
+        "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "De Standaard": {
+      "country": "BE",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148490/de-standaard",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 111500,
+          "unit": "copies",
+          "reference_period": "2021",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148490/de-standaard"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148490/de-standaard",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Le Soir": {
+      "country": "BE",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148689/le-soir",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 68000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148689/le-soir"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148689/le-soir",
         "retrieved_at": "2026-09-23"
       }
     }
