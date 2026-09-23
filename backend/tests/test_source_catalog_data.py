@@ -605,14 +605,12 @@ def test_de_national_broadcast_sparse_segments_document_real_market_gaps() -> No
     groups = {group["key"]: group for group in catalog["groups"]}
     for key in ("radical_left", "left_liberal", "liberal_centre", "conservative", "right", "radical_right"):
         radio_count = sum(
-            outlet["publication_form"] == "radio"
+            any(outlet["publication_form"] == "radio" for outlet in entry["outlets"])
             for entry in groups[key]["entries"]
-            for outlet in entry["outlets"]
         )
         tv_count = sum(
-            outlet["publication_form"] == "television"
+            any(outlet["publication_form"] == "television" for outlet in entry["outlets"])
             for entry in groups[key]["entries"]
-            for outlet in entry["outlets"]
         )
         if radio_count < catalog["coverage_targets"]["radio_min"] or tv_count < catalog["coverage_targets"]["television_min"]:
             assert groups[key].get("coverage_exception")
