@@ -230,7 +230,9 @@
     "Candidate review is performed as one international set rather than one approval cycle per country.",
     "Europe is excluded as a region rather than by enumerating European country codes; DE/AT/CH/GB are therefore covered transitively by the Europe exclusion.",
     "Initial implementation size is a working guideline only and may change during candidate review.",
-    "Initial broad pool intentionally exceeds the implementation target; candidates will be reduced by current print status, international/regional relevance, provenance quality and incremental viewpoint value."
+    "Initial broad pool intentionally exceeds the implementation target; candidates will be reduced by current print status, international/regional relevance, provenance quality and incremental viewpoint value.",
+    "Daily Maverick is a print-status risk because its core product is digital; verify recurring physical publication before promotion.",
+    "Maclean's, The Saturday Paper, Mail & Guardian and similar non-daily titles remain eligible because the catalog covers magazines and periodicals as well as newspapers."
   ],
   "regions_excluded": [
     "Europe"
@@ -248,6 +250,18 @@
     "political_mapping": "pending",
     "active_print_verification": "pending",
     "metrics_enrichment": "pending",
-    "implementation": "pending"
+    "implementation": "pending",
+    "curation": "rules_complete"
+  },
+  "curation_policy": {
+    "target": "approximately_40",
+    "rules": [
+      "active recurring print required",
+      "prefer agenda-setting national or regional publications",
+      "preserve material viewpoint diversity",
+      "do not fill political categories by quota",
+      "reach is metadata and never a hard exclusion threshold",
+      "retain non-English publications"
+    ]
   }
 }
