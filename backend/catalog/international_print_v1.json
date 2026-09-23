@@ -48,7 +48,188 @@
     {
       "key": "left_liberal",
       "label": "left liberal",
-      "entries": []
+      "entries": [
+        {
+          "key": "toronto-star",
+          "name": "Toronto Star",
+          "homepage": "https://www.thestar.com/",
+          "country": "CA",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/toronto-star/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "progressive",
+              "classifier_type": "academic_research",
+              "classifier_name": "PMC / Climatic Change study",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11264564/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study describes the Toronto Star as a progressive news source; direction agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "cartacapital",
+          "name": "CartaCapital",
+          "homepage": "https://www.cartacapital.com.br/",
+          "country": "BR",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "pt",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/cartacapital-bias-and-credibility/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "academic_research",
+              "classifier_name": "Revista da Universidade Federal de Minas Gerais",
+              "source_url": "https://periodicos.ufmg.br/index.php/revistadaufmg/article/view/20554",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Academic content analysis describes CartaCapital's editorial discourse as more to the left; direction agrees with MBFC Left. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "asahi-shimbun",
+          "name": "Asahi Shimbun",
+          "homepage": "https://www.asahi.com/",
+          "country": "JP",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ja",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-asahi-shimbun/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "research_institute",
+              "classifier_name": "Reuters Institute for the Study of Journalism",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2023/japan",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Reuters Institute calls Asahi Shimbun Japan's leading liberal daily; direction agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-hindu",
+          "name": "The Hindu",
+          "homepage": "https://www.thehindu.com/",
+          "country": "IN",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-hindu/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_of_center",
+              "classifier_type": "academic_research",
+              "classifier_name": "Peer-reviewed PMC study",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10345825/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study explicitly describes The Hindu as recognized for a left-of-center stance; direction agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "haaretz",
+          "name": "Haaretz",
+          "homepage": "https://www.haaretz.com/",
+          "country": "IL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "he",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/haaretz/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_leaning",
+              "classifier_type": "research_institute",
+              "classifier_name": "Reuters Institute for the Study of Journalism",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/news/israeli-mainstream-tv-ignores-gazans-suffering-these-outlets-expose-surveillance-brutality-and",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Reuters Institute describes Haaretz as Israel's leading left-leaning newspaper; direction agrees with MBFC Left. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
     },
     {
       "key": "liberal_centre",
@@ -58,12 +239,122 @@
     {
       "key": "conservative",
       "label": "conservative",
-      "entries": []
+      "entries": [
+        {
+          "key": "national-post",
+          "name": "National Post",
+          "homepage": "https://nationalpost.com/",
+          "country": "CA",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/national-post/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "academic_research",
+              "classifier_name": "PMC / Climatic Change study",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11264564/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study describes the National Post by the prominent conservative stance of its editorial board and columnists; direction agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "yomiuri-shimbun",
+          "name": "Yomiuri Shimbun",
+          "homepage": "https://www.yomiuri.co.jp/",
+          "country": "JP",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ja",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-yomiuri-shimbun/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "research_institute",
+              "classifier_name": "Reuters Institute for the Study of Journalism",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2023/japan",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Reuters Institute describes Yomiuri Shimbun as a conservative daily; direction agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
     },
     {
       "key": "right",
       "label": "right",
-      "entries": []
+      "entries": [
+        {
+          "key": "israel-hayom",
+          "name": "Israel Hayom",
+          "homepage": "https://www.israelhayom.com/",
+          "country": "IL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "he",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/israel-hayom/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_wing_slant",
+              "classifier_type": "academic_research",
+              "classifier_name": "University of Chicago Harris School paper",
+              "source_url": "https://harris.uchicago.edu/files/gmm_jan20-guy_grossman.pdf",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Academic study finds significantly greater right-wing slant in Israel Hayom front pages; direction agrees with MBFC Right. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        }
+      ]
     },
     {
       "key": "radical_right",
@@ -93,62 +384,6 @@
           "classifier_type": "media_database",
           "classifier_name": "Media Bias/Fact Check",
           "source_url": "https://mediabiasfactcheck.com/the-globe-and-mail/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "toronto-star",
-      "name": "Toronto Star",
-      "homepage": "https://www.thestar.com/",
-      "country": "CA",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/toronto-star/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "national-post",
-      "name": "National Post",
-      "homepage": "https://nationalpost.com/",
-      "country": "CA",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/national-post/",
           "reference_date": "2026-09-23",
           "retrieved_at": "2026-09-23T09:34:00+02:00",
           "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
@@ -320,34 +555,6 @@
       "metrics": []
     },
     {
-      "key": "cartacapital",
-      "name": "CartaCapital",
-      "homepage": "https://www.cartacapital.com.br/",
-      "country": "BR",
-      "publication_form": "periodical",
-      "form_group": "magazine_or_periodical",
-      "language": "pt",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/cartacapital-bias-and-credibility/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
       "key": "clarin",
       "name": "Clarín",
       "homepage": "https://www.clarin.com/",
@@ -418,62 +625,6 @@
       ],
       "feeds": [],
       "classifications": [],
-      "metrics": []
-    },
-    {
-      "key": "yomiuri-shimbun",
-      "name": "Yomiuri Shimbun",
-      "homepage": "https://www.yomiuri.co.jp/",
-      "country": "JP",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "ja",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-yomiuri-shimbun/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "asahi-shimbun",
-      "name": "Asahi Shimbun",
-      "homepage": "https://www.asahi.com/",
-      "country": "JP",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "ja",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-asahi-shimbun/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
       "metrics": []
     },
     {
@@ -570,34 +721,6 @@
       ],
       "feeds": [],
       "classifications": [],
-      "metrics": []
-    },
-    {
-      "key": "the-hindu",
-      "name": "The Hindu",
-      "homepage": "https://www.thehindu.com/",
-      "country": "IN",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-hindu/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
       "metrics": []
     },
     {
@@ -853,34 +976,6 @@
       "metrics": []
     },
     {
-      "key": "haaretz",
-      "name": "Haaretz",
-      "homepage": "https://www.haaretz.com/",
-      "country": "IL",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "he",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/haaretz/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
       "key": "the-jerusalem-post",
       "name": "The Jerusalem Post",
       "homepage": "https://www.jpost.com/",
@@ -901,34 +996,6 @@
           "classifier_type": "media_database",
           "classifier_name": "Media Bias/Fact Check",
           "source_url": "https://mediabiasfactcheck.com/the-jerusalem-post/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "israel-hayom",
-      "name": "Israel Hayom",
-      "homepage": "https://www.israelhayom.com/",
-      "country": "IL",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "he",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/israel-hayom/",
           "reference_date": "2026-09-23",
           "retrieved_at": "2026-09-23T09:34:00+02:00",
           "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
@@ -1256,7 +1323,8 @@
     "Daily Maverick is a print-status risk because its core product is digital; verify recurring physical publication before promotion.",
     "Maclean's, The Saturday Paper, Mail & Guardian and similar non-daily titles remain eligible because the catalog covers magazines and periodicals as well as newspapers.",
     "The first curated international shortlist contains 40 titles from 13 countries; deferred titles remain documented rather than deleted.",
-    "Turkey verification confirms that recurring print status and political descriptors can be sourced, but descriptors such as Kemalist/pro-government do not map one-to-one onto the FSC left-right taxonomy. This is a product-level cross-market comparability decision, not a data-cleaning issue."
+    "Turkey verification confirms that recurring print status and political descriptors can be sourced, but descriptors such as Kemalist/pro-government do not map one-to-one onto the FSC left-right taxonomy. This is a product-level cross-market comparability decision, not a data-cleaning issue.",
+    "Decision 2 requires two independent external sources before FSC political-group assignment; conflict or non-equivalent country-specific labels remain unclassified."
   ],
   "regions_excluded": [
     "Europe"
@@ -1271,12 +1339,12 @@
   },
   "review_status": {
     "candidate_pool": "broad_pool_complete",
-    "political_mapping": "decision_a_preserve_unmapped",
+    "political_mapping": "decision_2_two_source_threshold",
     "active_print_verification": "partial",
     "metrics_enrichment": "pending",
     "implementation": "structured_shortlist_seeded",
     "curation": "40_title_shortlist_complete",
-    "provenance_enrichment": "partial"
+    "provenance_enrichment": "two_source_assignments_started"
   },
   "curation_policy": {
     "target": "approximately_40",
@@ -1582,5 +1650,15 @@
     },
     "decision": "Country-specific political positions are not force-mapped onto FSC's six-group left-right axis. Entries remain politically unclassified unless a directly applicable left-right classification is supported by external provenance.",
     "provenance_policy": "Attributed country-specific media_positioning may be stored separately; FSC group assignment requires external evidence that directly supports the mapped left-right category."
+  },
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "rules": [
+      "A single media-bias database classification may be stored as attributed provenance but cannot by itself determine an FSC political group.",
+      "FSC political-group assignment requires at least two independent external sources whose descriptions materially agree on the relevant left-right direction.",
+      "Country-specific labels such as Kemalist, pro-government, constitutionalist or party-endorsement evidence do not by themselves establish an FSC left-right group.",
+      "Where sources conflict, describe different dimensions, or are too context-specific, the outlet remains politically unclassified.",
+      "No automatic mechanical crosswalk is applied solely from one provider's taxonomy."
+    ]
   }
 }
