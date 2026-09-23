@@ -360,7 +360,8 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     assert catalog["target_catalog_size"]["hard_cap"] is False
 
     entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
-    assert len(entries) >= 71
+    assert len(entries) == len(catalog["curated_shortlist"])
+    assert catalog["target_catalog_size"]["guideline_range"][0] <= len(entries) <= catalog["target_catalog_size"]["guideline_range"][1]
     assert len({entry["key"] for entry in entries}) == len(entries)
     assert len({entry["name"].casefold() for entry in entries}) == len(entries)
     assert all(entry["country"] != "US" for entry in entries)
@@ -440,14 +441,13 @@ def test_international_catalog_models_state_control_separately() -> None:
         )
 
 
-def test_international_radical_groups_require_two_external_orientation_sources() -> None:
+def test_international_sparse_political_groups_are_not_filled_by_quota() -> None:
     catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
     groups = {group["key"]: group for group in catalog["groups"]}
-    assert {entry["name"] for entry in groups["radical_left"]["entries"]} >= {"Green Left", "Red Flag"}
-    assert {entry["name"] for entry in groups["radical_right"]["entries"]} >= {"Yeni Akit"}
-    for key in ("radical_left", "radical_right"):
+    for key in ("radical_left", "liberal_centre", "radical_right"):
         assert groups[key].get("coverage_exception")
-        for entry in groups[key]["entries"]:
+    for group in catalog["groups"]:
+        for entry in group["entries"]:
             orientation_sources = {
                 item["classifier_name"]
                 for item in entry["classifications"]
@@ -456,11 +456,16 @@ def test_international_radical_groups_require_two_external_orientation_sources()
             assert len(orientation_sources) >= 2
 
 
-def test_international_original_candidates_are_resolved() -> None:
+def test_international_core_is_germany_focused_and_deferred_is_explicit() -> None:
     catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
-    assert catalog["deferred_candidates"] == []
     entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
     names = {entry["name"] for entry in entries}
-    assert "DM168" in names
-    assert "Daily Maverick" not in names
+    shortlist_names = {item["name"] for item in catalog["curated_shortlist"]}
+
+    assert names == shortlist_names
     assert all(entry["activity_status"] == "active" for entry in entries)
+    assert catalog["deferred_candidates"]
+    assert names.isdisjoint({item["name"] for item in catalog["deferred_candidates"]})
+    assert all(item["reason"] for item in catalog["deferred_candidates"])
+    assert {entry["country"] for entry in entries}.isdisjoint({"TW", "HK"})
+    assert catalog["review_status"]["scope"] == "decision_c_no_taiwan_hong_kong_currently"
