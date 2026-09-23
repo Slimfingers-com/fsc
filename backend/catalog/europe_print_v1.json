@@ -603,9 +603,9 @@
   },
   "review_status": {
     "shortlist_political_mapping": "complete",
-    "entry_level_provenance": "27_of_50_verified",
+    "entry_level_provenance": "36_of_50_verified",
     "active_print_verification": "in_progress",
-    "metrics_enrichment": "27_of_50_baseline_metrics",
+    "metrics_enrichment": "36_of_50_baseline_metrics",
     "implementation": "pending",
     "shortlist_size": 50,
     "shortlist_curation": "complete",
@@ -1996,6 +1996,240 @@
         "publication_form": "daily_newspaper",
         "frequency": "daily",
         "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "The Irish Times": {
+      "country": "IE",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148600/the-irish-times",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 58000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148600/the-irish-times"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148600/the-irish-times",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Público": {
+      "country": "PT",
+      "editorial_orientation": {
+        "value": "left_liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148771/publico",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 15000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148771/publico"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148771/publico",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Hospodářské noviny": {
+      "country": "CZ",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 32000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "weekdays",
+        "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Respekt": {
+      "country": "CZ",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148774/respekt",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 40000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148774/respekt"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "magazine",
+        "frequency": "weekly",
+        "source_url": "https://www.eurotopics.net/en/148774/respekt",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "HVG": {
+      "country": "HU",
+      "editorial_orientation": {
+        "value": "left_liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148594/hvg",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 30000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148594/hvg"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "magazine",
+        "frequency": "weekly",
+        "source_url": "https://www.eurotopics.net/en/148594/hvg",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Kathimerini": {
+      "country": "GR",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148614/kathimerini",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 18000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148614/kathimerini"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148614/kathimerini",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Efimerida ton Syntakton": {
+      "country": "GR",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 11000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Delo": {
+      "country": "SI",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148485/delo",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 20000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148485/delo"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148485/delo",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Danas": {
+      "country": "RS",
+      "editorial_orientation": {
+        "value": "left_liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148481/danas",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 10000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148481/danas"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148481/danas",
         "retrieved_at": "2026-09-23"
       }
     }
