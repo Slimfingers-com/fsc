@@ -9,7 +9,17 @@
   "activation_policy": "catalog_only_until_joint_review",
   "selection_policy": "relevance_and_viewpoint_diversity_not_country_quota",
   "coverage_policy": "no_country_quotas",
-  "languages": "multilingual",
+  "languages": [
+    "ar",
+    "en",
+    "es",
+    "fr",
+    "he",
+    "ja",
+    "ko",
+    "pt",
+    "tr"
+  ],
   "edition_policy": "brand_as_source_print_products_as_outlets",
   "notes": [
     "This catalog covers internationally relevant print publications outside Europe and outside the separately modeled US catalog.",
@@ -72,7 +82,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -87,7 +99,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -102,7 +116,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -117,7 +133,9 @@
       "language": "fr",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -132,7 +150,9 @@
       "language": "es",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -147,7 +167,9 @@
       "language": "es",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -162,7 +184,9 @@
       "language": "es",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -177,7 +201,9 @@
       "language": "pt",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -192,7 +218,9 @@
       "language": "pt",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -207,7 +235,9 @@
       "language": "pt",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -222,7 +252,9 @@
       "language": "pt",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -237,7 +269,9 @@
       "language": "es",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -252,7 +286,9 @@
       "language": "es",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -267,7 +303,9 @@
       "language": "es",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -282,7 +320,9 @@
       "language": "ja",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -297,7 +337,9 @@
       "language": "ja",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -312,7 +354,9 @@
       "language": "ja",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -327,7 +371,9 @@
       "language": "ja",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -342,7 +388,9 @@
       "language": "ko",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -357,7 +405,9 @@
       "language": "ko",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -372,7 +422,9 @@
       "language": "ko",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -387,7 +439,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -402,7 +456,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -417,7 +473,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -432,7 +490,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -447,7 +507,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -462,7 +524,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -477,7 +541,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -492,7 +558,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -507,7 +575,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -522,7 +592,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -537,7 +609,9 @@
       "language": "he",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -552,7 +626,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -567,7 +643,9 @@
       "language": "he",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -582,7 +660,9 @@
       "language": "tr",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -597,7 +677,9 @@
       "language": "tr",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -612,7 +694,9 @@
       "language": "tr",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -627,7 +711,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -642,7 +728,9 @@
       "language": "en",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
@@ -657,7 +745,9 @@
       "language": "ar",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
-      "format_tags": [],
+      "format_tags": [
+        "politically_unclassified"
+      ],
       "feeds": [],
       "classifications": [],
       "metrics": []
