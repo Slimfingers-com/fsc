@@ -261,7 +261,10 @@ class SourceMetric(BaseModel):
             "'sold_circulation', 'distributed_circulation', "
             "'print_run', 'print_readers', 'digital_unique_users', "
             "'visits', 'page_impressions', "
-            "'paid_digital_subscriptions', 'subscribers'"
+            "'paid_digital_subscriptions', 'subscribers', "
+            "'radio_daily_listeners', 'radio_hourly_listeners', "
+            "'radio_market_share', 'tv_viewers', 'tv_daily_reach', "
+            "'tv_market_share'"
             ")",
             name="ck_source_metric_kind",
         ),
