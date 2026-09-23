@@ -351,9 +351,9 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     assert catalog["target_catalog_size"]["hard_cap"] is False
 
     entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
-    assert len(entries) == 44
-    assert len({entry["key"] for entry in entries}) == 44
-    assert len({entry["name"].casefold() for entry in entries}) == 44
+    assert len(entries) == 50
+    assert len({entry["key"] for entry in entries}) == 50
+    assert len({entry["name"].casefold() for entry in entries}) == 50
     assert all(entry["country"] != "US" for entry in entries)
     assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
@@ -369,7 +369,11 @@ def test_international_catalog_preserves_unmapped_political_positions() -> None:
     assert catalog["review_status"]["political_mapping"] == "decision_2_two_source_threshold"
     assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
     assert all(
-        len(entry["classifications"]) >= 2
+        len({
+            item["classifier_name"]
+            for item in entry["classifications"]
+            if item["dimension"] == "editorial_orientation"
+        }) >= 2
         for group in catalog["groups"]
         for entry in group["entries"]
     )
