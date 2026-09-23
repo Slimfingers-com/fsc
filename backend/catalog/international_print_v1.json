@@ -18,7 +18,8 @@
     "ja",
     "ko",
     "pt",
-    "tr"
+    "tr",
+    "zh"
   ],
   "edition_policy": "brand_as_source_print_products_as_outlets",
   "notes": [
@@ -1334,6 +1335,118 @@
       "feeds": [],
       "classifications": [],
       "metrics": []
+    },
+    {
+      "key": "people-s-daily",
+      "name": "People's Daily",
+      "homepage": "https://www.people.com.cn/",
+      "country": "CN",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "zh",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "party_official",
+          "classifier_type": "self_description",
+          "classifier_name": "People's Daily",
+          "source_url": "https://peoplesdaily.pdnews.cn/peoplesPage",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Official self-description identifies People's Daily as the official newspaper of the Central Committee of the Communist Party of China. Control status is stored separately from the FSC political axis."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "global-times",
+      "name": "Global Times",
+      "homepage": "https://www.globaltimes.cn/",
+      "country": "CN",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "party_state_affiliated",
+          "classifier_type": "media_database",
+          "classifier_name": "State Media Monitor",
+          "source_url": "https://statemediamonitor.com/2026/08/peoples-daily/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "State Media Monitor lists Global Times among People's Daily assets and describes it as the group's nationalist tabloid. Control/affiliation is not treated as an FSC left-right classification."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "china-daily",
+      "name": "China Daily",
+      "homepage": "https://www.chinadaily.com.cn/",
+      "country": "CN",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "party_state_managed",
+          "classifier_type": "media_database",
+          "classifier_name": "State Media Monitor",
+          "source_url": "https://statemediamonitor.com/2026/08/china-daily/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "State Media Monitor describes China Daily Press as a public institution directly under the CCP Central Committee and managed through the Central Publicity Department. This is media-positioning provenance, not an FSC political-axis assignment."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "the-straits-times",
+      "name": "The Straits Times",
+      "homepage": "https://www.straitstimes.com/",
+      "country": "SG",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "state_managed_public_service_media",
+          "classifier_type": "media_database",
+          "classifier_name": "State Media Monitor",
+          "source_url": "https://statemediamonitor.com/2026/08/sph-media-trust-smt/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "State Media Monitor classifies SPH Media Trust as Captured Public/State-Managed while explicitly noting that it is not state-owned. Stored as control/governance metadata, not as an FSC political-axis assignment."
+        }
+      ],
+      "metrics": []
     }
   ],
   "research_regions": [
@@ -1353,7 +1466,9 @@
         "KR",
         "IN",
         "AU",
-        "NZ"
+        "NZ",
+        "CN",
+        "SG"
       ]
     },
     {
@@ -1497,6 +1612,20 @@
         "Al-Masry Al-Youm",
         "Al-Shorouk"
       ]
+    },
+    {
+      "country": "CN",
+      "titles": [
+        "People's Daily",
+        "Global Times",
+        "China Daily"
+      ]
+    },
+    {
+      "country": "SG",
+      "titles": [
+        "The Straits Times"
+      ]
     }
   ],
   "research_notes": [
@@ -1510,16 +1639,17 @@
     "Maclean's, The Saturday Paper, Mail & Guardian and similar non-daily titles remain eligible because the catalog covers magazines and periodicals as well as newspapers.",
     "The first curated international shortlist contains 40 titles from 13 countries; deferred titles remain documented rather than deleted.",
     "Turkey verification confirms that recurring print status and political descriptors can be sourced, but descriptors such as Kemalist/pro-government do not map one-to-one onto the FSC left-right taxonomy. This is a product-level cross-market comparability decision, not a data-cleaning issue.",
-    "Decision 2 requires two independent external sources before FSC political-group assignment; conflict or non-equivalent country-specific labels remain unclassified."
+    "Decision 2 requires two independent external sources before FSC political-group assignment; conflict or non-equivalent country-specific labels remain unclassified.",
+    "Decision A on control scope: state-owned, party-official, state-managed and state-funded print outlets may be included when relevant, with control metadata stored separately from political-axis classification."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 40,
+    "guideline_target": 44,
     "guideline_range": [
-      35,
-      45
+      40,
+      50
     ],
     "hard_cap": false
   },
@@ -1528,8 +1658,8 @@
     "political_mapping": "decision_2_two_source_threshold",
     "active_print_verification": "partial",
     "metrics_enrichment": "partial",
-    "implementation": "structured_shortlist_seeded",
-    "curation": "40_title_shortlist_complete",
+    "implementation": "structured_shortlist_expanded_for_control_scope",
+    "curation": "44_title_shortlist_complete",
     "provenance_enrichment": "two_source_assignments_expanded"
   },
   "curation_policy": {
@@ -1703,6 +1833,22 @@
     {
       "country": "EG",
       "name": "Al-Ahram"
+    },
+    {
+      "country": "CN",
+      "name": "People's Daily"
+    },
+    {
+      "country": "CN",
+      "name": "Global Times"
+    },
+    {
+      "country": "CN",
+      "name": "China Daily"
+    },
+    {
+      "country": "SG",
+      "name": "The Straits Times"
     }
   ],
   "deferred_candidates": [
@@ -1848,7 +1994,7 @@
     ]
   },
   "scope_review": {
-    "status": "decision_required",
+    "status": "resolved_include_with_control_metadata",
     "issue": "The current 40-title shortlist omits globally influential print outlets whose editorial independence is structurally constrained by party-state ownership, state ownership, or substantial government funding. The existing source metadata model can represent this separately as media_positioning provenance without forcing it onto the FSC left-right axis.",
     "examples": [
       {
@@ -1893,6 +2039,7 @@
     "options": {
       "include_with_control_metadata": "Include globally relevant state/party-controlled or state-funded print outlets and represent control/ownership as attributed media_positioning metadata.",
       "independent_only": "Restrict the international print catalog to editorially independent outlets and exclude structurally state/party-controlled publications."
-    }
+    },
+    "decision": "Include globally or regionally relevant state-owned, party-official, state-managed, and state-funded print outlets. Store control/ownership as attributed media_positioning metadata; do not infer an FSC left-right group from that status."
   }
 }
