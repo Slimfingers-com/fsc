@@ -575,69 +575,113 @@
     {
       "key": "the-hindu",
       "name": "The Hindu",
-      "homepage": null,
+      "homepage": "https://www.thehindu.com/",
       "country": "IN",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-hindu/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "the-times-of-india",
       "name": "The Times of India",
-      "homepage": null,
+      "homepage": "https://timesofindia.indiatimes.com/",
       "country": "IN",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/times-of-india/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "the-indian-express",
       "name": "The Indian Express",
-      "homepage": null,
+      "homepage": "https://indianexpress.com/",
       "country": "IN",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-indian-express/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "hindustan-times",
       "name": "Hindustan Times",
-      "homepage": null,
+      "homepage": "https://www.hindustantimes.com/",
       "country": "IN",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/hindustan-times/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -755,35 +799,57 @@
     {
       "key": "the-new-zealand-herald",
       "name": "The New Zealand Herald",
-      "homepage": null,
+      "homepage": "https://www.nzherald.co.nz/",
       "country": "NZ",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "least_biased",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/new-zealand-herald/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "the-post",
       "name": "The Post",
-      "homepage": null,
+      "homepage": "https://www.thepost.co.nz/",
       "country": "NZ",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/wellington-post-bias-and-credibility/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -873,58 +939,91 @@
     {
       "key": "cumhuriyet",
       "name": "Cumhuriyet",
-      "homepage": null,
+      "homepage": "https://www.cumhuriyet.com.tr/",
       "country": "TR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "tr",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/cumhuriyet-bias-and-credibility/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "sozcu",
       "name": "Sözcü",
-      "homepage": null,
+      "homepage": "https://www.sozcu.com.tr/",
       "country": "TR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "tr",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/sozcu-bias-and-credibility/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "sabah",
       "name": "Sabah",
-      "homepage": null,
+      "homepage": "https://www.sabah.com.tr/",
       "country": "TR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "tr",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/daily-sabah/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "mail-and-guardian",
       "name": "Mail & Guardian",
-      "homepage": null,
+      "homepage": "https://mg.co.za/",
       "country": "ZA",
       "publication_form": "weekly_newspaper",
       "form_group": "newspaper_or_weekly",
@@ -935,7 +1034,18 @@
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/mail-guardian-bias/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
