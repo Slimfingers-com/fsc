@@ -32,6 +32,12 @@ ALLOWED_METRIC_KINDS = {
     "page_impressions",
     "paid_digital_subscriptions",
     "subscribers",
+    "radio_daily_listeners",
+    "radio_hourly_listeners",
+    "radio_market_share",
+    "tv_viewers",
+    "tv_daily_reach",
+    "tv_market_share",
 }
 ALLOWED_CLASSIFIER_TYPES = {
     "self_description",
