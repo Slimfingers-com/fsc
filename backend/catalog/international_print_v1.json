@@ -683,6 +683,42 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "the-saturday-paper",
+          "name": "The Saturday Paper",
+          "homepage": "https://www.thesaturdaypaper.com.au/",
+          "country": "AU",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "leans_left",
+              "classifier_type": "academic",
+              "classifier_name": "Journalism Practice / Taylor & Francis",
+              "source_url": "https://www.tandfonline.com/doi/pdf/10.1080/17512786.2023.2215237",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study lists The Saturday Paper as 'Leans left'. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-saturday-paper/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "MBFC rates The Saturday Paper Left-Center and marks the review low-confidence; combined with independent peer-reviewed evidence under FSC's two-source rule."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -1842,6 +1878,274 @@
       "feeds": [],
       "classifications": [],
       "metrics": []
+    },
+    {
+      "key": "sunday-times",
+      "name": "Sunday Times",
+      "homepage": "https://www.sundaytimes.timeslive.co.za/",
+      "country": "ZA",
+      "publication_form": "sunday_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "hurriyet",
+      "name": "Hürriyet",
+      "homepage": "https://www.hurriyet.com.tr/",
+      "country": "TR",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "tr",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "pro_government",
+          "classifier_type": "media_database",
+          "classifier_name": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148569",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Eurotopics describes current Hürriyet as aligned with the government after its 2018 sale; this country-specific positioning is not mapped to FSC's left-right axis."
+        }
+      ],
+      "metrics": [
+        {
+          "metric_kind": "distributed_circulation",
+          "value": 185000,
+          "unit": "copies",
+          "metric_scope": "print",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148569",
+          "audited": false,
+          "retrieved_at": "2026-09-23T09:34:00+02:00"
+        }
+      ]
+    },
+    {
+      "key": "yeni-safak",
+      "name": "Yeni Şafak",
+      "homepage": "https://www.yenisafak.com.tr/",
+      "country": "TR",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "tr",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "pro_government",
+          "classifier_type": "media_database",
+          "classifier_name": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148868/yeni-safak",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Eurotopics describes Yeni Şafak as pro-government; stored separately from FSC political-axis classification."
+        },
+        {
+          "dimension": "editorial_orientation",
+          "value": "islamic_conservative",
+          "classifier_type": "media_database",
+          "classifier_name": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148868/yeni-safak",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Eurotopics describes an Islamic-conservative profile. One source is insufficient for FSC group assignment under Decision 2."
+        }
+      ],
+      "metrics": [
+        {
+          "metric_kind": "distributed_circulation",
+          "value": 101000,
+          "unit": "copies",
+          "metric_scope": "print",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148868/yeni-safak",
+          "audited": false,
+          "retrieved_at": "2026-09-23T09:34:00+02:00"
+        }
+      ]
+    },
+    {
+      "key": "the-punch",
+      "name": "The Punch",
+      "homepage": "https://punchng.com/",
+      "country": "NG",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "the-guardian-nigeria",
+      "name": "The Guardian Nigeria",
+      "homepage": "https://guardian.ng/",
+      "country": "NG",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "privately_owned_editorially_independent_self_description",
+          "classifier_type": "self_description",
+          "classifier_name": "The Guardian Nigeria",
+          "source_url": "https://guardian.ng/ownership-funding/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Publisher states 100% private equity and no allegiance to a political party or other interest group; self-description is contextual ownership/editorial-positioning metadata, not an FSC political classification."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "vanguard",
+      "name": "Vanguard",
+      "homepage": "https://www.vanguardngr.com/",
+      "country": "NG",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "thisday",
+      "name": "ThisDay",
+      "homepage": "https://www.thisdaylive.com/",
+      "country": "NG",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "al-masry-al-youm",
+      "name": "Al-Masry Al-Youm",
+      "homepage": "https://www.almasryalyoum.com/",
+      "country": "EG",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "ar",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "liberal",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Ownership Monitor / RSF",
+          "source_url": "https://www.egypt.mom-gmr.org/en/media/detail/outlet/al-masry-al-youm/",
+          "reference_date": "2019-01-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Media Ownership Monitor describes the newspaper as independent, liberal, and privately owned. This older single-source classification is retained as provenance but does not satisfy current FSC group assignment."
+        }
+      ],
+      "metrics": [
+        {
+          "metric_kind": "distributed_circulation",
+          "value": 80000,
+          "unit": "copies",
+          "metric_scope": "print",
+          "reference_period": "MOM profile (historical)",
+          "measurement_body": "Media Ownership Monitor / RSF",
+          "source_url": "https://www.egypt.mom-gmr.org/en/media/detail/outlet/al-masry-al-youm/",
+          "audited": false,
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Historical distribution figure from the cited outlet profile; retained with explicit historical scope."
+        }
+      ]
+    },
+    {
+      "key": "al-shorouk",
+      "name": "Al-Shorouk",
+      "homepage": "https://www.shorouknews.com/",
+      "country": "EG",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "ar",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "liberal_oriented",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Ownership Monitor / RSF",
+          "source_url": "https://egypt.mom-gmr.org/en/media/detail/outlet/al-shorouk/",
+          "reference_date": "2019-01-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Media Ownership Monitor describes Al-Shorouk as private, independent and liberal-oriented. Older single-source evidence is retained without current FSC group assignment."
+        }
+      ],
+      "metrics": [
+        {
+          "metric_kind": "distributed_circulation",
+          "value": 7800,
+          "unit": "copies",
+          "metric_scope": "print",
+          "reference_period": "MOM profile (historical)",
+          "measurement_body": "Media Ownership Monitor / RSF",
+          "source_url": "https://egypt.mom-gmr.org/en/media/detail/outlet/al-shorouk/",
+          "audited": false,
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Historical estimated distribution from Media Ownership Monitor; retained with explicit historical scope."
+        }
+      ]
     }
   ],
   "research_regions": [
@@ -2046,16 +2350,17 @@
     "Decision A on control scope: state-owned, party-official, state-managed and state-funded print outlets may be included when relevant, with control metadata stored separately from political-axis classification.",
     "International print coverage now includes active magazines/periodicals alongside newspapers; publication-form diversity is relevance-driven rather than quota-driven.",
     "Current print activity has been verified for all 50 implemented titles using current publisher/subscription/print-edition evidence; activity status does not imply political classification.",
-    "Radical-edge assignments use the same two-independent-source rule; Green Left and Red Flag are supported by an Australian peer-reviewed fringe-left classification plus independent media-bias evidence, while Yeni Akit has two independent peer-reviewed far-right classifications."
+    "Radical-edge assignments use the same two-independent-source rule; Green Left and Red Flag are supported by an Australian peer-reviewed fringe-left classification plus independent media-bias evidence, while Yeni Akit has two independent peer-reviewed far-right classifications.",
+    "Previously deferred candidates are reactivated when current recurring print status and material geographic, editorial or format value are verified; the former approximately-40 implementation target is not an exclusion rule."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 50,
+    "guideline_target": 60,
     "guideline_range": [
-      45,
-      60
+      50,
+      75
     ],
     "hard_cap": false
   },
@@ -2064,8 +2369,8 @@
     "political_mapping": "decision_2_two_source_threshold",
     "active_print_verification": "complete_for_current_50_title_set",
     "metrics_enrichment": "partial",
-    "implementation": "structured_shortlist_with_periodicals",
-    "curation": "53_title_comparison_set",
+    "implementation": "structured_catalog_expanded_by_verified_incremental_value",
+    "curation": "63_title_comparison_set",
     "provenance_enrichment": "radical_edge_two_source_assignments_added"
   },
   "curation_policy": {
@@ -2291,6 +2596,46 @@
     {
       "country": "TR",
       "name": "Yeni Akit"
+    },
+    {
+      "country": "AU",
+      "name": "The Saturday Paper"
+    },
+    {
+      "country": "ZA",
+      "name": "Sunday Times"
+    },
+    {
+      "country": "TR",
+      "name": "Hürriyet"
+    },
+    {
+      "country": "TR",
+      "name": "Yeni Şafak"
+    },
+    {
+      "country": "NG",
+      "name": "The Punch"
+    },
+    {
+      "country": "NG",
+      "name": "The Guardian Nigeria"
+    },
+    {
+      "country": "NG",
+      "name": "Vanguard"
+    },
+    {
+      "country": "NG",
+      "name": "ThisDay"
+    },
+    {
+      "country": "EG",
+      "name": "Al-Masry Al-Youm"
+    },
+    {
+      "country": "EG",
+      "name": "Al-Shorouk"
     }
   ],
   "deferred_candidates": [
@@ -2320,11 +2665,6 @@
       "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
     },
     {
-      "country": "AU",
-      "name": "The Saturday Paper",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
       "country": "NZ",
       "name": "Otago Daily Times",
       "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
@@ -2335,54 +2675,9 @@
       "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
     },
     {
-      "country": "TR",
-      "name": "Hürriyet",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "TR",
-      "name": "Yeni Şafak",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
       "country": "ZA",
       "name": "Daily Maverick",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "ZA",
-      "name": "Sunday Times",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "NG",
-      "name": "The Punch",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "NG",
-      "name": "The Guardian Nigeria",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "NG",
-      "name": "Vanguard",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "NG",
-      "name": "ThisDay",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "EG",
-      "name": "Al-Masry Al-Youm",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "EG",
-      "name": "Al-Shorouk",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "reason": "Current recurring physical print publication has not been verified; core product is digital. Keep deferred until recurring print evidence is available."
     }
   ],
   "political_mapping_review": {
