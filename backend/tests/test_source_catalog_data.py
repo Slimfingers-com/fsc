@@ -285,3 +285,44 @@ def test_die_tagespost_is_not_marked_as_party_press() -> None:
     entries = {entry["name"]: entry for group in catalog["groups"] for entry in group["entries"]}
     assert entries["Die Tagespost"].get("party_press") is not True
     assert entries["Die Tagespost"].get("party_affiliation") is None
+
+
+EUROPE_CATALOG = CATALOG_DIR / "europe_print_v1.json"
+
+
+def test_europe_catalog_is_regional_and_country_metadata_is_per_entry() -> None:
+    catalog = json.loads(EUROPE_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["scope"] == "europe"
+    assert catalog["country"] is None
+    assert set(catalog["countries_excluded"]) == {"DE", "AT", "CH", "GB"}
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]]
+    assert len(entries) == 50
+    assert len({entry["key"] for entry in entries}) == 50
+    assert all(entry["country"] not in catalog["countries_excluded"] for entry in entries)
+    assert all(entry["country"] for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["catalog_status"] == "candidate" for entry in entries)
+    assert all(entry["publication_form"] in ALLOWED_FORMS for entry in entries)
+    assert all(entry["form_group"] in ALLOWED_FORM_GROUPS for entry in entries)
+    assert all(entry["language"] in set(catalog["languages"]) for entry in entries)
+
+
+def test_europe_catalog_keeps_political_provenance_attributed() -> None:
+    catalog = json.loads(EUROPE_CATALOG.read_text(encoding="utf-8"))
+    for group in catalog["groups"]:
+        for entry in group["entries"]:
+            for classification in entry["classifications"]:
+                assert classification["classifier_name"]
+                assert classification["classifier_type"]
+                assert classification["source_url"].startswith("https://")
+                assert classification["reference_date"]
+                assert classification["retrieved_at"]
+                assert "not an FSC assessment" in classification.get("notes", "")
+
+
+def test_europe_catalog_does_not_reintroduce_detailed_country_blocks() -> None:
+    catalog = json.loads(EUROPE_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["scope"] == "europe"
+    assert "coverage_targets" not in catalog
+    assert catalog["target_catalog_size"]["guideline_target"] == 50
+    assert catalog["target_catalog_size"]["hard_cap"] is False

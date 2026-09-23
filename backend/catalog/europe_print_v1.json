@@ -1,0 +1,3802 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "scope": "europe",
+  "country": null,
+  "countries_excluded": [
+    "DE",
+    "AT",
+    "CH",
+    "GB"
+  ],
+  "media_category": "print",
+  "activation_policy": "catalog_only_until_joint_review",
+  "selection_policy": "curated_european_comparison_set_with_germany_as_more_granular_core_market",
+  "coverage_policy": "no_country_quotas",
+  "languages": [
+    "cs",
+    "da",
+    "el",
+    "en",
+    "es",
+    "fi",
+    "fr",
+    "hu",
+    "it",
+    "nl",
+    "no",
+    "pl",
+    "pt",
+    "sl",
+    "sr",
+    "sv"
+  ],
+  "edition_policy": "brand_as_source_print_products_as_outlets",
+  "notes": [
+    "This catalog covers relevant European print publications outside the separately modeled DE, AT, CH and GB catalogs.",
+    "Country remains metadata on each entry; Europe is one catalog block rather than one catalog per country.",
+    "Selection is based on European relevance, reach, agenda-setting role, and viewpoint diversity. There are no country quotas.",
+    "Political orientation and radicality require attributed provenance; FSC does not infer orientation from nationality, language, constitutional questions, endorsements, or ownership alone.",
+    "Political fringe publications may be included when relevant; sparse viewpoints remain sparse rather than being filled artificially.",
+    "Print activity must be verified; reach and circulation are metadata, never exclusion thresholds.",
+    "There is no target maximum for the European catalog. A larger set is preferred when additional active print titles materially add geographic, linguistic, political, ideological, regional, or audience diversity.",
+    "Multiple titles from the same country or political segment are retained when they represent meaningfully different editorial traditions, audiences, regions, or reach profiles; near-duplicates may be pruned.",
+    "Small-circulation publications may remain when they add a materially distinct viewpoint. Large circulation is not required.",
+    "Germany remains intentionally more granular than the rest-of-Europe comparison block. The broad European research pool is not itself the implementation set.",
+    "The approximately 50-title target is a curation guideline, not a quota or hard cap. Additional titles require meaningful incremental comparative value."
+  ],
+  "selection_dimensions": [
+    "european_relevance",
+    "national_relevance",
+    "reach_or_circulation",
+    "agenda_setting_role",
+    "viewpoint_diversity",
+    "language_and_geographic_breadth",
+    "distinct_editorial_tradition",
+    "minority_or_regional_voice"
+  ],
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical left",
+      "entries": [
+        {
+          "key": "l-humanite",
+          "name": "L'Humanité",
+          "homepage": null,
+          "country": "FR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "far_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148695/l-humanite",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 36000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148695/l-humanite",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "il-manifesto",
+          "name": "Il Manifesto",
+          "homepage": null,
+          "country": "IT",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "el-salto",
+          "name": "El Salto",
+          "homepage": null,
+          "country": "ES",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "es",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left liberal",
+      "entries": [
+        {
+          "key": "le-monde",
+          "name": "Le Monde",
+          "homepage": null,
+          "country": "FR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148683/le-monde",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 489000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148683/le-monde",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "liberation",
+          "name": "Libération",
+          "homepage": null,
+          "country": "FR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148696/liberation",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 101000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148696/liberation",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "la-repubblica",
+          "name": "la Repubblica",
+          "homepage": null,
+          "country": "IT",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148668/la-repubblica",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 137000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148668/la-repubblica",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "il-fatto-quotidiano",
+          "name": "Il Fatto Quotidiano",
+          "homepage": null,
+          "country": "IT",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "el-pais",
+          "name": "El País",
+          "homepage": null,
+          "country": "ES",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148524/el-pais",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 92000,
+              "unit": "copies",
+              "reference_period": "2020",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148524/el-pais",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "gazeta-wyborcza",
+          "name": "Gazeta Wyborcza",
+          "homepage": null,
+          "country": "PL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "pl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 48133,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "de-volkskrant",
+          "name": "de Volkskrant",
+          "homepage": null,
+          "country": "NL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "nl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 206000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "de-groene-amsterdammer",
+          "name": "De Groene Amsterdammer",
+          "homepage": null,
+          "country": "NL",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "nl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_wing",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 28000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "politiken",
+          "name": "Politiken",
+          "homepage": null,
+          "country": "DK",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "da",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148754/politiken",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 70000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148754/politiken",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "information",
+          "name": "Information",
+          "homepage": null,
+          "country": "DK",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "da",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_wing",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148592/information",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 22000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148592/information",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "dagens-etc",
+          "name": "Dagens ETC",
+          "homepage": null,
+          "country": "SE",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "sv",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "klassekampen",
+          "name": "Klassekampen",
+          "homepage": null,
+          "country": "NO",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "no",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_wing",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148626/klassekampen",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 33000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148626/klassekampen",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "nepszava",
+          "name": "Népszava",
+          "homepage": null,
+          "country": "HU",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "hu",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "hvg",
+          "name": "HVG",
+          "homepage": null,
+          "country": "HU",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "hu",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148594/hvg",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 30000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148594/hvg",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "efimerida-ton-syntakton",
+          "name": "Efimerida ton Syntakton",
+          "homepage": null,
+          "country": "GR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "el",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 11000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "danas",
+          "name": "Danas",
+          "homepage": null,
+          "country": "RS",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "sr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148481/danas",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 10000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148481/danas",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        }
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal centre",
+      "entries": [
+        {
+          "key": "les-echos",
+          "name": "Les Echos",
+          "homepage": null,
+          "country": "FR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148688/les-echos",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 140000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148688/les-echos",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "corriere-della-sera",
+          "name": "Corriere della Sera",
+          "homepage": null,
+          "country": "IT",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 208000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "il-sole-24-ore",
+          "name": "Il Sole 24 Ore",
+          "homepage": null,
+          "country": "IT",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "la-vanguardia",
+          "name": "La Vanguardia",
+          "homepage": null,
+          "country": "ES",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "rzeczpospolita",
+          "name": "Rzeczpospolita",
+          "homepage": null,
+          "country": "PL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "pl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 34057,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "nrc",
+          "name": "NRC",
+          "homepage": null,
+          "country": "NL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "nl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148739/nrc",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 145000,
+              "unit": "copies",
+              "reference_period": "2019",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148739/nrc",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "de-standaard",
+          "name": "De Standaard",
+          "homepage": null,
+          "country": "BE",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "nl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148490/de-standaard",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 111500,
+              "unit": "copies",
+              "reference_period": "2021",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148490/de-standaard",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "le-soir",
+          "name": "Le Soir",
+          "homepage": null,
+          "country": "BE",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148689/le-soir",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 68000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148689/le-soir",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "dagens-nyheter",
+          "name": "Dagens Nyheter",
+          "homepage": null,
+          "country": "SE",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "sv",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 146000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "dagens-n-ringsliv",
+          "name": "Dagens Næringsliv",
+          "homepage": null,
+          "country": "NO",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "no",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 59000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "helsingin-sanomat",
+          "name": "Helsingin Sanomat",
+          "homepage": null,
+          "country": "FI",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fi",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 259000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "the-irish-times",
+          "name": "The Irish Times",
+          "homepage": null,
+          "country": "IE",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148600/the-irish-times",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 58000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148600/the-irish-times",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "publico",
+          "name": "Público",
+          "homepage": null,
+          "country": "PT",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "pt",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148771/publico",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 15000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148771/publico",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "hospodarske-noviny",
+          "name": "Hospodářské noviny",
+          "homepage": null,
+          "country": "CZ",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "cs",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 32000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "respekt",
+          "name": "Respekt",
+          "homepage": null,
+          "country": "CZ",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "cs",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148774/respekt",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 40000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148774/respekt",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "delo",
+          "name": "Delo",
+          "homepage": null,
+          "country": "SI",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "sl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148485/delo",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 20000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148485/delo",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        }
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative",
+      "entries": [
+        {
+          "key": "le-figaro",
+          "name": "Le Figaro",
+          "homepage": null,
+          "country": "FR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148679/le-figaro",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 357000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148679/le-figaro",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "el-mundo",
+          "name": "El Mundo",
+          "homepage": null,
+          "country": "ES",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 68000,
+              "unit": "copies",
+              "reference_period": "2020",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "abc",
+          "name": "ABC",
+          "homepage": null,
+          "country": "ES",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "jyllands-posten",
+          "name": "Jyllands-Posten",
+          "homepage": null,
+          "country": "DK",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "da",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 73000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "svenska-dagbladet",
+          "name": "Svenska Dagbladet",
+          "homepage": null,
+          "country": "SE",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "sv",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 153000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "aftenposten",
+          "name": "Aftenposten",
+          "homepage": null,
+          "country": "NO",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "no",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148450/aftenposten",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 150000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148450/aftenposten",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "magyar-nemzet",
+          "name": "Magyar Nemzet",
+          "homepage": null,
+          "country": "HU",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "hu",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "kathimerini",
+          "name": "Kathimerini",
+          "homepage": null,
+          "country": "GR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "el",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148614/kathimerini",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 18000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148614/kathimerini",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        }
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
+    },
+    {
+      "key": "right",
+      "label": "right",
+      "entries": [
+        {
+          "key": "valeurs-actuelles",
+          "name": "Valeurs actuelles",
+          "homepage": null,
+          "country": "FR",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "il-giornale",
+          "name": "Il Giornale",
+          "homepage": null,
+          "country": "IT",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "it",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_wing",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148575/il-giornale",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 72000,
+              "unit": "copies",
+              "reference_period": "2022",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148575/il-giornale",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        },
+        {
+          "key": "gazeta-polska",
+          "name": "Gazeta Polska",
+          "homepage": null,
+          "country": "PL",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "pl",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "do-rzeczy",
+          "name": "Do Rzeczy",
+          "homepage": null,
+          "country": "PL",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "pl",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "sieci",
+          "name": "Sieci",
+          "homepage": null,
+          "country": "PL",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "pl",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        },
+        {
+          "key": "de-telegraaf",
+          "name": "De Telegraaf",
+          "homepage": null,
+          "country": "NL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "nl",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_wing",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T07:50:00+02:00",
+              "notes": "External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "circulation",
+              "value": 300000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
+            }
+          ]
+        }
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right",
+      "entries": [
+        {
+          "key": "rivarol",
+          "name": "Rivarol",
+          "homepage": null,
+          "country": "FR",
+          "publication_form": "weekly_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "fr",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
+    }
+  ],
+  "unclassified_entries": [],
+  "research_regions": [
+    {
+      "key": "western_southern_europe",
+      "priority_countries": [
+        "FR",
+        "IT",
+        "ES",
+        "PT"
+      ]
+    },
+    {
+      "key": "central_eastern_europe",
+      "priority_countries": [
+        "PL",
+        "CZ",
+        "HU",
+        "RO"
+      ]
+    },
+    {
+      "key": "benelux",
+      "priority_countries": [
+        "NL",
+        "BE",
+        "LU"
+      ]
+    },
+    {
+      "key": "nordics",
+      "priority_countries": [
+        "DK",
+        "SE",
+        "NO",
+        "FI",
+        "IS"
+      ]
+    },
+    {
+      "key": "southeast_europe",
+      "priority_countries": [
+        "GR",
+        "HR",
+        "RS",
+        "SI"
+      ]
+    },
+    {
+      "key": "european_neighbors",
+      "priority_countries": [
+        "IE"
+      ]
+    }
+  ],
+  "candidate_pool": [
+    {
+      "country": "FR",
+      "language": "fr",
+      "titles": [
+        "Le Monde",
+        "Le Figaro",
+        "Libération",
+        "Les Echos",
+        "La Croix",
+        "L'Humanité",
+        "Le Point",
+        "L'Obs",
+        "Marianne",
+        "Valeurs actuelles"
+      ]
+    },
+    {
+      "country": "IT",
+      "language": "it",
+      "titles": [
+        "Corriere della Sera",
+        "la Repubblica",
+        "La Stampa",
+        "Il Sole 24 Ore",
+        "Il Giornale",
+        "Libero",
+        "Il Fatto Quotidiano",
+        "L'Espresso",
+        "Internazionale"
+      ]
+    },
+    {
+      "country": "ES",
+      "language": "es",
+      "titles": [
+        "El País",
+        "El Mundo",
+        "ABC",
+        "La Vanguardia",
+        "La Razón",
+        "El Periódico",
+        "20minutos",
+        "El Salto"
+      ]
+    },
+    {
+      "country": "PT",
+      "language": "pt",
+      "titles": [
+        "Público",
+        "Diário de Notícias",
+        "Jornal de Notícias",
+        "Expresso",
+        "Observador"
+      ]
+    },
+    {
+      "country": "NL",
+      "language": "nl",
+      "titles": [
+        "de Volkskrant",
+        "NRC",
+        "Trouw",
+        "De Telegraaf",
+        "Het Financieele Dagblad",
+        "Elsevier Weekblad"
+      ]
+    },
+    {
+      "country": "BE",
+      "language": "nl/fr",
+      "titles": [
+        "De Standaard",
+        "De Morgen",
+        "Knack",
+        "Le Soir",
+        "La Libre Belgique",
+        "L'Echo"
+      ]
+    },
+    {
+      "country": "PL",
+      "language": "pl",
+      "titles": [
+        "Gazeta Wyborcza",
+        "Rzeczpospolita",
+        "Dziennik Gazeta Prawna",
+        "Polityka",
+        "Newsweek Polska",
+        "Do Rzeczy",
+        "Sieci",
+        "Gazeta Polska"
+      ]
+    },
+    {
+      "country": "CZ",
+      "language": "cs",
+      "titles": [
+        "Mladá fronta DNES",
+        "Lidové noviny",
+        "Hospodářské noviny",
+        "Respekt"
+      ]
+    },
+    {
+      "country": "HU",
+      "language": "hu",
+      "titles": [
+        "Népszava",
+        "Magyar Nemzet",
+        "HVG",
+        "Magyar Hang"
+      ]
+    },
+    {
+      "country": "RO",
+      "language": "ro",
+      "titles": [
+        "Adevărul",
+        "Libertatea",
+        "Ziarul Financiar"
+      ]
+    },
+    {
+      "country": "DK",
+      "language": "da",
+      "titles": [
+        "Politiken",
+        "Berlingske",
+        "Jyllands-Posten",
+        "Information",
+        "Ekstra Bladet"
+      ]
+    },
+    {
+      "country": "SE",
+      "language": "sv",
+      "titles": [
+        "Dagens Nyheter",
+        "Svenska Dagbladet",
+        "Aftonbladet",
+        "Expressen",
+        "Dagens ETC"
+      ]
+    },
+    {
+      "country": "NO",
+      "language": "no",
+      "titles": [
+        "Aftenposten",
+        "VG",
+        "Dagbladet",
+        "Klassekampen",
+        "Dagens Næringsliv"
+      ]
+    },
+    {
+      "country": "FI",
+      "language": "fi",
+      "titles": [
+        "Helsingin Sanomat",
+        "Ilta-Sanomat",
+        "Iltalehti",
+        "Suomen Kuvalehti"
+      ]
+    },
+    {
+      "country": "IE",
+      "language": "en",
+      "titles": [
+        "The Irish Times",
+        "Irish Independent",
+        "Irish Examiner",
+        "Sunday Independent"
+      ]
+    },
+    {
+      "country": "GR",
+      "language": "el",
+      "titles": [
+        "Kathimerini",
+        "Ta Nea",
+        "Efimerida ton Syntakton",
+        "Proto Thema"
+      ]
+    },
+    {
+      "country": "HR",
+      "language": "hr",
+      "titles": [
+        "Jutarnji list",
+        "Večernji list",
+        "Novi list"
+      ]
+    },
+    {
+      "country": "RS",
+      "language": "sr",
+      "titles": [
+        "Politika",
+        "Danas",
+        "Večernje novosti"
+      ]
+    },
+    {
+      "country": "SI",
+      "language": "sl",
+      "titles": [
+        "Delo",
+        "Dnevnik",
+        "Mladina"
+      ]
+    }
+  ],
+  "research_notes": [
+    "Priority-country lists guide research only and are not coverage requirements.",
+    "Candidate review is performed as one European set, not one approval cycle per country.",
+    "Initial broad European pool deliberately over-inclusive; active print status, political provenance, relevance and duplication are verified before promotion to entries.",
+    "Major national agenda-setting titles are considered alongside ideologically distinctive and fringe publications; neither reach nor ideology alone guarantees inclusion.",
+    "Lidové noviny requires exclusion/current-status verification: its daily print edition ceased in 2024, so it must not be promoted as an active daily without evidence of a current print product.",
+    "20minutos Spain requires current print-frequency verification before promotion; free-paper distribution models can change independently of the digital brand.",
+    "Observador Portugal is primarily digital and requires evidence of an active recurring print publication before inclusion.",
+    "Political classifications will be stored as source assertions with classifier type/name/date rather than inferred from common descriptions.",
+    "Do not aggressively reduce the broad candidate pool to a small representative sample. Verify and retain additional titles whenever they add meaningful differentiation.",
+    "Retain the broad research pool for discovery, then curate approximately 50 titles for implementation. Larger markets may contribute roughly 5-7 titles; medium markets roughly 2-4; smaller markets only particularly relevant titles. These are heuristics, not quotas.",
+    "Curated shortlist currently contains 53 titles; final verification may move it toward the ~50 target by removing titles that fail active-print, provenance, or incremental-value checks.",
+    "Political review confirms an expected mainstream/centre-left concentration in the first shortlist. Relevant right and radical-right active print candidates must be researched rather than moving conservative titles into harder-right groups.",
+    "Hungary changed materially in July 2026: Eurotopics reports no political daily print newspapers remain; Magyar Nemzet moved to weekly and Népszava ended its daily print edition. Publication forms must reflect current 2026 status.",
+    "Current sourced examples: Eurotopics classifies El Mundo conservative, El País centre-left, Il Giornale right-wing, Il Manifesto left-wing, Corriere della Sera liberal-conservative, De Volkskrant centre-left, NRC liberal, De Telegraaf right-wing, De Groene Amsterdammer left-wing, Jyllands-Posten liberal-conservative, and Efimerida ton Syntakton centre-left.",
+    "Rivarol added as a distinct French radical-right print voice: current September 2026 paper issues verify active weekly print; Le Monde describes it as an extreme-right and antisemitic weekly. Classification will be attributed, not asserted by FSC.",
+    "Sieci added to the Polish right-side comparison set. Eurotopics lists it as nationalist and Springer research discusses it among Polish right-wing magazines; current print status still requires final publisher/distribution verification.",
+    "Najwyższy Czas! remains a research candidate rather than promoted shortlist item: an August 2026 physical issue is listed by Empik and the publisher self-describes it as socially conservative/economically liberal, but stronger external placement is needed before deciding right vs radical-right.",
+    "Verified examples strengthen the taxonomy: Eurotopics labels L'Humanité far-left, Le Monde centre-left, Le Figaro liberal-conservative, Les Echos liberal, Corriere della Sera liberal-conservative, El Mundo conservative, Politiken centre-left, and Kathimerini liberal-conservative.",
+    "The current working distribution is intentionally asymmetric: radical-left and radical-right are sparse because the ~50-title Europe block is a relevance-weighted comparison set, not a six-way quota.",
+    "Remaining four provisional placements now have Eurotopics provenance: La Libre Belgique liberal, Suomen Kuvalehti liberal, Jutarnji list liberal, and Adevărul liberal-conservative. The initial 53-title set plus Rivarol and Sieci therefore has a working political placement for every retained title.",
+    "Implementation rule: external political classifications are stored as attributed classifier records with source URL and date, not as FSC-authored factual verdicts.",
+    "Verification queue generated from the political review so every shortlisted title can receive explicit current print evidence and provenance before promotion.",
+    "Curation reduced the 56-title verification queue to 50 without changing political labels to manufacture balance. Six lower-incremental-value titles remain documented as deferred candidates.",
+    "Final 50 working distribution: radical_left 3, left_liberal 16, liberal_centre 16, conservative 8, right 6, radical_right 1. This asymmetry is preserved as an observed consequence of the relevance-weighted shortlist, not corrected by quota.",
+    "Verification is batched operationally only; country batches do not create country quotas or separate catalogs.",
+    "Current-form checks must override legacy database descriptions when a title changed frequency or stopped print.",
+    "France/Italy/Spain form pass populated for the retained shortlist. El Salto is treated as a periodical rather than a daily/weekly newspaper; Valeurs actuelles and Rivarol as weekly print products."
+  ],
+  "target_catalog_size": {
+    "guideline_target": 50,
+    "guideline_range": [
+      45,
+      55
+    ],
+    "hard_cap": false
+  },
+  "curated_shortlist": [
+    {
+      "country": "FR",
+      "titles": [
+        "Le Monde",
+        "Le Figaro",
+        "Libération",
+        "L'Humanité",
+        "Les Echos",
+        "Valeurs actuelles",
+        "Rivarol"
+      ]
+    },
+    {
+      "country": "IT",
+      "titles": [
+        "Corriere della Sera",
+        "la Repubblica",
+        "Il Sole 24 Ore",
+        "Il Fatto Quotidiano",
+        "Il Giornale",
+        "Il Manifesto"
+      ]
+    },
+    {
+      "country": "ES",
+      "titles": [
+        "El País",
+        "El Mundo",
+        "ABC",
+        "La Vanguardia",
+        "El Salto"
+      ]
+    },
+    {
+      "country": "PL",
+      "titles": [
+        "Gazeta Wyborcza",
+        "Rzeczpospolita",
+        "Polityka",
+        "Do Rzeczy",
+        "Gazeta Polska",
+        "Sieci"
+      ]
+    },
+    {
+      "country": "NL",
+      "titles": [
+        "NRC",
+        "de Volkskrant",
+        "De Telegraaf",
+        "De Groene Amsterdammer"
+      ]
+    },
+    {
+      "country": "BE",
+      "titles": [
+        "De Standaard",
+        "Le Soir",
+        "La Libre Belgique"
+      ]
+    },
+    {
+      "country": "DK",
+      "titles": [
+        "Politiken",
+        "Jyllands-Posten",
+        "Information"
+      ]
+    },
+    {
+      "country": "SE",
+      "titles": [
+        "Dagens Nyheter",
+        "Svenska Dagbladet",
+        "Dagens ETC"
+      ]
+    },
+    {
+      "country": "NO",
+      "titles": [
+        "Aftenposten",
+        "Klassekampen",
+        "Dagens Næringsliv"
+      ]
+    },
+    {
+      "country": "FI",
+      "titles": [
+        "Helsingin Sanomat",
+        "Suomen Kuvalehti"
+      ]
+    },
+    {
+      "country": "IE",
+      "titles": [
+        "The Irish Times",
+        "Irish Independent"
+      ]
+    },
+    {
+      "country": "PT",
+      "titles": [
+        "Público",
+        "Expresso"
+      ]
+    },
+    {
+      "country": "CZ",
+      "titles": [
+        "Hospodářské noviny",
+        "Respekt"
+      ]
+    },
+    {
+      "country": "HU",
+      "titles": [
+        "Népszava",
+        "Magyar Nemzet",
+        "HVG"
+      ]
+    },
+    {
+      "country": "GR",
+      "titles": [
+        "Kathimerini",
+        "Efimerida ton Syntakton"
+      ]
+    },
+    {
+      "country": "RO",
+      "titles": [
+        "Adevărul"
+      ]
+    },
+    {
+      "country": "HR",
+      "titles": [
+        "Jutarnji list"
+      ]
+    },
+    {
+      "country": "RS",
+      "titles": [
+        "Danas"
+      ]
+    },
+    {
+      "country": "SI",
+      "titles": [
+        "Delo"
+      ]
+    }
+  ],
+  "political_review": {
+    "policy": "Working mapping only. Promotion requires provenance on each entry; no balancing by forced reclassification.",
+    "radical_left": [
+      "L'Humanité",
+      "Il Manifesto",
+      "El Salto"
+    ],
+    "left_liberal": [
+      "Le Monde",
+      "Libération",
+      "la Repubblica",
+      "Il Fatto Quotidiano",
+      "El País",
+      "Gazeta Wyborcza",
+      "de Volkskrant",
+      "De Groene Amsterdammer",
+      "Politiken",
+      "Information",
+      "Dagens ETC",
+      "Klassekampen",
+      "Népszava",
+      "HVG",
+      "Efimerida ton Syntakton",
+      "Danas"
+    ],
+    "liberal_centre": [
+      "Les Echos",
+      "Corriere della Sera",
+      "Il Sole 24 Ore",
+      "La Vanguardia",
+      "Rzeczpospolita",
+      "NRC",
+      "De Standaard",
+      "Le Soir",
+      "Dagens Nyheter",
+      "Dagens Næringsliv",
+      "Helsingin Sanomat",
+      "The Irish Times",
+      "Público",
+      "Hospodářské noviny",
+      "Respekt",
+      "Delo",
+      "La Libre Belgique",
+      "Suomen Kuvalehti",
+      "Jutarnji list"
+    ],
+    "conservative": [
+      "Le Figaro",
+      "El Mundo",
+      "ABC",
+      "Jyllands-Posten",
+      "Svenska Dagbladet",
+      "Aftenposten",
+      "Irish Independent",
+      "Expresso",
+      "Magyar Nemzet",
+      "Kathimerini",
+      "Adevărul"
+    ],
+    "right": [
+      "Valeurs actuelles",
+      "Il Giornale",
+      "Gazeta Polska",
+      "Do Rzeczy",
+      "Sieci",
+      "De Telegraaf"
+    ],
+    "radical_right": [
+      "Rivarol"
+    ],
+    "needs_more_provenance": []
+  },
+  "review_status": {
+    "shortlist_political_mapping": "complete",
+    "entry_level_provenance": "36_of_50_baseline_verified_14_high_attention",
+    "active_print_verification": "in_progress",
+    "metrics_enrichment": "36_of_50_baseline_metrics",
+    "implementation": "entries_generated_needs_homepage_language_and_remaining_provenance",
+    "shortlist_size": 50,
+    "shortlist_curation": "complete",
+    "political_distribution": {
+      "radical_left": 3,
+      "left_liberal": 16,
+      "liberal_centre": 16,
+      "conservative": 8,
+      "right": 6,
+      "radical_right": 1
+    },
+    "language_metadata": "complete"
+  },
+  "verification_queue": [
+    {
+      "name": "L'Humanité",
+      "country": "FR",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "Il Manifesto",
+      "country": "IT",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "El Salto",
+      "country": "ES",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "Le Monde",
+      "country": "FR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Libération",
+      "country": "FR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "la Repubblica",
+      "country": "IT",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Il Fatto Quotidiano",
+      "country": "IT",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "El País",
+      "country": "ES",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Gazeta Wyborcza",
+      "country": "PL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "de Volkskrant",
+      "country": "NL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "De Groene Amsterdammer",
+      "country": "NL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Politiken",
+      "country": "DK",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Information",
+      "country": "DK",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Dagens ETC",
+      "country": "SE",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Klassekampen",
+      "country": "NO",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Népszava",
+      "country": "HU",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "HVG",
+      "country": "HU",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Efimerida ton Syntakton",
+      "country": "GR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Danas",
+      "country": "RS",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Les Echos",
+      "country": "FR",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Corriere della Sera",
+      "country": "IT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Il Sole 24 Ore",
+      "country": "IT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "La Vanguardia",
+      "country": "ES",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Rzeczpospolita",
+      "country": "PL",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "NRC",
+      "country": "NL",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "De Standaard",
+      "country": "BE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Le Soir",
+      "country": "BE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Dagens Nyheter",
+      "country": "SE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Dagens Næringsliv",
+      "country": "NO",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Helsingin Sanomat",
+      "country": "FI",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "The Irish Times",
+      "country": "IE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Público",
+      "country": "PT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Hospodářské noviny",
+      "country": "CZ",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Respekt",
+      "country": "CZ",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Delo",
+      "country": "SI",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "La Libre Belgique",
+      "country": "BE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Suomen Kuvalehti",
+      "country": "FI",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Jutarnji list",
+      "country": "HR",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Le Figaro",
+      "country": "FR",
+      "working_group": "conservative"
+    },
+    {
+      "name": "El Mundo",
+      "country": "ES",
+      "working_group": "conservative"
+    },
+    {
+      "name": "ABC",
+      "country": "ES",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Jyllands-Posten",
+      "country": "DK",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Svenska Dagbladet",
+      "country": "SE",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Aftenposten",
+      "country": "NO",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Irish Independent",
+      "country": "IE",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Expresso",
+      "country": "PT",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Magyar Nemzet",
+      "country": "HU",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Kathimerini",
+      "country": "GR",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Adevărul",
+      "country": "RO",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Valeurs actuelles",
+      "country": "FR",
+      "working_group": "right"
+    },
+    {
+      "name": "Il Giornale",
+      "country": "IT",
+      "working_group": "right"
+    },
+    {
+      "name": "Gazeta Polska",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "Do Rzeczy",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "Sieci",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "De Telegraaf",
+      "country": "NL",
+      "working_group": "right"
+    },
+    {
+      "name": "Rivarol",
+      "country": "FR",
+      "working_group": "radical_right"
+    }
+  ],
+  "final_shortlist": [
+    {
+      "name": "L'Humanité",
+      "country": "FR",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "Il Manifesto",
+      "country": "IT",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "El Salto",
+      "country": "ES",
+      "working_group": "radical_left"
+    },
+    {
+      "name": "Le Monde",
+      "country": "FR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Libération",
+      "country": "FR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "la Repubblica",
+      "country": "IT",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Il Fatto Quotidiano",
+      "country": "IT",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "El País",
+      "country": "ES",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Gazeta Wyborcza",
+      "country": "PL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "de Volkskrant",
+      "country": "NL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "De Groene Amsterdammer",
+      "country": "NL",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Politiken",
+      "country": "DK",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Information",
+      "country": "DK",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Dagens ETC",
+      "country": "SE",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Klassekampen",
+      "country": "NO",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Népszava",
+      "country": "HU",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "HVG",
+      "country": "HU",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Efimerida ton Syntakton",
+      "country": "GR",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Danas",
+      "country": "RS",
+      "working_group": "left_liberal"
+    },
+    {
+      "name": "Les Echos",
+      "country": "FR",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Corriere della Sera",
+      "country": "IT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Il Sole 24 Ore",
+      "country": "IT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "La Vanguardia",
+      "country": "ES",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Rzeczpospolita",
+      "country": "PL",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "NRC",
+      "country": "NL",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "De Standaard",
+      "country": "BE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Le Soir",
+      "country": "BE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Dagens Nyheter",
+      "country": "SE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Dagens Næringsliv",
+      "country": "NO",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Helsingin Sanomat",
+      "country": "FI",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "The Irish Times",
+      "country": "IE",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Público",
+      "country": "PT",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Hospodářské noviny",
+      "country": "CZ",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Respekt",
+      "country": "CZ",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Delo",
+      "country": "SI",
+      "working_group": "liberal_centre"
+    },
+    {
+      "name": "Le Figaro",
+      "country": "FR",
+      "working_group": "conservative"
+    },
+    {
+      "name": "El Mundo",
+      "country": "ES",
+      "working_group": "conservative"
+    },
+    {
+      "name": "ABC",
+      "country": "ES",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Jyllands-Posten",
+      "country": "DK",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Svenska Dagbladet",
+      "country": "SE",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Aftenposten",
+      "country": "NO",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Magyar Nemzet",
+      "country": "HU",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Kathimerini",
+      "country": "GR",
+      "working_group": "conservative"
+    },
+    {
+      "name": "Valeurs actuelles",
+      "country": "FR",
+      "working_group": "right"
+    },
+    {
+      "name": "Il Giornale",
+      "country": "IT",
+      "working_group": "right"
+    },
+    {
+      "name": "Gazeta Polska",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "Do Rzeczy",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "Sieci",
+      "country": "PL",
+      "working_group": "right"
+    },
+    {
+      "name": "De Telegraaf",
+      "country": "NL",
+      "working_group": "right"
+    },
+    {
+      "name": "Rivarol",
+      "country": "FR",
+      "working_group": "radical_right"
+    }
+  ],
+  "deferred_candidates": [
+    {
+      "name": "La Libre Belgique",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Suomen Kuvalehti",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Jutarnji list",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Adevărul",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Irish Independent",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    },
+    {
+      "name": "Expresso",
+      "reason": "Deferred from the approximately 50-title implementation set because it adds less incremental political/geographic differentiation than retained peers; remains available for later expansion."
+    }
+  ],
+  "verification_batches": [
+    {
+      "batch": 1,
+      "countries": [
+        "FR",
+        "IT",
+        "ES"
+      ],
+      "status": "form_pass_complete_provenance_metrics_next",
+      "focus": "print status, publication form, political provenance, circulation"
+    },
+    {
+      "batch": 2,
+      "countries": [
+        "PL",
+        "NL",
+        "BE"
+      ],
+      "status": "8_titles_verified_remaining_polish_right_titles"
+    },
+    {
+      "batch": 3,
+      "countries": [
+        "DK",
+        "SE",
+        "NO",
+        "FI"
+      ],
+      "status": "9_titles_verified_dagens_etc_pending"
+    },
+    {
+      "batch": 4,
+      "countries": [
+        "IE",
+        "PT",
+        "CZ",
+        "HU",
+        "GR",
+        "RS",
+        "SI"
+      ],
+      "status": "queued"
+    }
+  ],
+  "form_verification": {
+    "L'Humanité": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Il Manifesto": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "El Salto": {
+      "publication_form": "periodical",
+      "status": "working_verified"
+    },
+    "Le Monde": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Libération": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "la Repubblica": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Il Fatto Quotidiano": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "El País": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Les Echos": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Corriere della Sera": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Il Sole 24 Ore": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "La Vanguardia": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Le Figaro": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "El Mundo": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "ABC": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Valeurs actuelles": {
+      "publication_form": "weekly_newspaper",
+      "status": "working_verified"
+    },
+    "Il Giornale": {
+      "publication_form": "daily_newspaper",
+      "status": "working_verified"
+    },
+    "Rivarol": {
+      "publication_form": "weekly_newspaper",
+      "status": "working_verified"
+    }
+  },
+  "verified_provenance": {
+    "L'Humanité": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "far_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148695/l-humanite",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 36000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148695/l-humanite"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148695/l-humanite",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Le Monde": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148683/le-monde",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 489000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148683/le-monde"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148683/le-monde",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Libération": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148696/liberation",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 101000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148696/liberation"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148696/liberation",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Le Figaro": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148679/le-figaro",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 357000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148679/le-figaro"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148679/le-figaro",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Les Echos": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148688/les-echos",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 140000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148688/les-echos"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148688/les-echos",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "la Repubblica": {
+      "country": "IT",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148668/la-repubblica",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 137000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148668/la-repubblica"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148668/la-repubblica",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Corriere della Sera": {
+      "country": "IT",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 208000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Il Giornale": {
+      "country": "IT",
+      "editorial_orientation": {
+        "value": "right_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148575/il-giornale",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 72000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148575/il-giornale"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148575/il-giornale",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "El País": {
+      "country": "ES",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148524/el-pais",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 92000,
+          "unit": "copies",
+          "reference_period": "2020",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148524/el-pais"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148524/el-pais",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "El Mundo": {
+      "country": "ES",
+      "editorial_orientation": {
+        "value": "conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 68000,
+          "unit": "copies",
+          "reference_period": "2020",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148523/el-mundo"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Gazeta Wyborcza": {
+      "country": "PL",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 48133,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "Monday to Saturday",
+        "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Rzeczpospolita": {
+      "country": "PL",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 34057,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "Monday to Saturday",
+        "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "de Volkskrant": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 206000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "NRC": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148739/nrc",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 145000,
+          "unit": "copies",
+          "reference_period": "2019",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148739/nrc"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148739/nrc",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "De Telegraaf": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "right_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 300000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "De Groene Amsterdammer": {
+      "country": "NL",
+      "editorial_orientation": {
+        "value": "left_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 28000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "magazine",
+        "frequency": "weekly",
+        "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "De Standaard": {
+      "country": "BE",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148490/de-standaard",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 111500,
+          "unit": "copies",
+          "reference_period": "2021",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148490/de-standaard"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148490/de-standaard",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Le Soir": {
+      "country": "BE",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148689/le-soir",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 68000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148689/le-soir"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148689/le-soir",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Politiken": {
+      "country": "DK",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148754/politiken",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 70000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148754/politiken"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148754/politiken",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Jyllands-Posten": {
+      "country": "DK",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 73000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Information": {
+      "country": "DK",
+      "editorial_orientation": {
+        "value": "left_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148592/information",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 22000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148592/information"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148592/information",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Dagens Nyheter": {
+      "country": "SE",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 146000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Svenska Dagbladet": {
+      "country": "SE",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 153000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Aftenposten": {
+      "country": "NO",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148450/aftenposten",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 150000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148450/aftenposten"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148450/aftenposten",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Klassekampen": {
+      "country": "NO",
+      "editorial_orientation": {
+        "value": "left_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148626/klassekampen",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 33000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148626/klassekampen"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148626/klassekampen",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Dagens Næringsliv": {
+      "country": "NO",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 59000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Helsingin Sanomat": {
+      "country": "FI",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 259000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "The Irish Times": {
+      "country": "IE",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148600/the-irish-times",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 58000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148600/the-irish-times"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148600/the-irish-times",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Público": {
+      "country": "PT",
+      "editorial_orientation": {
+        "value": "left_liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148771/publico",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 15000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148771/publico"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148771/publico",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Hospodářské noviny": {
+      "country": "CZ",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 32000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "weekdays",
+        "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Respekt": {
+      "country": "CZ",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148774/respekt",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 40000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148774/respekt"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "magazine",
+        "frequency": "weekly",
+        "source_url": "https://www.eurotopics.net/en/148774/respekt",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "HVG": {
+      "country": "HU",
+      "editorial_orientation": {
+        "value": "left_liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148594/hvg",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 30000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148594/hvg"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "magazine",
+        "frequency": "weekly",
+        "source_url": "https://www.eurotopics.net/en/148594/hvg",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Kathimerini": {
+      "country": "GR",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148614/kathimerini",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 18000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148614/kathimerini"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148614/kathimerini",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Efimerida ton Syntakton": {
+      "country": "GR",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 11000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Delo": {
+      "country": "SI",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148485/delo",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 20000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148485/delo"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148485/delo",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Danas": {
+      "country": "RS",
+      "editorial_orientation": {
+        "value": "left_liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148481/danas",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 10000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148481/danas"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148481/danas",
+        "retrieved_at": "2026-09-23"
+      }
+    }
+  },
+  "current_risk_review": {
+    "hungary": {
+      "titles": [
+        "Népszava",
+        "Magyar Nemzet"
+      ],
+      "status": "requires_current_2026_form_confirmation",
+      "reason": "Hungarian political print market changed materially in 2026; historical daily metadata cannot be reused."
+    },
+    "edge_titles": {
+      "titles": [
+        "Rivarol",
+        "Sieci",
+        "Gazeta Polska",
+        "Do Rzeczy",
+        "Valeurs actuelles"
+      ],
+      "status": "requires_stronger_independent_political_provenance",
+      "reason": "Right/radical-right placement should not rely on a single generic media database where stronger independent evidence is available."
+    },
+    "non_daily": {
+      "titles": [
+        "El Salto",
+        "Dagens ETC"
+      ],
+      "status": "requires_current_frequency_confirmation"
+    }
+  },
+  "coverage_policy_notes": "European comparison coverage is relevance-weighted; targets are goals, not quotas."
+}
