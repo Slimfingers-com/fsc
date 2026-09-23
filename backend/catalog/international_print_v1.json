@@ -44,7 +44,87 @@
     {
       "key": "radical_left",
       "label": "radical left",
-      "entries": []
+      "entries": [
+        {
+          "key": "green-left",
+          "name": "Green Left",
+          "homepage": "https://www.greenleft.org.au/",
+          "country": "AU",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "fortnightly",
+            "newspaper"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "fringe_left",
+              "classifier_type": "academic",
+              "classifier_name": "Media International Australia / SAGE",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/1329878X251380961",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed 2025 Australian media-polarisation study classifies Green Left as fringe-left. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "strongly_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/green-left-weekly/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "MBFC rates Green Left Weekly strongly Left; combined with independent academic fringe-left classification under FSC's two-source rule."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "red-flag",
+          "name": "Red Flag",
+          "homepage": "https://redflag.org.au/",
+          "country": "AU",
+          "publication_form": "periodical",
+          "form_group": "magazine_or_periodical",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [
+            "fortnightly",
+            "newspaper"
+          ],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "fringe_left",
+              "classifier_type": "academic",
+              "classifier_name": "Media International Australia / SAGE",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/1329878X251380961",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed 2025 Australian media-polarisation study classifies Red Flag as fringe-left. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "far_left",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/red-flag-bias-and-credibility/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "MBFC describes Red Flag as transparently far-left and Marxist/Trotskyist; combined with independent academic fringe-left classification under FSC's two-source rule."
+            }
+          ],
+          "metrics": []
+        }
+      ],
+      "coverage_exception": "Only internationally relevant active print titles with sufficiently strong external radical-left provenance are included; FSC does not fill this group by quota."
     },
     {
       "key": "left_liberal",
@@ -1082,7 +1162,67 @@
     {
       "key": "radical_right",
       "label": "radical right",
-      "entries": []
+      "entries": [
+        {
+          "key": "yeni-akit",
+          "name": "Yeni Akit",
+          "homepage": "https://www.yeniakit.com.tr/",
+          "country": "TR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "tr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "far_right",
+              "classifier_type": "academic",
+              "classifier_name": "International Migration / Wiley",
+              "source_url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/imig.12463",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study describes Yeni Akit as a religious, far-right newspaper. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "reactionary_islamist_far_right",
+              "classifier_type": "academic",
+              "classifier_name": "Sociology of Sport Journal / SAGE",
+              "source_url": "https://journals.sagepub.com/doi/abs/10.1177/01937235261474834",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "2026 peer-reviewed study explicitly describes Yeni Akit as reactionary/Islamist far-right. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "media_positioning",
+              "value": "pro_government_islamist",
+              "classifier_type": "media_database",
+              "classifier_name": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/tr/178240/yeni-akit",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Eurotopics describes Yeni Akit as Islamist, right-oriented and close to government; stored separately as contextual positioning."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 56000,
+              "unit": "copies",
+              "metric_scope": "print",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/tr/178240/yeni-akit",
+              "audited": false,
+              "retrieved_at": "2026-09-23T09:34:00+02:00"
+            }
+          ]
+        }
+      ],
+      "coverage_exception": "Only internationally relevant active print titles with sufficiently strong external radical-right provenance are included; FSC does not fill this group by quota."
     }
   ],
   "unclassified_entries": [
@@ -1816,7 +1956,9 @@
         "The Age",
         "Australian Financial Review",
         "The Saturday Paper",
-        "The Monthly"
+        "The Monthly",
+        "Green Left",
+        "Red Flag"
       ]
     },
     {
@@ -1843,7 +1985,8 @@
         "Cumhuriyet",
         "Sözcü",
         "Sabah",
-        "Yeni Şafak"
+        "Yeni Şafak",
+        "Yeni Akit"
       ]
     },
     {
@@ -1902,7 +2045,8 @@
     "Decision 2 requires two independent external sources before FSC political-group assignment; conflict or non-equivalent country-specific labels remain unclassified.",
     "Decision A on control scope: state-owned, party-official, state-managed and state-funded print outlets may be included when relevant, with control metadata stored separately from political-axis classification.",
     "International print coverage now includes active magazines/periodicals alongside newspapers; publication-form diversity is relevance-driven rather than quota-driven.",
-    "Current print activity has been verified for all 50 implemented titles using current publisher/subscription/print-edition evidence; activity status does not imply political classification."
+    "Current print activity has been verified for all 50 implemented titles using current publisher/subscription/print-edition evidence; activity status does not imply political classification.",
+    "Radical-edge assignments use the same two-independent-source rule; Green Left and Red Flag are supported by an Australian peer-reviewed fringe-left classification plus independent media-bias evidence, while Yeni Akit has two independent peer-reviewed far-right classifications."
   ],
   "regions_excluded": [
     "Europe"
@@ -1921,8 +2065,8 @@
     "active_print_verification": "complete_for_current_50_title_set",
     "metrics_enrichment": "partial",
     "implementation": "structured_shortlist_with_periodicals",
-    "curation": "50_title_comparison_set",
-    "provenance_enrichment": "two_source_assignments_plus_reviewed_conflicts"
+    "curation": "53_title_comparison_set",
+    "provenance_enrichment": "radical_edge_two_source_assignments_added"
   },
   "curation_policy": {
     "target": "approximately_40",
@@ -2135,6 +2279,18 @@
     {
       "country": "ZA",
       "name": "Financial Mail"
+    },
+    {
+      "country": "AU",
+      "name": "Green Left"
+    },
+    {
+      "country": "AU",
+      "name": "Red Flag"
+    },
+    {
+      "country": "TR",
+      "name": "Yeni Akit"
     }
   ],
   "deferred_candidates": [
