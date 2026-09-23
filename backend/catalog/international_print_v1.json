@@ -435,6 +435,138 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "la-jornada",
+          "name": "La Jornada",
+          "homepage": "https://www.jornada.com.mx/",
+          "country": "MX",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/la-jornada-bias-and-credibility/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "traditional_left",
+              "classifier_type": "academic",
+              "classifier_name": "Annals of the International Communication Association / Oxford Academic",
+              "source_url": "https://academic.oup.com/anncom/article/49/2/61/8125714",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Recent academic analysis describes La Jornada as a traditional leftist newspaper; agrees with MBFC Left. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "cumhuriyet",
+          "name": "Cumhuriyet",
+          "homepage": "https://www.cumhuriyet.com.tr/",
+          "country": "TR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "tr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/cumhuriyet-bias-and-credibility/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_leaning",
+              "classifier_type": "academic",
+              "classifier_name": "Connectist: Istanbul University Journal of Communication Sciences",
+              "source_url": "https://dergipark.org.tr/en/pub/connectist/article/1543750",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed 2025 study classifies Cumhuriyet among left-leaning Turkish newspapers; agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 23000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/149664",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "metric_scope": "print",
+              "audited": false
+            }
+          ]
+        },
+        {
+          "key": "sozcu",
+          "name": "Sözcü",
+          "homepage": "https://www.sozcu.com.tr/",
+          "country": "TR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "tr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/sozcu-bias-and-credibility/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_leaning",
+              "classifier_type": "academic",
+              "classifier_name": "Connectist: Istanbul University Journal of Communication Sciences",
+              "source_url": "https://dergipark.org.tr/en/pub/connectist/article/1543750",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed 2025 study classifies Sözcü as left-leaning; agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 175000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148786/soezcue",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "metric_scope": "print",
+              "audited": false
+            }
+          ]
         }
       ]
     },
@@ -710,6 +842,78 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "reforma",
+          "name": "Reforma",
+          "homepage": "https://www.reforma.com/",
+          "country": "MX",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/reforma-bias/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "center_right",
+              "classifier_type": "academic",
+              "classifier_name": "Annals of the International Communication Association / Oxford Academic",
+              "source_url": "https://academic.oup.com/anncom/article/49/2/61/8125714",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Recent academic analysis describes Reforma as a traditionally center-right newspaper; agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-jerusalem-post",
+          "name": "The Jerusalem Post",
+          "homepage": "https://www.jpost.com/",
+          "country": "IL",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-jerusalem-post/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_shifted",
+              "classifier_type": "academic",
+              "classifier_name": "SAGE Open",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/2158244020936986",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study notes a marked shift of the Jerusalem Post to the right; direction agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -788,6 +992,54 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "sabah",
+          "name": "Sabah",
+          "homepage": "https://www.sabah.com.tr/",
+          "country": "TR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "tr",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/daily-sabah/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_leaning",
+              "classifier_type": "academic",
+              "classifier_name": "Connectist: Istanbul University Journal of Communication Sciences",
+              "source_url": "https://dergipark.org.tr/en/pub/connectist/article/1543750",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed 2025 study classifies Sabah as right-leaning; agrees with MBFC Right. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [
+            {
+              "metric_kind": "distributed_circulation",
+              "value": 188000,
+              "unit": "copies",
+              "reference_period": "2023",
+              "measurement_body": "Eurotopics",
+              "source_url": "https://www.eurotopics.net/en/148776/sabah",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "metric_scope": "print",
+              "audited": false
+            }
+          ]
         }
       ]
     },
@@ -869,62 +1121,6 @@
       ],
       "feeds": [],
       "classifications": [],
-      "metrics": []
-    },
-    {
-      "key": "reforma",
-      "name": "Reforma",
-      "homepage": "https://www.reforma.com/",
-      "country": "MX",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "es",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/reforma-bias/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "la-jornada",
-      "name": "La Jornada",
-      "homepage": "https://www.jornada.com.mx/",
-      "country": "MX",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "es",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/la-jornada-bias-and-credibility/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
       "metrics": []
     },
     {
@@ -1159,154 +1355,6 @@
       "metrics": []
     },
     {
-      "key": "the-jerusalem-post",
-      "name": "The Jerusalem Post",
-      "homepage": "https://www.jpost.com/",
-      "country": "IL",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-jerusalem-post/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "cumhuriyet",
-      "name": "Cumhuriyet",
-      "homepage": "https://www.cumhuriyet.com.tr/",
-      "country": "TR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "tr",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/cumhuriyet-bias-and-credibility/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": [
-        {
-          "metric_kind": "distributed_circulation",
-          "value": 23000,
-          "unit": "copies",
-          "reference_period": "2023",
-          "measurement_body": "Eurotopics",
-          "source_url": "https://www.eurotopics.net/en/149664",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "metric_scope": "print",
-          "audited": false
-        }
-      ]
-    },
-    {
-      "key": "sozcu",
-      "name": "Sözcü",
-      "homepage": "https://www.sozcu.com.tr/",
-      "country": "TR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "tr",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/sozcu-bias-and-credibility/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": [
-        {
-          "metric_kind": "distributed_circulation",
-          "value": 175000,
-          "unit": "copies",
-          "reference_period": "2023",
-          "measurement_body": "Eurotopics",
-          "source_url": "https://www.eurotopics.net/en/148786/soezcue",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "metric_scope": "print",
-          "audited": false
-        }
-      ]
-    },
-    {
-      "key": "sabah",
-      "name": "Sabah",
-      "homepage": "https://www.sabah.com.tr/",
-      "country": "TR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "tr",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/daily-sabah/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": [
-        {
-          "metric_kind": "distributed_circulation",
-          "value": 188000,
-          "unit": "copies",
-          "reference_period": "2023",
-          "measurement_body": "Eurotopics",
-          "source_url": "https://www.eurotopics.net/en/148776/sabah",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "metric_scope": "print",
-          "audited": false
-        }
-      ]
-    },
-    {
       "key": "mail-and-guardian",
       "name": "Mail & Guardian",
       "homepage": "https://mg.co.za/",
@@ -1354,18 +1402,29 @@
     {
       "key": "al-ahram",
       "name": "Al-Ahram",
-      "homepage": null,
+      "homepage": "https://gate.ahram.org.eg/",
       "country": "EG",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "ar",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "state_controlled",
+          "classifier_type": "media_database",
+          "classifier_name": "State Media Monitor",
+          "source_url": "https://statemediamonitor.com/2026/06/national-press-authority-npa/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "State Media Monitor identifies the National Press Authority as the owner/overseer of Egypt's state-owned print institutions including Al-Ahram and classifies the structure State-Controlled. This control metadata is separate from FSC political-axis classification."
+        }
+      ],
       "metrics": []
     },
     {
