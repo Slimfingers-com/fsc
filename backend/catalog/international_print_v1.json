@@ -1531,8 +1531,8 @@
     "candidate_pool": "broad_pool_complete",
     "political_mapping": "decision_2_two_source_threshold",
     "active_print_verification": "complete_for_current_71_title_set",
-    "metrics_enrichment": "partial",
-    "implementation": "all_original_candidates_resolved_to_active_print_entries",
+    "metrics_enrichment": "partial_non_blocking",
+    "implementation": "35_title_germany_focused_core_structured",
     "curation": "35_title_germany_focused_core_complete",
     "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set",
     "scope": "decision_c_no_taiwan_hong_kong_currently"
@@ -2035,7 +2035,7 @@
   },
   "scope_review": {
     "status": "resolved_include_with_control_metadata",
-    "issue": "The current 40-title shortlist omits globally influential print outlets whose editorial independence is structurally constrained by party-state ownership, state ownership, or substantial government funding. The existing source metadata model can represent this separately as media_positioning provenance without forcing it onto the FSC left-right axis.",
+    "issue": "The international catalog is a Germany-focused comparison set rather than a world-coverage catalog. State/party-controlled media may be included when relevant, while Taiwan and Hong Kong remain deferred until FSC has a geography model that does not overload the ISO country field.",
     "examples": [
       {
         "country": "CN",
@@ -2080,6 +2080,14 @@
       "include_with_control_metadata": "Include globally relevant state/party-controlled or state-funded print outlets and represent control/ownership as attributed media_positioning metadata.",
       "independent_only": "Restrict the international print catalog to editorially independent outlets and exclude structurally state/party-controlled publications."
     },
-    "decision": "Include globally or regionally relevant state-owned, party-official, or substantially state-funded print outlets. Represent control/funding as separately attributed media_positioning metadata; do not infer an FSC left-right group from it."
+    "decision": "Include globally or regionally relevant state-owned, party-official, or substantially state-funded print outlets. Represent control/funding as separately attributed media_positioning metadata; do not infer an FSC left-right group from it.",
+    "geography_decision": {
+      "status": "decision_c_deferred",
+      "areas": [
+        "TW",
+        "HK"
+      ],
+      "reason": "Do not use the current ISO country field for politically sensitive media-market geography until a more explicit geography model is available."
+    }
   }
 }
