@@ -2468,6 +2468,40 @@
       "feeds": [],
       "classifications": [],
       "metrics": []
+    },
+    {
+      "key": "la-tercera",
+      "name": "La Tercera",
+      "homepage": "https://www.latercera.com/",
+      "country": "CL",
+      "publication_form": "weekly_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "es",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "el-espectador",
+      "name": "El Espectador",
+      "homepage": "https://www.elespectador.com/",
+      "country": "CO",
+      "publication_form": "weekly_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "es",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
     }
   ],
   "research_regions": [
@@ -2508,6 +2542,13 @@
         "ID",
         "PH",
         "SG"
+      ]
+    },
+    {
+      "key": "south_america_additional",
+      "priority_countries": [
+        "CL",
+        "CO"
       ]
     }
   ],
@@ -2684,19 +2725,20 @@
     "All originally deferred candidates have now been resolved: active recurring print products are included; Daily Maverick is represented by its concrete weekly print product DM168 under the brand-as-source/print-product-as-outlet policy.",
     "State/party control and state funding are modeled as media_positioning provenance and never used as a shortcut for FSC left-right classification.",
     "The original approximately-40-title guideline was superseded by the resolved active candidate set and later scope expansion; the catalog remains uncapped.",
-    "Southeast Asia gap review added active print titles from Indonesia and the Philippines based on current publisher subscription/edition evidence and 2026 public procurement evidence."
+    "Southeast Asia gap review added active print titles from Indonesia and the Philippines based on current publisher subscription/edition evidence and 2026 public procurement evidence.",
+    "Latin America gap review added current weekend print editions from Chile and Colombia; reduced print frequency is represented as weekly_newspaper rather than assuming historical daily cadence."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 70,
+    "guideline_target": 80,
     "guideline_range": [
-      65,
-      80
+      75,
+      90
     ],
     "hard_cap": false,
-    "notes": "Descriptive working range for the current expanded international comparison set; not a quota or maximum."
+    "notes": "Descriptive working range for the expanded international comparison set; not a quota or maximum."
   },
   "review_status": {
     "candidate_pool": "broad_pool_complete",
@@ -2704,7 +2746,7 @@
     "active_print_verification": "complete_for_current_71_title_set",
     "metrics_enrichment": "partial",
     "implementation": "all_original_candidates_resolved_to_active_print_entries",
-    "curation": "76_title_current_set_pending_gap_review",
+    "curation": "78_title_current_set_pending_gap_review",
     "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set",
     "scope": "decision_a_include_controlled_media"
   },
