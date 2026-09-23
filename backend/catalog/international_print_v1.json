@@ -75,52 +75,85 @@
     {
       "key": "the-globe-and-mail",
       "name": "The Globe and Mail",
-      "homepage": null,
+      "homepage": "https://www.theglobeandmail.com/",
       "country": "CA",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-globe-and-mail/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "toronto-star",
       "name": "Toronto Star",
-      "homepage": null,
+      "homepage": "https://www.thestar.com/",
       "country": "CA",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/toronto-star/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "national-post",
       "name": "National Post",
-      "homepage": null,
+      "homepage": "https://nationalpost.com/",
       "country": "CA",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/national-post/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -313,35 +346,57 @@
     {
       "key": "yomiuri-shimbun",
       "name": "Yomiuri Shimbun",
-      "homepage": null,
+      "homepage": "https://www.yomiuri.co.jp/",
       "country": "JP",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "ja",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-yomiuri-shimbun/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "asahi-shimbun",
       "name": "Asahi Shimbun",
-      "homepage": null,
+      "homepage": "https://www.asahi.com/",
       "country": "JP",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "ja",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-asahi-shimbun/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -381,18 +436,29 @@
     {
       "key": "chosun-ilbo",
       "name": "Chosun Ilbo",
-      "homepage": null,
+      "homepage": "https://www.chosun.com/",
       "country": "KR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "ko",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-chosun-ilbo/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -500,69 +566,113 @@
     {
       "key": "the-australian",
       "name": "The Australian",
-      "homepage": null,
+      "homepage": "https://www.theaustralian.com.au/",
       "country": "AU",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-australian/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "the-sydney-morning-herald",
       "name": "The Sydney Morning Herald",
-      "homepage": null,
+      "homepage": "https://www.smh.com.au/",
       "country": "AU",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-sydney-morning-herald/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "the-age",
       "name": "The Age",
-      "homepage": null,
+      "homepage": "https://www.theage.com.au/",
       "country": "AU",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-age-australia/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "australian-financial-review",
       "name": "Australian Financial Review",
-      "homepage": null,
+      "homepage": "https://www.afr.com/",
       "country": "AU",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-australian-financial-review/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -602,52 +712,85 @@
     {
       "key": "haaretz",
       "name": "Haaretz",
-      "homepage": null,
+      "homepage": "https://www.haaretz.com/",
       "country": "IL",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "he",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/haaretz/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "the-jerusalem-post",
       "name": "The Jerusalem Post",
-      "homepage": null,
+      "homepage": "https://www.jpost.com/",
       "country": "IL",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-jerusalem-post/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "israel-hayom",
       "name": "Israel Hayom",
-      "homepage": null,
+      "homepage": "https://www.israelhayom.com/",
       "country": "IL",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "he",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/israel-hayom/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -942,10 +1085,11 @@
   "review_status": {
     "candidate_pool": "broad_pool_complete",
     "political_mapping": "decision_a_preserve_unmapped",
-    "active_print_verification": "pending",
+    "active_print_verification": "partial",
     "metrics_enrichment": "pending",
     "implementation": "structured_shortlist_seeded",
-    "curation": "40_title_shortlist_complete"
+    "curation": "40_title_shortlist_complete",
+    "provenance_enrichment": "partial"
   },
   "curation_policy": {
     "target": "approximately_40",
