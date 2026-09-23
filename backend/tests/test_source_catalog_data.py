@@ -326,3 +326,60 @@ def test_europe_catalog_does_not_reintroduce_detailed_country_blocks() -> None:
     assert "coverage_targets" not in catalog
     assert catalog["target_catalog_size"]["guideline_target"] == 50
     assert catalog["target_catalog_size"]["hard_cap"] is False
+
+
+INTERNATIONAL_CATALOG = CATALOG_DIR / "international_print_v1.json"
+
+
+def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["scope"] == "international"
+    assert catalog["country"] is None
+    assert catalog["countries_excluded"] == ["US"]
+    assert catalog["regions_excluded"] == ["Europe"]
+    assert catalog["target_catalog_size"]["hard_cap"] is False
+
+    entries = catalog["unclassified_entries"]
+    assert len(entries) == 40
+    assert len({entry["key"] for entry in entries}) == 40
+    assert len({entry["name"].casefold() for entry in entries}) == 40
+    assert all(entry["country"] != "US" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["catalog_status"] == "candidate" for entry in entries)
+    assert all(entry["activity_status"] in ALLOWED_ACTIVITY for entry in entries)
+    assert all(entry["publication_form"] in ALLOWED_FORMS for entry in entries)
+    assert all(entry["form_group"] in ALLOWED_FORM_GROUPS for entry in entries)
+    assert all(entry["language"] in set(catalog["languages"]) for entry in entries)
+
+
+def test_international_catalog_preserves_unmapped_political_positions() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["political_mapping_review"]["status"] == "resolved_preserve_unmapped"
+    assert catalog["review_status"]["political_mapping"] == "decision_a_preserve_unmapped"
+    assert all(not group["entries"] for group in catalog["groups"])
+    assert all(
+        "politically_unclassified" in entry["format_tags"]
+        for entry in catalog["unclassified_entries"]
+    )
+
+
+def test_international_catalog_metadata_provenance_is_complete() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
+    for entry in entries:
+        for classification in entry["classifications"]:
+            assert classification["dimension"]
+            assert classification["value"]
+            assert classification["classifier_type"]
+            assert classification["classifier_name"]
+            assert classification["source_url"].startswith("https://")
+            assert classification["reference_date"]
+            assert classification["retrieved_at"]
+        for metric in entry["metrics"]:
+            assert metric["metric_kind"]
+            assert metric["value"] >= 0
+            assert metric["unit"]
+            assert metric["reference_period"]
+            assert metric["measurement_body"]
+            assert metric["source_url"].startswith("https://")
+            assert metric["retrieved_at"]
