@@ -339,7 +339,7 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     assert catalog["regions_excluded"] == ["Europe"]
     assert catalog["target_catalog_size"]["hard_cap"] is False
 
-    entries = catalog["unclassified_entries"]
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
     assert len(entries) == 40
     assert len({entry["key"] for entry in entries}) == 40
     assert len({entry["name"].casefold() for entry in entries}) == 40
@@ -355,8 +355,13 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
 def test_international_catalog_preserves_unmapped_political_positions() -> None:
     catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
     assert catalog["political_mapping_review"]["status"] == "resolved_preserve_unmapped"
-    assert catalog["review_status"]["political_mapping"] == "decision_a_preserve_unmapped"
-    assert all(not group["entries"] for group in catalog["groups"])
+    assert catalog["review_status"]["political_mapping"] == "decision_2_two_source_threshold"
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+    assert all(
+        len(entry["classifications"]) >= 2
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    )
     assert all(
         "politically_unclassified" in entry["format_tags"]
         for entry in catalog["unclassified_entries"]
