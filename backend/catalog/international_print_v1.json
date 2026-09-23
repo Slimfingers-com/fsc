@@ -465,7 +465,8 @@
     {
       "key": "liberal_centre",
       "label": "liberal centre",
-      "entries": []
+      "entries": [],
+      "coverage_exception": "Germany-focused international curation does not fill this political group by quota; no retained title currently meets both relevance and provenance requirements for the core set."
     },
     {
       "key": "conservative",
