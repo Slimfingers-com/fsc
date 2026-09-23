@@ -12,7 +12,24 @@
   "activation_policy": "catalog_only_until_joint_review",
   "selection_policy": "curated_european_comparison_set_with_germany_as_more_granular_core_market",
   "coverage_policy": "no_country_quotas",
-  "languages": "multilingual",
+  "languages": [
+    "cs",
+    "da",
+    "el",
+    "en",
+    "es",
+    "fi",
+    "fr",
+    "hu",
+    "it",
+    "nl",
+    "no",
+    "pl",
+    "pt",
+    "sl",
+    "sr",
+    "sv"
+  ],
   "edition_policy": "brand_as_source_print_products_as_outlets",
   "notes": [
     "This catalog covers relevant European print publications outside the separately modeled DE, AT, CH and GB catalogs.",
@@ -73,7 +90,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148695/l-humanite"
+              "source_url": "https://www.eurotopics.net/en/148695/l-humanite",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -107,7 +125,8 @@
           "classifications": [],
           "metrics": []
         }
-      ]
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
     },
     {
       "key": "left_liberal",
@@ -144,7 +163,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148683/le-monde"
+              "source_url": "https://www.eurotopics.net/en/148683/le-monde",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -179,7 +199,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148696/liberation"
+              "source_url": "https://www.eurotopics.net/en/148696/liberation",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -214,7 +235,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148668/la-repubblica"
+              "source_url": "https://www.eurotopics.net/en/148668/la-repubblica",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -264,7 +286,8 @@
               "unit": "copies",
               "reference_period": "2020",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148524/el-pais"
+              "source_url": "https://www.eurotopics.net/en/148524/el-pais",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -299,7 +322,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza"
+              "source_url": "https://www.eurotopics.net/en/148554/gazeta-wyborcza",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -334,7 +358,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant"
+              "source_url": "https://www.eurotopics.net/en/148496/de-volkskrant",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -369,7 +394,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer"
+              "source_url": "https://www.eurotopics.net/en/148475/de-groene-amsterdammer",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -404,7 +430,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148754/politiken"
+              "source_url": "https://www.eurotopics.net/en/148754/politiken",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -439,7 +466,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148592/information"
+              "source_url": "https://www.eurotopics.net/en/148592/information",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -489,7 +517,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148626/klassekampen"
+              "source_url": "https://www.eurotopics.net/en/148626/klassekampen",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -539,7 +568,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148594/hvg"
+              "source_url": "https://www.eurotopics.net/en/148594/hvg",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -574,7 +604,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton"
+              "source_url": "https://www.eurotopics.net/en/148529/efimerida-ton-syntakton",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -609,11 +640,13 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148481/danas"
+              "source_url": "https://www.eurotopics.net/en/148481/danas",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         }
-      ]
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
     },
     {
       "key": "liberal_centre",
@@ -650,7 +683,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148688/les-echos"
+              "source_url": "https://www.eurotopics.net/en/148688/les-echos",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -685,7 +719,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera"
+              "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -750,7 +785,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita"
+              "source_url": "https://www.eurotopics.net/en/148775/rzeczpospolita",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -785,7 +821,8 @@
               "unit": "copies",
               "reference_period": "2019",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148739/nrc"
+              "source_url": "https://www.eurotopics.net/en/148739/nrc",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -820,7 +857,8 @@
               "unit": "copies",
               "reference_period": "2021",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148490/de-standaard"
+              "source_url": "https://www.eurotopics.net/en/148490/de-standaard",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -855,7 +893,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148689/le-soir"
+              "source_url": "https://www.eurotopics.net/en/148689/le-soir",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -890,7 +929,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter"
+              "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -925,7 +965,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv"
+              "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -960,7 +1001,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat"
+              "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -995,7 +1037,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148600/the-irish-times"
+              "source_url": "https://www.eurotopics.net/en/148600/the-irish-times",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1030,7 +1073,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148771/publico"
+              "source_url": "https://www.eurotopics.net/en/148771/publico",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1065,7 +1109,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny"
+              "source_url": "https://www.eurotopics.net/en/148590/hospodarske-noviny",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1100,7 +1145,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148774/respekt"
+              "source_url": "https://www.eurotopics.net/en/148774/respekt",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1135,11 +1181,13 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148485/delo"
+              "source_url": "https://www.eurotopics.net/en/148485/delo",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         }
-      ]
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
     },
     {
       "key": "conservative",
@@ -1176,7 +1224,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148679/le-figaro"
+              "source_url": "https://www.eurotopics.net/en/148679/le-figaro",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1211,7 +1260,8 @@
               "unit": "copies",
               "reference_period": "2020",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148523/el-mundo"
+              "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1261,7 +1311,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten"
+              "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1296,7 +1347,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet"
+              "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1331,7 +1383,8 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148450/aftenposten"
+              "source_url": "https://www.eurotopics.net/en/148450/aftenposten",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1381,11 +1434,13 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148614/kathimerini"
+              "source_url": "https://www.eurotopics.net/en/148614/kathimerini",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         }
-      ]
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
     },
     {
       "key": "right",
@@ -1437,7 +1492,8 @@
               "unit": "copies",
               "reference_period": "2022",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148575/il-giornale"
+              "source_url": "https://www.eurotopics.net/en/148575/il-giornale",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         },
@@ -1517,11 +1573,13 @@
               "unit": "copies",
               "reference_period": "2023",
               "measurement_body": "Eurotopics",
-              "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf"
+              "source_url": "https://www.eurotopics.net/en/148491/de-telegraaf",
+              "retrieved_at": "2026-09-23T07:50:00+02:00"
             }
           ]
         }
-      ]
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
     },
     {
       "key": "radical_right",
@@ -1542,7 +1600,8 @@
           "classifications": [],
           "metrics": []
         }
-      ]
+      ],
+      "coverage_exception": "Europe is a relevance-weighted comparison set; political-group and publication-form counts are descriptive, not quotas."
     }
   ],
   "unclassified_entries": [],
@@ -3738,5 +3797,6 @@
       ],
       "status": "requires_current_frequency_confirmation"
     }
-  }
+  },
+  "coverage_policy_notes": "European comparison coverage is relevance-weighted; targets are goals, not quotas."
 }
