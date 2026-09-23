@@ -351,9 +351,9 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     assert catalog["target_catalog_size"]["hard_cap"] is False
 
     entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
-    assert len(entries) == 53
-    assert len({entry["key"] for entry in entries}) == 53
-    assert len({entry["name"].casefold() for entry in entries}) == 53
+    assert len(entries) == 71
+    assert len({entry["key"] for entry in entries}) == 71
+    assert len({entry["name"].casefold() for entry in entries}) == 71
     assert all(entry["country"] != "US" for entry in entries)
     assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
@@ -443,3 +443,13 @@ def test_international_radical_groups_require_two_external_orientation_sources()
                 if item["dimension"] == "editorial_orientation"
             }
             assert len(orientation_sources) >= 2
+
+
+def test_international_original_candidates_are_resolved() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["deferred_candidates"] == []
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
+    names = {entry["name"] for entry in entries}
+    assert "DM168" in names
+    assert "Daily Maverick" not in names
+    assert all(entry["activity_status"] == "active" for entry in entries)
