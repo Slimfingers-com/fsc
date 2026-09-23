@@ -2587,16 +2587,17 @@
     "Current print activity has been verified for all 50 implemented titles using current publisher/subscription/print-edition evidence; activity status does not imply political classification.",
     "Radical-edge assignments use the same two-independent-source rule; Green Left and Red Flag are supported by an Australian peer-reviewed fringe-left classification plus independent media-bias evidence, while Yeni Akit has two independent peer-reviewed far-right classifications.",
     "Previously deferred candidates are reactivated when current recurring print status and material geographic, editorial or format value are verified; the former approximately-40 implementation target is not an exclusion rule.",
-    "All originally deferred candidates have now been resolved: active recurring print products are included; Daily Maverick is represented by its concrete weekly print product DM168 under the brand-as-source/print-product-as-outlet policy."
+    "All originally deferred candidates have now been resolved: active recurring print products are included; Daily Maverick is represented by its concrete weekly print product DM168 under the brand-as-source/print-product-as-outlet policy.",
+    "State/party control and state funding are modeled as media_positioning provenance and never used as a shortcut for FSC left-right classification."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 70,
+    "guideline_target": 45,
     "guideline_range": [
-      60,
-      85
+      40,
+      50
     ],
     "hard_cap": false
   },
@@ -2606,8 +2607,9 @@
     "active_print_verification": "complete_for_current_71_title_set",
     "metrics_enrichment": "partial",
     "implementation": "all_original_candidates_resolved_to_active_print_entries",
-    "curation": "71_title_comparison_set_all_original_candidates_resolved",
-    "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set"
+    "curation": "44_title_shortlist_in_progress",
+    "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set",
+    "scope": "decision_a_include_controlled_media"
   },
   "curation_policy": {
     "target": "approximately_40",
@@ -2994,6 +2996,6 @@
       "include_with_control_metadata": "Include globally relevant state/party-controlled or state-funded print outlets and represent control/ownership as attributed media_positioning metadata.",
       "independent_only": "Restrict the international print catalog to editorially independent outlets and exclude structurally state/party-controlled publications."
     },
-    "decision": "Include globally or regionally relevant state-owned, party-official, state-managed, and state-funded print outlets. Store control/ownership as attributed media_positioning metadata; do not infer an FSC left-right group from that status."
+    "decision": "Include globally or regionally relevant state-owned, party-official, or substantially state-funded print outlets. Represent control/funding as separately attributed media_positioning metadata; do not infer an FSC left-right group from it."
   }
 }
