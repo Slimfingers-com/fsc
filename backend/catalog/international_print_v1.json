@@ -755,6 +755,52 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "mainichi-shimbun",
+          "name": "Mainichi Shimbun",
+          "homepage": "https://mainichi.jp/",
+          "country": "JP",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ja",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/mainichi-shimbun-bias-credibility/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "MBFC rates Mainichi Shimbun Left-Center. One source alone does not satisfy FSC Decision 2."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "progressive",
+              "classifier_type": "academic",
+              "classifier_name": "International Sociology / SAGE",
+              "source_url": "https://journals.sagepub.com/doi/pdf/10.1177/02685809231195958?download=true",
+              "reference_date": "2026-04-01",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Comparative academic study classifies Mainichi as Progressive. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_left_leaning",
+              "classifier_type": "academic",
+              "classifier_name": "Humanities and Social Sciences Communications / PMC",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11933884/",
+              "reference_date": "2025-01-01",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Independent academic study states Mainichi and Asahi are considered liberal and left-leaning. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -2237,34 +2283,6 @@
       "metrics": []
     },
     {
-      "key": "mainichi-shimbun",
-      "name": "Mainichi Shimbun",
-      "homepage": "https://mainichi.jp/",
-      "country": "JP",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "ja",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/mainichi-shimbun-bias-credibility/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "MBFC rates Mainichi Shimbun Left-Center. One source alone does not satisfy FSC Decision 2."
-        }
-      ],
-      "metrics": []
-    },
-    {
       "key": "the-telegraph-india",
       "name": "The Telegraph India",
       "homepage": "https://www.telegraphindia.com/",
@@ -2589,7 +2607,7 @@
     "metrics_enrichment": "partial",
     "implementation": "all_original_candidates_resolved_to_active_print_entries",
     "curation": "71_title_comparison_set_all_original_candidates_resolved",
-    "provenance_enrichment": "radical_edge_two_source_assignments_added"
+    "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set"
   },
   "curation_policy": {
     "target": "approximately_40",
