@@ -656,3 +656,180 @@ def test_de_national_broadcast_defers_joint_or_non_linear_cases() -> None:
     assert "phoenix" in deferred
     assert "scalar ownership-based independence key" in deferred["phoenix"]
     assert {"Deutsche Welle", "BILD TV", "REGIOCAST Nachrichten"} <= set(deferred)
+
+
+AT_BROADCAST_CATALOG = CATALOG_DIR / "at_broadcast_v1.json"
+
+
+def load_at_broadcast_catalog() -> dict:
+    return json.loads(AT_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def at_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_at_national_broadcast_catalog_has_approved_editorial_sources() -> None:
+    catalog = load_at_broadcast_catalog()
+    assert catalog["country"] == "AT"
+    assert catalog["scope"] == "national"
+    assert catalog["media_category"] == "broadcast"
+    assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert catalog["source_identity_policy"] == "one_editorial_source_multiple_programmes_and_channels_as_outlets"
+    assert catalog["approved_candidate_count"] == 8
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+
+    entries = at_broadcast_entries(catalog)
+    assert len(entries) == 8
+    assert len({entry["key"] for entry in entries}) == 8
+    assert len({entry["name"].casefold() for entry in entries}) == 8
+    assert all(entry["catalog_status"] == "candidate" for entry in entries)
+    assert all(entry["activity_status"] == "active" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["outlets"] for entry in entries)
+    assert all(
+        outlet["publication_form"] in {"radio", "television"}
+        for entry in entries
+        for outlet in entry["outlets"]
+    )
+
+
+def test_at_national_broadcast_deduplicates_crossmedia_newsrooms() -> None:
+    catalog = load_at_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in at_broadcast_entries(catalog)}
+
+    assert {outlet["name"] for outlet in entries["ORF Information"]["outlets"]} == {
+        "ORF 1",
+        "ORF 2",
+        "ORF III",
+        "Ö1",
+        "Ö3",
+        "FM4",
+    }
+    assert {outlet["name"] for outlet in entries["ProSiebenSat.1 PULS 4 Newsroom"]["outlets"]} == {
+        "PULS 24",
+        "PULS 4",
+        "ATV",
+    }
+    assert {outlet["name"] for outlet in entries["ÖSTERREICH / oe24"]["outlets"]} == {
+        "oe24.TV",
+        "oe24 RADIO",
+    }
+    assert entries["ÖSTERREICH / oe24"]["source_action"] == "extend_existing_source"
+    assert entries["ÖSTERREICH / oe24"]["existing_source_key"] == "oesterreich-oe24"
+
+    source_names = set(entries)
+    assert source_names.isdisjoint({
+        "ORF 1",
+        "ORF 2",
+        "ORF III",
+        "Ö1",
+        "Ö3",
+        "FM4",
+        "PULS 24",
+        "PULS 4",
+        "ATV",
+        "oe24.TV",
+        "oe24 RADIO",
+    })
+
+
+def test_at_national_broadcast_keeps_oe24_unclassified_until_provenance() -> None:
+    catalog = load_at_broadcast_catalog()
+    grouped_names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    unclassified = {entry["name"]: entry for entry in catalog["unclassified_entries"]}
+
+    assert "ÖSTERREICH / oe24" not in grouped_names
+    assert set(unclassified) == {"ÖSTERREICH / oe24"}
+    assert unclassified["ÖSTERREICH / oe24"]["classification_status"] == "unclassified_research_candidate"
+    assert unclassified["ÖSTERREICH / oe24"]["classifications"] == []
+
+
+def test_at_national_broadcast_keeps_regional_sources_out() -> None:
+    catalog = load_at_broadcast_catalog()
+    names = {entry["name"] for entry in at_broadcast_entries(catalog)}
+    assert names.isdisjoint({
+        "Radio Wien",
+        "Radio Niederösterreich",
+        "Radio Oberösterreich",
+        "Radio Steiermark",
+        "Radio Tirol",
+        "Radio Vorarlberg",
+        "W24",
+        "Antenne Steiermark",
+        "Life Radio",
+    })
+
+
+def test_at_national_broadcast_sparse_segments_document_real_market_gaps() -> None:
+    catalog = load_at_broadcast_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    for key in ("radical_left", "left_liberal", "liberal_centre", "conservative", "right", "radical_right"):
+        radio_count = sum(
+            any(outlet["publication_form"] == "radio" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        tv_count = sum(
+            any(outlet["publication_form"] == "television" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        if radio_count < catalog["coverage_targets"]["radio_min"] or tv_count < catalog["coverage_targets"]["television_min"]:
+            assert groups[key].get("coverage_exception")
+
+
+def test_at_national_broadcast_two_source_status_has_independent_provenance() -> None:
+    catalog = load_at_broadcast_catalog()
+    confirmed = [
+        entry for entry in at_broadcast_entries(catalog)
+        if entry["classification_status"] == "two_source_direction_confirmed"
+    ]
+    assert {entry["name"] for entry in confirmed} == {"AUF1"}
+    for entry in confirmed:
+        orientation_sources = {
+            item["classifier_name"]
+            for item in entry["classifications"]
+            if item["dimension"] == "editorial_orientation"
+        }
+        assert len(orientation_sources) >= 2
+
+
+def test_at_national_broadcast_religious_identity_is_not_political_classification() -> None:
+    catalog = load_at_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in at_broadcast_entries(catalog)}
+    radio_maria = entries["Radio Maria Österreich"]
+    assert radio_maria["classification_status"] == "thematic_candidate_not_political_classification"
+    assert not any(
+        item["dimension"] == "editorial_orientation"
+        for item in radio_maria["classifications"]
+    )
+
+
+def test_at_national_broadcast_classification_provenance_is_complete() -> None:
+    catalog = load_at_broadcast_catalog()
+    for entry in at_broadcast_entries(catalog):
+        for classification in entry["classifications"]:
+            assert classification["dimension"]
+            assert classification["value"]
+            assert classification["classifier_type"]
+            assert classification["classifier_name"]
+            assert classification["source_url"].startswith("https://")
+            assert classification["reference_date"]
+            assert classification["retrieved_at"]
+
+
+def test_at_national_broadcast_defers_non_austrian_or_crossmedia_edge_cases() -> None:
+    catalog = load_at_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+
+    assert {"ERF Süd", "Kontrafunk", "Klassik Radio", "Krone.tv"} <= set(deferred)
+    assert "predominantly from South Tyrol and Germany" in deferred["ERF Süd"]
+    assert "duplicate Austrian Source" in deferred["Kontrafunk"]
+    assert "existing German editorial Source" in deferred["Klassik Radio"]
+    assert "existing Kronen Zeitung Source" in deferred["Krone.tv"]
