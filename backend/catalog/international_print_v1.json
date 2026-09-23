@@ -15,6 +15,7 @@
     "es",
     "fr",
     "he",
+    "id",
     "ja",
     "ko",
     "pt",
@@ -2382,6 +2383,91 @@
         }
       ],
       "metrics": []
+    },
+    {
+      "key": "the-jakarta-post",
+      "name": "The Jakarta Post",
+      "homepage": "https://www.thejakartapost.com/",
+      "country": "ID",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "tempo",
+      "name": "Tempo",
+      "homepage": "https://magz.tempo.co/",
+      "country": "ID",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "id",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "philippine-daily-inquirer",
+      "name": "Philippine Daily Inquirer",
+      "homepage": "https://www.inquirer.net/",
+      "country": "PH",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "the-philippine-star",
+      "name": "The Philippine Star",
+      "homepage": "https://www.philstar.com/",
+      "country": "PH",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "manila-bulletin",
+      "name": "Manila Bulletin",
+      "homepage": "https://mb.com.ph/",
+      "country": "PH",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
     }
   ],
   "research_regions": [
@@ -2414,6 +2500,14 @@
         "ZA",
         "NG",
         "EG"
+      ]
+    },
+    {
+      "key": "southeast_asia",
+      "priority_countries": [
+        "ID",
+        "PH",
+        "SG"
       ]
     }
   ],
@@ -2589,7 +2683,8 @@
     "Previously deferred candidates are reactivated when current recurring print status and material geographic, editorial or format value are verified; the former approximately-40 implementation target is not an exclusion rule.",
     "All originally deferred candidates have now been resolved: active recurring print products are included; Daily Maverick is represented by its concrete weekly print product DM168 under the brand-as-source/print-product-as-outlet policy.",
     "State/party control and state funding are modeled as media_positioning provenance and never used as a shortcut for FSC left-right classification.",
-    "The original approximately-40-title guideline was superseded by the resolved active candidate set and later scope expansion; the catalog remains uncapped."
+    "The original approximately-40-title guideline was superseded by the resolved active candidate set and later scope expansion; the catalog remains uncapped.",
+    "Southeast Asia gap review added active print titles from Indonesia and the Philippines based on current publisher subscription/edition evidence and 2026 public procurement evidence."
   ],
   "regions_excluded": [
     "Europe"
@@ -2609,7 +2704,7 @@
     "active_print_verification": "complete_for_current_71_title_set",
     "metrics_enrichment": "partial",
     "implementation": "all_original_candidates_resolved_to_active_print_entries",
-    "curation": "71_title_current_set_complete_pending_gap_review",
+    "curation": "76_title_current_set_pending_gap_review",
     "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set",
     "scope": "decision_a_include_controlled_media"
   },
