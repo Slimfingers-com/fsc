@@ -330,7 +330,7 @@ Metrics are historical observations, not properties overwritten on the source.
 
 Required fields are represented by the provenance-aware `SourceMetric` model:
 
-- metric kind (sold circulation, distributed circulation, print run, print readers, digital unique users, visits, page impressions, paid digital subscriptions, subscribers)
+- metric kind (sold circulation, distributed circulation, print run, print readers, digital unique users, visits, page impressions, paid digital subscriptions, subscribers, radio daily listeners, radio hourly listeners, radio market share, TV viewers, TV daily reach, TV market share)
 - value and unit
 - scope
 - reference period and optional start/end
@@ -344,7 +344,8 @@ Rules:
 
 - IVW/audited figures and publisher-reported figures are never treated as equivalent.
 - Special-edition print runs are not regular sold circulation.
-- Print circulation, readers, digital unique users, visits and page impressions remain separate metrics.
+- Print circulation, readers, digital unique users, visits, page impressions, radio listeners and television audience metrics remain separate metrics.
+- Radio and television market shares use basis points as the integer unit (for example, 1.7% = 170 basis points), with target audience and measurement definition preserved in metric scope.
 - Missing current metrics stay NULL; stale figures are not copied forward merely to fill a field.
 - Reach never decides whether a source is eligible for the catalog.
 
