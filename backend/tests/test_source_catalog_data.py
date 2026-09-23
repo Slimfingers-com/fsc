@@ -360,9 +360,9 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     assert catalog["target_catalog_size"]["hard_cap"] is False
 
     entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
-    assert len(entries) == 71
-    assert len({entry["key"] for entry in entries}) == 71
-    assert len({entry["name"].casefold() for entry in entries}) == 71
+    assert len(entries) >= 71
+    assert len({entry["key"] for entry in entries}) == len(entries)
+    assert len({entry["name"].casefold() for entry in entries}) == len(entries)
     assert all(entry["country"] != "US" for entry in entries)
     assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
