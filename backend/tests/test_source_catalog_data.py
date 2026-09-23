@@ -351,9 +351,9 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     assert catalog["target_catalog_size"]["hard_cap"] is False
 
     entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
-    assert len(entries) == 50
-    assert len({entry["key"] for entry in entries}) == 50
-    assert len({entry["name"].casefold() for entry in entries}) == 50
+    assert len(entries) == 53
+    assert len({entry["key"] for entry in entries}) == 53
+    assert len({entry["name"].casefold() for entry in entries}) == 53
     assert all(entry["country"] != "US" for entry in entries)
     assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
@@ -427,3 +427,19 @@ def test_international_catalog_models_state_control_separately() -> None:
             item["dimension"] == "media_positioning" and item["value"] == value
             for item in entry["classifications"]
         )
+
+
+def test_international_radical_groups_require_two_external_orientation_sources() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    groups = {group["key"]: group for group in catalog["groups"]}
+    assert {entry["name"] for entry in groups["radical_left"]["entries"]} >= {"Green Left", "Red Flag"}
+    assert {entry["name"] for entry in groups["radical_right"]["entries"]} >= {"Yeni Akit"}
+    for key in ("radical_left", "radical_right"):
+        assert groups[key].get("coverage_exception")
+        for entry in groups[key]["entries"]:
+            orientation_sources = {
+                item["classifier_name"]
+                for item in entry["classifications"]
+                if item["dimension"] == "editorial_orientation"
+            }
+            assert len(orientation_sources) >= 2
