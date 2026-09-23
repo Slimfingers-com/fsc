@@ -22,6 +22,17 @@ ALLOWED_FORMS = {
 }
 ALLOWED_ACTIVITY = {"active", "verify_current"}
 ALLOWED_FORM_GROUPS = {"newspaper_or_weekly", "magazine_or_periodical"}
+ALLOWED_METRIC_KINDS = {
+    "sold_circulation",
+    "distributed_circulation",
+    "print_run",
+    "print_readers",
+    "digital_unique_users",
+    "visits",
+    "page_impressions",
+    "paid_digital_subscriptions",
+    "subscribers",
+}
 
 
 def load_catalog(country: str) -> dict:
@@ -381,7 +392,7 @@ def test_international_catalog_metadata_provenance_is_complete() -> None:
             assert classification["reference_date"]
             assert classification["retrieved_at"]
         for metric in entry["metrics"]:
-            assert metric["metric_kind"]
+            assert metric["metric_kind"] in ALLOWED_METRIC_KINDS
             assert metric["value"] >= 0
             assert metric["unit"]
             assert metric["reference_period"]
