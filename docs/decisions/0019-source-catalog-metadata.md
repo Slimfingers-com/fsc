@@ -97,11 +97,18 @@ Each record may optionally point to a specific SourceOutlet and contains:
 
 Distinct metric kinds include sold circulation, distributed circulation, print run,
 print readers, digital unique users, visits, page impressions, paid digital
-subscriptions and subscribers.
+subscriptions, subscribers, radio daily listeners, radio hourly listeners,
+radio market share, TV viewers, TV daily reach and TV market share.
 
-A print circulation value, reader estimate and digital unique-user value are not
-interchangeable and must never be summed or compared as though they were the same
-measurement.
+Broadcast audience metrics remain medium-specific rather than being collapsed into
+a generic reach value. Percentage market shares are stored as integer basis points
+(for example, 1.7% = 170 basis points) so the existing integer metric value model
+remains stable while preserving exact measurement semantics in the metric kind,
+unit, scope and reference period.
+
+A print circulation value, reader estimate, digital unique-user value, radio
+listener estimate and television audience/share value are not interchangeable and
+must never be summed or compared as though they were the same measurement.
 
 ### Inclusion policy
 
