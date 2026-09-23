@@ -33,6 +33,15 @@ ALLOWED_METRIC_KINDS = {
     "paid_digital_subscriptions",
     "subscribers",
 }
+ALLOWED_CLASSIFIER_TYPES = {
+    "self_description",
+    "media_database",
+    "academic",
+    "public_authority",
+    "court",
+    "publisher",
+    "other",
+}
 
 
 def load_catalog(country: str) -> dict:
@@ -390,7 +399,7 @@ def test_international_catalog_metadata_provenance_is_complete() -> None:
         for classification in entry["classifications"]:
             assert classification["dimension"]
             assert classification["value"]
-            assert classification["classifier_type"]
+            assert classification["classifier_type"] in ALLOWED_CLASSIFIER_TYPES
             assert classification["classifier_name"]
             assert classification["source_url"].startswith("https://")
             assert classification["reference_date"]
@@ -401,6 +410,8 @@ def test_international_catalog_metadata_provenance_is_complete() -> None:
             assert metric["unit"]
             assert metric["reference_period"]
             assert metric["measurement_body"]
+            assert metric["metric_scope"]
+            assert isinstance(metric["audited"], bool)
             assert metric["source_url"].startswith("https://")
             assert metric["retrieved_at"]
 
