@@ -2588,18 +2588,20 @@
     "Radical-edge assignments use the same two-independent-source rule; Green Left and Red Flag are supported by an Australian peer-reviewed fringe-left classification plus independent media-bias evidence, while Yeni Akit has two independent peer-reviewed far-right classifications.",
     "Previously deferred candidates are reactivated when current recurring print status and material geographic, editorial or format value are verified; the former approximately-40 implementation target is not an exclusion rule.",
     "All originally deferred candidates have now been resolved: active recurring print products are included; Daily Maverick is represented by its concrete weekly print product DM168 under the brand-as-source/print-product-as-outlet policy.",
-    "State/party control and state funding are modeled as media_positioning provenance and never used as a shortcut for FSC left-right classification."
+    "State/party control and state funding are modeled as media_positioning provenance and never used as a shortcut for FSC left-right classification.",
+    "The original approximately-40-title guideline was superseded by the resolved active candidate set and later scope expansion; the catalog remains uncapped."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 45,
+    "guideline_target": 70,
     "guideline_range": [
-      40,
-      50
+      65,
+      80
     ],
-    "hard_cap": false
+    "hard_cap": false,
+    "notes": "Descriptive working range for the current expanded international comparison set; not a quota or maximum."
   },
   "review_status": {
     "candidate_pool": "broad_pool_complete",
@@ -2607,7 +2609,7 @@
     "active_print_verification": "complete_for_current_71_title_set",
     "metrics_enrichment": "partial",
     "implementation": "all_original_candidates_resolved_to_active_print_entries",
-    "curation": "44_title_shortlist_in_progress",
+    "curation": "71_title_current_set_complete_pending_gap_review",
     "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set",
     "scope": "decision_a_include_controlled_media"
   },
