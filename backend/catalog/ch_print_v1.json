@@ -1014,7 +1014,8 @@
           "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
           "audited": true,
           "retrieved_at": "2026-09-22T18:10:00Z",
-          "notes": null
+          "notes": null,
+          "outlet_name": "Blick"
         },
         {
           "metric_kind": "print_readers",
@@ -1026,25 +1027,9 @@
           "source_url": "https://www.ringier-advertising.ch/de/brand/blick/",
           "audited": false,
           "retrieved_at": "2026-09-22T18:10:00Z",
-          "notes": null
-        }
-      ]
-    },
-    {
-      "key": "sonntagsblick",
-      "name": "SonntagsBlick",
-      "homepage": "https://www.blick.ch/sonntagsblick/",
-      "publication_form": "sunday_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "de",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "boulevard"
-      ],
-      "feeds": [],
-      "classifications": [],
-      "metrics": [
+          "notes": null,
+          "outlet_name": "Blick"
+        },
         {
           "metric_kind": "distributed_circulation",
           "value": 66608,
@@ -1055,7 +1040,8 @@
           "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
           "audited": true,
           "retrieved_at": "2026-09-22T18:10:00Z",
-          "notes": null
+          "notes": null,
+          "outlet_name": "SonntagsBlick"
         },
         {
           "metric_kind": "print_readers",
@@ -1067,11 +1053,35 @@
           "source_url": "https://www.ringier-advertising.ch/de/brand/sonntagsblick/",
           "audited": false,
           "retrieved_at": "2026-09-22T18:10:00Z",
-          "notes": null
+          "notes": null,
+          "outlet_name": "SonntagsBlick"
         }
+      ],
+      "outlets": [
+        {
+          "name": "Blick",
+          "publication_form": "daily_newspaper",
+          "language": "de",
+          "url": "https://www.blick.ch/",
+          "is_primary": true,
+          "active": true
+        },
+        {
+          "name": "SonntagsBlick",
+          "publication_form": "sunday_newspaper",
+          "language": "de",
+          "url": "https://www.blick.ch/sonntagsblick/",
+          "is_primary": false,
+          "active": true
+        }
+      ],
+      "notes": [
+        "SonntagsBlick is modeled as an outlet/product of the Blick editorial source, not as an independent Source."
       ]
     }
   ],
   "coverage_policy": "targets_are_goals_not_quotas",
-  "coverage_policy_notes": "Coverage minima guide research only. FSC does not force, invent, or broaden a political classification to satisfy a numeric target; documented market asymmetries are retained."
+  "coverage_policy_notes": "Coverage minima guide research only. FSC does not force, invent, or broaden a political classification to satisfy a numeric target; documented market asymmetries are retained.",
+  "edition_policy": "brand_as_source_print_products_as_outlets",
+  "source_identity_policy": "one_editorial_source_multiple_products_as_outlets"
 }
