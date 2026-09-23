@@ -159,18 +159,29 @@
     {
       "key": "le-devoir",
       "name": "Le Devoir",
-      "homepage": null,
+      "homepage": "https://www.ledevoir.com/",
       "country": "CA",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "fr",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "least_biased",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/le-devoir/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -193,52 +204,85 @@
     {
       "key": "reforma",
       "name": "Reforma",
-      "homepage": null,
+      "homepage": "https://www.reforma.com/",
       "country": "MX",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "es",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/reforma-bias/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "la-jornada",
       "name": "La Jornada",
-      "homepage": null,
+      "homepage": "https://www.jornada.com.mx/",
       "country": "MX",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "es",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/la-jornada-bias-and-credibility/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "folha-de-s-paulo",
       "name": "Folha de S.Paulo",
-      "homepage": null,
+      "homepage": "https://www1.folha.uol.com.br/",
       "country": "BR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "pt",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/folha-de-s-paulo-bias-and-credibility/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
@@ -278,52 +322,85 @@
     {
       "key": "cartacapital",
       "name": "CartaCapital",
-      "homepage": null,
+      "homepage": "https://www.cartacapital.com.br/",
       "country": "BR",
       "publication_form": "periodical",
       "form_group": "magazine_or_periodical",
       "language": "pt",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/cartacapital-bias-and-credibility/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "clarin",
       "name": "Clarín",
-      "homepage": null,
+      "homepage": "https://www.clarin.com/",
       "country": "AR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "es",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/clarin-bias/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
       "key": "la-nacion",
       "name": "La Nación",
-      "homepage": null,
+      "homepage": "https://www.lanacion.com.ar/",
       "country": "AR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "es",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/la-nacion-argentina-bias/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+        }
+      ],
       "metrics": []
     },
     {
