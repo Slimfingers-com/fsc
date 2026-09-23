@@ -603,9 +603,9 @@
   },
   "review_status": {
     "shortlist_political_mapping": "complete",
-    "entry_level_provenance": "18_of_50_verified",
+    "entry_level_provenance": "27_of_50_verified",
     "active_print_verification": "in_progress",
-    "metrics_enrichment": "18_of_50_baseline_metrics",
+    "metrics_enrichment": "27_of_50_baseline_metrics",
     "implementation": "pending",
     "shortlist_size": 50,
     "shortlist_curation": "complete",
@@ -1206,7 +1206,7 @@
         "NO",
         "FI"
       ],
-      "status": "queued"
+      "status": "9_titles_verified_dagens_etc_pending"
     },
     {
       "batch": 4,
@@ -1762,6 +1762,240 @@
         "publication_form": "daily_newspaper",
         "frequency": "daily",
         "source_url": "https://www.eurotopics.net/en/148689/le-soir",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Politiken": {
+      "country": "DK",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148754/politiken",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 70000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148754/politiken"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148754/politiken",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Jyllands-Posten": {
+      "country": "DK",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 73000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148607/jyllands-posten",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Information": {
+      "country": "DK",
+      "editorial_orientation": {
+        "value": "left_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148592/information",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 22000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148592/information"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148592/information",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Dagens Nyheter": {
+      "country": "SE",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 146000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148479/dagens-nyheter",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Svenska Dagbladet": {
+      "country": "SE",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 153000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148831/svenska-dagbladet",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Aftenposten": {
+      "country": "NO",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148450/aftenposten",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 150000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148450/aftenposten"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148450/aftenposten",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Klassekampen": {
+      "country": "NO",
+      "editorial_orientation": {
+        "value": "left_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148626/klassekampen",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 33000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148626/klassekampen"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148626/klassekampen",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Dagens Næringsliv": {
+      "country": "NO",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 59000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148478/dagens-naeringsliv",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Helsingin Sanomat": {
+      "country": "FI",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 259000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148585/helsingin-sanomat",
         "retrieved_at": "2026-09-23"
       }
     }
