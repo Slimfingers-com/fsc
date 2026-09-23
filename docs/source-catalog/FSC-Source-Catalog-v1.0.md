@@ -320,6 +320,12 @@ The current curated core contains 35 active print titles from Argentina, Austral
 
 Taiwan and Hong Kong are currently deferred. FSC will not overload the existing ISO country field with politically sensitive media-market geography until a more explicit geography model is available.
 
+## Source identity and product outlets
+
+FSC counts an editorially independent newsroom or editorial brand as the Source, not every edition, channel or programme. Multiple products of the same editorial source are modeled as SourceOutlets. Shared ownership alone does not merge editorially independent newsrooms.
+
+Examples: Guardian Weekly is an outlet/product of The Guardian; SonntagsBlick is an outlet/product of Blick. By contrast, independently edited Sunday titles such as NZZ am Sonntag or SonntagsZeitung may remain separate Sources when they have materially independent editorial leadership.
+
 ## Coverage policy
 
 The target of at least 3–5 titles per political segment and publication-form group is a **research coverage goal, not a quota**. FSC retains genuine market asymmetries when fewer reliably classifiable active print titles exist. Titles must not be moved, broadened or politically classified merely to satisfy a numeric target. Missing coverage remains explicit and can trigger further source research.
