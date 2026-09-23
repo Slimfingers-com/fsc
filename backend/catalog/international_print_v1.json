@@ -567,6 +567,42 @@
               "audited": false
             }
           ]
+        },
+        {
+          "key": "proceso",
+          "name": "Proceso",
+          "homepage": "https://www.proceso.com.mx/",
+          "country": "MX",
+          "publication_form": "magazine",
+          "form_group": "magazine_or_periodical",
+          "language": "es",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_associated",
+              "classifier_type": "academic",
+              "classifier_name": "Annals of the International Communication Association / Oxford Academic",
+              "source_url": "https://academic.oup.com/anncom/article/49/2/61/8125714",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Recent academic analysis describes Proceso as a magazine usually associated with the left. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "academic",
+              "classifier_name": "Mexican Watchdogs / University of North Carolina Press",
+              "source_url": "https://www.jstor.org/stable/10.5149/9781469685007_paxman.11",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Scholarly book chapter places Proceso among challenges on the left and describes it as channeling the Mexican left. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -1109,12 +1145,12 @@
     {
       "key": "el-universal",
       "name": "El Universal",
-      "homepage": null,
+      "homepage": "https://www.eluniversal.com.mx/",
       "country": "MX",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "es",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
@@ -1154,12 +1190,12 @@
     {
       "key": "o-estado-de-s-paulo",
       "name": "O Estado de S. Paulo",
-      "homepage": null,
+      "homepage": "https://www.estadao.com.br/",
       "country": "BR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "pt",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
@@ -1171,12 +1207,12 @@
     {
       "key": "o-globo",
       "name": "O Globo",
-      "homepage": null,
+      "homepage": "https://oglobo.globo.com/",
       "country": "BR",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "pt",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
@@ -1362,7 +1398,7 @@
       "publication_form": "weekly_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
@@ -1385,12 +1421,12 @@
     {
       "key": "business-day",
       "name": "Business Day",
-      "homepage": null,
+      "homepage": "https://www.businesslive.co.za/bd/",
       "country": "ZA",
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "en",
-      "activity_status": "verify_current",
+      "activity_status": "active",
       "catalog_status": "candidate",
       "format_tags": [
         "politically_unclassified"
@@ -1557,23 +1593,6 @@
       "metrics": []
     },
     {
-      "key": "proceso",
-      "name": "Proceso",
-      "homepage": "https://www.proceso.com.mx/",
-      "country": "MX",
-      "publication_form": "magazine",
-      "form_group": "magazine_or_periodical",
-      "language": "es",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [],
-      "metrics": []
-    },
-    {
       "key": "veja",
       "name": "VEJA",
       "homepage": "https://veja.abril.com.br/",
@@ -1587,7 +1606,28 @@
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "anti_left_liberal",
+          "classifier_type": "academic",
+          "classifier_name": "Temática / UFPB",
+          "source_url": "https://periodicos.ufpb.br/index.php/tematica/article/view/65539",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Academic study of 1990–2020 material reports anti-left bias and dissemination of liberalism. Historical-period evidence retained without current FSC group assignment."
+        },
+        {
+          "dimension": "editorial_orientation",
+          "value": "conservative_historical",
+          "classifier_type": "academic",
+          "classifier_name": "Comunicación y Sociedad / SciELO",
+          "source_url": "https://www.scielo.org.mx/scielo.php?lng=es&nrm=iso&pid=S0188-252X2025000100205&script=sci_arttext&tlng=en",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "2025 scholarly article refers to Veja as a conservative outlet and discusses an ultraconservative shift in a historical period. Temporal scope is insufficient for a current FSC group assignment."
+        }
+      ],
       "metrics": []
     },
     {
@@ -1604,7 +1644,18 @@
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/india-today/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification. A separate current automated outlet analysis describes India Today as Center, so FSC leaves the outlet politically unclassified pending stronger independent agreement."
+        }
+      ],
       "metrics": []
     },
     {
@@ -1621,7 +1672,18 @@
         "politically_unclassified"
       ],
       "feeds": [],
-      "classifications": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/the-monthly-australia/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "External classification; retained as one source only. Publisher self-description as progressive is not counted as an independent second source under Decision 2."
+        }
+      ],
       "metrics": []
     },
     {
@@ -1855,11 +1917,11 @@
   "review_status": {
     "candidate_pool": "broad_pool_complete",
     "political_mapping": "decision_2_two_source_threshold",
-    "active_print_verification": "partial",
+    "active_print_verification": "advanced",
     "metrics_enrichment": "partial",
     "implementation": "structured_shortlist_with_periodicals",
     "curation": "50_title_comparison_set",
-    "provenance_enrichment": "two_source_assignments_expanded"
+    "provenance_enrichment": "two_source_assignments_plus_reviewed_conflicts"
   },
   "curation_policy": {
     "target": "approximately_40",
