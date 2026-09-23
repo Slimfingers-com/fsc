@@ -603,9 +603,9 @@
   },
   "review_status": {
     "shortlist_political_mapping": "complete",
-    "entry_level_provenance": "in_progress_batch_1",
+    "entry_level_provenance": "10_of_50_verified",
     "active_print_verification": "in_progress",
-    "metrics_enrichment": "pending",
+    "metrics_enrichment": "10_of_50_baseline_metrics",
     "implementation": "pending",
     "shortlist_size": 50,
     "shortlist_curation": "complete",
@@ -1294,6 +1294,268 @@
     "Rivarol": {
       "publication_form": "weekly_newspaper",
       "status": "working_verified"
+    }
+  },
+  "verified_provenance": {
+    "L'Humanité": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "far_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148695/l-humanite",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 36000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148695/l-humanite"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148695/l-humanite",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Le Monde": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148683/le-monde",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 489000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148683/le-monde"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148683/le-monde",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Libération": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148696/liberation",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 101000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148696/liberation"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148696/liberation",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Le Figaro": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148679/le-figaro",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 357000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148679/le-figaro"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148679/le-figaro",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Les Echos": {
+      "country": "FR",
+      "editorial_orientation": {
+        "value": "liberal",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148688/les-echos",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 140000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148688/les-echos"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148688/les-echos",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "la Repubblica": {
+      "country": "IT",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148668/la-repubblica",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 137000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148668/la-repubblica"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148668/la-repubblica",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Corriere della Sera": {
+      "country": "IT",
+      "editorial_orientation": {
+        "value": "liberal_conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 208000,
+          "unit": "copies",
+          "reference_period": "2023",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148464/corriere-della-sera",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "Il Giornale": {
+      "country": "IT",
+      "editorial_orientation": {
+        "value": "right_wing",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148575/il-giornale",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 72000,
+          "unit": "copies",
+          "reference_period": "2022",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148575/il-giornale"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148575/il-giornale",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "El País": {
+      "country": "ES",
+      "editorial_orientation": {
+        "value": "centre_left",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148524/el-pais",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 92000,
+          "unit": "copies",
+          "reference_period": "2020",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148524/el-pais"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148524/el-pais",
+        "retrieved_at": "2026-09-23"
+      }
+    },
+    "El Mundo": {
+      "country": "ES",
+      "editorial_orientation": {
+        "value": "conservative",
+        "classifier_type": "media_database",
+        "classifier_name": "Eurotopics",
+        "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+        "retrieved_at": "2026-09-23"
+      },
+      "metrics": [
+        {
+          "metric_kind": "circulation",
+          "value": 68000,
+          "unit": "copies",
+          "reference_period": "2020",
+          "measurement_body": "Eurotopics",
+          "source_url": "https://www.eurotopics.net/en/148523/el-mundo"
+        }
+      ],
+      "print_evidence": {
+        "publication_form": "daily_newspaper",
+        "frequency": "daily",
+        "source_url": "https://www.eurotopics.net/en/148523/el-mundo",
+        "retrieved_at": "2026-09-23"
+      }
     }
   }
 }
