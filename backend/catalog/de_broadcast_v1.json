@@ -1,0 +1,615 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "scope": "national",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "one_editorial_source_multiple_programmes_and_channels_as_outlets",
+  "regional_policy": "regional_broadcast_sources_are_excluded_from_this_catalog_and_reviewed_in_a_separate_de_regional_block",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Research target is 3–5 editorially independent Sources per political planning segment and per broadcast form (television/radio). Genuine national-market gaps remain explicit. Programmes, channels and sub-brands of one newsroom do not count as independent Sources.",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "Planning placement in A–F is not itself a persisted FSC political classification. SourceClassification records remain attributed to external classifiers."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No suitable nationally oriented linear television or radio newsroom identified in the approved DE-national candidate scope. Regional/free radio is reviewed separately."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "academic",
+              "classifier_name": "Freitag, Kerkhof & Münster (2021)",
+              "source_url": "https://www.sciencedirect.com/science/article/pii/S0167624521000147",
+              "reference_date": "2021-01-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "outlet_name": "Deutschlandfunk",
+              "notes": "Study result applies specifically to the Deutschlandfunk outlet, not automatically to the full Deutschlandradio Source; source-level B/C placement remains unresolved."
+            }
+          ],
+          "metrics": [],
+          "key": "deutschlandradio",
+          "name": "Deutschlandradio",
+          "homepage": "https://www.deutschlandradio.de/",
+          "classification_status": "research_candidate_b_c_boundary",
+          "candidate_groups": [
+            "left_liberal",
+            "liberal_centre"
+          ],
+          "outlets": [
+            {
+              "key": "deutschlandfunk",
+              "name": "Deutschlandfunk",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.deutschlandfunk.de/"
+            },
+            {
+              "key": "deutschlandfunk-kultur",
+              "name": "Deutschlandfunk Kultur",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.deutschlandfunkkultur.de/"
+            },
+            {
+              "key": "deutschlandfunk-nova",
+              "name": "Deutschlandfunk Nova",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.deutschlandfunknova.de/"
+            }
+          ],
+          "notes": [
+            "Deutschlandfunk, Deutschlandfunk Kultur and Deutschlandfunk Nova are outlets/programmes of one Deutschlandradio Source and must never count as three independent Sources."
+          ]
+        }
+      ],
+      "coverage_exception": "Only one approved national radio Source is a B/C research candidate; no national television Source currently meets the research threshold. Do not fill with regional or digital-only outlets."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/economically liberal",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "classifier_type": "academic",
+              "classifier_name": "News under pressure? (2026 study)",
+              "source_url": "https://www.tandfonline.com/doi/full/10.1080/2474736X.2026.2682400",
+              "reference_date": "2026-06-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "External academic coding used as provenance; not an FSC assessment. A second independent source is still required for persisted FSC political-group assignment.",
+              "value": "centrist"
+            }
+          ],
+          "metrics": [],
+          "key": "ard-aktuell",
+          "name": "ARD-aktuell",
+          "homepage": "https://www.tagesschau.de/",
+          "classification_status": "single_external_source_needs_second_source",
+          "outlets": [
+            {
+              "key": "tagesschau",
+              "name": "Tagesschau",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.tagesschau.de/"
+            },
+            {
+              "key": "tagesthemen",
+              "name": "Tagesthemen",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.tagesschau.de/multimedia/sendung/tagesthemen/"
+            },
+            {
+              "key": "tagesschau24",
+              "name": "tagesschau24",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.tagesschau.de/multimedia/livestreams/"
+            }
+          ],
+          "notes": [
+            "ARD-aktuell is the central ARD news newsroom; regional ARD broadcasters are excluded from this national catalog."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "classifier_type": "academic",
+              "classifier_name": "News under pressure? (2026 study)",
+              "source_url": "https://www.tandfonline.com/doi/full/10.1080/2474736X.2026.2682400",
+              "reference_date": "2026-06-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "External academic coding used as provenance; not an FSC assessment. A second independent source is still required for persisted FSC political-group assignment.",
+              "value": "centrist"
+            }
+          ],
+          "metrics": [],
+          "key": "zdf",
+          "name": "ZDF",
+          "homepage": "https://www.zdf.de/nachrichten/",
+          "classification_status": "single_external_source_needs_second_source",
+          "outlets": [
+            {
+              "key": "zdf-news",
+              "name": "ZDF Nachrichten",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.zdf.de/nachrichten/"
+            }
+          ],
+          "notes": [
+            "heute, heute journal and related ZDF news formats are programmes/outlets of one ZDF Source, not separate Sources."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "classifier_type": "academic",
+              "classifier_name": "News under pressure? (2026 study)",
+              "source_url": "https://www.tandfonline.com/doi/full/10.1080/2474736X.2026.2682400",
+              "reference_date": "2026-06-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "The study codes RTL and NTV as mainstream centrist commercial broadcasters. Because both outlets are now organized within RTL NEWS, this is recorded at source level but still needs a second independent classifier for persisted FSC assignment.",
+              "value": "mainstream_centrist_commercial"
+            }
+          ],
+          "metrics": [],
+          "key": "rtl-news",
+          "name": "RTL NEWS",
+          "homepage": "https://media.rtl.com/",
+          "classification_status": "single_external_source_needs_second_source",
+          "outlets": [
+            {
+              "key": "rtl-aktuell",
+              "name": "RTL Aktuell",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.rtl.de/cms/sendungen/rtl-aktuell.html"
+            },
+            {
+              "key": "ntv",
+              "name": "ntv",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.n-tv.de/"
+            },
+            {
+              "key": "rtl-radio-news",
+              "name": "RTL Radio / RTL Aktuell",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.rtlradio.de/"
+            }
+          ],
+          "notes": [
+            "RTL Aktuell, ntv and RTL Radio news are represented as outlets of one RTL NEWS editorial Source for FSC independence counting."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "newstime",
+          "name": ":newstime",
+          "homepage": "https://www.prosieben.de/serien/newstime",
+          "classification_status": "unclassified_research_candidate",
+          "outlets": [
+            {
+              "key": "newstime-sat1",
+              "name": ":newstime SAT.1",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.sat1.de/serien/newstime"
+            },
+            {
+              "key": "newstime-prosieben",
+              "name": ":newstime ProSieben",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.prosieben.de/serien/newstime"
+            },
+            {
+              "key": "newstime-kabeleins",
+              "name": ":newstime Kabel Eins",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.kabeleins.de/serien/newstime"
+            }
+          ],
+          "notes": [
+            "ProSiebenSat.1 operates one central :newstime newsroom for SAT.1, ProSieben and Kabel Eins; the channel editions must not count as independent Sources."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "klassik-radio",
+          "name": "Klassik Radio",
+          "homepage": "https://www.klassikradio.de/",
+          "classification_status": "unclassified_research_candidate",
+          "outlets": [
+            {
+              "key": "klassik-radio-national",
+              "name": "Klassik Radio",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.klassikradio.de/"
+            }
+          ],
+          "notes": [
+            "National radio research candidate because it carries regular news and business information; political orientation remains unclassified."
+          ]
+        }
+      ],
+      "coverage_exception": "Television reaches the 3–5 research target; national radio remains below target after newsroom deduplication. No regional stations are used to fill the gap."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148503/die-welt",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "External classification of the integrated WELT editorial brand; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "academic",
+              "classifier_name": "Freitag, Kerkhof & Münster (2021)",
+              "source_url": "https://www.sciencedirect.com/science/article/pii/S0167624521000147",
+              "reference_date": "2021-01-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "Independent empirical study positions WELT on the right. Directionally consistent with euro|topics conservative classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [],
+          "key": "welt-broadcast",
+          "name": "WELT",
+          "homepage": "https://www.welt.de/",
+          "existing_source_key": "welt",
+          "classification_status": "two_source_direction_confirmed",
+          "outlets": [
+            {
+              "key": "welt-tv",
+              "name": "WELT TV",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.welt.de/tv-programm-live-stream/"
+            }
+          ],
+          "notes": [
+            "WELT TV extends the existing WELT Source from the DE print catalog; it must not create a duplicate Source."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "theologically_conservative",
+              "classifier_type": "self_description",
+              "classifier_name": "IDEA",
+              "source_url": "https://www.idea.de/ueber-uns/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "Theological self-positioning is stored separately and does not by itself establish a political FSC classification."
+            }
+          ],
+          "metrics": [],
+          "key": "idea",
+          "name": "IDEA",
+          "homepage": "https://www.idea.de/",
+          "classification_status": "thematic_candidate_not_political_classification",
+          "outlets": [
+            {
+              "key": "idea-tv",
+              "name": "IDEA TV",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.idea.de/"
+            }
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "ewtn-de",
+          "name": "EWTN Deutschland",
+          "homepage": "https://ewtn.de/",
+          "classification_status": "thematic_candidate_not_political_classification",
+          "outlets": [
+            {
+              "key": "ewtn-de-tv",
+              "name": "EWTN Deutschland",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://ewtn.de/"
+            }
+          ],
+          "notes": [
+            "Included under approved scope rule A because politics and society are recurring editorial topics; political orientation remains unclassified."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "hope-tv-de",
+          "name": "Hope TV Deutsch",
+          "homepage": "https://hopetv.de/",
+          "classification_status": "thematic_candidate_not_political_classification",
+          "outlets": [
+            {
+              "key": "hope-tv-de-tv",
+              "name": "Hope TV Deutsch",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://hopetv.de/"
+            }
+          ],
+          "notes": [
+            "Included under approved scope rule A because politics and world affairs recur in editorial programming; political orientation remains unclassified."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "erf",
+          "name": "ERF",
+          "homepage": "https://www.erf.de/",
+          "classification_status": "thematic_candidate_not_political_classification",
+          "outlets": [
+            {
+              "key": "erf-plus",
+              "name": "ERF Plus",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.erf.de/hoeren-sehen/erf-plus/"
+            }
+          ],
+          "notes": [
+            "Included under approved scope rule A because ERF Plus has an editorial current-affairs service covering politics, church and society; political orientation remains unclassified."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "catholic_christian",
+              "classifier_type": "self_description",
+              "classifier_name": "radio horeb",
+              "source_url": "https://www.horeb.org/programm/programmschwerpunkte/nachrichten/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "Religious identity is stored separately and does not by itself establish a political FSC classification."
+            }
+          ],
+          "metrics": [],
+          "key": "radio-horeb",
+          "name": "radio horeb",
+          "homepage": "https://www.horeb.org/",
+          "classification_status": "thematic_candidate_not_political_classification",
+          "outlets": [
+            {
+              "key": "radio-horeb-national",
+              "name": "radio horeb",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.horeb.org/"
+            }
+          ],
+          "notes": [
+            "The station maintains its own news team covering church, society and politics."
+          ]
+        }
+      ],
+      "coverage_exception": "Television has four approved D research candidates, but only WELT currently has two-source directional political provenance. National radio has two thematic D candidates; neither is politically classified merely from religious identity."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_of_cdu",
+              "classifier_type": "other",
+              "classifier_name": "Übermedien",
+              "source_url": "https://uebermedien.de/73663/kontrafunk-ein-radio-fuer-alle-die-an-corona-impfungen-klimawandel-und-allen-anderen-radios-zweifeln/",
+              "reference_date": "2022-07-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "External description of intended audience; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_media",
+              "classifier_type": "other",
+              "classifier_name": "Deutschlandfunk",
+              "source_url": "https://www.deutschlandfunk.de/brandenburg-lausitz-mittelstandsvereinigung-rechte-medien-kontrafunk-100.html",
+              "reference_date": "2024-02-07",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "External media classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [],
+          "key": "kontrafunk",
+          "name": "Kontrafunk",
+          "homepage": "https://kontrafunk.radio/de",
+          "classification_status": "two_source_direction_confirmed",
+          "outlets": [
+            {
+              "key": "kontrafunk-radio",
+              "name": "Kontrafunk",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://kontrafunk.radio/de"
+            }
+          ],
+          "notes": [
+            "Nationally oriented radio candidate; terrestrial distribution is expanding and does not affect ideological classification."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_conservative_to_right_populist",
+              "classifier_type": "other",
+              "classifier_name": "Zeppelin Universität / ZU Daily",
+              "source_url": "https://www.zu.de/newsroom/daily/2025-07-01-stimme-der-mehrheit-die-journalistische-qualitaet-von-nius-im-kontext-der-alternativmedien.php",
+              "reference_date": "2025-07-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "External university-hosted analysis; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_populist_or_at_least_right_conservative",
+              "classifier_type": "other",
+              "classifier_name": "Der Tagesspiegel",
+              "source_url": "https://www.tagesspiegel.de/politik/portal-von-reichelt-und-gotthardt-was-ist-nius--und-was-wird-den-machern-vorgeworfen-14208194.html",
+              "reference_date": "2025-08-01",
+              "retrieved_at": "2026-09-23T10:50:00Z",
+              "notes": "External media classification summarizing media-science and journalist-union assessments; not an FSC assessment."
+            }
+          ],
+          "metrics": [],
+          "key": "nius",
+          "name": "NIUS",
+          "homepage": "https://www.nius.de/",
+          "classification_status": "two_source_direction_confirmed",
+          "outlets": [
+            {
+              "key": "nius-radio",
+              "name": "NIUS – Das Radio",
+              "publication_form": "radio",
+              "scope": "national",
+              "homepage": "https://www.nius.de/"
+            }
+          ],
+          "notes": [
+            "NIUS is one cross-media Source; NIUS – Das Radio is the radio outlet. A future digital catalog must extend this Source rather than create a duplicate."
+          ]
+        }
+      ],
+      "coverage_exception": "Two national radio Sources meet the approved E research scope; no suitable national linear television Sources are included. The target is not filled artificially."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right / externally classified extreme-right spectrum",
+      "entries": [],
+      "coverage_exception": "No approved nationally oriented linear television or radio newsroom in the current DE-national scope has the required external provenance for this segment."
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "phoenix",
+      "reason": "Joint ARD/ZDF editorial/governance structure exposes a limitation of the current scalar ownership-based independence key; defer until independence grouping is modeled explicitly."
+    },
+    {
+      "name": "Deutsche Welle",
+      "reason": "German linear TV distribution ended; handle in a later international/digital block rather than DE national linear broadcast."
+    },
+    {
+      "name": "BILD TV",
+      "reason": "Linear channel discontinued; do not treat inactive linear television as current broadcast coverage."
+    },
+    {
+      "name": "REGIOCAST Nachrichten",
+      "reason": "Central news/content supplier rather than a consumer-facing radio Source; candidate for later agency/content-supplier block."
+    }
+  ],
+  "approved_candidate_count": 14,
+  "review_status": {
+    "source_selection": "approved_14_source_de_national_core_2026_09_23",
+    "regional_separation": "approved_separate_de_regional_block",
+    "religious_worldview_scope": "decision_a_include_if_politics_society_regular",
+    "source_identity": "one_editorial_source_multiple_outlets",
+    "political_mapping": "two_independent_sources_required_for_persisted_assignment"
+  }
+}

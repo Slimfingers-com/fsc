@@ -116,6 +116,38 @@ The two excluded rows are retained only to make the country-boundary decision ex
 
 This segment is genuinely magazine-heavy in the current German print market. FSC records that asymmetry rather than reclassifying magazines as newspapers merely to reach a numerical quota.
 
+## Germany (DE) – National broadcast
+
+Germany's national broadcast catalog follows the same A–F research matrix as print, but television and radio are counted separately. The target of 3–5 Sources per political planning segment and broadcast form is a research goal, not a quota.
+
+Source identity is editorial rather than channel-based: one newsroom/editorial source may have several television or radio outlets. Programme names and channel editions never count as independent Sources merely because they are separately branded. Regional broadcasters and regional/private radio brands are excluded from this national block and will be reviewed in a dedicated DE regional block.
+
+The jointly approved national candidate core contains 14 editorial Sources:
+
+| Planning segment | Television Sources | Radio Sources |
+| --- | --- | --- |
+| A radical/system-oppositional left | explicit market gap | explicit market gap |
+| B left/centre-left/left-liberal | explicit market gap | Deutschlandradio (B/C research boundary; DLF/Kultur/Nova are outlets) |
+| C liberal/centre | ARD-aktuell, ZDF, RTL NEWS, :newstime | RTL NEWS, Klassik Radio |
+| D conservative/liberal-conservative research pool | WELT, IDEA, EWTN Deutschland, Hope TV Deutsch | ERF, radio horeb |
+| E right/right-conservative/right-libertarian | explicit market gap | Kontrafunk, NIUS |
+| F radical right | explicit market gap | explicit market gap |
+
+The planning table is not itself a persisted FSC ideology classification. Persisted political group assignment still requires at least two independent external sources that materially agree in left/right direction.
+
+Specific identity rules:
+
+- **Deutschlandradio** is one Source. Deutschlandfunk, Deutschlandfunk Kultur and Deutschlandfunk Nova are radio outlets/programmes.
+- **RTL NEWS** is one editorial Source. RTL Aktuell, ntv and RTL Radio news are outlets and do not count as three independent confirmations.
+- **:newstime** is one Source for the centrally produced news editions on SAT.1, ProSieben and Kabel Eins.
+- **WELT TV** extends the existing WELT Source already present in the DE print catalog; it must not create a second WELT Source.
+- **NIUS – Das Radio** is an outlet of the cross-media NIUS Source; a later digital catalog must extend the same Source.
+- Religious or worldview-oriented broadcasters may enter the research pool when politics and society are recurring editorial subjects. Religious/theological positioning is stored separately and never automatically converted into a political classification.
+- **REGIOCAST Nachrichten** is treated as a future agency/content-supplier candidate rather than a consumer-facing radio Source.
+- **phoenix** is deferred because its joint ARD/ZDF structure exposes a limitation in the current scalar ownership-based consensus-independence key. It should be revisited when independence grouping is modeled explicitly.
+
+No feed is activated by inclusion in this catalog.
+
 ## Austria (AT)
 
 ### Print
@@ -375,7 +407,7 @@ Self-description, media-database classification, academic classification, public
 
 ## Catalog-block progress
 
-Completed print catalog blocks:
+Completed catalog blocks:
 
 1. Germany (DE)
 2. Austria (AT)
@@ -384,6 +416,7 @@ Completed print catalog blocks:
 5. United States (US)
 6. Europe comparison set outside DE/AT/CH/GB
 7. Germany-focused international comparison set outside Europe and the US
+8. Germany national broadcast candidate core (TV and radio; regional broadcast separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 

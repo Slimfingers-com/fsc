@@ -499,3 +499,160 @@ def test_print_products_are_not_duplicate_sources() -> None:
         "Blick",
         "SonntagsBlick",
     }
+
+
+DE_BROADCAST_CATALOG = CATALOG_DIR / "de_broadcast_v1.json"
+
+
+def load_de_broadcast_catalog() -> dict:
+    return json.loads(DE_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def test_de_national_broadcast_catalog_has_approved_editorial_sources() -> None:
+    catalog = load_de_broadcast_catalog()
+    assert catalog["country"] == "DE"
+    assert catalog["scope"] == "national"
+    assert catalog["media_category"] == "broadcast"
+    assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert catalog["source_identity_policy"] == "one_editorial_source_multiple_programmes_and_channels_as_outlets"
+    assert catalog["approved_candidate_count"] == 14
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]]
+    assert len(entries) == 14
+    assert len({entry["key"] for entry in entries}) == 14
+    assert len({entry["name"].casefold() for entry in entries}) == 14
+    assert all(entry["catalog_status"] == "candidate" for entry in entries)
+    assert all(entry["activity_status"] == "active" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["outlets"] for entry in entries)
+    assert all(
+        outlet["publication_form"] in {"radio", "television"}
+        for entry in entries
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_national_broadcast_deduplicates_programmes_into_editorial_sources() -> None:
+    catalog = load_de_broadcast_catalog()
+    entries = {
+        entry["name"]: entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+
+    assert {outlet["name"] for outlet in entries["Deutschlandradio"]["outlets"]} == {
+        "Deutschlandfunk",
+        "Deutschlandfunk Kultur",
+        "Deutschlandfunk Nova",
+    }
+    assert {outlet["name"] for outlet in entries["RTL NEWS"]["outlets"]} == {
+        "RTL Aktuell",
+        "ntv",
+        "RTL Radio / RTL Aktuell",
+    }
+    assert {outlet["name"] for outlet in entries[":newstime"]["outlets"]} == {
+        ":newstime SAT.1",
+        ":newstime ProSieben",
+        ":newstime Kabel Eins",
+    }
+    assert entries["WELT"]["source_action"] == "extend_existing_source"
+    assert entries["WELT"]["existing_source_key"] == "welt"
+
+    source_names = set(entries)
+    assert source_names.isdisjoint({
+        "Deutschlandfunk",
+        "Deutschlandfunk Kultur",
+        "Deutschlandfunk Nova",
+        "RTL Aktuell",
+        "ntv",
+        "RTL Radio",
+        "SAT.1",
+        "ProSieben",
+        "Kabel Eins",
+        "WELT TV",
+    })
+
+
+def test_de_national_broadcast_keeps_regional_sources_out() -> None:
+    catalog = load_de_broadcast_catalog()
+    names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    assert names.isdisjoint({
+        "BR24",
+        "NDR Info",
+        "WDR 5",
+        "SWR Aktuell",
+        "MDR AKTUELL",
+        "rbb24 Inforadio",
+        "hr-iNFO",
+        "ANTENNE BAYERN",
+        "HIT RADIO FFH",
+        "R.SH",
+        "Radio Dreyeckland",
+        "FSK Hamburg",
+        "Radio CORAX",
+        "Radio Blau",
+        "Radio LORA München",
+    })
+
+
+def test_de_national_broadcast_sparse_segments_document_real_market_gaps() -> None:
+    catalog = load_de_broadcast_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    for key in ("radical_left", "left_liberal", "liberal_centre", "conservative", "right", "radical_right"):
+        radio_count = sum(
+            any(outlet["publication_form"] == "radio" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        tv_count = sum(
+            any(outlet["publication_form"] == "television" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        if radio_count < catalog["coverage_targets"]["radio_min"] or tv_count < catalog["coverage_targets"]["television_min"]:
+            assert groups[key].get("coverage_exception")
+
+
+def test_de_national_broadcast_two_source_status_has_independent_provenance() -> None:
+    catalog = load_de_broadcast_catalog()
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]]
+    confirmed = [
+        entry for entry in entries
+        if entry["classification_status"] == "two_source_direction_confirmed"
+    ]
+    assert {entry["name"] for entry in confirmed} == {"WELT", "Kontrafunk", "NIUS"}
+    for entry in confirmed:
+        orientation_sources = {
+            item["classifier_name"]
+            for item in entry["classifications"]
+            if item["dimension"] == "editorial_orientation"
+        }
+        assert len(orientation_sources) >= 2
+
+
+def test_de_national_broadcast_religious_identity_is_not_political_classification() -> None:
+    catalog = load_de_broadcast_catalog()
+    entries = {
+        entry["name"]: entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    for name in ("IDEA", "EWTN Deutschland", "Hope TV Deutsch", "ERF", "radio horeb"):
+        assert entries[name]["classification_status"] == "thematic_candidate_not_political_classification"
+
+    for name in ("IDEA", "EWTN Deutschland", "Hope TV Deutsch", "ERF", "radio horeb"):
+        assert not any(
+            item["dimension"] == "editorial_orientation"
+            for item in entries[name]["classifications"]
+        )
+
+
+def test_de_national_broadcast_defers_joint_or_non_linear_cases() -> None:
+    catalog = load_de_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+    assert "phoenix" in deferred
+    assert "scalar ownership-based independence key" in deferred["phoenix"]
+    assert {"Deutsche Welle", "BILD TV", "REGIOCAST Nachrichten"} <= set(deferred)
