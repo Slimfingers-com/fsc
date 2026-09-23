@@ -1538,6 +1538,108 @@
         }
       ],
       "metrics": []
+    },
+    {
+      "key": "maclean-s",
+      "name": "Maclean's",
+      "homepage": "https://macleans.ca/",
+      "country": "CA",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "proceso",
+      "name": "Proceso",
+      "homepage": "https://www.proceso.com.mx/",
+      "country": "MX",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "es",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "veja",
+      "name": "VEJA",
+      "homepage": "https://veja.abril.com.br/",
+      "country": "BR",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "pt",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "india-today",
+      "name": "India Today",
+      "homepage": "https://www.indiatoday.in/magazine",
+      "country": "IN",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "the-monthly",
+      "name": "The Monthly",
+      "homepage": "https://www.themonthly.com.au/",
+      "country": "AU",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "financial-mail",
+      "name": "Financial Mail",
+      "homepage": "https://www.businesslive.co.za/fm/",
+      "country": "ZA",
+      "publication_form": "magazine",
+      "form_group": "magazine_or_periodical",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
     }
   ],
   "research_regions": [
@@ -1590,7 +1692,8 @@
         "El Universal",
         "Reforma",
         "La Jornada",
-        "Milenio"
+        "Milenio",
+        "Proceso"
       ]
     },
     {
@@ -1600,7 +1703,8 @@
         "O Estado de S. Paulo",
         "O Globo",
         "CartaCapital",
-        "Veja"
+        "Veja",
+        "VEJA"
       ]
     },
     {
@@ -1638,7 +1742,8 @@
         "The Times of India",
         "The Indian Express",
         "Hindustan Times",
-        "The Telegraph India"
+        "The Telegraph India",
+        "India Today"
       ]
     },
     {
@@ -1648,7 +1753,8 @@
         "The Sydney Morning Herald",
         "The Age",
         "Australian Financial Review",
-        "The Saturday Paper"
+        "The Saturday Paper",
+        "The Monthly"
       ]
     },
     {
@@ -1684,7 +1790,8 @@
         "Mail & Guardian",
         "Business Day",
         "Daily Maverick",
-        "Sunday Times"
+        "Sunday Times",
+        "Financial Mail"
       ]
     },
     {
@@ -1731,16 +1838,17 @@
     "The first curated international shortlist contains 40 titles from 13 countries; deferred titles remain documented rather than deleted.",
     "Turkey verification confirms that recurring print status and political descriptors can be sourced, but descriptors such as Kemalist/pro-government do not map one-to-one onto the FSC left-right taxonomy. This is a product-level cross-market comparability decision, not a data-cleaning issue.",
     "Decision 2 requires two independent external sources before FSC political-group assignment; conflict or non-equivalent country-specific labels remain unclassified.",
-    "Decision A on control scope: state-owned, party-official, state-managed and state-funded print outlets may be included when relevant, with control metadata stored separately from political-axis classification."
+    "Decision A on control scope: state-owned, party-official, state-managed and state-funded print outlets may be included when relevant, with control metadata stored separately from political-axis classification.",
+    "International print coverage now includes active magazines/periodicals alongside newspapers; publication-form diversity is relevance-driven rather than quota-driven."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 44,
+    "guideline_target": 50,
     "guideline_range": [
-      40,
-      50
+      45,
+      60
     ],
     "hard_cap": false
   },
@@ -1749,8 +1857,8 @@
     "political_mapping": "decision_2_two_source_threshold",
     "active_print_verification": "partial",
     "metrics_enrichment": "partial",
-    "implementation": "structured_shortlist_expanded_for_control_scope",
-    "curation": "44_title_shortlist_complete",
+    "implementation": "structured_shortlist_with_periodicals",
+    "curation": "50_title_comparison_set",
     "provenance_enrichment": "two_source_assignments_expanded"
   },
   "curation_policy": {
@@ -1940,22 +2048,36 @@
     {
       "country": "SG",
       "name": "The Straits Times"
+    },
+    {
+      "country": "CA",
+      "name": "Maclean's"
+    },
+    {
+      "country": "MX",
+      "name": "Proceso"
+    },
+    {
+      "country": "BR",
+      "name": "VEJA"
+    },
+    {
+      "country": "IN",
+      "name": "India Today"
+    },
+    {
+      "country": "AU",
+      "name": "The Monthly"
+    },
+    {
+      "country": "ZA",
+      "name": "Financial Mail"
     }
   ],
   "deferred_candidates": [
     {
-      "country": "CA",
-      "name": "Maclean's",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
       "country": "MX",
       "name": "Milenio",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
-    },
-    {
-      "country": "BR",
-      "name": "Veja",
       "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
     },
     {
