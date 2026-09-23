@@ -232,7 +232,8 @@
     "Initial implementation size is a working guideline only and may change during candidate review.",
     "Initial broad pool intentionally exceeds the implementation target; candidates will be reduced by current print status, international/regional relevance, provenance quality and incremental viewpoint value.",
     "Daily Maverick is a print-status risk because its core product is digital; verify recurring physical publication before promotion.",
-    "Maclean's, The Saturday Paper, Mail & Guardian and similar non-daily titles remain eligible because the catalog covers magazines and periodicals as well as newspapers."
+    "Maclean's, The Saturday Paper, Mail & Guardian and similar non-daily titles remain eligible because the catalog covers magazines and periodicals as well as newspapers.",
+    "The first curated international shortlist contains 40 titles from 13 countries; deferred titles remain documented rather than deleted."
   ],
   "regions_excluded": [
     "Europe"
@@ -251,7 +252,7 @@
     "active_print_verification": "pending",
     "metrics_enrichment": "pending",
     "implementation": "pending",
-    "curation": "rules_complete"
+    "curation": "40_title_shortlist_complete"
   },
   "curation_policy": {
     "target": "approximately_40",
@@ -263,5 +264,269 @@
       "reach is metadata and never a hard exclusion threshold",
       "retain non-English publications"
     ]
-  }
+  },
+  "curated_shortlist": [
+    {
+      "country": "CA",
+      "name": "The Globe and Mail"
+    },
+    {
+      "country": "CA",
+      "name": "Toronto Star"
+    },
+    {
+      "country": "CA",
+      "name": "National Post"
+    },
+    {
+      "country": "CA",
+      "name": "Le Devoir"
+    },
+    {
+      "country": "MX",
+      "name": "El Universal"
+    },
+    {
+      "country": "MX",
+      "name": "Reforma"
+    },
+    {
+      "country": "MX",
+      "name": "La Jornada"
+    },
+    {
+      "country": "BR",
+      "name": "Folha de S.Paulo"
+    },
+    {
+      "country": "BR",
+      "name": "O Estado de S. Paulo"
+    },
+    {
+      "country": "BR",
+      "name": "O Globo"
+    },
+    {
+      "country": "BR",
+      "name": "CartaCapital"
+    },
+    {
+      "country": "AR",
+      "name": "Clarín"
+    },
+    {
+      "country": "AR",
+      "name": "La Nación"
+    },
+    {
+      "country": "AR",
+      "name": "Página/12"
+    },
+    {
+      "country": "JP",
+      "name": "Yomiuri Shimbun"
+    },
+    {
+      "country": "JP",
+      "name": "Asahi Shimbun"
+    },
+    {
+      "country": "JP",
+      "name": "Nikkei"
+    },
+    {
+      "country": "JP",
+      "name": "Sankei Shimbun"
+    },
+    {
+      "country": "KR",
+      "name": "Chosun Ilbo"
+    },
+    {
+      "country": "KR",
+      "name": "JoongAng Ilbo"
+    },
+    {
+      "country": "KR",
+      "name": "Hankyoreh"
+    },
+    {
+      "country": "IN",
+      "name": "The Hindu"
+    },
+    {
+      "country": "IN",
+      "name": "The Times of India"
+    },
+    {
+      "country": "IN",
+      "name": "The Indian Express"
+    },
+    {
+      "country": "IN",
+      "name": "Hindustan Times"
+    },
+    {
+      "country": "AU",
+      "name": "The Australian"
+    },
+    {
+      "country": "AU",
+      "name": "The Sydney Morning Herald"
+    },
+    {
+      "country": "AU",
+      "name": "The Age"
+    },
+    {
+      "country": "AU",
+      "name": "Australian Financial Review"
+    },
+    {
+      "country": "NZ",
+      "name": "The New Zealand Herald"
+    },
+    {
+      "country": "NZ",
+      "name": "The Post"
+    },
+    {
+      "country": "IL",
+      "name": "Haaretz"
+    },
+    {
+      "country": "IL",
+      "name": "The Jerusalem Post"
+    },
+    {
+      "country": "IL",
+      "name": "Israel Hayom"
+    },
+    {
+      "country": "TR",
+      "name": "Cumhuriyet"
+    },
+    {
+      "country": "TR",
+      "name": "Sözcü"
+    },
+    {
+      "country": "TR",
+      "name": "Sabah"
+    },
+    {
+      "country": "ZA",
+      "name": "Mail & Guardian"
+    },
+    {
+      "country": "ZA",
+      "name": "Business Day"
+    },
+    {
+      "country": "EG",
+      "name": "Al-Ahram"
+    }
+  ],
+  "deferred_candidates": [
+    {
+      "country": "CA",
+      "name": "Maclean's",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "MX",
+      "name": "Milenio",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "BR",
+      "name": "Veja",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "JP",
+      "name": "Mainichi Shimbun",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "KR",
+      "name": "Dong-A Ilbo",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "KR",
+      "name": "Kyunghyang Shinmun",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "IN",
+      "name": "The Telegraph India",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "AU",
+      "name": "The Saturday Paper",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "NZ",
+      "name": "Otago Daily Times",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "IL",
+      "name": "Yedioth Ahronoth",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "TR",
+      "name": "Hürriyet",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "TR",
+      "name": "Yeni Şafak",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "ZA",
+      "name": "Daily Maverick",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "ZA",
+      "name": "Sunday Times",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "NG",
+      "name": "The Punch",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "NG",
+      "name": "The Guardian Nigeria",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "NG",
+      "name": "Vanguard",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "NG",
+      "name": "ThisDay",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "EG",
+      "name": "Al-Masry Al-Youm",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    },
+    {
+      "country": "EG",
+      "name": "Al-Shorouk",
+      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+    }
+  ]
 }
