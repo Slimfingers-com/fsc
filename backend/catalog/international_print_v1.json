@@ -327,6 +327,114 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "the-sydney-morning-herald",
+          "name": "The Sydney Morning Herald",
+          "homepage": "https://www.smh.com.au/",
+          "country": "AU",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-sydney-morning-herald/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_leaning",
+              "classifier_type": "academic",
+              "classifier_name": "Oxford Academic / Applied Linguistics",
+              "source_url": "https://academic.oup.com/applij/article/45/3/424/7235801",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Academic study's corpus metadata identifies the Sydney Morning Herald as left-leaning; agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-age",
+          "name": "The Age",
+          "homepage": "https://www.theage.com.au/",
+          "country": "AU",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-age-australia/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_leaning",
+              "classifier_type": "academic",
+              "classifier_name": "Oxford Academic / Applied Linguistics",
+              "source_url": "https://academic.oup.com/applij/article/45/3/424/7235801",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Academic study's corpus metadata identifies The Age as left-leaning; agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-post",
+          "name": "The Post",
+          "homepage": "https://www.thepost.co.nz/",
+          "country": "NZ",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/wellington-post-bias-and-credibility/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "centre_left",
+              "classifier_type": "academic",
+              "classifier_name": "Journalism Studies / Taylor & Francis",
+              "source_url": "https://www.tandfonline.com/doi/full/10.1080/1461670X.2025.2547303",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study describes The Post as representing Wellington/centre-left politics; agrees with MBFC Left-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -563,6 +671,42 @@
               "reference_date": "2026-09-23",
               "retrieved_at": "2026-09-23T09:34:00+02:00",
               "notes": "Peer-reviewed study includes JoongAng Ilbo among three well-known conservative media. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "the-australian",
+          "name": "The Australian",
+          "homepage": "https://www.theaustralian.com.au/",
+          "country": "AU",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "en",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-australian/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_leaning",
+              "classifier_type": "academic",
+              "classifier_name": "SAGE Open",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/2158244019893696",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study explicitly treats The Australian as representing right-wing political ideology; agrees directionally with MBFC Right-Center. External classification; not an FSC assessment."
             }
           ],
           "metrics": []
@@ -959,90 +1103,6 @@
       "metrics": []
     },
     {
-      "key": "the-australian",
-      "name": "The Australian",
-      "homepage": "https://www.theaustralian.com.au/",
-      "country": "AU",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-australian/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "the-sydney-morning-herald",
-      "name": "The Sydney Morning Herald",
-      "homepage": "https://www.smh.com.au/",
-      "country": "AU",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-sydney-morning-herald/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "the-age",
-      "name": "The Age",
-      "homepage": "https://www.theage.com.au/",
-      "country": "AU",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-age-australia/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
       "key": "australian-financial-review",
       "name": "Australian Financial Review",
       "homepage": "https://www.afr.com/",
@@ -1091,34 +1151,6 @@
           "classifier_type": "media_database",
           "classifier_name": "Media Bias/Fact Check",
           "source_url": "https://mediabiasfactcheck.com/new-zealand-herald/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "the-post",
-      "name": "The Post",
-      "homepage": "https://www.thepost.co.nz/",
-      "country": "NZ",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "en",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "left_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/wellington-post-bias-and-credibility/",
           "reference_date": "2026-09-23",
           "retrieved_at": "2026-09-23T09:34:00+02:00",
           "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
