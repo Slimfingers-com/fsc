@@ -351,9 +351,9 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     assert catalog["target_catalog_size"]["hard_cap"] is False
 
     entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
-    assert len(entries) == 40
-    assert len({entry["key"] for entry in entries}) == 40
-    assert len({entry["name"].casefold() for entry in entries}) == 40
+    assert len(entries) == 44
+    assert len({entry["key"] for entry in entries}) == 44
+    assert len({entry["name"].casefold() for entry in entries}) == 44
     assert all(entry["country"] != "US" for entry in entries)
     assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
@@ -399,3 +399,27 @@ def test_international_catalog_metadata_provenance_is_complete() -> None:
             assert metric["measurement_body"]
             assert metric["source_url"].startswith("https://")
             assert metric["retrieved_at"]
+
+
+def test_international_catalog_models_state_control_separately() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["scope_review"]["status"] == "resolved_include_with_control_metadata"
+    entries = {
+        entry["name"]: entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    entries.update({entry["name"]: entry for entry in catalog["unclassified_entries"]})
+    expected = {
+        "People's Daily": "party_official",
+        "Global Times": "party_state_affiliated",
+        "China Daily": "party_state_managed",
+        "The Straits Times": "state_managed_public_service_media",
+    }
+    for name, value in expected.items():
+        entry = entries[name]
+        assert "politically_unclassified" in entry["format_tags"]
+        assert any(
+            item["dimension"] == "media_positioning" and item["value"] == value
+            for item in entry["classifications"]
+        )
