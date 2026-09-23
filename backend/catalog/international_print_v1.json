@@ -228,6 +228,78 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "pagina-12",
+          "name": "Página/12",
+          "homepage": null,
+          "country": "AR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_of_center",
+              "classifier_type": "academic_research",
+              "classifier_name": "Scientific Reports",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11696528/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study describes Página/12 as left-of-center. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_of_center",
+              "classifier_type": "academic_research",
+              "classifier_name": "EPJ Data Science",
+              "source_url": "https://link.springer.com/article/10.1140/epjds/s13688-024-00493-y",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Independent peer-reviewed study describes Página 12 as a left-of-center broadsheet. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "hankyoreh",
+          "name": "Hankyoreh",
+          "homepage": null,
+          "country": "KR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ko",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "progressive",
+              "classifier_type": "academic_research",
+              "classifier_name": "Gazette / SAGE",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/0016549200062001005",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed research describes Hankyoreh as pursuing a progressive editorial policy. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal",
+              "classifier_type": "academic_research",
+              "classifier_name": "Peer-reviewed PMC study",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7481441/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study categorizes Hankyoreh as liberal. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -311,6 +383,150 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "clarin",
+          "name": "Clarín",
+          "homepage": "https://www.clarin.com/",
+          "country": "AR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/clarin-bias/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "center_right",
+              "classifier_type": "academic_research",
+              "classifier_name": "Scientific Reports",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11696528/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study describes Clarín as a center-right outlet; agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "la-nacion",
+          "name": "La Nación",
+          "homepage": "https://www.lanacion.com.ar/",
+          "country": "AR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "es",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/la-nacion-argentina-bias/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "center_right",
+              "classifier_type": "academic_research",
+              "classifier_name": "Scientific Reports",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11696528/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study describes La Nación as a center-right outlet; agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "chosun-ilbo",
+          "name": "Chosun Ilbo",
+          "homepage": "https://www.chosun.com/",
+          "country": "KR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ko",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_center",
+              "classifier_type": "media_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/the-chosun-ilbo/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "academic_research",
+              "classifier_name": "ScienceDirect / Procedia Social and Behavioral Sciences",
+              "source_url": "https://www.sciencedirect.com/science/article/pii/S1877042814061564",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Academic study explicitly describes Chosun Ilbo as a conservative newspaper; agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "joongang-ilbo",
+          "name": "JoongAng Ilbo",
+          "homepage": null,
+          "country": "KR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ko",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "academic_research",
+              "classifier_name": "Peer-reviewed PMC study",
+              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7481441/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study categorizes JoongAng Ilbo as conservative. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "academic_research",
+              "classifier_name": "Journalism / SAGE",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/14648849211069241",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Peer-reviewed study includes JoongAng Ilbo among three well-known conservative media. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -350,6 +566,42 @@
               "reference_date": "2026-09-23",
               "retrieved_at": "2026-09-23T09:34:00+02:00",
               "notes": "Academic study finds significantly greater right-wing slant in Israel Hayom front pages; direction agrees with MBFC Right. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "sankei-shimbun",
+          "name": "Sankei Shimbun",
+          "homepage": null,
+          "country": "JP",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ja",
+          "activity_status": "verify_current",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "very_conservative",
+              "classifier_type": "research_institute",
+              "classifier_name": "Reuters Institute for the Study of Journalism",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/archive/survey/2018/japan-2018/",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Reuters Institute describes Sankei Shimbun as very conservative. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_leaning",
+              "classifier_type": "academic_research",
+              "classifier_name": "Amsterdam University Press / De Gruyter Brill",
+              "source_url": "https://www.degruyterbrill.com/document/doi/10.1515/9789048551613-006/pdf?licenseType=open-access",
+              "reference_date": "2026-09-23",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "Academic book chapter describes Sankei Shimbun as right-leaning and as expressing rightist opinions. External classification; not an FSC assessment."
             }
           ],
           "metrics": []
@@ -555,79 +807,6 @@
       "metrics": []
     },
     {
-      "key": "clarin",
-      "name": "Clarín",
-      "homepage": "https://www.clarin.com/",
-      "country": "AR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "es",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/clarin-bias/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "la-nacion",
-      "name": "La Nación",
-      "homepage": "https://www.lanacion.com.ar/",
-      "country": "AR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "es",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/la-nacion-argentina-bias/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "pagina-12",
-      "name": "Página/12",
-      "homepage": null,
-      "country": "AR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "es",
-      "activity_status": "verify_current",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [],
-      "metrics": []
-    },
-    {
       "key": "nikkei",
       "name": "Nikkei",
       "homepage": null,
@@ -635,85 +814,6 @@
       "publication_form": "daily_newspaper",
       "form_group": "newspaper_or_weekly",
       "language": "ja",
-      "activity_status": "verify_current",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [],
-      "metrics": []
-    },
-    {
-      "key": "sankei-shimbun",
-      "name": "Sankei Shimbun",
-      "homepage": null,
-      "country": "JP",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "ja",
-      "activity_status": "verify_current",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [],
-      "metrics": []
-    },
-    {
-      "key": "chosun-ilbo",
-      "name": "Chosun Ilbo",
-      "homepage": "https://www.chosun.com/",
-      "country": "KR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "ko",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "right_center",
-          "classifier_type": "media_database",
-          "classifier_name": "Media Bias/Fact Check",
-          "source_url": "https://mediabiasfactcheck.com/the-chosun-ilbo/",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-        }
-      ],
-      "metrics": []
-    },
-    {
-      "key": "joongang-ilbo",
-      "name": "JoongAng Ilbo",
-      "homepage": null,
-      "country": "KR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "ko",
-      "activity_status": "verify_current",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [],
-      "metrics": []
-    },
-    {
-      "key": "hankyoreh",
-      "name": "Hankyoreh",
-      "homepage": null,
-      "country": "KR",
-      "publication_form": "daily_newspaper",
-      "form_group": "newspaper_or_weekly",
-      "language": "ko",
       "activity_status": "verify_current",
       "catalog_status": "candidate",
       "format_tags": [
@@ -1344,7 +1444,7 @@
     "metrics_enrichment": "pending",
     "implementation": "structured_shortlist_seeded",
     "curation": "40_title_shortlist_complete",
-    "provenance_enrichment": "two_source_assignments_started"
+    "provenance_enrichment": "two_source_assignments_expanded"
   },
   "curation_policy": {
     "target": "approximately_40",
