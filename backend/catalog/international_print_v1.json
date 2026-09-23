@@ -121,14 +121,16 @@
           ],
           "metrics": [
             {
-              "metric_kind": "print_subscribers_minimum",
+              "metric_kind": "subscribers",
               "value": 7000,
               "unit": "subscribers",
               "reference_period": "current media kit retrieved 2026-09-23",
               "measurement_body": "CartaCapital Media Kit",
               "source_url": "https://negocios.cartacapital.com.br/",
               "retrieved_at": "2026-09-23T09:34:00+02:00",
-              "notes": "Publisher states more than 7,000 print subscribers; value is stored as a lower bound."
+              "notes": "Publisher states more than 7,000 print subscribers; the stored value is a conservative lower bound.",
+              "metric_scope": "print",
+              "audited": false
             }
           ]
         },
@@ -168,14 +170,16 @@
           ],
           "metrics": [
             {
-              "metric_kind": "circulation_approximate",
+              "metric_kind": "distributed_circulation",
               "value": 3000000,
               "unit": "copies",
               "reference_period": "2025",
               "measurement_body": "Reuters Institute for the Study of Journalism",
               "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/japan",
               "retrieved_at": "2026-09-23T09:34:00+02:00",
-              "notes": "Reuters Institute states print circulation is about ten times the roughly 300,000 digital subscriptions; stored explicitly as approximate."
+              "notes": "Approximate print circulation derived from the cited source; not an audited FSC estimate.",
+              "metric_scope": "print",
+              "audited": false
             }
           ]
         },
@@ -406,13 +410,15 @@
           ],
           "metrics": [
             {
-              "metric_kind": "circulation",
+              "metric_kind": "distributed_circulation",
               "value": 5700000,
               "unit": "copies",
               "reference_period": "2025",
               "measurement_body": "Reuters Institute for the Study of Journalism",
               "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/japan",
-              "retrieved_at": "2026-09-23T09:34:00+02:00"
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "metric_scope": "print",
+              "audited": false
             }
           ]
         },
@@ -855,13 +861,15 @@
       "classifications": [],
       "metrics": [
         {
-          "metric_kind": "circulation",
+          "metric_kind": "distributed_circulation",
           "value": 1300000,
           "unit": "copies",
           "reference_period": "2025 report / 2024 milestone context",
           "measurement_body": "Reuters Institute for the Study of Journalism",
           "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/japan",
-          "retrieved_at": "2026-09-23T09:34:00+02:00"
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "metric_scope": "print",
+          "audited": false
         }
       ]
     },
@@ -1173,13 +1181,15 @@
       ],
       "metrics": [
         {
-          "metric_kind": "circulation",
+          "metric_kind": "distributed_circulation",
           "value": 23000,
           "unit": "copies",
           "reference_period": "2023",
           "measurement_body": "Eurotopics",
           "source_url": "https://www.eurotopics.net/en/149664",
-          "retrieved_at": "2026-09-23T09:34:00+02:00"
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "metric_scope": "print",
+          "audited": false
         }
       ]
     },
@@ -1211,13 +1221,15 @@
       ],
       "metrics": [
         {
-          "metric_kind": "circulation",
+          "metric_kind": "distributed_circulation",
           "value": 175000,
           "unit": "copies",
           "reference_period": "2023",
           "measurement_body": "Eurotopics",
           "source_url": "https://www.eurotopics.net/en/148786/soezcue",
-          "retrieved_at": "2026-09-23T09:34:00+02:00"
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "metric_scope": "print",
+          "audited": false
         }
       ]
     },
@@ -1249,13 +1261,15 @@
       ],
       "metrics": [
         {
-          "metric_kind": "circulation",
+          "metric_kind": "distributed_circulation",
           "value": 188000,
           "unit": "copies",
           "reference_period": "2023",
           "measurement_body": "Eurotopics",
           "source_url": "https://www.eurotopics.net/en/148776/sabah",
-          "retrieved_at": "2026-09-23T09:34:00+02:00"
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "metric_scope": "print",
+          "audited": false
         }
       ]
     },
@@ -1820,7 +1834,7 @@
       "preserve_unmapped": "Keep such titles politically unclassified on the FSC left-right axis while storing attributed media_positioning classifications.",
       "force_crosswalk": "Define an explicit FSC crosswalk from country-specific positions to the six global political groups, with provenance and documented caveats."
     },
-    "decision": "Country-specific political positions are not force-mapped onto FSC's six-group left-right axis. Entries remain politically unclassified unless a directly applicable left-right classification is supported by external provenance.",
+    "decision": "Decision A plus Decision 2: country-specific political positions are not force-mapped onto FSC's six-group left-right axis, and an FSC political-group assignment requires at least two independent external sources whose descriptions materially agree on the relevant left-right direction.",
     "provenance_policy": "Attributed country-specific media_positioning may be stored separately; FSC group assignment requires external evidence that directly supports the mapped left-right category."
   },
   "provenance_policy": {
