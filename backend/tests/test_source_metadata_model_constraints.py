@@ -186,3 +186,54 @@ def test_duplicate_source_wide_metric_is_rejected(db):
 
     with pytest.raises(IntegrityError):
         db.flush()
+
+
+@pytest.mark.parametrize(
+    ("metric_kind", "value", "unit"),
+    [
+        (SourceMetricKind.RADIO_DAILY_LISTENERS, 2_248_000, "listeners"),
+        (SourceMetricKind.RADIO_HOURLY_LISTENERS, 420_000, "listeners"),
+        (SourceMetricKind.RADIO_MARKET_SHARE, 1250, "basis_points"),
+        (SourceMetricKind.TV_VIEWERS, 1_100_000, "viewers"),
+        (SourceMetricKind.TV_DAILY_REACH, 4_200_000, "viewers"),
+        (SourceMetricKind.TV_MARKET_SHARE, 170, "basis_points"),
+    ],
+)
+def test_source_metric_accepts_broadcast_metric_kinds(db, metric_kind, value, unit):
+    source = make_source(db)
+    db.add(
+        SourceMetric(
+            source_id=source.id,
+            metric_kind=metric_kind,
+            value=value,
+            unit=unit,
+            metric_scope="broadcast_total",
+            reference_period="2026",
+            measurement_body="Audience Measurement Body",
+            source_url="https://example.com/broadcast-metric",
+            audited=False,
+            retrieved_at=datetime.now(UTC),
+        )
+    )
+    db.flush()
+
+
+def test_source_metric_rejects_invalid_metric_kind(db):
+    source = make_source(db)
+    db.add(
+        SourceMetric(
+            source_id=source.id,
+            metric_kind="broadcast_reach",
+            value=1000,
+            unit="people",
+            metric_scope="broadcast_total",
+            reference_period="2026",
+            measurement_body="Audience Measurement Body",
+            source_url="https://example.com/broadcast-metric",
+            audited=False,
+            retrieved_at=datetime.now(UTC),
+        )
+    )
+
+    with pytest.raises(IntegrityError):
+        db.flush()
