@@ -719,6 +719,42 @@
             }
           ],
           "metrics": []
+        },
+        {
+          "key": "kyunghyang-shinmun",
+          "name": "Kyunghyang Shinmun",
+          "homepage": "https://www.khan.co.kr/",
+          "country": "KR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ko",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "progressive",
+              "classifier_type": "academic",
+              "classifier_name": "Korean Journal of Communication & Information",
+              "source_url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003274065",
+              "reference_date": "2025-12-01",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "2025 peer-reviewed study explicitly contrasts conservative JoongAng Ilbo with progressive Kyunghyang Shinmun. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "progressive",
+              "classifier_type": "academic",
+              "classifier_name": "Journalism and Media",
+              "source_url": "https://www.mdpi.com/2673-5172/7/2/100",
+              "reference_date": "2026-01-01",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "2026 peer-reviewed study states Kyunghyang Shinmun occupies the progressive end of South Korea's political spectrum. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
         }
       ]
     },
@@ -1063,6 +1099,42 @@
               "reference_date": "2026-09-23",
               "retrieved_at": "2026-09-23T09:34:00+02:00",
               "notes": "Peer-reviewed study notes a marked shift of the Jerusalem Post to the right; direction agrees with MBFC Right-Center. External classification; not an FSC assessment."
+            }
+          ],
+          "metrics": []
+        },
+        {
+          "key": "dong-a-ilbo",
+          "name": "Dong-A Ilbo",
+          "homepage": "https://www.donga.com/",
+          "country": "KR",
+          "publication_form": "daily_newspaper",
+          "form_group": "newspaper_or_weekly",
+          "language": "ko",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "format_tags": [],
+          "feeds": [],
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "academic",
+              "classifier_name": "Journal of Speech, Media and Communication Research",
+              "source_url": "https://www.kci.go.kr/kciportal/mobile/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003206536",
+              "reference_date": "2025-05-01",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "2025 peer-reviewed study groups Dong-A Ilbo with conservative South Korean newspapers. External classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "conservative",
+              "classifier_type": "academic",
+              "classifier_name": "SAGE Open",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/21582440251384775",
+              "reference_date": "2025-01-01",
+              "retrieved_at": "2026-09-23T09:34:00+02:00",
+              "notes": "2025 peer-reviewed study describes Dong-A Ilbo among popular South Korean outlets that are conservative in nature. External classification; not an FSC assessment."
             }
           ],
           "metrics": []
@@ -2146,6 +2218,152 @@
           "notes": "Historical estimated distribution from Media Ownership Monitor; retained with explicit historical scope."
         }
       ]
+    },
+    {
+      "key": "milenio",
+      "name": "Milenio",
+      "homepage": "https://www.milenio.com/",
+      "country": "MX",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "es",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "mainichi-shimbun",
+      "name": "Mainichi Shimbun",
+      "homepage": "https://mainichi.jp/",
+      "country": "JP",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "ja",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "left_center",
+          "classifier_type": "media_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/mainichi-shimbun-bias-credibility/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "MBFC rates Mainichi Shimbun Left-Center. One source alone does not satisfy FSC Decision 2."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "the-telegraph-india",
+      "name": "The Telegraph India",
+      "homepage": "https://www.telegraphindia.com/",
+      "country": "IN",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "otago-daily-times",
+      "name": "Otago Daily Times",
+      "homepage": "https://www.odt.co.nz/",
+      "country": "NZ",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [],
+      "metrics": []
+    },
+    {
+      "key": "yedioth-ahronoth",
+      "name": "Yedioth Ahronoth",
+      "homepage": "https://www.ynet.co.il/",
+      "country": "IL",
+      "publication_form": "daily_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "he",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "centrist",
+          "classifier_type": "academic",
+          "classifier_name": "Distorting the News? / academic study",
+          "source_url": "https://www.researchgate.net/publication/333087311_Distorting_the_News_The_Mechanisms_of_Partisan_Media_Bias_and_Its_Effects_on_News_Production",
+          "reference_date": "2020-01-01",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Academic study describes Yedioth Ahronoth as centrist. Retained as provenance; other academic work has described it as center-right, so FSC leaves it unclassified."
+        },
+        {
+          "dimension": "editorial_orientation",
+          "value": "center_right",
+          "classifier_type": "academic",
+          "classifier_name": "Educational Management Administration & Leadership / SAGE",
+          "source_url": "https://journals.sagepub.com/doi/10.1177/1757743818768104",
+          "reference_date": "2018-01-01",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Peer-reviewed study describes Yedioth Ahronoth as center-right. This conflicts with centrist classifications, so no FSC group assignment is made."
+        }
+      ],
+      "metrics": []
+    },
+    {
+      "key": "dm168",
+      "name": "DM168",
+      "homepage": "https://www.dailymaverick.co.za/",
+      "country": "ZA",
+      "publication_form": "weekly_newspaper",
+      "form_group": "newspaper_or_weekly",
+      "language": "en",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "format_tags": [
+        "politically_unclassified",
+        "print_product_of_daily_maverick"
+      ],
+      "feeds": [],
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "independently_owned_non_party_affiliated_self_description",
+          "classifier_type": "self_description",
+          "classifier_name": "Daily Maverick",
+          "source_url": "https://www.dailymaverick.co.za/about-us/",
+          "reference_date": "2026-09-23",
+          "retrieved_at": "2026-09-23T09:34:00+02:00",
+          "notes": "Daily Maverick states it is independently owned and unaffiliated with political parties or religious organisations. Stored as contextual media-positioning metadata, not an FSC political classification."
+        }
+      ],
+      "metrics": []
     }
   ],
   "research_regions": [
@@ -2351,26 +2569,27 @@
     "International print coverage now includes active magazines/periodicals alongside newspapers; publication-form diversity is relevance-driven rather than quota-driven.",
     "Current print activity has been verified for all 50 implemented titles using current publisher/subscription/print-edition evidence; activity status does not imply political classification.",
     "Radical-edge assignments use the same two-independent-source rule; Green Left and Red Flag are supported by an Australian peer-reviewed fringe-left classification plus independent media-bias evidence, while Yeni Akit has two independent peer-reviewed far-right classifications.",
-    "Previously deferred candidates are reactivated when current recurring print status and material geographic, editorial or format value are verified; the former approximately-40 implementation target is not an exclusion rule."
+    "Previously deferred candidates are reactivated when current recurring print status and material geographic, editorial or format value are verified; the former approximately-40 implementation target is not an exclusion rule.",
+    "All originally deferred candidates have now been resolved: active recurring print products are included; Daily Maverick is represented by its concrete weekly print product DM168 under the brand-as-source/print-product-as-outlet policy."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 60,
+    "guideline_target": 70,
     "guideline_range": [
-      50,
-      75
+      60,
+      85
     ],
     "hard_cap": false
   },
   "review_status": {
     "candidate_pool": "broad_pool_complete",
     "political_mapping": "decision_2_two_source_threshold",
-    "active_print_verification": "complete_for_current_50_title_set",
+    "active_print_verification": "complete_for_current_71_title_set",
     "metrics_enrichment": "partial",
-    "implementation": "structured_catalog_expanded_by_verified_incremental_value",
-    "curation": "63_title_comparison_set",
+    "implementation": "all_original_candidates_resolved_to_active_print_entries",
+    "curation": "71_title_comparison_set_all_original_candidates_resolved",
     "provenance_enrichment": "radical_edge_two_source_assignments_added"
   },
   "curation_policy": {
@@ -2636,50 +2855,41 @@
     {
       "country": "EG",
       "name": "Al-Shorouk"
-    }
-  ],
-  "deferred_candidates": [
+    },
     {
       "country": "MX",
-      "name": "Milenio",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "name": "Milenio"
     },
     {
       "country": "JP",
-      "name": "Mainichi Shimbun",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "name": "Mainichi Shimbun"
     },
     {
       "country": "KR",
-      "name": "Dong-A Ilbo",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "name": "Dong-A Ilbo"
     },
     {
       "country": "KR",
-      "name": "Kyunghyang Shinmun",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "name": "Kyunghyang Shinmun"
     },
     {
       "country": "IN",
-      "name": "The Telegraph India",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "name": "The Telegraph India"
     },
     {
       "country": "NZ",
-      "name": "Otago Daily Times",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "name": "Otago Daily Times"
     },
     {
       "country": "IL",
-      "name": "Yedioth Ahronoth",
-      "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
+      "name": "Yedioth Ahronoth"
     },
     {
       "country": "ZA",
-      "name": "Daily Maverick",
-      "reason": "Current recurring physical print publication has not been verified; core product is digital. Keep deferred until recurring print evidence is available."
+      "name": "DM168"
     }
   ],
+  "deferred_candidates": [],
   "political_mapping_review": {
     "status": "resolved_preserve_unmapped",
     "issue": "Several internationally relevant print outlets are described by country-specific positions such as Kemalist or pro-government that are not safely equivalent to FSC's six left-right groups.",
