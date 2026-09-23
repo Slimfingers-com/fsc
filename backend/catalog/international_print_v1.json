@@ -1846,5 +1846,53 @@
       "Where sources conflict, describe different dimensions, or are too context-specific, the outlet remains politically unclassified.",
       "No automatic mechanical crosswalk is applied solely from one provider's taxonomy."
     ]
+  },
+  "scope_review": {
+    "status": "decision_required",
+    "issue": "The current 40-title shortlist omits globally influential print outlets whose editorial independence is structurally constrained by party-state ownership, state ownership, or substantial government funding. The existing source metadata model can represent this separately as media_positioning provenance without forcing it onto the FSC left-right axis.",
+    "examples": [
+      {
+        "country": "CN",
+        "title": "People's Daily",
+        "print_status": "daily newspaper",
+        "control_position": "official newspaper of the Central Committee of the Communist Party of China",
+        "source_url": "https://peoplesdaily.pdnews.cn/peoplesPage"
+      },
+      {
+        "country": "CN",
+        "title": "Global Times",
+        "print_status": "daily newspaper",
+        "control_position": "published under People's Daily; Eurotopics describes it as an offshoot of the Chinese Communist Party mouthpiece and politically nationalist",
+        "source_url": "https://www.eurotopics.net/en/184047/global-times"
+      },
+      {
+        "country": "CN",
+        "title": "China Daily",
+        "print_status": "daily newspaper",
+        "control_position": "state-owned / linked to the Chinese Communist Party propaganda apparatus",
+        "source_url": "https://www.chinadaily.com.cn/"
+      },
+      {
+        "country": "SG",
+        "title": "The Straits Times",
+        "print_status": "daily newspaper",
+        "control_position": "published by SPH Media Trust, which receives substantial Singapore government funding while stating editorial independence",
+        "source_url": "https://www.channelnewsasia.com/singapore/straits-times-government-funding-lawrence-wong-180-anniversary-5233396"
+      }
+    ],
+    "model_fit": {
+      "schema_change_required": false,
+      "proposed_dimension": "media_positioning",
+      "proposed_values": [
+        "party_official",
+        "state_owned",
+        "state_funded"
+      ],
+      "political_axis_policy": "Remain politically unclassified unless the normal two-independent-source left-right threshold is separately met."
+    },
+    "options": {
+      "include_with_control_metadata": "Include globally relevant state/party-controlled or state-funded print outlets and represent control/ownership as attributed media_positioning metadata.",
+      "independent_only": "Restrict the international print catalog to editorially independent outlets and exclude structurally state/party-controlled publications."
+    }
   }
 }
