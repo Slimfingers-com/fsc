@@ -300,6 +300,26 @@ Boulevard is a **format dimension**, not a political orientation.
 
 The print editions of **20 Minuten / 20 minutes / 20 minuti ended in December 2025**. They therefore do not belong in the active 2026 Swiss print catalog, even though their digital brands remain relevant for a later digital-media block.
 
+## International comparison set
+
+The international print catalog is **not** a world-coverage catalog. It is a Germany-focused comparison set for cross-source story, claim, perspective and coverage analysis.
+
+Selection prioritises:
+
+- relevance to German foreign, economic or security policy;
+- international agenda-setting role;
+- incremental editorial or political perspective value;
+- media-system comparison value, including state/party-controlled media;
+- active recurring print status.
+
+There are no country quotas and no requirement to populate every FSC political group. Country-specific political labels are not force-mapped onto the FSC left-right axis. Political group assignment requires at least two independent external sources that materially agree on the relevant left-right direction.
+
+State-owned, party-official and substantially state-funded media may be included when they add relevant comparison value. Control, ownership and funding are stored as attributed media-positioning metadata and do not substitute for political classification.
+
+The current curated core contains 35 active print titles from Argentina, Australia, Brazil, Canada, China, Egypt, India, Israel, Japan, Mexico, Nigeria, Singapore, South Africa, South Korea and Türkiye. Additional researched titles remain documented as deferred candidates and may be activated for topic-specific expansion without implying that the current core is incomplete.
+
+Taiwan and Hong Kong are currently deferred. FSC will not overload the existing ISO country field with politically sensitive media-market geography until a more explicit geography model is available.
+
 ## Coverage policy
 
 The target of at least 3–5 titles per political segment and publication-form group is a **research coverage goal, not a quota**. FSC retains genuine market asymmetries when fewer reliably classifiable active print titles exist. Titles must not be moved, broadened or politically classified merely to satisfy a numeric target. Missing coverage remains explicit and can trigger further source research.
@@ -346,27 +366,19 @@ Required provenance:
 
 Self-description, media-database classification, academic classification, public-authority classification and court findings remain distinguishable.
 
-## Country-block progress
+## Catalog-block progress
 
-Completed print country blocks:
+Completed print catalog blocks:
 
 1. Germany (DE)
 2. Austria (AT)
 3. Switzerland (CH)
+4. Great Britain (GB)
+5. United States (US)
+6. Europe comparison set outside DE/AT/CH/GB
+7. Germany-focused international comparison set outside Europe and the US
 
-The same taxonomy is applied next to:
-
-1. United Kingdom (GB)
-2. United States (US)
-3. Canada (CA)
-4. France (FR)
-5. Italy (IT)
-6. Spain (ES)
-7. Poland (PL)
-8. Benelux and Nordic countries as separate country records
-9. further internationally relevant countries
-
-Foreign-language media are not deferred. FSC v1.0 cross-language story matching is part of the current product scope.
+Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
 ## Activation rule
 

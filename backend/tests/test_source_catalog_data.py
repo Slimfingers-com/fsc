@@ -22,6 +22,26 @@ ALLOWED_FORMS = {
 }
 ALLOWED_ACTIVITY = {"active", "verify_current"}
 ALLOWED_FORM_GROUPS = {"newspaper_or_weekly", "magazine_or_periodical"}
+ALLOWED_METRIC_KINDS = {
+    "sold_circulation",
+    "distributed_circulation",
+    "print_run",
+    "print_readers",
+    "digital_unique_users",
+    "visits",
+    "page_impressions",
+    "paid_digital_subscriptions",
+    "subscribers",
+}
+ALLOWED_CLASSIFIER_TYPES = {
+    "self_description",
+    "media_database",
+    "academic",
+    "public_authority",
+    "court",
+    "publisher",
+    "other",
+}
 
 
 def load_catalog(country: str) -> dict:
@@ -326,3 +346,126 @@ def test_europe_catalog_does_not_reintroduce_detailed_country_blocks() -> None:
     assert "coverage_targets" not in catalog
     assert catalog["target_catalog_size"]["guideline_target"] == 50
     assert catalog["target_catalog_size"]["hard_cap"] is False
+
+
+INTERNATIONAL_CATALOG = CATALOG_DIR / "international_print_v1.json"
+
+
+def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["scope"] == "international"
+    assert catalog["country"] is None
+    assert catalog["countries_excluded"] == ["US"]
+    assert catalog["regions_excluded"] == ["Europe"]
+    assert catalog["target_catalog_size"]["hard_cap"] is False
+
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
+    assert len(entries) == len(catalog["curated_shortlist"])
+    assert catalog["target_catalog_size"]["guideline_range"][0] <= len(entries) <= catalog["target_catalog_size"]["guideline_range"][1]
+    assert len({entry["key"] for entry in entries}) == len(entries)
+    assert len({entry["name"].casefold() for entry in entries}) == len(entries)
+    assert all(entry["country"] != "US" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["catalog_status"] == "candidate" for entry in entries)
+    assert all(entry["activity_status"] in ALLOWED_ACTIVITY for entry in entries)
+    assert all(entry["publication_form"] in ALLOWED_FORMS for entry in entries)
+    assert all(entry["form_group"] in ALLOWED_FORM_GROUPS for entry in entries)
+    assert all(entry["language"] in set(catalog["languages"]) for entry in entries)
+
+
+def test_international_catalog_preserves_unmapped_political_positions() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["political_mapping_review"]["status"] == "resolved_preserve_unmapped"
+    assert catalog["review_status"]["political_mapping"] == "decision_2_two_source_threshold"
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+    assert all(
+        len({
+            item["classifier_name"]
+            for item in entry["classifications"]
+            if item["dimension"] == "editorial_orientation"
+        }) >= 2
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    )
+    assert all(
+        "politically_unclassified" in entry["format_tags"]
+        for entry in catalog["unclassified_entries"]
+    )
+
+
+def test_international_catalog_metadata_provenance_is_complete() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
+    for entry in entries:
+        for classification in entry["classifications"]:
+            assert classification["dimension"]
+            assert classification["value"]
+            assert classification["classifier_type"] in ALLOWED_CLASSIFIER_TYPES
+            assert classification["classifier_name"]
+            assert classification["source_url"].startswith("https://")
+            assert classification["reference_date"]
+            assert classification["retrieved_at"]
+        for metric in entry["metrics"]:
+            assert metric["metric_kind"] in ALLOWED_METRIC_KINDS
+            assert metric["value"] >= 0
+            assert metric["unit"]
+            assert metric["reference_period"]
+            assert metric["measurement_body"]
+            assert metric["metric_scope"]
+            assert isinstance(metric["audited"], bool)
+            assert metric["source_url"].startswith("https://")
+            assert metric["retrieved_at"]
+
+
+def test_international_catalog_models_state_control_separately() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    assert catalog["scope_review"]["status"] == "resolved_include_with_control_metadata"
+    entries = {
+        entry["name"]: entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    entries.update({entry["name"]: entry for entry in catalog["unclassified_entries"]})
+    expected = {
+        "People's Daily": "party_official",
+        "Global Times": "party_state_affiliated",
+        "China Daily": "party_state_managed",
+        "The Straits Times": "state_managed_public_service_media",
+    }
+    for name, value in expected.items():
+        entry = entries[name]
+        assert "politically_unclassified" in entry["format_tags"]
+        assert any(
+            item["dimension"] == "media_positioning" and item["value"] == value
+            for item in entry["classifications"]
+        )
+
+
+def test_international_sparse_political_groups_are_not_filled_by_quota() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    groups = {group["key"]: group for group in catalog["groups"]}
+    for key in ("radical_left", "liberal_centre", "radical_right"):
+        assert groups[key].get("coverage_exception")
+    for group in catalog["groups"]:
+        for entry in group["entries"]:
+            orientation_sources = {
+                item["classifier_name"]
+                for item in entry["classifications"]
+                if item["dimension"] == "editorial_orientation"
+            }
+            assert len(orientation_sources) >= 2
+
+
+def test_international_core_is_germany_focused_and_deferred_is_explicit() -> None:
+    catalog = json.loads(INTERNATIONAL_CATALOG.read_text(encoding="utf-8"))
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]] + catalog["unclassified_entries"]
+    names = {entry["name"] for entry in entries}
+    shortlist_names = {item["name"] for item in catalog["curated_shortlist"]}
+
+    assert names == shortlist_names
+    assert all(entry["activity_status"] == "active" for entry in entries)
+    assert catalog["deferred_candidates"]
+    assert names.isdisjoint({item["name"] for item in catalog["deferred_candidates"]})
+    assert all(item["reason"] for item in catalog["deferred_candidates"])
+    assert {entry["country"] for entry in entries}.isdisjoint({"TW", "HK"})
+    assert catalog["review_status"]["scope"] == "decision_c_no_taiwan_hong_kong_currently"
