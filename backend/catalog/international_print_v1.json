@@ -233,7 +233,8 @@
     "Initial broad pool intentionally exceeds the implementation target; candidates will be reduced by current print status, international/regional relevance, provenance quality and incremental viewpoint value.",
     "Daily Maverick is a print-status risk because its core product is digital; verify recurring physical publication before promotion.",
     "Maclean's, The Saturday Paper, Mail & Guardian and similar non-daily titles remain eligible because the catalog covers magazines and periodicals as well as newspapers.",
-    "The first curated international shortlist contains 40 titles from 13 countries; deferred titles remain documented rather than deleted."
+    "The first curated international shortlist contains 40 titles from 13 countries; deferred titles remain documented rather than deleted.",
+    "Turkey verification confirms that recurring print status and political descriptors can be sourced, but descriptors such as Kemalist/pro-government do not map one-to-one onto the FSC left-right taxonomy. This is a product-level cross-market comparability decision, not a data-cleaning issue."
   ],
   "regions_excluded": [
     "Europe"
@@ -248,7 +249,7 @@
   },
   "review_status": {
     "candidate_pool": "broad_pool_complete",
-    "political_mapping": "pending",
+    "political_mapping": "blocked_on_global_axis_policy",
     "active_print_verification": "pending",
     "metrics_enrichment": "pending",
     "implementation": "pending",
@@ -528,5 +529,33 @@
       "name": "Al-Shorouk",
       "reason": "Lower incremental value for the first international comparison set; retained for later expansion or substitution after print/provenance verification."
     }
-  ]
+  ],
+  "political_mapping_review": {
+    "status": "decision_required",
+    "issue": "Several internationally relevant print outlets are described by country-specific positions such as Kemalist or pro-government that are not safely equivalent to FSC's six left-right groups.",
+    "examples": [
+      {
+        "country": "TR",
+        "title": "Cumhuriyet",
+        "external_position": "Kemalist",
+        "source": "Eurotopics"
+      },
+      {
+        "country": "TR",
+        "title": "Sözcü",
+        "external_position": "Kemalist",
+        "source": "Eurotopics"
+      },
+      {
+        "country": "TR",
+        "title": "Sabah",
+        "external_position": "pro-government",
+        "source": "Eurotopics"
+      }
+    ],
+    "options": {
+      "preserve_unmapped": "Keep such titles politically unclassified on the FSC left-right axis while storing attributed media_positioning classifications.",
+      "force_crosswalk": "Define an explicit FSC crosswalk from country-specific positions to the six global political groups, with provenance and documented caveats."
+    }
+  }
 }
