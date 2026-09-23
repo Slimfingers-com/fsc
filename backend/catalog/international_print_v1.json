@@ -51,42 +51,6 @@
       "label": "left liberal",
       "entries": [
         {
-          "key": "toronto-star",
-          "name": "Toronto Star",
-          "homepage": "https://www.thestar.com/",
-          "country": "CA",
-          "publication_form": "daily_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "language": "en",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [],
-          "feeds": [],
-          "classifications": [
-            {
-              "dimension": "editorial_orientation",
-              "value": "left_center",
-              "classifier_type": "media_database",
-              "classifier_name": "Media Bias/Fact Check",
-              "source_url": "https://mediabiasfactcheck.com/toronto-star/",
-              "reference_date": "2026-09-23",
-              "retrieved_at": "2026-09-23T09:34:00+02:00",
-              "notes": "External classification retained as provenance; not an FSC assessment and not automatically cross-walked onto the FSC political groups."
-            },
-            {
-              "dimension": "editorial_orientation",
-              "value": "progressive",
-              "classifier_type": "academic",
-              "classifier_name": "PMC / Climatic Change study",
-              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11264564/",
-              "reference_date": "2026-09-23",
-              "retrieved_at": "2026-09-23T09:34:00+02:00",
-              "notes": "Peer-reviewed study describes the Toronto Star as a progressive news source; direction agrees with MBFC Left-Center. External classification; not an FSC assessment."
-            }
-          ],
-          "metrics": []
-        },
-        {
           "key": "cartacapital",
           "name": "CartaCapital",
           "homepage": "https://www.cartacapital.com.br/",
@@ -252,42 +216,6 @@
               "reference_date": "2026-09-23",
               "retrieved_at": "2026-09-23T09:34:00+02:00",
               "notes": "Reuters Institute describes Haaretz as Israel's leading left-leaning newspaper; direction agrees with MBFC Left. External classification; not an FSC assessment."
-            }
-          ],
-          "metrics": []
-        },
-        {
-          "key": "pagina-12",
-          "name": "Página/12",
-          "homepage": "https://www.pagina12.com.ar/",
-          "country": "AR",
-          "publication_form": "daily_newspaper",
-          "form_group": "newspaper_or_weekly",
-          "language": "es",
-          "activity_status": "active",
-          "catalog_status": "candidate",
-          "format_tags": [],
-          "feeds": [],
-          "classifications": [
-            {
-              "dimension": "editorial_orientation",
-              "value": "left_of_center",
-              "classifier_type": "academic",
-              "classifier_name": "Scientific Reports",
-              "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11696528/",
-              "reference_date": "2026-09-23",
-              "retrieved_at": "2026-09-23T09:34:00+02:00",
-              "notes": "Peer-reviewed study describes Página/12 as left-of-center. External classification; not an FSC assessment."
-            },
-            {
-              "dimension": "editorial_orientation",
-              "value": "left_of_center",
-              "classifier_type": "academic",
-              "classifier_name": "EPJ Data Science",
-              "source_url": "https://link.springer.com/article/10.1140/epjds/s13688-024-00493-y",
-              "reference_date": "2026-09-23",
-              "retrieved_at": "2026-09-23T09:34:00+02:00",
-              "notes": "Independent peer-reviewed study describes Página 12 as a left-of-center broadsheet. External classification; not an FSC assessment."
             }
           ],
           "metrics": []
@@ -1251,44 +1179,6 @@
       "metrics": []
     },
     {
-      "key": "veja",
-      "name": "VEJA",
-      "homepage": "https://veja.abril.com.br/",
-      "country": "BR",
-      "publication_form": "magazine",
-      "form_group": "magazine_or_periodical",
-      "language": "pt",
-      "activity_status": "active",
-      "catalog_status": "candidate",
-      "format_tags": [
-        "politically_unclassified"
-      ],
-      "feeds": [],
-      "classifications": [
-        {
-          "dimension": "editorial_orientation",
-          "value": "anti_left_liberal",
-          "classifier_type": "academic",
-          "classifier_name": "Temática / UFPB",
-          "source_url": "https://periodicos.ufpb.br/index.php/tematica/article/view/65539",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "Academic study of 1990–2020 material reports anti-left bias and dissemination of liberalism. Historical-period evidence retained without current FSC group assignment."
-        },
-        {
-          "dimension": "editorial_orientation",
-          "value": "conservative_historical",
-          "classifier_type": "academic",
-          "classifier_name": "Comunicación y Sociedad / SciELO",
-          "source_url": "https://www.scielo.org.mx/scielo.php?lng=es&nrm=iso&pid=S0188-252X2025000100205&script=sci_arttext&tlng=en",
-          "reference_date": "2026-09-23",
-          "retrieved_at": "2026-09-23T09:34:00+02:00",
-          "notes": "2025 scholarly article refers to Veja as a conservative outlet and discusses an ultraconservative shift in a historical period. Temporal scope is insufficient for a current FSC group assignment."
-        }
-      ],
-      "metrics": []
-    },
-    {
       "key": "hurriyet",
       "name": "Hürriyet",
       "homepage": "https://www.hurriyet.com.tr/",
@@ -1622,16 +1512,17 @@
     "Southeast Asia gap review added active print titles from Indonesia and the Philippines based on current publisher subscription/edition evidence and 2026 public procurement evidence.",
     "Latin America gap review added current weekend print editions from Chile and Colombia; reduced print frequency is represented as weekly_newspaper rather than assuming historical daily cadence.",
     "Taiwan and Hong Kong are deferred under scope decision C until FSC has a geography model that does not overload the ISO country field.",
-    "The international print catalog is intentionally not a world-coverage catalog. The current core is curated for Germany relevance, global agenda-setting, and incremental perspective value."
+    "The international print catalog is intentionally not a world-coverage catalog. The current core is curated for Germany relevance, global agenda-setting, and incremental perspective value.",
+    "Second relevance pass reduced redundant same-market coverage in Canada, Argentina and Brazil; deferred titles remain documented for topic-specific expansion."
   ],
   "regions_excluded": [
     "Europe"
   ],
   "target_catalog_size": {
-    "guideline_target": 38,
+    "guideline_target": 35,
     "guideline_range": [
-      35,
-      45
+      32,
+      40
     ],
     "hard_cap": false,
     "notes": "Germany-focused international comparison core. The range is a curation guideline, not a country quota or maximum."
@@ -1642,7 +1533,7 @@
     "active_print_verification": "complete_for_current_71_title_set",
     "metrics_enrichment": "partial",
     "implementation": "all_original_candidates_resolved_to_active_print_entries",
-    "curation": "38_title_germany_focused_core_complete",
+    "curation": "35_title_germany_focused_core_complete",
     "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set",
     "scope": "decision_c_no_taiwan_hong_kong_currently"
   },
@@ -1661,10 +1552,6 @@
     {
       "country": "AR",
       "name": "Clarín"
-    },
-    {
-      "country": "AR",
-      "name": "Página/12"
     },
     {
       "country": "AU",
@@ -1687,20 +1574,12 @@
       "name": "O Globo"
     },
     {
-      "country": "BR",
-      "name": "VEJA"
-    },
-    {
       "country": "CA",
       "name": "National Post"
     },
     {
       "country": "CA",
       "name": "The Globe and Mail"
-    },
-    {
-      "country": "CA",
-      "name": "Toronto Star"
     },
     {
       "country": "CN",
@@ -1820,6 +1699,13 @@
       "activity_status": "active"
     },
     {
+      "country": "AR",
+      "name": "Página/12",
+      "reason": "Deferred from the Germany-focused core because the retained titles from this market already provide sufficient agenda-setting and comparative value; no national spectrum quota is applied.",
+      "previous_group": "left_liberal",
+      "activity_status": "active"
+    },
+    {
       "country": "AU",
       "name": "Australian Financial Review",
       "reason": "Deferred from the Germany-focused international core because the retained titles from this market provide sufficient agenda-setting, political or media-structural comparison value without country quotas or taxonomy-filling.",
@@ -1869,6 +1755,13 @@
       "activity_status": "active"
     },
     {
+      "country": "BR",
+      "name": "VEJA",
+      "reason": "Deferred from the Germany-focused core because the retained titles from this market already provide sufficient agenda-setting and comparative value; no national spectrum quota is applied.",
+      "previous_group": null,
+      "activity_status": "active"
+    },
+    {
       "country": "CA",
       "name": "Le Devoir",
       "reason": "Deferred from the Germany-focused international core because the retained titles from this market provide sufficient agenda-setting, political or media-structural comparison value without country quotas or taxonomy-filling.",
@@ -1880,6 +1773,13 @@
       "name": "Maclean's",
       "reason": "Deferred from the Germany-focused international core because the retained titles from this market provide sufficient agenda-setting, political or media-structural comparison value without country quotas or taxonomy-filling.",
       "previous_group": null,
+      "activity_status": "active"
+    },
+    {
+      "country": "CA",
+      "name": "Toronto Star",
+      "reason": "Deferred from the Germany-focused core because the retained titles from this market already provide sufficient agenda-setting and comparative value; no national spectrum quota is applied.",
+      "previous_group": "left_liberal",
       "activity_status": "active"
     },
     {
