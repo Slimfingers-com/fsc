@@ -603,7 +603,7 @@
   },
   "review_status": {
     "shortlist_political_mapping": "complete",
-    "entry_level_provenance": "36_of_50_verified",
+    "entry_level_provenance": "36_of_50_baseline_verified_14_high_attention",
     "active_print_verification": "in_progress",
     "metrics_enrichment": "36_of_50_baseline_metrics",
     "implementation": "pending",
@@ -2232,6 +2232,34 @@
         "source_url": "https://www.eurotopics.net/en/148481/danas",
         "retrieved_at": "2026-09-23"
       }
+    }
+  },
+  "current_risk_review": {
+    "hungary": {
+      "titles": [
+        "Népszava",
+        "Magyar Nemzet"
+      ],
+      "status": "requires_current_2026_form_confirmation",
+      "reason": "Hungarian political print market changed materially in 2026; historical daily metadata cannot be reused."
+    },
+    "edge_titles": {
+      "titles": [
+        "Rivarol",
+        "Sieci",
+        "Gazeta Polska",
+        "Do Rzeczy",
+        "Valeurs actuelles"
+      ],
+      "status": "requires_stronger_independent_political_provenance",
+      "reason": "Right/radical-right placement should not rely on a single generic media database where stronger independent evidence is available."
+    },
+    "non_daily": {
+      "titles": [
+        "El Salto",
+        "Dagens ETC"
+      ],
+      "status": "requires_current_frequency_confirmation"
     }
   }
 }
