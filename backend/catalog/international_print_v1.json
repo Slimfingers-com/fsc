@@ -156,7 +156,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "progressive",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "PMC / Climatic Change study",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11264564/",
               "reference_date": "2026-09-23",
@@ -192,7 +192,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "left",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Revista da Universidade Federal de Minas Gerais",
               "source_url": "https://periodicos.ufmg.br/index.php/revistadaufmg/article/view/20554",
               "reference_date": "2026-09-23",
@@ -241,7 +241,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "liberal",
-              "classifier_type": "research_institute",
+              "classifier_type": "other",
               "classifier_name": "Reuters Institute for the Study of Journalism",
               "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2023/japan",
               "reference_date": "2026-09-23",
@@ -290,7 +290,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "left_of_center",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Peer-reviewed PMC study",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10345825/",
               "reference_date": "2026-09-23",
@@ -326,7 +326,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "left_leaning",
-              "classifier_type": "research_institute",
+              "classifier_type": "other",
               "classifier_name": "Reuters Institute for the Study of Journalism",
               "source_url": "https://reutersinstitute.politics.ox.ac.uk/news/israeli-mainstream-tv-ignores-gazans-suffering-these-outlets-expose-surveillance-brutality-and",
               "reference_date": "2026-09-23",
@@ -352,7 +352,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "left_of_center",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Scientific Reports",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11696528/",
               "reference_date": "2026-09-23",
@@ -362,7 +362,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "left_of_center",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "EPJ Data Science",
               "source_url": "https://link.springer.com/article/10.1140/epjds/s13688-024-00493-y",
               "reference_date": "2026-09-23",
@@ -388,7 +388,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "progressive",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Gazette / SAGE",
               "source_url": "https://journals.sagepub.com/doi/10.1177/0016549200062001005",
               "reference_date": "2026-09-23",
@@ -398,7 +398,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "liberal",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Peer-reviewed PMC study",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7481441/",
               "reference_date": "2026-09-23",
@@ -793,7 +793,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "conservative",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "PMC / Climatic Change study",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11264564/",
               "reference_date": "2026-09-23",
@@ -829,7 +829,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "conservative",
-              "classifier_type": "research_institute",
+              "classifier_type": "other",
               "classifier_name": "Reuters Institute for the Study of Journalism",
               "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2023/japan",
               "reference_date": "2026-09-23",
@@ -877,7 +877,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "center_right",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Scientific Reports",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11696528/",
               "reference_date": "2026-09-23",
@@ -913,7 +913,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "center_right",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Scientific Reports",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11696528/",
               "reference_date": "2026-09-23",
@@ -949,7 +949,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "conservative",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "ScienceDirect / Procedia Social and Behavioral Sciences",
               "source_url": "https://www.sciencedirect.com/science/article/pii/S1877042814061564",
               "reference_date": "2026-09-23",
@@ -975,7 +975,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "conservative",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Peer-reviewed PMC study",
               "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7481441/",
               "reference_date": "2026-09-23",
@@ -985,7 +985,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "conservative",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Journalism / SAGE",
               "source_url": "https://journals.sagepub.com/doi/10.1177/14648849211069241",
               "reference_date": "2026-09-23",
@@ -1171,7 +1171,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "right_wing_slant",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "University of Chicago Harris School paper",
               "source_url": "https://harris.uchicago.edu/files/gmm_jan20-guy_grossman.pdf",
               "reference_date": "2026-09-23",
@@ -1197,7 +1197,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "very_conservative",
-              "classifier_type": "research_institute",
+              "classifier_type": "other",
               "classifier_name": "Reuters Institute for the Study of Journalism",
               "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/archive/survey/2018/japan-2018/",
               "reference_date": "2026-09-23",
@@ -1207,7 +1207,7 @@
             {
               "dimension": "editorial_orientation",
               "value": "right_leaning",
-              "classifier_type": "academic_research",
+              "classifier_type": "academic",
               "classifier_name": "Amsterdam University Press / De Gruyter Brill",
               "source_url": "https://www.degruyterbrill.com/document/doi/10.1515/9789048551613-006/pdf?licenseType=open-access",
               "reference_date": "2026-09-23",
