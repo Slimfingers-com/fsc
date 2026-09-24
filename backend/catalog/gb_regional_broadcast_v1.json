@@ -1,0 +1,348 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "languages": [
+    "en",
+    "cy",
+    "gd"
+  ],
+  "scope": "regional_devolved",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "devolved_editorial_newsroom_not_parent_broadcaster_channel_or_commissioning_platform",
+  "locality_policy": "devolved_nation_and_large_regional_newsrooms_only_local_itv_bbc_and_commercial_radio_deferred",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "BBC nation placement in C is a public-service devolved reference convention only. Private devolved TV Sources remain politically unclassified."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No approved devolved/regional Source has sufficient two-source provenance for A."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [],
+      "coverage_exception": "No approved devolved/regional Source has sufficient two-source provenance for B."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/public-service devolved reference",
+      "entries": [
+        {
+          "key": "bbc-scotland",
+          "name": "BBC Scotland",
+          "homepage": "https://www.bbc.com/news/scotland",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bbc-scotland-reporting-scotland",
+              "name": "Reporting Scotland",
+              "publication_form": "television",
+              "scope": "devolved",
+              "region": [
+                "Scotland"
+              ],
+              "language": "en",
+              "homepage": "https://www.bbc.com/news/scotland"
+            },
+            {
+              "key": "bbc-radio-scotland",
+              "name": "BBC Radio Scotland",
+              "publication_form": "radio",
+              "scope": "devolved",
+              "region": [
+                "Scotland"
+              ],
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_scotland_fm"
+            },
+            {
+              "key": "bbc-radio-nan-gaidheal",
+              "name": "BBC Radio nan Gàidheal",
+              "publication_form": "radio",
+              "scope": "devolved",
+              "region": [
+                "Scotland"
+              ],
+              "language": "gd",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_nan_gaidheal"
+            }
+          ],
+          "notes": [
+            "Devolved BBC editorial Source for Scotland, separate from national BBC News for FSC regional independence counting.",
+            "C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "bbc-cymru-wales",
+          "name": "BBC Cymru Wales",
+          "homepage": "https://www.bbc.com/news/wales",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bbc-wales-today",
+              "name": "Wales Today",
+              "publication_form": "television",
+              "scope": "devolved",
+              "region": [
+                "Wales"
+              ],
+              "language": "en",
+              "homepage": "https://www.bbc.com/news/wales"
+            },
+            {
+              "key": "bbc-radio-wales",
+              "name": "BBC Radio Wales",
+              "publication_form": "radio",
+              "scope": "devolved",
+              "region": [
+                "Wales"
+              ],
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_wales_fm"
+            },
+            {
+              "key": "bbc-radio-cymru",
+              "name": "BBC Radio Cymru",
+              "publication_form": "radio",
+              "scope": "devolved",
+              "region": [
+                "Wales"
+              ],
+              "language": "cy",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_cymru"
+            }
+          ],
+          "notes": [
+            "Devolved BBC editorial Source for Wales, separate from national BBC News for FSC regional independence counting.",
+            "Newyddion S4C is produced by BBC Cymru Wales and therefore does not justify a duplicate S4C news Source.",
+            "C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "bbc-northern-ireland",
+          "name": "BBC Northern Ireland",
+          "homepage": "https://www.bbc.com/news/northern-ireland",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bbc-newsline",
+              "name": "BBC Newsline",
+              "publication_form": "television",
+              "scope": "devolved",
+              "region": [
+                "Northern Ireland"
+              ],
+              "language": "en",
+              "homepage": "https://www.bbc.com/news/northern-ireland"
+            },
+            {
+              "key": "bbc-radio-ulster",
+              "name": "BBC Radio Ulster",
+              "publication_form": "radio",
+              "scope": "devolved",
+              "region": [
+                "Northern Ireland"
+              ],
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_ulster"
+            },
+            {
+              "key": "bbc-radio-foyle",
+              "name": "BBC Radio Foyle",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "North West Northern Ireland"
+              ],
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_foyle"
+            }
+          ],
+          "notes": [
+            "Devolved BBC editorial Source for Northern Ireland. Radio Ulster and Radio Foyle share BBC Northern Ireland news/current-affairs output and remain outlets of one Source.",
+            "C is a public-service reference position, not a persisted political classification."
+          ]
+        }
+      ],
+      "coverage_exception": "Three devolved BBC Sources meet the radio research minimum and form the public-service reference pool. Their inclusion does not imply political centrist ideology."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [],
+      "coverage_exception": "No approved devolved/regional Source has sufficient two-source provenance for D."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [],
+      "coverage_exception": "No approved devolved/regional Source has sufficient two-source provenance for E."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [],
+      "coverage_exception": "No approved devolved/regional Source satisfies FSC's two-source threshold for F."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "stv-news",
+      "name": "STV News",
+      "homepage": "https://news.stv.tv/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "stv-news-at-six",
+          "name": "STV News at 6",
+          "publication_form": "television",
+          "scope": "devolved",
+          "region": [
+            "Scotland"
+          ],
+          "language": "en",
+          "homepage": "https://news.stv.tv/"
+        }
+      ],
+      "notes": [
+        "Independent Scottish regional/devolved television newsroom. Ofcom-approved 2026 changes share more content across STV's two licence areas but retain bespoke regional sections; one STV News Source is therefore appropriate."
+      ]
+    },
+    {
+      "key": "itv-cymru-wales",
+      "name": "ITV Cymru Wales",
+      "homepage": "https://www.itv.com/news/wales",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "wales-at-six",
+          "name": "Wales at Six",
+          "publication_form": "television",
+          "scope": "devolved",
+          "region": [
+            "Wales"
+          ],
+          "language": "en",
+          "homepage": "https://www.itv.com/news/wales"
+        },
+        {
+          "key": "sharp-end",
+          "name": "Sharp End",
+          "publication_form": "television",
+          "scope": "devolved",
+          "region": [
+            "Wales"
+          ],
+          "language": "en",
+          "homepage": "https://www.itv.com/news/wales"
+        }
+      ],
+      "notes": [
+        "Dedicated ITV Wales newsroom with devolved news and politics output; separate from national ITV News, which is produced by ITN."
+      ]
+    },
+    {
+      "key": "utv",
+      "name": "UTV",
+      "homepage": "https://www.itv.com/news/utv",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "utv-live",
+          "name": "UTV Live",
+          "publication_form": "television",
+          "scope": "devolved",
+          "region": [
+            "Northern Ireland"
+          ],
+          "language": "en",
+          "homepage": "https://www.itv.com/news/utv"
+        },
+        {
+          "key": "view-from-stormont",
+          "name": "View From Stormont",
+          "publication_form": "television",
+          "scope": "devolved",
+          "region": [
+            "Northern Ireland"
+          ],
+          "language": "en",
+          "homepage": "https://www.itv.com/news/utv"
+        }
+      ],
+      "notes": [
+        "Dedicated Northern Ireland ITV newsroom and programme identity; separate from national ITV News/ITN."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "S4C as a news Source",
+      "reason": "S4C is a commissioning public-service broadcaster, but its core Newyddion S4C news programme is produced by BBC Cymru Wales. S4C current-affairs commissions can be revisited without duplicating BBC Cymru Wales news."
+    },
+    {
+      "name": "BBC ALBA",
+      "reason": "Joint BBC Scotland/MG ALBA structure creates a multi-party source-identity case similar to other joint channels; defer until joint editorial-independence grouping is modeled explicitly."
+    },
+    {
+      "name": "ITV English regional newsrooms",
+      "reason": "Large set of sub-national regional news services such as Granada, Meridian and Calendar is deferred to a later GB local/regional expansion rather than inflating the devolved core."
+    },
+    {
+      "name": "commercial local radio",
+      "reason": "Most UK commercial local brands combine local output with heavily networked schedules; individual newsroom independence should be reviewed later rather than inferred from station branding."
+    }
+  ],
+  "approved_candidate_count": 6,
+  "new_source_count": 6,
+  "review_status": "autonomously_selected_devolved_core_no_feeds_activated"
+}

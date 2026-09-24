@@ -1721,3 +1721,64 @@ def test_ch_regional_broadcast_outlet_keys_are_unique() -> None:
     catalog = load_ch_regional_broadcast_catalog()
     keys = [outlet["key"] for entry in ch_regional_broadcast_entries(catalog) for outlet in entry["outlets"]]
     assert len(keys) == len(set(keys))
+
+
+GB_REGIONAL_BROADCAST_CATALOG = CATALOG_DIR / "gb_regional_broadcast_v1.json"
+
+
+def load_gb_regional_broadcast_catalog() -> dict:
+    return json.loads(GB_REGIONAL_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def gb_regional_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_gb_regional_broadcast_catalog_has_six_devolved_sources() -> None:
+    catalog = load_gb_regional_broadcast_catalog()
+    entries = gb_regional_broadcast_entries(catalog)
+    assert catalog["country"] == "GB"
+    assert catalog["scope"] == "regional_devolved"
+    assert catalog["approved_candidate_count"] == 6
+    assert len(entries) == 6
+    assert len({entry["key"] for entry in entries}) == 6
+
+
+def test_gb_regional_broadcast_bbc_nations_are_three_crossmedia_sources() -> None:
+    catalog = load_gb_regional_broadcast_catalog()
+    centre = {entry["name"]: entry for entry in next(g for g in catalog["groups"] if g["key"] == "liberal_centre")["entries"]}
+    assert set(centre) == {"BBC Scotland", "BBC Cymru Wales", "BBC Northern Ireland"}
+    assert all({outlet["publication_form"] for outlet in entry["outlets"]} == {"television", "radio"} for entry in centre.values())
+    assert all(entry["classification_status"] == "public_service_centre_reference_not_political_classification" for entry in centre.values())
+
+
+def test_gb_regional_broadcast_private_devolved_tv_sources_are_separate() -> None:
+    catalog = load_gb_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_regional_broadcast_entries(catalog)}
+    assert {"STV News", "ITV Cymru Wales", "UTV"} <= set(entries)
+    assert entries["ITV Cymru Wales"]["classification_status"] == "unclassified_research_candidate"
+    assert entries["UTV"]["classification_status"] == "unclassified_research_candidate"
+    assert "ITV News" not in entries
+
+
+def test_gb_regional_broadcast_s4c_news_is_not_duplicated() -> None:
+    catalog = load_gb_regional_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+    assert "S4C as a news Source" in deferred
+    assert "produced by BBC Cymru Wales" in deferred["S4C as a news Source"]
+
+
+def test_gb_regional_broadcast_joint_bbc_alba_is_deferred() -> None:
+    catalog = load_gb_regional_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+    assert "BBC ALBA" in deferred
+    assert "joint" in deferred["BBC ALBA"].lower()
+
+
+def test_gb_regional_broadcast_outlet_keys_are_unique() -> None:
+    catalog = load_gb_regional_broadcast_catalog()
+    keys = [outlet["key"] for entry in gb_regional_broadcast_entries(catalog) for outlet in entry["outlets"]]
+    assert len(keys) == len(set(keys))
