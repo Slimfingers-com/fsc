@@ -15,6 +15,7 @@ from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
 from app.models.source_dependency import ArticleProvenance, SourceRelation
+from app.repositories.source_dependency import SourceDependencyRepository
 
 
 def make_source(db, name: str) -> Source:
@@ -215,3 +216,38 @@ def test_soft_deleted_article_provenance_can_be_recreated(db):
         )
     )
     db.flush()
+
+
+def test_verified_article_provenance_loads_upstream_chain_recursively(db):
+    downstream_source = make_source(db, "Recursive Downstream")
+    intermediary_source = make_source(db, "Recursive Intermediary")
+    root_source = make_source(db, "Recursive Root")
+    downstream_article = make_article(db, downstream_source, "downstream")
+    intermediary_article = make_article(db, intermediary_source, "intermediary")
+
+    first = ArticleProvenance(
+        article_id=downstream_article.id,
+        upstream_source_id=intermediary_source.id,
+        upstream_article_id=intermediary_article.id,
+        relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
+        confidence=1.0,
+        detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+        verified=True,
+    )
+    second = ArticleProvenance(
+        article_id=intermediary_article.id,
+        upstream_source_id=root_source.id,
+        relation_kind=ArticleProvenanceKind.REPUBLISHED_FROM,
+        confidence=1.0,
+        detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+        verified=True,
+    )
+    db.add_all([first, second])
+    db.flush()
+
+    rows = SourceDependencyRepository().load_verified_article_provenance(
+        db,
+        article_ids=[downstream_article.id],
+    )
+
+    assert {row.id for row in rows} == {first.id, second.id}

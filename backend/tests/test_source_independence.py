@@ -146,3 +146,77 @@ def test_dated_relation_does_not_apply_when_article_date_is_unknown():
     )
 
     assert resolver.source_key(first) != resolver.source_key(second)
+
+
+def test_co_produced_article_bridges_dependency_components_conservatively():
+    first_source = uuid4()
+    second_source = uuid4()
+    first_article = uuid4()
+    joint_article = uuid4()
+    second_article = uuid4()
+
+    joint_provenance = ArticleProvenance(
+        id=uuid4(),
+        article_id=joint_article,
+        upstream_source_id=second_source,
+        relation_kind=ArticleProvenanceKind.CO_PRODUCED_WITH,
+        confidence=1.0,
+        detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+        verified=True,
+    )
+    resolver = SourceIndependenceResolver(
+        relations=(),
+        provenance=(joint_provenance,),
+    )
+
+    keys = resolver.article_component_keys(
+        articles=(
+            (first_article, first_source, None),
+            (joint_article, first_source, None),
+            (second_article, second_source, None),
+        )
+    )
+
+    assert len(set(keys.values())) == 1
+
+
+def test_article_provenance_follows_upstream_article_transitively():
+    downstream_source = uuid4()
+    intermediary_source = uuid4()
+    root_source = uuid4()
+    downstream_article = uuid4()
+    intermediary_article = uuid4()
+
+    resolver = SourceIndependenceResolver(
+        relations=(),
+        provenance=(
+            ArticleProvenance(
+                id=uuid4(),
+                article_id=downstream_article,
+                upstream_source_id=intermediary_source,
+                upstream_article_id=intermediary_article,
+                relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
+                confidence=1.0,
+                detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+                verified=True,
+            ),
+            ArticleProvenance(
+                id=uuid4(),
+                article_id=intermediary_article,
+                upstream_source_id=root_source,
+                relation_kind=ArticleProvenanceKind.REPUBLISHED_FROM,
+                confidence=1.0,
+                detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+                verified=True,
+            ),
+        ),
+    )
+
+    assert resolver.article_dependency_keys(
+        article_id=downstream_article,
+        source_id=downstream_source,
+    ) == frozenset({resolver.source_key(root_source)})
+    assert resolver.article_key(
+        article_id=downstream_article,
+        source_id=downstream_source,
+    ) == resolver.source_key(root_source)

@@ -4,6 +4,8 @@
 
 Accepted
 
+The source-independence rule in this ADR is superseded by ADR 0020.
+
 ## Context
 
 Story #11 exposes structural agreement and explicit differences. FSC also needs to show where the observed source set is thin, where attention signals exist without corresponding content coverage, and where existing claim groups lack attributed perspectives.

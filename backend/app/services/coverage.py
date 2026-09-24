@@ -102,7 +102,7 @@ class PreparedCoverageAnalysis:
 
 
 class CoverageService:
-    CONFIG_VERSION = "2"
+    CONFIG_VERSION = "3"
 
     def __init__(
         self,
@@ -154,6 +154,26 @@ class CoverageService:
         return SourceIndependenceResolver(
             relations=consensus_snapshot.source_relations,
             provenance=consensus_snapshot.article_provenance,
+        )
+
+    @staticmethod
+    def _article_independence_keys(
+        snapshot: CoverageSnapshot,
+        resolver: SourceIndependenceResolver,
+    ) -> dict[UUID, str]:
+        articles = {
+            row.article.id: (
+                row.article.id,
+                row.source.id,
+                row.membership.article_time,
+            )
+            for row in snapshot.source_rows
+        }
+        return resolver.article_component_keys(
+            articles=tuple(
+                articles[article_id]
+                for article_id in sorted(articles, key=str)
+            )
         )
 
     def load_snapshot(
@@ -289,6 +309,10 @@ class CoverageService:
         snapshot: CoverageSnapshot,
     ) -> str:
         independence = self._independence_resolver(snapshot)
+        article_independence_keys = self._article_independence_keys(
+            snapshot,
+            independence,
+        )
         source_identity = [
             [
                 str(row.membership.id),
@@ -307,11 +331,7 @@ class CoverageService:
                     else ""
                 ),
                 row.source.country or "",
-                independence.article_key(
-                    article_id=row.article.id,
-                    source_id=row.source.id,
-                    at=row.membership.article_time,
-                ),
+                article_independence_keys[row.article.id],
             ]
             for row in snapshot.source_rows
         ]
@@ -400,6 +420,10 @@ class CoverageService:
         snapshot: CoverageSnapshot,
     ) -> PreparedCoverageAnalysis:
         independence = self._independence_resolver(snapshot)
+        article_independence_keys = self._article_independence_keys(
+            snapshot,
+            independence,
+        )
         unique_sources = {
             row.source.id: row.source
             for row in snapshot.source_rows
@@ -462,11 +486,7 @@ class CoverageService:
                     article_id=row.article.id,
                     source_id=row.source.id,
                     independence_key=(
-                        independence.article_key(
-                            article_id=row.article.id,
-                            source_id=row.source.id,
-                            at=row.membership.article_time,
-                        )
+                        article_independence_keys[row.article.id]
                     ),
                     source_type=source_type,
                     coverage_scope=scope,

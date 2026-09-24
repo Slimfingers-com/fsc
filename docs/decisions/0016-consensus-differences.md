@@ -4,6 +4,8 @@
 
 Accepted
 
+The source-independence rule in this ADR is superseded by ADR 0020.
+
 ## Context
 
 Story #9 provides story-scoped claim groups and explicit contradiction relations. Story #10 attaches provenance-bearing evidence to the current claim-group generation. FSC now needs a compact structural view of what independent sources share and where their claims differ.
