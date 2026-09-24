@@ -1,0 +1,488 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "languages": [
+    "en"
+  ],
+  "scope": "regional",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "independent_regional_newsroom_not_network_affiliation_parent_brand_or_shared_distribution",
+  "locality_policy": "representative_state_and_major_metro_core_local_affiliate_universe_deferred",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "Public-media or NPR/PBS affiliation does not imply centrist political orientation. All selected US regional Sources remain politically unclassified pending Source-level external provenance."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No selected representative regional Source has sufficient two-source provenance for A."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [],
+      "coverage_exception": "No selected representative regional Source has sufficient two-source provenance for B."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/reference",
+      "entries": [],
+      "coverage_exception": "Public-media affiliation is not used as political classification. The selected regional Sources remain unclassified."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [],
+      "coverage_exception": "No selected representative regional Source has sufficient two-source provenance for D."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [],
+      "coverage_exception": "No selected representative regional Source has sufficient two-source provenance for E."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [],
+      "coverage_exception": "No selected representative regional Source satisfies FSC's two-source threshold for F."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "wnyc-gothamist",
+      "name": "WNYC / Gothamist Newsroom",
+      "homepage": "https://www.wnyc.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "wnyc-radio",
+          "name": "WNYC",
+          "publication_form": "radio",
+          "scope": "major_metro",
+          "region": [
+            "New York City metro"
+          ],
+          "language": "en",
+          "homepage": "https://www.wnyc.org/"
+        },
+        {
+          "key": "gothamist-digital",
+          "name": "Gothamist",
+          "publication_form": "digital",
+          "scope": "major_metro",
+          "region": [
+            "New York City metro"
+          ],
+          "language": "en",
+          "homepage": "https://gothamist.com/"
+        }
+      ],
+      "notes": [
+        "New York Public Radio explicitly operates an integrated WNYC/Gothamist newsroom. Radio and digital brands are outlets of one regional editorial Source.",
+        "NPR membership does not merge this newsroom into the national NPR Source."
+      ]
+    },
+    {
+      "key": "nj-spotlight-news",
+      "name": "NJ Spotlight News",
+      "homepage": "https://www.njspotlightnews.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "nj-spotlight-news-tv",
+          "name": "NJ Spotlight News",
+          "publication_form": "television",
+          "scope": "statewide",
+          "region": [
+            "New Jersey"
+          ],
+          "language": "en",
+          "homepage": "https://www.njspotlightnews.org/"
+        },
+        {
+          "key": "nj-spotlight-news-digital",
+          "name": "NJ Spotlight News digital",
+          "publication_form": "digital",
+          "scope": "statewide",
+          "region": [
+            "New Jersey"
+          ],
+          "language": "en",
+          "homepage": "https://www.njspotlightnews.org/"
+        }
+      ],
+      "notes": [
+        "Statewide New Jersey news and public-affairs newsroom. PBS distribution/member-station structure does not make PBS the editorial Source."
+      ]
+    },
+    {
+      "key": "whyy-news",
+      "name": "WHYY News",
+      "homepage": "https://whyy.org/news/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "whyy-radio",
+          "name": "WHYY 90.9",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Philadelphia",
+            "Delaware Valley"
+          ],
+          "language": "en",
+          "homepage": "https://whyy.org/"
+        },
+        {
+          "key": "whyy-news-digital",
+          "name": "WHYY News digital",
+          "publication_form": "digital",
+          "scope": "regional",
+          "region": [
+            "Philadelphia",
+            "Delaware Valley"
+          ],
+          "language": "en",
+          "homepage": "https://whyy.org/news/"
+        }
+      ],
+      "notes": [
+        "Independent Delaware Valley public-media newsroom with local politics, civic and regional reporting; NPR/PBS affiliations do not collapse it into national Sources."
+      ]
+    },
+    {
+      "key": "wbez",
+      "name": "WBEZ Chicago",
+      "homepage": "https://www.wbez.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "wbez-radio",
+          "name": "WBEZ 91.5",
+          "publication_form": "radio",
+          "scope": "major_metro",
+          "region": [
+            "Chicago"
+          ],
+          "language": "en",
+          "homepage": "https://www.wbez.org/"
+        },
+        {
+          "key": "wbez-digital",
+          "name": "WBEZ digital",
+          "publication_form": "digital",
+          "scope": "major_metro",
+          "region": [
+            "Chicago"
+          ],
+          "language": "en",
+          "homepage": "https://www.wbez.org/"
+        }
+      ],
+      "notes": [
+        "Chicago Public Media newsroom. National NPR programmes carried by WBEZ do not make WBEZ an NPR duplicate."
+      ]
+    },
+    {
+      "key": "wabe-news",
+      "name": "WABE News",
+      "homepage": "https://www.wabe.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "wabe-radio",
+          "name": "WABE 90.1",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Atlanta",
+            "Georgia"
+          ],
+          "language": "en",
+          "homepage": "https://www.wabe.org/"
+        },
+        {
+          "key": "wabe-digital",
+          "name": "WABE News digital",
+          "publication_form": "digital",
+          "scope": "regional",
+          "region": [
+            "Atlanta",
+            "Georgia"
+          ],
+          "language": "en",
+          "homepage": "https://www.wabe.org/"
+        }
+      ],
+      "notes": [
+        "Atlanta/Georgia regional public-media newsroom covering politics, public affairs and community news."
+      ]
+    },
+    {
+      "key": "kut-news",
+      "name": "KUT News",
+      "homepage": "https://www.kut.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "kut-radio",
+          "name": "KUT 90.5",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Central Texas"
+          ],
+          "language": "en",
+          "homepage": "https://www.kut.org/"
+        },
+        {
+          "key": "texas-standard",
+          "name": "Texas Standard",
+          "publication_form": "radio",
+          "scope": "statewide",
+          "region": [
+            "Texas"
+          ],
+          "language": "en",
+          "homepage": "https://texasstandard.org/"
+        }
+      ],
+      "notes": [
+        "KUT News is the editorial Source. Texas Standard is a statewide news-magazine outlet produced by KUT News in collaboration with KERA, Houston Public Media and Texas Public Radio; the collaboration does not create four Sources."
+      ]
+    },
+    {
+      "key": "kqed-news",
+      "name": "KQED News",
+      "homepage": "https://www.kqed.org/news",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "kqed-radio",
+          "name": "KQED Public Radio",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "San Francisco Bay Area"
+          ],
+          "language": "en",
+          "homepage": "https://www.kqed.org/radio"
+        },
+        {
+          "key": "kqed-news-digital",
+          "name": "KQED News digital",
+          "publication_form": "digital",
+          "scope": "regional",
+          "region": [
+            "San Francisco Bay Area"
+          ],
+          "language": "en",
+          "homepage": "https://www.kqed.org/news"
+        }
+      ],
+      "notes": [
+        "Bay Area public-media newsroom with independent regional reporting. NPR/PBS affiliations are distribution/partnership relationships, not Source identity."
+      ]
+    },
+    {
+      "key": "laist",
+      "name": "LAist",
+      "homepage": "https://laist.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "laist-radio",
+          "name": "LAist 89.3",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Southern California"
+          ],
+          "language": "en",
+          "homepage": "https://laist.com/"
+        },
+        {
+          "key": "laist-digital",
+          "name": "LAist digital",
+          "publication_form": "digital",
+          "scope": "regional",
+          "region": [
+            "Southern California"
+          ],
+          "language": "en",
+          "homepage": "https://laist.com/"
+        }
+      ],
+      "notes": [
+        "Southern California Public Radio operates LAist as one nonprofit newsroom across radio and digital."
+      ]
+    },
+    {
+      "key": "spectrum-news-ny1",
+      "name": "Spectrum News NY1",
+      "homepage": "https://ny1.com/nyc/all-boroughs",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "ny1-tv",
+          "name": "Spectrum News NY1",
+          "publication_form": "television",
+          "scope": "major_metro",
+          "region": [
+            "New York City"
+          ],
+          "language": "en",
+          "homepage": "https://ny1.com/nyc/all-boroughs"
+        },
+        {
+          "key": "ny1-digital",
+          "name": "NY1 digital",
+          "publication_form": "digital",
+          "scope": "major_metro",
+          "region": [
+            "New York City"
+          ],
+          "language": "en",
+          "homepage": "https://ny1.com/nyc/all-boroughs"
+        }
+      ],
+      "notes": [
+        "Dedicated New York City local-news network and newsroom. Shared Charter/Spectrum ownership does not merge it with other state/regional Spectrum News operations."
+      ]
+    },
+    {
+      "key": "spectrum-news-nc",
+      "name": "Spectrum News 1 North Carolina",
+      "homepage": "https://spectrumlocalnews.com/nc/charlotte",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "spectrum-news-nc-tv",
+          "name": "Spectrum News 1 North Carolina",
+          "publication_form": "television",
+          "scope": "statewide_regional",
+          "region": [
+            "North Carolina"
+          ],
+          "language": "en",
+          "homepage": "https://spectrumlocalnews.com/nc/charlotte"
+        },
+        {
+          "key": "spectrum-news-nc-digital",
+          "name": "Spectrum News 1 North Carolina digital",
+          "publication_form": "digital",
+          "scope": "statewide_regional",
+          "region": [
+            "North Carolina"
+          ],
+          "language": "en",
+          "homepage": "https://spectrumlocalnews.com/nc/charlotte"
+        }
+      ],
+      "notes": [
+        "North Carolina regional/state news operation with local-market editions and statewide political coverage. It remains separate from NY1 despite common Charter ownership."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "ABC/CBS/NBC/Fox local affiliates",
+      "reason": "The US affiliate universe contains hundreds of distinct local newsrooms. It is deferred to a later local-affiliate layer rather than treated as four network Sources or exhaustively enumerated here."
+    },
+    {
+      "name": "Sinclair local television stations",
+      "reason": "Common ownership and shared content infrastructure do not establish one regional editorial Source; individual station/newsroom identity requires later local-affiliate review."
+    },
+    {
+      "name": "News 12 Networks",
+      "reason": "Legitimate Northeast regional-news candidate deferred from the compact representative core for later private-regional expansion."
+    },
+    {
+      "name": "GBH/NEPM",
+      "reason": "Massachusetts public-media operations are undergoing 2026 merger/integration changes; defer until post-merger editorial Source boundaries are stable."
+    },
+    {
+      "name": "Spanish-language local affiliates",
+      "reason": "Univision/Telemundo and independent Spanish-language regional newsrooms should be included in a later multilingual local-affiliate expansion rather than sampled inconsistently here."
+    },
+    {
+      "name": "remaining NPR/PBS member stations",
+      "reason": "Membership or programme carriage does not create Source identity. Additional member-station newsrooms can be added later based on incremental regional value."
+    }
+  ],
+  "approved_candidate_count": 10,
+  "new_source_count": 10,
+  "review_status": "autonomously_selected_representative_regional_core_no_feeds_activated"
+}
