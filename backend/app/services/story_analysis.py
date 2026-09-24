@@ -580,9 +580,9 @@ class StoryAnalysisService:
                         coverage
                         .signal_source_count
                     ),
-                    independent_content_owner_count=(
+                    independent_content_source_count=(
                         coverage
-                        .independent_content_owner_count
+                        .independent_content_source_count
                     ),
                     claim_group_count=(
                         coverage

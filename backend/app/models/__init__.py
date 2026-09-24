@@ -14,6 +14,7 @@ from app.models.feed import Feed
 from app.models.perspective import ArticlePerspective
 from app.models.search_document import SearchDocument
 from app.models.source import Source
+from app.models.source_dependency import ArticleProvenance, SourceRelation
 from app.models.source_metadata import SourceClassification, SourceMetric, SourceOutlet
 from app.models.story import Story, StoryArticle
 from app.models.story_processing import StoryProcessingRun, StoryProcessingState
@@ -28,6 +29,8 @@ __all__ = [
     "Feed",
     "SearchDocument",
     "Source",
+    "SourceRelation",
+    "ArticleProvenance",
     "SourceClassification",
     "SourceMetric",
     "SourceOutlet",

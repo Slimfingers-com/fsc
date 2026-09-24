@@ -9,6 +9,7 @@ from app.core.slug import generate_slug
 from app.core.source_identity import normalize_source_name
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.source_dependency import SourceRelation
 from app.models.source_metadata import (
     SourceClassification,
     SourceMetric,
@@ -16,6 +17,7 @@ from app.models.source_metadata import (
 )
 from app.repositories.source import SourceRepository
 from app.schemas.source import SourceCreate
+from app.schemas.source_dependency import SourceRelationCreate
 from app.schemas.source_metadata import (
     SourceClassificationCreate,
     SourceMetricCreate,
@@ -300,6 +302,62 @@ class SourceService:
             raise
 
         return metric
+
+    def create_relation(
+        self,
+        db: Session,
+        source: Source,
+        data: SourceRelationCreate,
+    ) -> SourceRelation:
+        if data.related_source_id == source.id:
+            raise BusinessRuleViolationError(
+                "Eine Quelle kann nicht zu sich selbst in Beziehung stehen."
+            )
+
+        related_source = self.repository.get_active_by_id(
+            db,
+            data.related_source_id,
+        )
+        if related_source is None:
+            raise BusinessRuleViolationError(
+                "Die referenzierte Quelle existiert nicht oder ist nicht aktiv."
+            )
+
+        relation = SourceRelation(
+            source_id=source.id,
+            related_source_id=related_source.id,
+            relation_kind=data.relation_kind,
+            valid_from=data.valid_from,
+            valid_to=data.valid_to,
+            provenance_url=(
+                str(data.provenance_url)
+                if data.provenance_url is not None
+                else None
+            ),
+            reference_date=data.reference_date,
+            notes=data.notes,
+        )
+
+        try:
+            self.repository.add_relation(db, relation)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_source_relations_active_identity":
+                raise BusinessRuleViolationError(
+                    "Diese Quellenbeziehung existiert bereits."
+                ) from exc
+            if constraint_name == "ck_source_relation_distinct_sources":
+                raise BusinessRuleViolationError(
+                    "Eine Quelle kann nicht zu sich selbst in Beziehung stehen."
+                ) from exc
+            raise
+
+        return relation
 
     @staticmethod
     def _validate_feeds(

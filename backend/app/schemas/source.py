@@ -5,6 +5,7 @@ from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 from app.enums.coverage_scope import CoverageScope
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate, FeedRead
+from app.schemas.source_dependency import SourceRelationRead
 from app.schemas.source_metadata import (
     SourceClassificationRead,
     SourceMetricRead,
@@ -76,3 +77,5 @@ class SourceDetailRead(SourceRead):
     outlets: list[SourceOutletRead]
     classifications: list[SourceClassificationRead]
     metrics: list[SourceMetricRead]
+    outgoing_relations: list[SourceRelationRead]
+    incoming_relations: list[SourceRelationRead]

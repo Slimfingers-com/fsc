@@ -123,7 +123,7 @@ class StoryAnalysisCoverageRead(BaseModel):
     source_count: int = Field(ge=1)
     content_source_count: int = Field(ge=0)
     signal_source_count: int = Field(ge=0)
-    independent_content_owner_count: int = Field(
+    independent_content_source_count: int = Field(
         ge=0
     )
     claim_group_count: int = Field(ge=1)

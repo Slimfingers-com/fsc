@@ -14,12 +14,13 @@ from app.coverage.rule_based import (
 
 def source(
     *,
-    owner: str,
+    key: str,
     signal: bool = False,
 ):
     return CoverageSourceInput(
+        article_id=uuid4(),
         source_id=uuid4(),
-        independent_owner_key=owner,
+        independence_key=key,
         source_type=(
             "SIGNAL"
             if signal
@@ -64,8 +65,8 @@ def analyze(
 def test_two_independent_content_sources_have_no_source_gap():
     result = analyze(
         [
-            source(owner="a"),
-            source(owner="b"),
+            source(key="a"),
+            source(key="b"),
         ]
     )
     assert result.gaps == ()
@@ -74,8 +75,8 @@ def test_two_independent_content_sources_have_no_source_gap():
 def test_one_content_owner_creates_limited_source_gap():
     result = analyze(
         [
-            source(owner="same"),
-            source(owner="same"),
+            source(key="same"),
+            source(key="same"),
         ]
     )
     assert len(result.gaps) == 1
@@ -91,7 +92,7 @@ def test_signal_only_creates_attention_and_content_gaps():
     result = analyze(
         [
             source(
-                owner="signal-a",
+                key="signal-a",
                 signal=True,
             )
         ]
@@ -116,8 +117,8 @@ def test_only_observed_group_without_attribution_is_missing():
     )
     result = analyze(
         [
-            source(owner="a"),
-            source(owner="b"),
+            source(key="a"),
+            source(key="b"),
         ],
         [
             missing_group,

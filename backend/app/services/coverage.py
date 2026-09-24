@@ -47,6 +47,7 @@ from app.services.consensus import (
     ConsensusService,
     ConsensusSnapshot,
 )
+from app.services.source_independence import SourceIndependenceResolver
 
 
 logger = logging.getLogger(__name__)
@@ -66,7 +67,7 @@ class CoverageMetrics:
     source_count: int
     content_source_count: int
     signal_source_count: int
-    independent_content_owner_count: int
+    independent_content_source_count: int
     claim_group_count: int
     shared_group_count: int
     difference_count: int
@@ -101,7 +102,7 @@ class PreparedCoverageAnalysis:
 
 
 class CoverageService:
-    CONFIG_VERSION = "1"
+    CONFIG_VERSION = "2"
 
     def __init__(
         self,
@@ -146,18 +147,13 @@ class CoverageService:
         )
 
     @staticmethod
-    def _independent_owner_key(
-        source,
-    ) -> str:
-        ownership = (
-            (source.ownership or "")
-            .strip()
-            .casefold()
-        )
-        return (
-            f"ownership:{ownership}"
-            if ownership
-            else f"source:{source.id}"
+    def _independence_resolver(
+        snapshot: CoverageSnapshot,
+    ) -> SourceIndependenceResolver:
+        consensus_snapshot = snapshot.consensus_snapshot
+        return SourceIndependenceResolver(
+            relations=consensus_snapshot.source_relations,
+            provenance=consensus_snapshot.article_provenance,
         )
 
     def load_snapshot(
@@ -292,6 +288,7 @@ class CoverageService:
         self,
         snapshot: CoverageSnapshot,
     ) -> str:
+        independence = self._independence_resolver(snapshot)
         source_identity = [
             [
                 str(row.membership.id),
@@ -310,9 +307,10 @@ class CoverageService:
                     else ""
                 ),
                 row.source.country or "",
-                row.source.ownership or "",
-                self._independent_owner_key(
-                    row.source
+                independence.article_key(
+                    article_id=row.article.id,
+                    source_id=row.source.id,
+                    at=row.membership.article_time,
                 ),
             ]
             for row in snapshot.source_rows
@@ -401,13 +399,12 @@ class CoverageService:
         self,
         snapshot: CoverageSnapshot,
     ) -> PreparedCoverageAnalysis:
-        unique_sources = {}
-        for row in snapshot.source_rows:
-            unique_sources[row.source.id] = (
-                row.source
-            )
+        independence = self._independence_resolver(snapshot)
+        unique_sources = {
+            row.source.id: row.source
+            for row in snapshot.source_rows
+        }
 
-        source_inputs = []
         source_type_counts: dict[str, int] = {}
         coverage_scope_counts: dict[str, int] = {}
         country_counts: dict[str, int] = {}
@@ -428,40 +425,52 @@ class CoverageService:
             )
             country = source.country
             source_type_counts[source_type] = (
-                source_type_counts.get(
-                    source_type,
-                    0,
-                )
+                source_type_counts.get(source_type, 0)
                 + 1
             )
             if scope is not None:
                 coverage_scope_counts[scope] = (
-                    coverage_scope_counts.get(
-                        scope,
-                        0,
-                    )
+                    coverage_scope_counts.get(scope, 0)
                     + 1
                 )
             if country is not None:
                 country_counts[country] = (
-                    country_counts.get(
-                        country,
-                        0,
-                    )
+                    country_counts.get(country, 0)
                     + 1
                 )
 
+        source_inputs = []
+        for row in sorted(
+            snapshot.source_rows,
+            key=lambda value: (
+                str(value.article.id),
+                str(value.source.id),
+            ),
+        ):
+            source_type = self._enum_value(
+                row.source.source_type
+            )
+            scope = (
+                self._enum_value(
+                    row.source.coverage_scope
+                )
+                if row.source.coverage_scope is not None
+                else None
+            )
             source_inputs.append(
                 CoverageSourceInput(
-                    source_id=source.id,
-                    independent_owner_key=(
-                        self._independent_owner_key(
-                            source
+                    article_id=row.article.id,
+                    source_id=row.source.id,
+                    independence_key=(
+                        independence.article_key(
+                            article_id=row.article.id,
+                            source_id=row.source.id,
+                            at=row.membership.article_time,
                         )
                     ),
                     source_type=source_type,
                     coverage_scope=scope,
-                    country=country,
+                    country=row.source.country,
                     is_signal=(
                         source_type
                         == SourceType.SIGNAL.value
@@ -508,8 +517,16 @@ class CoverageService:
             for item in source_inputs
             if item.is_signal
         ]
-        independent_content_owners = {
-            item.independent_owner_key
+        content_source_ids = {
+            item.source_id
+            for item in content_sources
+        }
+        signal_source_ids = {
+            item.source_id
+            for item in signal_sources
+        }
+        independent_content_sources = {
+            item.independence_key
             for item in content_sources
         }
 
@@ -520,15 +537,15 @@ class CoverageService:
                     for row in snapshot.source_rows
                 }
             ),
-            source_count=len(source_inputs),
+            source_count=len(unique_sources),
             content_source_count=len(
-                content_sources
+                content_source_ids
             ),
             signal_source_count=len(
-                signal_sources
+                signal_source_ids
             ),
-            independent_content_owner_count=len(
-                independent_content_owners
+            independent_content_source_count=len(
+                independent_content_sources
             ),
             claim_group_count=len(
                 group_inputs
@@ -733,9 +750,9 @@ class CoverageService:
                 signal_source_count=(
                     metrics.signal_source_count
                 ),
-                independent_content_owner_count=(
+                independent_content_source_count=(
                     metrics
-                    .independent_content_owner_count
+                    .independent_content_source_count
                 ),
                 claim_group_count=(
                     metrics.claim_group_count

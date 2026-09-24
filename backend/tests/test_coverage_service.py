@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 from sqlalchemy import func, select
 
 from app.enums.coverage_scope import CoverageScope
+from app.enums.source_dependency import SourceRelationKind
 from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
 from app.models.coverage import (
@@ -10,6 +11,7 @@ from app.models.coverage import (
     StoryCoverageSummary,
     StoryMissingPerspective,
 )
+from app.models.source_dependency import SourceRelation
 from app.models.story_processing import StoryProcessingRun
 from app.services.coverage import CoverageService
 from tests.coverage_helpers import (
@@ -82,7 +84,7 @@ def test_coverage_metrics_capture_source_distributions(db):
 
     assert (
         prepared.metrics
-        .independent_content_owner_count
+        .independent_content_source_count
         == 2
     )
     assert (
@@ -109,7 +111,7 @@ def test_coverage_metrics_capture_source_distributions(db):
     )
 
 
-def test_same_owner_creates_observable_coverage_gap(db):
+def test_same_owner_does_not_reduce_independent_content_sources(db):
     data = build_coverage_story(
         db,
         same_owner=True,
@@ -120,18 +122,46 @@ def test_same_owner_creates_observable_coverage_gap(db):
         story_id=data["story"].id,
     )
     assert snapshot is not None
-    prepared = service.prepare(
-        snapshot
-    )
-    result = service.run_provider(
-        prepared
-    )
+    prepared = service.prepare(snapshot)
+    result = service.run_provider(prepared)
 
-    assert (
-        prepared.metrics
-        .independent_content_owner_count
-        == 1
+    assert prepared.metrics.independent_content_source_count == 2
+    assert result.gaps == ()
+
+
+def test_shared_newsroom_creates_observable_coverage_gap(db):
+    data = build_coverage_story(
+        db,
+        shared_newsroom=True,
     )
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+    prepared = service.prepare(snapshot)
+    result = service.run_provider(prepared)
+
+    assert prepared.metrics.independent_content_source_count == 1
+    assert len(result.gaps) == 1
+
+
+def test_verified_supplier_provenance_creates_observable_coverage_gap(db):
+    data = build_coverage_story(
+        db,
+        supplied_by_first=True,
+    )
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+    prepared = service.prepare(snapshot)
+    result = service.run_provider(prepared)
+
+    assert prepared.metrics.independent_content_source_count == 1
     assert len(result.gaps) == 1
 
 
@@ -147,8 +177,12 @@ def test_stale_consensus_generation_is_rejected(db):
         is not None
     )
 
-    data["sources"][0].ownership = (
-        "Changed Owner"
+    db.add(
+        SourceRelation(
+            source_id=data["sources"][0].id,
+            related_source_id=data["sources"][1].id,
+            relation_kind=SourceRelationKind.SHARED_NEWSROOM,
+        )
     )
     db.flush()
 

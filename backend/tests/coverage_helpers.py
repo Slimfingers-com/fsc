@@ -66,12 +66,18 @@ def build_coverage_story(
     *,
     same_owner: bool = False,
     contradictory: bool = False,
+    shared_newsroom: bool = False,
+    supplied_by_first: bool = False,
+    verified_provenance: bool = True,
     specs=None,
 ):
     data = build_consensus_story(
         db,
         same_owner=same_owner,
         contradictory=contradictory,
+        shared_newsroom=shared_newsroom,
+        supplied_by_first=supplied_by_first,
+        verified_provenance=verified_provenance,
         specs=specs,
     )
     persist_current_consensus(

@@ -524,3 +524,82 @@ def test_source_metric_rejects_invalid_period(client, db):
     )
 
     assert response.status_code == 422
+
+
+def test_source_relation_round_trip(client):
+    first_response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Relation Source",
+            "url": "https://relation-source.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    second_response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Upstream Agency",
+            "url": "https://upstream-agency.example.com",
+            "source_type": "AGENCY",
+        },
+    )
+    assert first_response.status_code == 201
+    assert second_response.status_code == 201
+    upstream_id = second_response.json()["id"]
+
+    relation_response = client.post(
+        "/sources/relation-source/relations",
+        headers=ADMIN_HEADERS,
+        json={
+            "related_source_id": upstream_id,
+            "relation_kind": "content_supplier",
+            "reference_date": "2026-09-24",
+            "provenance_url": "https://example.com/supplier-proof",
+        },
+    )
+    assert relation_response.status_code == 201
+    relation = relation_response.json()
+    assert relation["related_source_id"] == upstream_id
+    assert relation["relation_kind"] == "content_supplier"
+
+    source_detail = client.get("/sources/relation-source")
+    upstream_detail = client.get("/sources/upstream-agency")
+    assert source_detail.status_code == 200
+    assert upstream_detail.status_code == 200
+    assert len(source_detail.json()["outgoing_relations"]) == 1
+    assert len(source_detail.json()["incoming_relations"]) == 0
+    assert len(upstream_detail.json()["incoming_relations"]) == 1
+
+
+def test_source_relation_requires_admin_key(client):
+    first_response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Protected Relation Source",
+            "url": "https://protected-relation.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    second_response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Protected Relation Target",
+            "url": "https://protected-target.example.com",
+            "source_type": "AGENCY",
+        },
+    )
+    assert first_response.status_code == 201
+    assert second_response.status_code == 201
+
+    response = client.post(
+        "/sources/protected-relation-source/relations",
+        json={
+            "related_source_id": second_response.json()["id"],
+            "relation_kind": "content_supplier",
+        },
+    )
+    assert response.status_code == 401

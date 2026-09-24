@@ -44,7 +44,7 @@ def persist_coverage(db, data):
 def test_coverage_endpoints(client, db):
     data = build_coverage_story(
         db,
-        same_owner=True,
+        shared_newsroom=True,
     )
     persist_coverage(db, data)
 
@@ -54,7 +54,7 @@ def test_coverage_endpoints(client, db):
     assert summary.status_code == 200
     assert (
         summary.json()[
-            "independent_content_owner_count"
+            "independent_content_source_count"
         ]
         == 1
     )

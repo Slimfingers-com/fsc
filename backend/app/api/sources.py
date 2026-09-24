@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.core.settings import settings
 from app.db.session import get_db
 from app.schemas.source import SourceCreate, SourceDetailRead, SourceRead
+from app.schemas.source_dependency import SourceRelationCreate, SourceRelationRead
 from app.schemas.source_metadata import (
     SourceClassificationCreate,
     SourceClassificationRead,
@@ -193,3 +194,32 @@ def create_source_metric(
     db.commit()
     db.refresh(metric)
     return metric
+
+
+@router.post(
+    "/{slug}/relations",
+    response_model=SourceRelationRead,
+    status_code=201,
+)
+def create_source_relation(
+    slug: str,
+    data: SourceRelationCreate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    source = service.get_by_slug(db, slug)
+
+    if source is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Source not found.",
+        )
+
+    relation = service.create_relation(
+        db,
+        source,
+        data,
+    )
+    db.commit()
+    db.refresh(relation)
+    return relation

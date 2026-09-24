@@ -24,6 +24,7 @@ from app.models.consensus import (
     StoryDifferenceSummary,
 )
 from app.models.story import Story
+from app.models.source_dependency import ArticleProvenance, SourceRelation
 from app.models.story_processing import StoryProcessingRun
 from app.repositories.claim_relation import (
     ClaimRelationRepository,
@@ -33,7 +34,9 @@ from app.repositories.consensus import (
     ConsensusGroupRow,
     ConsensusRepository,
 )
+from app.repositories.source_dependency import SourceDependencyRepository
 from app.repositories.story import StoryRepository
+from app.services.source_independence import SourceIndependenceResolver
 from app.repositories.story_processing import (
     StoryProcessingCandidate,
     StoryProcessingClaim,
@@ -61,6 +64,8 @@ class ConsensusSnapshot:
     evidence: tuple[tuple[object, object], ...]
     perspectives: tuple[object, ...]
     relations: tuple[object, ...]
+    source_relations: tuple[SourceRelation, ...]
+    article_provenance: tuple[ArticleProvenance, ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -72,19 +77,24 @@ class PreparedConsensusAnalysis:
 
 
 class ConsensusService:
-    CONFIG_VERSION = "1"
+    CONFIG_VERSION = "2"
 
     def __init__(
         self,
         analyzer: ConsensusAnalyzer | None = None,
         repository: ConsensusRepository | None = None,
         claim_repository: ClaimRelationRepository | None = None,
+        dependency_repository: SourceDependencyRepository | None = None,
         *,
         config_version: str = CONFIG_VERSION,
     ) -> None:
         self.analyzer = analyzer or RuleBasedConsensusAnalyzer()
         self.repository = repository or ConsensusRepository()
         self.claim_repository = claim_repository or ClaimRelationRepository()
+        self.dependency_repository = (
+            dependency_repository
+            or SourceDependencyRepository()
+        )
         self.config_version = config_version
         if not config_version:
             raise ValueError("config_version must not be empty")
@@ -217,6 +227,29 @@ class ConsensusService:
         ):
             return None
 
+        article_provenance = (
+            self.dependency_repository
+            .load_verified_article_provenance(
+                db,
+                article_ids=article_ids,
+            )
+        )
+        dependency_source_ids = {
+            row.source.id
+            for row in rows
+        }
+        dependency_source_ids.update(
+            item.upstream_source_id
+            for item in article_provenance
+        )
+        source_relations = (
+            self.dependency_repository
+            .load_independence_relations(
+                db,
+                seed_source_ids=dependency_source_ids,
+            )
+        )
+
         return ConsensusSnapshot(
             story=story,
             memberships=tuple(memberships),
@@ -224,6 +257,8 @@ class ConsensusService:
             evidence=tuple(evidence),
             perspectives=tuple(perspectives),
             relations=tuple(relations),
+            source_relations=tuple(source_relations),
+            article_provenance=tuple(article_provenance),
         )
 
     @staticmethod
@@ -235,22 +270,19 @@ class ConsensusService:
         )
 
     @staticmethod
-    def _independent_source_key(row: ConsensusGroupRow) -> str:
-        ownership = (
-            (row.source.ownership or "")
-            .strip()
-            .casefold()
-        )
-        return (
-            f"ownership:{ownership}"
-            if ownership
-            else f"source:{row.source.id}"
+    def _independence_resolver(
+        snapshot: ConsensusSnapshot,
+    ) -> SourceIndependenceResolver:
+        return SourceIndependenceResolver(
+            relations=snapshot.source_relations,
+            provenance=snapshot.article_provenance,
         )
 
     def analysis_hash(
         self,
         snapshot: ConsensusSnapshot,
     ) -> str:
+        independence = self._independence_resolver(snapshot)
         membership_identity = [
             [
                 str(item.membership.id),
@@ -275,8 +307,11 @@ class ConsensusService:
                 row.claim.claim_hash,
                 str(row.article.id),
                 str(row.source.id),
-                row.source.ownership or "",
-                self._independent_source_key(row),
+                independence.article_key(
+                    article_id=row.article.id,
+                    source_id=row.source.id,
+                    at=row.article.published_at,
+                ),
             ]
             for row in snapshot.rows
         ]
@@ -319,6 +354,42 @@ class ConsensusService:
             ]
             for item in snapshot.relations
         ]
+        source_relation_identity = [
+            [
+                str(item.id),
+                str(item.source_id),
+                str(item.related_source_id),
+                self._enum_value(item.relation_kind),
+                (
+                    item.valid_from.isoformat()
+                    if item.valid_from is not None
+                    else ""
+                ),
+                (
+                    item.valid_to.isoformat()
+                    if item.valid_to is not None
+                    else ""
+                ),
+            ]
+            for item in snapshot.source_relations
+        ]
+        provenance_identity = [
+            [
+                str(item.id),
+                str(item.article_id),
+                str(item.upstream_source_id),
+                (
+                    str(item.upstream_article_id)
+                    if item.upstream_article_id is not None
+                    else ""
+                ),
+                self._enum_value(item.relation_kind),
+                item.confidence,
+                self._enum_value(item.detection_method),
+                item.verified,
+            ]
+            for item in snapshot.article_provenance
+        ]
         payload = [
             str(snapshot.story.id),
             snapshot.story.language_code or "",
@@ -327,6 +398,8 @@ class ConsensusService:
             evidence_identity,
             perspective_identity,
             relation_identity,
+            source_relation_identity,
+            provenance_identity,
             self.analyzer.provider,
             self.analyzer.version,
             self.processing_configuration_version,
@@ -355,6 +428,7 @@ class ConsensusService:
         self,
         snapshot: ConsensusSnapshot,
     ) -> PreparedConsensusAnalysis:
+        independence = self._independence_resolver(snapshot)
         rows_by_group: dict[UUID, list[ConsensusGroupRow]] = {}
         for row in snapshot.rows:
             rows_by_group.setdefault(
@@ -390,7 +464,11 @@ class ConsensusService:
                 if row.claim.id == group.representative_claim_id
             )
             independent_sources = {
-                self._independent_source_key(row)
+                independence.article_key(
+                    article_id=row.article.id,
+                    source_id=row.source.id,
+                    at=row.article.published_at,
+                )
                 for row in rows
             }
             group_evidence = evidence_by_group.get(

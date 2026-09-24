@@ -53,7 +53,7 @@ def test_distinct_owners_count_as_independent_sources(db):
     assert result.consensus[0].consensus_kind == ConsensusKind.SHARED
 
 
-def test_same_owner_sources_do_not_create_shared_consensus(db):
+def test_same_owner_sources_still_count_as_independent(db):
     data = build_consensus_story(
         db,
         same_owner=True,
@@ -68,13 +68,65 @@ def test_same_owner_sources_do_not_create_shared_consensus(db):
 
     group = prepared.analysis_input.groups[0]
     assert group.article_count == 2
-    assert group.independent_source_count == 1
+    assert group.independent_source_count == 2
 
+    result = service.run_provider(prepared)
+    assert result.consensus[0].consensus_kind == ConsensusKind.SHARED
+
+
+def test_shared_newsroom_sources_count_as_one_independent_source(db):
+    data = build_consensus_story(
+        db,
+        shared_newsroom=True,
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+    prepared = service.prepare(snapshot)
+
+    group = prepared.analysis_input.groups[0]
+    assert group.independent_source_count == 1
     result = service.run_provider(prepared)
     assert (
         result.consensus[0].consensus_kind
         == ConsensusKind.SINGLE_SOURCE
     )
+
+
+def test_verified_supplier_provenance_counts_as_one_independent_source(db):
+    data = build_consensus_story(
+        db,
+        supplied_by_first=True,
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+    prepared = service.prepare(snapshot)
+
+    assert prepared.analysis_input.groups[0].independent_source_count == 1
+
+
+def test_unverified_supplier_provenance_does_not_reduce_independence(db):
+    data = build_consensus_story(
+        db,
+        supplied_by_first=True,
+        verified_provenance=False,
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+    prepared = service.prepare(snapshot)
+
+    assert prepared.analysis_input.groups[0].independent_source_count == 2
 
 
 def test_contradiction_creates_difference_summary(db):

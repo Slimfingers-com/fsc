@@ -21,8 +21,9 @@ class MissingPerspectiveKind(StrEnum):
 
 @dataclass(frozen=True, slots=True)
 class CoverageSourceInput:
+    article_id: UUID
     source_id: UUID
-    independent_owner_key: str
+    independence_key: str
     source_type: str
     coverage_scope: str | None
     country: str | None
