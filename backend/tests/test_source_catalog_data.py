@@ -1584,3 +1584,77 @@ def test_de_regional_broadcast_outlet_keys_are_unique() -> None:
         for outlet in entry["outlets"]
     ]
     assert len(outlet_keys) == len(set(outlet_keys))
+
+
+AT_REGIONAL_BROADCAST_CATALOG = CATALOG_DIR / "at_regional_broadcast_v1.json"
+
+
+def load_at_regional_broadcast_catalog() -> dict:
+    return json.loads(AT_REGIONAL_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def at_regional_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_at_regional_broadcast_catalog_has_approved_editorial_sources() -> None:
+    catalog = load_at_regional_broadcast_catalog()
+    assert catalog["country"] == "AT"
+    assert catalog["scope"] == "regional"
+    assert catalog["approved_candidate_count"] == 19
+    entries = at_regional_broadcast_entries(catalog)
+    assert len(entries) == 19
+    assert len({entry["key"] for entry in entries}) == 19
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_at_regional_broadcast_has_nine_orf_landstudios() -> None:
+    catalog = load_at_regional_broadcast_catalog()
+    centre = {entry["name"]: entry for entry in next(g for g in catalog["groups"] if g["key"] == "liberal_centre")["entries"]}
+    assert set(centre) == {
+        "ORF Burgenland", "ORF Kärnten", "ORF Niederösterreich", "ORF Oberösterreich",
+        "ORF Salzburg", "ORF Steiermark", "ORF Tirol", "ORF Vorarlberg", "ORF Wien",
+    }
+    assert all(len(entry["outlets"]) == 3 for entry in centre.values())
+    assert all(entry["classification_status"] == "public_service_centre_reference_not_political_classification" for entry in centre.values())
+
+
+def test_at_regional_broadcast_r9_does_not_merge_partner_sources() -> None:
+    catalog = load_at_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in at_regional_broadcast_entries(catalog)}
+    assert {"W24", "LT1", "Kanal3", "RTS Regionalfernsehen Salzburg", "Tirol TV"} <= set(entries)
+    assert "R9" not in entries
+    assert "R9" in {item["name"] for item in catalog["excluded_or_deferred"]}
+
+
+def test_at_regional_broadcast_rtv_has_two_source_f_provenance() -> None:
+    catalog = load_at_regional_broadcast_catalog()
+    radical = next(g for g in catalog["groups"] if g["key"] == "radical_right")
+    assert [entry["name"] for entry in radical["entries"]] == ["RTV Regionalfernsehen OÖ"]
+    rtv = radical["entries"][0]
+    assert rtv["classification_status"] == "two_source_extreme_right_spectrum_confirmed"
+    assert len({item["classifier_name"] for item in rtv["classifications"]}) >= 2
+
+
+def test_at_regional_broadcast_private_radio_sources_are_unclassified() -> None:
+    catalog = load_at_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in catalog["unclassified_entries"]}
+    for name in ("Antenne Steiermark", "Life Radio", "Radio U1 Tirol", "Radio 88.6"):
+        assert entries[name]["classification_status"] == "unclassified_research_candidate"
+        assert entries[name]["classifications"] == []
+
+
+def test_at_regional_broadcast_kurier_tv_extends_existing_print_source_later() -> None:
+    catalog = load_at_regional_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+    assert "KURIER TV" in deferred
+    assert "existing Kurier Source" in deferred["KURIER TV"]
+
+
+def test_at_regional_broadcast_outlet_keys_are_unique() -> None:
+    catalog = load_at_regional_broadcast_catalog()
+    outlet_keys = [outlet["key"] for entry in at_regional_broadcast_entries(catalog) for outlet in entry["outlets"]]
+    assert len(outlet_keys) == len(set(outlet_keys))
