@@ -655,7 +655,7 @@ def test_de_national_broadcast_defers_joint_or_non_linear_cases() -> None:
     deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
     assert "phoenix" in deferred
     assert "scalar ownership-based independence key" in deferred["phoenix"]
-    assert {"Deutsche Welle", "BILD TV", "REGIOCAST Nachrichten"} <= set(deferred)
+    assert {"Deutsche Welle", "BILD TV"} <= set(deferred)
 
 
 AT_BROADCAST_CATALOG = CATALOG_DIR / "at_broadcast_v1.json"
@@ -1876,3 +1876,68 @@ def test_us_regional_broadcast_outlet_keys_are_unique() -> None:
         for outlet in entry["outlets"]
     ]
     assert len(keys) == len(set(keys))
+
+AGENCY_CONTENT_SUPPLIER_CATALOG = CATALOG_DIR / "agency_content_supplier_v1.json"
+
+
+def load_agency_content_supplier_catalog() -> dict:
+    return json.loads(AGENCY_CONTENT_SUPPLIER_CATALOG.read_text(encoding="utf-8"))
+
+
+def test_agency_content_supplier_catalog_has_approved_core() -> None:
+    catalog = load_agency_content_supplier_catalog()
+    assert catalog["media_category"] == "agency_content_supplier"
+    assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert catalog["segmentation_policy"] == "functional_role_not_political_orientation"
+    assert catalog["approved_candidate_count"] == 9
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]]
+    assert len(entries) == 9
+    assert {entry["name"] for entry in entries} == {
+        "dpa",
+        "dts Nachrichtenagentur",
+        "APA",
+        "Keystone-SDA",
+        "PA Media",
+        "Reuters",
+        "Associated Press",
+        "AFP",
+        "REGIOCAST Nachrichten",
+    }
+
+
+def test_agency_catalog_is_functional_not_political() -> None:
+    catalog = load_agency_content_supplier_catalog()
+    entries = [entry for group in catalog["groups"] for entry in group["entries"]]
+    assert all(entry["source_type"] == "AGENCY" for entry in entries)
+    assert all(entry["classification_status"] == "functional_supplier_not_political_classification" for entry in entries)
+    assert all(entry["classifications"] == [] for entry in entries)
+
+
+def test_radio_supplier_services_extend_existing_editorial_sources() -> None:
+    gb = json.loads((CATALOG_DIR / "gb_broadcast_v1.json").read_text(encoding="utf-8"))
+    us = json.loads((CATALOG_DIR / "us_broadcast_v1.json").read_text(encoding="utf-8"))
+    gb_entries = {entry["key"]: entry for group in gb["groups"] for entry in group["entries"]}
+    us_entries = {entry["key"]: entry for group in us["groups"] for entry in group["entries"]}
+
+    assert "Sky News Radio" in {outlet["name"] for outlet in gb_entries["sky-news"]["outlets"]}
+    assert "ABC News Radio" in {outlet["name"] for outlet in us_entries["abc-news"]["outlets"]}
+    assert "Fox News Radio" in {outlet["name"] for outlet in us_entries["fox-news"]["outlets"]}
+
+    all_names = {
+        entry["name"]
+        for catalog in (gb, us)
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    assert {"Sky News Radio", "ABC News Radio", "Fox News Radio"}.isdisjoint(all_names)
+
+
+def test_regiocast_moves_from_de_broadcast_deferred_to_supplier_catalog() -> None:
+    de = load_de_broadcast_catalog()
+    deferred = {item["name"] for item in de["excluded_or_deferred"]}
+    assert "REGIOCAST Nachrichten" not in deferred
+    agency = load_agency_content_supplier_catalog()
+    names = {entry["name"] for group in agency["groups"] for entry in group["entries"]}
+    assert "REGIOCAST Nachrichten" in names

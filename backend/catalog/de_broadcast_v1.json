@@ -598,10 +598,6 @@
     {
       "name": "BILD TV",
       "reason": "Linear channel discontinued; do not treat inactive linear television as current broadcast coverage."
-    },
-    {
-      "name": "REGIOCAST Nachrichten",
-      "reason": "Central news/content supplier rather than a consumer-facing radio Source; candidate for later agency/content-supplier block."
     }
   ],
   "approved_candidate_count": 14,

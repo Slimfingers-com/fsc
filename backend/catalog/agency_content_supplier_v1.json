@@ -1,0 +1,228 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "scope": "international",
+  "media_category": "agency_content_supplier",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "one_editorial_source_multiple_services_and_distribution_channels_as_outlets",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "Functional grouping is not ideological; later political classifications remain externally attributed."
+  },
+  "groups": [
+    {
+      "key": "national_generalists",
+      "label": "national general-interest news agencies",
+      "entries": [
+        {
+          "key": "dpa",
+          "name": "dpa",
+          "homepage": "https://www.dpa.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        },
+        {
+          "key": "dts-nachrichtenagentur",
+          "name": "dts Nachrichtenagentur",
+          "homepage": "https://www.dts-nachrichtenagentur.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        },
+        {
+          "key": "apa",
+          "name": "APA",
+          "homepage": "https://apa.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        },
+        {
+          "key": "keystone-sda",
+          "name": "Keystone-SDA",
+          "homepage": "https://www.keystone-sda.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "CH",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        },
+        {
+          "key": "pa-media",
+          "name": "PA Media",
+          "homepage": "https://pa.media/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "global_generalists",
+      "label": "global general-interest news agencies",
+      "entries": [
+        {
+          "key": "reuters",
+          "name": "Reuters",
+          "homepage": "https://www.reuters.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        },
+        {
+          "key": "associated-press",
+          "name": "Associated Press",
+          "homepage": "https://apnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        },
+        {
+          "key": "afp",
+          "name": "AFP",
+          "homepage": "https://www.afp.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "FR",
+          "language": "fr",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "broadcast_content_suppliers",
+      "label": "broadcast-specific content suppliers",
+      "entries": [
+        {
+          "key": "regiocast-nachrichten",
+          "name": "REGIOCAST Nachrichten",
+          "homepage": "https://www.regiocast.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "AGENCY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_supplier_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [],
+          "notes": [
+            "Agency/content-supplier Source; functional catalog placement is not a political classification."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 9,
+  "review_status": {
+    "source_selection": "approved_9_source_agency_content_supplier_core_2026_09_24",
+    "source_identity": "one_editorial_source_multiple_outlets",
+    "political_mapping": "no_functional_group_is_a_political_classification"
+  },
+  "deferred_specialists": [
+    {
+      "name": "Bloomberg News",
+      "reason": "Specialist business/financial supplier; defer to specialist-agency expansion."
+    },
+    {
+      "name": "Dow Jones Newswires",
+      "reason": "Specialist business/financial supplier; defer to specialist-agency expansion."
+    },
+    {
+      "name": "epd",
+      "reason": "Thematic specialist agency; defer to specialist-agency expansion."
+    },
+    {
+      "name": "KNA",
+      "reason": "Thematic specialist agency; defer to specialist-agency expansion."
+    }
+  ]
+}

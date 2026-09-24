@@ -223,11 +223,20 @@
               "scope": "national",
               "language": "en",
               "homepage": "https://news.sky.com/"
+            },
+            {
+              "key": "sky-news-radio",
+              "name": "Sky News Radio",
+              "publication_form": "radio",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://news.sky.com/"
             }
           ],
           "notes": [
-            "National UK television news Source with its own newsroom. Sky News Radio is not modeled as a consumer radio Source because it primarily supplies bulletins to commercial radio stations.",
-            "C is a mainstream-reference planning position, not a persisted ideological classification."
+            "National UK television news Source with its own newsroom.",
+            "C is a mainstream-reference planning position, not a persisted ideological classification.",
+            "Sky News Radio is an outlet/service of this existing editorial Source, not an independent Source."
           ]
         },
         {

@@ -314,10 +314,19 @@
               "scope": "national",
               "language": "en",
               "homepage": "https://abcnews.go.com/WN"
+            },
+            {
+              "key": "abc-news-radio",
+              "name": "ABC News Radio",
+              "publication_form": "radio",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://abcnews.go.com/"
             }
           ],
           "notes": [
-            "C is a mainstream-reference planning placement, not a persisted political classification. ABC News Radio affiliate supply is deferred to Agency/Content Supplier."
+            "C is a mainstream-reference planning placement, not a persisted political classification.",
+            "ABC News Radio is an outlet/service of this existing editorial Source, not an independent Source."
           ]
         },
         {
@@ -484,10 +493,19 @@
               "scope": "national",
               "language": "en",
               "homepage": "https://www.foxnews.com/"
+            },
+            {
+              "key": "fox-news-radio",
+              "name": "Fox News Radio",
+              "publication_form": "radio",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://www.foxnews.com/"
             }
           ],
           "notes": [
-            "Fox News Radio affiliate bulletins are deferred to Agency/Content Supplier. SiriusXM simulcast does not create a separate radio Source."
+            "SiriusXM simulcast does not create a separate radio Source.",
+            "Fox News Radio is an outlet/service of this existing editorial Source, not an independent Source."
           ]
         }
       ],
