@@ -1,0 +1,817 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "languages": [
+    "en"
+  ],
+  "scope": "national",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "editorial_source_not_distribution_network_affiliate_feed_or_simulcast",
+  "regional_policy": "local_network_affiliates_regional_public_media_and_local_talk_radio_are_excluded_and_reviewed_in_a_separate_us_regional_block",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Research target is 3–5 editorially independent Sources per political planning segment and per broadcast form. Genuine US market gaps remain explicit. Affiliate feeds, simulcasts, specialist business channels and local stations do not create independent national Sources.",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "radicality_resolution": "conflicting_external_radicality_labels_remain_explicitly_unresolved",
+    "notes": "A–F planning placement is not itself a persisted FSC political classification. Religious identity, public-service status, self-described channel positioning and distribution structure are never automatically converted into ideology."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No approved national US television or radio Source currently satisfies FSC's two-independent-source threshold for A. Digital-native outlets are reviewed separately."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "democracy-now",
+          "name": "Democracy Now!",
+          "homepage": "https://www.democracynow.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/democracy-now-media-bias",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "AllSides rates the online content Left and notes that its rating does not automatically cover broadcast content; scope caveat retained."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/democracy-now/",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "MBFC rates Democracy Now Left and identifies it as TV/Radio. FSC stores only the attributed orientation, not MBFC factuality judgments."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "democracy-now-tv",
+              "name": "Democracy Now! television",
+              "publication_form": "television",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://www.democracynow.org/"
+            },
+            {
+              "key": "democracy-now-radio",
+              "name": "Democracy Now! radio",
+              "publication_form": "radio",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://www.democracynow.org/"
+            }
+          ],
+          "notes": [
+            "One cross-media editorial Source syndicated through public/community television and radio; individual carrier stations do not create additional Sources."
+          ]
+        },
+        {
+          "key": "pbs-newshour",
+          "name": "PBS NewsHour",
+          "homepage": "https://www.pbs.org/newshour/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_left",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/pbs-newshour-media-bias",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "AllSides rates PBS NewsHour online content Lean Left and explicitly limits that rating to online coverage; FSC preserves this scope caveat."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/pbs-news-hour/",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "MBFC rates PBS NewsHour Left-Center and identifies it as a TV station. Orientation attribution only."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "pbs-newshour-tv",
+              "name": "PBS NewsHour",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.pbs.org/newshour/"
+            }
+          ],
+          "notes": [
+            "PBS NewsHour is modeled as the editorial Source; PBS member-station distribution does not turn PBS as a whole into the Source."
+          ]
+        },
+        {
+          "key": "ms-now",
+          "name": "MS NOW",
+          "homepage": "https://www.ms.now/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/ms-now-media-bias",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "AllSides rates MS NOW online content Left and explicitly excludes broadcast TV from its rating scope; caveat retained."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/msnbc/",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "MBFC rates MS NOW Left and identifies it as a TV station. Orientation attribution only."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ms-now-tv",
+              "name": "MS NOW",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ms.now/"
+            }
+          ],
+          "notes": [
+            "MS NOW is modeled separately from NBC News following the Versant separation completed in 2026."
+          ]
+        },
+        {
+          "key": "cnn",
+          "name": "CNN",
+          "homepage": "https://www.cnn.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_left",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/cnn-media-bias",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "AllSides rating applies to CNN Digital rather than broadcast TV; FSC stores this scope limitation."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/cnn-bias/",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "MBFC rates CNN Left-Center and its analysis includes on-air personalities. Orientation attribution only."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cnn-tv",
+              "name": "CNN",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cnn.com/"
+            }
+          ],
+          "notes": [
+            "SiriusXM carriage or simulcast does not create a separate CNN radio Source."
+          ]
+        },
+        {
+          "key": "npr",
+          "name": "NPR",
+          "homepage": "https://www.npr.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "lean_left",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/npr-media-bias",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "AllSides rates NPR online written news Lean Left and explicitly states that the rating does not cover NPR radio; FSC preserves this scope caveat."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/npr/",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "MBFC rates NPR Left-Center and identifies it as radio. Orientation attribution only."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "npr-morning-edition",
+              "name": "Morning Edition",
+              "publication_form": "radio",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://www.npr.org/programs/morning-edition/"
+            },
+            {
+              "key": "npr-all-things-considered",
+              "name": "All Things Considered",
+              "publication_form": "radio",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://www.npr.org/programs/all-things-considered/"
+            },
+            {
+              "key": "npr-weekend-edition",
+              "name": "Weekend Edition",
+              "publication_form": "radio",
+              "scope": "national_syndicated",
+              "language": "en",
+              "homepage": "https://www.npr.org/programs/weekend-edition-saturday/"
+            }
+          ],
+          "notes": [
+            "NPR is one editorial/program-production Source; nationally distributed NPR programmes are outlets/formats, not separate Sources. Local member stations remain regional."
+          ]
+        }
+      ],
+      "coverage_exception": "B has four approved television Sources plus one national radio Source; the radio side remains below the 3–5 goal when editorial Source identity is respected."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/mainstream reference",
+      "entries": [
+        {
+          "key": "abc-news",
+          "name": "ABC News",
+          "homepage": "https://abcnews.go.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "mainstream_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "abc-world-news-tonight",
+              "name": "ABC World News Tonight",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://abcnews.go.com/WN"
+            }
+          ],
+          "notes": [
+            "C is a mainstream-reference planning placement, not a persisted political classification. ABC News Radio affiliate supply is deferred to Agency/Content Supplier."
+          ]
+        },
+        {
+          "key": "cbs-news",
+          "name": "CBS News",
+          "homepage": "https://www.cbsnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "mainstream_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cbs-evening-news",
+              "name": "CBS Evening News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cbsnews.com/evening-news/"
+            }
+          ],
+          "notes": [
+            "C is a mainstream-reference planning placement, not a persisted political classification. CBS News Radio ended in May 2026 and is not an active radio outlet."
+          ]
+        },
+        {
+          "key": "nbc-news",
+          "name": "NBC News",
+          "homepage": "https://www.nbcnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "mainstream_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nbc-nightly-news",
+              "name": "NBC Nightly News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nbcnews.com/nightly-news"
+            }
+          ],
+          "notes": [
+            "NBC News remains separate from MS NOW after the Versant separation. C is a mainstream-reference planning placement, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "newsnation",
+          "name": "NewsNation",
+          "homepage": "https://www.newsnationnow.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "conflicting_external_orientation_reference_only",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "newsnation-tv",
+              "name": "NewsNation",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.newsnationnow.com/"
+            }
+          ],
+          "notes": [
+            "External current ratings disagree between Center and Right-Center; FSC retains NewsNation in the C reference pool without a persisted ideological classification."
+          ]
+        },
+        {
+          "key": "siriusxm-potus",
+          "name": "SiriusXM POTUS",
+          "homepage": "https://www.siriusxm.com/channels/potus-politics",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "self_described_multi_perspective_reference_not_political_classification",
+          "classifications": [
+            {
+              "dimension": "media_positioning",
+              "value": "politics_from_all_perspectives",
+              "classifier_type": "self_description",
+              "classifier_name": "SiriusXM",
+              "source_url": "https://www.siriusxm.com/channels/potus-politics",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "Self-description only; not an independent political classification."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "siriusxm-potus-radio",
+              "name": "SiriusXM POTUS",
+              "publication_form": "radio",
+              "scope": "national_satellite",
+              "language": "en",
+              "homepage": "https://www.siriusxm.com/channels/potus-politics"
+            }
+          ],
+          "notes": [
+            "POTUS is a separately programmed national political channel and is modeled independently from SiriusXM Progress and Patriot. C is a research-reference placement only."
+          ]
+        }
+      ],
+      "coverage_exception": "Television has four mainstream-reference Sources. Radio has only POTUS in C; national radio political channels are not reclassified merely to meet the target."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [],
+      "coverage_exception": "No approved national US television or radio Source is placed in D. Religious identity and self-described conservatism alone do not satisfy the two-independent-source political rule."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "fox-news",
+          "name": "Fox News",
+          "homepage": "https://www.foxnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "AllSides",
+              "source_url": "https://www.allsides.com/news-source/fox-news-media-bias",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "AllSides rates Fox News Digital Right and explicitly excludes broadcast TV from its rating scope; caveat retained."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/fox-news-bias/",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "MBFC rates Fox News Right. Orientation attribution only."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fox-news-channel",
+              "name": "Fox News Channel",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.foxnews.com/"
+            }
+          ],
+          "notes": [
+            "Fox News Radio affiliate bulletins are deferred to Agency/Content Supplier. SiriusXM simulcast does not create a separate radio Source."
+          ]
+        }
+      ],
+      "coverage_exception": "Fox News is the only approved national Source in E. Self-described conservative SiriusXM Patriot remains politically unclassified until independent provenance is sufficient."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified far-right spectrum",
+      "entries": [
+        {
+          "key": "oan",
+          "name": "One America News",
+          "homepage": "https://www.oann.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_radicality_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "far_right",
+              "classifier_type": "news_agency",
+              "classifier_name": "Reuters",
+              "source_url": "https://www.reuters.com/business/media-telecom/right-wing-one-america-news-provide-newsfeed-voice-america-2025-05-07/",
+              "reference_date": "2025-05-07",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "Reuters describes OAN as a far-right outlet. External attribution, not an official extremism designation."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "far_right_outlet",
+              "classifier_type": "peer_reviewed_academic",
+              "classifier_name": "Political Communication",
+              "source_url": "https://journals.sagepub.com/doi/10.1177/19401612241235630",
+              "reference_date": "2024-03-18",
+              "retrieved_at": "2026-09-24T07:35:00Z",
+              "notes": "Peer-reviewed study explicitly conceptualizes OANN among far-right outlets. Academic classification, not an official extremism designation."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oan-tv",
+              "name": "One America News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.oann.com/"
+            }
+          ],
+          "notes": [
+            "F research placement records convergent external far-right classification and does not imply an official US extremist designation."
+          ]
+        }
+      ],
+      "coverage_exception": "OAN is the only approved national television Source with convergent two-source far-right classification. No radio Source is added artificially."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "newsmax",
+      "name": "Newsmax",
+      "homepage": "https://www.newsmax.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "right_direction_confirmed_radicality_unresolved",
+      "classifications": [
+        {
+          "dimension": "editorial_orientation",
+          "value": "right",
+          "classifier_type": "media_rating_database",
+          "classifier_name": "AllSides",
+          "source_url": "https://www.allsides.com/news-source/newsmax",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T07:35:00Z",
+          "notes": "AllSides currently rates Newsmax Right."
+        },
+        {
+          "dimension": "editorial_orientation",
+          "value": "right",
+          "classifier_type": "media_rating_database",
+          "classifier_name": "Media Bias/Fact Check",
+          "source_url": "https://mediabiasfactcheck.com/newsmax-bias-credibilty-reliability/",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T07:35:00Z",
+          "notes": "MBFC currently rates Newsmax Right. Orientation attribution only."
+        },
+        {
+          "dimension": "radicality_positioning",
+          "value": "far_right_outlet",
+          "classifier_type": "peer_reviewed_academic",
+          "classifier_name": "Political Communication",
+          "source_url": "https://journals.sagepub.com/doi/10.1177/19401612241235630",
+          "reference_date": "2024-03-18",
+          "retrieved_at": "2026-09-24T07:35:00Z",
+          "notes": "Peer-reviewed study conceptualizes Newsmax among far-right outlets. This conflicts with current Right classifications on radicality and is preserved rather than force-resolved."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "newsmax-tv",
+          "name": "Newsmax",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.newsmax.com/"
+        }
+      ],
+      "notes": [
+        "Rightward direction is externally well supported, but E versus F radicality is unresolved because reputable external sources use different labels. Newsmax therefore remains outside the A–F group array."
+      ]
+    },
+    {
+      "key": "ewtn-us",
+      "name": "EWTN",
+      "homepage": "https://www.ewtn.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "catholic",
+          "classifier_type": "self_description",
+          "classifier_name": "EWTN",
+          "source_url": "https://www.ewtn.com/",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T07:35:00Z",
+          "notes": "Catholic self-positioning is stored separately and does not establish a political FSC classification."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "ewtn-tv-us",
+          "name": "EWTN television",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.ewtn.com/"
+        },
+        {
+          "key": "ewtn-radio-us",
+          "name": "EWTN Radio",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.ewtn.com/radio"
+        }
+      ],
+      "notes": [
+        "One cross-media Source for EWTN television and radio news/current-affairs output. Religious identity is not automatically mapped to D or E."
+      ]
+    },
+    {
+      "key": "siriusxm-progress",
+      "name": "SiriusXM Progress",
+      "homepage": "https://www.siriusxm.com/channels/siriusxm-progress",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "self_positioned_not_independently_confirmed",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "progressive_politics",
+          "classifier_type": "self_description",
+          "classifier_name": "SiriusXM",
+          "source_url": "https://www.siriusxm.com/channels/siriusxm-progress",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T07:35:00Z",
+          "notes": "Operator self-description; not sufficient for persisted B classification without independent external provenance."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "siriusxm-progress-radio",
+          "name": "SiriusXM Progress",
+          "publication_form": "radio",
+          "scope": "national_satellite",
+          "language": "en",
+          "homepage": "https://www.siriusxm.com/channels/siriusxm-progress"
+        }
+      ],
+      "notes": [
+        "Separately programmed national political channel. Kept unclassified despite explicit progressive self-positioning because the two-independent-source rule is not yet met."
+      ]
+    },
+    {
+      "key": "siriusxm-patriot",
+      "name": "SiriusXM Patriot",
+      "homepage": "https://www.siriusxm.com/channels/siriusxm-patriot",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "self_positioned_not_independently_confirmed",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "conservative_talk",
+          "classifier_type": "self_description",
+          "classifier_name": "SiriusXM",
+          "source_url": "https://www.siriusxm.com/channels/siriusxm-patriot",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T07:35:00Z",
+          "notes": "Operator self-description; not sufficient for persisted E classification without independent external provenance."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "siriusxm-patriot-radio",
+          "name": "SiriusXM Patriot",
+          "publication_form": "radio",
+          "scope": "national_satellite",
+          "language": "en",
+          "homepage": "https://www.siriusxm.com/channels/siriusxm-patriot"
+        }
+      ],
+      "notes": [
+        "Separately programmed national political channel. Kept unclassified despite explicit conservative self-positioning because the two-independent-source rule is not yet met."
+      ]
+    },
+    {
+      "key": "american-family-radio",
+      "name": "American Family Radio",
+      "homepage": "https://afr.net/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "christian_biblical_worldview",
+          "classifier_type": "self_description",
+          "classifier_name": "American Family Radio",
+          "source_url": "https://radioconnection.afr.net/who-we-are/",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T07:35:00Z",
+          "notes": "Religious/worldview self-description only; not an FSC political classification."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "afr-radio",
+          "name": "American Family Radio",
+          "publication_form": "radio",
+          "scope": "national_multistate",
+          "language": "en",
+          "homepage": "https://afr.net/"
+        }
+      ],
+      "notes": [
+        "Included because AFR combines religious programming with recurring news, political and social-issues programming. Evangelical identity is not automatically mapped to D or E."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "ABC News Radio",
+      "reason": "National affiliate news-content service rather than an independent consumer radio Source; reserve for the Agency/Content Supplier model."
+    },
+    {
+      "name": "Fox News Radio",
+      "reason": "Affiliate-oriented radio news network and bulletin supplier; reserve for the Agency/Content Supplier model rather than duplicate Fox News."
+    },
+    {
+      "name": "CBS News Radio",
+      "reason": "Service ended on May 22, 2026 and is not an active national radio Source."
+    },
+    {
+      "name": "Free Speech TV",
+      "reason": "Distribution platform/network for relevant programming; Democracy Now! is the approved editorial Source and carrier distribution does not create another Source."
+    },
+    {
+      "name": "CNN SiriusXM simulcast",
+      "reason": "Simulcast of the existing CNN Source; distribution on satellite radio does not create a separate radio Source."
+    },
+    {
+      "name": "Fox News SiriusXM simulcast",
+      "reason": "Simulcast of the existing Fox News Source; distribution on satellite radio does not create a separate radio Source."
+    },
+    {
+      "name": "MS NOW SiriusXM simulcast",
+      "reason": "Simulcast of the existing MS NOW Source; distribution on satellite radio does not create a separate radio Source."
+    },
+    {
+      "name": "C-SPAN / C-SPAN Radio",
+      "reason": "Better modeled later as institutional/public-affairs primary-source infrastructure rather than a standard editorial news Source."
+    },
+    {
+      "name": "CNBC",
+      "reason": "Specialist business/financial broadcaster reserved for a later specialist economic/financial source block."
+    },
+    {
+      "name": "Bloomberg Television / Radio",
+      "reason": "Specialist business/financial broadcaster reserved for a later specialist economic/financial source block."
+    },
+    {
+      "name": "Fox Business",
+      "reason": "Specialist business/financial broadcaster reserved for a later specialist economic/financial source block."
+    },
+    {
+      "name": "Voice of America",
+      "reason": "International US-government-funded service; reserve for international/state-funded comparison rather than the US-national core."
+    },
+    {
+      "name": "local network affiliates and public-media stations",
+      "reason": "ABC/CBS/NBC/Fox affiliates and regional NPR/PBS member stations are reserved for the later US regional block."
+    }
+  ],
+  "approved_candidate_count": 17,
+  "new_source_count": 17,
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+}

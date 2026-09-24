@@ -1191,3 +1191,210 @@ def test_gb_national_broadcast_classification_provenance_is_complete() -> None:
             assert classification["source_url"].startswith("https://")
             assert classification["reference_date"]
             assert classification["retrieved_at"]
+
+
+US_BROADCAST_CATALOG = CATALOG_DIR / "us_broadcast_v1.json"
+
+
+def load_us_broadcast_catalog() -> dict:
+    return json.loads(US_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def us_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_us_national_broadcast_catalog_has_approved_editorial_sources() -> None:
+    catalog = load_us_broadcast_catalog()
+    assert catalog["country"] == "US"
+    assert catalog["scope"] == "national"
+    assert catalog["media_category"] == "broadcast"
+    assert catalog["approved_candidate_count"] == 17
+    assert catalog["new_source_count"] == 17
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+
+    entries = us_broadcast_entries(catalog)
+    assert len(entries) == 17
+    assert len({entry["key"] for entry in entries}) == 17
+    assert len({entry["name"].casefold() for entry in entries}) == 17
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_us_crossmedia_sources_are_not_duplicated_by_medium() -> None:
+    catalog = load_us_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_broadcast_entries(catalog)}
+
+    assert {outlet["publication_form"] for outlet in entries["Democracy Now!"]["outlets"]} == {
+        "television",
+        "radio",
+    }
+    assert {outlet["publication_form"] for outlet in entries["EWTN"]["outlets"]} == {
+        "television",
+        "radio",
+    }
+    assert "Democracy Now! radio" not in entries
+    assert "EWTN Radio" not in entries
+
+
+def test_us_npr_programmes_are_outlets_of_one_source() -> None:
+    catalog = load_us_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_broadcast_entries(catalog)}
+    npr = entries["NPR"]
+
+    assert {outlet["name"] for outlet in npr["outlets"]} == {
+        "Morning Edition",
+        "All Things Considered",
+        "Weekend Edition",
+    }
+    assert "Morning Edition" not in entries
+    assert "All Things Considered" not in entries
+
+
+def test_us_siriusxm_political_channels_are_distinct_sources() -> None:
+    catalog = load_us_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_broadcast_entries(catalog)}
+
+    assert {
+        "SiriusXM POTUS",
+        "SiriusXM Progress",
+        "SiriusXM Patriot",
+    } <= set(entries)
+    assert len({
+        entries["SiriusXM POTUS"]["key"],
+        entries["SiriusXM Progress"]["key"],
+        entries["SiriusXM Patriot"]["key"],
+    }) == 3
+    assert entries["SiriusXM Progress"]["classification_status"] == "self_positioned_not_independently_confirmed"
+    assert entries["SiriusXM Patriot"]["classification_status"] == "self_positioned_not_independently_confirmed"
+
+
+def test_us_newsmax_right_direction_is_confirmed_but_radicality_unresolved() -> None:
+    catalog = load_us_broadcast_catalog()
+    grouped_names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    entries = {entry["name"]: entry for entry in us_broadcast_entries(catalog)}
+    newsmax = entries["Newsmax"]
+
+    assert "Newsmax" not in grouped_names
+    assert newsmax["classification_status"] == "right_direction_confirmed_radicality_unresolved"
+    assert {
+        item["value"]
+        for item in newsmax["classifications"]
+        if item["dimension"] == "editorial_orientation"
+    } == {"right"}
+    assert {
+        item["value"]
+        for item in newsmax["classifications"]
+        if item["dimension"] == "radicality_positioning"
+    } == {"far_right_outlet"}
+
+
+def test_us_confirmed_direction_sources_have_independent_provenance() -> None:
+    catalog = load_us_broadcast_catalog()
+    entries = us_broadcast_entries(catalog)
+    confirmed = [
+        entry for entry in entries
+        if entry["classification_status"] == "two_source_direction_confirmed"
+    ]
+    assert {entry["name"] for entry in confirmed} == {
+        "Democracy Now!",
+        "PBS NewsHour",
+        "MS NOW",
+        "CNN",
+        "NPR",
+        "Fox News",
+    }
+
+    for entry in confirmed:
+        orientation_sources = {
+            item["classifier_name"]
+            for item in entry["classifications"]
+            if item["dimension"] == "editorial_orientation"
+        }
+        assert len(orientation_sources) >= 2
+
+
+def test_us_oan_far_right_status_has_two_independent_sources() -> None:
+    catalog = load_us_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_broadcast_entries(catalog)}
+    oan = entries["One America News"]
+
+    assert oan["classification_status"] == "two_source_radicality_confirmed"
+    assert len({
+        item["classifier_name"]
+        for item in oan["classifications"]
+        if item["dimension"] == "editorial_orientation"
+    }) >= 2
+
+
+def test_us_religious_sources_are_not_politically_classified() -> None:
+    catalog = load_us_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_broadcast_entries(catalog)}
+
+    for name in ("EWTN", "American Family Radio"):
+        assert entries[name]["classification_status"] == "thematic_candidate_not_political_classification"
+        assert not any(
+            item["dimension"] == "editorial_orientation"
+            for item in entries[name]["classifications"]
+        )
+
+
+def test_us_supplier_simulcast_and_specialist_cases_are_deferred() -> None:
+    catalog = load_us_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+
+    assert "ABC News Radio" in deferred
+    assert "Agency/Content Supplier" in deferred["ABC News Radio"]
+    assert "Fox News Radio" in deferred
+    assert "Agency/Content Supplier" in deferred["Fox News Radio"]
+    assert "CBS News Radio" in deferred
+    assert "ended on May 22, 2026" in deferred["CBS News Radio"]
+
+    for name in ("CNN SiriusXM simulcast", "Fox News SiriusXM simulcast", "MS NOW SiriusXM simulcast"):
+        assert "does not create a separate radio Source" in deferred[name]
+
+    assert {"CNBC", "Bloomberg Television / Radio", "Fox Business"} <= set(deferred)
+
+
+def test_us_regional_sources_are_not_in_national_core() -> None:
+    catalog = load_us_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+    assert "local network affiliates and public-media stations" in deferred
+    assert "US regional block" in deferred["local network affiliates and public-media stations"]
+
+
+def test_us_sparse_segments_document_real_market_gaps() -> None:
+    catalog = load_us_broadcast_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    for key in ("radical_left", "left_liberal", "liberal_centre", "conservative", "right", "radical_right"):
+        radio_count = sum(
+            any(outlet["publication_form"] == "radio" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        tv_count = sum(
+            any(outlet["publication_form"] == "television" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        if radio_count < catalog["coverage_targets"]["radio_min"] or tv_count < catalog["coverage_targets"]["television_min"]:
+            assert groups[key].get("coverage_exception")
+
+
+def test_us_national_broadcast_classification_provenance_is_complete() -> None:
+    catalog = load_us_broadcast_catalog()
+    for entry in us_broadcast_entries(catalog):
+        for classification in entry["classifications"]:
+            assert classification["dimension"]
+            assert classification["value"]
+            assert classification["classifier_type"]
+            assert classification["classifier_name"]
+            assert classification["source_url"].startswith("https://")
+            assert classification["reference_date"]
+            assert classification["retrieved_at"]
