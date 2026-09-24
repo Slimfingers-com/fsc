@@ -1,0 +1,451 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it"
+  ],
+  "scope": "regional",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "licensed_regional_editorial_source_not_common_owner_or_public_service_parent",
+  "locality_policy": "compact_concessioned_regional_core_local_micro_media_deferred",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "No selected Swiss regional private Source currently has sufficient two-source provenance for A–F placement. SRF/RTS/RSI/RTR regional output remains part of existing national language-region Sources rather than creating duplicates."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No approved regional Source has sufficient two-source provenance for A."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [],
+      "coverage_exception": "No approved regional Source has sufficient two-source provenance for B."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/reference",
+      "entries": [],
+      "coverage_exception": "Swiss public-service regional output is not split into new Sources: it remains within SRF, RTS, RSI and RTR from the national catalog. Private regional Sources remain politically unclassified."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [],
+      "coverage_exception": "No approved regional Source has sufficient two-source provenance for D."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [],
+      "coverage_exception": "No approved regional Source has sufficient two-source provenance for E."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [],
+      "coverage_exception": "No approved regional Source satisfies FSC's two-independent-source threshold for F."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "telebaern",
+      "name": "TeleBärn",
+      "homepage": "https://www.telebaern.tv/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "telebaern-tv",
+          "name": "TeleBärn",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Bern"
+          ],
+          "language": "de",
+          "homepage": "https://www.telebaern.tv/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned regional television Source for Bern. Shared CH Media ownership does not merge editorial identity; CH Media states the licensed regional TV stations remain editorially independent."
+      ]
+    },
+    {
+      "key": "tele-m1",
+      "name": "Tele M1",
+      "homepage": "https://www.telem1.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "tele-m1-tv",
+          "name": "Tele M1",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Aargau",
+            "Solothurn"
+          ],
+          "language": "de",
+          "homepage": "https://www.telem1.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned regional television Source for Aargau/Solothurn; editorially independent despite shared CH Media infrastructure."
+      ]
+    },
+    {
+      "key": "tvo",
+      "name": "TVO",
+      "homepage": "https://www.tvo-online.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "tvo-tv",
+          "name": "TVO",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Ostschweiz"
+          ],
+          "language": "de",
+          "homepage": "https://www.tvo-online.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned East Switzerland regional television Source."
+      ]
+    },
+    {
+      "key": "leman-bleu",
+      "name": "Léman Bleu",
+      "homepage": "https://www.lemanbleu.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "leman-bleu-tv",
+          "name": "Léman Bleu",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Genève"
+          ],
+          "language": "fr",
+          "homepage": "https://www.lemanbleu.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned Geneva regional television Source."
+      ]
+    },
+    {
+      "key": "canal9",
+      "name": "Canal 9 / Kanal 9",
+      "homepage": "https://canal9.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "canal9-fr",
+          "name": "Canal 9",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Valais"
+          ],
+          "language": "fr",
+          "homepage": "https://canal9.ch/"
+        },
+        {
+          "key": "kanal9-de",
+          "name": "Kanal 9",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Wallis"
+          ],
+          "language": "de",
+          "homepage": "https://kanal9.ch/"
+        }
+      ],
+      "notes": [
+        "One bilingual Valais regional television Source with French- and German-language outlets."
+      ]
+    },
+    {
+      "key": "teleticino",
+      "name": "TeleTicino",
+      "homepage": "https://www.teleticino.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "teleticino-tv",
+          "name": "TeleTicino",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Ticino"
+          ],
+          "language": "it",
+          "homepage": "https://www.teleticino.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned Ticino regional television Source. Shared group ownership with Radio 3i does not by itself merge Source identity; Radio 3i is not part of this compact initial core."
+      ]
+    },
+    {
+      "key": "radio-central",
+      "name": "Radio Central",
+      "homepage": "https://www.radiocentral.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-central-radio",
+          "name": "Radio Central",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Zentralschweiz"
+          ],
+          "language": "de",
+          "homepage": "https://www.radiocentral.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned Central Switzerland commercial regional radio Source."
+      ]
+    },
+    {
+      "key": "radio-grischa",
+      "name": "Radio Grischa",
+      "homepage": "https://www.radiogrischa.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-grischa-radio",
+          "name": "Radio Grischa",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Südostschweiz",
+            "Glarus"
+          ],
+          "language": "de",
+          "homepage": "https://www.radiogrischa.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned Southeast Switzerland/Glarus radio Source."
+      ]
+    },
+    {
+      "key": "radio-chablais",
+      "name": "Radio Chablais",
+      "homepage": "https://www.radiochablais.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-chablais-radio",
+          "name": "Radio Chablais",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Chablais"
+          ],
+          "language": "fr",
+          "homepage": "https://www.radiochablais.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned Chablais regional radio Source."
+      ]
+    },
+    {
+      "key": "radio-fr",
+      "name": "RadioFr. Fribourg/Freiburg",
+      "homepage": "https://www.radiofr.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radiofr-fribourg",
+          "name": "RadioFr. Fribourg",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Fribourg"
+          ],
+          "language": "fr",
+          "homepage": "https://www.radiofr.ch/fribourg"
+        },
+        {
+          "key": "radiofr-freiburg",
+          "name": "RadioFr. Freiburg",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Freiburg"
+          ],
+          "language": "de",
+          "homepage": "https://www.radiofr.ch/freiburg"
+        }
+      ],
+      "notes": [
+        "One bilingual Fribourg regional radio Source with French- and German-language programmes."
+      ]
+    },
+    {
+      "key": "radio-ticino",
+      "name": "Radio Ticino",
+      "homepage": "https://www.radioticino.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-ticino-radio",
+          "name": "Radio Ticino",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Sopraceneri"
+          ],
+          "language": "it",
+          "homepage": "https://www.radioticino.com/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned Italian-language regional radio Source for Sopraceneri."
+      ]
+    },
+    {
+      "key": "radio-beo",
+      "name": "Radio BeO",
+      "homepage": "https://www.radiobeo.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-beo-radio",
+          "name": "Radio BeO",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Berner Oberland"
+          ],
+          "language": "de",
+          "homepage": "https://www.radiobeo.ch/"
+        }
+      ],
+      "notes": [
+        "BAKOM-concessioned Berner Oberland commercial regional radio Source."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "SRF regional journals",
+      "reason": "Regional programmes remain outlets/formats of the existing SRF Source; they do not create new regional Sources."
+    },
+    {
+      "name": "RTS regional output",
+      "reason": "Regional programmes remain part of the existing RTS Source; no duplicate Source is created."
+    },
+    {
+      "name": "RSI regional output",
+      "reason": "Regional output remains part of the existing RSI Source; no duplicate Source is created."
+    },
+    {
+      "name": "RTR regional output",
+      "reason": "Regional output remains part of the existing RTR Source; no duplicate Source is created."
+    },
+    {
+      "name": "remaining BAKOM regional TV and local radio concessionaires",
+      "reason": "Legitimate regional candidates remain available for later expansion; the initial core is intentionally compact and multilingual, and no canton quota applies."
+    }
+  ],
+  "approved_candidate_count": 12,
+  "new_source_count": 12,
+  "review_status": "autonomously_selected_compact_regional_core_no_feeds_activated"
+}
