@@ -432,6 +432,44 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## United States (US) — National broadcast
+
+The US national broadcast catalog uses the same A–F research matrix, but counts television and radio separately and counts editorial Sources rather than networks of affiliates, content-supply feeds, simulcasts or distribution platforms. The research target remains 3–5 independent Sources per segment and medium; it is a goal, never a quota.
+
+The jointly approved US-national core contains 17 editorial Source identities:
+
+| Planning segment | Television Sources | Radio Sources |
+| --- | --- | --- |
+| A radical/system-oppositional left | explicit market gap | explicit market gap |
+| B left/centre-left/left-liberal | Democracy Now!, PBS NewsHour, MS NOW, CNN | Democracy Now!, NPR |
+| C liberal/centre/mainstream reference | ABC News, CBS News, NBC News, NewsNation | SiriusXM POTUS |
+| D conservative/liberal-conservative | explicit market gap | explicit market gap |
+| E right/right-conservative/right-libertarian | Fox News | explicit market gap |
+| F radical right / externally classified far-right spectrum | One America News | explicit market gap |
+
+Politically unclassified but included for national broadcast relevance: Newsmax, EWTN, SiriusXM Progress, SiriusXM Patriot and American Family Radio.
+
+The planning table is not itself a persisted FSC ideology classification. Persisted political group assignment requires at least two independent external sources that materially agree in left/right direction. Conflicting external radicality labels remain unresolved rather than being force-mapped into E or F.
+
+Specific identity rules:
+- **Democracy Now!** is one cross-media Source syndicated through television and radio carriers; carrier stations do not become new Sources.
+- **PBS NewsHour** is the editorial Source. PBS distribution/member-station carriage does not make PBS as a whole the Source.
+- **MS NOW and NBC News are separate Sources** after the Versant separation completed in 2026.
+- **NPR** is one Source; Morning Edition, All Things Considered and Weekend Edition are programme outlets/formats, while local member stations remain regional.
+- **Fox News** is one national television Source; Fox News Radio affiliate bulletins and SiriusXM simulcasts do not create another Source.
+- **One America News (OAN)** is placed in F only because two independent external sources explicitly classify it in the far-right spectrum; this is not an official extremism designation.
+- **Newsmax remains outside E/F** despite a clearly rightward external orientation because current independent sources disagree on radicality: some classify it Right, while peer-reviewed research treats it as a far-right outlet.
+- **SiriusXM POTUS, Progress and Patriot are three separately programmed Sources**. POTUS is a C/reference candidate; Progress and Patriot remain politically unclassified because operator self-positioning alone does not satisfy the two-source rule.
+- **EWTN** is one cross-media Source for national television and radio. Catholic identity is not automatically mapped to D or E.
+- **American Family Radio** is included for recurring news, politics and social-issues programming, but evangelical identity is not automatically mapped politically.
+- **ABC News Radio** and **Fox News Radio** are deferred to the later Agency/Content Supplier model.
+- **CBS News Radio** is excluded from the active core because the service ended on May 22, 2026.
+- **C-SPAN/C-SPAN Radio** are deferred to an institutional/public-affairs primary-source block.
+- **CNBC, Bloomberg and Fox Business** are deferred to a specialist economic/financial source block.
+- Local network affiliates, regional public-media stations and local talk radio remain outside this national block for later US regional review.
+
+No feed is activated by inclusion in this catalog.
+
 ## International comparison set
 
 The international print catalog is **not** a world-coverage catalog. It is a Germany-focused comparison set for cross-source story, claim, perspective and coverage analysis.
@@ -520,6 +558,7 @@ Completed catalog blocks:
 9. Austria national broadcast candidate core (TV and radio; regional broadcast separate)
 10. Switzerland national broadcast candidate core (TV and radio; regional broadcast separate)
 11. Great Britain national broadcast candidate core (TV and radio; regional/devolved broadcast separate)
+12. United States national broadcast candidate core (TV and radio; regional broadcast separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
