@@ -573,6 +573,28 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## United States (US) — Regional broadcast
+
+This block is deliberately representative rather than exhaustive. The US local-affiliate system contains hundreds of independently operated newsrooms, so FSC uses a compact state-/major-metro core and leaves the affiliate universe for a later local layer.
+
+The initial core contains 10 politically unclassified regional Sources:
+
+WNYC / Gothamist Newsroom, NJ Spotlight News, WHYY News, WBEZ Chicago, WABE News, KUT News, KQED News, LAist, Spectrum News NY1 and Spectrum News 1 North Carolina.
+
+Specific identity rules:
+
+- NPR/PBS membership, affiliation or programme carriage does not merge a regional newsroom into the national NPR or PBS NewsHour Sources.
+- **WNYC and Gothamist** are outlets of one integrated New York Public Radio newsroom rather than two independent Sources.
+- **KUT News** is the Source for KUT 90.5 and the statewide Texas Standard programme. Texas Standard's collaboration with KERA, Houston Public Media and Texas Public Radio does not create four independent Sources.
+- **Spectrum News NY1** and **Spectrum News 1 North Carolina** remain separate regional Sources despite common Charter/Spectrum ownership because they operate distinct geographic newsrooms.
+- ABC, CBS, NBC and Fox local affiliates are not collapsed into four network Sources. Their large universe of individual local newsrooms is deferred to a later local-affiliate layer.
+- Sinclair ownership and shared content infrastructure likewise do not create one national/regional Sinclair newsroom; station-level identity requires later review.
+- GBH/NEPM is deferred while its 2026 merger/integration settles into a stable editorial structure.
+- Spanish-language local affiliates are deferred for a deliberate multilingual local-affiliate expansion rather than sampled inconsistently here.
+- All ten selected Sources remain politically unclassified. Public-media status is not used as a substitute for political classification.
+
+No feed is activated by inclusion in this catalog.
+
 ## International comparison set
 
 The international print catalog is **not** a world-coverage catalog. It is a Germany-focused comparison set for cross-source story, claim, perspective and coverage analysis.
@@ -666,6 +688,7 @@ Completed catalog blocks:
 14. Austria regional broadcast candidate core (state/multi-state level; local/community broadcast separate)
 15. Switzerland regional broadcast candidate core (compact multilingual licensed regional set)
 16. Great Britain regional/devolved broadcast candidate core (devolved nations; local English regions separate)
+17. United States regional broadcast candidate core (representative state/major-metro set; local affiliates separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 

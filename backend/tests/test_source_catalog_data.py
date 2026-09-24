@@ -1782,3 +1782,97 @@ def test_gb_regional_broadcast_outlet_keys_are_unique() -> None:
     catalog = load_gb_regional_broadcast_catalog()
     keys = [outlet["key"] for entry in gb_regional_broadcast_entries(catalog) for outlet in entry["outlets"]]
     assert len(keys) == len(set(keys))
+
+
+US_REGIONAL_BROADCAST_CATALOG = CATALOG_DIR / "us_regional_broadcast_v1.json"
+
+
+def load_us_regional_broadcast_catalog() -> dict:
+    return json.loads(US_REGIONAL_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def us_regional_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_us_regional_broadcast_catalog_has_representative_core() -> None:
+    catalog = load_us_regional_broadcast_catalog()
+    entries = us_regional_broadcast_entries(catalog)
+
+    assert catalog["country"] == "US"
+    assert catalog["scope"] == "regional"
+    assert catalog["approved_candidate_count"] == 10
+    assert catalog["new_source_count"] == 10
+    assert len(entries) == 10
+    assert len({entry["key"] for entry in entries}) == 10
+    assert all(entry["classification_status"] == "unclassified_research_candidate" for entry in entries)
+    assert all(entry["classifications"] == [] for entry in entries)
+
+
+def test_us_regional_broadcast_public_media_affiliation_does_not_merge_national_sources() -> None:
+    catalog = load_us_regional_broadcast_catalog()
+    names = {entry["name"] for entry in us_regional_broadcast_entries(catalog)}
+
+    assert {
+        "WNYC / Gothamist Newsroom",
+        "WHYY News",
+        "WBEZ Chicago",
+        "WABE News",
+        "KUT News",
+        "KQED News",
+        "LAist",
+    } <= names
+    assert "NPR" not in names
+    assert "PBS" not in names
+
+
+def test_us_regional_broadcast_wnyc_gothamist_is_one_source() -> None:
+    catalog = load_us_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_regional_broadcast_entries(catalog)}
+    assert {outlet["name"] for outlet in entries["WNYC / Gothamist Newsroom"]["outlets"]} == {
+        "WNYC",
+        "Gothamist",
+    }
+    assert "Gothamist" not in entries
+
+
+def test_us_regional_broadcast_kut_texas_standard_is_one_source() -> None:
+    catalog = load_us_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_regional_broadcast_entries(catalog)}
+    assert {outlet["name"] for outlet in entries["KUT News"]["outlets"]} == {
+        "KUT 90.5",
+        "Texas Standard",
+    }
+    assert "Texas Standard" not in entries
+
+
+def test_us_regional_broadcast_spectrum_newsrooms_remain_separate() -> None:
+    catalog = load_us_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in us_regional_broadcast_entries(catalog)}
+
+    assert "Spectrum News NY1" in entries
+    assert "Spectrum News 1 North Carolina" in entries
+    assert entries["Spectrum News NY1"]["key"] != entries["Spectrum News 1 North Carolina"]["key"]
+
+
+def test_us_regional_broadcast_network_affiliate_universe_is_deferred() -> None:
+    catalog = load_us_regional_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+
+    assert "ABC/CBS/NBC/Fox local affiliates" in deferred
+    assert "local-affiliate layer" in deferred["ABC/CBS/NBC/Fox local affiliates"]
+    assert "Sinclair local television stations" in deferred
+    assert "individual station/newsroom identity" in deferred["Sinclair local television stations"]
+
+
+def test_us_regional_broadcast_outlet_keys_are_unique() -> None:
+    catalog = load_us_regional_broadcast_catalog()
+    keys = [
+        outlet["key"]
+        for entry in us_regional_broadcast_entries(catalog)
+        for outlet in entry["outlets"]
+    ]
+    assert len(keys) == len(set(keys))
