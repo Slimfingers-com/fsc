@@ -364,6 +364,39 @@ Boulevard is a **format dimension**, not a political orientation.
 
 The print editions of **20 Minuten / 20 minutes / 20 minuti ended in December 2025**. They therefore do not belong in the active 2026 Swiss print catalog, even though their digital brands remain relevant for a later digital-media block.
 
+### National broadcast candidate core
+
+Television and radio are reviewed separately, while FSC counts editorial Sources rather than channels, programmes or transmission windows. The research target remains 3–5 independent Sources per A–F planning segment and broadcast form; it is a goal, never a quota.
+
+The jointly approved CH-national core contains 13 Source identities: eight new Swiss Sources and five extensions/reuses of Sources already present elsewhere in the catalog.
+
+| Planning segment | Television Sources | Radio Sources |
+| --- | --- | --- |
+| A radical/system-oppositional left | explicit market gap | explicit market gap |
+| B left/centre-left/left-liberal | SonntagsZeitung | explicit market gap |
+| C liberal/centre/public-service reference | SRF, RTS | SRF, RTS |
+| D conservative/liberal-conservative | Neue Zürcher Zeitung | explicit market gap |
+| E right/right-conservative/right-libertarian | explicit market gap | Kontrafunk |
+| F radical right / externally classified extreme-right spectrum | Kla.TV | explicit market gap |
+
+Politically unclassified but included for national broadcast relevance: RSI, RTR, BILANZ, Blick, ERF Medien Schweiz, ALPHAVISION and Radio Maria Deutschschweiz.
+
+The planning table is not itself a persisted FSC ideology classification. Persisted political group assignment requires at least two independent external sources that materially agree in left/right direction.
+
+Specific identity rules:
+- **SRF, RTS, RSI and RTR are four Sources**, not one SRG Source. SRG is the common parent; journalistic responsibility for Information, Culture, Entertainment and Society/Knowledge remains in the language-region units.
+- **PresseTV is not a Source** for FSC. NZZ Format, NZZ Standpunkte, BILANZ Standpunkte and SonntagsZeitung Standpunkte remain products of the respective media houses.
+- **Blick TV** extends the existing Blick Source rather than creating a separate audiovisual newsroom.
+- **Kontrafunk** is reused from the existing DE broadcast catalog. Swiss domicile and Switzerland-focused programming do not create a second Source.
+- **FENSTER ZUM SONNTAG** is deliberately split by editorial responsibility: ALPHAVISION owns the Magazin editorial responsibility; ERF Medien Schweiz owns the Talk editorial responsibility and also operates Radio Life Channel.
+- **Radio Maria Deutschschweiz** is included as a national religious radio Source but remains politically unclassified. Religious identity is not automatically conservative.
+- **Kla.TV** is a Swiss-origin online-television Source. Its F research placement is based on two independent external journalistic assessments and is not presented as an official Swiss extremism designation.
+- **RSI and RTR** remain politically unclassified pending sufficient independent orientation provenance.
+- BAKOM-licensed local radio and regional television remain outside this national block for a later CH regional review.
+- The 3+ entertainment-led sender family and Weltwoche Daily are not relabelled as general-political broadcast Sources merely because they distribute audiovisual content.
+
+No feed is activated by inclusion in this catalog.
+
 ## International comparison set
 
 The international print catalog is **not** a world-coverage catalog. It is a Germany-focused comparison set for cross-source story, claim, perspective and coverage analysis.
@@ -450,6 +483,7 @@ Completed catalog blocks:
 7. Germany-focused international comparison set outside Europe and the US
 8. Germany national broadcast candidate core (TV and radio; regional broadcast separate)
 9. Austria national broadcast candidate core (TV and radio; regional broadcast separate)
+10. Switzerland national broadcast candidate core (TV and radio; regional broadcast separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
