@@ -1,0 +1,857 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "scope": "regional",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "regional_editorial_source_not_channel_programme_owner_or_shared_news_supplier",
+  "locality_policy": "this_catalog_covers_state_or_multi_state_regional_sources_local_city_and_district_broadcast_is_deferred",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Research target is 3–5 editorially independent Sources per political planning segment and broadcast form where the regional media landscape supports it. Genuine gaps remain explicit. Public-service regional Sources are shown in C as a reference pool, not as a persisted ideological classification.",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "C placement of public-service regional broadcasters is a reference-pool convention only. Ownership, federal-state location, religious identity or presenter positions are never converted automatically into Source-level political classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No approved state- or multi-state regional German television or radio Source is placed in A. Local/community media remain for a later DE local block."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [],
+      "coverage_exception": "No approved regional Source has sufficient two-source external provenance for B. Market gaps remain explicit."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/public-service regional reference",
+      "entries": [
+        {
+          "key": "br",
+          "name": "Bayerischer Rundfunk",
+          "homepage": "https://www.br.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "br-fernsehen",
+              "name": "BR Fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "BY"
+              ],
+              "homepage": "https://www.br.de/fernsehen/"
+            },
+            {
+              "key": "br24-radio",
+              "name": "BR24",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "BY"
+              ],
+              "homepage": "https://www.br.de/nachrichten/"
+            },
+            {
+              "key": "bayern-1",
+              "name": "Bayern 1",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "BY"
+              ],
+              "homepage": "https://www.br.de/radio/bayern1/"
+            },
+            {
+              "key": "bayern-2",
+              "name": "Bayern 2",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "BY"
+              ],
+              "homepage": "https://www.br.de/radio/bayern2/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source. Television and radio programmes are outlets and do not count as independent editorial Sources.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "hr",
+          "name": "Hessischer Rundfunk",
+          "homepage": "https://www.hr.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hr-fernsehen",
+              "name": "hr-fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "HE"
+              ],
+              "homepage": "https://www.hr-fernsehen.de/"
+            },
+            {
+              "key": "hr-info",
+              "name": "hr-iNFO",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "HE"
+              ],
+              "homepage": "https://www.hr-inforadio.de/"
+            },
+            {
+              "key": "hr1",
+              "name": "hr1",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "HE"
+              ],
+              "homepage": "https://www.hr1.de/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source; programme brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "mdr",
+          "name": "Mitteldeutscher Rundfunk",
+          "homepage": "https://www.mdr.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mdr-fernsehen",
+              "name": "MDR Fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "SN",
+                "ST",
+                "TH"
+              ],
+              "homepage": "https://www.mdr.de/tv/"
+            },
+            {
+              "key": "mdr-aktuell-radio",
+              "name": "MDR AKTUELL",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "SN",
+                "ST",
+                "TH"
+              ],
+              "homepage": "https://www.mdr.de/mdr-aktuell/"
+            },
+            {
+              "key": "mdr-sachsen",
+              "name": "MDR SACHSEN",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "SN"
+              ],
+              "homepage": "https://www.mdr.de/sachsenradio/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source covering Saxony, Saxony-Anhalt and Thuringia; state programme brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "ndr",
+          "name": "Norddeutscher Rundfunk",
+          "homepage": "https://www.ndr.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ndr-fernsehen",
+              "name": "NDR Fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "HH",
+                "MV",
+                "NI",
+                "SH"
+              ],
+              "homepage": "https://www.ndr.de/fernsehen/"
+            },
+            {
+              "key": "ndr-info",
+              "name": "NDR Info",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "HH",
+                "MV",
+                "NI",
+                "SH"
+              ],
+              "homepage": "https://www.ndr.de/nachrichten/info/"
+            },
+            {
+              "key": "ndr-1-niedersachsen",
+              "name": "NDR 1 Niedersachsen",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "NI"
+              ],
+              "homepage": "https://www.ndr.de/ndr1niedersachsen/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source covering four northern states; state and programme brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "radio-bremen",
+          "name": "Radio Bremen",
+          "homepage": "https://www.radiobremen.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "radio-bremen-buten-un-binnen",
+              "name": "buten un binnen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "HB"
+              ],
+              "homepage": "https://www.butenunbinnen.de/"
+            },
+            {
+              "key": "bremen-eins",
+              "name": "Bremen Eins",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "HB"
+              ],
+              "homepage": "https://www.bremeneins.de/"
+            },
+            {
+              "key": "bremen-zwei",
+              "name": "Bremen Zwei",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "HB"
+              ],
+              "homepage": "https://www.bremenzwei.de/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source; television and radio brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "rbb",
+          "name": "Rundfunk Berlin-Brandenburg",
+          "homepage": "https://www.rbb-online.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rbb-fernsehen",
+              "name": "rbb Fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "BE",
+                "BB"
+              ],
+              "homepage": "https://www.rbb-online.de/fernsehen/"
+            },
+            {
+              "key": "rbb24-inforadio",
+              "name": "rbb24 Inforadio",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "BE",
+                "BB"
+              ],
+              "homepage": "https://www.inforadio.de/"
+            },
+            {
+              "key": "radioeins",
+              "name": "radioeins",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "BE",
+                "BB"
+              ],
+              "homepage": "https://www.radioeins.de/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source covering Berlin and Brandenburg; programme brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "sr",
+          "name": "Saarländischer Rundfunk",
+          "homepage": "https://www.sr.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sr-fernsehen",
+              "name": "SR Fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "SL"
+              ],
+              "homepage": "https://www.sr.de/sr/fernsehen/"
+            },
+            {
+              "key": "sr-1",
+              "name": "SR 1",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "SL"
+              ],
+              "homepage": "https://www.sr.de/sr/sr1/"
+            },
+            {
+              "key": "sr-2-kulturradio",
+              "name": "SR 2 Kulturradio",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "SL"
+              ],
+              "homepage": "https://www.sr.de/sr/sr2/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source; programme brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "swr",
+          "name": "Südwestrundfunk",
+          "homepage": "https://www.swr.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swr-fernsehen",
+              "name": "SWR Fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "BW",
+                "RP"
+              ],
+              "homepage": "https://www.swr.de/tv/"
+            },
+            {
+              "key": "swr-aktuell-radio",
+              "name": "SWR Aktuell",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "BW",
+                "RP"
+              ],
+              "homepage": "https://www.swr.de/swraktuell/radio/"
+            },
+            {
+              "key": "swr1",
+              "name": "SWR1",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "BW",
+                "RP"
+              ],
+              "homepage": "https://www.swr.de/swr1/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source covering Baden-Württemberg and Rhineland-Palatinate; programme brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "wdr",
+          "name": "Westdeutscher Rundfunk",
+          "homepage": "https://www1.wdr.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wdr-fernsehen",
+              "name": "WDR Fernsehen",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "NW"
+              ],
+              "homepage": "https://www1.wdr.de/fernsehen/"
+            },
+            {
+              "key": "wdr-2",
+              "name": "WDR 2",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "NW"
+              ],
+              "homepage": "https://www1.wdr.de/radio/wdr2/"
+            },
+            {
+              "key": "wdr-5",
+              "name": "WDR 5",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "NW"
+              ],
+              "homepage": "https://www1.wdr.de/radio/wdr5/"
+            }
+          ],
+          "notes": [
+            "One ARD Landesrundfunkanstalt Source; programme brands remain outlets.",
+            "C is a public-service regional reference position, not a persisted political classification."
+          ]
+        }
+      ],
+      "coverage_exception": "The public-service reference pool intentionally exceeds the 3–5 research target because the nine ARD Landesrundfunkanstalten are editorially distinct regional institutions; the target is not a cap."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [],
+      "coverage_exception": "No approved regional Source has sufficient two-source external provenance for D. Ownership and state location are not political classifications."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [],
+      "coverage_exception": "No approved regional Source has sufficient two-source external provenance for E. Market gaps remain explicit."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [],
+      "coverage_exception": "No approved state- or multi-state regional Source satisfies FSC's two-source threshold for F."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "rtl-nord",
+      "name": "RTL Nord",
+      "homepage": "https://www.rtl.de/rtl-nord/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rtl-nord-hh-sh",
+          "name": "RTL Nord Hamburg/Schleswig-Holstein",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "HH",
+            "SH"
+          ],
+          "homepage": "https://www.rtl.de/rtl-nord/"
+        },
+        {
+          "key": "rtl-nord-ni-hb",
+          "name": "RTL Nord Niedersachsen/Bremen",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "NI",
+            "HB"
+          ],
+          "homepage": "https://www.rtl.de/rtl-nord/"
+        }
+      ],
+      "notes": [
+        "One regional editorial Source with two licensed regional editions. RTL Nord states that its editorial operations are independent of RTL Deutschland; it is therefore separate from the national RTL NEWS Source."
+      ]
+    },
+    {
+      "key": "rtl-west",
+      "name": "RTL WEST",
+      "homepage": "https://www.rtl.de/rtl-west/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rtl-west-nrw",
+          "name": "RTL WEST",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "NW"
+          ],
+          "homepage": "https://www.rtl.de/rtl-west/"
+        }
+      ],
+      "notes": [
+        "Own regional programme responsibility and licence; modeled separately from national RTL NEWS."
+      ]
+    },
+    {
+      "key": "rtl-hessen",
+      "name": "RTL Hessen",
+      "homepage": "https://www.rtl.de/rtl-hessen/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rtl-hessen-tv",
+          "name": "RTL Hessen",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "HE"
+          ],
+          "homepage": "https://www.rtl.de/rtl-hessen/"
+        }
+      ],
+      "notes": [
+        "Regional programme operated by RTL Hessen Programmfenster GmbH; modeled separately from national RTL NEWS."
+      ]
+    },
+    {
+      "key": "sat1-norddeutschland",
+      "name": "SAT.1 Norddeutschland",
+      "homepage": "https://www.sat1regional.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "sat1-regional-hh-sh",
+          "name": "SAT.1 REGIONAL Hamburg/Schleswig-Holstein",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "HH",
+            "SH"
+          ],
+          "homepage": "https://www.sat1regional.de/"
+        },
+        {
+          "key": "sat1-regional-ni-hb",
+          "name": "SAT.1 REGIONAL Niedersachsen/Bremen",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "NI",
+            "HB"
+          ],
+          "homepage": "https://www.sat1regional.de/"
+        }
+      ],
+      "notes": [
+        "One regional editorial Source with two regional editions; editorial independence from the national SAT.1 programme means it remains separate from :newstime."
+      ]
+    },
+    {
+      "key": "sat1-bayern",
+      "name": "SAT.1 Bayern",
+      "homepage": "https://www.sat1.de/regional/bayern",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "sat1-bayern-tv",
+          "name": "SAT.1 Bayern",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "BY"
+          ],
+          "homepage": "https://www.sat1.de/regional/bayern"
+        }
+      ],
+      "notes": [
+        "Regional programme with its own programme responsibility and editorial leadership; modeled separately from the national :newstime Source."
+      ]
+    },
+    {
+      "key": "antenne-bayern",
+      "name": "ANTENNE BAYERN",
+      "homepage": "https://www.antenne.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "antenne-bayern-radio",
+          "name": "ANTENNE BAYERN",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "BY"
+          ],
+          "homepage": "https://www.antenne.de/"
+        }
+      ],
+      "notes": [
+        "Statewide private radio Source in Bavaria. Music sub-brands are not separate FSC political Sources."
+      ]
+    },
+    {
+      "key": "ffh-newsredaktion",
+      "name": "FFH Newsredaktion",
+      "homepage": "https://www.ffh.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "hit-radio-ffh",
+          "name": "HIT RADIO FFH",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "HE"
+          ],
+          "homepage": "https://www.ffh.de/"
+        },
+        {
+          "key": "planet-radio",
+          "name": "planet radio",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "HE"
+          ],
+          "homepage": "https://www.planetradio.de/"
+        },
+        {
+          "key": "harmony",
+          "name": "harmony",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "HE"
+          ],
+          "homepage": "https://www.harmonyfm.de/"
+        }
+      ],
+      "notes": [
+        "Group-level news editorial Source serving the FFH Media Group radio brands; the three consumer stations are outlets rather than independent news Sources. HIT RADIO FFH is the primary outlet for this catalog."
+      ]
+    },
+    {
+      "key": "radio-ffn",
+      "name": "radio ffn",
+      "homepage": "https://www.ffn.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-ffn-radio",
+          "name": "radio ffn",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "NI"
+          ],
+          "homepage": "https://www.ffn.de/"
+        }
+      ],
+      "notes": [
+        "Statewide private radio Source in Lower Saxony."
+      ]
+    },
+    {
+      "key": "rsh",
+      "name": "R.SH",
+      "homepage": "https://www.rsh.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rsh-radio",
+          "name": "R.SH",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "SH"
+          ],
+          "homepage": "https://www.rsh.de/"
+        }
+      ],
+      "notes": [
+        "R.SH has its own programme and news editorial responsibility and is the regional consumer Source. REGIOCAST Nachrichten remains a separate future Agency/Content Supplier candidate and is not used as the radio Source."
+      ]
+    },
+    {
+      "key": "radio-saw",
+      "name": "radio SAW",
+      "homepage": "https://www.radiosaw.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-saw-radio",
+          "name": "radio SAW",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "ST"
+          ],
+          "homepage": "https://www.radiosaw.de/"
+        }
+      ],
+      "notes": [
+        "Statewide private radio Source in Saxony-Anhalt with its own news editorial operation."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "REGIOCAST Nachrichten",
+      "reason": "Central private radio news-production operation; reserve for the Agency/Content Supplier model rather than model it as a regional consumer radio Source."
+    },
+    {
+      "name": "Antenne Niedersachsen",
+      "reason": "Legitimate statewide private radio Source but deferred from the compact initial core because Lower Saxony is already represented by NDR and radio ffn; no state quota applies."
+    },
+    {
+      "name": "local television",
+      "reason": "City/local television such as münchen.tv, Hamburg 1, TV.Berlin, Franken Fernsehen, Regio TV and Niederbayern TV is reserved for a later DE local block unless specific FSC incremental value justifies earlier inclusion."
+    },
+    {
+      "name": "local radio",
+      "reason": "Local and city radio brands are reserved for a later DE local block and are not added merely to achieve geographic completeness."
+    }
+  ],
+  "approved_candidate_count": 19,
+  "new_source_count": 19,
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+}
