@@ -553,6 +553,26 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Great Britain (GB) — Regional/devolved broadcast
+
+This compact block covers the three devolved nations and deliberately avoids expanding into every English ITV region or commercial local-radio brand.
+
+The core contains six Sources:
+
+- Public-service reference: BBC Scotland, BBC Cymru Wales and BBC Northern Ireland.
+- Politically unclassified private television: STV News, ITV Cymru Wales and UTV.
+
+Specific identity rules:
+
+- BBC Scotland, BBC Cymru Wales and BBC Northern Ireland are three devolved cross-media Sources for FSC regional independence counting. Their television and nation-specific radio services are outlets.
+- STV News is one Scottish Source despite STV's two licence areas; 2026 Ofcom-approved changes increase shared content while retaining bespoke regional sections.
+- ITV Cymru Wales and UTV remain separate from national ITV News because they are dedicated devolved ITV newsrooms rather than the ITN-produced national newsroom.
+- S4C is not duplicated as a news Source: Newyddion S4C is produced by BBC Cymru Wales. S4C's independently commissioned current-affairs output can be revisited separately.
+- BBC ALBA is deferred because its joint BBC Scotland/MG ALBA structure requires explicit joint-source independence modeling.
+- English ITV regional newsrooms and commercial local radio remain deferred to a later local/regional expansion.
+
+No feed is activated by inclusion in this catalog.
+
 ## International comparison set
 
 The international print catalog is **not** a world-coverage catalog. It is a Germany-focused comparison set for cross-source story, claim, perspective and coverage analysis.
@@ -645,6 +665,7 @@ Completed catalog blocks:
 13. Germany regional broadcast candidate core (state/multi-state level; local broadcast separate)
 14. Austria regional broadcast candidate core (state/multi-state level; local/community broadcast separate)
 15. Switzerland regional broadcast candidate core (compact multilingual licensed regional set)
+16. Great Britain regional/devolved broadcast candidate core (devolved nations; local English regions separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
