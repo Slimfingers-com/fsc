@@ -1020,3 +1020,174 @@ def test_ch_national_broadcast_classification_provenance_is_complete() -> None:
             assert classification["source_url"].startswith("https://")
             assert classification["reference_date"]
             assert classification["retrieved_at"]
+
+
+GB_BROADCAST_CATALOG = CATALOG_DIR / "gb_broadcast_v1.json"
+
+
+def load_gb_broadcast_catalog() -> dict:
+    return json.loads(GB_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def gb_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_gb_national_broadcast_catalog_has_approved_editorial_sources() -> None:
+    catalog = load_gb_broadcast_catalog()
+    assert catalog["country"] == "GB"
+    assert catalog["scope"] == "national"
+    assert catalog["media_category"] == "broadcast"
+    assert catalog["approved_candidate_count"] == 14
+    assert catalog["new_source_count"] == 14
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+
+    entries = gb_broadcast_entries(catalog)
+    assert len(entries) == 14
+    assert len({entry["key"] for entry in entries}) == 14
+    assert len({entry["name"].casefold() for entry in entries}) == 14
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_gb_itn_newsrooms_remain_editorially_distinct_sources() -> None:
+    catalog = load_gb_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_broadcast_entries(catalog)}
+
+    assert {"ITV News", "Channel 4 News", "5 News"} <= set(entries)
+    assert len({entries[name]["key"] for name in ("ITV News", "Channel 4 News", "5 News")}) == 3
+    assert "ITN" not in entries
+
+
+def test_gb_bbc_news_and_radio_5_live_are_separate_sources() -> None:
+    catalog = load_gb_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_broadcast_entries(catalog)}
+
+    assert entries["BBC News"]["key"] == "bbc-news"
+    assert entries["BBC Radio 5 Live"]["key"] == "bbc-radio-5-live"
+    assert entries["BBC News"]["key"] != entries["BBC Radio 5 Live"]["key"]
+    assert any(outlet["name"] == "Today" for outlet in entries["BBC News"]["outlets"])
+    assert any(outlet["name"] == "BBC Radio 5 Live" for outlet in entries["BBC Radio 5 Live"]["outlets"])
+
+
+def test_gb_lbc_and_lbc_news_are_separate_sources() -> None:
+    catalog = load_gb_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_broadcast_entries(catalog)}
+
+    assert entries["LBC"]["key"] == "lbc"
+    assert entries["LBC News"]["key"] == "lbc-news"
+    assert entries["LBC"]["key"] != entries["LBC News"]["key"]
+    assert entries["LBC"]["classification_status"] == "unclassified_research_candidate"
+    assert entries["LBC News"]["classification_status"] == "unclassified_research_candidate"
+
+
+def test_gb_times_radio_is_not_an_outlet_of_the_times_source() -> None:
+    catalog = load_gb_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_broadcast_entries(catalog)}
+    times_radio = entries["Times Radio"]
+
+    assert times_radio["source_action"] == "create_source"
+    assert times_radio["related_existing_source_key"] == "times"
+    assert times_radio["classification_status"] == "unclassified_research_candidate"
+
+
+def test_gb_news_is_one_crossmedia_source() -> None:
+    catalog = load_gb_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_broadcast_entries(catalog)}
+    gb_news = entries["GB News"]
+
+    assert {outlet["name"] for outlet in gb_news["outlets"]} == {"GB News", "GB News Radio"}
+    assert {outlet["publication_form"] for outlet in gb_news["outlets"]} == {"television", "radio"}
+
+
+def test_gb_ucb_programmes_are_outlets_of_one_source() -> None:
+    catalog = load_gb_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_broadcast_entries(catalog)}
+
+    assert {outlet["name"] for outlet in entries["UCB"]["outlets"]} == {"UCB 1", "UCB 2"}
+    assert "UCB 1" not in entries
+    assert "UCB 2" not in entries
+
+
+def test_gb_national_broadcast_two_source_status_has_independent_provenance() -> None:
+    catalog = load_gb_broadcast_catalog()
+    confirmed = [
+        entry for entry in gb_broadcast_entries(catalog)
+        if entry["classification_status"] == "two_source_direction_confirmed"
+    ]
+    assert {entry["name"] for entry in confirmed} == {"Channel 4 News", "GB News"}
+
+    for entry in confirmed:
+        orientation_sources = {
+            item["classifier_name"]
+            for item in entry["classifications"]
+            if item["dimension"] == "editorial_orientation"
+        }
+        assert len(orientation_sources) >= 2
+
+
+def test_gb_religious_sources_are_not_politically_classified() -> None:
+    catalog = load_gb_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in gb_broadcast_entries(catalog)}
+
+    for name in ("Revelation TV", "UCB", "Premier Christian Radio"):
+        assert entries[name]["classification_status"] == "thematic_candidate_not_political_classification"
+        assert not any(
+            item["dimension"] == "editorial_orientation"
+            for item in entries[name]["classifications"]
+        )
+
+
+def test_gb_sparse_segments_document_real_market_gaps() -> None:
+    catalog = load_gb_broadcast_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    for key in ("radical_left", "left_liberal", "liberal_centre", "conservative", "right", "radical_right"):
+        radio_count = sum(
+            any(outlet["publication_form"] == "radio" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        tv_count = sum(
+            any(outlet["publication_form"] == "television" for outlet in entry["outlets"])
+            for entry in groups[key]["entries"]
+        )
+        if radio_count < catalog["coverage_targets"]["radio_min"] or tv_count < catalog["coverage_targets"]["television_min"]:
+            assert groups[key].get("coverage_exception")
+
+
+def test_gb_supplier_and_wrong_medium_cases_are_deferred() -> None:
+    catalog = load_gb_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+
+    assert "Sky News Radio" in deferred
+    assert "Agency/Content Supplier" in deferred["Sky News Radio"]
+    assert "Novara Media" in deferred
+    assert "digital-video/podcast block" in deferred["Novara Media"]
+    assert "former TalkTV linear channel" in deferred
+
+
+def test_gb_regional_and_devolved_sources_are_not_in_national_core() -> None:
+    catalog = load_gb_broadcast_catalog()
+    names = {entry["name"] for entry in gb_broadcast_entries(catalog)}
+
+    assert names.isdisjoint({
+        "BBC Local Radio",
+        "STV",
+        "S4C",
+    })
+
+
+def test_gb_national_broadcast_classification_provenance_is_complete() -> None:
+    catalog = load_gb_broadcast_catalog()
+    for entry in gb_broadcast_entries(catalog):
+        for classification in entry["classifications"]:
+            assert classification["dimension"]
+            assert classification["value"]
+            assert classification["classifier_type"]
+            assert classification["classifier_name"]
+            assert classification["source_url"].startswith("https://")
+            assert classification["reference_date"]
+            assert classification["retrieved_at"]

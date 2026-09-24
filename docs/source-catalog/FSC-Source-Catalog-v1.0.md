@@ -397,6 +397,41 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Great Britain (GB) — National broadcast
+
+The GB national broadcast catalog uses the same A–F research matrix, but counts television and radio separately and counts editorial newsrooms rather than channels, common owners, production companies or transmission suppliers. The research target remains 3–5 independent Sources per segment and medium; it is a goal, never a quota.
+
+The jointly approved GB-national core contains 14 editorial Source identities:
+
+| Planning segment | Television Sources | Radio Sources |
+| --- | --- | --- |
+| A radical/system-oppositional left | explicit market gap | explicit market gap |
+| B left/centre-left/left-liberal | Channel 4 News | explicit market gap |
+| C liberal/centre/public-service and mainstream reference | BBC News, ITV News, 5 News, Sky News | BBC News, BBC Radio 5 Live |
+| D conservative/liberal-conservative | explicit market gap | explicit market gap |
+| E right/right-conservative/right-libertarian | GB News | GB News |
+| F radical right / externally classified extreme-right spectrum | explicit market gap | explicit market gap |
+
+Politically unclassified but included for national broadcast relevance: Revelation TV, LBC, LBC News, Times Radio, Talk, UCB and Premier Christian Radio.
+
+The planning table is not itself a persisted FSC ideology classification. Persisted political group assignment requires at least two independent external sources that materially agree in left/right direction.
+
+Specific identity rules:
+- **ITV News, Channel 4 News and 5 News are three Sources**, despite common production by ITN. ITN itself describes them as separate newsrooms with distinct editorial voices and missions.
+- **BBC News** is one cross-media news Source for central television news and BBC Radio 4 news/current-affairs programmes produced by BBC News.
+- **BBC Radio 5 Live** is a separate Source because it has its own station-level controller, commissioning and editorial structure.
+- **LBC and LBC News are separate Sources**. Shared Global newsroom infrastructure and bulletins do not collapse the two national speech/news services into one editorial Source.
+- **Times Radio is a separate Source from The Times**. It draws on Times/Sunday Times journalism but has its own Programme Director, schedule, production operation and editorial contacts; no political classification is inherited from the print title.
+- **GB News** is one cross-media Source with television and GB News Radio as outlets.
+- **UCB** is one Source with UCB 1 and UCB 2 as radio outlets.
+- **Sky News Radio** is deferred to the later Agency/Content Supplier model because it primarily supplies bulletins to commercial radio stations rather than operating as a normal national consumer radio programme.
+- **Talk** is included as a current national radio/digital Source; the former linear TalkTV channel is not treated as a current television Source.
+- Christian broadcasters may enter the catalog when news, politics or society are recurring editorial subjects. Christian identity is never automatically mapped to D or any other political segment.
+- Local, regional and devolved broadcasters, including BBC Local Radio, STV and S4C, remain outside this national block for later GB regional/devolved review.
+- Digital-native audiovisual outlets such as Novara Media remain for a later digital-video/podcast block.
+
+No feed is activated by inclusion in this catalog.
+
 ## International comparison set
 
 The international print catalog is **not** a world-coverage catalog. It is a Germany-focused comparison set for cross-source story, claim, perspective and coverage analysis.
@@ -484,6 +519,7 @@ Completed catalog blocks:
 8. Germany national broadcast candidate core (TV and radio; regional broadcast separate)
 9. Austria national broadcast candidate core (TV and radio; regional broadcast separate)
 10. Switzerland national broadcast candidate core (TV and radio; regional broadcast separate)
+11. Great Britain national broadcast candidate core (TV and radio; regional/devolved broadcast separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 

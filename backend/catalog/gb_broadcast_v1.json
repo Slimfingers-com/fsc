@@ -1,0 +1,607 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "languages": [
+    "en"
+  ],
+  "scope": "national",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "editorial_newsroom_not_owner_channel_or_transmission_supplier",
+  "regional_policy": "local_regional_and_devolved_broadcast_sources_are_excluded_and_reviewed_in_a_separate_gb_regional_devolved_block",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Research target is 3–5 editorially independent Sources per political planning segment and per broadcast form. Genuine UK market gaps remain explicit. Shared ownership, common production companies or common news-supply infrastructure do not merge editorially distinct newsrooms.",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "A–F planning placement is not itself a persisted FSC political classification. Public-service status, religious identity, ownership and presenter ideology are never automatically converted into a Source-level political classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No approved nationally oriented UK linear television or radio newsroom is placed here. Digital-native outlets such as Novara Media belong in a later digital-video/podcast block."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "channel-4-news",
+          "name": "Channel 4 News",
+          "homepage": "https://www.channel4.com/news/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "internationalist_liberal",
+              "classifier_type": "academic_media_research",
+              "classifier_name": "Media Influence Matrix / Media and Journalism Research Center",
+              "source_url": "https://journalismresearch.org/wp-content/uploads/2022/08/ukmimfundingjournalism.pdf",
+              "reference_date": "2021-09-01",
+              "retrieved_at": "2026-09-24T06:15:00Z",
+              "notes": "The UK Media Influence Matrix describes Channel 4 News as more internationalist and liberal in editorial orientation than BBC and ITV News, especially in story selection. External academic attribution, not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_center",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/channel-4-news-uk/",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T06:15:00Z",
+              "notes": "Current external media-rating classification. FSC stores the attribution and does not adopt MBFC factuality judgments."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "channel-4-news-tv",
+              "name": "Channel 4 News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.channel4.com/news/"
+            }
+          ],
+          "notes": [
+            "ITN produces Channel 4 News, but ITN states that ITV News, Channel 4 News and 5 News are separate newsrooms with distinct editorial voices and missions."
+          ]
+        }
+      ],
+      "coverage_exception": "One approved independent national television newsroom is placed in B. No national radio Source is moved into B merely to satisfy the research target."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/public-service-and-mainstream reference",
+      "entries": [
+        {
+          "key": "bbc-news",
+          "name": "BBC News",
+          "homepage": "https://www.bbc.com/news",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bbc-news-channel",
+              "name": "BBC News Channel",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.com/news"
+            },
+            {
+              "key": "bbc-news-at-six",
+              "name": "BBC News at Six",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/programmes/b007mpkn"
+            },
+            {
+              "key": "bbc-news-at-ten",
+              "name": "BBC News at Ten",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/programmes/b006mdbc"
+            },
+            {
+              "key": "bbc-radio-4-today",
+              "name": "Today",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/programmes/b006qj9z"
+            },
+            {
+              "key": "bbc-radio-4-world-at-one",
+              "name": "World at One",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/programmes/b006qptc"
+            },
+            {
+              "key": "bbc-radio-4-pm",
+              "name": "PM",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/programmes/b006qskw"
+            }
+          ],
+          "notes": [
+            "BBC News is treated as one cross-media news Source for central television news and BBC Radio 4 news/current-affairs programmes produced by BBC News.",
+            "The C placement is a public-service reference position, not a persisted ideological classification."
+          ]
+        },
+        {
+          "key": "itv-news",
+          "name": "ITV News",
+          "homepage": "https://www.itv.com/news",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "mainstream_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "itv-news-tv",
+              "name": "ITV News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.itv.com/news"
+            }
+          ],
+          "notes": [
+            "ITN supplies ITV News, but ITV News is kept as its own editorial Source because ITN and parliamentary evidence describe the national ITN newsrooms as editorially distinct.",
+            "C is a mainstream-reference planning position, not a persisted ideological classification."
+          ]
+        },
+        {
+          "key": "5-news",
+          "name": "5 News",
+          "homepage": "https://www.channel5.com/show/5-news",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "mainstream_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "5-news-tv",
+              "name": "5 News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.channel5.com/show/5-news"
+            }
+          ],
+          "notes": [
+            "5 News is an editorially separate ITN newsroom with its own editor and mission; shared ITN production does not collapse it into ITV News or Channel 4 News.",
+            "C is a mainstream-reference planning position, not a persisted ideological classification."
+          ]
+        },
+        {
+          "key": "sky-news",
+          "name": "Sky News",
+          "homepage": "https://news.sky.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "mainstream_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sky-news-tv",
+              "name": "Sky News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://news.sky.com/"
+            }
+          ],
+          "notes": [
+            "National UK television news Source with its own newsroom. Sky News Radio is not modeled as a consumer radio Source because it primarily supplies bulletins to commercial radio stations.",
+            "C is a mainstream-reference planning position, not a persisted ideological classification."
+          ]
+        },
+        {
+          "key": "bbc-radio-5-live",
+          "name": "BBC Radio 5 Live",
+          "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bbc-radio-5-live-radio",
+              "name": "BBC Radio 5 Live",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live"
+            },
+            {
+              "key": "bbc-radio-5-sports-extra",
+              "name": "BBC Radio 5 Sports Extra",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bbc.co.uk/sounds/play/live:bbc_radio_five_live_sports_extra"
+            }
+          ],
+          "notes": [
+            "BBC Radio 5 Live is modeled separately from BBC News because it has station-level controller, commissioning and editorial structures.",
+            "The C placement is a public-service reference position, not a persisted ideological classification."
+          ]
+        }
+      ],
+      "coverage_exception": "The television side reaches the research target through distinct mainstream/public-service newsrooms. Radio remains sparse because BBC News and BBC Radio 5 Live are the only approved C Sources; other national speech stations remain politically unclassified."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [],
+      "coverage_exception": "No approved independent national television or radio Source is placed in D. Religious broadcasters are not classified as conservative merely from Christian identity."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "gb-news",
+          "name": "GB News",
+          "homepage": "https://www.gbnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_leaning",
+              "classifier_type": "academic_industry_report",
+              "classifier_name": "Reuters Institute Digital News Report 2024 – United Kingdom",
+              "source_url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2024/united-kingdom",
+              "reference_date": "2024-06-17",
+              "retrieved_at": "2026-09-24T06:15:00Z",
+              "notes": "Reuters Institute describes GB News as a right-leaning TV news channel. External attribution, not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right",
+              "classifier_type": "media_rating_database",
+              "classifier_name": "Media Bias/Fact Check",
+              "source_url": "https://mediabiasfactcheck.com/gb-news-uk-bias/",
+              "reference_date": "2026-08-01",
+              "retrieved_at": "2026-09-24T06:15:00Z",
+              "notes": "Current external media-rating classification. FSC stores the orientation attribution and does not adopt MBFC factuality judgments."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-news-tv",
+              "name": "GB News",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gbnews.com/"
+            },
+            {
+              "key": "gb-news-radio",
+              "name": "GB News Radio",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gbnews.com/"
+            }
+          ],
+          "notes": [
+            "GB News television and radio are treated as outlets of one cross-media editorial Source.",
+            "External sources support E-direction placement; Ofcom impartiality decisions are regulatory evidence and are not used as political-classification substitutes."
+          ]
+        }
+      ],
+      "coverage_exception": "GB News is the only approved national Source in E and spans both television and radio. No other Source is moved into E merely to meet a quota."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [],
+      "coverage_exception": "No approved national UK television or radio newsroom currently satisfies FSC's two-independent-source threshold for F. Market gaps remain explicit."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "revelation-tv",
+      "name": "Revelation TV",
+      "homepage": "https://revelationtv.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "christian",
+          "classifier_type": "self_description",
+          "classifier_name": "Revelation TV",
+          "source_url": "https://revelationtv.com/",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T06:15:00Z",
+          "notes": "Christian self-positioning is stored separately and does not establish a political FSC classification."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "revelation-tv-channel",
+          "name": "Revelation TV",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://revelationtv.com/"
+        }
+      ],
+      "notes": [
+        "Included because recurring programmes cover national and international news, politics and current affairs from a Christian perspective. Religious identity is not automatically conservative."
+      ]
+    },
+    {
+      "key": "lbc",
+      "name": "LBC",
+      "homepage": "https://www.lbc.co.uk/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "lbc-radio",
+          "name": "LBC",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.lbc.co.uk/"
+        }
+      ],
+      "notes": [
+        "National speech/current-affairs Source with its own Managing Editor across radio and digital. Presenter-level political positions are not generalized into a Source-level classification."
+      ]
+    },
+    {
+      "key": "lbc-news",
+      "name": "LBC News",
+      "homepage": "https://www.lbc.co.uk/news/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "lbc-news-radio",
+          "name": "LBC News",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.lbc.co.uk/news/"
+        }
+      ],
+      "notes": [
+        "Rolling-news service with a distinct station/editorial operation. Shared Global newsroom infrastructure and bulletins do not merge LBC News with LBC."
+      ]
+    },
+    {
+      "key": "times-radio",
+      "name": "Times Radio",
+      "homepage": "https://www.thetimes.com/radio",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "related_existing_source_key": "times",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "times-radio-national",
+          "name": "Times Radio",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.thetimes.com/radio"
+        }
+      ],
+      "notes": [
+        "Times Radio draws on journalism from The Times and The Sunday Times but has its own Programme Director, schedule, production team and editorial contacts; it is therefore a separate Source rather than an outlet of the existing The Times print Source.",
+        "No political classification is inherited automatically from The Times."
+      ]
+    },
+    {
+      "key": "talk",
+      "name": "Talk",
+      "homepage": "https://talk.tv/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "talk-radio",
+          "name": "Talk",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://talk.tv/"
+        }
+      ],
+      "notes": [
+        "Current national radio/digital speech Source. The former linear TalkTV television service is not treated as a current TV Source.",
+        "Opinionated presenters or programmes are insufficient for a Source-level E classification without two independent external orientation sources."
+      ]
+    },
+    {
+      "key": "ucb",
+      "name": "UCB",
+      "homepage": "https://www.ucb.co.uk/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "christian",
+          "classifier_type": "self_description",
+          "classifier_name": "UCB",
+          "source_url": "https://www.ucb.co.uk/listen",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T06:15:00Z",
+          "notes": "Christian self-positioning is stored separately and does not establish a political FSC classification."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "ucb-1",
+          "name": "UCB 1",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.ucb.co.uk/listen"
+        },
+        {
+          "key": "ucb-2",
+          "name": "UCB 2",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.ucb.co.uk/listen"
+        }
+      ],
+      "notes": [
+        "One editorial Source with two national radio outlets. Included because UCB describes in-depth news and discussion as part of the service."
+      ]
+    },
+    {
+      "key": "premier-christian-radio",
+      "name": "Premier Christian Radio",
+      "homepage": "https://www.premier.plus/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "christian",
+          "classifier_type": "self_description",
+          "classifier_name": "Premier",
+          "source_url": "https://www.premier.plus/pages/how-to-listen",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T06:15:00Z",
+          "notes": "Christian self-positioning is stored separately and does not establish a political FSC classification."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "premier-christian-radio-national",
+          "name": "Premier Christian Radio",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "en",
+          "homepage": "https://www.premier.plus/"
+        }
+      ],
+      "notes": [
+        "National Christian speech/news radio Source. Premier Praise and Premier Gospel are not counted as additional political Sources."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "Sky News Radio",
+      "reason": "News-content supplier to UK commercial radio rather than a normal national consumer radio programme; reserve for the later Agency/Content Supplier model."
+    },
+    {
+      "name": "Novara Media",
+      "reason": "Politically relevant digital-native audiovisual outlet, but belongs in a later digital-video/podcast block rather than the national linear broadcast catalog."
+    },
+    {
+      "name": "BBC World Service",
+      "reason": "International-service mandate; defer to an international/global broadcast comparison block rather than the UK-national core."
+    },
+    {
+      "name": "BBC Local Radio",
+      "reason": "Local/regional BBC services are reserved for the later GB regional/devolved block."
+    },
+    {
+      "name": "STV",
+      "reason": "Scotland-focused broadcaster reserved for the later GB regional/devolved block."
+    },
+    {
+      "name": "S4C",
+      "reason": "Welsh-language/devolved broadcaster reserved for the later GB regional/devolved block."
+    },
+    {
+      "name": "talkSPORT",
+      "reason": "National station but predominantly sports-focused rather than a general political/current-affairs Source for the FSC core."
+    },
+    {
+      "name": "TBN UK",
+      "reason": "National distribution alone is insufficient; the reviewed offering does not add enough recurring general-political/current-affairs newsroom value relative to the approved core."
+    },
+    {
+      "name": "former TalkTV linear channel",
+      "reason": "The linear television service is no longer treated as a current TV Source; the continuing Talk radio/digital operation is included separately."
+    }
+  ],
+  "approved_candidate_count": 14,
+  "new_source_count": 14,
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+}
