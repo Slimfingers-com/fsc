@@ -1658,3 +1658,66 @@ def test_at_regional_broadcast_outlet_keys_are_unique() -> None:
     catalog = load_at_regional_broadcast_catalog()
     outlet_keys = [outlet["key"] for entry in at_regional_broadcast_entries(catalog) for outlet in entry["outlets"]]
     assert len(outlet_keys) == len(set(outlet_keys))
+
+
+CH_REGIONAL_BROADCAST_CATALOG = CATALOG_DIR / "ch_regional_broadcast_v1.json"
+
+
+def load_ch_regional_broadcast_catalog() -> dict:
+    return json.loads(CH_REGIONAL_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def ch_regional_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_ch_regional_broadcast_catalog_has_compact_multilingual_core() -> None:
+    catalog = load_ch_regional_broadcast_catalog()
+    entries = ch_regional_broadcast_entries(catalog)
+    assert catalog["country"] == "CH"
+    assert catalog["scope"] == "regional"
+    assert catalog["approved_candidate_count"] == 12
+    assert len(entries) == 12
+    assert len({entry["key"] for entry in entries}) == 12
+    assert all(entry["classification_status"] == "unclassified_research_candidate" for entry in entries)
+
+
+def test_ch_regional_broadcast_language_regions_are_represented_without_quota() -> None:
+    catalog = load_ch_regional_broadcast_catalog()
+    languages = {
+        outlet["language"]
+        for entry in ch_regional_broadcast_entries(catalog)
+        for outlet in entry["outlets"]
+    }
+    assert {"de", "fr", "it"} <= languages
+
+
+def test_ch_regional_broadcast_public_service_regional_output_is_not_duplicated() -> None:
+    catalog = load_ch_regional_broadcast_catalog()
+    names = {entry["name"] for entry in ch_regional_broadcast_entries(catalog)}
+    assert names.isdisjoint({"SRF", "RTS", "RSI", "RTR"})
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+    assert "existing SRF Source" in deferred["SRF regional journals"]
+    assert "existing RTS Source" in deferred["RTS regional output"]
+
+
+def test_ch_regional_broadcast_shared_ownership_does_not_merge_independent_tv_sources() -> None:
+    catalog = load_ch_regional_broadcast_catalog()
+    names = {entry["name"] for entry in ch_regional_broadcast_entries(catalog)}
+    assert {"TeleBärn", "Tele M1", "TVO"} <= names
+
+
+def test_ch_regional_broadcast_bilingual_services_are_single_sources() -> None:
+    catalog = load_ch_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in ch_regional_broadcast_entries(catalog)}
+    assert {outlet["name"] for outlet in entries["Canal 9 / Kanal 9"]["outlets"]} == {"Canal 9", "Kanal 9"}
+    assert {outlet["name"] for outlet in entries["RadioFr. Fribourg/Freiburg"]["outlets"]} == {"RadioFr. Fribourg", "RadioFr. Freiburg"}
+
+
+def test_ch_regional_broadcast_outlet_keys_are_unique() -> None:
+    catalog = load_ch_regional_broadcast_catalog()
+    keys = [outlet["key"] for entry in ch_regional_broadcast_entries(catalog) for outlet in entry["outlets"]]
+    assert len(keys) == len(set(keys))

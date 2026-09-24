@@ -531,6 +531,28 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Switzerland (CH) — Regional broadcast
+
+This compact block selects licensed regional television and local-radio Sources across the German-, French- and Italian-speaking media regions. It does not attempt a canton-by-canton quota.
+
+The initial core contains 12 politically unclassified Sources: six television and six radio.
+
+Television: TeleBärn, Tele M1, TVO, Léman Bleu, Canal 9/Kanal 9 and TeleTicino.
+
+Radio: Radio Central, Radio Grischa, Radio Chablais, RadioFr. Fribourg/Freiburg, Radio Ticino and Radio BeO.
+
+Specific identity rules:
+
+- BAKOM concessions establish these as genuine regional/local broadcasters with regional-information duties, but do not imply political orientation.
+- Shared ownership does not merge editorially independent regional stations. In particular, CH Media has stated that its licensed regional TV stations remain editorially independent.
+- Canal 9/Kanal 9 is one bilingual Valais Source with French- and German-language outlets.
+- RadioFr. Fribourg/Freiburg is one bilingual Fribourg Source with French- and German-language radio outlets.
+- SRF, RTS, RSI and RTR are not duplicated in this regional catalog. Their regional output remains part of the already existing national language-region Sources.
+- Remaining BAKOM-concessioned regional television and local radio providers remain available for later expansion; the core is deliberately multilingual and compact rather than quota-driven.
+- No selected private regional Source currently has sufficient two-independent-source provenance for an A–F political placement.
+
+No feed is activated by inclusion in this catalog.
+
 ## International comparison set
 
 The international print catalog is **not** a world-coverage catalog. It is a Germany-focused comparison set for cross-source story, claim, perspective and coverage analysis.
@@ -622,6 +644,7 @@ Completed catalog blocks:
 12. United States national broadcast candidate core (TV and radio; regional broadcast separate)
 13. Germany regional broadcast candidate core (state/multi-state level; local broadcast separate)
 14. Austria regional broadcast candidate core (state/multi-state level; local/community broadcast separate)
+15. Switzerland regional broadcast candidate core (compact multilingual licensed regional set)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
