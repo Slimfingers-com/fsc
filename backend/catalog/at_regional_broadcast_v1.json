@@ -1,0 +1,822 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "scope": "regional",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "regional_editorial_unit_not_parent_network_distribution_brand_or_technical_reach",
+  "locality_policy": "state_and_multi_state_regional_sources_only_local_micro_broadcasters_deferred",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "C placement of ORF Landesstudios is a public-service regional reference convention only. Religious identity, technical reach, ownership or self-description do not establish political classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No approved Austrian state-level regional television or radio Source is placed in A."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [],
+      "coverage_exception": "No approved Austrian regional Source has sufficient two-source external provenance for B."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/public-service regional reference",
+      "entries": [
+        {
+          "key": "orf-burgenland",
+          "name": "ORF Burgenland",
+          "homepage": "https://burgenland.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-burgenland-heute",
+              "name": "Burgenland heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "burgenland"
+              ],
+              "homepage": "https://burgenland.orf.at/"
+            },
+            {
+              "key": "orf-burgenland-radio",
+              "name": "Radio Burgenland",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "burgenland"
+              ],
+              "homepage": "https://burgenland.orf.at/"
+            },
+            {
+              "key": "orf-burgenland-online",
+              "name": "burgenland.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "burgenland"
+              ],
+              "homepage": "https://burgenland.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-kaernten",
+          "name": "ORF Kärnten",
+          "homepage": "https://kaernten.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-kaernten-heute",
+              "name": "Kärnten heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "kaernten"
+              ],
+              "homepage": "https://kaernten.orf.at/"
+            },
+            {
+              "key": "orf-kaernten-radio",
+              "name": "Radio Kärnten",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "kaernten"
+              ],
+              "homepage": "https://kaernten.orf.at/"
+            },
+            {
+              "key": "orf-kaernten-online",
+              "name": "kaernten.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "kaernten"
+              ],
+              "homepage": "https://kaernten.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-niederoesterreich",
+          "name": "ORF Niederösterreich",
+          "homepage": "https://niederoesterreich.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-niederoesterreich-heute",
+              "name": "Niederösterreich heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "niederoesterreich"
+              ],
+              "homepage": "https://niederoesterreich.orf.at/"
+            },
+            {
+              "key": "orf-niederoesterreich-radio",
+              "name": "Radio Niederösterreich",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "niederoesterreich"
+              ],
+              "homepage": "https://niederoesterreich.orf.at/"
+            },
+            {
+              "key": "orf-niederoesterreich-online",
+              "name": "niederoesterreich.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "niederoesterreich"
+              ],
+              "homepage": "https://niederoesterreich.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-oberoesterreich",
+          "name": "ORF Oberösterreich",
+          "homepage": "https://oberoesterreich.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-oberoesterreich-heute",
+              "name": "Oberösterreich heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "oberoesterreich"
+              ],
+              "homepage": "https://oberoesterreich.orf.at/"
+            },
+            {
+              "key": "orf-oberoesterreich-radio",
+              "name": "Radio Oberösterreich",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "oberoesterreich"
+              ],
+              "homepage": "https://oberoesterreich.orf.at/"
+            },
+            {
+              "key": "orf-oberoesterreich-online",
+              "name": "oberoesterreich.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "oberoesterreich"
+              ],
+              "homepage": "https://oberoesterreich.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-salzburg",
+          "name": "ORF Salzburg",
+          "homepage": "https://salzburg.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-salzburg-heute",
+              "name": "Salzburg heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "salzburg"
+              ],
+              "homepage": "https://salzburg.orf.at/"
+            },
+            {
+              "key": "orf-salzburg-radio",
+              "name": "Radio Salzburg",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "salzburg"
+              ],
+              "homepage": "https://salzburg.orf.at/"
+            },
+            {
+              "key": "orf-salzburg-online",
+              "name": "salzburg.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "salzburg"
+              ],
+              "homepage": "https://salzburg.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-steiermark",
+          "name": "ORF Steiermark",
+          "homepage": "https://steiermark.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-steiermark-heute",
+              "name": "Steiermark heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "steiermark"
+              ],
+              "homepage": "https://steiermark.orf.at/"
+            },
+            {
+              "key": "orf-steiermark-radio",
+              "name": "Radio Steiermark",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "steiermark"
+              ],
+              "homepage": "https://steiermark.orf.at/"
+            },
+            {
+              "key": "orf-steiermark-online",
+              "name": "steiermark.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "steiermark"
+              ],
+              "homepage": "https://steiermark.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-tirol",
+          "name": "ORF Tirol",
+          "homepage": "https://tirol.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-tirol-heute",
+              "name": "Tirol heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "tirol"
+              ],
+              "homepage": "https://tirol.orf.at/"
+            },
+            {
+              "key": "orf-tirol-radio",
+              "name": "Radio Tirol",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "tirol"
+              ],
+              "homepage": "https://tirol.orf.at/"
+            },
+            {
+              "key": "orf-tirol-online",
+              "name": "tirol.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "tirol"
+              ],
+              "homepage": "https://tirol.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-vorarlberg",
+          "name": "ORF Vorarlberg",
+          "homepage": "https://vorarlberg.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-vorarlberg-heute",
+              "name": "Vorarlberg heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "vorarlberg"
+              ],
+              "homepage": "https://vorarlberg.orf.at/"
+            },
+            {
+              "key": "orf-vorarlberg-radio",
+              "name": "Radio Vorarlberg",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "vorarlberg"
+              ],
+              "homepage": "https://vorarlberg.orf.at/"
+            },
+            {
+              "key": "orf-vorarlberg-online",
+              "name": "vorarlberg.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "vorarlberg"
+              ],
+              "homepage": "https://vorarlberg.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        },
+        {
+          "key": "orf-wien",
+          "name": "ORF Wien",
+          "homepage": "https://wien.orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-wien-heute",
+              "name": "Wien heute",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "wien"
+              ],
+              "homepage": "https://wien.orf.at/"
+            },
+            {
+              "key": "orf-wien-radio",
+              "name": "Radio Wien",
+              "publication_form": "radio",
+              "scope": "regional",
+              "region": [
+                "wien"
+              ],
+              "homepage": "https://wien.orf.at/"
+            },
+            {
+              "key": "orf-wien-online",
+              "name": "wien.ORF.at",
+              "publication_form": "digital",
+              "scope": "regional",
+              "region": [
+                "wien"
+              ],
+              "homepage": "https://wien.orf.at/"
+            }
+          ],
+          "notes": [
+            "One ORF Landesstudio editorial Source with its own Landesdirektion and regional TV, radio and online output.",
+            "Separate from the national ORF Information Source; C is a public-service reference position, not a persisted political classification."
+          ]
+        }
+      ],
+      "coverage_exception": "All nine ORF Landesstudios are retained despite exceeding the 3–5 target because they are distinct regional editorial units; the target is not a cap."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [],
+      "coverage_exception": "No approved Austrian regional Source has sufficient two-source external provenance for D."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [],
+      "coverage_exception": "No approved Austrian regional Source has sufficient two-source external provenance for E."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [
+        {
+          "key": "rtv-ooe",
+          "name": "RTV Regionalfernsehen OÖ",
+          "homepage": "https://live.rtv-ooe.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_extreme_right_spectrum_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_extremist_agitation",
+              "classifier_type": "state_security_report",
+              "classifier_name": "Direktion Staatsschutz und Nachrichtendienst – Verfassungsschutzbericht 2025",
+              "source_url": "https://www.dsn.gv.at/501/files/vsb/verfassungsschutzbericht_vsb_2025_bf.pdf",
+              "reference_date": "2026-05-04",
+              "retrieved_at": "2026-09-24T08:15:00Z",
+              "notes": "The Austrian security report states that RTV focuses on conspiracy narratives/disinformation, cooperates closely with extremist AUF1 and serves right-extremist agitation. This is attributed wording, not an FSC legal designation."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "radicalized_right_extreme_and_conspiracy_ideological_content",
+              "classifier_type": "journalistic_analysis",
+              "classifier_name": "Der Standard",
+              "source_url": "https://www.derstandard.at/story/3000000212514/die-blaue-medienwelt-ist-noch-radikaler-und-groesser-geworden",
+              "reference_date": "2024-03-29",
+              "retrieved_at": "2026-09-24T08:15:00Z",
+              "notes": "Independent journalistic analysis describes RTV as a radicalized regional broadcaster with increasingly extreme-right and conspiracy-ideological content."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rtv-ooe-tv",
+              "name": "RTV Regionalfernsehen OÖ",
+              "publication_form": "television",
+              "scope": "regional",
+              "region": [
+                "OÖ"
+              ],
+              "homepage": "https://live.rtv-ooe.at/"
+            }
+          ],
+          "notes": [
+            "Regional Upper Austria Source. F placement records attributed external assessments and does not claim RTV is legally designated an extremist organization."
+          ]
+        }
+      ],
+      "coverage_exception": "RTV is the only approved regional Source with sufficient two-source provenance for F; no radio Source is added artificially."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "w24",
+      "name": "W24",
+      "homepage": "https://www.w24.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "w24-tv",
+          "name": "W24",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Wien"
+          ],
+          "homepage": "https://www.w24.at/"
+        }
+      ],
+      "notes": [
+        "Independent Vienna regional television Source; R9 membership does not merge editorial identity."
+      ]
+    },
+    {
+      "key": "lt1",
+      "name": "LT1",
+      "homepage": "https://www.lt1.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "lt1-tv",
+          "name": "LT1",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "OÖ"
+          ],
+          "homepage": "https://www.lt1.at/"
+        }
+      ],
+      "notes": [
+        "Independent Upper Austria regional television Source; R9 membership does not merge editorial identity."
+      ]
+    },
+    {
+      "key": "kanal3",
+      "name": "Kanal3",
+      "homepage": "https://www.kanal3.tv/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "kanal3-tv",
+          "name": "Kanal3",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Steiermark"
+          ],
+          "homepage": "https://www.kanal3.tv/"
+        }
+      ],
+      "notes": [
+        "Independent Styrian regional television Source; R9 membership does not merge editorial identity."
+      ]
+    },
+    {
+      "key": "rts-salzburg",
+      "name": "RTS Regionalfernsehen Salzburg",
+      "homepage": "https://www.rts-salzburg.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rts-salzburg-tv",
+          "name": "RTS Regionalfernsehen Salzburg",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Salzburg"
+          ],
+          "homepage": "https://www.rts-salzburg.at/"
+        }
+      ],
+      "notes": [
+        "Independent Salzburg regional television Source; R9 membership does not merge editorial identity."
+      ]
+    },
+    {
+      "key": "tirol-tv",
+      "name": "Tirol TV",
+      "homepage": "https://www.tiroltv.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "tirol-tv-outlet",
+          "name": "Tirol TV",
+          "publication_form": "television",
+          "scope": "regional",
+          "region": [
+            "Tirol"
+          ],
+          "homepage": "https://www.tiroltv.at/"
+        }
+      ],
+      "notes": [
+        "Independent Tyrol regional television Source; R9 membership does not merge editorial identity."
+      ]
+    },
+    {
+      "key": "antenne-steiermark",
+      "name": "Antenne Steiermark",
+      "homepage": "https://www.antenne.at/steiermark/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "antenne-steiermark-radio",
+          "name": "Antenne Steiermark",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Steiermark"
+          ],
+          "homepage": "https://www.antenne.at/steiermark/"
+        }
+      ],
+      "notes": [
+        "Regional private radio Source; RTR lists its own broadcasting entity."
+      ]
+    },
+    {
+      "key": "life-radio",
+      "name": "Life Radio",
+      "homepage": "https://www.liferadio.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "life-radio-ooe",
+          "name": "Life Radio",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "OÖ"
+          ],
+          "homepage": "https://www.liferadio.at/"
+        }
+      ],
+      "notes": [
+        "Upper Austria private radio Source; technical DAB+ reach does not change its regional editorial identity."
+      ]
+    },
+    {
+      "key": "radio-u1-tirol",
+      "name": "Radio U1 Tirol",
+      "homepage": "https://u1-radio.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-u1-tirol-radio",
+          "name": "Radio U1 Tirol",
+          "publication_form": "radio",
+          "scope": "regional",
+          "region": [
+            "Tirol"
+          ],
+          "homepage": "https://u1-radio.at/"
+        }
+      ],
+      "notes": [
+        "Tyrolean regional radio Source with recurring news and political interview formats, including 2026 party-leader summer talks."
+      ]
+    },
+    {
+      "key": "radio-886",
+      "name": "Radio 88.6",
+      "homepage": "https://www.radio886.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-886-radio",
+          "name": "Radio 88.6",
+          "publication_form": "radio",
+          "scope": "multi_state_regional",
+          "region": [
+            "Wien",
+            "NÖ",
+            "Burgenland",
+            "OÖ",
+            "Steiermark",
+            "Salzburg",
+            "Tirol"
+          ],
+          "homepage": "https://www.radio886.at/"
+        }
+      ],
+      "notes": [
+        "Multi-state regional Source whose core editorial/market identity remains regional despite nationwide DAB+ availability. Source scope follows editorial mandate, not technical reach alone."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "R9",
+      "reason": "Regional television umbrella/distribution and joint-programming platform; membership does not merge the editorial Sources of its regional partner stations. Revisit separately for genuinely R9-produced formats."
+    },
+    {
+      "name": "KURIER TV",
+      "reason": "Potential future audiovisual outlet of the existing Kurier Source from the AT print catalog; must extend Kurier rather than create a duplicate Source."
+    },
+    {
+      "name": "N1 TV",
+      "reason": "Legitimate regional television candidate deferred from the compact initial core; no federal-state quota applies."
+    },
+    {
+      "name": "KT1",
+      "reason": "Legitimate Kärnten regional television candidate deferred from the compact initial core."
+    },
+    {
+      "name": "Ländle TV",
+      "reason": "Legitimate Vorarlberg regional television candidate deferred from the compact initial core."
+    },
+    {
+      "name": "local/community broadcasters",
+      "reason": "Smaller local and community television/radio Sources are reserved for a later AT local block unless specific FSC incremental value justifies inclusion."
+    }
+  ],
+  "approved_candidate_count": 19,
+  "new_source_count": 19,
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+}

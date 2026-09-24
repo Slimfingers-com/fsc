@@ -302,6 +302,35 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Austria (AT) — Regional broadcast
+
+This block covers state-level and multi-state regional editorial Sources. Technical reach alone does not make a regional editorial Source national.
+
+The jointly approved compact core contains 19 Source identities:
+
+| Planning segment | Television Sources | Radio Sources |
+| --- | --- | --- |
+| A radical/system-oppositional left | explicit market gap | explicit market gap |
+| B left/centre-left/left-liberal | explicit market gap | explicit market gap |
+| C public-service regional reference | 9 ORF Landesstudios | the same 9 ORF Landesstudios |
+| D conservative/liberal-conservative | explicit market gap | explicit market gap |
+| E right/right-conservative/right-libertarian | explicit market gap | explicit market gap |
+| F externally classified extreme-right spectrum | RTV Regionalfernsehen OÖ | explicit market gap |
+
+Politically unclassified private Sources: W24, LT1, Kanal3, RTS Regionalfernsehen Salzburg, Tirol TV, Antenne Steiermark, Life Radio, Radio U1 Tirol and Radio 88.6.
+
+Specific identity rules:
+
+- **The nine ORF Landesstudios are nine regional Sources**, each combining its regional television, radio and digital newsroom output. They remain separate from the national ORF Information Source.
+- **R9 is not a collective Source** for its partner stations. Partner broadcasters retain their editorial Source identity; genuinely R9-produced formats can be reviewed separately later.
+- **RTV Regionalfernsehen OÖ** is placed in F using two independent external sources, including the Austrian Verfassungsschutzbericht 2025. This is attributed external classification, not an FSC legal designation.
+- **Radio 88.6** remains a multi-state regional Source despite nationwide DAB+ availability because Source scope follows editorial mandate, not technical reach alone.
+- **KURIER TV** is deferred as a future outlet extension of the existing Kurier Source, not a new Source.
+- N1 TV, KT1 and Ländle TV remain legitimate deferred regional candidates; no federal-state quota applies.
+- Smaller local/community broadcasters remain outside this block for later AT local review.
+
+No feed is activated by inclusion in this catalog.
+
 ## Switzerland (CH)
 
 ### Print
@@ -592,6 +621,7 @@ Completed catalog blocks:
 11. Great Britain national broadcast candidate core (TV and radio; regional/devolved broadcast separate)
 12. United States national broadcast candidate core (TV and radio; regional broadcast separate)
 13. Germany regional broadcast candidate core (state/multi-state level; local broadcast separate)
+14. Austria regional broadcast candidate core (state/multi-state level; local/community broadcast separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
