@@ -48,14 +48,14 @@ class RuleBasedCoverageAnalyzer(CoverageAnalyzer):
             for source in story.sources
             if source.is_signal
         )
-        independent_content_owners = {
-            source.independent_owner_key
+        independent_content_sources = {
+            source.independence_key
             for source in content_sources
         }
 
         gaps = []
         if (
-            len(independent_content_owners)
+            len(independent_content_sources)
             < self.minimum_independent_content_sources
         ):
             gaps.append(
@@ -66,7 +66,7 @@ class RuleBasedCoverageAnalyzer(CoverageAnalyzer):
                         .LIMITED_INDEPENDENT_CONTENT_SOURCES
                     ),
                     observed_count=len(
-                        independent_content_owners
+                        independent_content_sources
                     ),
                     minimum_expected=(
                         self
@@ -83,7 +83,12 @@ class RuleBasedCoverageAnalyzer(CoverageAnalyzer):
                         CoverageGapKind
                         .SIGNAL_WITHOUT_CONTENT_COVERAGE
                     ),
-                    observed_count=len(signal_sources),
+                    observed_count=len(
+                        {
+                            source.source_id
+                            for source in signal_sources
+                        }
+                    ),
                     minimum_expected=None,
                 )
             )

@@ -139,7 +139,7 @@ export type StoryAnalysis = {
     source_count: number;
     content_source_count: number;
     signal_source_count: number;
-    independent_content_owner_count: number;
+    independent_content_source_count: number;
     claim_group_count: number;
     shared_group_count: number;
     difference_count: number;

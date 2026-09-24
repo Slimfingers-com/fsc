@@ -17,6 +17,7 @@ from app.enums.source_type import SourceType
 
 if TYPE_CHECKING:
     from app.models.feed import Feed
+    from app.models.source_dependency import ArticleProvenance, SourceRelation
     from app.models.source_metadata import (
         SourceClassification,
         SourceMetric,
@@ -166,4 +167,21 @@ class Source(BaseModel):
     metrics: Mapped[list["SourceMetric"]] = relationship(
         back_populates="source",
         cascade="all, delete-orphan",
+    )
+
+    outgoing_relations: Mapped[list["SourceRelation"]] = relationship(
+        foreign_keys="SourceRelation.source_id",
+        back_populates="source",
+        cascade="all, delete-orphan",
+    )
+
+    incoming_relations: Mapped[list["SourceRelation"]] = relationship(
+        foreign_keys="SourceRelation.related_source_id",
+        back_populates="related_source",
+        cascade="all, delete-orphan",
+    )
+
+    article_provenance_as_upstream: Mapped[list["ArticleProvenance"]] = relationship(
+        foreign_keys="ArticleProvenance.upstream_source_id",
+        back_populates="upstream_source",
     )

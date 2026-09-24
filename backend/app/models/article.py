@@ -28,6 +28,7 @@ if TYPE_CHECKING:
     from app.models.feed import Feed
     from app.models.perspective import ArticlePerspective
     from app.models.search_document import SearchDocument
+    from app.models.source_dependency import ArticleProvenance
     from app.models.story import StoryArticle
     from app.models.topic import ArticleTopic
 
@@ -198,4 +199,9 @@ class Article(BaseModel):
 
     processing_runs: Mapped[list["ArticleProcessingRun"]] = relationship(
         back_populates="article",
+    )
+    provenance: Mapped[list["ArticleProvenance"]] = relationship(
+        foreign_keys="ArticleProvenance.article_id",
+        back_populates="article",
+        cascade="all, delete-orphan",
     )

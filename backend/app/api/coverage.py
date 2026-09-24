@@ -279,9 +279,9 @@ def story_coverage(
         signal_source_count=(
             summary.signal_source_count
         ),
-        independent_content_owner_count=(
+        independent_content_source_count=(
             summary
-            .independent_content_owner_count
+            .independent_content_source_count
         ),
         claim_group_count=(
             summary.claim_group_count

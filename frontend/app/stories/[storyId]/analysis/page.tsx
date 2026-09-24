@@ -45,7 +45,7 @@ export default async function AnalysisPage({ params }: Props) {
         <div className="metric"><strong>{analysis.coverage.claim_group_count}</strong><span>Aussagegruppen</span></div>
         <div className="metric"><strong>{analysis.coverage.shared_group_count}</strong><span>Geteilte Aussagen</span></div>
         <div className="metric"><strong>{analysis.coverage.difference_count}</strong><span>Widersprüche</span></div>
-        <div className="metric"><strong>{analysis.coverage.independent_content_owner_count}</strong><span>Unabh. Owner</span></div>
+        <div className="metric"><strong>{analysis.coverage.independent_content_source_count}</strong><span>Unabh. Quellen</span></div>
       </section>
 
       {analysis.coverage_gaps.length > 0 ? (

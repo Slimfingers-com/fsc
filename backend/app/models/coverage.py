@@ -43,7 +43,7 @@ class StoryCoverageSummary(BaseModel):
             "AND source_count >= 1 "
             "AND content_source_count >= 0 "
             "AND signal_source_count >= 0 "
-            "AND independent_content_owner_count >= 0 "
+            "AND independent_content_source_count >= 0 "
             "AND claim_group_count >= 1 "
             "AND shared_group_count >= 0 "
             "AND difference_count >= 0 "
@@ -74,7 +74,7 @@ class StoryCoverageSummary(BaseModel):
     source_count: Mapped[int] = mapped_column(Integer, nullable=False)
     content_source_count: Mapped[int] = mapped_column(Integer, nullable=False)
     signal_source_count: Mapped[int] = mapped_column(Integer, nullable=False)
-    independent_content_owner_count: Mapped[int] = mapped_column(
+    independent_content_source_count: Mapped[int] = mapped_column(
         Integer,
         nullable=False,
     )

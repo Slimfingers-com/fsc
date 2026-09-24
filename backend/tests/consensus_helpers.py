@@ -4,6 +4,11 @@ from uuid import uuid4
 from sqlalchemy import select
 
 from app.claim_relations.provider import ClaimRelationKind
+from app.enums.source_dependency import (
+    ArticleProvenanceDetectionMethod,
+    ArticleProvenanceKind,
+    SourceRelationKind,
+)
 from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
 from app.models.claim_relation import (
@@ -11,6 +16,7 @@ from app.models.claim_relation import (
     StoryClaimGroupMember,
     StoryClaimRelation,
 )
+from app.models.source_dependency import ArticleProvenance, SourceRelation
 from app.models.story_processing import StoryProcessingRun
 from app.services.evidence import EvidenceService
 from tests.evidence_helpers import build_evidence_story
@@ -59,6 +65,9 @@ def build_consensus_story(
     *,
     same_owner: bool = False,
     contradictory: bool = False,
+    shared_newsroom: bool = False,
+    supplied_by_first: bool = False,
+    verified_provenance: bool = True,
     specs=None,
 ):
     ownership_a = "Shared Media Group" if same_owner else "Owner A"
@@ -85,6 +94,31 @@ def build_consensus_story(
             ]
         ),
     )
+
+    if shared_newsroom:
+        db.add(
+            SourceRelation(
+                source_id=data["sources"][0].id,
+                related_source_id=data["sources"][1].id,
+                relation_kind=SourceRelationKind.SHARED_NEWSROOM,
+            )
+        )
+        db.flush()
+
+    if supplied_by_first:
+        db.add(
+            ArticleProvenance(
+                article_id=data["articles"][1].id,
+                upstream_source_id=data["sources"][0].id,
+                relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
+                confidence=0.95,
+                detection_method=(
+                    ArticleProvenanceDetectionMethod.MANUAL
+                ),
+                verified=verified_provenance,
+            )
+        )
+        db.flush()
 
     if contradictory:
         first_claim, second_claim = data["claims"]

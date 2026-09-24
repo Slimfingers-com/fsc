@@ -49,7 +49,7 @@ def test_coverage_summary_rejects_negative_counts(db):
             source_count=2,
             content_source_count=2,
             signal_source_count=0,
-            independent_content_owner_count=-1,
+            independent_content_source_count=-1,
             claim_group_count=1,
             shared_group_count=1,
             difference_count=0,

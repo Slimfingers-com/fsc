@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+from app.api.article_provenance import router as article_provenance_router
 from app.api.claims import router as claims_router
 from app.api.coverage import router as coverage_router
 from app.api.consensus import router as consensus_router
@@ -14,6 +15,7 @@ from app.api.story_analysis import router as story_analysis_router
 
 api_router = APIRouter()
 
+api_router.include_router(article_provenance_router)
 api_router.include_router(sources_router)
 api_router.include_router(search_router)
 api_router.include_router(entity_topic_router)

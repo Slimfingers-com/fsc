@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.models.feed import Feed
 from app.models.source import Source
+from app.models.source_dependency import SourceRelation
 from app.models.source_metadata import (
     SourceClassification,
     SourceMetric,
@@ -43,6 +44,16 @@ class SourceRepository(BaseRepository[Source]):
                 selectinload(
                     Source.metrics.and_(
                         SourceMetric.deleted_at.is_(None)
+                    )
+                ),
+                selectinload(
+                    Source.outgoing_relations.and_(
+                        SourceRelation.deleted_at.is_(None)
+                    )
+                ),
+                selectinload(
+                    Source.incoming_relations.and_(
+                        SourceRelation.deleted_at.is_(None)
                     )
                 ),
             )
@@ -155,3 +166,24 @@ class SourceRepository(BaseRepository[Source]):
     ) -> SourceMetric:
         db.add(metric)
         return metric
+
+    def get_active_by_id(
+        self,
+        db: Session,
+        source_id: UUID,
+    ) -> Source | None:
+        statement = (
+            select(Source)
+            .where(Source.id == source_id)
+            .where(Source.deleted_at.is_(None))
+            .where(Source.active.is_(True))
+        )
+        return db.scalar(statement)
+
+    def add_relation(
+        self,
+        db: Session,
+        relation: SourceRelation,
+    ) -> SourceRelation:
+        db.add(relation)
+        return relation
