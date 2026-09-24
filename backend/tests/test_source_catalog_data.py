@@ -515,13 +515,13 @@ def test_de_national_broadcast_catalog_has_approved_editorial_sources() -> None:
     assert catalog["media_category"] == "broadcast"
     assert catalog["activation_policy"] == "catalog_only_until_joint_review"
     assert catalog["source_identity_policy"] == "one_editorial_source_multiple_programmes_and_channels_as_outlets"
-    assert catalog["approved_candidate_count"] == 14
+    assert catalog["approved_candidate_count"] == 15
     assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
 
     entries = [entry for group in catalog["groups"] for entry in group["entries"]]
-    assert len(entries) == 14
-    assert len({entry["key"] for entry in entries}) == 14
-    assert len({entry["name"].casefold() for entry in entries}) == 14
+    assert len(entries) == 15
+    assert len({entry["key"] for entry in entries}) == 15
+    assert len({entry["name"].casefold() for entry in entries}) == 15
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
     assert all(entry["activity_status"] == "active" for entry in entries)
     assert all(entry["feeds"] == [] for entry in entries)
@@ -650,12 +650,22 @@ def test_de_national_broadcast_religious_identity_is_not_political_classificatio
         )
 
 
-def test_de_national_broadcast_defers_joint_or_non_linear_cases() -> None:
+def test_de_national_broadcast_defers_non_linear_cases() -> None:
     catalog = load_de_broadcast_catalog()
     deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
-    assert "phoenix" in deferred
-    assert "scalar ownership-based independence key" in deferred["phoenix"]
+    assert "phoenix" not in deferred
     assert {"Deutsche Welle", "BILD TV"} <= set(deferred)
+
+
+def test_de_national_broadcast_phoenix_is_own_nonpolitical_source() -> None:
+    catalog = load_de_broadcast_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    phoenix = next(entry for entry in groups["liberal_centre"]["entries"] if entry["key"] == "phoenix")
+    assert phoenix["name"] == "phoenix"
+    assert phoenix["classification_status"] == "public_service_reference_not_political_classification"
+    assert phoenix["classifications"] == []
+    assert {outlet["name"] for outlet in phoenix["outlets"]} == {"phoenix"}
+    assert any("no static collapsing SourceRelation" in note for note in phoenix["notes"])
 
 
 AT_BROADCAST_CATALOG = CATALOG_DIR / "at_broadcast_v1.json"
