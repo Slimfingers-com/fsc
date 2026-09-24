@@ -1,0 +1,674 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm"
+  ],
+  "scope": "national",
+  "media_category": "broadcast",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "one_editorial_source_multiple_programmes_channels_and_formats_as_outlets",
+  "ownership_policy": "shared_parent_does_not_collapse_editorially_responsible_language_region_units",
+  "regional_policy": "licensed_local_radio_and_regional_television_are_excluded_and_reviewed_in_a_separate_ch_regional_block",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "coverage_policy_notes": "Research target is 3–5 editorially independent Sources per political planning segment and per broadcast form. Genuine national-market gaps remain explicit. Channels, programmes, format brands and transmission windows do not count as independent Sources when editorial responsibility lies elsewhere.",
+  "coverage_targets": {
+    "television_min": 3,
+    "television_max": 5,
+    "radio_min": 3,
+    "radio_max": 5
+  },
+  "group_semantics": "research_planning_only_not_persisted_fsc_classification",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "A–F planning placement is not itself a persisted FSC political classification. Religious identity, public-service status and ownership are stored separately and are never converted automatically into ideology."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [],
+      "coverage_exception": "No suitable nationally oriented Swiss television or radio newsroom identified in the approved CH-national candidate scope. Local and community radio is reviewed separately."
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "sonntagszeitung-broadcast",
+          "name": "SonntagsZeitung",
+          "homepage": "https://www.tagesanzeiger.ch/sonntagszeitung",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "sonntagszeitung",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_liberal",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148788/sonntagszeitung",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "left_accent_in_referendum_tone",
+              "classifier_type": "academic",
+              "classifier_name": "fög – University of Zurich",
+              "source_url": "https://www.foeg.uzh.ch/dam/jcr:33f99533-ff1a-4594-9d10-5fe0b3afb8f0/SRG_Factsheet_Forschungsbefunde_2026.pdf",
+              "reference_date": "2026-02-19",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "Across 61 Swiss referendums from 2018–2025 the study places SonntagsZeitung at -9 on its left-right tonal-positioning scale; this is a study-specific empirical measure, not a general FSC ideology score."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sonntagszeitung-standpunkte",
+              "name": "SonntagsZeitung Standpunkte",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.pressetv.ch/"
+            }
+          ],
+          "notes": [
+            "PresseTV is a transmission/project framework; editorial responsibility for Standpunkte remains with the respective media house. The existing SonntagsZeitung Source is extended rather than duplicated."
+          ]
+        }
+      ],
+      "coverage_exception": "Only one approved national television Source is placed in B and no independent national radio Source is added merely to meet the research target."
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/public-service reference",
+      "entries": [
+        {
+          "key": "srf",
+          "name": "SRF",
+          "homepage": "https://www.srf.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "srf-1",
+              "name": "SRF 1",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.srf.ch/play/tv"
+            },
+            {
+              "key": "srf-zwei",
+              "name": "SRF zwei",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.srf.ch/play/tv"
+            },
+            {
+              "key": "srf-info",
+              "name": "SRF info",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.srf.ch/play/tv"
+            },
+            {
+              "key": "radio-srf-1",
+              "name": "Radio SRF 1",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.srf.ch/radio-srf-1"
+            },
+            {
+              "key": "radio-srf-2-kultur",
+              "name": "Radio SRF 2 Kultur",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.srf.ch/radio-srf-2-kultur"
+            },
+            {
+              "key": "radio-srf-3",
+              "name": "Radio SRF 3",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.srf.ch/radio-srf-3"
+            },
+            {
+              "key": "radio-srf-4-news",
+              "name": "Radio SRF 4 News",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.srf.ch/radio-srf-4-news"
+            }
+          ],
+          "notes": [
+            "SRF is one of four SRG language-region units. SRG states that journalistic responsibility for Information, Culture, Entertainment and Society/Knowledge remains in the regional units.",
+            "The C placement is a public-service reference position for research coverage, not a persisted ideological classification. fög's 2026 referendum study places SRF practically at the media-arena average."
+          ]
+        },
+        {
+          "key": "rts",
+          "name": "RTS",
+          "homepage": "https://www.rts.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "public_service_centre_reference_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rts-1",
+              "name": "RTS 1",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "fr",
+              "homepage": "https://www.rts.ch/play/tv"
+            },
+            {
+              "key": "rts-2",
+              "name": "RTS 2",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "fr",
+              "homepage": "https://www.rts.ch/play/tv"
+            },
+            {
+              "key": "rts-la-premiere",
+              "name": "RTS La Première",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "fr",
+              "homepage": "https://www.rts.ch/audio-podcast/radio/lapremiere/"
+            },
+            {
+              "key": "rts-espace-2",
+              "name": "RTS Espace 2",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "fr",
+              "homepage": "https://www.rts.ch/audio-podcast/radio/espace-2/"
+            },
+            {
+              "key": "rts-couleur-3",
+              "name": "RTS Couleur 3",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "fr",
+              "homepage": "https://www.rts.ch/audio-podcast/radio/couleur3/"
+            },
+            {
+              "key": "rts-option-musique",
+              "name": "RTS Option Musique",
+              "publication_form": "radio",
+              "scope": "national",
+              "language": "fr",
+              "homepage": "https://www.rts.ch/audio-podcast/radio/option-musique/"
+            }
+          ],
+          "notes": [
+            "RTS is one of four SRG language-region units with retained journalistic responsibility.",
+            "The C placement is a public-service reference position for research coverage, not a persisted ideological classification. fög's 2026 referendum study places RTS practically at the media-arena average."
+          ]
+        }
+      ],
+      "coverage_exception": "SRF and RTS provide nationally relevant cross-media public-service Sources but the segment remains below the 3–5 target per medium when editorial independence is respected."
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "key": "nzz-broadcast",
+          "name": "Neue Zürcher Zeitung",
+          "homepage": "https://www.nzz.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "nzz",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "liberal_conservative",
+              "classifier_type": "media_database",
+              "classifier_name": "euro|topics",
+              "source_url": "https://www.eurotopics.net/de/148731/neue-zuercher-zeitung",
+              "reference_date": "2026-09-24",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "External media-database classification; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_accent_in_referendum_tone",
+              "classifier_type": "academic",
+              "classifier_name": "fög – University of Zurich",
+              "source_url": "https://www.foeg.uzh.ch/dam/jcr:33f99533-ff1a-4594-9d10-5fe0b3afb8f0/SRG_Factsheet_Forschungsbefunde_2026.pdf",
+              "reference_date": "2026-02-19",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "Across 61 Swiss referendums from 2018–2025 the study places nzz.ch at +20 on its left-right tonal-positioning scale; this is a study-specific empirical measure, not a general FSC ideology score."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nzz-format",
+              "name": "NZZ Format",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.nzz.ch/video/nzz-format"
+            },
+            {
+              "key": "nzz-standpunkte",
+              "name": "NZZ Standpunkte",
+              "publication_form": "television",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.pressetv.ch/"
+            }
+          ],
+          "notes": [
+            "PresseTV is not a separate editorial Source for these programmes. The existing NZZ Source is extended with its television formats."
+          ]
+        }
+      ],
+      "coverage_exception": "Only one approved national television Source is placed in D; religious broadcasters are not automatically classified as conservative."
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "kontrafunk-ch",
+          "name": "Kontrafunk",
+          "homepage": "https://kontrafunk.radio/de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "reuse_existing_source",
+          "existing_source_key": "kontrafunk",
+          "existing_catalog": "de_broadcast_v1.json",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_of_cdu",
+              "classifier_type": "other",
+              "classifier_name": "Übermedien",
+              "source_url": "https://uebermedien.de/73663/kontrafunk-ein-radio-fuer-alle-die-an-corona-impfungen-klimawandel-und-allen-anderen-radios-zweifeln/",
+              "reference_date": "2022-07-01",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "External description of intended audience; not an FSC assessment."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "right_media",
+              "classifier_type": "other",
+              "classifier_name": "Deutschlandfunk",
+              "source_url": "https://www.deutschlandfunk.de/brandenburg-lausitz-mittelstandsvereinigung-rechte-medien-kontrafunk-100.html",
+              "reference_date": "2024-02-07",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "External media classification; not an FSC assessment."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kontrafunk-radio-ch-context",
+              "name": "Kontrafunk",
+              "publication_form": "radio",
+              "scope": "cross_border_national_relevance",
+              "language": "de",
+              "homepage": "https://kontrafunk.radio/de"
+            }
+          ],
+          "notes": [
+            "Kontrafunk is already one editorial Source in the DE broadcast catalog. Swiss domicile and Switzerland-focused programming do not create a duplicate Source."
+          ]
+        }
+      ],
+      "coverage_exception": "Kontrafunk is the only approved radio Source in E and is reused cross-border rather than duplicated."
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right/externally classified extreme-right spectrum",
+      "entries": [
+        {
+          "key": "kla-tv",
+          "name": "Kla.TV",
+          "homepage": "https://www.kla.tv/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "two_source_direction_confirmed",
+          "classifications": [
+            {
+              "dimension": "editorial_orientation",
+              "value": "extreme_right_positions_and_conspiracy_content",
+              "classifier_type": "journalistic_investigation",
+              "classifier_name": "Bayerischer Rundfunk / BR24",
+              "source_url": "https://www.br.de/nachricht/verschwoerung-sekte-klagemauer-tv-100.html",
+              "reference_date": "2016-11-30",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "BR investigation documents Klagemauer-TV carrying a film by a neo-Nazi and Sasek repeatedly approaching historical revisionism and positions of the extreme right. External attribution, not an official Swiss classification."
+            },
+            {
+              "dimension": "editorial_orientation",
+              "value": "radical_right_conspiracy_myths",
+              "classifier_type": "journalistic_analysis",
+              "classifier_name": "Watson Schweiz",
+              "source_url": "https://www.watson.ch/schweiz/digital/398463153-anonymous-hackt-ivo-saseks-sekte-und-veroeffentlicht-interne-dokumente",
+              "reference_date": "2020-07-27",
+              "retrieved_at": "2026-09-24T05:55:00Z",
+              "notes": "Watson describes Kla.TV as distributing radical-right conspiracy myths. External media attribution, not an official extremist classification."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kla-tv-webtv",
+              "name": "Kla.TV",
+              "publication_form": "television",
+              "scope": "national_online",
+              "language": "multi",
+              "homepage": "https://www.kla.tv/"
+            }
+          ],
+          "notes": [
+            "Swiss-origin online television Source with recurring political and current-affairs programming. Inclusion in F records attributed external positioning; it is not presented as an official Swiss extremism designation."
+          ]
+        }
+      ],
+      "coverage_exception": "One approved Swiss-origin television Source has two independent external journalistic sources supporting F-direction research placement. No radio Source is added artificially."
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "rsi",
+      "name": "RSI",
+      "homepage": "https://www.rsi.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rsi-la-1",
+          "name": "RSI LA 1",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "it",
+          "homepage": "https://www.rsi.ch/play/tv"
+        },
+        {
+          "key": "rsi-la-2",
+          "name": "RSI LA 2",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "it",
+          "homepage": "https://www.rsi.ch/play/tv"
+        },
+        {
+          "key": "rsi-rete-uno",
+          "name": "RSI Rete Uno",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "it",
+          "homepage": "https://www.rsi.ch/rete-uno/"
+        },
+        {
+          "key": "rsi-rete-due",
+          "name": "RSI Rete Due",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "it",
+          "homepage": "https://www.rsi.ch/rete-due/"
+        },
+        {
+          "key": "rsi-rete-tre",
+          "name": "RSI Rete Tre",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "it",
+          "homepage": "https://www.rsi.ch/rete-tre/"
+        }
+      ],
+      "notes": [
+        "RSI is one of the four SRG language-region units and retains journalistic responsibility. No A–F position is fixed without sufficient independent orientation provenance."
+      ]
+    },
+    {
+      "key": "rtr",
+      "name": "RTR",
+      "homepage": "https://www.rtr.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rtr-television",
+          "name": "RTR television service",
+          "publication_form": "television",
+          "scope": "national_language_region",
+          "language": "rm",
+          "homepage": "https://www.rtr.ch/play/tv"
+        },
+        {
+          "key": "radio-rtr",
+          "name": "Radio RTR",
+          "publication_form": "radio",
+          "scope": "national_language_region",
+          "language": "rm",
+          "homepage": "https://www.rtr.ch/radio"
+        }
+      ],
+      "notes": [
+        "RTR is one of the four SRG language-region units and retains journalistic responsibility. Its television output is distributed through SRG programme windows rather than a standalone full-time linear channel. No A–F position is fixed without sufficient independent orientation provenance."
+      ]
+    },
+    {
+      "key": "bilanz-broadcast",
+      "name": "BILANZ",
+      "homepage": "https://www.handelszeitung.ch/bilanz",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "existing_source_key": "bilanz",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "bilanz-standpunkte",
+          "name": "BILANZ Standpunkte",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "de",
+          "homepage": "https://www.pressetv.ch/"
+        }
+      ],
+      "notes": [
+        "The existing BILANZ print Source is extended with its television format. PresseTV is not treated as the editorial Source."
+      ]
+    },
+    {
+      "key": "blick-broadcast",
+      "name": "Blick",
+      "homepage": "https://www.blick.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "existing_source_key": "blick",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "blick-tv",
+          "name": "Blick TV",
+          "publication_form": "television",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.blick.ch/video/"
+        }
+      ],
+      "notes": [
+        "Blick TV is modeled as an audiovisual outlet of the existing Blick editorial Source, not as a separate Source."
+      ]
+    },
+    {
+      "key": "erf-medien-schweiz",
+      "name": "ERF Medien Schweiz",
+      "homepage": "https://www.erf-medien.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "fenster-zum-sonntag-talk",
+          "name": "FENSTER ZUM SONNTAG Talk",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "de",
+          "homepage": "https://www.sonntag.ch/"
+        },
+        {
+          "key": "radio-life-channel",
+          "name": "Radio Life Channel",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "de",
+          "homepage": "https://lifechannel.ch/"
+        }
+      ],
+      "notes": [
+        "Fenster zum Sonntag states that ERF Medien is editorially responsible for the Talk format and operates Radio Life Channel.",
+        "Christian/religious identity is not automatically converted into a political classification."
+      ]
+    },
+    {
+      "key": "alphavision",
+      "name": "ALPHAVISION",
+      "homepage": "https://www.sonntag.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "fenster-zum-sonntag-magazin",
+          "name": "FENSTER ZUM SONNTAG Magazin",
+          "publication_form": "television",
+          "scope": "national",
+          "language": "de",
+          "homepage": "https://www.sonntag.ch/"
+        }
+      ],
+      "notes": [
+        "Fenster zum Sonntag states that ALPHAVISION carries editorial and entrepreneurial responsibility for the Magazin format.",
+        "Christian thematic identity is not automatically converted into a political classification."
+      ]
+    },
+    {
+      "key": "radio-maria-deutschschweiz",
+      "name": "Radio Maria Deutschschweiz",
+      "homepage": "https://radiomaria.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "thematic_candidate_not_political_classification",
+      "classifications": [
+        {
+          "dimension": "media_positioning",
+          "value": "catholic_politically_independent",
+          "classifier_type": "self_description",
+          "classifier_name": "Radio Maria Deutschschweiz",
+          "source_url": "https://radiomaria.ch/index.php/uber-uns/",
+          "reference_date": "2026-09-24",
+          "retrieved_at": "2026-09-24T05:55:00Z",
+          "notes": "The association describes itself as politically independent and the station as private Catholic radio. This is not an FSC ideological classification."
+        }
+      ],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "radio-maria-deutschschweiz-radio",
+          "name": "Radio Maria Deutschschweiz",
+          "publication_form": "radio",
+          "scope": "national",
+          "language": "de",
+          "homepage": "https://radiomaria.ch/"
+        }
+      ],
+      "notes": [
+        "Included as a national religious radio Source with information and society-relevant programming; religious identity alone does not imply D or any other political group."
+      ]
+    }
+  ],
+  "excluded_or_deferred": [
+    {
+      "name": "PresseTV",
+      "reason": "Transmission/project company rather than the editorial Source for NZZ Format and Standpunkte formats; SRG states that content responsibility remains with the respective media houses."
+    },
+    {
+      "name": "Südostschweiz Standpunkte",
+      "reason": "Defer to later regional/cross-media review rather than introduce the regional Südostschweiz editorial Source inside the CH-national broadcast core."
+    },
+    {
+      "name": "3+ sender family",
+      "reason": "National free-TV distribution is entertainment-led and does not establish a recurring general political/current-affairs newsroom matching the FSC broadcast-source purpose."
+    },
+    {
+      "name": "Weltwoche Daily",
+      "reason": "Existing Weltwoche editorial Source, but the current daily video product belongs in a later digital-video/podcast block rather than being relabelled as linear television."
+    },
+    {
+      "name": "licensed local radio and regional television",
+      "reason": "BAKOM-licensed local radio and regional television providers are reserved for the separate CH regional block."
+    }
+  ],
+  "approved_candidate_count": 13,
+  "new_source_count": 8,
+  "existing_source_extension_or_reuse_count": 5,
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+}
