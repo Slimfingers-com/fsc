@@ -20,20 +20,48 @@ class SourceDependencyRepository:
     ) -> list[ArticleProvenance]:
         if not article_ids:
             return []
-        statement = (
-            select(ArticleProvenance)
-            .where(
-                ArticleProvenance.article_id.in_(article_ids),
-                ArticleProvenance.deleted_at.is_(None),
-                ArticleProvenance.verified.is_(True),
+
+        known_article_ids = set(article_ids)
+        frontier = set(article_ids)
+        by_id: dict[UUID, ArticleProvenance] = {}
+
+        while frontier:
+            statement = (
+                select(ArticleProvenance)
+                .where(
+                    ArticleProvenance.article_id.in_(frontier),
+                    ArticleProvenance.deleted_at.is_(None),
+                    ArticleProvenance.verified.is_(True),
+                )
+                .order_by(
+                    ArticleProvenance.article_id,
+                    ArticleProvenance.upstream_source_id,
+                    ArticleProvenance.id,
+                )
             )
-            .order_by(
-                ArticleProvenance.article_id,
-                ArticleProvenance.upstream_source_id,
-                ArticleProvenance.id,
-            )
+            rows = list(db.scalars(statement).all())
+            next_frontier: set[UUID] = set()
+
+            for item in rows:
+                by_id[item.id] = item
+                if (
+                    item.upstream_article_id is not None
+                    and item.upstream_article_id not in known_article_ids
+                ):
+                    known_article_ids.add(item.upstream_article_id)
+                    next_frontier.add(item.upstream_article_id)
+
+            frontier = next_frontier
+
+        return sorted(
+            by_id.values(),
+            key=lambda item: (
+                str(item.article_id),
+                str(item.upstream_source_id),
+                str(item.upstream_article_id or ""),
+                str(item.id),
+            ),
         )
-        return list(db.scalars(statement).all())
 
     def load_independence_relations(
         self,

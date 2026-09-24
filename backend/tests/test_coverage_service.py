@@ -3,7 +3,11 @@ from datetime import UTC, datetime
 from sqlalchemy import func, select
 
 from app.enums.coverage_scope import CoverageScope
-from app.enums.source_dependency import SourceRelationKind
+from app.enums.source_dependency import (
+    ArticleProvenanceDetectionMethod,
+    ArticleProvenanceKind,
+    SourceRelationKind,
+)
 from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
 from app.models.coverage import (
@@ -11,11 +15,13 @@ from app.models.coverage import (
     StoryCoverageSummary,
     StoryMissingPerspective,
 )
-from app.models.source_dependency import SourceRelation
+from app.models.source_dependency import ArticleProvenance, SourceRelation
 from app.models.story_processing import StoryProcessingRun
 from app.services.coverage import CoverageService
+from tests.consensus_helpers import build_consensus_story
 from tests.coverage_helpers import (
     build_coverage_story,
+    persist_current_consensus,
 )
 
 
@@ -261,3 +267,53 @@ def test_missing_perspective_keeps_contradiction_context(db):
             .is_(None),
         )
     ) == 1
+
+
+def test_co_production_bridges_coverage_independence_component(db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The plan begins Monday.",
+            },
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The plan begins Monday.",
+            },
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The plan begins Monday.",
+            },
+        ],
+    )
+
+    data["articles"][2].feed.name = "Secondary"
+    data["articles"][2].feed.source = data["sources"][1]
+    db.add(
+        ArticleProvenance(
+            article_id=data["articles"][1].id,
+            upstream_source_id=data["sources"][0].id,
+            relation_kind=ArticleProvenanceKind.CO_PRODUCED_WITH,
+            confidence=1.0,
+            detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+            verified=True,
+        )
+    )
+    db.flush()
+    persist_current_consensus(db, data)
+
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+
+    assert prepared.metrics.independent_content_source_count == 1
+    assert len({
+        item.independence_key
+        for item in prepared.analysis_input.sources
+    }) == 1

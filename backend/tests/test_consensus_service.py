@@ -3,11 +3,17 @@ from datetime import UTC, datetime
 from sqlalchemy import func, select
 
 from app.consensus.provider import ConsensusKind, DifferenceKind
+from app.enums.source_dependency import (
+    ArticleProvenanceDetectionMethod,
+    ArticleProvenanceKind,
+)
+from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
 from app.models.consensus import (
     StoryConsensusSummary,
     StoryDifferenceSummary,
 )
+from app.models.source_dependency import ArticleProvenance
 from app.models.story_processing import StoryProcessingRun
 from app.services.consensus import ConsensusService
 from tests.consensus_helpers import build_consensus_story
@@ -181,3 +187,50 @@ def test_contradiction_creates_difference_summary(db):
             StoryDifferenceSummary.deleted_at.is_(None),
         )
     ) == 1
+
+
+def test_co_production_bridges_story_independence_component(db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The plan begins Monday.",
+            },
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The plan begins Monday.",
+            },
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The plan begins Monday.",
+            },
+        ],
+    )
+
+    data["articles"][2].feed.name = "Secondary"
+    data["articles"][2].feed.source = data["sources"][1]
+    db.add(
+        ArticleProvenance(
+            article_id=data["articles"][1].id,
+            upstream_source_id=data["sources"][0].id,
+            relation_kind=ArticleProvenanceKind.CO_PRODUCED_WITH,
+            confidence=1.0,
+            detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+            verified=True,
+        )
+    )
+    db.flush()
+
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+
+    assert len(prepared.analysis_input.groups) == 1
+    assert prepared.analysis_input.groups[0].article_count == 3
+    assert prepared.analysis_input.groups[0].independent_source_count == 1

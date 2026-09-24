@@ -77,7 +77,7 @@ class PreparedConsensusAnalysis:
 
 
 class ConsensusService:
-    CONFIG_VERSION = "2"
+    CONFIG_VERSION = "3"
 
     def __init__(
         self,
@@ -278,11 +278,35 @@ class ConsensusService:
             provenance=snapshot.article_provenance,
         )
 
+    @staticmethod
+    def _article_independence_keys(
+        snapshot: ConsensusSnapshot,
+        resolver: SourceIndependenceResolver,
+    ) -> dict[UUID, str]:
+        articles = {
+            row.article.id: (
+                row.article.id,
+                row.source.id,
+                row.article.published_at,
+            )
+            for row in snapshot.rows
+        }
+        return resolver.article_component_keys(
+            articles=tuple(
+                articles[article_id]
+                for article_id in sorted(articles, key=str)
+            )
+        )
+
     def analysis_hash(
         self,
         snapshot: ConsensusSnapshot,
     ) -> str:
         independence = self._independence_resolver(snapshot)
+        article_independence_keys = self._article_independence_keys(
+            snapshot,
+            independence,
+        )
         membership_identity = [
             [
                 str(item.membership.id),
@@ -307,11 +331,7 @@ class ConsensusService:
                 row.claim.claim_hash,
                 str(row.article.id),
                 str(row.source.id),
-                independence.article_key(
-                    article_id=row.article.id,
-                    source_id=row.source.id,
-                    at=row.article.published_at,
-                ),
+                article_independence_keys[row.article.id],
             ]
             for row in snapshot.rows
         ]
@@ -429,6 +449,10 @@ class ConsensusService:
         snapshot: ConsensusSnapshot,
     ) -> PreparedConsensusAnalysis:
         independence = self._independence_resolver(snapshot)
+        article_independence_keys = self._article_independence_keys(
+            snapshot,
+            independence,
+        )
         rows_by_group: dict[UUID, list[ConsensusGroupRow]] = {}
         for row in snapshot.rows:
             rows_by_group.setdefault(
@@ -464,11 +488,7 @@ class ConsensusService:
                 if row.claim.id == group.representative_claim_id
             )
             independent_sources = {
-                independence.article_key(
-                    article_id=row.article.id,
-                    source_id=row.source.id,
-                    at=row.article.published_at,
-                )
+                article_independence_keys[row.article.id]
                 for row in rows
             }
             group_evidence = evidence_by_group.get(
