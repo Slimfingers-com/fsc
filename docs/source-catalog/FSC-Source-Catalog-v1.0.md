@@ -122,13 +122,13 @@ Germany's national broadcast catalog follows the same A–F research matrix as p
 
 Source identity is editorial rather than channel-based: one newsroom/editorial source may have several television or radio outlets. Programme names and channel editions never count as independent Sources merely because they are separately branded. Regional broadcasters and regional/private radio brands are excluded from this national block and will be reviewed in a dedicated DE regional block.
 
-The jointly approved national candidate core contains 14 editorial Sources:
+The jointly approved national candidate core contains 15 editorial Sources:
 
 | Planning segment | Television Sources | Radio Sources |
 | --- | --- | --- |
 | A radical/system-oppositional left | explicit market gap | explicit market gap |
 | B left/centre-left/left-liberal | explicit market gap | Deutschlandradio (B/C research boundary; DLF/Kultur/Nova are outlets) |
-| C liberal/centre | ARD-aktuell, ZDF, RTL NEWS, :newstime | RTL NEWS, Klassik Radio |
+| C liberal/centre | ARD-aktuell, ZDF, phoenix, RTL NEWS, :newstime | RTL NEWS, Klassik Radio |
 | D conservative/liberal-conservative research pool | WELT, IDEA, EWTN Deutschland, Hope TV Deutsch | ERF, radio horeb |
 | E right/right-conservative/right-libertarian | explicit market gap | Kontrafunk, NIUS |
 | F radical right | explicit market gap | explicit market gap |
@@ -144,7 +144,7 @@ Specific identity rules:
 - **NIUS – Das Radio** is an outlet of the cross-media NIUS Source; a later digital catalog must extend the same Source.
 - Religious or worldview-oriented broadcasters may enter the research pool when politics and society are recurring editorial subjects. Religious/theological positioning is stored separately and never automatically converted into a political classification.
 - **REGIOCAST Nachrichten** is modeled in the Agency/Content Supplier catalog as its own supplier Source rather than as a consumer-facing radio Source.
-- **phoenix** is deferred because its joint ARD/ZDF structure exposes a limitation in the current scalar ownership-based consensus-independence key. It should be revisited when independence grouping is modeled explicitly.
+- **phoenix** is its own Source in the C public-service reference pool. Its joint ARD/ZDF structure is documented without a static collapsing SourceRelation: linking phoenix statically to both ARD-aktuell and ZDF would transitively collapse those otherwise independent Sources. Concrete shared, supplied or co-produced content affects independence only through verified ArticleProvenance.
 
 No feed is activated by inclusion in this catalog.
 

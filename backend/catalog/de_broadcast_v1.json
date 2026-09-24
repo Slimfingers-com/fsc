@@ -181,6 +181,31 @@
           "catalog_status": "candidate",
           "source_action": "create_source",
           "feeds": [],
+          "classifications": [],
+          "metrics": [],
+          "key": "phoenix",
+          "name": "phoenix",
+          "homepage": "https://www.phoenix.de/",
+          "classification_status": "public_service_reference_not_political_classification",
+          "outlets": [
+            {
+              "key": "phoenix-tv",
+              "name": "phoenix",
+              "publication_form": "television",
+              "scope": "national",
+              "homepage": "https://www.phoenix.de/"
+            }
+          ],
+          "notes": [
+            "Joint ARD/ZDF public-service information channel with its own programme management and editorial teams; C is a public-service reference placement, not a persisted political classification.",
+            "A1 dependency rule: the ARD/ZDF joint structure is documented but no static collapsing SourceRelation is created, because that would transitively collapse ARD-aktuell and ZDF. Concrete shared or upstream content must affect independence through verified ArticleProvenance."
+          ]
+        },
+        {
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -588,10 +613,6 @@
   ],
   "excluded_or_deferred": [
     {
-      "name": "phoenix",
-      "reason": "Joint ARD/ZDF editorial/governance structure exposes a limitation of the current scalar ownership-based independence key; defer until independence grouping is modeled explicitly."
-    },
-    {
       "name": "Deutsche Welle",
       "reason": "German linear TV distribution ended; handle in a later international/digital block rather than DE national linear broadcast."
     },
@@ -600,9 +621,9 @@
       "reason": "Linear channel discontinued; do not treat inactive linear television as current broadcast coverage."
     }
   ],
-  "approved_candidate_count": 14,
+  "approved_candidate_count": 15,
   "review_status": {
-    "source_selection": "approved_14_source_de_national_core_2026_09_23",
+    "source_selection": "approved_15_source_de_national_core_2026_09_24",
     "regional_separation": "approved_separate_de_regional_block",
     "religious_worldview_scope": "decision_a_include_if_politics_society_regular",
     "source_identity": "one_editorial_source_multiple_outlets",
