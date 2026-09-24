@@ -143,7 +143,7 @@ Specific identity rules:
 - **WELT TV** extends the existing WELT Source already present in the DE print catalog; it must not create a second WELT Source.
 - **NIUS – Das Radio** is an outlet of the cross-media NIUS Source; a later digital catalog must extend the same Source.
 - Religious or worldview-oriented broadcasters may enter the research pool when politics and society are recurring editorial subjects. Religious/theological positioning is stored separately and never automatically converted into a political classification.
-- **REGIOCAST Nachrichten** is treated as a future agency/content-supplier candidate rather than a consumer-facing radio Source.
+- **REGIOCAST Nachrichten** is modeled in the Agency/Content Supplier catalog as its own supplier Source rather than as a consumer-facing radio Source.
 - **phoenix** is deferred because its joint ARD/ZDF structure exposes a limitation in the current scalar ownership-based consensus-independence key. It should be revisited when independence grouping is modeled explicitly.
 
 No feed is activated by inclusion in this catalog.
@@ -173,7 +173,7 @@ Specific identity rules:
 - **SAT.1 Norddeutschland** is one Source with two regional editions for Hamburg/Schleswig-Holstein and Niedersachsen/Bremen.
 - **RTL WEST, RTL Hessen and SAT.1 Bayern** remain separate from the national RTL NEWS and :newstime Sources because they have their own regional programme/editorial responsibility.
 - **FFH Newsredaktion** is one news Source serving HIT RADIO FFH, planet radio and harmony; the consumer radio brands do not count as three independent newsrooms.
-- **R.SH** is the regional consumer-facing Source. **REGIOCAST Nachrichten** remains deferred to the Agency/Content Supplier model.
+- **R.SH** is the regional consumer-facing Source. **REGIOCAST Nachrichten** is a separate supplier Source in the Agency/Content Supplier catalog; supplier provenance must be attached per article before it affects independence.
 - ANTENNE BAYERN, radio ffn and radio SAW are independent statewide private radio Sources.
 - Private regional Sources remain politically unclassified until two independent external sources support a Source-level political direction.
 - Local television such as münchen.tv, Hamburg 1, TV.Berlin, Franken Fernsehen, Regio TV and Niederbayern TV, plus local/city radio, remain outside this compact regional block.
@@ -485,7 +485,7 @@ Specific identity rules:
 - **Times Radio is a separate Source from The Times**. It draws on Times/Sunday Times journalism but has its own Programme Director, schedule, production operation and editorial contacts; no political classification is inherited from the print title.
 - **GB News** is one cross-media Source with television and GB News Radio as outlets.
 - **UCB** is one Source with UCB 1 and UCB 2 as radio outlets.
-- **Sky News Radio** is deferred to the later Agency/Content Supplier model because it primarily supplies bulletins to commercial radio stations rather than operating as a normal national consumer radio programme.
+- **Sky News Radio** is modeled as a radio outlet/service of the existing Sky News Source, not as a second independent Source.
 - **Talk** is included as a current national radio/digital Source; the former linear TalkTV channel is not treated as a current television Source.
 - Christian broadcasters may enter the catalog when news, politics or society are recurring editorial subjects. Christian identity is never automatically mapped to D or any other political segment.
 - Local, regional and devolved broadcasters, including BBC Local Radio, STV and S4C, remain outside this national block for later GB regional/devolved review.
@@ -523,7 +523,7 @@ Specific identity rules:
 - **SiriusXM POTUS, Progress and Patriot are three separately programmed Sources**. POTUS is a C/reference candidate; Progress and Patriot remain politically unclassified because operator self-positioning alone does not satisfy the two-source rule.
 - **EWTN** is one cross-media Source for national television and radio. Catholic identity is not automatically mapped to D or E.
 - **American Family Radio** is included for recurring news, politics and social-issues programming, but evangelical identity is not automatically mapped politically.
-- **ABC News Radio** and **Fox News Radio** are deferred to the later Agency/Content Supplier model.
+- **ABC News Radio** and **Fox News Radio** are modeled as radio outlets/services of the existing ABC News and Fox News Sources, not as independent Sources.
 - **CBS News Radio** is excluded from the active core because the service ended on May 22, 2026.
 - **C-SPAN/C-SPAN Radio** are deferred to an institutional/public-affairs primary-source block.
 - **CNBC, Bloomberg and Fox Business** are deferred to a specialist economic/financial source block.
