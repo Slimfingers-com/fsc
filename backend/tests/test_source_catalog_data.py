@@ -1398,3 +1398,189 @@ def test_us_national_broadcast_classification_provenance_is_complete() -> None:
             assert classification["source_url"].startswith("https://")
             assert classification["reference_date"]
             assert classification["retrieved_at"]
+
+
+DE_REGIONAL_BROADCAST_CATALOG = CATALOG_DIR / "de_regional_broadcast_v1.json"
+
+
+def load_de_regional_broadcast_catalog() -> dict:
+    return json.loads(DE_REGIONAL_BROADCAST_CATALOG.read_text(encoding="utf-8"))
+
+
+def de_regional_broadcast_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog.get("unclassified_entries", []),
+    ]
+
+
+def test_de_regional_broadcast_catalog_has_approved_editorial_sources() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    assert catalog["country"] == "DE"
+    assert catalog["scope"] == "regional"
+    assert catalog["media_category"] == "broadcast"
+    assert catalog["approved_candidate_count"] == 19
+    assert catalog["new_source_count"] == 19
+    assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
+
+    entries = de_regional_broadcast_entries(catalog)
+    assert len(entries) == 19
+    assert len({entry["key"] for entry in entries}) == 19
+    assert len({entry["name"].casefold() for entry in entries}) == 19
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_de_regional_broadcast_has_exactly_nine_ard_landesrundfunkanstalten() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    centre = {entry["name"]: entry for entry in groups["liberal_centre"]["entries"]}
+
+    assert set(centre) == {
+        "Bayerischer Rundfunk",
+        "Hessischer Rundfunk",
+        "Mitteldeutscher Rundfunk",
+        "Norddeutscher Rundfunk",
+        "Radio Bremen",
+        "Rundfunk Berlin-Brandenburg",
+        "Saarländischer Rundfunk",
+        "Südwestrundfunk",
+        "Westdeutscher Rundfunk",
+    }
+    assert all(
+        entry["classification_status"] == "public_service_centre_reference_not_political_classification"
+        for entry in centre.values()
+    )
+    assert all(entry["classifications"] == [] for entry in centre.values())
+    assert "ARD" not in centre
+
+
+def test_de_regional_broadcast_public_service_programmes_are_outlets() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in de_regional_broadcast_entries(catalog)}
+
+    assert {outlet["name"] for outlet in entries["Bayerischer Rundfunk"]["outlets"]} == {
+        "BR Fernsehen",
+        "BR24",
+        "Bayern 1",
+        "Bayern 2",
+    }
+    assert {outlet["name"] for outlet in entries["Norddeutscher Rundfunk"]["outlets"]} == {
+        "NDR Fernsehen",
+        "NDR Info",
+        "NDR 1 Niedersachsen",
+    }
+    assert "BR Fernsehen" not in entries
+    assert "NDR Info" not in entries
+
+
+def test_de_regional_broadcast_north_regional_windows_are_deduplicated() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in de_regional_broadcast_entries(catalog)}
+
+    assert {outlet["name"] for outlet in entries["RTL Nord"]["outlets"]} == {
+        "RTL Nord Hamburg/Schleswig-Holstein",
+        "RTL Nord Niedersachsen/Bremen",
+    }
+    assert {outlet["name"] for outlet in entries["SAT.1 Norddeutschland"]["outlets"]} == {
+        "SAT.1 REGIONAL Hamburg/Schleswig-Holstein",
+        "SAT.1 REGIONAL Niedersachsen/Bremen",
+    }
+    assert "RTL Nord Hamburg/Schleswig-Holstein" not in entries
+    assert "SAT.1 REGIONAL Niedersachsen/Bremen" not in entries
+
+
+def test_de_regional_broadcast_private_tv_sources_are_separate_from_national_newsrooms() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in de_regional_broadcast_entries(catalog)}
+
+    for name in ("RTL Nord", "RTL WEST", "RTL Hessen", "SAT.1 Norddeutschland", "SAT.1 Bayern"):
+        assert entries[name]["source_action"] == "create_source"
+        assert entries[name]["classification_status"] == "unclassified_research_candidate"
+
+    assert "RTL NEWS" not in entries
+    assert ":newstime" not in entries
+
+
+def test_de_regional_broadcast_ffh_newsroom_is_one_source() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in de_regional_broadcast_entries(catalog)}
+    ffh = entries["FFH Newsredaktion"]
+
+    assert {outlet["name"] for outlet in ffh["outlets"]} == {
+        "HIT RADIO FFH",
+        "planet radio",
+        "harmony",
+    }
+    assert "HIT RADIO FFH" not in entries
+    assert "planet radio" not in entries
+    assert "harmony" not in entries
+
+
+def test_de_regional_broadcast_rsh_is_source_regiocast_news_is_supplier() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    entries = {entry["name"]: entry for entry in de_regional_broadcast_entries(catalog)}
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+
+    assert "R.SH" in entries
+    assert entries["R.SH"]["classification_status"] == "unclassified_research_candidate"
+    assert "REGIOCAST Nachrichten" not in entries
+    assert "REGIOCAST Nachrichten" in deferred
+    assert "Agency/Content Supplier" in deferred["REGIOCAST Nachrichten"]
+
+
+def test_de_regional_broadcast_private_sources_remain_unclassified() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    unclassified = {entry["name"]: entry for entry in catalog["unclassified_entries"]}
+
+    assert set(unclassified) == {
+        "RTL Nord",
+        "RTL WEST",
+        "RTL Hessen",
+        "SAT.1 Norddeutschland",
+        "SAT.1 Bayern",
+        "ANTENNE BAYERN",
+        "FFH Newsredaktion",
+        "radio ffn",
+        "R.SH",
+        "radio SAW",
+    }
+    assert all(
+        entry["classification_status"] == "unclassified_research_candidate"
+        for entry in unclassified.values()
+    )
+    assert all(entry["classifications"] == [] for entry in unclassified.values())
+
+
+def test_de_regional_broadcast_local_media_are_deferred() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    deferred = {item["name"]: item["reason"] for item in catalog["excluded_or_deferred"]}
+
+    assert "local television" in deferred
+    assert "DE local block" in deferred["local television"]
+    assert "local radio" in deferred
+    assert "DE local block" in deferred["local radio"]
+    assert "Antenne Niedersachsen" in deferred
+
+
+def test_de_regional_broadcast_sparse_segments_document_real_market_gaps() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    for key in ("radical_left", "left_liberal", "conservative", "right", "radical_right"):
+        assert groups[key]["entries"] == []
+        assert groups[key].get("coverage_exception")
+
+    assert len(groups["liberal_centre"]["entries"]) == 9
+
+
+def test_de_regional_broadcast_outlet_keys_are_unique() -> None:
+    catalog = load_de_regional_broadcast_catalog()
+    entries = de_regional_broadcast_entries(catalog)
+    outlet_keys = [
+        outlet["key"]
+        for entry in entries
+        for outlet in entry["outlets"]
+    ]
+    assert len(outlet_keys) == len(set(outlet_keys))

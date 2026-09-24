@@ -148,6 +148,38 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Germany (DE) — Regional broadcast
+
+This regional block covers state-level and multi-state editorial Sources. Local/city television and local radio are deliberately deferred to a later DE local block. Television and radio are counted separately for coverage, but FSC counts editorial Sources rather than individual programme brands.
+
+The jointly approved compact regional core contains 19 editorial Source identities:
+
+| Planning segment | Television Sources | Radio Sources |
+| --- | --- | --- |
+| A radical/system-oppositional left | explicit market gap | explicit market gap |
+| B left/centre-left/left-liberal | explicit market gap | explicit market gap |
+| C public-service regional reference | BR, hr, MDR, NDR, Radio Bremen, rbb, SR, SWR, WDR | BR, hr, MDR, NDR, Radio Bremen, rbb, SR, SWR, WDR |
+| D conservative/liberal-conservative | explicit market gap | explicit market gap |
+| E right/right-conservative/right-libertarian | explicit market gap | explicit market gap |
+| F radical right / externally classified extreme-right spectrum | explicit market gap | explicit market gap |
+
+Politically unclassified private Sources: RTL Nord, RTL WEST, RTL Hessen, SAT.1 Norddeutschland, SAT.1 Bayern, ANTENNE BAYERN, FFH Newsredaktion, radio ffn, R.SH and radio SAW.
+
+The C placement of the nine ARD Landesrundfunkanstalten is a public-service regional reference convention only and is not a persisted political classification.
+
+Specific identity rules:
+- **BR, hr, MDR, NDR, Radio Bremen, rbb, SR, SWR and WDR are nine Sources.** Their television and radio programme brands are outlets, not independent Sources.
+- **RTL Nord** is one Source with two regional editions for Hamburg/Schleswig-Holstein and Niedersachsen/Bremen.
+- **SAT.1 Norddeutschland** is one Source with two regional editions for Hamburg/Schleswig-Holstein and Niedersachsen/Bremen.
+- **RTL WEST, RTL Hessen and SAT.1 Bayern** remain separate from the national RTL NEWS and :newstime Sources because they have their own regional programme/editorial responsibility.
+- **FFH Newsredaktion** is one news Source serving HIT RADIO FFH, planet radio and harmony; the consumer radio brands do not count as three independent newsrooms.
+- **R.SH** is the regional consumer-facing Source. **REGIOCAST Nachrichten** remains deferred to the Agency/Content Supplier model.
+- ANTENNE BAYERN, radio ffn and radio SAW are independent statewide private radio Sources.
+- Private regional Sources remain politically unclassified until two independent external sources support a Source-level political direction.
+- Local television such as münchen.tv, Hamburg 1, TV.Berlin, Franken Fernsehen, Regio TV and Niederbayern TV, plus local/city radio, remain outside this compact regional block.
+
+No feed is activated by inclusion in this catalog.
+
 ## Austria (AT)
 
 ### Print
@@ -559,6 +591,7 @@ Completed catalog blocks:
 10. Switzerland national broadcast candidate core (TV and radio; regional broadcast separate)
 11. Great Britain national broadcast candidate core (TV and radio; regional/devolved broadcast separate)
 12. United States national broadcast candidate core (TV and radio; regional broadcast separate)
+13. Germany regional broadcast candidate core (state/multi-state level; local broadcast separate)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
