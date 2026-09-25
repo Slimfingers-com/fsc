@@ -16,6 +16,7 @@ def source(
     *,
     key: str,
     signal: bool = False,
+    confirmation_role: str | None = None,
 ):
     return CoverageSourceInput(
         article_id=uuid4(),
@@ -25,6 +26,10 @@ def source(
             "SIGNAL"
             if signal
             else "NEWS"
+        ),
+        confirmation_role=(
+            confirmation_role
+            or ("signal" if signal else "editorial")
         ),
         coverage_scope=None,
         country=None,

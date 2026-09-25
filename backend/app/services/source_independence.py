@@ -6,19 +6,7 @@ from app.enums.source_dependency import (
     ArticleProvenanceKind,
     SourceRelationKind,
 )
-from app.enums.source_type import SourceType
 from app.models.source_dependency import ArticleProvenance, SourceRelation
-
-
-def counts_as_independent_confirmation(
-    source_type: SourceType | str,
-) -> bool:
-    value = (
-        source_type.value
-        if isinstance(source_type, SourceType)
-        else source_type
-    )
-    return value != SourceType.PRIMARY_SOURCE.value
 
 
 class SourceIndependenceResolver:

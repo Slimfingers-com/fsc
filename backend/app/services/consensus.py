@@ -18,6 +18,7 @@ from app.consensus.provider import (
     StoryConsensusResult,
 )
 from app.consensus.rule_based import RuleBasedConsensusAnalyzer
+from app.enums.confirmation_role import counts_as_independent_confirmation
 from app.enums.story_pipeline import StoryPipeline
 from app.models.consensus import (
     StoryConsensusSummary,
@@ -36,10 +37,7 @@ from app.repositories.consensus import (
 )
 from app.repositories.source_dependency import SourceDependencyRepository
 from app.repositories.story import StoryRepository
-from app.services.source_independence import (
-    SourceIndependenceResolver,
-    counts_as_independent_confirmation,
-)
+from app.services.source_independence import SourceIndependenceResolver
 from app.repositories.story_processing import (
     StoryProcessingCandidate,
     StoryProcessingClaim,
@@ -80,7 +78,7 @@ class PreparedConsensusAnalysis:
 
 
 class ConsensusService:
-    CONFIG_VERSION = "4"
+    CONFIG_VERSION = "5"
 
     def __init__(
         self,
@@ -335,6 +333,7 @@ class ConsensusService:
                 str(row.article.id),
                 str(row.source.id),
                 self._enum_value(row.source.source_type),
+                self._enum_value(row.article.confirmation_role),
                 article_independence_keys[row.article.id],
             ]
             for row in snapshot.rows
@@ -495,7 +494,7 @@ class ConsensusService:
                 article_independence_keys[row.article.id]
                 for row in rows
                 if counts_as_independent_confirmation(
-                    row.source.source_type
+                    row.article.confirmation_role
                 )
             }
             group_evidence = evidence_by_group.get(

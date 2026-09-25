@@ -7,9 +7,7 @@ from app.coverage.provider import (
     StoryCoverageInput,
     StoryCoverageResult,
 )
-from app.services.source_independence import (
-    counts_as_independent_confirmation,
-)
+from app.enums.confirmation_role import counts_as_independent_confirmation
 
 
 class RuleBasedCoverageAnalyzer(CoverageAnalyzer):
@@ -55,7 +53,7 @@ class RuleBasedCoverageAnalyzer(CoverageAnalyzer):
             source.independence_key
             for source in content_sources
             if counts_as_independent_confirmation(
-                source.source_type
+                source.confirmation_role
             )
         }
 

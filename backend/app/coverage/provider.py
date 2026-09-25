@@ -25,6 +25,7 @@ class CoverageSourceInput:
     source_id: UUID
     independence_key: str
     source_type: str
+    confirmation_role: str
     coverage_scope: str | None
     country: str | None
     is_signal: bool

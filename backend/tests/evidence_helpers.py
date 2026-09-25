@@ -5,6 +5,7 @@ from uuid import uuid4
 from app.analysis.provider import TextPart
 from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.article_pipeline import ArticlePipeline
+from app.enums.confirmation_role import default_confirmation_role
 from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
 from app.models.article import Article
@@ -88,6 +89,11 @@ def build_evidence_story(
             feed=feed,
             identity_type=ArticleIdentityType.DERIVED,
             identity_key=uuid4().hex * 2,
+            confirmation_role=spec.get(
+                "confirmation_role"
+            ) or default_confirmation_role(
+                spec["source_type"]
+            ),
             title=spec.get("title") or f"Evidence {index}",
             normalized_title=(
                 spec.get("title") or f"Evidence {index}"
