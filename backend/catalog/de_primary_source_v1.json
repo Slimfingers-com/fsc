@@ -1,0 +1,949 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "primary_source",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_or_political_actor_is_source_hosting_portal_is_not_source_identity",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "consensus_policy": "primary_sources_are_evidence_but_not_independent_editorial_confirmation",
+  "attribution_policy": "hosted_documents_should_be_attributed_to_the_substantive_author_when_identifiable",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "constitutional_legislative",
+      "label": "constitutional organs and legislature",
+      "entries": [
+        {
+          "key": "de-bundestag",
+          "name": "Deutscher Bundestag",
+          "homepage": "https://www.bundestag.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundestag-official",
+              "name": "Deutscher Bundestag",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundestag.de/"
+            }
+          ],
+          "notes": [
+            "Parliamentary institution; official proceedings, plenary material and institutional publications."
+          ]
+        },
+        {
+          "key": "de-bundesrat",
+          "name": "Bundesrat",
+          "homepage": "https://www.bundesrat.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundesrat-official",
+              "name": "Bundesrat",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesrat.de/"
+            }
+          ],
+          "notes": [
+            "Federal legislative chamber; official proceedings and institutional publications."
+          ]
+        },
+        {
+          "key": "de-bundespraesident",
+          "name": "Bundespräsident",
+          "homepage": "https://www.bundespraesident.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundespraesident-official",
+              "name": "Bundespräsident",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundespraesident.de/"
+            }
+          ],
+          "notes": [
+            "Federal President; official speeches, statements and institutional publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_security",
+      "label": "federal government, foreign affairs and security",
+      "entries": [
+        {
+          "key": "de-bundesregierung",
+          "name": "Bundesregierung / Bundespresseamt",
+          "homepage": "https://www.bundesregierung.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundesregierung-official",
+              "name": "Bundesregierung / Bundespresseamt",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesregierung.de/"
+            }
+          ],
+          "notes": [
+            "Federal Government and Federal Press Office institutional publications."
+          ]
+        },
+        {
+          "key": "de-auswaertiges-amt",
+          "name": "Auswärtiges Amt",
+          "homepage": "https://www.auswaertiges-amt.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-auswaertiges-amt-official",
+              "name": "Auswärtiges Amt",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.auswaertiges-amt.de/"
+            }
+          ],
+          "notes": [
+            "Federal Foreign Office official statements and publications."
+          ]
+        },
+        {
+          "key": "de-bmi",
+          "name": "Bundesministerium des Innern",
+          "homepage": "https://www.bmi.bund.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bmi-official",
+              "name": "Bundesministerium des Innern",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmi.bund.de/"
+            }
+          ],
+          "notes": [
+            "Federal Ministry of the Interior official statements and publications."
+          ]
+        },
+        {
+          "key": "de-bmvg",
+          "name": "Bundesministerium der Verteidigung",
+          "homepage": "https://www.bmvg.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bmvg-official",
+              "name": "Bundesministerium der Verteidigung",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmvg.de/"
+            }
+          ],
+          "notes": [
+            "Federal Ministry of Defence official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_economy_social",
+      "label": "federal government, economy and social affairs",
+      "entries": [
+        {
+          "key": "de-bmf",
+          "name": "Bundesministerium der Finanzen",
+          "homepage": "https://www.bundesfinanzministerium.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bmf-official",
+              "name": "Bundesministerium der Finanzen",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesfinanzministerium.de/"
+            }
+          ],
+          "notes": [
+            "Federal Ministry of Finance official statements and publications."
+          ]
+        },
+        {
+          "key": "de-bmwe",
+          "name": "Bundesministerium für Wirtschaft und Energie",
+          "homepage": "https://www.bundeswirtschaftsministerium.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bmwe-official",
+              "name": "Bundesministerium für Wirtschaft und Energie",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundeswirtschaftsministerium.de/"
+            }
+          ],
+          "notes": [
+            "Federal Ministry for Economic Affairs and Energy official statements and publications."
+          ]
+        },
+        {
+          "key": "de-bmas",
+          "name": "Bundesministerium für Arbeit und Soziales",
+          "homepage": "https://www.bmas.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bmas-official",
+              "name": "Bundesministerium für Arbeit und Soziales",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmas.de/"
+            }
+          ],
+          "notes": [
+            "Federal Ministry of Labour and Social Affairs official statements and publications."
+          ]
+        },
+        {
+          "key": "de-bmg",
+          "name": "Bundesministerium für Gesundheit",
+          "homepage": "https://www.bundesgesundheitsministerium.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bmg-official",
+              "name": "Bundesministerium für Gesundheit",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesgesundheitsministerium.de/"
+            }
+          ],
+          "notes": [
+            "Federal Ministry of Health official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "official_data_statistics",
+      "label": "official data and statistics",
+      "entries": [
+        {
+          "key": "de-destatis",
+          "name": "Statistisches Bundesamt (Destatis)",
+          "homepage": "https://www.destatis.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-destatis-official",
+              "name": "Statistisches Bundesamt (Destatis)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.destatis.de/"
+            }
+          ],
+          "notes": [
+            "Federal statistical authority; official statistics and releases."
+          ]
+        },
+        {
+          "key": "de-bundesagentur-arbeit",
+          "name": "Bundesagentur für Arbeit",
+          "homepage": "https://www.arbeitsagentur.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundesagentur-arbeit-official",
+              "name": "Bundesagentur für Arbeit",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.arbeitsagentur.de/"
+            }
+          ],
+          "notes": [
+            "Federal employment agency; official labour-market statistics and releases."
+          ]
+        },
+        {
+          "key": "de-bundesbank",
+          "name": "Deutsche Bundesbank",
+          "homepage": "https://www.bundesbank.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundesbank-official",
+              "name": "Deutsche Bundesbank",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesbank.de/"
+            }
+          ],
+          "notes": [
+            "Central bank; official monetary, financial and economic data and publications."
+          ]
+        },
+        {
+          "key": "de-bundeswahlleiterin",
+          "name": "Bundeswahlleiterin",
+          "homepage": "https://www.bundeswahlleiterin.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundeswahlleiterin-official",
+              "name": "Bundeswahlleiterin",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundeswahlleiterin.de/"
+            }
+          ],
+          "notes": [
+            "Official federal election authority; election results and statistics."
+          ]
+        },
+        {
+          "key": "de-rki",
+          "name": "Robert Koch-Institut",
+          "homepage": "https://www.rki.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-rki-official",
+              "name": "Robert Koch-Institut",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.rki.de/"
+            }
+          ],
+          "notes": [
+            "Federal public-health institute; official surveillance data and scientific/public-health publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_courts",
+      "label": "federal courts",
+      "entries": [
+        {
+          "key": "de-bverfg",
+          "name": "Bundesverfassungsgericht",
+          "homepage": "https://www.bundesverfassungsgericht.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bverfg-official",
+              "name": "Bundesverfassungsgericht",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesverfassungsgericht.de/"
+            }
+          ],
+          "notes": [
+            "Federal Constitutional Court; official decisions and press releases."
+          ]
+        },
+        {
+          "key": "de-bgh",
+          "name": "Bundesgerichtshof",
+          "homepage": "https://www.bundesgerichtshof.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bgh-official",
+              "name": "Bundesgerichtshof",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesgerichtshof.de/"
+            }
+          ],
+          "notes": [
+            "Federal Court of Justice; official decisions and press releases."
+          ]
+        },
+        {
+          "key": "de-bverwg",
+          "name": "Bundesverwaltungsgericht",
+          "homepage": "https://www.bverwg.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bverwg-official",
+              "name": "Bundesverwaltungsgericht",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bverwg.de/"
+            }
+          ],
+          "notes": [
+            "Federal Administrative Court; official decisions and press releases."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economic_infrastructure_regulators",
+      "label": "economic and infrastructure regulators",
+      "entries": [
+        {
+          "key": "de-bnetza",
+          "name": "Bundesnetzagentur",
+          "homepage": "https://www.bundesnetzagentur.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bnetza-official",
+              "name": "Bundesnetzagentur",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundesnetzagentur.de/"
+            }
+          ],
+          "notes": [
+            "Federal network regulator; official decisions, consultations and market data."
+          ]
+        },
+        {
+          "key": "de-bundeskartellamt",
+          "name": "Bundeskartellamt",
+          "homepage": "https://www.bundeskartellamt.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bundeskartellamt-official",
+              "name": "Bundeskartellamt",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundeskartellamt.de/"
+            }
+          ],
+          "notes": [
+            "Federal competition authority; official decisions and publications."
+          ]
+        },
+        {
+          "key": "de-bafin",
+          "name": "BaFin",
+          "homepage": "https://www.bafin.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bafin-official",
+              "name": "BaFin",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bafin.de/"
+            }
+          ],
+          "notes": [
+            "Federal financial supervisor; official supervisory publications, measures and warnings."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "security_migration",
+      "label": "security and migration authorities",
+      "entries": [
+        {
+          "key": "de-bka",
+          "name": "Bundeskriminalamt",
+          "homepage": "https://www.bka.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bka-official",
+              "name": "Bundeskriminalamt",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bka.de/"
+            }
+          ],
+          "notes": [
+            "Federal Criminal Police Office; official crime statistics, notices and publications."
+          ]
+        },
+        {
+          "key": "de-bfv",
+          "name": "Bundesamt für Verfassungsschutz",
+          "homepage": "https://www.verfassungsschutz.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bfv-official",
+              "name": "Bundesamt für Verfassungsschutz",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.verfassungsschutz.de/"
+            }
+          ],
+          "notes": [
+            "Federal domestic intelligence authority; official reports and publications."
+          ]
+        },
+        {
+          "key": "de-bamf",
+          "name": "Bundesamt für Migration und Flüchtlinge",
+          "homepage": "https://www.bamf.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-bamf-official",
+              "name": "Bundesamt für Migration und Flüchtlinge",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bamf.de/"
+            }
+          ],
+          "notes": [
+            "Federal migration authority; official migration/asylum data and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "parliamentary_factions",
+      "label": "parliamentary political actors",
+      "entries": [
+        {
+          "key": "de-cducsu-fraktion",
+          "name": "CDU/CSU-Fraktion im Deutschen Bundestag",
+          "homepage": "https://www.cducsu.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-cducsu-fraktion-official",
+              "name": "CDU/CSU-Fraktion im Deutschen Bundestag",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.cducsu.de/"
+            }
+          ],
+          "notes": [
+            "Parliamentary faction; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "de-afd-fraktion",
+          "name": "AfD-Fraktion im Deutschen Bundestag",
+          "homepage": "https://afdbundestag.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-afd-fraktion-official",
+              "name": "AfD-Fraktion im Deutschen Bundestag",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://afdbundestag.de/"
+            }
+          ],
+          "notes": [
+            "Parliamentary faction; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "de-spd-fraktion",
+          "name": "SPD-Bundestagsfraktion",
+          "homepage": "https://www.spdfraktion.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-spd-fraktion-official",
+              "name": "SPD-Bundestagsfraktion",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.spdfraktion.de/"
+            }
+          ],
+          "notes": [
+            "Parliamentary faction; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "de-gruene-fraktion",
+          "name": "Bündnis 90/Die Grünen Bundestagsfraktion",
+          "homepage": "https://www.gruene-bundestag.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-gruene-fraktion-official",
+              "name": "Bündnis 90/Die Grünen Bundestagsfraktion",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.gruene-bundestag.de/"
+            }
+          ],
+          "notes": [
+            "Parliamentary faction; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "de-linke-fraktion",
+          "name": "Fraktion Die Linke im Bundestag",
+          "homepage": "https://www.linksfraktion.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "de-linke-fraktion-official",
+              "name": "Fraktion Die Linke im Bundestag",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.linksfraktion.de/"
+            }
+          ],
+          "notes": [
+            "Parliamentary faction; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 30,
+  "review_status": {
+    "source_selection": "approved_30_source_de_primary_source_core_2026_09_25",
+    "segmentation": "functional_not_political",
+    "independent_confirmation": "excluded_by_adr_0021",
+    "parties_vs_factions": "initial_core_uses_bundestag_factions_not_duplicate_party_organizations"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_federal_ministries",
+      "reason": "Topic-specific expansion remains eligible; initial core focuses on the most frequently relevant national policy domains."
+    },
+    {
+      "category": "party_organizations",
+      "reason": "Party organizations are institutionally distinct from parliamentary factions but are deferred to avoid immediate parallel primary channels."
+    }
+  ]
+}
