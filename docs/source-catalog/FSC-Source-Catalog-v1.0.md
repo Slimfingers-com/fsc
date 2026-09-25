@@ -840,6 +840,12 @@ Completed catalog blocks:
 15. Switzerland regional broadcast candidate core (compact multilingual licensed regional set)
 16. Great Britain regional/devolved broadcast candidate core (devolved nations; local English regions separate)
 17. United States regional broadcast candidate core (representative state/major-metro set; local affiliates separate)
+18. Agency / Content Supplier core (national and global agencies plus broadcast supplier; cross-media radio services deduplicated)
+19. Germany digital candidate core (digital as medium; cross-media Sources reused)
+20. Austria digital candidate core (digital as medium; cross-media Sources reused)
+21. Switzerland digital candidate core (multilingual digital set; cross-media Sources reused)
+22. Great Britain digital candidate core (digital as medium; cross-media Sources reused)
+23. United States digital candidate core (digital as medium; cross-media Sources reused)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
