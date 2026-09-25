@@ -1,0 +1,940 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm"
+  ],
+  "media_category": "digital",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "digital_is_medium_existing_cross_media_sources_are_extended_not_duplicated",
+  "publication_form_policy": "born_digital_sources_use_digital_native_digital_continuations_and_existing_source_web_outlets_use_other",
+  "coverage_targets": {
+    "planning_segment_min": 3,
+    "planning_segment_max": 5
+  },
+  "coverage_policy": "targets_are_goals_not_quotas_multilingual_relevance_can_exceed_target_and_real_market_gaps_remain_visible",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "A-F groups are research planning pools only. Catalog placement alone never creates a persisted political or radicality classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [
+        {
+          "key": "solidarites-digital",
+          "name": "solidaritéS",
+          "homepage": "https://solidarites.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "solidarites",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "solidarites-digital-web",
+              "name": "solidaritéS",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "fr",
+              "homepage": "https://solidarites.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "voix-populaire-digital",
+          "name": "Voix Populaire",
+          "homepage": "https://voixpopulaire.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "voix-populaire",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "voix-populaire-digital-web",
+              "name": "Voix Populaire",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "fr",
+              "homepage": "https://voixpopulaire.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "watson-ch",
+          "name": "Watson",
+          "homepage": "https://www.watson.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "watson-ch-web",
+              "name": "Watson",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.watson.ch/"
+            }
+          ],
+          "notes": [
+            "Research-planning placement only; catalog placement does not create a persisted political classification."
+          ]
+        },
+        {
+          "key": "woz-digital",
+          "name": "WOZ – Die Wochenzeitung",
+          "homepage": "https://www.woz.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "woz",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "woz-digital-web",
+              "name": "WOZ – Die Wochenzeitung",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.woz.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "tages-anzeiger-digital",
+          "name": "Tages-Anzeiger",
+          "homepage": "https://www.tagesanzeiger.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "tages-anzeiger",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tages-anzeiger-digital-web",
+              "name": "Tages-Anzeiger",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.tagesanzeiger.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "le-courrier-digital",
+          "name": "Le Courrier",
+          "homepage": "https://lecourrier.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "le-courrier",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "le-courrier-digital-web",
+              "name": "Le Courrier",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "fr",
+              "homepage": "https://lecourrier.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "le-temps-digital",
+          "name": "Le Temps",
+          "homepage": "https://www.letemps.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "le-temps",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "le-temps-digital-web",
+              "name": "Le Temps",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "fr",
+              "homepage": "https://www.letemps.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "la-regione-digital",
+          "name": "laRegione",
+          "homepage": "https://www.laregione.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "la-regione",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "la-regione-digital-web",
+              "name": "laRegione",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "it",
+              "homepage": "https://www.laregione.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/reference",
+      "entries": [
+        {
+          "key": "20-minuten",
+          "name": "20 Minuten / 20 Minutes",
+          "homepage": "https://www.20min.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "20-minuten-de",
+              "name": "20 Minuten",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.20min.ch/"
+            },
+            {
+              "key": "20-minutes-fr",
+              "name": "20 Minutes",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "fr",
+              "homepage": "https://www.20min.ch/fr/"
+            }
+          ],
+          "notes": [
+            "One editorial Source for the German- and French-language digital brands under a joint national editorial leadership; digital-only continuation of a former print brand, not born-digital."
+          ]
+        },
+        {
+          "key": "nau-ch",
+          "name": "Nau.ch",
+          "homepage": "https://www.nau.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nau-ch-web",
+              "name": "Nau.ch",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.nau.ch/"
+            }
+          ],
+          "notes": [
+            "Research-planning placement only; catalog placement does not create a persisted political classification."
+          ]
+        },
+        {
+          "key": "blue-news",
+          "name": "blue News",
+          "homepage": "https://www.bluewin.ch/de/news.html",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "blue-news-web",
+              "name": "blue News",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.bluewin.ch/de/news.html"
+            }
+          ],
+          "notes": [
+            "Research-planning placement only; catalog placement does not create a persisted political classification."
+          ]
+        },
+        {
+          "key": "srf-digital",
+          "name": "SRF",
+          "homepage": "https://www.srf.ch/news",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "srf",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "srf-digital-web",
+              "name": "SRF",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.srf.ch/news"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "rts-digital",
+          "name": "RTS",
+          "homepage": "https://www.rts.ch/info/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "rts",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rts-digital-web",
+              "name": "RTS",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "fr",
+              "homepage": "https://www.rts.ch/info/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "corriere-del-ticino-digital",
+          "name": "Corriere del Ticino",
+          "homepage": "https://www.cdt.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "corriere-del-ticino",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "corriere-del-ticino-digital-web",
+              "name": "Corriere del Ticino",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "it",
+              "homepage": "https://www.cdt.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "key": "nzz-digital",
+          "name": "Neue Zürcher Zeitung",
+          "homepage": "https://www.nzz.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "nzz",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nzz-digital-web",
+              "name": "Neue Zürcher Zeitung",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.nzz.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "luzerner-zeitung-digital",
+          "name": "Luzerner Zeitung",
+          "homepage": "https://www.luzernerzeitung.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "luzerner-zeitung",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "luzerner-zeitung-digital-web",
+              "name": "Luzerner Zeitung",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.luzernerzeitung.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "st-galler-tagblatt-digital",
+          "name": "St. Galler Tagblatt",
+          "homepage": "https://www.tagblatt.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "st-galler-tagblatt",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "st-galler-tagblatt-digital-web",
+              "name": "St. Galler Tagblatt",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.tagblatt.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "schweizerzeit-digital",
+          "name": "Schweizerzeit",
+          "homepage": "https://schweizerzeit.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "schweizerzeit",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "schweizerzeit-digital-web",
+              "name": "Schweizerzeit",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://schweizerzeit.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "weltwoche-digital",
+          "name": "Die Weltwoche",
+          "homepage": "https://weltwoche.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "weltwoche",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "weltwoche-digital-web",
+              "name": "Die Weltwoche",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://weltwoche.ch/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "svp-klartext-digital",
+          "name": "SVP-Klartext",
+          "homepage": "https://www.svp.ch/parteizeitung/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "svp-klartext",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "svp-klartext-digital-web",
+              "name": "SVP-Klartext",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.svp.ch/parteizeitung/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "kontrafunk-digital",
+          "name": "Kontrafunk",
+          "homepage": "https://kontrafunk.radio/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "kontrafunk-ch",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kontrafunk-digital-web",
+              "name": "Kontrafunk",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://kontrafunk.radio/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right / externally classified extreme-right spectrum",
+      "entries": [
+        {
+          "key": "kla-tv-digital",
+          "name": "Kla.TV",
+          "homepage": "https://www.kla.tv/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "kla-tv",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kla-tv-digital-web",
+              "name": "Kla.TV",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.kla.tv/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "schweizer-demokrat-digital",
+          "name": "Schweizer Demokrat",
+          "homepage": "https://www.schweizer-demokraten.ch/de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "schweizer-demokrat",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "schweizer-demokrat-digital-web",
+              "name": "Schweizer Demokrat",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.schweizer-demokraten.ch/de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "republik",
+      "name": "Republik",
+      "homepage": "https://www.republik.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "republik-web",
+          "name": "Republik",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.republik.ch/"
+        }
+      ],
+      "notes": [
+        "Reader-funded digital newsroom; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "infosperber",
+      "name": "Infosperber",
+      "homepage": "https://www.infosperber.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "infosperber-web",
+          "name": "Infosperber",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.infosperber.ch/"
+        }
+      ],
+      "notes": [
+        "Independent online newspaper; politically unclassified/specialist in FSC."
+      ]
+    },
+    {
+      "key": "inside-paradeplatz",
+      "name": "Inside Paradeplatz",
+      "homepage": "https://insideparadeplatz.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "inside-paradeplatz-web",
+          "name": "Inside Paradeplatz",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://insideparadeplatz.ch/"
+        }
+      ],
+      "notes": [
+        "Digital specialist outlet focused on the Swiss financial centre; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "le-matin",
+      "name": "Le Matin",
+      "homepage": "https://www.lematin.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "le-matin-web",
+          "name": "Le Matin",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "fr",
+          "homepage": "https://www.lematin.ch/"
+        }
+      ],
+      "notes": [
+        "Digital continuation of the former print daily with its own current digital newsroom; separate from Le Matin Dimanche and not born-digital."
+      ]
+    },
+    {
+      "key": "antithese-bon-pour-la-tete",
+      "name": "Antithèse & Bon pour la tête",
+      "homepage": "https://www.antithese.info/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "antithese-bon-pour-la-tete-web",
+          "name": "Antithèse & Bon pour la tête",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "fr",
+          "homepage": "https://www.antithese.info/"
+        }
+      ],
+      "notes": [
+        "Merged editorial platform modeled as one Source; do not duplicate the predecessor brands."
+      ]
+    },
+    {
+      "key": "ticinonline",
+      "name": "TicinOnline / tio.ch",
+      "homepage": "https://www.tio.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "ticinonline-web",
+          "name": "TicinOnline / tio.ch",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "it",
+          "homepage": "https://www.tio.ch/"
+        }
+      ],
+      "notes": [
+        "Separate Ticino digital newsroom; tio.ch / 20 minuti is not collapsed into the 20 Minuten / 20 Minutes Source."
+      ]
+    },
+    {
+      "key": "blick-digital",
+      "name": "Blick",
+      "homepage": "https://www.blick.ch/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "existing_source_key": "blick",
+      "feeds": [],
+      "classification_status": "existing_source_classification_not_duplicated",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "blick-digital-web",
+          "name": "Blick",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.blick.ch/"
+        }
+      ],
+      "notes": [
+        "blick.ch extends the existing Blick Source; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "rsi-digital",
+      "name": "RSI",
+      "homepage": "https://www.rsi.ch/info/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "existing_source_key": "rsi",
+      "feeds": [],
+      "classification_status": "existing_source_classification_not_duplicated",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rsi-digital-web",
+          "name": "RSI",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "it",
+          "homepage": "https://www.rsi.ch/info/"
+        }
+      ],
+      "notes": [
+        "Digital outlet of existing RSI Source; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "rtr-digital",
+      "name": "RTR",
+      "homepage": "https://www.rtr.ch/novitads",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "existing_source_key": "rtr",
+      "feeds": [],
+      "classification_status": "existing_source_classification_not_duplicated",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "rtr-digital-web",
+          "name": "RTR",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "rm",
+          "homepage": "https://www.rtr.ch/novitads"
+        }
+      ],
+      "notes": [
+        "Digital outlet of existing RTR Source; politically unclassified in FSC."
+      ]
+    }
+  ],
+  "approved_candidate_count": 32,
+  "approved_core_count": 23,
+  "new_source_count": 10,
+  "existing_source_extension_count": 22,
+  "review_status": {
+    "source_selection": "approved_32_candidate_ch_digital_core_2026_09_25",
+    "digital_scope": "decision_a_digital_is_medium",
+    "source_identity": "reuse_existing_cross_media_source",
+    "20_minuten": "one_source_two_language_outlets",
+    "ticinonline": "separate_source_from_20_minuten",
+    "le_matin": "separate_digital_continuation_from_le_matin_dimanche",
+    "antithese_bon_pour_la_tete": "one_merged_source",
+    "market_gaps": "a_and_f_approved_below_target"
+  }
+}

@@ -520,6 +520,37 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Switzerland (CH) — Digital
+
+Digital is modeled as a **medium**. Existing print/broadcast Sources are extended rather than duplicated. Born-digital Sources use `digital_native`; digital continuations of former print brands use `other`.
+
+The approved CH digital set contains 32 candidates: 23 in the A–F planning core and nine unclassified/specialist candidates. Of those, 10 create new Source identities and 22 extend existing Sources.
+
+| Planning segment | Digital Sources |
+| --- | --- |
+| A radical/system-oppositional left | solidaritéS, Voix Populaire |
+| B left/centre-left/left-liberal | Watson, WOZ, Tages-Anzeiger, Le Courrier, Le Temps, laRegione |
+| C liberal/centre/reference | 20 Minuten / 20 Minutes, Nau.ch, blue News, SRF, RTS, Corriere del Ticino |
+| D conservative/liberal-conservative | Neue Zürcher Zeitung, Luzerner Zeitung, St. Galler Tagblatt, Schweizerzeit |
+| E right/right-conservative/right-libertarian | Die Weltwoche, SVP-Klartext, Kontrafunk |
+| F radical right / externally classified extreme-right spectrum | Kla.TV, Schweizer Demokrat |
+
+The A–F table is a research-planning matrix, not a persisted FSC political classification. A and F deliberately remain below the 3–5 target; B and C exceed it because multilingual relevance is not removed to make the matrix symmetrical.
+
+Unclassified/specialist candidates: Republik, Infosperber, Inside Paradeplatz, Le Matin, Antithèse & Bon pour la tête, TicinOnline / tio.ch, Blick, RSI and RTR.
+
+Specific identity rules:
+
+- **20 Minuten / 20 Minutes is one Source with German- and French-language outlets** under a joint national editorial leadership.
+- **TicinOnline / tio.ch remains a separate Source** and is not collapsed into 20 Minuten / 20 Minutes.
+- **Le Matin** is a separate active digital continuation from **Le Matin Dimanche** and is not born-digital.
+- **Antithèse & Bon pour la tête** is one merged Source, not two.
+- **WIDERSPRUCH** is not counted as a digital outlet merely because selected texts appear online.
+- Existing print/broadcast Sources are extended for solidaritéS, Voix Populaire, WOZ, Tages-Anzeiger, Le Courrier, Le Temps, laRegione, SRF, RTS, Corriere del Ticino, Neue Zürcher Zeitung, Luzerner Zeitung, St. Galler Tagblatt, Schweizerzeit, Die Weltwoche, SVP-Klartext, Kontrafunk, Kla.TV, Schweizer Demokrat, Blick, RSI and RTR.
+- Heidi.news remains deferred pending a cleaner current editorial-dependency assessment relative to Le Temps.
+
+No feed is activated by inclusion in this catalog.
+
 ## Great Britain (GB) — National broadcast
 
 The GB national broadcast catalog uses the same A–F research matrix, but counts television and radio separately and counts editorial newsrooms rather than channels, common owners, production companies or transmission suppliers. The research target remains 3–5 independent Sources per segment and medium; it is a goal, never a quota.
