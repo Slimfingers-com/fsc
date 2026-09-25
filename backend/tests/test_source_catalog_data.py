@@ -2202,3 +2202,102 @@ def test_at_digital_extension_keys_exist_in_existing_at_catalogs() -> None:
             for entry in catalog.get("unclassified_entries", [])
         )
     assert extensions <= existing_keys
+
+
+CH_DIGITAL_CATALOG = CATALOG_DIR / "ch_digital_v1.json"
+
+
+def load_ch_digital_catalog() -> dict:
+    return json.loads(CH_DIGITAL_CATALOG.read_text(encoding="utf-8"))
+
+
+def ch_digital_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog["unclassified_entries"],
+    ]
+
+
+def test_ch_digital_catalog_has_approved_scope_and_counts() -> None:
+    catalog = load_ch_digital_catalog()
+    assert catalog["country"] == "CH"
+    assert catalog["media_category"] == "digital"
+    assert catalog["approved_candidate_count"] == 32
+    assert catalog["approved_core_count"] == 23
+    assert catalog["new_source_count"] == 10
+    assert catalog["existing_source_extension_count"] == 22
+
+    entries = ch_digital_entries(catalog)
+    assert len(entries) == 32
+    assert len({entry["key"] for entry in entries}) == 32
+    assert len({entry["name"].casefold() for entry in entries}) == 32
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_ch_digital_planning_segments_preserve_multilingual_gaps() -> None:
+    catalog = load_ch_digital_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    assert [len(groups[key]["entries"]) for key in (
+        "radical_left", "left_liberal", "liberal_centre",
+        "conservative", "right", "radical_right",
+    )] == [2, 6, 6, 4, 3, 2]
+    assert catalog["review_status"]["market_gaps"] == "a_and_f_approved_below_target"
+
+
+def test_ch_digital_source_identity_special_cases() -> None:
+    catalog = load_ch_digital_catalog()
+    entries = ch_digital_entries(catalog)
+
+    twenty = next(entry for entry in entries if entry["key"] == "20-minuten")
+    assert {outlet["name"] for outlet in twenty["outlets"]} == {"20 Minuten", "20 Minutes"}
+    assert {outlet["language"] for outlet in twenty["outlets"]} == {"de", "fr"}
+    assert {outlet["publication_form"] for outlet in twenty["outlets"]} == {"other"}
+
+    tio = next(entry for entry in entries if entry["key"] == "ticinonline")
+    assert tio["source_action"] == "create_source"
+    assert tio["outlets"][0]["publication_form"] == "digital_native"
+
+    le_matin = next(entry for entry in entries if entry["key"] == "le-matin")
+    assert le_matin["outlets"][0]["publication_form"] == "other"
+
+    antithese = next(entry for entry in entries if entry["key"] == "antithese-bon-pour-la-tete")
+    assert antithese["source_action"] == "create_source"
+
+
+def test_ch_digital_reuses_existing_cross_media_sources() -> None:
+    catalog = load_ch_digital_catalog()
+    extensions = [
+        entry for entry in ch_digital_entries(catalog)
+        if entry["source_action"] == "extend_existing_source"
+    ]
+    assert len(extensions) == 22
+    existing_keys = {entry["existing_source_key"] for entry in extensions}
+
+    known_keys: set[str] = set()
+    for filename in ("ch_print_v1.json", "ch_broadcast_v1.json", "ch_regional_broadcast_v1.json"):
+        source_catalog = json.loads((CATALOG_DIR / filename).read_text(encoding="utf-8"))
+        known_keys.update(
+            entry["key"]
+            for group in source_catalog["groups"]
+            for entry in group["entries"]
+        )
+        known_keys.update(
+            entry["key"]
+            for entry in source_catalog.get("unclassified_entries", [])
+        )
+    assert existing_keys <= known_keys
+    assert all(
+        outlet["media_category"] == "digital"
+        and outlet["publication_form"] == "other"
+        for entry in extensions
+        for outlet in entry["outlets"]
+    )
+
+
+def test_ch_digital_unclassified_candidates_match_approved_set() -> None:
+    catalog = load_ch_digital_catalog()
+    assert {entry["name"] for entry in catalog["unclassified_entries"]} == {
+        "Republik", "Infosperber", "Inside Paradeplatz", "Le Matin",
+        "Antithèse & Bon pour la tête", "TicinOnline / tio.ch",
+        "Blick", "RSI", "RTR",
+    }
