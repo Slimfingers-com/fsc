@@ -2383,3 +2383,97 @@ def test_gb_digital_unclassified_specialists_match_selected_set() -> None:
     assert {entry["name"] for entry in catalog["unclassified_entries"]} == {
         "Full Fact", "PoliticsHome", "The Conversation UK", "Private Eye", "Prospect",
     }
+
+
+US_DIGITAL_CATALOG = CATALOG_DIR / "us_digital_v1.json"
+
+
+def load_us_digital_catalog() -> dict:
+    return json.loads(US_DIGITAL_CATALOG.read_text(encoding="utf-8"))
+
+
+def us_digital_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog["unclassified_entries"],
+    ]
+
+
+def test_us_digital_catalog_has_approved_scope_and_counts() -> None:
+    catalog = load_us_digital_catalog()
+    assert catalog["country"] == "US"
+    assert catalog["media_category"] == "digital"
+    assert catalog["approved_candidate_count"] == 32
+    assert catalog["approved_core_count"] == 27
+    assert catalog["new_source_count"] == 23
+    assert catalog["existing_source_extension_count"] == 9
+    entries = us_digital_entries(catalog)
+    assert len(entries) == 32
+    assert len({entry["key"] for entry in entries}) == 32
+    assert len({entry["name"].casefold() for entry in entries}) == 32
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_us_digital_planning_segments_match_selected_core() -> None:
+    catalog = load_us_digital_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    assert [len(groups[key]["entries"]) for key in (
+        "radical_left", "left_liberal", "liberal_centre",
+        "conservative", "right", "radical_right",
+    )] == [4, 5, 6, 4, 5, 3]
+    assert {entry["name"] for entry in groups["radical_right"]["entries"]} == {
+        "Breitbart", "The Gateway Pundit", "One America News",
+    }
+
+
+def test_us_digital_reuses_existing_broadcast_sources() -> None:
+    catalog = load_us_digital_catalog()
+    extensions = [
+        entry for entry in us_digital_entries(catalog)
+        if entry["source_action"] == "extend_existing_source"
+    ]
+    assert {entry["existing_source_key"] for entry in extensions} == {
+        "democracy-now", "npr", "cnn", "abc-news", "cbs-news",
+        "nbc-news", "fox-news", "oan", "newsmax",
+    }
+    broadcast = json.loads((CATALOG_DIR / "us_broadcast_v1.json").read_text(encoding="utf-8"))
+    known = {
+        entry["key"]
+        for group in broadcast["groups"]
+        for entry in group["entries"]
+    }
+    known.update(entry["key"] for entry in broadcast["unclassified_entries"])
+    assert {entry["existing_source_key"] for entry in extensions} <= known
+
+
+def test_us_digital_publication_forms_follow_origin() -> None:
+    catalog = load_us_digital_catalog()
+    entries = {entry["key"]: entry for entry in us_digital_entries(catalog)}
+    native = {
+        "truthout", "common-dreams", "huffpost-us", "vox", "the-intercept",
+        "axios", "semafor", "the-dispatch", "the-bulwark", "daily-wire",
+        "the-federalist", "breitbart", "gateway-pundit", "propublica",
+        "notus", "the-19th",
+    }
+    other = {
+        "jacobin-us", "politico-us", "wall-street-journal", "national-review",
+        "reason", "washington-examiner", "the-hill",
+    }
+    assert all(entries[key]["outlets"][0]["publication_form"] == "digital_native" for key in native)
+    assert all(entries[key]["outlets"][0]["publication_form"] == "other" for key in other)
+    extensions = [
+        entry for entry in entries.values()
+        if entry["source_action"] == "extend_existing_source"
+    ]
+    assert all(
+        outlet["publication_form"] == "other"
+        for entry in extensions
+        for outlet in entry["outlets"]
+    )
+
+
+def test_us_digital_unclassified_specialists_match_selected_set() -> None:
+    catalog = load_us_digital_catalog()
+    assert {entry["name"] for entry in catalog["unclassified_entries"]} == {
+        "ProPublica", "The Hill", "NOTUS", "The 19th", "Newsmax",
+    }

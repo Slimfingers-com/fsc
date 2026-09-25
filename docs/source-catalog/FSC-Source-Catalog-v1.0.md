@@ -695,6 +695,35 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## United States (US) — Digital
+
+Digital is modeled as a **medium**. Existing broadcast Sources are extended rather than duplicated. Born-digital Sources use `digital_native`; print-origin and cross-format Sources use `other`.
+
+The approved US digital candidate set contains 32 candidates: 27 in the A–F research-planning core and five politically unclassified/specialist candidates. Of those, 23 create new Source identities and nine extend existing broadcast Sources.
+
+| Planning segment | Digital Sources |
+| --- | --- |
+| A radical/system-oppositional left | Jacobin, Truthout, Common Dreams, Democracy Now! |
+| B left/centre-left/left-liberal | NPR, CNN, HuffPost, Vox, The Intercept |
+| C liberal/centre/reference | Axios, POLITICO, Semafor, ABC News, CBS News, NBC News |
+| D conservative/liberal-conservative | The Wall Street Journal, The Dispatch, National Review, The Bulwark |
+| E right/right-conservative/right-libertarian | Reason, The Daily Wire, Washington Examiner, The Federalist, Fox News |
+| F radical right / externally classified far-right spectrum | Breitbart, The Gateway Pundit, One America News |
+
+The A–F table is a research-planning matrix, not a persisted FSC political classification. Persisted political or radicality assignments still require two independent external sources that materially agree.
+
+Politically unclassified/specialist digital candidates: ProPublica, The Hill, NOTUS, The 19th and Newsmax.
+
+Specific identity rules:
+
+- Democracy Now!, NPR, CNN, ABC News, CBS News, NBC News, Fox News, One America News and Newsmax extend their existing national broadcast Sources.
+- Print-origin or established cross-format publications such as Jacobin, POLITICO, The Wall Street Journal, National Review, Reason, Washington Examiner and The Hill use `publication_form=other`, not `digital_native`.
+- Born-digital newsrooms such as Truthout, Common Dreams, HuffPost, Vox, The Intercept, Axios, Semafor, The Dispatch, The Bulwark, The Daily Wire, The Federalist, Breitbart, The Gateway Pundit, ProPublica, NOTUS and The 19th use `digital_native`.
+- Newsmax remains politically unclassified in FSC because the existing external evidence disagrees on radicality; digital presence does not change that rule.
+- Aggregators, social platforms and carrier/distribution services are not editorial Sources.
+
+No feed is activated by inclusion in this catalog.
+
 ## United States (US) — Regional broadcast
 
 This block is deliberately representative rather than exhaustive. The US local-affiliate system contains hundreds of independently operated newsrooms, so FSC uses a compact state-/major-metro core and leaves the affiliate universe for a later local layer.
