@@ -192,6 +192,21 @@ def test_create_source_without_feeds(client):
     assert data["feeds"] == []
 
 
+def test_create_interest_group_source(client):
+    response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Example Industry Association",
+            "url": "https://association.example.com",
+            "source_type": "INTEREST_GROUP",
+        },
+    )
+
+    assert response.status_code == 201
+    assert response.json()["source_type"] == "INTEREST_GROUP"
+
+
 def test_create_duplicate_source_returns_409(client):
     payload = {
         "name": "Reuters",

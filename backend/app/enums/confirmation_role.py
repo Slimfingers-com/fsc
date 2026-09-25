@@ -41,7 +41,11 @@ def default_confirmation_role(
     )
     if value is SourceType.PRIMARY_SOURCE:
         return ConfirmationRole.PRIMARY_EVIDENCE
-    if value in {SourceType.NGO, SourceType.COMPANY}:
+    if value in {
+        SourceType.NGO,
+        SourceType.INTEREST_GROUP,
+        SourceType.COMPANY,
+    }:
         return ConfirmationRole.ADVOCACY
     if value in {SourceType.ACADEMIC, SourceType.THINK_TANK}:
         return ConfirmationRole.EXPERT_ANALYSIS

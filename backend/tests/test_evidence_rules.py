@@ -117,6 +117,16 @@ def test_news_is_independent_reporting():
     )
 
 
+def test_interest_group_is_context_by_default():
+    result = analyze(
+        make_claim(
+            source_type="INTEREST_GROUP"
+        )
+    )
+    assert result.evidence[0].evidence_kind == EvidenceKind.CONTEXT
+    assert result.links[0].relation_kind == EvidenceRelationKind.CONTEXT
+
+
 def test_unclassified_source_is_context_not_support():
     result = analyze(
         make_claim(

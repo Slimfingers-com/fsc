@@ -38,7 +38,7 @@ when a newly ingested article has no article-specific decision yet:
 - NEWS, AGENCY, REGIONAL, ALTERNATIVE -> `editorial`
 - ACADEMIC, THINK_TANK -> `expert_analysis`
 - PRIMARY_SOURCE -> `primary_evidence`
-- NGO, COMPANY -> `advocacy`
+- NGO, INTEREST_GROUP, COMPANY -> `advocacy`
 - SIGNAL -> `signal`
 
 After creation, normal feed refreshes do not overwrite the article role. An administrator

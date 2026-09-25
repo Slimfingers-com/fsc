@@ -17,6 +17,7 @@ from app.enums.source_type import SourceType
         (SourceType.ALTERNATIVE, ConfirmationRole.EDITORIAL),
         (SourceType.PRIMARY_SOURCE, ConfirmationRole.PRIMARY_EVIDENCE),
         (SourceType.NGO, ConfirmationRole.ADVOCACY),
+        (SourceType.INTEREST_GROUP, ConfirmationRole.ADVOCACY),
         (SourceType.COMPANY, ConfirmationRole.ADVOCACY),
         (SourceType.ACADEMIC, ConfirmationRole.EXPERT_ANALYSIS),
         (SourceType.THINK_TANK, ConfirmationRole.EXPERT_ANALYSIS),

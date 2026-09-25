@@ -443,6 +443,33 @@ def test_primary_source_feed_assigns_primary_evidence_role(db):
     assert article.confirmation_role is ConfirmationRole.PRIMARY_EVIDENCE
 
 
+def test_interest_group_feed_assigns_advocacy_role(db):
+    source = SourceService().create_source(
+        db,
+        SourceCreate(
+            name="Example Association",
+            url="https://association.example.com",
+            source_type=SourceType.INTEREST_GROUP,
+            feeds=[
+                FeedCreate(
+                    name="Association Feed",
+                    url="https://association.example.com/feed.xml",
+                )
+            ],
+        ),
+    )
+    feed = source.feeds[0]
+
+    FeedPersistenceService().persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(parsed_entry()),
+    )
+
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    assert article.confirmation_role is ConfirmationRole.ADVOCACY
+
+
 def test_feed_update_preserves_manual_confirmation_role_override(db):
     feed = create_feed(db)
     service = FeedPersistenceService()
