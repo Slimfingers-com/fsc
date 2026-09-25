@@ -234,3 +234,61 @@ def test_co_production_bridges_story_independence_component(db):
     assert len(prepared.analysis_input.groups) == 1
     assert prepared.analysis_input.groups[0].article_count == 3
     assert prepared.analysis_input.groups[0].independent_source_count == 1
+
+
+def test_primary_source_is_evidence_but_not_independent_confirmation(db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The unemployment rate is 5 percent.",
+            },
+            {
+                "source_type": SourceType.PRIMARY_SOURCE,
+                "claim_text": "The unemployment rate is 5 percent.",
+            },
+        ],
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+    group = prepared.analysis_input.groups[0]
+
+    assert group.article_count == 2
+    assert group.evidence_source_count == 2
+    assert group.independent_source_count == 1
+
+    result = service.run_provider(prepared)
+    assert (
+        result.consensus[0].consensus_kind
+        == ConsensusKind.SINGLE_SOURCE
+    )
+
+
+def test_consensus_hash_includes_source_type(db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The plan begins Monday.",
+            },
+        ],
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    initial_hash = service.analysis_hash(snapshot)
+    snapshot.rows[0].source.source_type = SourceType.PRIMARY_SOURCE
+
+    assert service.analysis_hash(snapshot) != initial_hash

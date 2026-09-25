@@ -4,7 +4,7 @@
 
 Accepted
 
-The source-independence rule in this ADR is superseded by ADR 0020.
+The source-independence rule in this ADR is superseded by ADR 0020. Source-type eligibility for independent confirmation is refined by ADR 0021.
 
 ## Context
 
