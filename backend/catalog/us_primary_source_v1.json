@@ -1,0 +1,949 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "language": "en",
+  "media_category": "primary_source",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_or_political_actor_is_source_hosting_portal_is_not_source_identity",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "consensus_policy": "primary_sources_are_evidence_but_not_independent_editorial_confirmation",
+  "attribution_policy": "hosted_documents_should_be_attributed_to_the_substantive_author_when_identifiable",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "constitutional_legislative",
+      "label": "constitutional legislature",
+      "entries": [
+        {
+          "key": "us-house",
+          "name": "U.S. House of Representatives",
+          "homepage": "https://www.house.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-house-official",
+              "name": "U.S. House of Representatives",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.house.gov/"
+            }
+          ],
+          "notes": [
+            "Federal lower chamber; official proceedings and institutional publications."
+          ]
+        },
+        {
+          "key": "us-senate",
+          "name": "U.S. Senate",
+          "homepage": "https://www.senate.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-senate-official",
+              "name": "U.S. Senate",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.senate.gov/"
+            }
+          ],
+          "notes": [
+            "Federal upper chamber; official proceedings and institutional publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_security",
+      "label": "federal government, foreign affairs and security",
+      "entries": [
+        {
+          "key": "us-white-house",
+          "name": "White House",
+          "homepage": "https://www.whitehouse.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-white-house-official",
+              "name": "White House",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.whitehouse.gov/"
+            }
+          ],
+          "notes": [
+            "Executive Office/White House official statements and presidential publications."
+          ]
+        },
+        {
+          "key": "us-state",
+          "name": "U.S. Department of State",
+          "homepage": "https://www.state.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-state-official",
+              "name": "U.S. Department of State",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.state.gov/"
+            }
+          ],
+          "notes": [
+            "Foreign affairs department official statements and publications."
+          ]
+        },
+        {
+          "key": "us-dhs",
+          "name": "U.S. Department of Homeland Security",
+          "homepage": "https://www.dhs.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-dhs-official",
+              "name": "U.S. Department of Homeland Security",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.dhs.gov/"
+            }
+          ],
+          "notes": [
+            "Homeland security department official statements and publications."
+          ]
+        },
+        {
+          "key": "us-defense",
+          "name": "U.S. Department of Defense",
+          "homepage": "https://www.defense.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-defense-official",
+              "name": "U.S. Department of Defense",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.defense.gov/"
+            }
+          ],
+          "notes": [
+            "Defense department official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_economy_social",
+      "label": "federal government, economy and social affairs",
+      "entries": [
+        {
+          "key": "us-treasury",
+          "name": "U.S. Department of the Treasury",
+          "homepage": "https://home.treasury.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-treasury-official",
+              "name": "U.S. Department of the Treasury",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://home.treasury.gov/"
+            }
+          ],
+          "notes": [
+            "Treasury official fiscal/economic statements and publications."
+          ]
+        },
+        {
+          "key": "us-commerce",
+          "name": "U.S. Department of Commerce",
+          "homepage": "https://www.commerce.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-commerce-official",
+              "name": "U.S. Department of Commerce",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.commerce.gov/"
+            }
+          ],
+          "notes": [
+            "Commerce department official statements and publications."
+          ]
+        },
+        {
+          "key": "us-labor",
+          "name": "U.S. Department of Labor",
+          "homepage": "https://www.dol.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-labor-official",
+              "name": "U.S. Department of Labor",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.dol.gov/"
+            }
+          ],
+          "notes": [
+            "Labor department official statements and publications."
+          ]
+        },
+        {
+          "key": "us-hhs",
+          "name": "U.S. Department of Health and Human Services",
+          "homepage": "https://www.hhs.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-hhs-official",
+              "name": "U.S. Department of Health and Human Services",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.hhs.gov/"
+            }
+          ],
+          "notes": [
+            "Health and human services department official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "official_data_statistics",
+      "label": "official data and statistics",
+      "entries": [
+        {
+          "key": "us-census",
+          "name": "U.S. Census Bureau",
+          "homepage": "https://www.census.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-census-official",
+              "name": "U.S. Census Bureau",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.census.gov/"
+            }
+          ],
+          "notes": [
+            "Federal statistical agency; official population/economic data and releases."
+          ]
+        },
+        {
+          "key": "us-bls",
+          "name": "Bureau of Labor Statistics",
+          "homepage": "https://www.bls.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-bls-official",
+              "name": "Bureau of Labor Statistics",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bls.gov/"
+            }
+          ],
+          "notes": [
+            "Official labour and price statistics."
+          ]
+        },
+        {
+          "key": "us-bea",
+          "name": "Bureau of Economic Analysis",
+          "homepage": "https://www.bea.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-bea-official",
+              "name": "Bureau of Economic Analysis",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bea.gov/"
+            }
+          ],
+          "notes": [
+            "Official national economic accounts and releases."
+          ]
+        },
+        {
+          "key": "us-federal-reserve",
+          "name": "Federal Reserve Board",
+          "homepage": "https://www.federalreserve.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-federal-reserve-official",
+              "name": "Federal Reserve Board",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.federalreserve.gov/"
+            }
+          ],
+          "notes": [
+            "Central bank board; official monetary, financial and economic data and publications."
+          ]
+        },
+        {
+          "key": "us-cdc",
+          "name": "Centers for Disease Control and Prevention",
+          "homepage": "https://www.cdc.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-cdc-official",
+              "name": "Centers for Disease Control and Prevention",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cdc.gov/"
+            }
+          ],
+          "notes": [
+            "Federal public-health agency; official surveillance data and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_courts",
+      "label": "federal courts and judiciary",
+      "entries": [
+        {
+          "key": "us-supreme-court",
+          "name": "Supreme Court of the United States",
+          "homepage": "https://www.supremecourt.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-supreme-court-official",
+              "name": "Supreme Court of the United States",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.supremecourt.gov/"
+            }
+          ],
+          "notes": [
+            "Supreme Court; official opinions, orders and institutional publications."
+          ]
+        },
+        {
+          "key": "us-courts",
+          "name": "United States Courts",
+          "homepage": "https://www.uscourts.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-courts-official",
+              "name": "United States Courts",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.uscourts.gov/"
+            }
+          ],
+          "notes": [
+            "Federal judiciary institutional source for official court-system publications and data."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economic_infrastructure_regulators",
+      "label": "economic, communications and election regulators",
+      "entries": [
+        {
+          "key": "us-sec",
+          "name": "U.S. Securities and Exchange Commission",
+          "homepage": "https://www.sec.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-sec-official",
+              "name": "U.S. Securities and Exchange Commission",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.sec.gov/"
+            }
+          ],
+          "notes": [
+            "Securities regulator; official enforcement, rulemaking and disclosure publications."
+          ]
+        },
+        {
+          "key": "us-ftc",
+          "name": "Federal Trade Commission",
+          "homepage": "https://www.ftc.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-ftc-official",
+              "name": "Federal Trade Commission",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ftc.gov/"
+            }
+          ],
+          "notes": [
+            "Competition and consumer-protection regulator; official decisions and publications."
+          ]
+        },
+        {
+          "key": "us-fcc",
+          "name": "Federal Communications Commission",
+          "homepage": "https://www.fcc.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-fcc-official",
+              "name": "Federal Communications Commission",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.fcc.gov/"
+            }
+          ],
+          "notes": [
+            "Communications regulator; official decisions and publications."
+          ]
+        },
+        {
+          "key": "us-ferc",
+          "name": "Federal Energy Regulatory Commission",
+          "homepage": "https://www.ferc.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-ferc-official",
+              "name": "Federal Energy Regulatory Commission",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ferc.gov/"
+            }
+          ],
+          "notes": [
+            "Federal energy regulator; official decisions and publications."
+          ]
+        },
+        {
+          "key": "us-fec",
+          "name": "Federal Election Commission",
+          "homepage": "https://www.fec.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-fec-official",
+              "name": "Federal Election Commission",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.fec.gov/"
+            }
+          ],
+          "notes": [
+            "Federal campaign-finance regulator; official filings, data and decisions."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "security_migration",
+      "label": "security, cyber and immigration authorities",
+      "entries": [
+        {
+          "key": "us-fbi",
+          "name": "Federal Bureau of Investigation",
+          "homepage": "https://www.fbi.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-fbi-official",
+              "name": "Federal Bureau of Investigation",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.fbi.gov/"
+            }
+          ],
+          "notes": [
+            "Federal law-enforcement agency; official crime/security information and publications."
+          ]
+        },
+        {
+          "key": "us-cisa",
+          "name": "Cybersecurity and Infrastructure Security Agency",
+          "homepage": "https://www.cisa.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-cisa-official",
+              "name": "Cybersecurity and Infrastructure Security Agency",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cisa.gov/"
+            }
+          ],
+          "notes": [
+            "Federal cyber and infrastructure-security authority; official advisories and publications."
+          ]
+        },
+        {
+          "key": "us-uscis",
+          "name": "U.S. Citizenship and Immigration Services",
+          "homepage": "https://www.uscis.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-uscis-official",
+              "name": "U.S. Citizenship and Immigration Services",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.uscis.gov/"
+            }
+          ],
+          "notes": [
+            "Federal immigration-benefits authority; official policy and statistical publications."
+          ]
+        },
+        {
+          "key": "us-cbp",
+          "name": "U.S. Customs and Border Protection",
+          "homepage": "https://www.cbp.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-cbp-official",
+              "name": "U.S. Customs and Border Protection",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cbp.gov/"
+            }
+          ],
+          "notes": [
+            "Federal border authority; official border/migration statistics and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "congressional_political_actors",
+      "label": "congressional political actors",
+      "entries": [
+        {
+          "key": "us-house-democratic-caucus",
+          "name": "House Democratic Caucus",
+          "homepage": "https://www.dems.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-house-democratic-caucus-official",
+              "name": "House Democratic Caucus",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.dems.gov/"
+            }
+          ],
+          "notes": [
+            "Formal House Democratic organization; statements are primary political material."
+          ]
+        },
+        {
+          "key": "us-house-republican-conference",
+          "name": "House Republican Conference",
+          "homepage": "https://www.gop.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-house-republican-conference-official",
+              "name": "House Republican Conference",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gop.gov/"
+            }
+          ],
+          "notes": [
+            "Formal House Republican organization; statements are primary political material."
+          ]
+        },
+        {
+          "key": "us-senate-democratic-caucus",
+          "name": "Senate Democratic Caucus",
+          "homepage": "https://www.democrats.senate.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-senate-democratic-caucus-official",
+              "name": "Senate Democratic Caucus",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.democrats.senate.gov/"
+            }
+          ],
+          "notes": [
+            "Senate Democratic conference/caucus; statements are primary political material."
+          ]
+        },
+        {
+          "key": "us-senate-republican-conference",
+          "name": "Senate Republican Conference",
+          "homepage": "https://www.republican.senate.gov/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-senate-republican-conference-official",
+              "name": "Senate Republican Conference",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.republican.senate.gov/"
+            }
+          ],
+          "notes": [
+            "Formal Senate Republican conference; statements are primary political material."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 30,
+  "review_status": {
+    "source_selection": "approved_30_source_us_primary_source_core_2026_09_25",
+    "segmentation": "functional_not_political",
+    "independent_confirmation": "excluded_by_adr_0021",
+    "political_actors": "formal_house_and_senate_party_caucus_conference_sources"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_federal_departments_and_agencies",
+      "reason": "Topic-specific expansion remains eligible outside the compact federal core."
+    },
+    {
+      "category": "state_primary_sources",
+      "reason": "State governments, legislatures, courts and election authorities are deferred to a state-level primary-source expansion."
+    }
+  ]
+}

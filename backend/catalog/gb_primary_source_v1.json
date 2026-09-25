@@ -1,0 +1,950 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "language": "en",
+  "media_category": "primary_source",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_or_political_actor_is_source_hosting_portal_is_not_source_identity",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "consensus_policy": "primary_sources_are_evidence_but_not_independent_editorial_confirmation",
+  "attribution_policy": "hosted_documents_should_be_attributed_to_the_substantive_author_when_identifiable",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "constitutional_legislative",
+      "label": "constitutional organs and legislature",
+      "entries": [
+        {
+          "key": "gb-house-commons",
+          "name": "House of Commons",
+          "homepage": "https://www.parliament.uk/business/commons/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-house-commons-official",
+              "name": "House of Commons",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.parliament.uk/business/commons/"
+            }
+          ],
+          "notes": [
+            "UK Parliament lower chamber; official proceedings and institutional publications."
+          ]
+        },
+        {
+          "key": "gb-house-lords",
+          "name": "House of Lords",
+          "homepage": "https://www.parliament.uk/business/lords/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-house-lords-official",
+              "name": "House of Lords",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.parliament.uk/business/lords/"
+            }
+          ],
+          "notes": [
+            "UK Parliament upper chamber; official proceedings and institutional publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "central_government_security",
+      "label": "central government, foreign affairs and security",
+      "entries": [
+        {
+          "key": "gb-prime-ministers-office",
+          "name": "UK Government / Prime Minister's Office",
+          "homepage": "https://www.gov.uk/government/organisations/prime-ministers-office-10-downing-street",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-prime-ministers-office-official",
+              "name": "UK Government / Prime Minister's Office",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/prime-ministers-office-10-downing-street"
+            }
+          ],
+          "notes": [
+            "Central UK Government and Prime Minister's Office publications."
+          ]
+        },
+        {
+          "key": "gb-fcdo",
+          "name": "Foreign, Commonwealth & Development Office",
+          "homepage": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-fcdo-official",
+              "name": "Foreign, Commonwealth & Development Office",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office"
+            }
+          ],
+          "notes": [
+            "Foreign affairs department official statements and publications."
+          ]
+        },
+        {
+          "key": "gb-home-office",
+          "name": "Home Office",
+          "homepage": "https://www.gov.uk/government/organisations/home-office",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-home-office-official",
+              "name": "Home Office",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/home-office"
+            }
+          ],
+          "notes": [
+            "Home Office official statements, statistics and publications."
+          ]
+        },
+        {
+          "key": "gb-mod",
+          "name": "Ministry of Defence",
+          "homepage": "https://www.gov.uk/government/organisations/ministry-of-defence",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-mod-official",
+              "name": "Ministry of Defence",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/ministry-of-defence"
+            }
+          ],
+          "notes": [
+            "Defence ministry official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "central_government_economy_social",
+      "label": "central government, economy and social affairs",
+      "entries": [
+        {
+          "key": "gb-hm-treasury",
+          "name": "HM Treasury",
+          "homepage": "https://www.gov.uk/government/organisations/hm-treasury",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-hm-treasury-official",
+              "name": "HM Treasury",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/hm-treasury"
+            }
+          ],
+          "notes": [
+            "Treasury official fiscal/economic statements and publications."
+          ]
+        },
+        {
+          "key": "gb-bist",
+          "name": "Department for Business, Innovation, Science and Trade",
+          "homepage": "https://www.gov.uk/government/organisations/department-for-business-innovation-science-and-trade",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-bist-official",
+              "name": "Department for Business, Innovation, Science and Trade",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/department-for-business-innovation-science-and-trade"
+            }
+          ],
+          "notes": [
+            "Current business, innovation, science and trade department; official statements and publications."
+          ]
+        },
+        {
+          "key": "gb-dwp",
+          "name": "Department for Work and Pensions",
+          "homepage": "https://www.gov.uk/government/organisations/department-for-work-pensions",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-dwp-official",
+              "name": "Department for Work and Pensions",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/department-for-work-pensions"
+            }
+          ],
+          "notes": [
+            "Work and pensions department official statistics and publications."
+          ]
+        },
+        {
+          "key": "gb-dhsc",
+          "name": "Department of Health and Social Care",
+          "homepage": "https://www.gov.uk/government/organisations/department-of-health-and-social-care",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-dhsc-official",
+              "name": "Department of Health and Social Care",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/department-of-health-and-social-care"
+            }
+          ],
+          "notes": [
+            "Health and social care department official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "official_data_statistics",
+      "label": "official data and statistics",
+      "entries": [
+        {
+          "key": "gb-ons",
+          "name": "Office for National Statistics",
+          "homepage": "https://www.ons.gov.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-ons-official",
+              "name": "Office for National Statistics",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ons.gov.uk/"
+            }
+          ],
+          "notes": [
+            "National statistical authority; official statistics and releases."
+          ]
+        },
+        {
+          "key": "gb-bank-england",
+          "name": "Bank of England",
+          "homepage": "https://www.bankofengland.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-bank-england-official",
+              "name": "Bank of England",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bankofengland.co.uk/"
+            }
+          ],
+          "notes": [
+            "Central bank; official monetary, financial and economic data and publications."
+          ]
+        },
+        {
+          "key": "gb-obr",
+          "name": "Office for Budget Responsibility",
+          "homepage": "https://obr.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-obr-official",
+              "name": "Office for Budget Responsibility",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://obr.uk/"
+            }
+          ],
+          "notes": [
+            "Independent official fiscal institution; forecasts and fiscal analysis."
+          ]
+        },
+        {
+          "key": "gb-electoral-commission",
+          "name": "Electoral Commission",
+          "homepage": "https://www.electoralcommission.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-electoral-commission-official",
+              "name": "Electoral Commission",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.electoralcommission.org.uk/"
+            }
+          ],
+          "notes": [
+            "Official electoral regulator; election and political-finance information."
+          ]
+        },
+        {
+          "key": "gb-ukhsa",
+          "name": "UK Health Security Agency",
+          "homepage": "https://www.gov.uk/government/organisations/uk-health-security-agency",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-ukhsa-official",
+              "name": "UK Health Security Agency",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/uk-health-security-agency"
+            }
+          ],
+          "notes": [
+            "Official health-security data, surveillance and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "courts",
+      "label": "national courts and judiciary",
+      "entries": [
+        {
+          "key": "gb-supreme-court",
+          "name": "UK Supreme Court",
+          "homepage": "https://www.supremecourt.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-supreme-court-official",
+              "name": "UK Supreme Court",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.supremecourt.uk/"
+            }
+          ],
+          "notes": [
+            "Supreme Court; official judgments and institutional publications."
+          ]
+        },
+        {
+          "key": "gb-judiciary-ew",
+          "name": "Courts and Tribunals Judiciary",
+          "homepage": "https://www.judiciary.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-judiciary-ew-official",
+              "name": "Courts and Tribunals Judiciary",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.judiciary.uk/"
+            }
+          ],
+          "notes": [
+            "England and Wales judiciary; official judgments, statements and institutional material."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economic_infrastructure_regulators",
+      "label": "economic and infrastructure regulators",
+      "entries": [
+        {
+          "key": "gb-fca",
+          "name": "Financial Conduct Authority",
+          "homepage": "https://www.fca.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-fca-official",
+              "name": "Financial Conduct Authority",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.fca.org.uk/"
+            }
+          ],
+          "notes": [
+            "Financial regulator; official supervisory publications and warnings."
+          ]
+        },
+        {
+          "key": "gb-cma",
+          "name": "Competition and Markets Authority",
+          "homepage": "https://www.gov.uk/government/organisations/competition-and-markets-authority",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-cma-official",
+              "name": "Competition and Markets Authority",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gov.uk/government/organisations/competition-and-markets-authority"
+            }
+          ],
+          "notes": [
+            "Competition authority; official decisions and publications."
+          ]
+        },
+        {
+          "key": "gb-ofcom",
+          "name": "Ofcom",
+          "homepage": "https://www.ofcom.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-ofcom-official",
+              "name": "Ofcom",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ofcom.org.uk/"
+            }
+          ],
+          "notes": [
+            "Communications regulator; official decisions, research and publications."
+          ]
+        },
+        {
+          "key": "gb-ofgem",
+          "name": "Ofgem",
+          "homepage": "https://www.ofgem.gov.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-ofgem-official",
+              "name": "Ofgem",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ofgem.gov.uk/"
+            }
+          ],
+          "notes": [
+            "Energy regulator; official decisions and market publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "security",
+      "label": "security authorities",
+      "entries": [
+        {
+          "key": "gb-nca",
+          "name": "National Crime Agency",
+          "homepage": "https://www.nationalcrimeagency.gov.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-nca-official",
+              "name": "National Crime Agency",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nationalcrimeagency.gov.uk/"
+            }
+          ],
+          "notes": [
+            "National crime agency; official security and crime publications."
+          ]
+        },
+        {
+          "key": "gb-mi5",
+          "name": "MI5",
+          "homepage": "https://www.mi5.gov.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-mi5-official",
+              "name": "MI5",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.mi5.gov.uk/"
+            }
+          ],
+          "notes": [
+            "Domestic security service; official threat information and publications."
+          ]
+        },
+        {
+          "key": "gb-ncsc",
+          "name": "National Cyber Security Centre",
+          "homepage": "https://www.ncsc.gov.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-ncsc-official",
+              "name": "National Cyber Security Centre",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ncsc.gov.uk/"
+            }
+          ],
+          "notes": [
+            "National cyber-security authority; official advisories and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "parliamentary_political_actors",
+      "label": "major parliamentary political actors",
+      "entries": [
+        {
+          "key": "gb-labour",
+          "name": "Labour Party",
+          "homepage": "https://labour.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-labour-official",
+              "name": "Labour Party",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://labour.org.uk/"
+            }
+          ],
+          "notes": [
+            "Major parliamentary political actor; official party statements are primary political material."
+          ]
+        },
+        {
+          "key": "gb-conservative",
+          "name": "Conservative Party",
+          "homepage": "https://www.conservatives.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-conservative-official",
+              "name": "Conservative Party",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.conservatives.com/"
+            }
+          ],
+          "notes": [
+            "Major parliamentary political actor; official party statements are primary political material."
+          ]
+        },
+        {
+          "key": "gb-libdem",
+          "name": "Liberal Democrats",
+          "homepage": "https://www.libdems.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-libdem-official",
+              "name": "Liberal Democrats",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.libdems.org.uk/"
+            }
+          ],
+          "notes": [
+            "Major parliamentary political actor; official party statements are primary political material."
+          ]
+        },
+        {
+          "key": "gb-reform",
+          "name": "Reform UK",
+          "homepage": "https://www.reformparty.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-reform-official",
+              "name": "Reform UK",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.reformparty.uk/"
+            }
+          ],
+          "notes": [
+            "Major parliamentary political actor; official party statements are primary political material."
+          ]
+        },
+        {
+          "key": "gb-snp",
+          "name": "Scottish National Party",
+          "homepage": "https://www.snp.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-snp-official",
+              "name": "Scottish National Party",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.snp.org/"
+            }
+          ],
+          "notes": [
+            "Major parliamentary political actor; official party statements are primary political material."
+          ]
+        },
+        {
+          "key": "gb-green",
+          "name": "Green Party of England and Wales",
+          "homepage": "https://greenparty.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-green-official",
+              "name": "Green Party of England and Wales",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://greenparty.org.uk/"
+            }
+          ],
+          "notes": [
+            "Major parliamentary political actor; official party statements are primary political material."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 30,
+  "review_status": {
+    "source_selection": "approved_30_source_gb_primary_source_core_2026_09_25",
+    "segmentation": "functional_not_political",
+    "independent_confirmation": "excluded_by_adr_0021",
+    "political_actors": "major_current_house_of_commons_parties",
+    "party_vs_parliamentary_group": "party_organization_used_where_no_uniform_public_faction_source_exists"
+  },
+  "deferred_expansion": [
+    {
+      "category": "devolved_governments_and_legislatures",
+      "reason": "Scotland, Wales and Northern Ireland primary institutions are deferred to a devolved-primary-source expansion."
+    },
+    {
+      "category": "additional_government_departments",
+      "reason": "Topic-specific expansion remains eligible outside the compact national core."
+    }
+  ]
+}

@@ -422,6 +422,27 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Austria (AT) — Primary Sources
+
+Primary Sources are grouped by **institutional function**, not political orientation. All entries use `SourceType.PRIMARY_SOURCE`; under ADR 0021 they remain full evidence/content Sources but never count as independent editorial confirmation.
+
+The AT core contains 31 Source identities:
+
+| Functional group | Primary Sources |
+| --- | --- |
+| Constitutional organs / legislature | Nationalrat, Bundesrat, Bundespräsident |
+| Federal government / foreign affairs / security | Bundeskanzleramt / Bundesregierung, BMEIA, Bundesministerium für Inneres, Bundesministerium für Landesverteidigung |
+| Federal government / economy / social affairs | Bundesministerium für Finanzen, Bundesministerium für Wirtschaft, Energie und Tourismus, Bundesministerium für Arbeit, Soziales, Gesundheit, Pflege und Konsumentenschutz, Bundesministerium für Innovation, Mobilität und Infrastruktur |
+| Official data / statistics | Statistik Austria, Arbeitsmarktservice Österreich, Oesterreichische Nationalbank, Bundeswahlbehörde, AGES |
+| Highest courts | Verfassungsgerichtshof, Verwaltungsgerichtshof, Oberster Gerichtshof |
+| Economic / infrastructure regulators | FMA, Bundeswettbewerbsbehörde, E-Control, KommAustria |
+| Security / migration authorities | Bundeskriminalamt Österreich, Direktion Staatsschutz und Nachrichtendienst, Bundesamt für Fremdenwesen und Asyl |
+| Parliamentary political actors | FPÖ-Parlamentsklub, ÖVP-Parlamentsklub, SPÖ-Parlamentsklub, NEOS-Parlamentsklub, Grüner Klub im Parlament |
+
+Institutional websites and parliamentary hosting systems are Outlets, not additional Sources. Documents are attributed to the substantive author when identifiable. Political clubs are Primary Sources for their own positions and are not assigned an FSC political orientation by virtue of their identity. Party organizations remain eligible for later expansion rather than being duplicated alongside the parliamentary clubs.
+
+No feed is activated by inclusion in this catalog.
+
 ## Switzerland (CH)
 
 ### Print
@@ -580,6 +601,25 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Switzerland (CH) — Primary Sources
+
+The multilingual Swiss Primary Source core is grouped by **institutional function**. It contains 30 Source identities and covers German, French, Italian and Romansh publication contexts where the institution provides them. ADR 0021 applies unchanged.
+
+| Functional group | Primary Sources |
+| --- | --- |
+| Constitutional / legislature | Nationalrat, Ständerat |
+| Federal government / foreign affairs / security | Schweizerischer Bundesrat / Bundeskanzlei, EDA, EJPD, VBS |
+| Federal government / economy / social affairs | EFD, WBF, EDI, UVEK |
+| Official data / statistics | Bundesamt für Statistik, SECO, Schweizerische Nationalbank, Bundesamt für Gesundheit |
+| Federal courts | Schweizerisches Bundesgericht, Bundesstrafgericht, Bundesverwaltungsgericht |
+| Economic / infrastructure regulators | FINMA, WEKO, ElCom, ComCom |
+| Security / migration authorities | fedpol, Nachrichtendienst des Bundes, Staatssekretariat für Migration |
+| Parliamentary political actors | SVP-Fraktion, SP-Fraktion, Die Mitte-Fraktion, FDP-Liberale Fraktion, Grüne Fraktion, Grünliberale Fraktion |
+
+Federal parliamentary groups are their own political Primary Sources; party organizations are not duplicated into this compact core. A document distributed through parliament.ch or admin.ch is attributed to its substantive institutional author whenever identifiable.
+
+No feed is activated by inclusion in this catalog.
+
 ## Great Britain (GB) — National broadcast
 
 The GB national broadcast catalog uses the same A–F research matrix, but counts television and radio separately and counts editorial newsrooms rather than channels, common owners, production companies or transmission suppliers. The research target remains 3–5 independent Sources per segment and medium; it is a goal, never a quota.
@@ -724,6 +764,25 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Great Britain (GB) — Primary Sources
+
+The GB Primary Source core is grouped by **institutional function**, not political orientation, and contains 30 Source identities. ADR 0021 applies unchanged.
+
+| Functional group | Primary Sources |
+| --- | --- |
+| Legislature | House of Commons, House of Lords |
+| Central government / foreign affairs / security | UK Government / Prime Minister's Office, Foreign, Commonwealth & Development Office, Home Office, Ministry of Defence |
+| Central government / economy / social affairs | HM Treasury, Department for Business, Innovation, Science and Trade, Department for Work and Pensions, Department of Health and Social Care |
+| Official data / statistics | Office for National Statistics, Bank of England, Office for Budget Responsibility, Electoral Commission, UK Health Security Agency |
+| Courts / judiciary | UK Supreme Court, Courts and Tribunals Judiciary |
+| Economic / infrastructure regulators | Financial Conduct Authority, Competition and Markets Authority, Ofcom, Ofgem |
+| Security authorities | National Crime Agency, MI5, National Cyber Security Centre |
+| Major parliamentary political actors | Labour Party, Conservative Party, Liberal Democrats, Reform UK, Scottish National Party, Green Party of England and Wales |
+
+The current department name **Department for Business, Innovation, Science and Trade** is used rather than its predecessor name. Because the UK does not expose one uniform public-facing faction-source structure comparable to DE/AT/CH, the compact core uses the major current House of Commons party organizations as political Primary Sources. Devolved governments and legislatures remain a dedicated later expansion.
+
+No feed is activated by inclusion in this catalog.
+
 ## United States (US) — Digital
 
 Digital is modeled as a **medium**. Existing broadcast Sources are extended rather than duplicated. Born-digital Sources use `digital_native`; print-origin and cross-format Sources use `other`.
@@ -750,6 +809,25 @@ Specific identity rules:
 - Born-digital newsrooms such as Truthout, Common Dreams, HuffPost, Vox, The Intercept, Axios, Semafor, The Dispatch, The Bulwark, The Daily Wire, The Federalist, Breitbart, The Gateway Pundit, ProPublica, NOTUS and The 19th use `digital_native`.
 - Newsmax remains politically unclassified in FSC because the existing external evidence disagrees on radicality; digital presence does not change that rule.
 - Aggregators, social platforms and carrier/distribution services are not editorial Sources.
+
+No feed is activated by inclusion in this catalog.
+
+## United States (US) — Primary Sources
+
+The US federal Primary Source core is grouped by **institutional function**, not political orientation, and contains 30 Source identities. ADR 0021 applies unchanged.
+
+| Functional group | Primary Sources |
+| --- | --- |
+| Legislature | U.S. House of Representatives, U.S. Senate |
+| Federal government / foreign affairs / security | White House, U.S. Department of State, U.S. Department of Homeland Security, U.S. Department of Defense |
+| Federal government / economy / social affairs | U.S. Department of the Treasury, U.S. Department of Commerce, U.S. Department of Labor, U.S. Department of Health and Human Services |
+| Official data / statistics | U.S. Census Bureau, Bureau of Labor Statistics, Bureau of Economic Analysis, Federal Reserve Board, Centers for Disease Control and Prevention |
+| Federal courts / judiciary | Supreme Court of the United States, United States Courts |
+| Economic / communications / election regulators | SEC, FTC, FCC, FERC, Federal Election Commission |
+| Security / cyber / immigration authorities | FBI, CISA, USCIS, U.S. Customs and Border Protection |
+| Congressional political actors | House Democratic Caucus, House Republican Conference, Senate Democratic Caucus, Senate Republican Conference |
+
+The four congressional caucus/conference Sources are formal party organizations within the two chambers and are treated as political Primary Sources, not editorial Sources. State governments, legislatures, courts and election authorities remain a separate state-level expansion.
 
 No feed is activated by inclusion in this catalog.
 
@@ -875,6 +953,11 @@ Completed catalog blocks:
 21. Switzerland digital candidate core (multilingual digital set; cross-media Sources reused)
 22. Great Britain digital candidate core (digital as medium; cross-media Sources reused)
 23. United States digital candidate core (digital as medium; cross-media Sources reused)
+24. Germany primary-source core (functional institutional groups; excluded from independent editorial confirmation)
+25. Austria primary-source core (functional institutional groups; excluded from independent editorial confirmation)
+26. Switzerland primary-source core (multilingual functional institutional groups; excluded from independent editorial confirmation)
+27. Great Britain primary-source core (functional institutional groups; excluded from independent editorial confirmation)
+28. United States primary-source core (functional institutional groups; excluded from independent editorial confirmation)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 

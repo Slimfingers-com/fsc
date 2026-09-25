@@ -1,0 +1,978 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "media_category": "primary_source",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_or_political_actor_is_source_hosting_portal_is_not_source_identity",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "consensus_policy": "primary_sources_are_evidence_but_not_independent_editorial_confirmation",
+  "attribution_policy": "hosted_documents_should_be_attributed_to_the_substantive_author_when_identifiable",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "constitutional_legislative",
+      "label": "constitutional organs and legislature",
+      "entries": [
+        {
+          "key": "at-nationalrat",
+          "name": "Nationalrat",
+          "homepage": "https://www.parlament.gv.at/verstehen/nationalrat/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-nationalrat-official",
+              "name": "Nationalrat",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.parlament.gv.at/verstehen/nationalrat/"
+            }
+          ],
+          "notes": [
+            "National chamber of Parliament; official proceedings and institutional publications."
+          ]
+        },
+        {
+          "key": "at-bundesrat",
+          "name": "Bundesrat",
+          "homepage": "https://www.parlament.gv.at/verstehen/bundesrat/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bundesrat-official",
+              "name": "Bundesrat",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.parlament.gv.at/verstehen/bundesrat/"
+            }
+          ],
+          "notes": [
+            "Federal chamber of Parliament; official proceedings and institutional publications."
+          ]
+        },
+        {
+          "key": "at-bundespraesident",
+          "name": "Bundespräsident",
+          "homepage": "https://www.bundespraesident.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bundespraesident-official",
+              "name": "Bundespräsident",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundespraesident.at/"
+            }
+          ],
+          "notes": [
+            "Federal President; official speeches, statements and institutional publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_security",
+      "label": "federal government, foreign affairs and security",
+      "entries": [
+        {
+          "key": "at-bundeskanzleramt",
+          "name": "Bundeskanzleramt / Bundesregierung",
+          "homepage": "https://www.bundeskanzleramt.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bundeskanzleramt-official",
+              "name": "Bundeskanzleramt / Bundesregierung",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundeskanzleramt.gv.at/"
+            }
+          ],
+          "notes": [
+            "Federal Chancellery and central Federal Government institutional publications."
+          ]
+        },
+        {
+          "key": "at-bmeia",
+          "name": "Bundesministerium für europäische und internationale Angelegenheiten",
+          "homepage": "https://www.bmeia.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bmeia-official",
+              "name": "Bundesministerium für europäische und internationale Angelegenheiten",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmeia.gv.at/"
+            }
+          ],
+          "notes": [
+            "Foreign ministry official statements and publications."
+          ]
+        },
+        {
+          "key": "at-bmi",
+          "name": "Bundesministerium für Inneres",
+          "homepage": "https://www.bmi.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bmi-official",
+              "name": "Bundesministerium für Inneres",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmi.gv.at/"
+            }
+          ],
+          "notes": [
+            "Interior ministry official statements and publications."
+          ]
+        },
+        {
+          "key": "at-bmlv",
+          "name": "Bundesministerium für Landesverteidigung",
+          "homepage": "https://www.bmlv.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bmlv-official",
+              "name": "Bundesministerium für Landesverteidigung",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmlv.gv.at/"
+            }
+          ],
+          "notes": [
+            "Defence ministry official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_economy_social",
+      "label": "federal government, economy and social affairs",
+      "entries": [
+        {
+          "key": "at-bmf",
+          "name": "Bundesministerium für Finanzen",
+          "homepage": "https://www.bmf.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bmf-official",
+              "name": "Bundesministerium für Finanzen",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmf.gv.at/"
+            }
+          ],
+          "notes": [
+            "Finance ministry official statements and publications."
+          ]
+        },
+        {
+          "key": "at-bmwet",
+          "name": "Bundesministerium für Wirtschaft, Energie und Tourismus",
+          "homepage": "https://www.bmwet.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bmwet-official",
+              "name": "Bundesministerium für Wirtschaft, Energie und Tourismus",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmwet.gv.at/"
+            }
+          ],
+          "notes": [
+            "Economic, energy and tourism ministry official statements and publications."
+          ]
+        },
+        {
+          "key": "at-sozialministerium",
+          "name": "Bundesministerium für Arbeit, Soziales, Gesundheit, Pflege und Konsumentenschutz",
+          "homepage": "https://www.sozialministerium.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-sozialministerium-official",
+              "name": "Bundesministerium für Arbeit, Soziales, Gesundheit, Pflege und Konsumentenschutz",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.sozialministerium.gv.at/"
+            }
+          ],
+          "notes": [
+            "Labour, social affairs and health ministry official statements and publications."
+          ]
+        },
+        {
+          "key": "at-bmimi",
+          "name": "Bundesministerium für Innovation, Mobilität und Infrastruktur",
+          "homepage": "https://www.bmimi.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bmimi-official",
+              "name": "Bundesministerium für Innovation, Mobilität und Infrastruktur",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmimi.gv.at/"
+            }
+          ],
+          "notes": [
+            "Innovation, mobility and infrastructure ministry official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "official_data_statistics",
+      "label": "official data and statistics",
+      "entries": [
+        {
+          "key": "at-statistik-austria",
+          "name": "Statistik Austria",
+          "homepage": "https://www.statistik.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-statistik-austria-official",
+              "name": "Statistik Austria",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.statistik.at/"
+            }
+          ],
+          "notes": [
+            "National statistical authority; official statistics and releases."
+          ]
+        },
+        {
+          "key": "at-ams",
+          "name": "Arbeitsmarktservice Österreich",
+          "homepage": "https://www.ams.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-ams-official",
+              "name": "Arbeitsmarktservice Österreich",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.ams.at/"
+            }
+          ],
+          "notes": [
+            "Public employment service; official labour-market data and releases."
+          ]
+        },
+        {
+          "key": "at-oenb",
+          "name": "Oesterreichische Nationalbank",
+          "homepage": "https://www.oenb.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-oenb-official",
+              "name": "Oesterreichische Nationalbank",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.oenb.at/"
+            }
+          ],
+          "notes": [
+            "Central bank; official monetary, financial and economic data and publications."
+          ]
+        },
+        {
+          "key": "at-bundeswahlbehoerde",
+          "name": "Bundeswahlbehörde",
+          "homepage": "https://www.bmi.gv.at/412/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bundeswahlbehoerde-official",
+              "name": "Bundeswahlbehörde",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmi.gv.at/412/"
+            }
+          ],
+          "notes": [
+            "Federal election authority; official election information and results."
+          ]
+        },
+        {
+          "key": "at-ages",
+          "name": "AGES",
+          "homepage": "https://www.ages.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-ages-official",
+              "name": "AGES",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.ages.at/"
+            }
+          ],
+          "notes": [
+            "Austrian Agency for Health and Food Safety; official health, food-safety and surveillance publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "highest_courts",
+      "label": "highest courts",
+      "entries": [
+        {
+          "key": "at-vfgh",
+          "name": "Verfassungsgerichtshof",
+          "homepage": "https://www.vfgh.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-vfgh-official",
+              "name": "Verfassungsgerichtshof",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.vfgh.gv.at/"
+            }
+          ],
+          "notes": [
+            "Constitutional Court; official decisions and releases."
+          ]
+        },
+        {
+          "key": "at-vwgh",
+          "name": "Verwaltungsgerichtshof",
+          "homepage": "https://www.vwgh.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-vwgh-official",
+              "name": "Verwaltungsgerichtshof",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.vwgh.gv.at/"
+            }
+          ],
+          "notes": [
+            "Supreme Administrative Court; official decisions and releases."
+          ]
+        },
+        {
+          "key": "at-ogh",
+          "name": "Oberster Gerichtshof",
+          "homepage": "https://www.ogh.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-ogh-official",
+              "name": "Oberster Gerichtshof",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.ogh.gv.at/"
+            }
+          ],
+          "notes": [
+            "Supreme Court; official decisions and institutional publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economic_infrastructure_regulators",
+      "label": "economic and infrastructure regulators",
+      "entries": [
+        {
+          "key": "at-fma",
+          "name": "Finanzmarktaufsicht (FMA)",
+          "homepage": "https://www.fma.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-fma-official",
+              "name": "Finanzmarktaufsicht (FMA)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fma.gv.at/"
+            }
+          ],
+          "notes": [
+            "Financial-market supervisor; official supervisory publications and warnings."
+          ]
+        },
+        {
+          "key": "at-bwb",
+          "name": "Bundeswettbewerbsbehörde",
+          "homepage": "https://www.bwb.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bwb-official",
+              "name": "Bundeswettbewerbsbehörde",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bwb.gv.at/"
+            }
+          ],
+          "notes": [
+            "Federal competition authority; official decisions and publications."
+          ]
+        },
+        {
+          "key": "at-e-control",
+          "name": "E-Control",
+          "homepage": "https://www.e-control.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-e-control-official",
+              "name": "E-Control",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.e-control.at/"
+            }
+          ],
+          "notes": [
+            "Energy regulator; official regulatory decisions and market information."
+          ]
+        },
+        {
+          "key": "at-kommaustria",
+          "name": "KommAustria",
+          "homepage": "https://www.rtr.at/medien/wer_wir_sind/KommAustria/KommAustria.de.html",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-kommaustria-official",
+              "name": "KommAustria",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.rtr.at/medien/wer_wir_sind/KommAustria/KommAustria.de.html"
+            }
+          ],
+          "notes": [
+            "Media regulator; official decisions and regulatory publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "security_migration",
+      "label": "security and migration authorities",
+      "entries": [
+        {
+          "key": "at-bundeskriminalamt",
+          "name": "Bundeskriminalamt Österreich",
+          "homepage": "https://www.bundeskriminalamt.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bundeskriminalamt-official",
+              "name": "Bundeskriminalamt Österreich",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bundeskriminalamt.at/"
+            }
+          ],
+          "notes": [
+            "Federal Criminal Police Office; official crime information and publications."
+          ]
+        },
+        {
+          "key": "at-dsn",
+          "name": "Direktion Staatsschutz und Nachrichtendienst",
+          "homepage": "https://www.dsn.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-dsn-official",
+              "name": "Direktion Staatsschutz und Nachrichtendienst",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.dsn.gv.at/"
+            }
+          ],
+          "notes": [
+            "Domestic security and intelligence authority; official reports and publications."
+          ]
+        },
+        {
+          "key": "at-bfa",
+          "name": "Bundesamt für Fremdenwesen und Asyl",
+          "homepage": "https://www.bfa.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-bfa-official",
+              "name": "Bundesamt für Fremdenwesen und Asyl",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bfa.gv.at/"
+            }
+          ],
+          "notes": [
+            "Federal asylum and immigration authority; official information and statistics."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "parliamentary_clubs",
+      "label": "parliamentary political actors",
+      "entries": [
+        {
+          "key": "at-fpoe-klub",
+          "name": "FPÖ-Parlamentsklub",
+          "homepage": "https://www.fpoe-parlamentsklub.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-fpoe-klub-official",
+              "name": "FPÖ-Parlamentsklub",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fpoe-parlamentsklub.at/"
+            }
+          ],
+          "notes": [
+            "Parliamentary club; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "at-oevp-klub",
+          "name": "ÖVP-Parlamentsklub",
+          "homepage": "https://oevpklub.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-oevp-klub-official",
+              "name": "ÖVP-Parlamentsklub",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://oevpklub.at/"
+            }
+          ],
+          "notes": [
+            "Parliamentary club; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "at-spoe-klub",
+          "name": "SPÖ-Parlamentsklub",
+          "homepage": "https://www.spoe.at/klub/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-spoe-klub-official",
+              "name": "SPÖ-Parlamentsklub",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.spoe.at/klub/"
+            }
+          ],
+          "notes": [
+            "Parliamentary club; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "at-neos-klub",
+          "name": "NEOS-Parlamentsklub",
+          "homepage": "https://parlament.neos.eu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-neos-klub-official",
+              "name": "NEOS-Parlamentsklub",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://parlament.neos.eu/"
+            }
+          ],
+          "notes": [
+            "Parliamentary club; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        },
+        {
+          "key": "at-gruener-klub",
+          "name": "Grüner Klub im Parlament",
+          "homepage": "https://gruene.at/organisation/parlament/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "at-gruener-klub-official",
+              "name": "Grüner Klub im Parlament",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://gruene.at/organisation/parlament/"
+            }
+          ],
+          "notes": [
+            "Parliamentary club; statements are primary material from the political actor, not editorial confirmation."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 31,
+  "review_status": {
+    "source_selection": "approved_31_source_at_primary_source_core_2026_09_25",
+    "segmentation": "functional_not_political",
+    "independent_confirmation": "excluded_by_adr_0021",
+    "political_actors": "current_nationalrat_parliamentary_clubs"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_federal_ministries",
+      "reason": "Topic-specific expansion remains eligible outside the compact core."
+    },
+    {
+      "category": "party_organizations",
+      "reason": "Party organizations remain institutionally distinct from parliamentary clubs and can be added in a dedicated expansion."
+    }
+  ]
+}
