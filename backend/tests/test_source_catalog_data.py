@@ -2562,3 +2562,144 @@ def test_de_primary_source_catalog_records_attribution_and_deferred_scope() -> N
         "additional_federal_ministries",
         "party_organizations",
     }
+
+
+REMAINING_PRIMARY_SOURCE_CATALOGS = {
+    "AT": {
+        "path": CATALOG_DIR / "at_primary_source_v1.json",
+        "count": 31,
+        "group_sizes": [3, 4, 4, 5, 3, 4, 3, 5],
+        "political_group": "parliamentary_clubs",
+        "political_names": {
+            "FPÖ-Parlamentsklub",
+            "ÖVP-Parlamentsklub",
+            "SPÖ-Parlamentsklub",
+            "NEOS-Parlamentsklub",
+            "Grüner Klub im Parlament",
+        },
+    },
+    "CH": {
+        "path": CATALOG_DIR / "ch_primary_source_v1.json",
+        "count": 30,
+        "group_sizes": [2, 4, 4, 4, 3, 4, 3, 6],
+        "political_group": "parliamentary_factions",
+        "political_names": {
+            "SVP-Fraktion",
+            "SP-Fraktion",
+            "Die Mitte-Fraktion. Die Mitte. EVP.",
+            "FDP-Liberale Fraktion",
+            "Grüne Fraktion",
+            "Grünliberale Fraktion",
+        },
+    },
+    "GB": {
+        "path": CATALOG_DIR / "gb_primary_source_v1.json",
+        "count": 30,
+        "group_sizes": [2, 4, 4, 5, 2, 4, 3, 6],
+        "political_group": "parliamentary_political_actors",
+        "political_names": {
+            "Labour Party",
+            "Conservative Party",
+            "Liberal Democrats",
+            "Reform UK",
+            "Scottish National Party",
+            "Green Party of England and Wales",
+        },
+    },
+    "US": {
+        "path": CATALOG_DIR / "us_primary_source_v1.json",
+        "count": 30,
+        "group_sizes": [2, 4, 4, 5, 2, 5, 4, 4],
+        "political_group": "congressional_political_actors",
+        "political_names": {
+            "House Democratic Caucus",
+            "House Republican Conference",
+            "Senate Democratic Caucus",
+            "Senate Republican Conference",
+        },
+    },
+}
+
+
+@pytest.mark.parametrize("country", ["AT", "CH", "GB", "US"])
+def test_remaining_primary_source_catalogs_have_approved_scope(country: str) -> None:
+    spec = REMAINING_PRIMARY_SOURCE_CATALOGS[country]
+    catalog = json.loads(spec["path"].read_text(encoding="utf-8"))
+    entries = [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+    assert catalog["country"] == country
+    assert catalog["media_category"] == "primary_source"
+    assert catalog["segmentation_policy"] == "functional_role_not_political_orientation"
+    assert (
+        catalog["consensus_policy"]
+        == "primary_sources_are_evidence_but_not_independent_editorial_confirmation"
+    )
+    assert catalog["approved_candidate_count"] == spec["count"]
+    assert len(entries) == spec["count"]
+    assert len({entry["key"] for entry in entries}) == spec["count"]
+    assert len({entry["name"].casefold() for entry in entries}) == spec["count"]
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == "PRIMARY_SOURCE" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["classifications"] == [] for entry in entries)
+
+
+@pytest.mark.parametrize("country", ["AT", "CH", "GB", "US"])
+def test_remaining_primary_source_group_sizes_and_political_actors(country: str) -> None:
+    spec = REMAINING_PRIMARY_SOURCE_CATALOGS[country]
+    catalog = json.loads(spec["path"].read_text(encoding="utf-8"))
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    assert [len(group["entries"]) for group in catalog["groups"]] == spec["group_sizes"]
+    assert {
+        entry["name"]
+        for entry in groups[spec["political_group"]]["entries"]
+    } == spec["political_names"]
+
+
+@pytest.mark.parametrize("country", ["AT", "CH", "GB", "US"])
+def test_remaining_primary_source_outlets_use_primary_source_medium(country: str) -> None:
+    spec = REMAINING_PRIMARY_SOURCE_CATALOGS[country]
+    catalog = json.loads(spec["path"].read_text(encoding="utf-8"))
+    entries = [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+    assert all(
+        outlet["media_category"] == "primary_source"
+        and outlet["publication_form"] == "other"
+        and outlet["scope"] == "national"
+        for entry in entries
+        for outlet in entry["outlets"]
+    )
+
+
+def test_ch_primary_source_catalog_is_explicitly_multilingual() -> None:
+    catalog = json.loads(
+        REMAINING_PRIMARY_SOURCE_CATALOGS["CH"]["path"].read_text(encoding="utf-8")
+    )
+    assert catalog["languages"] == ["de", "fr", "it", "rm"]
+    assert all(
+        entry["language"] == "multi"
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    )
+
+
+def test_gb_primary_source_catalog_uses_current_business_department_name() -> None:
+    catalog = json.loads(
+        REMAINING_PRIMARY_SOURCE_CATALOGS["GB"]["path"].read_text(encoding="utf-8")
+    )
+    names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+    assert "Department for Business, Innovation, Science and Trade" in names
+    assert "Department for Business and Trade" not in names

@@ -1,0 +1,951 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm"
+  ],
+  "media_category": "primary_source",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_or_political_actor_is_source_hosting_portal_is_not_source_identity",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "consensus_policy": "primary_sources_are_evidence_but_not_independent_editorial_confirmation",
+  "attribution_policy": "hosted_documents_should_be_attributed_to_the_substantive_author_when_identifiable",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "constitutional_legislative",
+      "label": "constitutional organs and legislature",
+      "entries": [
+        {
+          "key": "ch-nationalrat",
+          "name": "Nationalrat",
+          "homepage": "https://www.parlament.ch/de/organe/nationalrat",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-nationalrat-official",
+              "name": "Nationalrat",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/nationalrat"
+            }
+          ],
+          "notes": [
+            "Federal Assembly lower chamber; official proceedings and institutional publications."
+          ]
+        },
+        {
+          "key": "ch-staenderat",
+          "name": "Ständerat",
+          "homepage": "https://www.parlament.ch/de/organe/staenderat",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-staenderat-official",
+              "name": "Ständerat",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/staenderat"
+            }
+          ],
+          "notes": [
+            "Federal Assembly upper chamber; official proceedings and institutional publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_security",
+      "label": "federal government, foreign affairs and security",
+      "entries": [
+        {
+          "key": "ch-bundesrat",
+          "name": "Schweizerischer Bundesrat / Bundeskanzlei",
+          "homepage": "https://www.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-bundesrat-official",
+              "name": "Schweizerischer Bundesrat / Bundeskanzlei",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Federal Government and Federal Chancellery institutional publications."
+          ]
+        },
+        {
+          "key": "ch-eda",
+          "name": "Eidgenössisches Departement für auswärtige Angelegenheiten (EDA)",
+          "homepage": "https://www.eda.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-eda-official",
+              "name": "Eidgenössisches Departement für auswärtige Angelegenheiten (EDA)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.eda.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Foreign affairs department official statements and publications."
+          ]
+        },
+        {
+          "key": "ch-ejpd",
+          "name": "Eidgenössisches Justiz- und Polizeidepartement (EJPD)",
+          "homepage": "https://www.ejpd.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-ejpd-official",
+              "name": "Eidgenössisches Justiz- und Polizeidepartement (EJPD)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.ejpd.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Justice and police department official statements and publications."
+          ]
+        },
+        {
+          "key": "ch-vbs",
+          "name": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport (VBS)",
+          "homepage": "https://www.vbs.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-vbs-official",
+              "name": "Eidgenössisches Departement für Verteidigung, Bevölkerungsschutz und Sport (VBS)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.vbs.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Defence, civil protection and sport department official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_government_economy_social",
+      "label": "federal government, economy and social affairs",
+      "entries": [
+        {
+          "key": "ch-efd",
+          "name": "Eidgenössisches Finanzdepartement (EFD)",
+          "homepage": "https://www.efd.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-efd-official",
+              "name": "Eidgenössisches Finanzdepartement (EFD)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.efd.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Finance department official statements and publications."
+          ]
+        },
+        {
+          "key": "ch-wbf",
+          "name": "Eidgenössisches Departement für Wirtschaft, Bildung und Forschung (WBF)",
+          "homepage": "https://www.wbf.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-wbf-official",
+              "name": "Eidgenössisches Departement für Wirtschaft, Bildung und Forschung (WBF)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.wbf.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Economic affairs, education and research department official statements and publications."
+          ]
+        },
+        {
+          "key": "ch-edi",
+          "name": "Eidgenössisches Departement des Innern (EDI)",
+          "homepage": "https://www.edi.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-edi-official",
+              "name": "Eidgenössisches Departement des Innern (EDI)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.edi.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Home affairs/social portfolio department official statements and publications."
+          ]
+        },
+        {
+          "key": "ch-uvek",
+          "name": "Eidgenössisches Departement für Umwelt, Verkehr, Energie und Kommunikation (UVEK)",
+          "homepage": "https://www.uvek.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-uvek-official",
+              "name": "Eidgenössisches Departement für Umwelt, Verkehr, Energie und Kommunikation (UVEK)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.uvek.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Environment, transport, energy and communications department official statements and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "official_data_statistics",
+      "label": "official data and statistics",
+      "entries": [
+        {
+          "key": "ch-bfs",
+          "name": "Bundesamt für Statistik (BFS)",
+          "homepage": "https://www.bfs.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-bfs-official",
+              "name": "Bundesamt für Statistik (BFS)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.bfs.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Federal statistical office; official statistics and releases."
+          ]
+        },
+        {
+          "key": "ch-seco",
+          "name": "Staatssekretariat für Wirtschaft (SECO)",
+          "homepage": "https://www.seco.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-seco-official",
+              "name": "Staatssekretariat für Wirtschaft (SECO)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.seco.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Federal economic authority; official economic and labour-market data and publications."
+          ]
+        },
+        {
+          "key": "ch-snb",
+          "name": "Schweizerische Nationalbank (SNB)",
+          "homepage": "https://www.snb.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-snb-official",
+              "name": "Schweizerische Nationalbank (SNB)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.snb.ch/"
+            }
+          ],
+          "notes": [
+            "Central bank; official monetary, financial and economic data and publications."
+          ]
+        },
+        {
+          "key": "ch-bag",
+          "name": "Bundesamt für Gesundheit (BAG)",
+          "homepage": "https://www.bag.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-bag-official",
+              "name": "Bundesamt für Gesundheit (BAG)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.bag.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Federal public-health authority; official health data and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "federal_courts",
+      "label": "federal courts",
+      "entries": [
+        {
+          "key": "ch-bundesgericht",
+          "name": "Schweizerisches Bundesgericht",
+          "homepage": "https://www.bger.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-bundesgericht-official",
+              "name": "Schweizerisches Bundesgericht",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.bger.ch/"
+            }
+          ],
+          "notes": [
+            "Federal Supreme Court; official decisions and publications."
+          ]
+        },
+        {
+          "key": "ch-bundesstrafgericht",
+          "name": "Bundesstrafgericht",
+          "homepage": "https://www.bstger.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-bundesstrafgericht-official",
+              "name": "Bundesstrafgericht",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.bstger.ch/"
+            }
+          ],
+          "notes": [
+            "Federal Criminal Court; official decisions and publications."
+          ]
+        },
+        {
+          "key": "ch-bundesverwaltungsgericht",
+          "name": "Bundesverwaltungsgericht",
+          "homepage": "https://www.bvger.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-bundesverwaltungsgericht-official",
+              "name": "Bundesverwaltungsgericht",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.bvger.ch/"
+            }
+          ],
+          "notes": [
+            "Federal Administrative Court; official decisions and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economic_infrastructure_regulators",
+      "label": "economic and infrastructure regulators",
+      "entries": [
+        {
+          "key": "ch-finma",
+          "name": "FINMA",
+          "homepage": "https://www.finma.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-finma-official",
+              "name": "FINMA",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.finma.ch/"
+            }
+          ],
+          "notes": [
+            "Financial-market supervisor; official supervisory publications and decisions."
+          ]
+        },
+        {
+          "key": "ch-weko",
+          "name": "Wettbewerbskommission (WEKO)",
+          "homepage": "https://www.weko.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-weko-official",
+              "name": "Wettbewerbskommission (WEKO)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.weko.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Competition authority; official decisions and publications."
+          ]
+        },
+        {
+          "key": "ch-elcom",
+          "name": "Eidgenössische Elektrizitätskommission (ElCom)",
+          "homepage": "https://www.elcom.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-elcom-official",
+              "name": "Eidgenössische Elektrizitätskommission (ElCom)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.elcom.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Electricity regulator; official decisions and market information."
+          ]
+        },
+        {
+          "key": "ch-comcom",
+          "name": "Eidgenössische Kommunikationskommission (ComCom)",
+          "homepage": "https://www.comcom.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-comcom-official",
+              "name": "Eidgenössische Kommunikationskommission (ComCom)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.comcom.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Telecommunications regulator; official decisions and publications."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "security_migration",
+      "label": "security and migration authorities",
+      "entries": [
+        {
+          "key": "ch-fedpol",
+          "name": "Bundesamt für Polizei (fedpol)",
+          "homepage": "https://www.fedpol.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-fedpol-official",
+              "name": "Bundesamt für Polizei (fedpol)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.fedpol.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Federal police authority; official crime/security information and publications."
+          ]
+        },
+        {
+          "key": "ch-ndb",
+          "name": "Nachrichtendienst des Bundes (NDB)",
+          "homepage": "https://www.vbs.admin.ch/de/nachrichtendienst",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-ndb-official",
+              "name": "Nachrichtendienst des Bundes (NDB)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.vbs.admin.ch/de/nachrichtendienst"
+            }
+          ],
+          "notes": [
+            "Federal intelligence service; official security reports and publications."
+          ]
+        },
+        {
+          "key": "ch-sem",
+          "name": "Staatssekretariat für Migration (SEM)",
+          "homepage": "https://www.sem.admin.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-sem-official",
+              "name": "Staatssekretariat für Migration (SEM)",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.sem.admin.ch/"
+            }
+          ],
+          "notes": [
+            "Federal migration authority; official migration/asylum information and statistics."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "parliamentary_factions",
+      "label": "parliamentary political actors",
+      "entries": [
+        {
+          "key": "ch-svp-fraktion",
+          "name": "SVP-Fraktion",
+          "homepage": "https://www.parlament.ch/de/organe/fraktionen/svp-fraktion",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-svp-fraktion-official",
+              "name": "SVP-Fraktion",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/fraktionen/svp-fraktion"
+            }
+          ],
+          "notes": [
+            "Federal parliamentary group; statements and motions are primary political material."
+          ]
+        },
+        {
+          "key": "ch-sp-fraktion",
+          "name": "SP-Fraktion",
+          "homepage": "https://www.parlament.ch/de/organe/fraktionen/sp-fraktion",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-sp-fraktion-official",
+              "name": "SP-Fraktion",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/fraktionen/sp-fraktion"
+            }
+          ],
+          "notes": [
+            "Federal parliamentary group; statements and motions are primary political material."
+          ]
+        },
+        {
+          "key": "ch-mitte-fraktion",
+          "name": "Die Mitte-Fraktion. Die Mitte. EVP.",
+          "homepage": "https://www.parlament.ch/de/organe/fraktionen/die-mitte-fraktion",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-mitte-fraktion-official",
+              "name": "Die Mitte-Fraktion. Die Mitte. EVP.",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/fraktionen/die-mitte-fraktion"
+            }
+          ],
+          "notes": [
+            "Federal parliamentary group; statements and motions are primary political material."
+          ]
+        },
+        {
+          "key": "ch-fdp-fraktion",
+          "name": "FDP-Liberale Fraktion",
+          "homepage": "https://www.parlament.ch/de/organe/fraktionen/fdp-liberale-fraktion",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-fdp-fraktion-official",
+              "name": "FDP-Liberale Fraktion",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/fraktionen/fdp-liberale-fraktion"
+            }
+          ],
+          "notes": [
+            "Federal parliamentary group; statements and motions are primary political material."
+          ]
+        },
+        {
+          "key": "ch-gruene-fraktion",
+          "name": "Grüne Fraktion",
+          "homepage": "https://www.parlament.ch/de/organe/fraktionen/gruene-fraktion",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-gruene-fraktion-official",
+              "name": "Grüne Fraktion",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/fraktionen/gruene-fraktion"
+            }
+          ],
+          "notes": [
+            "Federal parliamentary group; statements and motions are primary political material."
+          ]
+        },
+        {
+          "key": "ch-glp-fraktion",
+          "name": "Grünliberale Fraktion",
+          "homepage": "https://www.parlament.ch/de/organe/fraktionen/gruenliberale-fraktion",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "PRIMARY_SOURCE",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_primary_source_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ch-glp-fraktion-official",
+              "name": "Grünliberale Fraktion",
+              "media_category": "primary_source",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.parlament.ch/de/organe/fraktionen/gruenliberale-fraktion"
+            }
+          ],
+          "notes": [
+            "Federal parliamentary group; statements and motions are primary political material."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 30,
+  "review_status": {
+    "source_selection": "approved_30_source_ch_primary_source_core_2026_09_25",
+    "segmentation": "functional_not_political",
+    "independent_confirmation": "excluded_by_adr_0021",
+    "political_actors": "current_federal_parliamentary_groups",
+    "multilingual_scope": "de_fr_it_rm"
+  },
+  "deferred_expansion": [
+    {
+      "category": "federal_offices",
+      "reason": "Additional federal offices remain eligible for topic-specific expansion."
+    }
+  ]
+}
