@@ -2477,3 +2477,88 @@ def test_us_digital_unclassified_specialists_match_selected_set() -> None:
     assert {entry["name"] for entry in catalog["unclassified_entries"]} == {
         "ProPublica", "The Hill", "NOTUS", "The 19th", "Newsmax",
     }
+
+
+DE_PRIMARY_SOURCE_CATALOG = CATALOG_DIR / "de_primary_source_v1.json"
+
+
+def load_de_primary_source_catalog() -> dict:
+    return json.loads(DE_PRIMARY_SOURCE_CATALOG.read_text(encoding="utf-8"))
+
+
+def de_primary_source_entries(catalog: dict) -> list[dict]:
+    return [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+
+def test_de_primary_source_catalog_has_approved_scope_and_count() -> None:
+    catalog = load_de_primary_source_catalog()
+    assert catalog["country"] == "DE"
+    assert catalog["media_category"] == "primary_source"
+    assert catalog["segmentation_policy"] == "functional_role_not_political_orientation"
+    assert (
+        catalog["consensus_policy"]
+        == "primary_sources_are_evidence_but_not_independent_editorial_confirmation"
+    )
+    assert catalog["approved_candidate_count"] == 30
+
+    entries = de_primary_source_entries(catalog)
+    assert len(entries) == 30
+    assert len({entry["key"] for entry in entries}) == 30
+    assert len({entry["name"].casefold() for entry in entries}) == 30
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == "PRIMARY_SOURCE" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["classifications"] == [] for entry in entries)
+
+
+def test_de_primary_source_functional_groups_match_approved_core() -> None:
+    catalog = load_de_primary_source_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    assert [len(groups[key]["entries"]) for key in (
+        "constitutional_legislative",
+        "federal_government_security",
+        "federal_government_economy_social",
+        "official_data_statistics",
+        "federal_courts",
+        "economic_infrastructure_regulators",
+        "security_migration",
+        "parliamentary_factions",
+    )] == [3, 4, 4, 5, 3, 3, 3, 5]
+    assert {entry["name"] for entry in groups["parliamentary_factions"]["entries"]} == {
+        "CDU/CSU-Fraktion im Deutschen Bundestag",
+        "AfD-Fraktion im Deutschen Bundestag",
+        "SPD-Bundestagsfraktion",
+        "Bündnis 90/Die Grünen Bundestagsfraktion",
+        "Fraktion Die Linke im Bundestag",
+    }
+
+
+def test_de_primary_source_outlets_use_primary_source_medium() -> None:
+    catalog = load_de_primary_source_catalog()
+    entries = de_primary_source_entries(catalog)
+    assert all(
+        outlet["media_category"] == "primary_source"
+        and outlet["publication_form"] == "other"
+        and outlet["scope"] == "national"
+        for entry in entries
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_primary_source_catalog_records_attribution_and_deferred_scope() -> None:
+    catalog = load_de_primary_source_catalog()
+    assert (
+        catalog["attribution_policy"]
+        == "hosted_documents_should_be_attributed_to_the_substantive_author_when_identifiable"
+    )
+    assert {
+        item["category"]
+        for item in catalog["deferred_expansion"]
+    } == {
+        "additional_federal_ministries",
+        "party_organizations",
+    }

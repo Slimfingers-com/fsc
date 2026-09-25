@@ -212,6 +212,35 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Germany (DE) — Primary Sources
+
+Primary Sources are grouped by **institutional function**, not political orientation. They use `SourceType.PRIMARY_SOURCE`, `media_category=primary_source` and `publication_form=other`. Under ADR 0021 they remain full content/evidence Sources but do not contribute to independent editorial-confirmation counts.
+
+The jointly approved DE primary-source core contains 30 Source identities:
+
+| Functional group | Primary Sources |
+| --- | --- |
+| Constitutional organs / legislature | Deutscher Bundestag, Bundesrat, Bundespräsident |
+| Federal government / foreign affairs / security | Bundesregierung / Bundespresseamt, Auswärtiges Amt, Bundesministerium des Innern, Bundesministerium der Verteidigung |
+| Federal government / economy / social affairs | Bundesministerium der Finanzen, Bundesministerium für Wirtschaft und Energie, Bundesministerium für Arbeit und Soziales, Bundesministerium für Gesundheit |
+| Official data / statistics | Statistisches Bundesamt (Destatis), Bundesagentur für Arbeit, Deutsche Bundesbank, Bundeswahlleiterin, Robert Koch-Institut |
+| Federal courts | Bundesverfassungsgericht, Bundesgerichtshof, Bundesverwaltungsgericht |
+| Economic / infrastructure regulators | Bundesnetzagentur, Bundeskartellamt, BaFin |
+| Security / migration authorities | Bundeskriminalamt, Bundesamt für Verfassungsschutz, Bundesamt für Migration und Flüchtlinge |
+| Parliamentary political actors | CDU/CSU-Fraktion, AfD-Fraktion, SPD-Bundestagsfraktion, Bündnis 90/Die Grünen Bundestagsfraktion, Fraktion Die Linke |
+
+Specific identity and attribution rules:
+
+- **Institution, not website/portal, is the Source.** DIP, press archives, statistics portals and document repositories are distribution Outlets, not separate Source identities.
+- A document hosted by Bundestag/DIP is attributed to its **substantive author** when identifiable. A faction motion therefore belongs to that faction Source, not automatically to Deutscher Bundestag.
+- **Bundesregierung / Bundespresseamt and individual federal ministries remain separate Sources.** Republishing a ministry statement on bundesregierung.de does not create a second independent confirmation; article provenance can represent the republication chain.
+- Parliamentary factions are primary political actors and receive no FSC political-orientation classification from their institutional role.
+- The initial core uses Bundestag factions rather than duplicating both party organizations and factions. Party organizations remain eligible for a later dedicated expansion.
+- Additional federal ministries remain eligible for topic-specific expansion; the initial core focuses on the most frequently relevant national policy domains.
+- Inclusion as a Primary Source never allows an institution to corroborate its own assertion for Consensus/Coverage independence.
+
+No feed is activated by inclusion in this catalog.
+
 ## Austria (AT)
 
 ### Print
