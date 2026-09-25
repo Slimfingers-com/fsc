@@ -1,0 +1,1021 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "digital",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "digital_is_medium_existing_cross_media_sources_are_extended_not_duplicated",
+  "publication_form_policy": "born_digital_sources_use_digital_native_existing_source_web_outlets_use_other",
+  "coverage_targets": {
+    "planning_segment_min": 3,
+    "planning_segment_max": 5
+  },
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "A-F groups are research planning pools only. Catalog placement alone never creates a persisted political or radicality classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [
+        {
+          "key": "klasse-gegen-klasse",
+          "name": "Klasse Gegen Klasse",
+          "homepage": "https://www.klassegegenklasse.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "klasse-gegen-klasse-web",
+              "name": "Klasse Gegen Klasse",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.klassegegenklasse.org/"
+            }
+          ],
+          "notes": [
+            "A planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "perspektive-online",
+          "name": "Perspektive Online",
+          "homepage": "https://perspektive-online.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "perspektive-online-web",
+              "name": "Perspektive Online",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://perspektive-online.net/"
+            }
+          ],
+          "notes": [
+            "A planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "lower-class-magazine",
+          "name": "Lower Class Magazine",
+          "homepage": "https://lowerclassmag.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lower-class-magazine-web",
+              "name": "Lower Class Magazine",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://lowerclassmag.com/"
+            }
+          ],
+          "notes": [
+            "A planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "nachdenkseiten",
+          "name": "NachDenkSeiten",
+          "homepage": "https://www.nachdenkseiten.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nachdenkseiten-web",
+              "name": "NachDenkSeiten",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.nachdenkseiten.de/"
+            }
+          ],
+          "notes": [
+            "A/B research boundary; kept in A planning pool by joint decision, without persisted FSC political classification."
+          ]
+        },
+        {
+          "key": "junge-welt-digital",
+          "name": "junge Welt",
+          "homepage": "https://www.jungewelt.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "junge-welt-digital-web",
+              "name": "junge Welt",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.jungewelt.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "junge-welt"
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "correctiv",
+          "name": "CORRECTIV",
+          "homepage": "https://correctiv.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "correctiv-web",
+              "name": "CORRECTIV",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://correctiv.org/"
+            }
+          ],
+          "notes": [
+            "B planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "watson-de",
+          "name": "watson.de",
+          "homepage": "https://www.watson.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "watson-de-web",
+              "name": "watson.de",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.watson.de/"
+            }
+          ],
+          "notes": [
+            "B planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "taz-digital",
+          "name": "taz",
+          "homepage": "https://taz.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "taz-digital-web",
+              "name": "taz",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://taz.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "taz"
+        },
+        {
+          "key": "der-spiegel-digital",
+          "name": "DER SPIEGEL",
+          "homepage": "https://www.spiegel.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "der-spiegel-digital-web",
+              "name": "DER SPIEGEL",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.spiegel.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "der-spiegel"
+        },
+        {
+          "key": "die-zeit-digital",
+          "name": "DIE ZEIT",
+          "homepage": "https://www.zeit.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "die-zeit-digital-web",
+              "name": "DIE ZEIT",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.zeit.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "die-zeit"
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/reference",
+      "entries": [
+        {
+          "key": "t-online",
+          "name": "t-online",
+          "homepage": "https://www.t-online.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "t-online-web",
+              "name": "t-online",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.t-online.de/"
+            }
+          ],
+          "notes": [
+            "C planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "krautreporter",
+          "name": "Krautreporter",
+          "homepage": "https://krautreporter.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "krautreporter-web",
+              "name": "Krautreporter",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://krautreporter.de/"
+            }
+          ],
+          "notes": [
+            "C planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "the-pioneer",
+          "name": "The Pioneer",
+          "homepage": "https://www.thepioneer.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-pioneer-web",
+              "name": "The Pioneer",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.thepioneer.de/"
+            }
+          ],
+          "notes": [
+            "C planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "ard-aktuell-digital",
+          "name": "ARD-aktuell",
+          "homepage": "https://www.tagesschau.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ard-aktuell-digital-web",
+              "name": "ARD-aktuell",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.tagesschau.de/"
+            }
+          ],
+          "notes": [
+            "tagesschau.de extends the existing ARD-aktuell Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "ard-aktuell"
+        },
+        {
+          "key": "zdf-digital",
+          "name": "ZDF",
+          "homepage": "https://www.zdf.de/nachrichten/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zdf-digital-web",
+              "name": "ZDF",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.zdf.de/nachrichten/"
+            }
+          ],
+          "notes": [
+            "ZDFheute extends the existing ZDF Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "zdf"
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "key": "faz-digital",
+          "name": "Frankfurter Allgemeine Zeitung",
+          "homepage": "https://www.faz.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "faz-digital-web",
+              "name": "Frankfurter Allgemeine Zeitung",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.faz.net/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "faz"
+        },
+        {
+          "key": "welt-digital",
+          "name": "WELT",
+          "homepage": "https://www.welt.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "welt-digital-web",
+              "name": "WELT",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.welt.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing WELT Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "welt"
+        },
+        {
+          "key": "bild-digital",
+          "name": "BILD",
+          "homepage": "https://www.bild.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bild-digital-web",
+              "name": "BILD",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.bild.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "bild"
+        },
+        {
+          "key": "focus-digital",
+          "name": "FOCUS",
+          "homepage": "https://www.focus.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "focus-digital-web",
+              "name": "FOCUS",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.focus.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "focus"
+        },
+        {
+          "key": "cicero-digital",
+          "name": "Cicero",
+          "homepage": "https://www.cicero.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cicero-digital-web",
+              "name": "Cicero",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.cicero.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "cicero"
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "achgut",
+          "name": "Achgut",
+          "homepage": "https://www.achgut.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "achgut-web",
+              "name": "Achgut",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.achgut.com/"
+            }
+          ],
+          "notes": [
+            "E planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "apollo-news",
+          "name": "Apollo News",
+          "homepage": "https://apollo-news.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "apollo-news-web",
+              "name": "Apollo News",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://apollo-news.net/"
+            }
+          ],
+          "notes": [
+            "E planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "reitschuster",
+          "name": "reitschuster.de",
+          "homepage": "https://reitschuster.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "reitschuster-web",
+              "name": "reitschuster.de",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://reitschuster.de/"
+            }
+          ],
+          "notes": [
+            "E planning placement; no persisted FSC political classification in this catalog."
+          ]
+        },
+        {
+          "key": "nius-digital",
+          "name": "NIUS",
+          "homepage": "https://www.nius.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nius-digital-web",
+              "name": "NIUS",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.nius.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing cross-media NIUS Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "nius"
+        },
+        {
+          "key": "tichys-einblick-digital",
+          "name": "Tichys Einblick",
+          "homepage": "https://www.tichyseinblick.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tichys-einblick-digital-web",
+              "name": "Tichys Einblick",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.tichyseinblick.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "tichys-einblick"
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right / externally classified extreme-right spectrum",
+      "entries": [
+        {
+          "key": "pi-news",
+          "name": "PI-News",
+          "homepage": "https://www.pi-news.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "pi-news-web",
+              "name": "PI-News",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.pi-news.net/"
+            }
+          ],
+          "notes": [
+            "F planning placement; no persisted FSC radicality classification is created by catalog placement alone."
+          ]
+        },
+        {
+          "key": "compact-digital",
+          "name": "COMPACT",
+          "homepage": "https://www.compact-online.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "compact-digital-web",
+              "name": "COMPACT",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.compact-online.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "compact"
+        },
+        {
+          "key": "sezession-digital",
+          "name": "Sezession",
+          "homepage": "https://sezession.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sezession-digital-web",
+              "name": "Sezession",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://sezession.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "sezession"
+        },
+        {
+          "key": "zuerst-digital",
+          "name": "ZUERST!",
+          "homepage": "https://zuerst.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zuerst-digital-web",
+              "name": "ZUERST!",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://zuerst.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "zuerst"
+        }
+      ]
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "netzpolitik-org",
+      "name": "netzpolitik.org",
+      "homepage": "https://netzpolitik.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "netzpolitik-org-web",
+          "name": "netzpolitik.org",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://netzpolitik.org/"
+        }
+      ],
+      "notes": [
+        "Specialist digital-rights journalism; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "uebermedien",
+      "name": "Übermedien",
+      "homepage": "https://uebermedien.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "uebermedien-web",
+          "name": "Übermedien",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://uebermedien.de/"
+        }
+      ],
+      "notes": [
+        "Specialist media-journalism outlet; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "table-briefings",
+      "name": "Table.Briefings",
+      "homepage": "https://table.media/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "table-briefings-web",
+          "name": "Table.Briefings",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://table.media/"
+        }
+      ],
+      "notes": [
+        "Professional policy/news briefing newsroom; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "volksverpetzer",
+      "name": "Volksverpetzer",
+      "homepage": "https://volksverpetzer.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "volksverpetzer-web",
+          "name": "Volksverpetzer",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://volksverpetzer.de/"
+        }
+      ],
+      "notes": [
+        "Fact-checking, analysis and commentary source; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "belltower-news",
+      "name": "Belltower.News",
+      "homepage": "https://www.belltower.news/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "belltower-news-web",
+          "name": "Belltower.News",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.belltower.news/"
+        }
+      ],
+      "notes": [
+        "Specialist journalism on right-wing extremism, antisemitism and racism; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "multipolar",
+      "name": "Multipolar",
+      "homepage": "https://www.multipolar-magazin.de/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "multipolar-web",
+          "name": "Multipolar",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.multipolar-magazin.de/"
+        }
+      ],
+      "notes": [
+        "Alternative online magazine; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "apolut",
+      "name": "apolut",
+      "homepage": "https://apolut.net/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "apolut-web",
+          "name": "apolut",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://apolut.net/"
+        }
+      ],
+      "notes": [
+        "Digital politics/video/podcast source; politically unclassified in FSC."
+      ]
+    }
+  ],
+  "approved_candidate_count": 36,
+  "approved_core_count": 29,
+  "new_source_count": 20,
+  "existing_source_extension_count": 16,
+  "review_status": {
+    "source_selection": "approved_36_candidate_de_digital_core_2026_09_25",
+    "digital_scope": "decision_a_digital_is_medium",
+    "source_identity": "reuse_existing_cross_media_source",
+    "nachdenkseiten_boundary": "approved_a_b_boundary_in_a_planning_pool",
+    "multipolar_apolut": "approved_unclassified"
+  }
+}

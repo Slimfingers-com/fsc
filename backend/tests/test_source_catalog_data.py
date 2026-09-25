@@ -1951,3 +1951,129 @@ def test_regiocast_moves_from_de_broadcast_deferred_to_supplier_catalog() -> Non
     agency = load_agency_content_supplier_catalog()
     names = {entry["name"] for group in agency["groups"] for entry in group["entries"]}
     assert "REGIOCAST Nachrichten" in names
+
+
+DE_DIGITAL_CATALOG = CATALOG_DIR / "de_digital_v1.json"
+
+
+def load_de_digital_catalog() -> dict:
+    return json.loads(DE_DIGITAL_CATALOG.read_text(encoding="utf-8"))
+
+
+def de_digital_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog["unclassified_entries"],
+    ]
+
+
+def test_de_digital_catalog_has_approved_scope_and_counts() -> None:
+    catalog = load_de_digital_catalog()
+    assert catalog["country"] == "DE"
+    assert catalog["media_category"] == "digital"
+    assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert catalog["source_identity_policy"] == "digital_is_medium_existing_cross_media_sources_are_extended_not_duplicated"
+    assert catalog["publication_form_policy"] == "born_digital_sources_use_digital_native_existing_source_web_outlets_use_other"
+    assert catalog["approved_candidate_count"] == 36
+    assert catalog["approved_core_count"] == 29
+    assert catalog["new_source_count"] == 20
+    assert catalog["existing_source_extension_count"] == 16
+
+    entries = de_digital_entries(catalog)
+    assert len(entries) == 36
+    assert len({entry["key"] for entry in entries}) == 36
+    assert len({entry["name"].casefold() for entry in entries}) == 36
+    assert all(entry["activity_status"] == "active" for entry in entries)
+    assert all(entry["catalog_status"] == "candidate" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_de_digital_planning_segments_match_approved_core() -> None:
+    catalog = load_de_digital_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    assert [len(groups[key]["entries"]) for key in (
+        "radical_left", "left_liberal", "liberal_centre",
+        "conservative", "right", "radical_right",
+    )] == [5, 5, 5, 5, 5, 4]
+    assert {
+        entry["name"] for entry in groups["radical_left"]["entries"]
+    } == {
+        "Klasse Gegen Klasse", "Perspektive Online", "Lower Class Magazine",
+        "NachDenkSeiten", "junge Welt",
+    }
+    assert {
+        entry["name"] for entry in groups["right"]["entries"]
+    } == {
+        "Achgut", "Apollo News", "reitschuster.de", "NIUS", "Tichys Einblick",
+    }
+
+
+def test_de_digital_reuses_existing_cross_media_sources() -> None:
+    catalog = load_de_digital_catalog()
+    entries = de_digital_entries(catalog)
+    extensions = [entry for entry in entries if entry["source_action"] == "extend_existing_source"]
+    assert len(extensions) == 16
+    assert {entry["existing_source_key"] for entry in extensions} == {
+        "junge-welt", "taz", "der-spiegel", "die-zeit", "ard-aktuell", "zdf",
+        "faz", "welt", "bild", "focus", "cicero", "nius", "tichys-einblick",
+        "compact", "sezession", "zuerst",
+    }
+    assert all(
+        outlet["media_category"] == "digital"
+        and outlet["publication_form"] == "other"
+        for entry in extensions
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_digital_new_sources_are_digital_native() -> None:
+    catalog = load_de_digital_catalog()
+    entries = de_digital_entries(catalog)
+    new_sources = [entry for entry in entries if entry["source_action"] == "create_source"]
+    assert len(new_sources) == 20
+    assert all(
+        outlet["media_category"] == "digital"
+        and outlet["publication_form"] == "digital_native"
+        for entry in new_sources
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_digital_unclassified_candidates_stay_outside_a_f() -> None:
+    catalog = load_de_digital_catalog()
+    assert {entry["name"] for entry in catalog["unclassified_entries"]} == {
+        "netzpolitik.org", "Übermedien", "Table.Briefings", "Volksverpetzer",
+        "Belltower.News", "Multipolar", "apolut",
+    }
+    assert all(
+        entry["classification_status"] == "unclassified_research_candidate"
+        and entry["classifications"] == []
+        for entry in catalog["unclassified_entries"]
+    )
+
+
+def test_de_digital_planning_placement_does_not_persist_classification() -> None:
+    catalog = load_de_digital_catalog()
+    core = [entry for group in catalog["groups"] for entry in group["entries"]]
+    assert all(entry["classifications"] == [] for entry in core)
+    nachdenkseiten = next(entry for entry in core if entry["key"] == "nachdenkseiten")
+    assert any("A/B research boundary" in note for note in nachdenkseiten["notes"])
+    assert catalog["review_status"]["multipolar_apolut"] == "approved_unclassified"
+
+
+def test_de_digital_extension_keys_exist_in_existing_de_catalogs() -> None:
+    digital = load_de_digital_catalog()
+    extensions = {
+        entry["existing_source_key"]
+        for entry in de_digital_entries(digital)
+        if entry["source_action"] == "extend_existing_source"
+    }
+    existing_keys: set[str] = set()
+    for filename in ("de_print_v1.json", "de_broadcast_v1.json"):
+        catalog = json.loads((CATALOG_DIR / filename).read_text(encoding="utf-8"))
+        existing_keys.update(
+            entry["key"]
+            for group in catalog["groups"]
+            for entry in group["entries"]
+        )
+    assert extensions <= existing_keys
