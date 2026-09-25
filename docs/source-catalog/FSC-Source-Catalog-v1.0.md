@@ -7,8 +7,8 @@ Status: working catalog for joint review. Catalog inclusion does **not** activat
 FSC keeps these dimensions separate:
 
 1. **Country of origin** — country blocks are never merged. Germany, Austria and Switzerland are separate.
-2. **Media category** — print, broadcast, digital-native, agency, primary source, organization, other.
-3. **Publication form** — e.g. daily newspaper, weekly newspaper, magazine, periodical.
+2. **Media category** — print, broadcast, digital, agency, primary source, organization, other.
+3. **Publication form** — e.g. daily newspaper, weekly newspaper, magazine, periodical, radio, television, digital-native.
 4. **Editorial orientation** — descriptive, provenance-backed metadata; never an FSC score.
 5. **Radicality / external extremist classification** — separate from left/right orientation and always stored with classifier, source URL and reference date.
 6. **Reach / circulation** — descriptive metadata with metric type, measurement body and reference period; never an inclusion criterion.
@@ -177,6 +177,38 @@ Specific identity rules:
 - ANTENNE BAYERN, radio ffn and radio SAW are independent statewide private radio Sources.
 - Private regional Sources remain politically unclassified until two independent external sources support a Source-level political direction.
 - Local television such as münchen.tv, Hamburg 1, TV.Berlin, Franken Fernsehen, Regio TV and Niederbayern TV, plus local/city radio, remain outside this compact regional block.
+
+No feed is activated by inclusion in this catalog.
+
+## Germany (DE) — Digital
+
+Digital is modeled as a **medium**, not as a synonym for born-digital. Born-digital Sources use the `digital_native` publication form. Websites of Sources already cataloged in print or broadcast extend the existing Source and use a generic digital outlet form instead of creating duplicate Source identities.
+
+The jointly approved DE digital candidate set contains 36 digital candidates: 29 in the A–F research-planning core and seven politically unclassified/specialist candidates. Of those 36 candidates, 20 create new Source identities and 16 extend Sources that already exist elsewhere in the FSC catalog.
+
+| Planning segment | Digital Sources |
+| --- | --- |
+| A radical/system-oppositional left | Klasse Gegen Klasse, Perspektive Online, Lower Class Magazine, NachDenkSeiten, junge Welt |
+| B left/centre-left/left-liberal | CORRECTIV, watson.de, taz, DER SPIEGEL, DIE ZEIT |
+| C liberal/centre/reference | t-online, Krautreporter, The Pioneer, ARD-aktuell / tagesschau.de, ZDF / ZDFheute |
+| D conservative/liberal-conservative | Frankfurter Allgemeine Zeitung, WELT, BILD, FOCUS, Cicero |
+| E right/right-conservative/right-libertarian | Achgut, Apollo News, reitschuster.de, NIUS, Tichys Einblick |
+| F radical right / externally classified extreme-right spectrum | PI-News, COMPACT, Sezession, ZUERST! |
+
+The A–F table is a research-planning matrix, not a persisted FSC political classification. Persisted Source-level political or radicality assignments still require two independent external sources that materially agree.
+
+Politically unclassified/specialist digital candidates: netzpolitik.org, Übermedien, Table.Briefings, Volksverpetzer, Belltower.News, Multipolar and apolut.
+
+Specific identity rules:
+
+- **junge Welt, taz, DER SPIEGEL, DIE ZEIT, Frankfurter Allgemeine Zeitung, WELT, BILD, FOCUS, Cicero, Tichys Einblick, COMPACT, Sezession and ZUERST!** extend their existing print Sources.
+- **ARD-aktuell / tagesschau.de** and **ZDF / ZDFheute** extend the existing national broadcast Sources.
+- **NIUS** extends the existing cross-media Source already used for NIUS – Das Radio.
+- **NachDenkSeiten** remains an explicit A/B research-boundary case and is kept in the A planning pool by joint decision; catalog placement does not create a radicality classification.
+- **Multipolar** and **apolut** are deliberately retained as politically unclassified candidates rather than force-mapped into A–F.
+- Born-digital Sources use `publication_form=digital_native`; web outlets extending an existing print/broadcast Source use `publication_form=other` under `media_category=digital`.
+- Foreign-origin digital media are not relabeled as German Sources solely because they publish in German or target German audiences.
+- Aggregators and distribution platforms are not editorial Sources.
 
 No feed is activated by inclusion in this catalog.
 
