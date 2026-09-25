@@ -666,6 +666,35 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Great Britain (GB) — Digital
+
+Digital is modeled as a **medium**. Existing national broadcast Sources are extended rather than duplicated. Born-digital Sources use `digital_native`; print-origin and digital-continuation Sources use `other`.
+
+The GB digital candidate set contains 28 candidates: 23 in the A–F planning core and five unclassified/specialist candidates. Of those, 23 create new Source identities and five extend existing broadcast Sources.
+
+| Planning segment | Digital Sources |
+| --- | --- |
+| A radical/system-oppositional left | Novara Media, The Canary, Morning Star, Socialist Worker |
+| B left/centre-left/left-liberal | The Guardian, The Independent, openDemocracy, Byline Times, New Statesman |
+| C liberal/centre/reference | BBC News, ITV News, Channel 4 News, Sky News, Financial Times, The Economist |
+| D conservative/liberal-conservative | The Times, The Telegraph, The Spectator |
+| E right/right-conservative/right-libertarian | GB News, UnHerd, The Critic, Spiked, Daily Mail |
+| F radical right / externally classified extreme-right spectrum | explicit market gap |
+
+The A–F table is a research-planning matrix, not a persisted FSC political classification. The F gap is deliberately left visible rather than filled with marginal activist or conspiracy sites that do not meet the core editorial-source threshold.
+
+Unclassified/specialist candidates: Full Fact, PoliticsHome, The Conversation UK, Private Eye and Prospect.
+
+Specific identity rules:
+
+- BBC News, ITV News, Channel 4 News, Sky News and GB News extend their existing broadcast Sources.
+- The Independent is a digital continuation of a former print newspaper and is not modeled as born-digital.
+- Morning Star, Socialist Worker, The Guardian, Financial Times, The Economist, The Times, The Telegraph, The Spectator, The Critic, Daily Mail, Byline Times, New Statesman, Private Eye and Prospect are print/cross-format-origin Sources and use `publication_form=other`.
+- Novara Media, The Canary, openDemocracy, UnHerd, Spiked, Full Fact, PoliticsHome and The Conversation UK use `digital_native`.
+- The Canary is active at the catalog review date; reported financial-continuity risk does not itself change Source identity.
+
+No feed is activated by inclusion in this catalog.
+
 ## United States (US) — Regional broadcast
 
 This block is deliberately representative rather than exhaustive. The US local-affiliate system contains hundreds of independently operated newsrooms, so FSC uses a compact state-/major-metro core and leaves the affiliate universe for a later local layer.

@@ -1,0 +1,800 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "language": "en",
+  "media_category": "digital",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "digital_is_medium_existing_cross_media_sources_are_extended_not_duplicated",
+  "publication_form_policy": "born_digital_sources_use_digital_native_print_origin_and_digital_continuations_use_other",
+  "coverage_targets": {
+    "planning_segment_min": 3,
+    "planning_segment_max": 5
+  },
+  "coverage_policy": "targets_are_goals_not_quotas_real_market_gaps_remain_visible",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "A-F groups are research planning pools only. Catalog placement alone never creates a persisted political or radicality classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [
+        {
+          "key": "novara-media",
+          "name": "Novara Media",
+          "homepage": "https://novaramedia.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "novara-media-web",
+              "name": "Novara Media",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://novaramedia.com/"
+            }
+          ],
+          "notes": [
+            "A research-planning placement; independent politically committed digital newsroom."
+          ]
+        },
+        {
+          "key": "the-canary",
+          "name": "The Canary",
+          "homepage": "https://www.thecanary.co/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-canary-web",
+              "name": "The Canary",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.thecanary.co/"
+            }
+          ],
+          "notes": [
+            "A research-planning placement; active at the 2026-09-25 review date, with reported financial-continuity risk noted separately from source eligibility."
+          ]
+        },
+        {
+          "key": "morning-star",
+          "name": "Morning Star",
+          "homepage": "https://morningstaronline.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "morning-star-web",
+              "name": "Morning Star",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://morningstaronline.co.uk/"
+            }
+          ],
+          "notes": [
+            "A research-planning placement; digital outlet of a print-origin newsroom not otherwise present in FSC."
+          ]
+        },
+        {
+          "key": "socialist-worker-uk",
+          "name": "Socialist Worker",
+          "homepage": "https://socialistworker.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "socialist-worker-uk-web",
+              "name": "Socialist Worker",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://socialistworker.co.uk/"
+            }
+          ],
+          "notes": [
+            "A research-planning placement; digital outlet of a print-origin socialist newsroom not otherwise present in FSC."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "the-guardian-uk",
+          "name": "The Guardian",
+          "homepage": "https://www.theguardian.com/uk",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-guardian-uk-web",
+              "name": "The Guardian",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.theguardian.com/uk"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; print-origin UK newsroom."
+          ]
+        },
+        {
+          "key": "the-independent-uk",
+          "name": "The Independent",
+          "homepage": "https://www.independent.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-independent-uk-web",
+              "name": "The Independent",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.independent.co.uk/"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; digital continuation of a former print newspaper, not born-digital."
+          ]
+        },
+        {
+          "key": "opendemocracy",
+          "name": "openDemocracy",
+          "homepage": "https://www.opendemocracy.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "opendemocracy-web",
+              "name": "openDemocracy",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.opendemocracy.net/"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; independent digital investigative/movement-focused newsroom."
+          ]
+        },
+        {
+          "key": "byline-times",
+          "name": "Byline Times",
+          "homepage": "https://bylinetimes.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "byline-times-web",
+              "name": "Byline Times",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://bylinetimes.com/"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; cross-format independent newsroom with print and digital publishing."
+          ]
+        },
+        {
+          "key": "new-statesman",
+          "name": "New Statesman",
+          "homepage": "https://www.newstatesman.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "new-statesman-web",
+              "name": "New Statesman",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.newstatesman.com/"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; print-origin magazine/newsroom."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/reference",
+      "entries": [
+        {
+          "key": "bbc-news-digital",
+          "name": "BBC News",
+          "homepage": "https://www.bbc.com/news",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "bbc-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bbc-news-digital-web",
+              "name": "BBC News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.bbc.com/news"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "itv-news-digital",
+          "name": "ITV News",
+          "homepage": "https://www.itv.com/news",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "itv-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "itv-news-digital-web",
+              "name": "ITV News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.itv.com/news"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "channel-4-news-digital",
+          "name": "Channel 4 News",
+          "homepage": "https://www.channel4.com/news",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "channel-4-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "channel-4-news-digital-web",
+              "name": "Channel 4 News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.channel4.com/news"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "sky-news-digital",
+          "name": "Sky News",
+          "homepage": "https://news.sky.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "sky-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sky-news-digital-web",
+              "name": "Sky News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://news.sky.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "financial-times",
+          "name": "Financial Times",
+          "homepage": "https://www.ft.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "financial-times-web",
+              "name": "Financial Times",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.ft.com/"
+            }
+          ],
+          "notes": [
+            "C research/reference placement; print-origin business and general-news newsroom."
+          ]
+        },
+        {
+          "key": "the-economist",
+          "name": "The Economist",
+          "homepage": "https://www.economist.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-economist-web",
+              "name": "The Economist",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.economist.com/"
+            }
+          ],
+          "notes": [
+            "C research/reference placement; print-origin international affairs/economics newsroom."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "key": "the-times-uk",
+          "name": "The Times",
+          "homepage": "https://www.thetimes.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-times-uk-web",
+              "name": "The Times",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.thetimes.com/"
+            }
+          ],
+          "notes": [
+            "D research-planning placement; print-origin newsroom."
+          ]
+        },
+        {
+          "key": "the-telegraph",
+          "name": "The Telegraph",
+          "homepage": "https://www.telegraph.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-telegraph-web",
+              "name": "The Telegraph",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.telegraph.co.uk/"
+            }
+          ],
+          "notes": [
+            "D research-planning placement; print-origin newsroom."
+          ]
+        },
+        {
+          "key": "the-spectator-uk",
+          "name": "The Spectator",
+          "homepage": "https://www.spectator.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-spectator-uk-web",
+              "name": "The Spectator",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.spectator.co.uk/"
+            }
+          ],
+          "notes": [
+            "D research-planning placement; print-origin magazine/newsroom."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "gb-news-digital",
+          "name": "GB News",
+          "homepage": "https://www.gbnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "gb-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gb-news-digital-web",
+              "name": "GB News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.gbnews.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "unherd",
+          "name": "UnHerd",
+          "homepage": "https://unherd.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unherd-web",
+              "name": "UnHerd",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://unherd.com/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; heterodox/right-leaning external descriptions are planning evidence, not persisted FSC classification."
+          ]
+        },
+        {
+          "key": "the-critic",
+          "name": "The Critic",
+          "homepage": "https://thecritic.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-critic-web",
+              "name": "The Critic",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://thecritic.co.uk/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; magazine and digital commentary newsroom."
+          ]
+        },
+        {
+          "key": "spiked",
+          "name": "Spiked",
+          "homepage": "https://www.spiked-online.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "spiked-web",
+              "name": "Spiked",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.spiked-online.com/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; digital commentary/news outlet."
+          ]
+        },
+        {
+          "key": "daily-mail-uk",
+          "name": "Daily Mail",
+          "homepage": "https://www.dailymail.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "daily-mail-uk-web",
+              "name": "Daily Mail",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.dailymail.co.uk/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; print-origin newsroom."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right / externally classified extreme-right spectrum",
+      "entries": []
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "full-fact",
+      "name": "Full Fact",
+      "homepage": "https://fullfact.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "full-fact-web",
+          "name": "Full Fact",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://fullfact.org/"
+        }
+      ],
+      "notes": [
+        "Specialist fact-checking newsroom; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "politicshome",
+      "name": "PoliticsHome",
+      "homepage": "https://www.politicshome.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "politicshome-web",
+          "name": "PoliticsHome",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://www.politicshome.com/"
+        }
+      ],
+      "notes": [
+        "Specialist Westminster/policy newsroom; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "the-conversation-uk",
+      "name": "The Conversation UK",
+      "homepage": "https://theconversation.com/uk",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "the-conversation-uk-web",
+          "name": "The Conversation UK",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://theconversation.com/uk"
+        }
+      ],
+      "notes": [
+        "Academic/expert journalism platform; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "private-eye",
+      "name": "Private Eye",
+      "homepage": "https://www.private-eye.co.uk/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "private-eye-web",
+          "name": "Private Eye",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://www.private-eye.co.uk/"
+        }
+      ],
+      "notes": [
+        "Print-origin investigative/satirical publication with digital presence; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "prospect-uk",
+      "name": "Prospect",
+      "homepage": "https://www.prospectmagazine.co.uk/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "prospect-uk-web",
+          "name": "Prospect",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://www.prospectmagazine.co.uk/"
+        }
+      ],
+      "notes": [
+        "Print-origin ideas/current-affairs magazine; politically unclassified in FSC."
+      ]
+    }
+  ],
+  "approved_candidate_count": 28,
+  "approved_core_count": 23,
+  "new_source_count": 23,
+  "existing_source_extension_count": 5,
+  "review_status": {
+    "source_selection": "self_continued_28_candidate_gb_digital_core_2026_09_25",
+    "digital_scope": "decision_a_digital_is_medium",
+    "source_identity": "reuse_existing_broadcast_sources",
+    "radical_right": "explicit_market_gap_no_quota_filling"
+  }
+}

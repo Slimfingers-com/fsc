@@ -2301,3 +2301,85 @@ def test_ch_digital_unclassified_candidates_match_approved_set() -> None:
         "Antithèse & Bon pour la tête", "TicinOnline / tio.ch",
         "Blick", "RSI", "RTR",
     }
+
+
+GB_DIGITAL_CATALOG = CATALOG_DIR / "gb_digital_v1.json"
+
+
+def load_gb_digital_catalog() -> dict:
+    return json.loads(GB_DIGITAL_CATALOG.read_text(encoding="utf-8"))
+
+
+def gb_digital_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog["unclassified_entries"],
+    ]
+
+
+def test_gb_digital_catalog_has_approved_scope_and_counts() -> None:
+    catalog = load_gb_digital_catalog()
+    assert catalog["country"] == "GB"
+    assert catalog["media_category"] == "digital"
+    assert catalog["approved_candidate_count"] == 28
+    assert catalog["approved_core_count"] == 23
+    assert catalog["new_source_count"] == 23
+    assert catalog["existing_source_extension_count"] == 5
+    entries = gb_digital_entries(catalog)
+    assert len(entries) == 28
+    assert len({entry["key"] for entry in entries}) == 28
+    assert len({entry["name"].casefold() for entry in entries}) == 28
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_gb_digital_planning_segments_keep_f_market_gap() -> None:
+    catalog = load_gb_digital_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    assert [len(groups[key]["entries"]) for key in (
+        "radical_left", "left_liberal", "liberal_centre",
+        "conservative", "right", "radical_right",
+    )] == [4, 5, 6, 3, 5, 0]
+    assert catalog["review_status"]["radical_right"] == "explicit_market_gap_no_quota_filling"
+
+
+def test_gb_digital_reuses_existing_broadcast_sources() -> None:
+    catalog = load_gb_digital_catalog()
+    extensions = [
+        entry for entry in gb_digital_entries(catalog)
+        if entry["source_action"] == "extend_existing_source"
+    ]
+    assert {entry["existing_source_key"] for entry in extensions} == {
+        "bbc-news", "itv-news", "channel-4-news", "sky-news", "gb-news",
+    }
+    broadcast = json.loads((CATALOG_DIR / "gb_broadcast_v1.json").read_text(encoding="utf-8"))
+    known = {
+        entry["key"]
+        for group in broadcast["groups"]
+        for entry in group["entries"]
+    }
+    known.update(entry["key"] for entry in broadcast["unclassified_entries"])
+    assert {entry["existing_source_key"] for entry in extensions} <= known
+
+
+def test_gb_digital_publication_forms_follow_origin() -> None:
+    catalog = load_gb_digital_catalog()
+    entries = {entry["key"]: entry for entry in gb_digital_entries(catalog)}
+    native = {
+        "novara-media", "the-canary", "opendemocracy", "unherd", "spiked",
+        "full-fact", "politicshome", "the-conversation-uk",
+    }
+    print_or_continuation = {
+        "morning-star", "socialist-worker-uk", "the-guardian-uk",
+        "the-independent-uk", "byline-times", "new-statesman", "financial-times",
+        "the-economist", "the-times-uk", "the-telegraph", "the-spectator-uk",
+        "the-critic", "daily-mail-uk", "private-eye", "prospect-uk",
+    }
+    assert all(entries[key]["outlets"][0]["publication_form"] == "digital_native" for key in native)
+    assert all(entries[key]["outlets"][0]["publication_form"] == "other" for key in print_or_continuation)
+
+
+def test_gb_digital_unclassified_specialists_match_selected_set() -> None:
+    catalog = load_gb_digital_catalog()
+    assert {entry["name"] for entry in catalog["unclassified_entries"]} == {
+        "Full Fact", "PoliticsHome", "The Conversation UK", "Private Eye", "Prospect",
+    }
