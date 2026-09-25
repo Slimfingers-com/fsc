@@ -2,6 +2,7 @@ from datetime import UTC, datetime
 
 from sqlalchemy import func, select
 
+from app.enums.confirmation_role import ConfirmationRole
 from app.enums.coverage_scope import CoverageScope
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
@@ -355,3 +356,73 @@ def test_primary_source_counts_as_content_but_not_independent_content(db):
         "PRIMARY_SOURCE": 1,
     }
     assert len(result.gaps) == 1
+
+
+def test_confirmation_role_overrides_source_type_for_coverage(db):
+    data = build_coverage_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.PRIMARY_SOURCE,
+                "confirmation_role": ConfirmationRole.EXPERT_ANALYSIS,
+                "claim_text": "The outlook improves next quarter.",
+                "coverage_scope": CoverageScope.NATIONAL,
+                "country": "DE",
+            },
+            {
+                "source_type": SourceType.NEWS,
+                "confirmation_role": ConfirmationRole.ADVOCACY,
+                "claim_text": "The outlook improves next quarter.",
+                "coverage_scope": CoverageScope.NATIONAL,
+                "country": "DE",
+            },
+        ],
+    )
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+    result = service.run_provider(prepared)
+
+    assert prepared.metrics.content_source_count == 2
+    assert prepared.metrics.signal_source_count == 0
+    assert prepared.metrics.independent_content_source_count == 1
+    assert len(result.gaps) == 1
+
+
+def test_signal_content_partition_is_article_role_driven(db):
+    data = build_coverage_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "confirmation_role": ConfirmationRole.SIGNAL,
+                "claim_text": "Attention signal.",
+                "coverage_scope": CoverageScope.NATIONAL,
+                "country": "DE",
+            },
+            {
+                "source_type": SourceType.SIGNAL,
+                "confirmation_role": ConfirmationRole.EDITORIAL,
+                "claim_text": "Attention signal.",
+                "coverage_scope": CoverageScope.NATIONAL,
+                "country": "DE",
+            },
+        ],
+    )
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+
+    assert prepared.metrics.content_source_count == 1
+    assert prepared.metrics.signal_source_count == 1
+    assert prepared.metrics.independent_content_source_count == 1

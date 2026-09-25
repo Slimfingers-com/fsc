@@ -20,7 +20,10 @@ from app.coverage.provider import (
     StoryCoverageResult,
 )
 from app.coverage.rule_based import RuleBasedCoverageAnalyzer
-from app.enums.source_type import SourceType
+from app.enums.confirmation_role import (
+    ConfirmationRole,
+    counts_as_independent_confirmation,
+)
 from app.enums.story_pipeline import StoryPipeline
 from app.models.consensus import (
     StoryConsensusSummary,
@@ -47,10 +50,7 @@ from app.services.consensus import (
     ConsensusService,
     ConsensusSnapshot,
 )
-from app.services.source_independence import (
-    SourceIndependenceResolver,
-    counts_as_independent_confirmation,
-)
+from app.services.source_independence import SourceIndependenceResolver
 
 
 logger = logging.getLogger(__name__)
@@ -105,7 +105,7 @@ class PreparedCoverageAnalysis:
 
 
 class CoverageService:
-    CONFIG_VERSION = "4"
+    CONFIG_VERSION = "5"
 
     def __init__(
         self,
@@ -325,6 +325,9 @@ class CoverageService:
                 self._enum_value(
                     row.source.source_type
                 ),
+                self._enum_value(
+                    row.article.confirmation_role
+                ),
                 (
                     self._enum_value(
                         row.source.coverage_scope
@@ -492,11 +495,14 @@ class CoverageService:
                         article_independence_keys[row.article.id]
                     ),
                     source_type=source_type,
+                    confirmation_role=self._enum_value(
+                        row.article.confirmation_role
+                    ),
                     coverage_scope=scope,
                     country=row.source.country,
                     is_signal=(
-                        source_type
-                        == SourceType.SIGNAL.value
+                        row.article.confirmation_role
+                        is ConfirmationRole.SIGNAL
                     ),
                 )
             )
@@ -552,7 +558,7 @@ class CoverageService:
             item.independence_key
             for item in content_sources
             if counts_as_independent_confirmation(
-                item.source_type
+                item.confirmation_role
             )
         }
 

@@ -1,6 +1,7 @@
 from datetime import UTC, datetime
 
 from app.enums.article_identity_type import ArticleIdentityType
+from app.enums.confirmation_role import ConfirmationRole
 from app.enums.source_type import SourceType
 from app.ingestion.models import (
     FeedFetchResult,
@@ -413,3 +414,55 @@ def test_link_only_entry_does_not_merge_ambiguous_guid_rows(
         is ArticleIdentityType.LINK
         for article in articles
     ) == 1
+
+
+def test_primary_source_feed_assigns_primary_evidence_role(db):
+    source = SourceService().create_source(
+        db,
+        SourceCreate(
+            name="Official Example",
+            url="https://official.example.com",
+            source_type=SourceType.PRIMARY_SOURCE,
+            feeds=[
+                FeedCreate(
+                    name="Official Feed",
+                    url="https://official.example.com/feed.xml",
+                )
+            ],
+        ),
+    )
+    feed = source.feeds[0]
+
+    FeedPersistenceService().persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(parsed_entry()),
+    )
+
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    assert article.confirmation_role is ConfirmationRole.PRIMARY_EVIDENCE
+
+
+def test_feed_update_preserves_manual_confirmation_role_override(db):
+    feed = create_feed(db)
+    service = FeedPersistenceService()
+    service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(parsed_entry()),
+    )
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    article.confirmation_role = ConfirmationRole.ADVOCACY
+    db.flush()
+
+    service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(
+                summary="Updated after role override",
+            )
+        ),
+    )
+
+    assert article.confirmation_role is ConfirmationRole.ADVOCACY

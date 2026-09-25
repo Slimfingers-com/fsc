@@ -17,6 +17,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
 from app.enums.article_identity_type import ArticleIdentityType
+from app.enums.confirmation_role import ConfirmationRole
 
 if TYPE_CHECKING:
     from app.models.article_processing import (
@@ -65,6 +66,18 @@ class Article(BaseModel):
     identity_key: Mapped[str] = mapped_column(
         String(64),
         nullable=False,
+    )
+
+    confirmation_role: Mapped[ConfirmationRole] = mapped_column(
+        Enum(
+            ConfirmationRole,
+            name="article_confirmation_role",
+            native_enum=False,
+            length=32,
+            values_callable=lambda enum: [item.value for item in enum],
+        ),
+        nullable=False,
+        default=ConfirmationRole.EDITORIAL,
     )
 
     guid: Mapped[str | None] = mapped_column(

@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted, with the source-type implementation rule superseded by ADR 0022.
 
 ## Context
 
