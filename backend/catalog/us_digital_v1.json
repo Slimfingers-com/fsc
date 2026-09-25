@@ -1,0 +1,909 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "language": "en",
+  "media_category": "digital",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "digital_is_medium_existing_cross_media_sources_are_extended_not_duplicated",
+  "publication_form_policy": "born_digital_sources_use_digital_native_print_origin_and_cross_format_sources_use_other",
+  "coverage_targets": {
+    "planning_segment_min": 3,
+    "planning_segment_max": 5
+  },
+  "coverage_policy": "targets_are_goals_not_quotas_relevance_can_exceed_target",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "A-F groups are research planning pools only. Catalog placement alone never creates a persisted political or radicality classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [
+        {
+          "key": "jacobin-us",
+          "name": "Jacobin",
+          "homepage": "https://jacobin.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "jacobin-us-web",
+              "name": "Jacobin",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://jacobin.com/"
+            }
+          ],
+          "notes": [
+            "A research-planning placement; socialist print-and-digital newsroom."
+          ]
+        },
+        {
+          "key": "truthout",
+          "name": "Truthout",
+          "homepage": "https://truthout.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "truthout-web",
+              "name": "Truthout",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://truthout.org/"
+            }
+          ],
+          "notes": [
+            "A research-planning placement; nonprofit social-justice newsroom."
+          ]
+        },
+        {
+          "key": "common-dreams",
+          "name": "Common Dreams",
+          "homepage": "https://www.commondreams.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "common-dreams-web",
+              "name": "Common Dreams",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.commondreams.org/"
+            }
+          ],
+          "notes": [
+            "A research-planning placement; progressive digital news organization."
+          ]
+        },
+        {
+          "key": "democracy-now-digital",
+          "name": "Democracy Now!",
+          "homepage": "https://www.democracynow.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "democracy-now",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "democracy-now-digital-web",
+              "name": "Democracy Now!",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.democracynow.org/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "npr-digital",
+          "name": "NPR",
+          "homepage": "https://www.npr.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "npr",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "npr-digital-web",
+              "name": "NPR",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.npr.org/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "cnn-digital",
+          "name": "CNN",
+          "homepage": "https://www.cnn.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "cnn",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cnn-digital-web",
+              "name": "CNN",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.cnn.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "huffpost-us",
+          "name": "HuffPost",
+          "homepage": "https://www.huffpost.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "huffpost-us-web",
+              "name": "HuffPost",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.huffpost.com/"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; digital-native national newsroom."
+          ]
+        },
+        {
+          "key": "vox",
+          "name": "Vox",
+          "homepage": "https://www.vox.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "vox-web",
+              "name": "Vox",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.vox.com/"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; explanatory digital newsroom."
+          ]
+        },
+        {
+          "key": "the-intercept",
+          "name": "The Intercept",
+          "homepage": "https://theintercept.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-intercept-web",
+              "name": "The Intercept",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://theintercept.com/"
+            }
+          ],
+          "notes": [
+            "B research-planning placement; nonprofit investigative digital newsroom."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/reference",
+      "entries": [
+        {
+          "key": "axios",
+          "name": "Axios",
+          "homepage": "https://www.axios.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "axios-web",
+              "name": "Axios",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.axios.com/"
+            }
+          ],
+          "notes": [
+            "C research/reference placement; digital-native national newsroom."
+          ]
+        },
+        {
+          "key": "politico-us",
+          "name": "POLITICO",
+          "homepage": "https://www.politico.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "politico-us-web",
+              "name": "POLITICO",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.politico.com/"
+            }
+          ],
+          "notes": [
+            "C research/reference placement; national political newsroom with digital and print products."
+          ]
+        },
+        {
+          "key": "semafor",
+          "name": "Semafor",
+          "homepage": "https://www.semafor.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "semafor-web",
+              "name": "Semafor",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.semafor.com/"
+            }
+          ],
+          "notes": [
+            "C research/reference placement; digital-native global/national newsroom."
+          ]
+        },
+        {
+          "key": "abc-news-digital",
+          "name": "ABC News",
+          "homepage": "https://abcnews.go.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "abc-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "abc-news-digital-web",
+              "name": "ABC News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://abcnews.go.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "cbs-news-digital",
+          "name": "CBS News",
+          "homepage": "https://www.cbsnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "cbs-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cbs-news-digital-web",
+              "name": "CBS News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.cbsnews.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        },
+        {
+          "key": "nbc-news-digital",
+          "name": "NBC News",
+          "homepage": "https://www.nbcnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "nbc-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nbc-news-digital-web",
+              "name": "NBC News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.nbcnews.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "key": "wall-street-journal",
+          "name": "The Wall Street Journal",
+          "homepage": "https://www.wsj.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wall-street-journal-web",
+              "name": "The Wall Street Journal",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.wsj.com/"
+            }
+          ],
+          "notes": [
+            "D research-planning placement; print-origin national business/general-news newsroom."
+          ]
+        },
+        {
+          "key": "the-dispatch",
+          "name": "The Dispatch",
+          "homepage": "https://thedispatch.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-dispatch-web",
+              "name": "The Dispatch",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://thedispatch.com/"
+            }
+          ],
+          "notes": [
+            "D research-planning placement; independent center-right/conservative digital newsroom."
+          ]
+        },
+        {
+          "key": "national-review",
+          "name": "National Review",
+          "homepage": "https://www.nationalreview.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "national-review-web",
+              "name": "National Review",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.nationalreview.com/"
+            }
+          ],
+          "notes": [
+            "D research-planning placement; print-origin conservative magazine/newsroom."
+          ]
+        },
+        {
+          "key": "the-bulwark",
+          "name": "The Bulwark",
+          "homepage": "https://www.thebulwark.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-bulwark-web",
+              "name": "The Bulwark",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.thebulwark.com/"
+            }
+          ],
+          "notes": [
+            "D research-planning placement; independent center-right/liberal-democracy-focused digital newsroom."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "reason",
+          "name": "Reason",
+          "homepage": "https://reason.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "reason-web",
+              "name": "Reason",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://reason.com/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; print-origin libertarian newsroom."
+          ]
+        },
+        {
+          "key": "daily-wire",
+          "name": "The Daily Wire",
+          "homepage": "https://www.dailywire.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "daily-wire-web",
+              "name": "The Daily Wire",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.dailywire.com/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; self-described right-of-center digital media company."
+          ]
+        },
+        {
+          "key": "washington-examiner",
+          "name": "Washington Examiner",
+          "homepage": "https://www.washingtonexaminer.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "washington-examiner-web",
+              "name": "Washington Examiner",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.washingtonexaminer.com/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; print-origin conservative newsroom."
+          ]
+        },
+        {
+          "key": "the-federalist",
+          "name": "The Federalist",
+          "homepage": "https://thefederalist.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "the-federalist-web",
+              "name": "The Federalist",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://thefederalist.com/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement; digital conservative commentary/news outlet."
+          ]
+        },
+        {
+          "key": "fox-news-digital",
+          "name": "Fox News",
+          "homepage": "https://www.foxnews.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "fox-news",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fox-news-digital-web",
+              "name": "Fox News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.foxnews.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing broadcast Source; do not duplicate source identity."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right / externally classified far-right spectrum",
+      "entries": [
+        {
+          "key": "breitbart",
+          "name": "Breitbart",
+          "homepage": "https://www.breitbart.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "breitbart-web",
+              "name": "Breitbart",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.breitbart.com/"
+            }
+          ],
+          "notes": [
+            "F research-planning placement based on external far-right descriptions; catalog placement alone is not a persisted FSC radicality classification."
+          ]
+        },
+        {
+          "key": "gateway-pundit",
+          "name": "The Gateway Pundit",
+          "homepage": "https://www.thegatewaypundit.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gateway-pundit-web",
+              "name": "The Gateway Pundit",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.thegatewaypundit.com/"
+            }
+          ],
+          "notes": [
+            "F research-planning placement based on external far-right descriptions; catalog placement alone is not a persisted FSC radicality classification."
+          ]
+        },
+        {
+          "key": "oan-digital",
+          "name": "One America News",
+          "homepage": "https://www.oann.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "existing_source_key": "oan",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oan-digital-web",
+              "name": "One America News",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "en",
+              "homepage": "https://www.oann.com/"
+            }
+          ],
+          "notes": [
+            "Existing F-planning broadcast Source extended digitally; do not duplicate source identity."
+          ]
+        }
+      ]
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "propublica",
+      "name": "ProPublica",
+      "homepage": "https://www.propublica.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "propublica-web",
+          "name": "ProPublica",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://www.propublica.org/"
+        }
+      ],
+      "notes": [
+        "Nonprofit investigative newsroom; politically unclassified/specialist in FSC."
+      ]
+    },
+    {
+      "key": "the-hill",
+      "name": "The Hill",
+      "homepage": "https://thehill.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "the-hill-web",
+          "name": "The Hill",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://thehill.com/"
+        }
+      ],
+      "notes": [
+        "Washington policy/politics newsroom with print origins; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "notus",
+      "name": "NOTUS",
+      "homepage": "https://www.notus.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "notus-web",
+          "name": "NOTUS",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://www.notus.org/"
+        }
+      ],
+      "notes": [
+        "Nonprofit national politics newsroom; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "the-19th",
+      "name": "The 19th",
+      "homepage": "https://19thnews.org/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "the-19th-web",
+          "name": "The 19th",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://19thnews.org/"
+        }
+      ],
+      "notes": [
+        "Nonprofit politics/policy newsroom with specialist focus; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "newsmax-digital",
+      "name": "Newsmax",
+      "homepage": "https://www.newsmax.com/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "existing_source_key": "newsmax",
+      "feeds": [],
+      "classification_status": "existing_source_classification_not_duplicated",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "newsmax-digital-web",
+          "name": "Newsmax",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "en",
+          "homepage": "https://www.newsmax.com/"
+        }
+      ],
+      "notes": [
+        "Newsmax remains politically unclassified here because existing independent sources disagree on radicality; digital distribution does not create a second Source."
+      ]
+    }
+  ],
+  "approved_candidate_count": 32,
+  "approved_core_count": 27,
+  "new_source_count": 23,
+  "existing_source_extension_count": 9,
+  "review_status": {
+    "source_selection": "self_continued_32_candidate_us_digital_core_2026_09_25",
+    "digital_scope": "decision_a_digital_is_medium",
+    "source_identity": "reuse_existing_broadcast_sources",
+    "newsmax": "keep_unclassified_due_radicality_disagreement"
+  }
+}
