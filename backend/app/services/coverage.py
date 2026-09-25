@@ -47,7 +47,10 @@ from app.services.consensus import (
     ConsensusService,
     ConsensusSnapshot,
 )
-from app.services.source_independence import SourceIndependenceResolver
+from app.services.source_independence import (
+    SourceIndependenceResolver,
+    counts_as_independent_confirmation,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -102,7 +105,7 @@ class PreparedCoverageAnalysis:
 
 
 class CoverageService:
-    CONFIG_VERSION = "3"
+    CONFIG_VERSION = "4"
 
     def __init__(
         self,
@@ -548,6 +551,9 @@ class CoverageService:
         independent_content_sources = {
             item.independence_key
             for item in content_sources
+            if counts_as_independent_confirmation(
+                item.source_type
+            )
         }
 
         metrics = CoverageMetrics(

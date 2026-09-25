@@ -7,6 +7,9 @@ from app.coverage.provider import (
     StoryCoverageInput,
     StoryCoverageResult,
 )
+from app.services.source_independence import (
+    counts_as_independent_confirmation,
+)
 
 
 class RuleBasedCoverageAnalyzer(CoverageAnalyzer):
@@ -51,6 +54,9 @@ class RuleBasedCoverageAnalyzer(CoverageAnalyzer):
         independent_content_sources = {
             source.independence_key
             for source in content_sources
+            if counts_as_independent_confirmation(
+                source.source_type
+            )
         }
 
         gaps = []

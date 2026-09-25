@@ -317,3 +317,41 @@ def test_co_production_bridges_coverage_independence_component(db):
         item.independence_key
         for item in prepared.analysis_input.sources
     }) == 1
+
+
+def test_primary_source_counts_as_content_but_not_independent_content(db):
+    data = build_coverage_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "claim_text": "The unemployment rate is 5 percent.",
+                "coverage_scope": CoverageScope.NATIONAL,
+                "country": "DE",
+            },
+            {
+                "source_type": SourceType.PRIMARY_SOURCE,
+                "claim_text": "The unemployment rate is 5 percent.",
+                "coverage_scope": CoverageScope.NATIONAL,
+                "country": "DE",
+            },
+        ],
+    )
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+    result = service.run_provider(prepared)
+
+    assert prepared.metrics.source_count == 2
+    assert prepared.metrics.content_source_count == 2
+    assert prepared.metrics.independent_content_source_count == 1
+    assert prepared.metrics.source_type_counts == {
+        "NEWS": 1,
+        "PRIMARY_SOURCE": 1,
+    }
+    assert len(result.gaps) == 1

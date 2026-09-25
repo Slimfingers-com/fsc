@@ -36,7 +36,10 @@ from app.repositories.consensus import (
 )
 from app.repositories.source_dependency import SourceDependencyRepository
 from app.repositories.story import StoryRepository
-from app.services.source_independence import SourceIndependenceResolver
+from app.services.source_independence import (
+    SourceIndependenceResolver,
+    counts_as_independent_confirmation,
+)
 from app.repositories.story_processing import (
     StoryProcessingCandidate,
     StoryProcessingClaim,
@@ -77,7 +80,7 @@ class PreparedConsensusAnalysis:
 
 
 class ConsensusService:
-    CONFIG_VERSION = "3"
+    CONFIG_VERSION = "4"
 
     def __init__(
         self,
@@ -331,6 +334,7 @@ class ConsensusService:
                 row.claim.claim_hash,
                 str(row.article.id),
                 str(row.source.id),
+                self._enum_value(row.source.source_type),
                 article_independence_keys[row.article.id],
             ]
             for row in snapshot.rows
@@ -490,6 +494,9 @@ class ConsensusService:
             independent_sources = {
                 article_independence_keys[row.article.id]
                 for row in rows
+                if counts_as_independent_confirmation(
+                    row.source.source_type
+                )
             }
             group_evidence = evidence_by_group.get(
                 group_id,
