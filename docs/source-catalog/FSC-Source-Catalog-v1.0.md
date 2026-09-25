@@ -582,7 +582,7 @@ Specific identity rules:
 - **Talk** is included as a current national radio/digital Source; the former linear TalkTV channel is not treated as a current television Source.
 - Christian broadcasters may enter the catalog when news, politics or society are recurring editorial subjects. Christian identity is never automatically mapped to D or any other political segment.
 - Local, regional and devolved broadcasters, including BBC Local Radio, STV and S4C, remain outside this national block for later GB regional/devolved review.
-- Digital-native audiovisual outlets such as Novara Media remain for a later digital-video/podcast block.
+- Digital-native audiovisual outlets such as Novara Media are handled in the GB digital catalog rather than duplicated as broadcast Sources.
 
 No feed is activated by inclusion in this catalog.
 
