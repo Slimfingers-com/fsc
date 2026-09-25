@@ -1,0 +1,896 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "media_category": "digital",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "digital_is_medium_existing_cross_media_sources_are_extended_not_duplicated",
+  "publication_form_policy": "born_digital_sources_use_digital_native_existing_source_web_outlets_and_digital_continuations_use_other",
+  "coverage_targets": {
+    "planning_segment_min": 3,
+    "planning_segment_max": 5
+  },
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "provenance_policy": {
+    "political_group_assignment": "two_independent_sources_required",
+    "notes": "A-F groups are research planning pools only. Catalog placement alone never creates a persisted political or radicality classification."
+  },
+  "groups": [
+    {
+      "key": "radical_left",
+      "label": "radical/system-oppositional left",
+      "entries": [
+        {
+          "key": "der-funke-digital",
+          "name": "Der Funke",
+          "homepage": "https://www.derfunke.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "der-funke-digital-web",
+              "name": "Der Funke",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.derfunke.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "der-funke"
+        },
+        {
+          "key": "die-rote-fahne-digital",
+          "name": "Die Rote Fahne",
+          "homepage": "https://www.rf-news.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "die-rote-fahne-digital-web",
+              "name": "Die Rote Fahne",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.rf-news.de/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "die-rote-fahne"
+        },
+        {
+          "key": "volksstimme-digital",
+          "name": "Volksstimme",
+          "homepage": "https://www.volksstimme.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "volksstimme-digital-web",
+              "name": "Volksstimme",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.volksstimme.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "volksstimme"
+        }
+      ]
+    },
+    {
+      "key": "left_liberal",
+      "label": "left/centre-left/left-liberal",
+      "entries": [
+        {
+          "key": "der-standard-digital",
+          "name": "Der Standard",
+          "homepage": "https://www.derstandard.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "der-standard-digital-web",
+              "name": "Der Standard",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.derstandard.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "der-standard"
+        },
+        {
+          "key": "falter-digital",
+          "name": "Falter",
+          "homepage": "https://www.falter.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "falter-digital-web",
+              "name": "Falter",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.falter.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "falter"
+        },
+        {
+          "key": "moment-at",
+          "name": "MOMENT.at",
+          "homepage": "https://www.moment.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "moment-at-web",
+              "name": "MOMENT.at",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.moment.at/"
+            }
+          ],
+          "notes": [
+            "B planning placement; no persisted FSC political classification in this catalog."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "liberal_centre",
+      "label": "liberal/centre/reference",
+      "entries": [
+        {
+          "key": "orf-information-digital",
+          "name": "ORF Information",
+          "homepage": "https://orf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "orf-information-digital-web",
+              "name": "ORF Information",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://orf.at/"
+            }
+          ],
+          "notes": [
+            "ORF.at extends the existing ORF Information Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "orf-information"
+        },
+        {
+          "key": "puls24-digital",
+          "name": "ProSiebenSat.1 PULS 4 Newsroom",
+          "homepage": "https://www.puls24.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "puls24-digital-web",
+              "name": "ProSiebenSat.1 PULS 4 Newsroom",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.puls24.at/"
+            }
+          ],
+          "notes": [
+            "PULS24.at extends the existing ProSiebenSat.1 PULS 4 Newsroom Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "prosiebensat1-puls4-newsroom"
+        },
+        {
+          "key": "kleine-zeitung-digital",
+          "name": "Kleine Zeitung",
+          "homepage": "https://www.kleinezeitung.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kleine-zeitung-digital-web",
+              "name": "Kleine Zeitung",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.kleinezeitung.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "kleine-zeitung"
+        },
+        {
+          "key": "profil-digital",
+          "name": "profil",
+          "homepage": "https://www.profil.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "profil-digital-web",
+              "name": "profil",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.profil.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "profil"
+        },
+        {
+          "key": "wz-wiener-zeitung",
+          "name": "WZ / Wiener Zeitung",
+          "homepage": "https://www.wienerzeitung.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wz-wiener-zeitung-web",
+              "name": "WZ / Wiener Zeitung",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.wienerzeitung.at/"
+            }
+          ],
+          "notes": [
+            "Active digital continuation of the historic Wiener Zeitung; modeled as a new current digital Source in FSC because no active Wiener Zeitung Source exists in the current print catalog."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "conservative",
+      "label": "conservative/liberal-conservative",
+      "entries": [
+        {
+          "key": "die-presse-digital",
+          "name": "Die Presse",
+          "homepage": "https://www.diepresse.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "die-presse-digital-web",
+              "name": "Die Presse",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.diepresse.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "die-presse"
+        },
+        {
+          "key": "kurier-digital",
+          "name": "Kurier",
+          "homepage": "https://kurier.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kurier-digital-web",
+              "name": "Kurier",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://kurier.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "kurier"
+        },
+        {
+          "key": "salzburger-nachrichten-digital",
+          "name": "Salzburger Nachrichten",
+          "homepage": "https://www.sn.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "salzburger-nachrichten-digital-web",
+              "name": "Salzburger Nachrichten",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.sn.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "salzburger-nachrichten"
+        },
+        {
+          "key": "die-furche-digital",
+          "name": "Die Furche",
+          "homepage": "https://www.furche.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "die-furche-digital-web",
+              "name": "Die Furche",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.furche.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "die-furche"
+        }
+      ]
+    },
+    {
+      "key": "right",
+      "label": "right/right-conservative/right-libertarian",
+      "entries": [
+        {
+          "key": "exxpress",
+          "name": "eXXpress",
+          "homepage": "https://exxpress.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "exxpress-web",
+              "name": "eXXpress",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://exxpress.at/"
+            }
+          ],
+          "notes": [
+            "E research-planning placement only; catalog placement does not create a persisted political classification."
+          ]
+        },
+        {
+          "key": "zurzeit-digital",
+          "name": "ZurZeit",
+          "homepage": "https://zurzeit.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zurzeit-digital-web",
+              "name": "ZurZeit",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://zurzeit.at/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "zurzeit"
+        },
+        {
+          "key": "freilich-digital",
+          "name": "FREILICH",
+          "homepage": "https://www.freilich-magazin.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "freilich-digital-web",
+              "name": "FREILICH",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.freilich-magazin.com/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "freilich"
+        },
+        {
+          "key": "servustv-digital",
+          "name": "ServusTV",
+          "homepage": "https://www.servustv.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "servustv-digital-web",
+              "name": "ServusTV",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.servustv.com/"
+            }
+          ],
+          "notes": [
+            "ServusTV On extends the existing ServusTV Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "servustv"
+        }
+      ]
+    },
+    {
+      "key": "radical_right",
+      "label": "radical right / externally classified extreme-right spectrum",
+      "entries": [
+        {
+          "key": "auf1-digital",
+          "name": "AUF1",
+          "homepage": "https://auf1.tv/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "auf1-digital-web",
+              "name": "AUF1",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://auf1.tv/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing AUF1 Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "auf1"
+        },
+        {
+          "key": "info-direkt-digital",
+          "name": "Info-DIREKT",
+          "homepage": "https://www.info-direkt.eu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "extend_existing_source",
+          "feeds": [],
+          "classification_status": "existing_source_classification_not_duplicated",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "info-direkt-digital-web",
+              "name": "Info-DIREKT",
+              "media_category": "digital",
+              "publication_form": "other",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://www.info-direkt.eu/"
+            }
+          ],
+          "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity."
+          ],
+          "existing_source_key": "info-direkt"
+        },
+        {
+          "key": "unzensuriert",
+          "name": "Unzensuriert",
+          "homepage": "https://unzensuriert.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unzensuriert-web",
+              "name": "Unzensuriert",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://unzensuriert.at/"
+            }
+          ],
+          "notes": [
+            "F research-planning placement only; catalog placement alone does not create a persisted radicality classification."
+          ]
+        },
+        {
+          "key": "heimatkurier",
+          "name": "Heimatkurier",
+          "homepage": "https://heimatkurier.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "heimatkurier-web",
+              "name": "Heimatkurier",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://heimatkurier.at/"
+            }
+          ],
+          "notes": [
+            "F research-planning placement only; catalog placement alone does not create a persisted radicality classification."
+          ]
+        },
+        {
+          "key": "der-status",
+          "name": "Der Status",
+          "homepage": "https://derstatus.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "feeds": [],
+          "classification_status": "planning_position_not_persisted",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "der-status-web",
+              "name": "Der Status",
+              "media_category": "digital",
+              "publication_form": "digital_native",
+              "scope": "national_online",
+              "language": "de",
+              "homepage": "https://derstatus.at/"
+            }
+          ],
+          "notes": [
+            "F research-planning placement only; catalog placement alone does not create a persisted radicality classification."
+          ]
+        }
+      ]
+    }
+  ],
+  "unclassified_entries": [
+    {
+      "key": "krone-digital",
+      "name": "Kronen Zeitung",
+      "homepage": "https://www.krone.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "feeds": [],
+      "classification_status": "existing_source_classification_not_duplicated",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "krone-digital-web",
+          "name": "Kronen Zeitung",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.krone.at/"
+        }
+      ],
+      "notes": [
+        "krone.at extends the existing Kronen Zeitung Source; politically unclassified in FSC."
+      ],
+      "existing_source_key": "kronen-zeitung"
+    },
+    {
+      "key": "heute-digital",
+      "name": "Heute",
+      "homepage": "https://www.heute.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "feeds": [],
+      "classification_status": "existing_source_classification_not_duplicated",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "heute-digital-web",
+          "name": "Heute",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.heute.at/"
+        }
+      ],
+      "notes": [
+        "heute.at extends the existing Heute Source; politically unclassified in FSC."
+      ],
+      "existing_source_key": "heute"
+    },
+    {
+      "key": "oe24-digital",
+      "name": "ÖSTERREICH / oe24",
+      "homepage": "https://www.oe24.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "extend_existing_source",
+      "feeds": [],
+      "classification_status": "existing_source_classification_not_duplicated",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "oe24-digital-web",
+          "name": "ÖSTERREICH / oe24",
+          "media_category": "digital",
+          "publication_form": "other",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.oe24.at/"
+        }
+      ],
+      "notes": [
+        "oe24.at extends the existing ÖSTERREICH / oe24 Source; politically unclassified in FSC."
+      ],
+      "existing_source_key": "oesterreich-oe24"
+    },
+    {
+      "key": "zackzack",
+      "name": "ZackZack",
+      "homepage": "https://zackzack.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "zackzack-web",
+          "name": "ZackZack",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://zackzack.at/"
+        }
+      ],
+      "notes": [
+        "Independent digital politics/society outlet; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "dossier",
+      "name": "DOSSIER",
+      "homepage": "https://www.dossier.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "dossier-web",
+          "name": "DOSSIER",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://www.dossier.at/"
+        }
+      ],
+      "notes": [
+        "Independent investigative/data-journalism outlet; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "kobuk",
+      "name": "Kobuk",
+      "homepage": "https://kobuk.at/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "kobuk-web",
+          "name": "Kobuk",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://kobuk.at/"
+        }
+      ],
+      "notes": [
+        "Specialist media-watch outlet; politically unclassified in FSC."
+      ]
+    },
+    {
+      "key": "report24",
+      "name": "Report24",
+      "homepage": "https://report24.news/",
+      "activity_status": "active",
+      "catalog_status": "candidate",
+      "source_action": "create_source",
+      "feeds": [],
+      "classification_status": "unclassified_research_candidate",
+      "classifications": [],
+      "metrics": [],
+      "outlets": [
+        {
+          "key": "report24-web",
+          "name": "Report24",
+          "media_category": "digital",
+          "publication_form": "digital_native",
+          "scope": "national_online",
+          "language": "de",
+          "homepage": "https://report24.news/"
+        }
+      ],
+      "notes": [
+        "Digital news/commentary outlet; politically unclassified in FSC."
+      ]
+    }
+  ],
+  "approved_candidate_count": 31,
+  "approved_core_count": 24,
+  "new_source_count": 10,
+  "existing_source_extension_count": 21,
+  "review_status": {
+    "source_selection": "approved_31_candidate_at_digital_core_2026_09_25",
+    "digital_scope": "decision_a_digital_is_medium",
+    "source_identity": "reuse_existing_cross_media_source",
+    "wiener_zeitung": "approved_new_active_digital_source_with_historical_continuity",
+    "unclassified_specialists": "approved_7_candidate_set"
+  }
+}

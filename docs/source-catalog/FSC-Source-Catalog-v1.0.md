@@ -363,6 +363,36 @@ Specific identity rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Austria (AT) — Digital
+
+Digital is modeled as a **medium**. Born-digital Sources use the `digital_native` publication form. Existing print/broadcast Sources are extended rather than duplicated; digital continuations of historic print identities may use `publication_form=other` when they are not born-digital.
+
+The jointly approved AT digital candidate set contains 31 candidates: 24 in the A–F research-planning core and seven politically unclassified/specialist candidates. Of those, 10 create new Source identities and 21 extend existing Sources.
+
+| Planning segment | Digital Sources |
+| --- | --- |
+| A radical/system-oppositional left | Der Funke, Die Rote Fahne, Volksstimme |
+| B left/centre-left/left-liberal | Der Standard, Falter, MOMENT.at |
+| C liberal/centre/reference | ORF Information / ORF.at, ProSiebenSat.1 PULS 4 Newsroom / PULS24.at, Kleine Zeitung, profil, WZ / Wiener Zeitung |
+| D conservative/liberal-conservative | Die Presse, Kurier, Salzburger Nachrichten, Die Furche |
+| E right/right-conservative/right-libertarian | eXXpress, ZurZeit, FREILICH, ServusTV |
+| F radical right / externally classified extreme-right spectrum | AUF1, Info-DIREKT, Unzensuriert, Heimatkurier, Der Status |
+
+The A–F table is a research-planning matrix, not a persisted FSC political classification. Persisted Source-level political or radicality assignments still require two independent external sources that materially agree.
+
+Politically unclassified/specialist digital candidates: Kronen Zeitung / krone.at, Heute / heute.at, ÖSTERREICH / oe24 / oe24.at, ZackZack, DOSSIER, Kobuk and Report24.
+
+Specific identity rules:
+
+- Existing print Sources are extended for Der Funke, Die Rote Fahne, Volksstimme, Der Standard, Falter, Kleine Zeitung, profil, Die Presse, Kurier, Salzburger Nachrichten, Die Furche, ZurZeit, FREILICH, Info-DIREKT, Kronen Zeitung, Heute and ÖSTERREICH / oe24.
+- Existing broadcast Sources are extended for ORF Information, ProSiebenSat.1 PULS 4 Newsroom, ServusTV and AUF1.
+- **MOMENT.at, eXXpress, Unzensuriert, Heimatkurier, Der Status, ZackZack, DOSSIER, Kobuk and Report24** are new born-digital Source identities.
+- **WZ / Wiener Zeitung** is a new active digital Source with historic Wiener Zeitung continuity; it is not modeled as born-digital.
+- Catalog placement for eXXpress, Unzensuriert, Heimatkurier and Der Status does not itself create a persisted political or radicality classification.
+- Aggregators and distribution platforms are not editorial Sources.
+
+No feed is activated by inclusion in this catalog.
+
 ## Switzerland (CH)
 
 ### Print

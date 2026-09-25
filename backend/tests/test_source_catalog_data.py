@@ -2077,3 +2077,128 @@ def test_de_digital_extension_keys_exist_in_existing_de_catalogs() -> None:
             for entry in group["entries"]
         )
     assert extensions <= existing_keys
+
+
+AT_DIGITAL_CATALOG = CATALOG_DIR / "at_digital_v1.json"
+
+
+def load_at_digital_catalog() -> dict:
+    return json.loads(AT_DIGITAL_CATALOG.read_text(encoding="utf-8"))
+
+
+def at_digital_entries(catalog: dict) -> list[dict]:
+    return [
+        *[entry for group in catalog["groups"] for entry in group["entries"]],
+        *catalog["unclassified_entries"],
+    ]
+
+
+def test_at_digital_catalog_has_approved_scope_and_counts() -> None:
+    catalog = load_at_digital_catalog()
+    assert catalog["country"] == "AT"
+    assert catalog["media_category"] == "digital"
+    assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert catalog["source_identity_policy"] == "digital_is_medium_existing_cross_media_sources_are_extended_not_duplicated"
+    assert catalog["approved_candidate_count"] == 31
+    assert catalog["approved_core_count"] == 24
+    assert catalog["new_source_count"] == 10
+    assert catalog["existing_source_extension_count"] == 21
+
+    entries = at_digital_entries(catalog)
+    assert len(entries) == 31
+    assert len({entry["key"] for entry in entries}) == 31
+    assert len({entry["name"].casefold() for entry in entries}) == 31
+    assert all(entry["activity_status"] == "active" for entry in entries)
+    assert all(entry["catalog_status"] == "candidate" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_at_digital_planning_segments_match_approved_core() -> None:
+    catalog = load_at_digital_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+    assert [len(groups[key]["entries"]) for key in (
+        "radical_left", "left_liberal", "liberal_centre",
+        "conservative", "right", "radical_right",
+    )] == [3, 3, 5, 4, 4, 5]
+    assert {entry["name"] for entry in groups["left_liberal"]["entries"]} == {
+        "Der Standard", "Falter", "MOMENT.at",
+    }
+    assert {entry["name"] for entry in groups["radical_right"]["entries"]} == {
+        "AUF1", "Info-DIREKT", "Unzensuriert", "Heimatkurier", "Der Status",
+    }
+
+
+def test_at_digital_reuses_existing_cross_media_sources() -> None:
+    catalog = load_at_digital_catalog()
+    entries = at_digital_entries(catalog)
+    extensions = [entry for entry in entries if entry["source_action"] == "extend_existing_source"]
+    assert len(extensions) == 21
+    assert {entry["existing_source_key"] for entry in extensions} == {
+        "der-funke", "die-rote-fahne", "volksstimme", "der-standard", "falter",
+        "orf-information", "prosiebensat1-puls4-newsroom", "kleine-zeitung", "profil",
+        "die-presse", "kurier", "salzburger-nachrichten", "die-furche", "zurzeit",
+        "freilich", "servustv", "auf1", "info-direkt", "kronen-zeitung", "heute",
+        "oesterreich-oe24",
+    }
+    assert all(
+        outlet["media_category"] == "digital"
+        and outlet["publication_form"] == "other"
+        for entry in extensions
+        for outlet in entry["outlets"]
+    )
+
+
+def test_at_digital_new_sources_handle_native_and_wiener_zeitung_continuation() -> None:
+    catalog = load_at_digital_catalog()
+    entries = at_digital_entries(catalog)
+    new_sources = [entry for entry in entries if entry["source_action"] == "create_source"]
+    assert len(new_sources) == 10
+    wz = next(entry for entry in new_sources if entry["key"] == "wz-wiener-zeitung")
+    assert {outlet["publication_form"] for outlet in wz["outlets"]} == {"other"}
+    born_digital = [entry for entry in new_sources if entry["key"] != "wz-wiener-zeitung"]
+    assert len(born_digital) == 9
+    assert all(
+        outlet["media_category"] == "digital"
+        and outlet["publication_form"] == "digital_native"
+        for entry in born_digital
+        for outlet in entry["outlets"]
+    )
+
+
+def test_at_digital_unclassified_candidates_stay_unclassified() -> None:
+    catalog = load_at_digital_catalog()
+    assert {entry["name"] for entry in catalog["unclassified_entries"]} == {
+        "Kronen Zeitung", "Heute", "ÖSTERREICH / oe24",
+        "ZackZack", "DOSSIER", "Kobuk", "Report24",
+    }
+    new_unclassified = [
+        entry for entry in catalog["unclassified_entries"]
+        if entry["source_action"] == "create_source"
+    ]
+    assert all(
+        entry["classification_status"] == "unclassified_research_candidate"
+        and entry["classifications"] == []
+        for entry in new_unclassified
+    )
+
+
+def test_at_digital_extension_keys_exist_in_existing_at_catalogs() -> None:
+    digital = load_at_digital_catalog()
+    extensions = {
+        entry["existing_source_key"]
+        for entry in at_digital_entries(digital)
+        if entry["source_action"] == "extend_existing_source"
+    }
+    existing_keys: set[str] = set()
+    for filename in ("at_print_v1.json", "at_broadcast_v1.json"):
+        catalog = json.loads((CATALOG_DIR / filename).read_text(encoding="utf-8"))
+        existing_keys.update(
+            entry["key"]
+            for group in catalog["groups"]
+            for entry in group["entries"]
+        )
+        existing_keys.update(
+            entry["key"]
+            for entry in catalog.get("unclassified_entries", [])
+        )
+    assert extensions <= existing_keys
