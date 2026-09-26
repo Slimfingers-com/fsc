@@ -2888,9 +2888,9 @@ def test_de_interest_group_dihk_uses_legal_status_metadata() -> None:
             "value": "public_law_corporation",
             "classifier_type": "self_description",
             "classifier_name": "Deutsche Industrie- und Handelskammer (DIHK)",
-            "source_url": "https://www.dihk.de/de/impressum",
+            "source_url": "https://www.dihk.de/de/ueber-uns/gremien/vollversammlung-und-praesidium-der-dihk",
             "reference_date": "2023-01-01",
-            "retrieved_at": "2026-09-26T16:00:00Z",
+            "retrieved_at": "2026-09-26T15:55:00Z",
             "notes": (
                 "DIHK states that it is a Körperschaft des öffentlichen Rechts "
                 "under § 10b Abs. 1 IHKG; this legal status does not replace "

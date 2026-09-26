@@ -1005,6 +1005,8 @@ Completed catalog blocks:
 26. Switzerland primary-source core (multilingual functional institutional groups; excluded from independent editorial confirmation)
 27. Great Britain primary-source core (functional institutional groups; excluded from independent editorial confirmation)
 28. United States primary-source core (functional institutional groups; excluded from independent editorial confirmation)
+29. Germany NGO core (mission-driven civil-society organizations; article-level confirmation roles)
+30. Germany interest-group core (member/sector representation; legal status kept separate from SourceType)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
