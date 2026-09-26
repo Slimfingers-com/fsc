@@ -1,0 +1,694 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "NGO",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_is_source_projects_campaigns_and_portals_are_outlets_not_separate_sources",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "environment_climate_nature",
+      "label": "environment, climate and nature",
+      "entries": [
+        {
+          "key": "greenpeace-deutschland",
+          "name": "Greenpeace Deutschland",
+          "homepage": "https://www.greenpeace.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "greenpeace-deutschland-official",
+              "name": "Greenpeace Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.greenpeace.de/"
+            }
+          ],
+          "notes": [
+            "Environmental and campaign organization; German Greenpeace organization."
+          ]
+        },
+        {
+          "key": "bund",
+          "name": "Bund für Umwelt und Naturschutz Deutschland (BUND)",
+          "homepage": "https://www.bund.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bund-official",
+              "name": "Bund für Umwelt und Naturschutz Deutschland (BUND)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bund.net/"
+            }
+          ],
+          "notes": [
+            "Environmental and nature-conservation NGO."
+          ]
+        },
+        {
+          "key": "nabu",
+          "name": "NABU – Naturschutzbund Deutschland",
+          "homepage": "https://www.nabu.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nabu-official",
+              "name": "NABU – Naturschutzbund Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.nabu.de/"
+            }
+          ],
+          "notes": [
+            "Nature and biodiversity NGO."
+          ]
+        },
+        {
+          "key": "deutsche-umwelthilfe",
+          "name": "Deutsche Umwelthilfe (DUH)",
+          "homepage": "https://www.duh.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutsche-umwelthilfe-official",
+              "name": "Deutsche Umwelthilfe (DUH)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.duh.de/"
+            }
+          ],
+          "notes": [
+            "Environmental and consumer-protection NGO."
+          ]
+        },
+        {
+          "key": "wwf-deutschland",
+          "name": "WWF Deutschland",
+          "homepage": "https://www.wwf.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wwf-deutschland-official",
+              "name": "WWF Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.wwf.de/"
+            }
+          ],
+          "notes": [
+            "German WWF conservation organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "rights_freedoms_migration_press_digital",
+      "label": "human rights, civil liberties, migration, press and digital rights",
+      "entries": [
+        {
+          "key": "amnesty-deutschland",
+          "name": "Amnesty International Deutschland",
+          "homepage": "https://www.amnesty.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "amnesty-deutschland-official",
+              "name": "Amnesty International Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.amnesty.de/"
+            }
+          ],
+          "notes": [
+            "German section of the international human-rights movement."
+          ]
+        },
+        {
+          "key": "pro-asyl",
+          "name": "PRO ASYL",
+          "homepage": "https://www.proasyl.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "pro-asyl-official",
+              "name": "PRO ASYL",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.proasyl.de/"
+            }
+          ],
+          "notes": [
+            "Refugee-rights and human-rights organization."
+          ]
+        },
+        {
+          "key": "gesellschaft-freiheitsrechte",
+          "name": "Gesellschaft für Freiheitsrechte (GFF)",
+          "homepage": "https://freiheitsrechte.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gesellschaft-freiheitsrechte-official",
+              "name": "Gesellschaft für Freiheitsrechte (GFF)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://freiheitsrechte.org/"
+            }
+          ],
+          "notes": [
+            "Civil-liberties organization using strategic litigation and advocacy."
+          ]
+        },
+        {
+          "key": "reporter-ohne-grenzen",
+          "name": "Reporter ohne Grenzen Deutschland",
+          "homepage": "https://www.reporter-ohne-grenzen.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "reporter-ohne-grenzen-official",
+              "name": "Reporter ohne Grenzen Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.reporter-ohne-grenzen.de/"
+            }
+          ],
+          "notes": [
+            "German section of Reporters Without Borders; press-freedom NGO."
+          ]
+        },
+        {
+          "key": "hateaid",
+          "name": "HateAid",
+          "homepage": "https://hateaid.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hateaid-official",
+              "name": "HateAid",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://hateaid.org/"
+            }
+          ],
+          "notes": [
+            "Civil-society organization focused on digital violence and rights."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "democracy_transparency_watchdog_consumer",
+      "label": "democracy, transparency, watchdog and consumer advocacy",
+      "entries": [
+        {
+          "key": "transparency-deutschland",
+          "name": "Transparency International Deutschland",
+          "homepage": "https://www.transparency.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "transparency-deutschland-official",
+              "name": "Transparency International Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.transparency.de/"
+            }
+          ],
+          "notes": [
+            "German anti-corruption civil-society organization."
+          ]
+        },
+        {
+          "key": "lobbycontrol",
+          "name": "LobbyControl",
+          "homepage": "https://www.lobbycontrol.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lobbycontrol-official",
+              "name": "LobbyControl",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.lobbycontrol.de/"
+            }
+          ],
+          "notes": [
+            "Civil-society watchdog focused on lobbying, transparency and political influence."
+          ]
+        },
+        {
+          "key": "mehr-demokratie",
+          "name": "Mehr Demokratie",
+          "homepage": "https://www.mehr-demokratie.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mehr-demokratie-official",
+              "name": "Mehr Demokratie",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.mehr-demokratie.de/"
+            }
+          ],
+          "notes": [
+            "Civil-society organization focused on democratic participation and reform."
+          ]
+        },
+        {
+          "key": "campact",
+          "name": "Campact",
+          "homepage": "https://www.campact.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "campact-official",
+              "name": "Campact",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.campact.de/"
+            }
+          ],
+          "notes": [
+            "Campaign organization for public-interest political participation."
+          ]
+        },
+        {
+          "key": "parlamentwatch",
+          "name": "Parlamentwatch e.V.",
+          "homepage": "https://www.abgeordnetenwatch.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "parlamentwatch-official",
+              "name": "abgeordnetenwatch.de",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.abgeordnetenwatch.de/"
+            }
+          ],
+          "notes": [
+            "Institutional Source behind abgeordnetenwatch.de; the portal is an Outlet, not a second Source."
+          ]
+        },
+        {
+          "key": "foodwatch",
+          "name": "foodwatch Deutschland",
+          "homepage": "https://www.foodwatch.org/de",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "foodwatch-official",
+              "name": "foodwatch Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.foodwatch.org/de"
+            }
+          ],
+          "notes": [
+            "Consumer-rights and food-policy NGO."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "humanitarian_development_social_welfare",
+      "label": "humanitarian, development and social welfare",
+      "entries": [
+        {
+          "key": "welthungerhilfe",
+          "name": "Welthungerhilfe",
+          "homepage": "https://www.welthungerhilfe.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "welthungerhilfe-official",
+              "name": "Welthungerhilfe",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.welthungerhilfe.de/"
+            }
+          ],
+          "notes": [
+            "Humanitarian and development NGO."
+          ]
+        },
+        {
+          "key": "terre-des-hommes-deutschland",
+          "name": "terre des hommes Deutschland",
+          "homepage": "https://www.tdh.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "terre-des-hommes-deutschland-official",
+              "name": "terre des hommes Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.tdh.de/"
+            }
+          ],
+          "notes": [
+            "Child-rights, humanitarian and development NGO."
+          ]
+        },
+        {
+          "key": "aerzte-ohne-grenzen-deutschland",
+          "name": "Ärzte ohne Grenzen Deutschland",
+          "homepage": "https://www.aerzte-ohne-grenzen.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "aerzte-ohne-grenzen-deutschland-official",
+              "name": "Ärzte ohne Grenzen Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.aerzte-ohne-grenzen.de/"
+            }
+          ],
+          "notes": [
+            "German section of the international humanitarian medical organization."
+          ]
+        },
+        {
+          "key": "deutscher-caritasverband",
+          "name": "Deutscher Caritasverband",
+          "homepage": "https://www.caritas.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutscher-caritasverband-official",
+              "name": "Deutscher Caritasverband",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.caritas.de/"
+            }
+          ],
+          "notes": [
+            "National welfare organization; political advocacy is part of its social mission rather than sector-member representation."
+          ]
+        },
+        {
+          "key": "diakonie-deutschland",
+          "name": "Diakonie Deutschland",
+          "homepage": "https://www.diakonie.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "diakonie-deutschland-official",
+              "name": "Diakonie Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.diakonie.de/"
+            }
+          ],
+          "notes": [
+            "National welfare organization; legal carrier details are metadata, not a second Source identity."
+          ]
+        },
+        {
+          "key": "deutsches-rotes-kreuz",
+          "name": "Deutsches Rotes Kreuz (DRK)",
+          "homepage": "https://www.drk.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutsches-rotes-kreuz-official",
+              "name": "Deutsches Rotes Kreuz (DRK)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.drk.de/"
+            }
+          ],
+          "notes": [
+            "National Red Cross society and humanitarian organization; special statutory role does not make it a PRIMARY_SOURCE."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 22,
+  "review_status": {
+    "source_selection": "approved_22_source_de_ngo_core_2026_09_26",
+    "segmentation": "functional_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022",
+    "organization_boundary": "mission_driven_civil_society_per_adr_0023"
+  },
+  "deferred_expansion": [
+    {
+      "category": "regional_and_local_chapters",
+      "reason": "Regional chapters are not duplicated while the national institutional Source is sufficient for the initial core."
+    },
+    {
+      "category": "additional_sector_specific_ngos",
+      "reason": "Topic-specific expansion remains eligible after the compact national core."
+    }
+  ]
+}
