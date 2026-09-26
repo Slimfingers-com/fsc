@@ -45,6 +45,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 StoryArticle.match_details.label("match_details"),
                 StoryArticle.clustered_at.label("clustered_at"),
                 Story.language_code.label("language_code"),
+                Article.language_code.label("article_language_code"),
                 Article.link.label("url"),
                 Source.id.label("source_id"),
                 Source.name.label("source_name"),
@@ -86,6 +87,11 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
             select(
                 eligible.c.story_id,
                 eligible.c.language_code,
+                func.array_agg(
+                    func.distinct(eligible.c.article_language_code)
+                ).filter(
+                    eligible.c.article_language_code.is_not(None)
+                ).label("language_codes"),
                 func.count().label("article_count"),
                 func.count(
                     func.distinct(eligible.c.source_id)
@@ -198,6 +204,11 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 topic_match.exists()
             )
 
+        if filters.language_code is not None:
+            statement = statement.where(
+                eligible.c.article_language_code == filters.language_code
+            )
+
         if filters.source_id is not None:
             statement = statement.where(
                 eligible.c.source_id
@@ -296,6 +307,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 summary.c.story_id,
                 representative.c.title,
                 summary.c.language_code,
+                summary.c.language_codes,
                 summary.c.article_count,
                 summary.c.source_count,
                 summary.c.first_article_at,
@@ -314,15 +326,10 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
             )
         )
 
-        if filters.language_code is not None:
-            statement = statement.where(
-                summary.c.language_code
-                == filters.language_code
-            )
-
         membership_filters_present = any(
             value is not None
             for value in (
+                filters.language_code,
                 filters.source_id,
                 filters.source_slug,
                 filters.published_from,
@@ -384,6 +391,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                     story_id=row.story_id,
                     title=row.title,
                     language_code=row.language_code,
+                    language_codes=tuple(sorted(row.language_codes or ())),
                     article_count=int(
                         row.article_count
                     ),
@@ -421,6 +429,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 summary.c.story_id,
                 representative.c.title,
                 summary.c.language_code,
+                summary.c.language_codes,
                 summary.c.article_count,
                 summary.c.source_count,
                 summary.c.first_article_at,
@@ -443,6 +452,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
             story_id=row.story_id,
             title=row.title,
             language_code=row.language_code,
+            language_codes=tuple(sorted(row.language_codes or ())),
             article_count=int(row.article_count),
             source_count=int(row.source_count),
             first_article_at=row.first_article_at,
@@ -457,6 +467,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 eligible.c.url,
                 eligible.c.published_at,
                 eligible.c.article_time,
+                eligible.c.article_language_code,
                 eligible.c.source_id,
                 eligible.c.source_name,
                 eligible.c.source_slug,
@@ -607,6 +618,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                     url=value.url,
                     published_at=value.published_at,
                     article_time=value.article_time,
+                    language_code=value.article_language_code,
                     source_id=value.source_id,
                     source_name=(
                         value.source_name

@@ -33,6 +33,7 @@ class StorySummary:
     story_id: UUID
     title: str | None
     language_code: str | None
+    language_codes: tuple[str, ...]
     article_count: int
     source_count: int
     first_article_at: datetime
@@ -55,6 +56,7 @@ class StoryArticleItem:
     url: str | None
     published_at: datetime | None
     article_time: datetime
+    language_code: str | None
     source_id: UUID
     source_name: str
     source_slug: str
