@@ -1,0 +1,886 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "COMPANY",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "group_first_corporate_identity_controlled_subsidiaries_and_brands_are_not_automatic_sources",
+  "segmentation_policy": "functional_economic_role_not_political_orientation",
+  "ownership_policy": "ownership_and_control_are_metadata_and_do_not_create_editorial_dependency_by_themselves",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "mobility_transport",
+      "label": "mobility and transport",
+      "entries": [
+        {
+          "key": "volkswagen-group",
+          "name": "Volkswagen AG (Volkswagen Group)",
+          "homepage": "https://www.volkswagen-group.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "volkswagen-group-official",
+              "name": "Volkswagen AG (Volkswagen Group)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.volkswagen-group.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source. Individual controlled brands and subsidiaries are not added automatically."
+          ]
+        },
+        {
+          "key": "mercedes-benz-group",
+          "name": "Mercedes-Benz Group AG",
+          "homepage": "https://group.mercedes-benz.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mercedes-benz-group-official",
+              "name": "Mercedes-Benz Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://group.mercedes-benz.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source. Controlled brands and subsidiaries remain deferred unless independently relevant."
+          ]
+        },
+        {
+          "key": "bmw-group",
+          "name": "BMW AG (BMW Group)",
+          "homepage": "https://www.bmwgroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bmw-group-official",
+              "name": "BMW AG (BMW Group)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bmwgroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source."
+          ]
+        },
+        {
+          "key": "deutsche-bahn",
+          "name": "Deutsche Bahn AG",
+          "homepage": "https://www.deutschebahn.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutsche-bahn-official",
+              "name": "Deutsche Bahn AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.deutschebahn.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source for Deutsche Bahn; operating subsidiaries are not duplicated automatically."
+          ]
+        },
+        {
+          "key": "lufthansa-group",
+          "name": "Deutsche Lufthansa AG (Lufthansa Group)",
+          "homepage": "https://www.lufthansagroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lufthansa-group-official",
+              "name": "Deutsche Lufthansa AG (Lufthansa Group)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.lufthansagroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source; airline brands and controlled subsidiaries are not separate Sources by default."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "industry_engineering_defence_materials",
+      "label": "industry, engineering, defence and materials",
+      "entries": [
+        {
+          "key": "siemens",
+          "name": "Siemens AG",
+          "homepage": "https://www.siemens.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "siemens-official",
+              "name": "Siemens AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.siemens.com/"
+            }
+          ],
+          "notes": [
+            "Group-level industrial technology Source."
+          ]
+        },
+        {
+          "key": "bosch-group",
+          "name": "Robert Bosch GmbH (Bosch Group)",
+          "homepage": "https://www.bosch.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bosch-group-official",
+              "name": "Robert Bosch GmbH (Bosch Group)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bosch.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source."
+          ]
+        },
+        {
+          "key": "basf",
+          "name": "BASF SE",
+          "homepage": "https://www.basf.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "basf-official",
+              "name": "BASF SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.basf.com/"
+            }
+          ],
+          "notes": [
+            "Group-level chemicals and materials Source."
+          ]
+        },
+        {
+          "key": "rheinmetall",
+          "name": "Rheinmetall AG",
+          "homepage": "https://www.rheinmetall.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rheinmetall-official",
+              "name": "Rheinmetall AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.rheinmetall.com/"
+            }
+          ],
+          "notes": [
+            "Group-level defence and technology Source."
+          ]
+        },
+        {
+          "key": "thyssenkrupp",
+          "name": "thyssenkrupp AG",
+          "homepage": "https://www.thyssenkrupp.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "thyssenkrupp-official",
+              "name": "thyssenkrupp AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.thyssenkrupp.com/"
+            }
+          ],
+          "notes": [
+            "Group-level industrial and materials Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "energy_logistics_critical_infrastructure",
+      "label": "energy, logistics and critical infrastructure",
+      "entries": [
+        {
+          "key": "rwe",
+          "name": "RWE AG",
+          "homepage": "https://www.rwe.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rwe-official",
+              "name": "RWE AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.rwe.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy Source."
+          ]
+        },
+        {
+          "key": "eon",
+          "name": "E.ON SE",
+          "homepage": "https://www.eon.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "eon-official",
+              "name": "E.ON SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.eon.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy Source."
+          ]
+        },
+        {
+          "key": "uniper",
+          "name": "Uniper SE",
+          "homepage": "https://www.uniper.energy/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "uniper-official",
+              "name": "Uniper SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.uniper.energy/"
+            }
+          ],
+          "notes": [
+            "Company Source; ownership structure does not change SourceType and is orthogonal metadata."
+          ]
+        },
+        {
+          "key": "siemens-energy",
+          "name": "Siemens Energy AG",
+          "homepage": "https://www.siemens-energy.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "siemens-energy-official",
+              "name": "Siemens Energy AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.siemens-energy.com/"
+            }
+          ],
+          "notes": [
+            "Current institutional Source identity. Announced future brand/name changes are not applied before they become effective."
+          ]
+        },
+        {
+          "key": "dhl-group",
+          "name": "DHL AG (DHL Group)",
+          "homepage": "https://group.dhl.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dhl-group-official",
+              "name": "DHL AG (DHL Group)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://group.dhl.com/"
+            }
+          ],
+          "notes": [
+            "Group parent Source. Deutsche Post AG is a controlled operating subsidiary and is not duplicated in the initial core."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "digital_telecom_semiconductors",
+      "label": "digital, telecommunications and semiconductors",
+      "entries": [
+        {
+          "key": "deutsche-telekom",
+          "name": "Deutsche Telekom AG",
+          "homepage": "https://www.telekom.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutsche-telekom-official",
+              "name": "Deutsche Telekom AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.telekom.com/"
+            }
+          ],
+          "notes": [
+            "Group-level telecommunications Source."
+          ]
+        },
+        {
+          "key": "sap",
+          "name": "SAP SE",
+          "homepage": "https://www.sap.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sap-official",
+              "name": "SAP SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.sap.com/"
+            }
+          ],
+          "notes": [
+            "Group-level enterprise software Source."
+          ]
+        },
+        {
+          "key": "infineon",
+          "name": "Infineon Technologies AG",
+          "homepage": "https://www.infineon.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "infineon-official",
+              "name": "Infineon Technologies AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.infineon.com/"
+            }
+          ],
+          "notes": [
+            "Group-level semiconductor Source."
+          ]
+        },
+        {
+          "key": "united-internet",
+          "name": "United Internet AG",
+          "homepage": "https://www.united-internet.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "united-internet-official",
+              "name": "United Internet AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.united-internet.de/"
+            }
+          ],
+          "notes": [
+            "Group-level internet and telecommunications Source; controlled brands/subsidiaries are not automatic Sources."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "finance_insurance_real_estate",
+      "label": "finance, insurance and real estate",
+      "entries": [
+        {
+          "key": "deutsche-bank",
+          "name": "Deutsche Bank AG",
+          "homepage": "https://www.db.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutsche-bank-official",
+              "name": "Deutsche Bank AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.db.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "commerzbank",
+          "name": "Commerzbank AG",
+          "homepage": "https://www.commerzbank.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "commerzbank-official",
+              "name": "Commerzbank AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.commerzbank.de/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "allianz",
+          "name": "Allianz SE",
+          "homepage": "https://www.allianz.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "allianz-official",
+              "name": "Allianz SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.allianz.com/"
+            }
+          ],
+          "notes": [
+            "Group-level insurance and financial-services Source."
+          ]
+        },
+        {
+          "key": "munich-re",
+          "name": "Münchener Rückversicherungs-Gesellschaft AG (Munich Re)",
+          "homepage": "https://www.munichre.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "munich-re-official",
+              "name": "Münchener Rückversicherungs-Gesellschaft AG (Munich Re)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.munichre.com/"
+            }
+          ],
+          "notes": [
+            "Group-level reinsurance Source; Munich Re is the public group brand."
+          ]
+        },
+        {
+          "key": "vonovia",
+          "name": "Vonovia SE",
+          "homepage": "https://www.vonovia.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "vonovia-official",
+              "name": "Vonovia SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.vonovia.de/"
+            }
+          ],
+          "notes": [
+            "Group-level residential real-estate Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "health_pharma_life_science",
+      "label": "health, pharma and life science",
+      "entries": [
+        {
+          "key": "bayer",
+          "name": "Bayer AG",
+          "homepage": "https://www.bayer.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bayer-official",
+              "name": "Bayer AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bayer.com/"
+            }
+          ],
+          "notes": [
+            "Group-level life-science Source."
+          ]
+        },
+        {
+          "key": "merck",
+          "name": "Merck KGaA",
+          "homepage": "https://www.merckgroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "merck-official",
+              "name": "Merck KGaA",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.merckgroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level science and technology Source based in Darmstadt."
+          ]
+        },
+        {
+          "key": "biontech",
+          "name": "BioNTech SE",
+          "homepage": "https://www.biontech.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "biontech-official",
+              "name": "BioNTech SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.biontech.com/"
+            }
+          ],
+          "notes": [
+            "Biotechnology company Source."
+          ]
+        },
+        {
+          "key": "fresenius",
+          "name": "Fresenius SE & Co. KGaA",
+          "homepage": "https://www.fresenius.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fresenius-official",
+              "name": "Fresenius SE & Co. KGaA",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fresenius.com/"
+            }
+          ],
+          "notes": [
+            "Group-level healthcare Source; controlled operating companies are not added automatically."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 28,
+  "review_status": {
+    "source_selection": "approved_28_source_de_company_core_2026_09_26",
+    "segmentation": "functional_economic_role_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022",
+    "identity_model": "group_first_initial_core",
+    "subsidiaries": "deferred_unless_independently_relevant"
+  },
+  "deferred_expansion": [
+    {
+      "category": "retail_consumer_groups",
+      "reason": "Schwarz Gruppe, REWE Group, EDEKA-Verbund, ALDI Nord and ALDI Süd remain eligible for a later expansion; the approved initial core stays compact."
+    },
+    {
+      "category": "controlled_subsidiaries_and_brands",
+      "reason": "Porsche AG, Audi AG, DB InfraGO AG, Deutsche Post AG, Siemens Healthineers AG, Fresenius Medical Care AG, 1&1 AG, T-Systems and comparable controlled entities are not automatic additional Sources."
+    },
+    {
+      "category": "additional_sector_leaders",
+      "reason": "Sector-specific companies can be added later when their institutional voice adds material independent coverage value."
+    }
+  ]
+}

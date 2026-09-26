@@ -288,6 +288,37 @@ Identity and boundary rules:
 
 No feed is activated by inclusion in either organization catalog.
 
+## Germany (DE) — Companies
+
+Companies are grouped by **economic function**, not political orientation. They use `SourceType.COMPANY`, `media_category=organization` and `publication_form=other`. Under ADR 0022, company content defaults to `confirmation_role=advocacy`, while the concrete article role remains authoritative.
+
+The jointly approved compact DE company core contains 28 Source identities:
+
+| Functional group | COMPANY Sources |
+| --- | --- |
+| Mobility / transport | Volkswagen AG (Volkswagen Group), Mercedes-Benz Group AG, BMW AG (BMW Group), Deutsche Bahn AG, Deutsche Lufthansa AG (Lufthansa Group) |
+| Industry / engineering / defence / materials | Siemens AG, Robert Bosch GmbH (Bosch Group), BASF SE, Rheinmetall AG, thyssenkrupp AG |
+| Energy / logistics / critical infrastructure | RWE AG, E.ON SE, Uniper SE, Siemens Energy AG, DHL AG (DHL Group) |
+| Digital / telecommunications / semiconductors | Deutsche Telekom AG, SAP SE, Infineon Technologies AG, United Internet AG |
+| Finance / insurance / real estate | Deutsche Bank AG, Commerzbank AG, Allianz SE, Münchener Rückversicherungs-Gesellschaft AG (Munich Re), Vonovia SE |
+| Health / pharma / life science | Bayer AG, Merck KGaA, BioNTech SE, Fresenius SE & Co. KGaA |
+
+Identity and boundary rules:
+
+- **Group-first initial core:** the corporate group or parent institutional voice is the Source where that is the relevant national-level identity.
+- Controlled subsidiaries, operating companies and brands are not automatic additional Sources. They can be added later only when their independently relevant institutional voice justifies a separate Source.
+- Ownership or control alone does not create FSC editorial dependency. Corporate ownership can be metadata; concrete copied, supplied or jointly produced content remains article-provenance territory.
+- COMPANY source type does not determine confirmation eligibility. Company statements normally default to `advocacy`; own corporate figures or decisions can be `primary_evidence`; a genuinely independent analytical publication can be `expert_analysis` when justified.
+- DHL AG / DHL Group is the initial group-level Source. Deutsche Post AG is not duplicated in the initial core.
+- Siemens Energy AG remains the current Source identity; announced future brand/name changes are not applied before becoming effective.
+- State or public ownership does not change a commercial company's `COMPANY` SourceType.
+
+Deferred expansion includes the large retail/consumer groups Schwarz Gruppe, REWE Group, EDEKA-Verbund, ALDI Nord and ALDI Süd, plus controlled entities such as Porsche AG, Audi AG, DB InfraGO AG, Deutsche Post AG, Siemens Healthineers AG, Fresenius Medical Care AG, 1&1 AG and T-Systems.
+
+No political-orientation or radicality classification is inferred from sector, ownership, company identity or catalog inclusion.
+
+No feed is activated by inclusion in the company catalog.
+
 ## Austria (AT)
 
 ### Print
@@ -1007,6 +1038,7 @@ Completed catalog blocks:
 28. United States primary-source core (functional institutional groups; excluded from independent editorial confirmation)
 29. Germany NGO core (mission-driven civil-society organizations; article-level confirmation roles)
 30. Germany interest-group core (member/sector representation; legal status kept separate from SourceType)
+31. Germany company core (28 group-first corporate Sources; controlled subsidiaries deferred unless independently relevant)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
