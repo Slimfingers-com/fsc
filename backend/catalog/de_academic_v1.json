@@ -1,0 +1,736 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "ACADEMIC",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "scientific_institution_is_source_subunits_are_not_automatic_sources",
+  "segmentation_policy": "functional_research_domain_not_political_orientation",
+  "academic_boundary_policy": "primary_scientific_research_function_includes_universities_academies_and_extra_university_research_institutes",
+  "think_tank_boundary_policy": "policy_analysis_and_advice_primary_function_is_think_tank_research_primary_function_is_academic",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "universities",
+      "label": "universities",
+      "entries": [
+        {
+          "key": "lmu",
+          "name": "Ludwig-Maximilians-Universität München (LMU)",
+          "homepage": "https://www.lmu.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lmu-official",
+              "name": "Ludwig-Maximilians-Universität München (LMU)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.lmu.de/"
+            }
+          ],
+          "notes": [
+            "University-level Source. Faculties, chairs and institutes are not automatic separate Sources."
+          ]
+        },
+        {
+          "key": "tum",
+          "name": "Technische Universität München (TUM)",
+          "homepage": "https://www.tum.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tum-official",
+              "name": "Technische Universität München (TUM)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.tum.de/"
+            }
+          ],
+          "notes": [
+            "University-level Source. Faculties and schools are not automatic separate Sources."
+          ]
+        },
+        {
+          "key": "heidelberg-university",
+          "name": "Universität Heidelberg",
+          "homepage": "https://www.uni-heidelberg.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "heidelberg-university-official",
+              "name": "Universität Heidelberg",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.uni-heidelberg.de/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "humboldt-university-berlin",
+          "name": "Humboldt-Universität zu Berlin",
+          "homepage": "https://www.hu-berlin.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "humboldt-university-berlin-official",
+              "name": "Humboldt-Universität zu Berlin",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.hu-berlin.de/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "free-university-berlin",
+          "name": "Freie Universität Berlin",
+          "homepage": "https://www.fu-berlin.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "free-university-berlin-official",
+              "name": "Freie Universität Berlin",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fu-berlin.de/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "university-bonn",
+          "name": "Universität Bonn",
+          "homepage": "https://www.uni-bonn.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-bonn-official",
+              "name": "Universität Bonn",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.uni-bonn.de/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "cross_disciplinary_science_organizations",
+      "label": "cross-disciplinary science organizations",
+      "entries": [
+        {
+          "key": "max-planck-gesellschaft",
+          "name": "Max-Planck-Gesellschaft",
+          "homepage": "https://www.mpg.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "max-planck-gesellschaft-official",
+              "name": "Max-Planck-Gesellschaft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.mpg.de/"
+            }
+          ],
+          "notes": [
+            "Research-organization Source. Individual Max Planck institutes are deferred unless independently relevant."
+          ]
+        },
+        {
+          "key": "fraunhofer-gesellschaft",
+          "name": "Fraunhofer-Gesellschaft",
+          "homepage": "https://www.fraunhofer.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fraunhofer-gesellschaft-official",
+              "name": "Fraunhofer-Gesellschaft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fraunhofer.de/"
+            }
+          ],
+          "notes": [
+            "Research-organization Source. Individual Fraunhofer institutes are deferred unless independently relevant."
+          ]
+        },
+        {
+          "key": "leopoldina",
+          "name": "Nationale Akademie der Wissenschaften Leopoldina",
+          "homepage": "https://www.leopoldina.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "leopoldina-official",
+              "name": "Nationale Akademie der Wissenschaften Leopoldina",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.leopoldina.org/"
+            }
+          ],
+          "notes": [
+            "National academy of sciences; scientific institutional Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economy_society_policy_research",
+      "label": "economy, society and policy research",
+      "entries": [
+        {
+          "key": "ifo",
+          "name": "ifo Institut",
+          "homepage": "https://www.ifo.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ifo-official",
+              "name": "ifo Institut",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.ifo.de/"
+            }
+          ],
+          "notes": [
+            "Academic Source because non-profit economic and social-science research is its primary institutional function; policy advice does not make it a THINK_TANK."
+          ]
+        },
+        {
+          "key": "diw-berlin",
+          "name": "DIW Berlin",
+          "homepage": "https://www.diw.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "diw-berlin-official",
+              "name": "DIW Berlin",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.diw.de/"
+            }
+          ],
+          "notes": [
+            "Independent publicly funded research institute; policy advice is research-based and secondary to its scientific institutional identity."
+          ]
+        },
+        {
+          "key": "zew",
+          "name": "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
+          "homepage": "https://www.zew.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zew-official",
+              "name": "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.zew.de/"
+            }
+          ],
+          "notes": [
+            "Economic research institute; treated as ACADEMIC under the primary-scientific-function rule."
+          ]
+        },
+        {
+          "key": "rwi",
+          "name": "RWI – Leibniz-Institut für Wirtschaftsforschung",
+          "homepage": "https://www.rwi-essen.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rwi-official",
+              "name": "RWI – Leibniz-Institut für Wirtschaftsforschung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.rwi-essen.de/"
+            }
+          ],
+          "notes": [
+            "Economic research institute; treated as ACADEMIC under the primary-scientific-function rule."
+          ]
+        },
+        {
+          "key": "ifw-kiel",
+          "name": "Kiel Institut für Weltwirtschaft (IfW Kiel)",
+          "homepage": "https://www.ifw-kiel.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ifw-kiel-official",
+              "name": "Kiel Institut für Weltwirtschaft (IfW Kiel)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.ifw-kiel.de/"
+            }
+          ],
+          "notes": [
+            "Economic research institute; treated as ACADEMIC under the primary-scientific-function rule."
+          ]
+        },
+        {
+          "key": "wzb",
+          "name": "Wissenschaftszentrum Berlin für Sozialforschung (WZB)",
+          "homepage": "https://www.wzb.eu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wzb-official",
+              "name": "Wissenschaftszentrum Berlin für Sozialforschung (WZB)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.wzb.eu/"
+            }
+          ],
+          "notes": [
+            "Social-science research institute; treated as ACADEMIC under the primary-scientific-function rule."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "climate_technology_energy",
+      "label": "climate, technology and energy",
+      "entries": [
+        {
+          "key": "pik",
+          "name": "Potsdam-Institut für Klimafolgenforschung (PIK)",
+          "homepage": "https://www.pik-potsdam.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "pik-official",
+              "name": "Potsdam-Institut für Klimafolgenforschung (PIK)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.pik-potsdam.de/"
+            }
+          ],
+          "notes": [
+            "Climate-impact research institute."
+          ]
+        },
+        {
+          "key": "dlr",
+          "name": "Deutsches Zentrum für Luft- und Raumfahrt (DLR)",
+          "homepage": "https://www.dlr.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dlr-official",
+              "name": "Deutsches Zentrum für Luft- und Raumfahrt (DLR)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.dlr.de/"
+            }
+          ],
+          "notes": [
+            "Large independent research center; DLR institutional Source."
+          ]
+        },
+        {
+          "key": "forschungszentrum-juelich",
+          "name": "Forschungszentrum Jülich",
+          "homepage": "https://www.fz-juelich.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "forschungszentrum-juelich-official",
+              "name": "Forschungszentrum Jülich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fz-juelich.de/"
+            }
+          ],
+          "notes": [
+            "Large independent research center; institutional Source."
+          ]
+        },
+        {
+          "key": "kit",
+          "name": "Karlsruher Institut für Technologie (KIT)",
+          "homepage": "https://www.kit.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kit-official",
+              "name": "Karlsruher Institut für Technologie (KIT)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.kit.edu/"
+            }
+          ],
+          "notes": [
+            "University and large-scale research institution; institutional Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "health_life_sciences",
+      "label": "health and life sciences",
+      "entries": [
+        {
+          "key": "charite",
+          "name": "Charité – Universitätsmedizin Berlin",
+          "homepage": "https://www.charite.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "charite-official",
+              "name": "Charité – Universitätsmedizin Berlin",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.charite.de/"
+            }
+          ],
+          "notes": [
+            "University medical institution with independent research and publication activity; institutional Source."
+          ]
+        },
+        {
+          "key": "dkfz",
+          "name": "Deutsches Krebsforschungszentrum (DKFZ)",
+          "homepage": "https://www.dkfz.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dkfz-official",
+              "name": "Deutsches Krebsforschungszentrum (DKFZ)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.dkfz.de/"
+            }
+          ],
+          "notes": [
+            "Independent cancer research center; institutional Source."
+          ]
+        },
+        {
+          "key": "max-delbrueck-center",
+          "name": "Max Delbrück Center",
+          "homepage": "https://www.mdc-berlin.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "max-delbrueck-center-official",
+              "name": "Max Delbrück Center",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.mdc-berlin.de/"
+            }
+          ],
+          "notes": [
+            "Independent biomedical research center; institutional Source."
+          ]
+        },
+        {
+          "key": "bnitm",
+          "name": "Bernhard-Nocht-Institut für Tropenmedizin (BNITM)",
+          "homepage": "https://www.bnitm.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_research_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bnitm-official",
+              "name": "Bernhard-Nocht-Institut für Tropenmedizin (BNITM)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bnitm.de/"
+            }
+          ],
+          "notes": [
+            "Independent tropical-medicine research institute; institutional Source."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 23,
+  "review_status": {
+    "source_selection": "approved_23_source_de_academic_core_2026_09_26",
+    "segmentation": "functional_research_domain_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022",
+    "academic_think_tank_boundary": "primary_institutional_function",
+    "extra_university_research_institutes": "included_as_academic"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_universities",
+      "reason": "Further universities remain eligible when they add material national or topic-specific research coverage."
+    },
+    {
+      "category": "research_organization_member_institutes",
+      "reason": "Individual Max Planck and Fraunhofer institutes are not automatic additional Sources; they are added only when independently relevant."
+    },
+    {
+      "category": "additional_helmholtz_and_leibniz_centers",
+      "reason": "Further independent research centers remain eligible for topic-specific expansion."
+    }
+  ]
+}

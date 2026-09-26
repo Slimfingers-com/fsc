@@ -319,6 +319,33 @@ No political-orientation or radicality classification is inferred from sector, o
 
 No feed is activated by inclusion in the company catalog.
 
+## Germany (DE) — Academic
+
+Academic Sources are grouped by **scientific research function**, not political orientation. Under ADR 0024, `ACADEMIC` includes universities, academies and extra-university research institutions when scientific research is their primary institutional function. Policy advice and public communication do not by themselves make such institutions `THINK_TANK` Sources.
+
+The jointly approved DE academic core contains 23 Source identities:
+
+| Functional group | ACADEMIC Sources |
+| --- | --- |
+| Universities | Ludwig-Maximilians-Universität München (LMU), Technische Universität München (TUM), Universität Heidelberg, Humboldt-Universität zu Berlin, Freie Universität Berlin, Universität Bonn |
+| Cross-disciplinary science organizations | Max-Planck-Gesellschaft, Fraunhofer-Gesellschaft, Nationale Akademie der Wissenschaften Leopoldina |
+| Economy / society / policy research | ifo Institut, DIW Berlin, ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung, RWI – Leibniz-Institut für Wirtschaftsforschung, Kiel Institut für Weltwirtschaft (IfW Kiel), Wissenschaftszentrum Berlin für Sozialforschung (WZB) |
+| Climate / technology / energy | Potsdam-Institut für Klimafolgenforschung (PIK), Deutsches Zentrum für Luft- und Raumfahrt (DLR), Forschungszentrum Jülich, Karlsruher Institut für Technologie (KIT) |
+| Health / life sciences | Charité – Universitätsmedizin Berlin, Deutsches Krebsforschungszentrum (DKFZ), Max Delbrück Center, Bernhard-Nocht-Institut für Tropenmedizin (BNITM) |
+
+Identity and boundary rules:
+
+- **Primary scientific function determines ACADEMIC.** ifo, DIW, ZEW, RWI, IfW and WZB remain ACADEMIC even though they also advise policymakers and participate in public policy debate.
+- **THINK_TANK is reserved for policy analysis/advice as the primary institutional function.** SWP and DGAP are examples for the later think-tank catalog.
+- Universities are Sources at institutional level by default; faculties, chairs, departments and university institutes are not automatic additional Sources.
+- Max-Planck-Gesellschaft and Fraunhofer-Gesellschaft are organization-level Sources in the compact core. Their individual institutes are deferred unless independently relevant.
+- Independent large-scale research centers such as DLR, Forschungszentrum Jülich, DKFZ and the Max Delbrück Center remain their own Sources even when they belong to broader research associations.
+- RKI is not duplicated here because it already exists as a `PRIMARY_SOURCE`.
+- New ACADEMIC articles default to `expert_analysis`, but article-level `confirmation_role` remains authoritative. Own measurements/data can be `primary_evidence`; institutional positions can be `advocacy`; genuinely editorial material can be `editorial`.
+- No political-orientation or radicality classification is inferred from institution, discipline, funding structure or catalog inclusion.
+
+No feed is activated by inclusion in the academic catalog.
+
 ## Austria (AT)
 
 ### Print
@@ -1039,6 +1066,7 @@ Completed catalog blocks:
 29. Germany NGO core (mission-driven civil-society organizations; article-level confirmation roles)
 30. Germany interest-group core (member/sector representation; legal status kept separate from SourceType)
 31. Germany company core (28 group-first corporate Sources; controlled subsidiaries deferred unless independently relevant)
+32. Germany academic core (23 scientific-research Sources; extra-university institutes included by primary-function rule)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 

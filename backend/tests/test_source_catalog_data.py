@@ -3110,3 +3110,191 @@ def test_de_company_catalog_has_no_political_classification() -> None:
 
     assert "editorial_orientation" not in dimensions
     assert "radicality" not in dimensions
+
+
+DE_ACADEMIC_CATALOG = CATALOG_DIR / "de_academic_v1.json"
+
+
+def load_de_academic_catalog() -> dict:
+    return json.loads(DE_ACADEMIC_CATALOG.read_text(encoding="utf-8"))
+
+
+def de_academic_entries(catalog: dict) -> list[dict]:
+    return [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+
+def test_de_academic_catalog_has_approved_scope_and_count() -> None:
+    catalog = load_de_academic_catalog()
+    entries = de_academic_entries(catalog)
+
+    assert catalog["country"] == "DE"
+    assert catalog["media_category"] == "organization"
+    assert catalog["organization_type"] == "ACADEMIC"
+    assert (
+        catalog["segmentation_policy"]
+        == "functional_research_domain_not_political_orientation"
+    )
+    assert (
+        catalog["academic_boundary_policy"]
+        == (
+            "primary_scientific_research_function_includes_universities_"
+            "academies_and_extra_university_research_institutes"
+        )
+    )
+    assert (
+        catalog["think_tank_boundary_policy"]
+        == (
+            "policy_analysis_and_advice_primary_function_is_think_tank_"
+            "research_primary_function_is_academic"
+        )
+    )
+    assert catalog["default_confirmation_role"] == "expert_analysis"
+    assert catalog["approved_candidate_count"] == 23
+    assert [len(group["entries"]) for group in catalog["groups"]] == [
+        6,
+        3,
+        6,
+        4,
+        4,
+    ]
+    assert len(entries) == 23
+    assert len({entry["key"] for entry in entries}) == 23
+    assert len({entry["name"].casefold() for entry in entries}) == 23
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == "ACADEMIC" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["classifications"] == [] for entry in entries)
+
+
+def test_de_academic_catalog_matches_approved_core() -> None:
+    catalog = load_de_academic_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    assert {
+        entry["name"]
+        for entry in groups["universities"]["entries"]
+    } == {
+        "Ludwig-Maximilians-Universität München (LMU)",
+        "Technische Universität München (TUM)",
+        "Universität Heidelberg",
+        "Humboldt-Universität zu Berlin",
+        "Freie Universität Berlin",
+        "Universität Bonn",
+    }
+    assert {
+        entry["name"]
+        for entry in groups[
+            "cross_disciplinary_science_organizations"
+        ]["entries"]
+    } == {
+        "Max-Planck-Gesellschaft",
+        "Fraunhofer-Gesellschaft",
+        "Nationale Akademie der Wissenschaften Leopoldina",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["economy_society_policy_research"]["entries"]
+    } == {
+        "ifo Institut",
+        "DIW Berlin",
+        "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
+        "RWI – Leibniz-Institut für Wirtschaftsforschung",
+        "Kiel Institut für Weltwirtschaft (IfW Kiel)",
+        "Wissenschaftszentrum Berlin für Sozialforschung (WZB)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["climate_technology_energy"]["entries"]
+    } == {
+        "Potsdam-Institut für Klimafolgenforschung (PIK)",
+        "Deutsches Zentrum für Luft- und Raumfahrt (DLR)",
+        "Forschungszentrum Jülich",
+        "Karlsruher Institut für Technologie (KIT)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["health_life_sciences"]["entries"]
+    } == {
+        "Charité – Universitätsmedizin Berlin",
+        "Deutsches Krebsforschungszentrum (DKFZ)",
+        "Max Delbrück Center",
+        "Bernhard-Nocht-Institut für Tropenmedizin (BNITM)",
+    }
+
+
+def test_de_academic_catalog_encodes_academic_think_tank_boundary() -> None:
+    catalog = load_de_academic_catalog()
+    entries = de_academic_entries(catalog)
+    by_name = {entry["name"]: entry for entry in entries}
+
+    for name in (
+        "ifo Institut",
+        "DIW Berlin",
+        "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
+        "RWI – Leibniz-Institut für Wirtschaftsforschung",
+        "Kiel Institut für Weltwirtschaft (IfW Kiel)",
+        "Wissenschaftszentrum Berlin für Sozialforschung (WZB)",
+    ):
+        assert by_name[name]["source_type"] == "ACADEMIC"
+
+    assert "Stiftung Wissenschaft und Politik (SWP)" not in by_name
+    assert "Deutsche Gesellschaft für Auswärtige Politik (DGAP)" not in by_name
+
+
+def test_de_academic_catalog_enforces_institution_level_identity() -> None:
+    catalog = load_de_academic_catalog()
+    names = {entry["name"] for entry in de_academic_entries(catalog)}
+
+    assert "Max-Planck-Gesellschaft" in names
+    assert "Fraunhofer-Gesellschaft" in names
+    assert "Deutsches Zentrum für Luft- und Raumfahrt (DLR)" in names
+    assert "Forschungszentrum Jülich" in names
+    assert "Deutsches Krebsforschungszentrum (DKFZ)" in names
+    assert "Max Delbrück Center" in names
+    assert "Robert Koch-Institut" not in names
+
+    assert not any(
+        "Max-Planck-Institut" in name
+        or "Fraunhofer-Institut" in name
+        for name in names
+    )
+
+
+def test_de_academic_outlets_use_organization_medium() -> None:
+    catalog = load_de_academic_catalog()
+
+    assert all(
+        outlet["media_category"] == "organization"
+        and outlet["publication_form"] == "other"
+        and outlet["scope"] == "national"
+        for entry in de_academic_entries(catalog)
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_academic_catalog_records_deferred_expansion() -> None:
+    catalog = load_de_academic_catalog()
+    assert {
+        item["category"]
+        for item in catalog["deferred_expansion"]
+    } == {
+        "additional_universities",
+        "research_organization_member_institutes",
+        "additional_helmholtz_and_leibniz_centers",
+    }
+
+
+def test_de_academic_catalog_has_no_political_classification() -> None:
+    catalog = load_de_academic_catalog()
+    dimensions = {
+        classification["dimension"]
+        for entry in de_academic_entries(catalog)
+        for classification in entry["classifications"]
+    }
+
+    assert "editorial_orientation" not in dimensions
+    assert "radicality" not in dimensions
