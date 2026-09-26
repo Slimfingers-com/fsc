@@ -2913,3 +2913,200 @@ def test_de_organization_catalogs_do_not_persist_political_orientation() -> None
         }
         assert "editorial_orientation" not in dimensions
         assert "radicality" not in dimensions
+
+
+DE_COMPANY_CATALOG = CATALOG_DIR / "de_company_v1.json"
+
+
+def load_de_company_catalog() -> dict:
+    return json.loads(DE_COMPANY_CATALOG.read_text(encoding="utf-8"))
+
+
+def de_company_entries(catalog: dict) -> list[dict]:
+    return [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+
+def test_de_company_catalog_has_approved_scope_and_count() -> None:
+    catalog = load_de_company_catalog()
+    entries = de_company_entries(catalog)
+
+    assert catalog["country"] == "DE"
+    assert catalog["media_category"] == "organization"
+    assert catalog["organization_type"] == "COMPANY"
+    assert (
+        catalog["segmentation_policy"]
+        == "functional_economic_role_not_political_orientation"
+    )
+    assert (
+        catalog["source_identity_policy"]
+        == (
+            "group_first_corporate_identity_controlled_subsidiaries_and_"
+            "brands_are_not_automatic_sources"
+        )
+    )
+    assert (
+        catalog["ownership_policy"]
+        == (
+            "ownership_and_control_are_metadata_and_do_not_create_"
+            "editorial_dependency_by_themselves"
+        )
+    )
+    assert catalog["default_confirmation_role"] == "advocacy"
+    assert catalog["approved_candidate_count"] == 28
+    assert [len(group["entries"]) for group in catalog["groups"]] == [
+        5,
+        5,
+        5,
+        4,
+        5,
+        4,
+    ]
+    assert len(entries) == 28
+    assert len({entry["key"] for entry in entries}) == 28
+    assert len({entry["name"].casefold() for entry in entries}) == 28
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == "COMPANY" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["classifications"] == [] for entry in entries)
+
+
+def test_de_company_catalog_matches_approved_core() -> None:
+    catalog = load_de_company_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    assert {
+        entry["name"]
+        for entry in groups["mobility_transport"]["entries"]
+    } == {
+        "Volkswagen AG (Volkswagen Group)",
+        "Mercedes-Benz Group AG",
+        "BMW AG (BMW Group)",
+        "Deutsche Bahn AG",
+        "Deutsche Lufthansa AG (Lufthansa Group)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups[
+            "industry_engineering_defence_materials"
+        ]["entries"]
+    } == {
+        "Siemens AG",
+        "Robert Bosch GmbH (Bosch Group)",
+        "BASF SE",
+        "Rheinmetall AG",
+        "thyssenkrupp AG",
+    }
+    assert {
+        entry["name"]
+        for entry in groups[
+            "energy_logistics_critical_infrastructure"
+        ]["entries"]
+    } == {
+        "RWE AG",
+        "E.ON SE",
+        "Uniper SE",
+        "Siemens Energy AG",
+        "DHL AG (DHL Group)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["digital_telecom_semiconductors"]["entries"]
+    } == {
+        "Deutsche Telekom AG",
+        "SAP SE",
+        "Infineon Technologies AG",
+        "United Internet AG",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["finance_insurance_real_estate"]["entries"]
+    } == {
+        "Deutsche Bank AG",
+        "Commerzbank AG",
+        "Allianz SE",
+        "Münchener Rückversicherungs-Gesellschaft AG (Munich Re)",
+        "Vonovia SE",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["health_pharma_life_science"]["entries"]
+    } == {
+        "Bayer AG",
+        "Merck KGaA",
+        "BioNTech SE",
+        "Fresenius SE & Co. KGaA",
+    }
+
+
+def test_de_company_outlets_use_organization_medium() -> None:
+    catalog = load_de_company_catalog()
+
+    assert all(
+        outlet["media_category"] == "organization"
+        and outlet["publication_form"] == "other"
+        and outlet["scope"] == "national"
+        for entry in de_company_entries(catalog)
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_company_catalog_enforces_group_first_boundary() -> None:
+    catalog = load_de_company_catalog()
+    names = {entry["name"] for entry in de_company_entries(catalog)}
+
+    assert "DHL AG (DHL Group)" in names
+    assert "Deutsche Post AG" not in names
+    assert "Siemens Energy AG" in names
+    assert "Omterra" not in names
+
+    controlled_entities = {
+        "Porsche AG",
+        "Audi AG",
+        "DB InfraGO AG",
+        "Deutsche Post AG",
+        "Siemens Healthineers AG",
+        "Fresenius Medical Care AG",
+        "1&1 AG",
+        "T-Systems",
+    }
+    assert names.isdisjoint(controlled_entities)
+
+
+def test_de_company_catalog_records_deferred_expansion() -> None:
+    catalog = load_de_company_catalog()
+    deferred = {
+        item["category"]: item["reason"]
+        for item in catalog["deferred_expansion"]
+    }
+
+    assert set(deferred) == {
+        "retail_consumer_groups",
+        "controlled_subsidiaries_and_brands",
+        "additional_sector_leaders",
+    }
+    assert all(
+        name in deferred["retail_consumer_groups"]
+        for name in (
+            "Schwarz Gruppe",
+            "REWE Group",
+            "EDEKA-Verbund",
+            "ALDI Nord",
+            "ALDI Süd",
+        )
+    )
+
+
+def test_de_company_catalog_has_no_political_classification() -> None:
+    catalog = load_de_company_catalog()
+    dimensions = {
+        classification["dimension"]
+        for entry in de_company_entries(catalog)
+        for classification in entry["classifications"]
+    }
+
+    assert "editorial_orientation" not in dimensions
+    assert "radicality" not in dimensions
