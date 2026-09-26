@@ -1,0 +1,562 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "INTEREST_GROUP",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_is_source_member_bodies_and_portals_are_separate_only_when_they_are_distinct_institutional_voices",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "legal_status_policy": "legal_form_and_public_law_status_are_metadata_not_source_type",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "labour_unions",
+      "label": "labour and trade unions",
+      "entries": [
+        {
+          "key": "dgb",
+          "name": "Deutscher Gewerkschaftsbund (DGB)",
+          "homepage": "https://www.dgb.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dgb-official",
+              "name": "Deutscher Gewerkschaftsbund (DGB)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.dgb.de/"
+            }
+          ],
+          "notes": [
+            "National trade-union confederation; member unions remain institutionally distinct Sources."
+          ]
+        },
+        {
+          "key": "ig-metall",
+          "name": "IG Metall",
+          "homepage": "https://www.igmetall.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ig-metall-official",
+              "name": "IG Metall",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.igmetall.de/"
+            }
+          ],
+          "notes": [
+            "Trade union and member-interest organization."
+          ]
+        },
+        {
+          "key": "verdi",
+          "name": "ver.di",
+          "homepage": "https://www.verdi.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "verdi-official",
+              "name": "ver.di",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.verdi.de/"
+            }
+          ],
+          "notes": [
+            "Trade union and member-interest organization."
+          ]
+        },
+        {
+          "key": "dbb",
+          "name": "dbb beamtenbund und tarifunion",
+          "homepage": "https://www.dbb.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dbb-official",
+              "name": "dbb beamtenbund und tarifunion",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.dbb.de/"
+            }
+          ],
+          "notes": [
+            "Trade-union federation and member-interest organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "business_employer_sector",
+      "label": "business, employer and sector associations",
+      "entries": [
+        {
+          "key": "bdi",
+          "name": "Bundesverband der Deutschen Industrie (BDI)",
+          "homepage": "https://bdi.eu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bdi-official",
+              "name": "Bundesverband der Deutschen Industrie (BDI)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://bdi.eu/"
+            }
+          ],
+          "notes": [
+            "Industry federation representing member-sector interests."
+          ]
+        },
+        {
+          "key": "bda",
+          "name": "Bundesvereinigung der Deutschen Arbeitgeberverbände (BDA)",
+          "homepage": "https://arbeitgeber.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bda-official",
+              "name": "Bundesvereinigung der Deutschen Arbeitgeberverbände (BDA)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://arbeitgeber.de/"
+            }
+          ],
+          "notes": [
+            "National employer-association federation."
+          ]
+        },
+        {
+          "key": "zdh",
+          "name": "Zentralverband des Deutschen Handwerks (ZDH)",
+          "homepage": "https://www.zdh.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zdh-official",
+              "name": "Zentralverband des Deutschen Handwerks (ZDH)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.zdh.de/"
+            }
+          ],
+          "notes": [
+            "National umbrella organization representing the skilled-crafts sector."
+          ]
+        },
+        {
+          "key": "bitkom",
+          "name": "Bitkom",
+          "homepage": "https://www.bitkom.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bitkom-official",
+              "name": "Bitkom",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bitkom.org/"
+            }
+          ],
+          "notes": [
+            "Digital-industry membership association; think-tank self-description does not override its primary member-representation function."
+          ]
+        },
+        {
+          "key": "deutscher-bauernverband",
+          "name": "Deutscher Bauernverband (DBV)",
+          "homepage": "https://www.bauernverband.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutscher-bauernverband-official",
+              "name": "Deutscher Bauernverband (DBV)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bauernverband.de/"
+            }
+          ],
+          "notes": [
+            "Agricultural membership and sector-interest association."
+          ]
+        },
+        {
+          "key": "dihk",
+          "name": "Deutsche Industrie- und Handelskammer (DIHK)",
+          "homepage": "https://www.dihk.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [
+            {
+              "dimension": "legal_status",
+              "value": "public_law_corporation",
+              "classifier_type": "self_description",
+              "classifier_name": "Deutsche Industrie- und Handelskammer (DIHK)",
+              "source_url": "https://www.dihk.de/de/impressum",
+              "reference_date": "2023-01-01",
+              "retrieved_at": "2026-09-26T16:00:00Z",
+              "notes": "DIHK states that it is a Körperschaft des öffentlichen Rechts under § 10b Abs. 1 IHKG; this legal status does not replace its functional INTEREST_GROUP SourceType."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dihk-official",
+              "name": "Deutsche Industrie- und Handelskammer (DIHK)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.dihk.de/"
+            }
+          ],
+          "notes": [
+            "National chamber organization representing statutory chamber interests; public-law status is modeled separately as LEGAL_STATUS."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "consumer_housing_social",
+      "label": "consumer, housing and social interests",
+      "entries": [
+        {
+          "key": "vzbv",
+          "name": "Verbraucherzentrale Bundesverband (vzbv)",
+          "homepage": "https://www.vzbv.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "vzbv-official",
+              "name": "Verbraucherzentrale Bundesverband (vzbv)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.vzbv.de/"
+            }
+          ],
+          "notes": [
+            "Umbrella organization representing consumer interests."
+          ]
+        },
+        {
+          "key": "deutscher-mieterbund",
+          "name": "Deutscher Mieterbund (DMB)",
+          "homepage": "https://mieterbund.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "deutscher-mieterbund-official",
+              "name": "Deutscher Mieterbund (DMB)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://mieterbund.de/"
+            }
+          ],
+          "notes": [
+            "National umbrella organization of tenant associations."
+          ]
+        },
+        {
+          "key": "haus-und-grund",
+          "name": "Haus & Grund Deutschland",
+          "homepage": "https://www.hausundgrund.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "haus-und-grund-official",
+              "name": "Haus & Grund Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.hausundgrund.de/"
+            }
+          ],
+          "notes": [
+            "National association representing private property-owner and landlord interests."
+          ]
+        },
+        {
+          "key": "vdk",
+          "name": "Sozialverband VdK Deutschland",
+          "homepage": "https://www.vdk.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "vdk-official",
+              "name": "Sozialverband VdK Deutschland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.vdk.de/"
+            }
+          ],
+          "notes": [
+            "Membership-based social-interest organization."
+          ]
+        },
+        {
+          "key": "sovd",
+          "name": "Sozialverband Deutschland (SoVD)",
+          "homepage": "https://www.sovd.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sovd-official",
+              "name": "Sozialverband Deutschland (SoVD)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.sovd.de/"
+            }
+          ],
+          "notes": [
+            "Membership-based social-interest organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "membership_civic_interests",
+      "label": "other major membership and civic interests",
+      "entries": [
+        {
+          "key": "bund-der-steuerzahler",
+          "name": "Bund der Steuerzahler Deutschland (BdSt)",
+          "homepage": "https://www.steuerzahler.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bund-der-steuerzahler-official",
+              "name": "Bund der Steuerzahler Deutschland (BdSt)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.steuerzahler.de/"
+            }
+          ],
+          "notes": [
+            "Membership-based representation of taxpayer interests."
+          ]
+        },
+        {
+          "key": "adac",
+          "name": "ADAC",
+          "homepage": "https://www.adac.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "adac-official",
+              "name": "ADAC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.adac.de/"
+            }
+          ],
+          "notes": [
+            "Large membership organization with explicit consumer and mobility interest representation."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 17,
+  "review_status": {
+    "source_selection": "approved_17_source_de_interest_group_core_2026_09_26",
+    "segmentation": "functional_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022",
+    "organization_boundary": "member_or_sector_interest_representation_per_adr_0023",
+    "statutory_body_decision": "functional_source_type_with_separate_legal_status_metadata"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_professional_and_sector_associations",
+      "reason": "Further sector and professional associations remain eligible after the compact national core."
+    },
+    {
+      "category": "regional_member_organizations",
+      "reason": "Regional chapters and member bodies are added only when they are independently relevant institutional voices."
+    }
+  ]
+}
