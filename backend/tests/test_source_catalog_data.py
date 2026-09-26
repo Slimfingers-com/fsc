@@ -2703,3 +2703,213 @@ def test_gb_primary_source_catalog_uses_current_business_department_name() -> No
     }
     assert "Department for Business, Innovation, Science and Trade" in names
     assert "Department for Business and Trade" not in names
+
+
+DE_NGO_CATALOG = CATALOG_DIR / "de_ngo_v1.json"
+DE_INTEREST_GROUP_CATALOG = CATALOG_DIR / "de_interest_group_v1.json"
+
+
+def load_de_organization_catalog(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def de_organization_entries(catalog: dict) -> list[dict]:
+    return [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+
+@pytest.mark.parametrize(
+    ("path", "organization_type", "source_type", "count", "group_sizes"),
+    [
+        (DE_NGO_CATALOG, "NGO", "NGO", 22, [5, 5, 6, 6]),
+        (
+            DE_INTEREST_GROUP_CATALOG,
+            "INTEREST_GROUP",
+            "INTEREST_GROUP",
+            17,
+            [4, 6, 5, 2],
+        ),
+    ],
+)
+def test_de_organization_catalogs_have_approved_scope(
+    path: Path,
+    organization_type: str,
+    source_type: str,
+    count: int,
+    group_sizes: list[int],
+) -> None:
+    catalog = load_de_organization_catalog(path)
+    entries = de_organization_entries(catalog)
+
+    assert catalog["country"] == "DE"
+    assert catalog["media_category"] == "organization"
+    assert catalog["organization_type"] == organization_type
+    assert catalog["segmentation_policy"] == "functional_role_not_political_orientation"
+    assert catalog["default_confirmation_role"] == "advocacy"
+    assert (
+        catalog["confirmation_policy"]
+        == "article_confirmation_role_controls_independence_source_type_only_sets_initial_default"
+    )
+    assert catalog["approved_candidate_count"] == count
+    assert [len(group["entries"]) for group in catalog["groups"]] == group_sizes
+    assert len(entries) == count
+    assert len({entry["key"] for entry in entries}) == count
+    assert len({entry["name"].casefold() for entry in entries}) == count
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == source_type for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+@pytest.mark.parametrize("path", [DE_NGO_CATALOG, DE_INTEREST_GROUP_CATALOG])
+def test_de_organization_outlets_use_organization_medium(path: Path) -> None:
+    catalog = load_de_organization_catalog(path)
+    entries = de_organization_entries(catalog)
+
+    assert all(
+        outlet["media_category"] == "organization"
+        and outlet["publication_form"] == "other"
+        and outlet["scope"] == "national"
+        for entry in entries
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_ngo_catalog_matches_approved_core_and_identity_rules() -> None:
+    catalog = load_de_organization_catalog(DE_NGO_CATALOG)
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    assert {
+        entry["name"]
+        for entry in groups["environment_climate_nature"]["entries"]
+    } == {
+        "Greenpeace Deutschland",
+        "Bund für Umwelt und Naturschutz Deutschland (BUND)",
+        "NABU – Naturschutzbund Deutschland",
+        "Deutsche Umwelthilfe (DUH)",
+        "WWF Deutschland",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["rights_freedoms_migration_press_digital"]["entries"]
+    } == {
+        "Amnesty International Deutschland",
+        "PRO ASYL",
+        "Gesellschaft für Freiheitsrechte (GFF)",
+        "Reporter ohne Grenzen Deutschland",
+        "HateAid",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["democracy_transparency_watchdog_consumer"]["entries"]
+    } == {
+        "Transparency International Deutschland",
+        "LobbyControl",
+        "Mehr Demokratie",
+        "Campact",
+        "Parlamentwatch e.V.",
+        "foodwatch Deutschland",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["humanitarian_development_social_welfare"]["entries"]
+    } == {
+        "Welthungerhilfe",
+        "terre des hommes Deutschland",
+        "Ärzte ohne Grenzen Deutschland",
+        "Deutscher Caritasverband",
+        "Diakonie Deutschland",
+        "Deutsches Rotes Kreuz (DRK)",
+    }
+
+    entries = de_organization_entries(catalog)
+    names = {entry["name"] for entry in entries}
+    assert "CORRECTIV" not in names
+
+    parlamentwatch = next(entry for entry in entries if entry["key"] == "parlamentwatch")
+    assert parlamentwatch["name"] == "Parlamentwatch e.V."
+    assert parlamentwatch["outlets"][0]["name"] == "abgeordnetenwatch.de"
+
+
+def test_de_interest_group_catalog_matches_approved_core() -> None:
+    catalog = load_de_organization_catalog(DE_INTEREST_GROUP_CATALOG)
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    assert {
+        entry["name"]
+        for entry in groups["labour_unions"]["entries"]
+    } == {
+        "Deutscher Gewerkschaftsbund (DGB)",
+        "IG Metall",
+        "ver.di",
+        "dbb beamtenbund und tarifunion",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["business_employer_sector"]["entries"]
+    } == {
+        "Bundesverband der Deutschen Industrie (BDI)",
+        "Bundesvereinigung der Deutschen Arbeitgeberverbände (BDA)",
+        "Zentralverband des Deutschen Handwerks (ZDH)",
+        "Bitkom",
+        "Deutscher Bauernverband (DBV)",
+        "Deutsche Industrie- und Handelskammer (DIHK)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["consumer_housing_social"]["entries"]
+    } == {
+        "Verbraucherzentrale Bundesverband (vzbv)",
+        "Deutscher Mieterbund (DMB)",
+        "Haus & Grund Deutschland",
+        "Sozialverband VdK Deutschland",
+        "Sozialverband Deutschland (SoVD)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["membership_civic_interests"]["entries"]
+    } == {
+        "Bund der Steuerzahler Deutschland (BdSt)",
+        "ADAC",
+    }
+
+
+def test_de_interest_group_dihk_uses_legal_status_metadata() -> None:
+    catalog = load_de_organization_catalog(DE_INTEREST_GROUP_CATALOG)
+    entries = de_organization_entries(catalog)
+    dihk = next(entry for entry in entries if entry["key"] == "dihk")
+
+    assert dihk["source_type"] == "INTEREST_GROUP"
+    assert dihk["classifications"] == [
+        {
+            "dimension": "legal_status",
+            "value": "public_law_corporation",
+            "classifier_type": "self_description",
+            "classifier_name": "Deutsche Industrie- und Handelskammer (DIHK)",
+            "source_url": "https://www.dihk.de/de/impressum",
+            "reference_date": "2023-01-01",
+            "retrieved_at": "2026-09-26T16:00:00Z",
+            "notes": (
+                "DIHK states that it is a Körperschaft des öffentlichen Rechts "
+                "under § 10b Abs. 1 IHKG; this legal status does not replace "
+                "its functional INTEREST_GROUP SourceType."
+            ),
+        }
+    ]
+
+    other_entries = [entry for entry in entries if entry["key"] != "dihk"]
+    assert all(entry["classifications"] == [] for entry in other_entries)
+
+
+def test_de_organization_catalogs_do_not_persist_political_orientation() -> None:
+    for path in (DE_NGO_CATALOG, DE_INTEREST_GROUP_CATALOG):
+        catalog = load_de_organization_catalog(path)
+        dimensions = {
+            classification["dimension"]
+            for entry in de_organization_entries(catalog)
+            for classification in entry["classifications"]
+        }
+        assert "editorial_orientation" not in dimensions
+        assert "radicality" not in dimensions
