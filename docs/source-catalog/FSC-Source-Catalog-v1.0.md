@@ -241,6 +241,53 @@ Specific identity and attribution rules:
 
 No feed is activated by inclusion in this catalog.
 
+## Germany (DE) — NGOs
+
+NGOs are grouped by **civil-society function**, not political orientation. They use `SourceType.NGO`, `media_category=organization` and `publication_form=other`. Under ADR 0022, NGO content defaults to `confirmation_role=advocacy`, but the role remains article-specific.
+
+The jointly approved DE NGO core contains 22 Source identities:
+
+| Functional group | NGO Sources |
+| --- | --- |
+| Environment / climate / nature | Greenpeace Deutschland, BUND, NABU, Deutsche Umwelthilfe, WWF Deutschland |
+| Human rights / civil liberties / migration / press & digital rights | Amnesty International Deutschland, PRO ASYL, Gesellschaft für Freiheitsrechte, Reporter ohne Grenzen Deutschland, HateAid |
+| Democracy / transparency / watchdog / consumer advocacy | Transparency International Deutschland, LobbyControl, Mehr Demokratie, Campact, Parlamentwatch e.V., foodwatch Deutschland |
+| Humanitarian / development / social welfare | Welthungerhilfe, terre des hommes Deutschland, Ärzte ohne Grenzen Deutschland, Deutscher Caritasverband, Diakonie Deutschland, Deutsches Rotes Kreuz |
+
+Identity and boundary rules:
+
+- **Mission-driven civil society is NGO; member/sector representation is INTEREST_GROUP.**
+- **Parlamentwatch e.V. is the Source; abgeordnetenwatch.de is its Outlet.**
+- **CORRECTIV is not duplicated here.** It already exists as a digital editorial Source.
+- Caritas and Diakonie remain NGOs because welfare/help is their primary institutional mission; their advocacy activity does not turn them into member-sector interest groups.
+- The Deutsches Rotes Kreuz remains an NGO despite its special statutory/humanitarian role; that role does not make all DRK content official state material.
+- NGO source type never determines confirmation eligibility by itself. An NGO item can be reclassified article-by-article, for example to `expert_analysis` or `primary_evidence`, when justified.
+
+No political-orientation or radicality classification is inferred from inclusion in these functional groups.
+
+## Germany (DE) — Interest groups
+
+ADR 0023 introduces `SourceType.INTEREST_GROUP` for organized non-state representation of a defined membership, profession, industry, sector or comparable constituency. The DE core contains 17 Source identities:
+
+| Functional group | Interest-group Sources |
+| --- | --- |
+| Labour / trade unions | Deutscher Gewerkschaftsbund (DGB), IG Metall, ver.di, dbb beamtenbund und tarifunion |
+| Business / employers / sectors | Bundesverband der Deutschen Industrie (BDI), Bundesvereinigung der Deutschen Arbeitgeberverbände (BDA), Zentralverband des Deutschen Handwerks (ZDH), Bitkom, Deutscher Bauernverband (DBV), Deutsche Industrie- und Handelskammer (DIHK) |
+| Consumer / housing / social interests | Verbraucherzentrale Bundesverband (vzbv), Deutscher Mieterbund (DMB), Haus & Grund Deutschland, Sozialverband VdK Deutschland, Sozialverband Deutschland (SoVD) |
+| Other major membership / civic interests | Bund der Steuerzahler Deutschland (BdSt), ADAC |
+
+Identity and boundary rules:
+
+- Source type describes the institution; article-level `confirmation_role` describes the concrete content.
+- New INTEREST_GROUP articles default to `advocacy`, but an analytical paper, own survey/data publication or genuinely editorial item can be assigned the appropriate article role.
+- DGB and its member unions are distinct institutional Sources. Membership or umbrella relationships do not statically collapse them; article provenance handles copied or jointly produced content.
+- The same rule applies to umbrella/sector associations and their members.
+- Bitkom remains `INTEREST_GROUP` despite also describing itself as a think tank because member/sector representation is its primary institutional function.
+- The DIHK remains `INTEREST_GROUP`. Its status as a **Körperschaft des öffentlichen Rechts** is stored separately as `LEGAL_STATUS`; legal form does not replace functional SourceType.
+- Regional chapters and member bodies are added only when they are independently relevant institutional voices; they are not duplicated automatically.
+
+No feed is activated by inclusion in either organization catalog.
+
 ## Austria (AT)
 
 ### Print
