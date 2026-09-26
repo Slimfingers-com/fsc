@@ -46,6 +46,16 @@ research and policy analysis rather than representing a member constituency.
 A hybrid organization's primary institutional function determines its
 `SourceType`; labels used in self-description alone do not control the type.
 
+Legal form and public-law status are orthogonal metadata, not SourceTypes.
+An organization can therefore remain `INTEREST_GROUP` even when it is a
+statutory or public-law body, provided its primary institutional function is
+member or sector interest representation. The Deutsche Industrie- und
+Handelskammer (DIHK) is the initial catalog example: it remains
+`INTEREST_GROUP`, while its status as a Körperschaft des öffentlichen Rechts
+is recorded separately through the `LEGAL_STATUS` classification dimension.
+The same rule avoids creating SourceTypes for e.V., foundation, gGmbH, SE or
+other legal forms.
+
 ## Confirmation semantics
 
 New articles from `INTEREST_GROUP` sources default to
