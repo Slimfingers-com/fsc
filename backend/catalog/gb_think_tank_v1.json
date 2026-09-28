@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "GB",
   "language": "en",
   "media_category": "organization",
@@ -8,6 +8,16 @@
   "segmentation_policy": "functional_role_not_political_orientation",
   "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
   "default_confirmation_role": "expert_analysis",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  },
   "coverage_policy": "targets_are_goals_not_quotas",
   "source_identity_policy": "policy_analysis_institution_is_source_publications_and_programmes_are_not_automatic_sources",
   "academic_boundary_policy": "research_primary_function_is_academic_policy_analysis_and_advice_primary_function_is_think_tank",
@@ -27,7 +37,18 @@
           "source_type": "THINK_TANK",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Expert comments",
+              "url": "https://www.chathamhouse.org/path/83/feed.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "expert_analysis",
+              "feed_class": "research_publication",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -56,7 +77,18 @@
           "source_type": "THINK_TANK",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Latest commentary",
+              "url": "https://www.rusi.org/rss/latest-commentary.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "expert_analysis",
+              "feed_class": "research_publication",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],

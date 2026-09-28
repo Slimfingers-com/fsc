@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "GB",
   "language": "en",
   "media_category": "organization",
@@ -8,6 +8,17 @@
   "segmentation_policy": "functional_role_not_political_orientation",
   "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
   "default_confirmation_role": "advocacy",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "advocacy",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  },
+  "research_independence_policy": "interest_bound_source_research_does_not_create_independent_confirmation",
   "coverage_policy": "targets_are_goals_not_quotas",
   "source_identity_policy": "member_or_sector_representation_is_interest_group",
   "academic_boundary_policy": "universities_uk_is_membership_representation_not_academic_research_source",
@@ -177,7 +188,18 @@
           "source_type": "INTEREST_GROUP",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "News",
+              "url": "https://www.britishchambers.org.uk/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],
