@@ -329,6 +329,40 @@ def test_confirmation_role_overrides_source_type_for_independence(db):
     )
 
 
+def test_signal_role_cannot_create_multi_source_consensus(db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "confirmation_role": ConfirmationRole.EDITORIAL,
+                "claim_text": "The incident happened downtown.",
+            },
+            {
+                "source_type": SourceType.SIGNAL,
+                "confirmation_role": ConfirmationRole.SIGNAL,
+                "claim_text": "The incident happened downtown.",
+            },
+        ],
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+    group = prepared.analysis_input.groups[0]
+
+    assert group.article_count == 2
+    assert group.independent_source_count == 1
+    assert (
+        service.run_provider(prepared).consensus[0].consensus_kind
+        == ConsensusKind.SINGLE_SOURCE
+    )
+
+
 def test_consensus_hash_includes_confirmation_role(db):
     data = build_consensus_story(
         db,

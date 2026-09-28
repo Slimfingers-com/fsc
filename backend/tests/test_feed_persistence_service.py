@@ -470,6 +470,33 @@ def test_interest_group_feed_assigns_advocacy_role(db):
     assert article.confirmation_role is ConfirmationRole.ADVOCACY
 
 
+def test_signal_feed_assigns_signal_role(db):
+    source = SourceService().create_source(
+        db,
+        SourceCreate(
+            name="Example Signal Origin",
+            url="https://signal.example.com",
+            source_type=SourceType.SIGNAL,
+            feeds=[
+                FeedCreate(
+                    name="Signal Feed",
+                    url="https://signal.example.com/feed.xml",
+                )
+            ],
+        ),
+    )
+    feed = source.feeds[0]
+
+    FeedPersistenceService().persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(parsed_entry()),
+    )
+
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    assert article.confirmation_role is ConfirmationRole.SIGNAL
+
+
 def test_feed_update_preserves_manual_confirmation_role_override(db):
     feed = create_feed(db)
     service = FeedPersistenceService()
