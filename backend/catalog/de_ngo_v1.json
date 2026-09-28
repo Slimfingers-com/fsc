@@ -672,14 +672,253 @@
           ]
         }
       ]
+    },
+    {
+      "key": "political_and_operational_foundations",
+      "label": "political and operational foundations",
+      "entries": [
+        {
+          "key": "konrad-adenauer-stiftung",
+          "name": "Konrad-Adenauer-Stiftung",
+          "homepage": "https://www.kas.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "konrad-adenauer-stiftung-official",
+              "name": "Konrad-Adenauer-Stiftung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.kas.de/"
+            }
+          ],
+          "notes": [
+            "Political foundation with a broad institutional mission spanning political education, analysis, talent support, culture and international work; institution remains NGO rather than defaulting all content to THINK_TANK."
+          ]
+        },
+        {
+          "key": "friedrich-ebert-stiftung",
+          "name": "Friedrich-Ebert-Stiftung",
+          "homepage": "https://www.fes.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "friedrich-ebert-stiftung-official",
+              "name": "Friedrich-Ebert-Stiftung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fes.de/"
+            }
+          ],
+          "notes": [
+            "Political foundation with political education, policy analysis, international cooperation and talent support; concrete studies can be expert_analysis article by article."
+          ]
+        },
+        {
+          "key": "heinrich-boell-stiftung",
+          "name": "Heinrich-Böll-Stiftung",
+          "homepage": "https://www.boell.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "heinrich-boell-stiftung-official",
+              "name": "Heinrich-Böll-Stiftung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.boell.de/"
+            }
+          ],
+          "notes": [
+            "Political foundation whose broader mission includes political education, civic engagement, international work, culture and research; institution remains NGO."
+          ]
+        },
+        {
+          "key": "friedrich-naumann-stiftung",
+          "name": "Friedrich-Naumann-Stiftung für die Freiheit",
+          "homepage": "https://www.freiheit.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "friedrich-naumann-stiftung-official",
+              "name": "Friedrich-Naumann-Stiftung für die Freiheit",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.freiheit.org/"
+            }
+          ],
+          "notes": [
+            "Political foundation with education, international work, talent support and policy analysis; institution remains NGO."
+          ]
+        },
+        {
+          "key": "rosa-luxemburg-stiftung",
+          "name": "Rosa-Luxemburg-Stiftung",
+          "homepage": "https://www.rosalux.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rosa-luxemburg-stiftung-official",
+              "name": "Rosa-Luxemburg-Stiftung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.rosalux.de/"
+            }
+          ],
+          "notes": [
+            "Political education institution with research, analysis and scholarship activities; institution remains NGO and article role remains content-specific."
+          ]
+        },
+        {
+          "key": "hanns-seidel-stiftung",
+          "name": "Hanns-Seidel-Stiftung",
+          "homepage": "https://www.hss.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hanns-seidel-stiftung-official",
+              "name": "Hanns-Seidel-Stiftung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.hss.de/"
+            }
+          ],
+          "notes": [
+            "Political foundation operating across policy analysis, political education, talent support and international cooperation; institution remains NGO."
+          ]
+        },
+        {
+          "key": "desiderius-erasmus-stiftung",
+          "name": "Desiderius-Erasmus-Stiftung",
+          "homepage": "https://erasmus-stiftung.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "desiderius-erasmus-stiftung-official",
+              "name": "Desiderius-Erasmus-Stiftung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://erasmus-stiftung.de/"
+            }
+          ],
+          "notes": [
+            "Political foundation with civic education, science/research support and talent development among its statutory purposes; institution remains NGO."
+          ]
+        },
+        {
+          "key": "bertelsmann-stiftung",
+          "name": "Bertelsmann Stiftung",
+          "homepage": "https://www.bertelsmann-stiftung.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bertelsmann-stiftung-official",
+              "name": "Bertelsmann Stiftung",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bertelsmann-stiftung.de/"
+            }
+          ],
+          "notes": [
+            "Operational non-profit foundation with studies, projects and societal-change work broader than a pure think-tank function; institution remains NGO."
+          ]
+        }
+      ]
     }
   ],
-  "approved_candidate_count": 22,
+  "approved_candidate_count": 30,
   "review_status": {
-    "source_selection": "approved_22_source_de_ngo_core_2026_09_26",
+    "source_selection": "approved_30_source_de_ngo_core_2026_09_28",
     "segmentation": "functional_not_political",
     "confirmation_semantics": "article_level_confirmation_role_per_adr_0022",
-    "organization_boundary": "mission_driven_civil_society_per_adr_0023"
+    "organization_boundary": "mission_driven_civil_society_per_adr_0023",
+    "foundation_boundary": "broad_mission_foundations_remain_ngo_per_adr_0025"
   },
   "deferred_expansion": [
     {

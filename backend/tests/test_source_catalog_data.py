@@ -2724,7 +2724,7 @@ def de_organization_entries(catalog: dict) -> list[dict]:
 @pytest.mark.parametrize(
     ("path", "organization_type", "source_type", "count", "group_sizes"),
     [
-        (DE_NGO_CATALOG, "NGO", "NGO", 22, [5, 5, 6, 6]),
+        (DE_NGO_CATALOG, "NGO", "NGO", 30, [5, 5, 6, 6, 8]),
         (
             DE_INTEREST_GROUP_CATALOG,
             "INTEREST_GROUP",
@@ -2822,6 +2822,19 @@ def test_de_ngo_catalog_matches_approved_core_and_identity_rules() -> None:
         "Deutscher Caritasverband",
         "Diakonie Deutschland",
         "Deutsches Rotes Kreuz (DRK)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["political_and_operational_foundations"]["entries"]
+    } == {
+        "Konrad-Adenauer-Stiftung",
+        "Friedrich-Ebert-Stiftung",
+        "Heinrich-Böll-Stiftung",
+        "Friedrich-Naumann-Stiftung für die Freiheit",
+        "Rosa-Luxemburg-Stiftung",
+        "Hanns-Seidel-Stiftung",
+        "Desiderius-Erasmus-Stiftung",
+        "Bertelsmann Stiftung",
     }
 
     entries = de_organization_entries(catalog)
@@ -3293,6 +3306,185 @@ def test_de_academic_catalog_has_no_political_classification() -> None:
     dimensions = {
         classification["dimension"]
         for entry in de_academic_entries(catalog)
+        for classification in entry["classifications"]
+    }
+
+    assert "editorial_orientation" not in dimensions
+    assert "radicality" not in dimensions
+
+
+DE_THINK_TANK_CATALOG = CATALOG_DIR / "de_think_tank_v1.json"
+
+
+def load_de_think_tank_catalog() -> dict:
+    return json.loads(DE_THINK_TANK_CATALOG.read_text(encoding="utf-8"))
+
+
+def de_think_tank_entries(catalog: dict) -> list[dict]:
+    return [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+
+def test_de_think_tank_catalog_has_approved_scope_and_count() -> None:
+    catalog = load_de_think_tank_catalog()
+    entries = de_think_tank_entries(catalog)
+
+    assert catalog["country"] == "DE"
+    assert catalog["media_category"] == "organization"
+    assert catalog["organization_type"] == "THINK_TANK"
+    assert (
+        catalog["segmentation_policy"]
+        == "functional_policy_domain_not_political_orientation"
+    )
+    assert (
+        catalog["academic_boundary_policy"]
+        == (
+            "research_primary_function_is_academic_policy_analysis_and_"
+            "advice_primary_function_is_think_tank"
+        )
+    )
+    assert (
+        catalog["foundation_boundary_policy"]
+        == "broad_mission_political_and_operational_foundations_remain_ngo"
+    )
+    assert catalog["default_confirmation_role"] == "expert_analysis"
+    assert catalog["approved_candidate_count"] == 15
+    assert [len(group["entries"]) for group in catalog["groups"]] == [5, 6, 1, 3]
+    assert len(entries) == 15
+    assert len({entry["key"] for entry in entries}) == 15
+    assert len({entry["name"].casefold() for entry in entries}) == 15
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == "THINK_TANK" for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["classifications"] == [] for entry in entries)
+
+
+def test_de_think_tank_catalog_matches_approved_core() -> None:
+    catalog = load_de_think_tank_catalog()
+    groups = {group["key"]: group for group in catalog["groups"]}
+
+    assert {
+        entry["name"]
+        for entry in groups["foreign_security_global_order_democracy"]["entries"]
+    } == {
+        "Stiftung Wissenschaft und Politik (SWP)",
+        "Deutsche Gesellschaft für Auswärtige Politik (DGAP)",
+        "Mercator Institute for China Studies (MERICS)",
+        "Global Public Policy Institute (GPPi)",
+        "Zentrum Liberale Moderne (LibMod)",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["economy_europe_state_society"]["entries"]
+    } == {
+        "Stiftung Marktwirtschaft",
+        "cep – Centrum für Europäische Politik",
+        "Dezernat Zukunft",
+        "Das Progressive Zentrum",
+        "Prometheus – Das Freiheitsinstitut",
+        "REPUBLIK21 e.V.",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["digital_technology_policy"]["entries"]
+    } == {
+        "interface – Tech analysis and policy ideas for Europe e.V.",
+    }
+    assert {
+        entry["name"]
+        for entry in groups["climate_energy_transformation"]["entries"]
+    } == {
+        "Agora Think Tanks gGmbH",
+        "Agora Transport Transformation gGmbH",
+        "ZOE Institute for Future-Fit Economies",
+    }
+
+
+def test_de_think_tank_catalog_models_brands_as_outlets() -> None:
+    catalog = load_de_think_tank_catalog()
+    entries = {entry["key"]: entry for entry in de_think_tank_entries(catalog)}
+
+    assert {
+        outlet["name"]
+        for outlet in entries["agora-think-tanks"]["outlets"]
+    } == {
+        "Agora Energiewende",
+        "Agora Industry",
+        "Agora Agriculture",
+    }
+    assert entries["agora-transport-transformation"]["outlets"][0]["name"] == (
+        "Agora Verkehrswende"
+    )
+    assert entries["republik21"]["name"] == "REPUBLIK21 e.V."
+    assert entries["republik21"]["outlets"][0]["name"] == "Denkfabrik R21"
+    assert entries["interface-eu"]["outlets"][0]["name"] == "interface"
+
+
+def test_de_foundations_remain_ngo_not_think_tank() -> None:
+    ngo = load_de_organization_catalog(DE_NGO_CATALOG)
+    think_tank = load_de_think_tank_catalog()
+    ngo_names = {entry["name"] for entry in de_organization_entries(ngo)}
+    think_tank_names = {
+        entry["name"]
+        for entry in de_think_tank_entries(think_tank)
+    }
+
+    foundations = {
+        "Konrad-Adenauer-Stiftung",
+        "Friedrich-Ebert-Stiftung",
+        "Heinrich-Böll-Stiftung",
+        "Friedrich-Naumann-Stiftung für die Freiheit",
+        "Rosa-Luxemburg-Stiftung",
+        "Hanns-Seidel-Stiftung",
+        "Desiderius-Erasmus-Stiftung",
+        "Bertelsmann Stiftung",
+    }
+
+    assert foundations <= ngo_names
+    assert foundations.isdisjoint(think_tank_names)
+
+
+def test_de_think_tank_outlets_use_organization_medium() -> None:
+    catalog = load_de_think_tank_catalog()
+
+    assert all(
+        outlet["media_category"] == "organization"
+        and outlet["publication_form"] == "other"
+        and outlet["scope"] == "national"
+        for entry in de_think_tank_entries(catalog)
+        for outlet in entry["outlets"]
+    )
+
+
+def test_de_organization_catalogs_have_unique_source_identity() -> None:
+    paths = (
+        DE_NGO_CATALOG,
+        DE_INTEREST_GROUP_CATALOG,
+        DE_COMPANY_CATALOG,
+        DE_ACADEMIC_CATALOG,
+        DE_THINK_TANK_CATALOG,
+    )
+    names: list[str] = []
+
+    for path in paths:
+        catalog = json.loads(path.read_text(encoding="utf-8"))
+        names.extend(
+            entry["name"].casefold()
+            for group in catalog["groups"]
+            for entry in group["entries"]
+        )
+
+    assert len(names) == len(set(names))
+
+
+def test_de_think_tank_catalog_has_no_political_classification() -> None:
+    catalog = load_de_think_tank_catalog()
+    dimensions = {
+        classification["dimension"]
+        for entry in de_think_tank_entries(catalog)
         for classification in entry["classifications"]
     }
 

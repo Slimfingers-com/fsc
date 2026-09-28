@@ -1,0 +1,512 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "DE",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "THINK_TANK",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institutional_carrier_is_source_programs_brands_and_project_sites_are_outlets_not_automatic_sources",
+  "segmentation_policy": "functional_policy_domain_not_political_orientation",
+  "academic_boundary_policy": "research_primary_function_is_academic_policy_analysis_and_advice_primary_function_is_think_tank",
+  "foundation_boundary_policy": "broad_mission_political_and_operational_foundations_remain_ngo",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "foreign_security_global_order_democracy",
+      "label": "foreign policy, security, global order and democracy",
+      "entries": [
+        {
+          "key": "swp",
+          "name": "Stiftung Wissenschaft und Politik (SWP)",
+          "homepage": "https://www.swp-berlin.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swp-official",
+              "name": "Stiftung Wissenschaft und Politik (SWP)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.swp-berlin.org/"
+            }
+          ],
+          "notes": [
+            "Policy-analysis and advisory institution whose primary institutional function is research-based policy advice."
+          ]
+        },
+        {
+          "key": "dgap",
+          "name": "Deutsche Gesellschaft für Auswärtige Politik (DGAP)",
+          "homepage": "https://dgap.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dgap-official",
+              "name": "Deutsche Gesellschaft für Auswärtige Politik (DGAP)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://dgap.org/"
+            }
+          ],
+          "notes": [
+            "Foreign-policy think tank and membership organization; primary institutional content role is policy analysis and debate."
+          ]
+        },
+        {
+          "key": "merics",
+          "name": "Mercator Institute for China Studies (MERICS)",
+          "homepage": "https://merics.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "merics-official",
+              "name": "Mercator Institute for China Studies (MERICS)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://merics.org/"
+            }
+          ],
+          "notes": [
+            "China-focused think tank; institutional carrier is MERICS gGmbH."
+          ]
+        },
+        {
+          "key": "gppi",
+          "name": "Global Public Policy Institute (GPPi)",
+          "homepage": "https://gppi.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gppi-official",
+              "name": "Global Public Policy Institute (GPPi)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://gppi.net/"
+            }
+          ],
+          "notes": [
+            "Independent non-profit think tank focused on global governance, research, policy advice and debate."
+          ]
+        },
+        {
+          "key": "libmod",
+          "name": "Zentrum Liberale Moderne (LibMod)",
+          "homepage": "https://libmod.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "libmod-official",
+              "name": "Zentrum Liberale Moderne (LibMod)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://libmod.de/"
+            }
+          ],
+          "notes": [
+            "Policy think tank focused on democracy, international affairs and societal transformation."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economy_europe_state_society",
+      "label": "economy, Europe, state and society",
+      "entries": [
+        {
+          "key": "stiftung-marktwirtschaft",
+          "name": "Stiftung Marktwirtschaft",
+          "homepage": "https://www.stiftung-marktwirtschaft.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "stiftung-marktwirtschaft-official",
+              "name": "Stiftung Marktwirtschaft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.stiftung-marktwirtschaft.de/"
+            }
+          ],
+          "notes": [
+            "Policy-analysis institution focused on market-economy and public-policy questions."
+          ]
+        },
+        {
+          "key": "cep",
+          "name": "cep – Centrum für Europäische Politik",
+          "homepage": "https://www.cep.eu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cep-official",
+              "name": "cep – Centrum für Europäische Politik",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.cep.eu/"
+            }
+          ],
+          "notes": [
+            "European-policy think tank and policy-analysis institution."
+          ]
+        },
+        {
+          "key": "dezernat-zukunft",
+          "name": "Dezernat Zukunft",
+          "homepage": "https://dezernatzukunft.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dezernat-zukunft-official",
+              "name": "Dezernat Zukunft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://dezernatzukunft.org/"
+            }
+          ],
+          "notes": [
+            "Policy think tank focused on macrofinance and economic policy."
+          ]
+        },
+        {
+          "key": "progressives-zentrum",
+          "name": "Das Progressive Zentrum",
+          "homepage": "https://www.progressives-zentrum.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "progressives-zentrum-official",
+              "name": "Das Progressive Zentrum",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.progressives-zentrum.org/"
+            }
+          ],
+          "notes": [
+            "Independent policy think tank focused on democratic and societal policy questions."
+          ]
+        },
+        {
+          "key": "prometheus",
+          "name": "Prometheus – Das Freiheitsinstitut",
+          "homepage": "https://prometheusinstitut.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "prometheus-official",
+              "name": "Prometheus – Das Freiheitsinstitut",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://prometheusinstitut.de/"
+            }
+          ],
+          "notes": [
+            "Policy think tank focused on economic and social policy ideas."
+          ]
+        },
+        {
+          "key": "republik21",
+          "name": "REPUBLIK21 e.V.",
+          "homepage": "https://denkfabrik-r21.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "denkfabrik-r21",
+              "name": "Denkfabrik R21",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://denkfabrik-r21.de/"
+            }
+          ],
+          "notes": [
+            "Institutional Source behind the Denkfabrik R21 brand; policy concepts and public-policy debate are its primary function."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "digital_technology_policy",
+      "label": "digital and technology policy",
+      "entries": [
+        {
+          "key": "interface-eu",
+          "name": "interface – Tech analysis and policy ideas for Europe e.V.",
+          "homepage": "https://www.interface-eu.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "interface-eu-official",
+              "name": "interface",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.interface-eu.org/"
+            }
+          ],
+          "notes": [
+            "European technology-policy think tank, formerly Stiftung Neue Verantwortung."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "climate_energy_transformation",
+      "label": "climate, energy and transformation",
+      "entries": [
+        {
+          "key": "agora-think-tanks",
+          "name": "Agora Think Tanks gGmbH",
+          "homepage": "https://www.agora-thinktanks.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "agora-energiewende",
+              "name": "Agora Energiewende",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.agora-energiewende.de/"
+            },
+            {
+              "key": "agora-industry",
+              "name": "Agora Industry",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.agora-industry.org/"
+            },
+            {
+              "key": "agora-agriculture",
+              "name": "Agora Agriculture",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.agora-agriculture.org/"
+            }
+          ],
+          "notes": [
+            "Institutional carrier of Agora Energiewende, Agora Industry and Agora Agriculture; these brands are Outlets of one Source."
+          ]
+        },
+        {
+          "key": "agora-transport-transformation",
+          "name": "Agora Transport Transformation gGmbH",
+          "homepage": "https://www.agora-verkehrswende.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "agora-verkehrswende",
+              "name": "Agora Verkehrswende",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.agora-verkehrswende.de/"
+            }
+          ],
+          "notes": [
+            "Independent legal carrier behind the Agora Verkehrswende brand and therefore a separate Source from Agora Think Tanks gGmbH."
+          ]
+        },
+        {
+          "key": "zoe-institute",
+          "name": "ZOE Institute for Future-Fit Economies",
+          "homepage": "https://zoe-institut.de/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "DE",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_policy_analysis_institution_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zoe-institute-official",
+              "name": "ZOE Institute for Future-Fit Economies",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://zoe-institut.de/"
+            }
+          ],
+          "notes": [
+            "Policy think tank focused on economic transformation and evidence-informed policymaking."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 15,
+  "review_status": {
+    "source_selection": "approved_15_source_de_think_tank_core_2026_09_28",
+    "segmentation": "functional_policy_domain_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022",
+    "academic_think_tank_boundary": "primary_institutional_function_per_adr_0024",
+    "foundation_boundary": "broad_mission_foundations_remain_ngo_per_adr_0025"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_policy_institutes",
+      "reason": "Additional national or specialist policy institutes remain eligible when they add material topic coverage."
+    },
+    {
+      "category": "academic_hybrids",
+      "reason": "Institutions whose primary function is scientific research remain ACADEMIC even when they also use a think-tank label or conduct policy advice."
+    }
+  ]
+}
