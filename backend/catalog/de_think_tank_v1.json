@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "DE",
   "language": "de",
   "media_category": "organization",
@@ -11,6 +11,16 @@
   "foundation_boundary_policy": "broad_mission_political_and_operational_foundations_remain_ngo",
   "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
   "default_confirmation_role": "expert_analysis",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  },
   "coverage_policy": "targets_are_goals_not_quotas",
   "groups": [
     {
@@ -27,7 +37,18 @@
           "source_type": "THINK_TANK",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Official publications (German)",
+              "url": "https://www.swp-berlin.org/SWPPublications.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "expert_analysis",
+              "feed_class": "research_publication",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_policy_analysis_institution_not_political_classification",
           "classifications": [],
           "metrics": [],

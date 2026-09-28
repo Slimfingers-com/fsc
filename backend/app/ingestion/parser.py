@@ -1,5 +1,6 @@
 from collections.abc import Mapping, Sequence
 from typing import Any
+from urllib.parse import urljoin
 
 import feedparser
 
@@ -34,12 +35,13 @@ class FeedParser:
         feed_format = self._detect_format(document)
         feed = document.get("feed") or {}
 
+        base_url = fetch_result.final_url
         return ParsedFeed(
-            source_url=fetch_result.final_url,
+            source_url=base_url,
             format=feed_format,
             version=str(document.get("version") or ""),
             title=self._text(feed.get("title")),
-            link=self._feed_link(feed),
+            link=self._feed_link(feed, base_url=base_url),
             description=self._first_text(
                 feed.get("subtitle"),
                 feed.get("description"),
@@ -54,7 +56,7 @@ class FeedParser:
                 )
             ),
             entries=tuple(
-                self._parse_entry(entry)
+                self._parse_entry(entry, base_url=base_url)
                 for entry in document.get("entries", ())
             ),
             warnings=self._warnings(document),
@@ -71,11 +73,16 @@ class FeedParser:
             "Document is neither supported RSS nor Atom."
         )
 
-    def _parse_entry(self, entry: Mapping[str, Any]) -> ParsedFeedEntry:
+    def _parse_entry(
+        self,
+        entry: Mapping[str, Any],
+        *,
+        base_url: str,
+    ) -> ParsedFeedEntry:
         return ParsedFeedEntry(
             external_id=self._first_text(entry.get("id"), entry.get("guid")),
             title=self._text(entry.get("title")),
-            link=self._entry_link(entry),
+            link=self._entry_link(entry, base_url=base_url),
             summary=self._first_text(
                 entry.get("summary"), entry.get("description")
             ),
@@ -96,22 +103,37 @@ class FeedParser:
                 )
             ),
             categories=self._categories(entry),
-            enclosures=self._enclosures(entry),
+            enclosures=self._enclosures(entry, base_url=base_url),
         )
 
-    def _feed_link(self, feed: Mapping[str, Any]) -> str | None:
+    def _feed_link(
+        self,
+        feed: Mapping[str, Any],
+        *,
+        base_url: str,
+    ) -> str | None:
         direct = self._text(feed.get("link"))
         if direct:
-            return direct
-        return self._alternate_link(feed.get("links"))
+            return self._absolute_url(direct, base_url)
+        return self._alternate_link(feed.get("links"), base_url=base_url)
 
-    def _entry_link(self, entry: Mapping[str, Any]) -> str | None:
+    def _entry_link(
+        self,
+        entry: Mapping[str, Any],
+        *,
+        base_url: str,
+    ) -> str | None:
         direct = self._text(entry.get("link"))
         if direct:
-            return direct
-        return self._alternate_link(entry.get("links"))
+            return self._absolute_url(direct, base_url)
+        return self._alternate_link(entry.get("links"), base_url=base_url)
 
-    def _alternate_link(self, links: Any) -> str | None:
+    def _alternate_link(
+        self,
+        links: Any,
+        *,
+        base_url: str,
+    ) -> str | None:
         if not isinstance(links, Sequence) or isinstance(links, (str, bytes)):
             return None
         fallback: str | None = None
@@ -123,8 +145,8 @@ class FeedParser:
                 continue
             fallback = fallback or href
             if self._text(link.get("rel")) in {None, "alternate"}:
-                return href
-        return fallback
+                return self._absolute_url(href, base_url)
+        return self._absolute_url(fallback, base_url) if fallback else None
 
     def _entry_content(self, entry: Mapping[str, Any]) -> str | None:
         contents = entry.get("content") or ()
@@ -157,7 +179,10 @@ class FeedParser:
         return tuple(values)
 
     def _enclosures(
-        self, entry: Mapping[str, Any]
+        self,
+        entry: Mapping[str, Any],
+        *,
+        base_url: str,
     ) -> tuple[ParsedFeedEnclosure, ...]:
         result: list[ParsedFeedEnclosure] = []
         enclosures = entry.get("enclosures") or ()
@@ -171,12 +196,16 @@ class FeedParser:
                 continue
             result.append(
                 ParsedFeedEnclosure(
-                    url=url,
+                    url=self._absolute_url(url, base_url),
                     content_type=self._text(enclosure.get("type")),
                     length_bytes=self._non_negative_int(enclosure.get("length")),
                 )
             )
         return tuple(result)
+
+    @staticmethod
+    def _absolute_url(value: str, base_url: str) -> str:
+        return urljoin(base_url, value)
 
     @staticmethod
     def _first_present(

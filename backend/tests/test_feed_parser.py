@@ -80,6 +80,30 @@ def test_parse_atom():
     assert entry.published_at == datetime(2026, 7, 21, 7, 0, tzinfo=timezone.utc)
 
 
+@pytest.mark.filterwarnings("error::DeprecationWarning")
+def test_parse_resolves_relative_links_against_final_feed_url():
+    xml = b"""<?xml version="1.0"?>
+    <rss version="2.0"><channel>
+      <title>Relative News</title>
+      <link>/news</link>
+      <description>News description</description>
+      <item>
+        <guid>article-relative</guid>
+        <title>Relative</title>
+        <link>/articles/relative</link>
+        <enclosure url="media/audio.mp3" type="audio/mpeg" length="42"/>
+      </item>
+    </channel></rss>"""
+
+    feed = FeedParser().parse(fetched(xml))
+
+    assert feed.link == "https://example.com/news"
+    assert feed.entries[0].link == "https://example.com/articles/relative"
+    assert feed.entries[0].enclosures[0].url == (
+        "https://example.com/media/audio.mp3"
+    )
+
+
 def test_parse_preserves_bozo_warning_for_recoverable_feed():
     xml = b"<rss version='2.0'><channel><title>x</title></channel>"
     feed = FeedParser().parse(fetched(xml))
