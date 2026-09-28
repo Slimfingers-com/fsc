@@ -1,0 +1,934 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "NGO",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "environment_climate_nature",
+      "label": "environment, climate and nature",
+      "entries": [
+        {
+          "key": "greenpeace-austria",
+          "name": "Greenpeace in Österreich",
+          "homepage": "https://greenpeace.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "greenpeace-austria-official",
+              "name": "Greenpeace in Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://greenpeace.at/"
+            }
+          ],
+          "notes": [
+            "Austrian Greenpeace organization."
+          ]
+        },
+        {
+          "key": "global-2000",
+          "name": "GLOBAL 2000",
+          "homepage": "https://www.global2000.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "global-2000-official",
+              "name": "GLOBAL 2000",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.global2000.at/"
+            }
+          ],
+          "notes": [
+            "Independent Austrian environmental NGO."
+          ]
+        },
+        {
+          "key": "wwf-austria",
+          "name": "WWF Österreich",
+          "homepage": "https://www.wwf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wwf-austria-official",
+              "name": "WWF Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.wwf.at/"
+            }
+          ],
+          "notes": [
+            "Austrian conservation NGO."
+          ]
+        },
+        {
+          "key": "naturschutzbund-austria",
+          "name": "Naturschutzbund Österreich",
+          "homepage": "https://naturschutzbund.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "naturschutzbund-austria-official",
+              "name": "Naturschutzbund Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://naturschutzbund.at/"
+            }
+          ],
+          "notes": [
+            "National nature-conservation organization."
+          ]
+        },
+        {
+          "key": "birdlife-austria",
+          "name": "BirdLife Österreich",
+          "homepage": "https://www.birdlife.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "birdlife-austria-official",
+              "name": "BirdLife Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.birdlife.at/"
+            }
+          ],
+          "notes": [
+            "National bird and biodiversity conservation organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "rights_migration_digital",
+      "label": "human rights, migration and digital rights",
+      "entries": [
+        {
+          "key": "amnesty-austria",
+          "name": "Amnesty International Österreich",
+          "homepage": "https://www.amnesty.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "amnesty-austria-official",
+              "name": "Amnesty International Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.amnesty.at/"
+            }
+          ],
+          "notes": [
+            "Austrian human-rights organization."
+          ]
+        },
+        {
+          "key": "asylkoordination",
+          "name": "asylkoordination österreich",
+          "homepage": "https://www.asyl.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "asylkoordination-official",
+              "name": "asylkoordination österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.asyl.at/"
+            }
+          ],
+          "notes": [
+            "Refugee-rights and asylum-policy civil-society organization."
+          ]
+        },
+        {
+          "key": "sos-mitmensch",
+          "name": "SOS Mitmensch",
+          "homepage": "https://www.sosmitmensch.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sos-mitmensch-official",
+              "name": "SOS Mitmensch",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.sosmitmensch.at/"
+            }
+          ],
+          "notes": [
+            "Human-rights and anti-discrimination NGO; MO magazine remains a separate editorial Source identity where applicable."
+          ]
+        },
+        {
+          "key": "zara",
+          "name": "ZARA – Zivilcourage und Anti-Rassismus-Arbeit",
+          "homepage": "https://www.zara.or.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zara-official",
+              "name": "ZARA – Zivilcourage und Anti-Rassismus-Arbeit",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.zara.or.at/"
+            }
+          ],
+          "notes": [
+            "Anti-racism and civil-courage NGO."
+          ]
+        },
+        {
+          "key": "epicenter-works",
+          "name": "epicenter.works",
+          "homepage": "https://epicenter.works/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "epicenter-works-official",
+              "name": "epicenter.works",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://epicenter.works/"
+            }
+          ],
+          "notes": [
+            "Digital-rights civil-society organization."
+          ]
+        },
+        {
+          "key": "liga-menschenrechte",
+          "name": "Österreichische Liga für Menschenrechte",
+          "homepage": "https://www.liga.or.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "liga-menschenrechte-official",
+              "name": "Österreichische Liga für Menschenrechte",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.liga.or.at/"
+            }
+          ],
+          "notes": [
+            "Human-rights NGO."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "democracy_transparency_global_justice",
+      "label": "democracy, transparency and global justice",
+      "entries": [
+        {
+          "key": "transparency-austria",
+          "name": "Transparency International – Austrian Chapter",
+          "homepage": "https://www.transparency.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "transparency-austria-official",
+              "name": "Transparency International – Austrian Chapter",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.transparency.at/"
+            }
+          ],
+          "notes": [
+            "Austrian anti-corruption civil-society organization."
+          ]
+        },
+        {
+          "key": "forum-informationsfreiheit",
+          "name": "Forum Informationsfreiheit",
+          "homepage": "https://www.informationsfreiheit.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "forum-informationsfreiheit-official",
+              "name": "Forum Informationsfreiheit",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.informationsfreiheit.at/"
+            }
+          ],
+          "notes": [
+            "Transparency and freedom-of-information civil-society organization."
+          ]
+        },
+        {
+          "key": "mehr-demokratie-austria",
+          "name": "mehr demokratie!",
+          "homepage": "https://www.mehr-demokratie.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mehr-demokratie-austria-official",
+              "name": "mehr demokratie!",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.mehr-demokratie.at/"
+            }
+          ],
+          "notes": [
+            "Democracy and participation NGO."
+          ]
+        },
+        {
+          "key": "attac-austria",
+          "name": "Attac Österreich",
+          "homepage": "https://www.attac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "attac-austria-official",
+              "name": "Attac Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.attac.at/"
+            }
+          ],
+          "notes": [
+            "Globalization, economic and social-justice civil-society organization."
+          ]
+        },
+        {
+          "key": "suedwind",
+          "name": "Südwind",
+          "homepage": "https://www.suedwind.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "suedwind-official",
+              "name": "Südwind",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.suedwind.at/"
+            }
+          ],
+          "notes": [
+            "Development and global-justice NGO; an editorially independent magazine may remain a separate media Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "humanitarian_development",
+      "label": "humanitarian and development",
+      "entries": [
+        {
+          "key": "red-cross-austria",
+          "name": "Österreichisches Rotes Kreuz",
+          "homepage": "https://www.roteskreuz.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "red-cross-austria-official",
+              "name": "Österreichisches Rotes Kreuz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.roteskreuz.at/"
+            }
+          ],
+          "notes": [
+            "National Red Cross society and humanitarian organization."
+          ]
+        },
+        {
+          "key": "msf-austria",
+          "name": "Ärzte ohne Grenzen Österreich",
+          "homepage": "https://www.aerzte-ohne-grenzen.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "msf-austria-official",
+              "name": "Ärzte ohne Grenzen Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.aerzte-ohne-grenzen.at/"
+            }
+          ],
+          "notes": [
+            "Austrian section of the humanitarian medical organization."
+          ]
+        },
+        {
+          "key": "care-austria",
+          "name": "CARE Österreich",
+          "homepage": "https://www.care.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "care-austria-official",
+              "name": "CARE Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.care.at/"
+            }
+          ],
+          "notes": [
+            "Humanitarian and development NGO."
+          ]
+        },
+        {
+          "key": "licht-fuer-die-welt",
+          "name": "Licht für die Welt",
+          "homepage": "https://www.licht-fuer-die-welt.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "licht-fuer-die-welt-official",
+              "name": "Licht für die Welt",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.licht-fuer-die-welt.at/"
+            }
+          ],
+          "notes": [
+            "Development and disability-inclusion NGO."
+          ]
+        },
+        {
+          "key": "sos-kinderdorf-austria",
+          "name": "SOS-Kinderdorf Österreich",
+          "homepage": "https://www.sos-kinderdorf.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sos-kinderdorf-austria-official",
+              "name": "SOS-Kinderdorf Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.sos-kinderdorf.at/"
+            }
+          ],
+          "notes": [
+            "Child and family welfare NGO."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "social_welfare",
+      "label": "social welfare",
+      "entries": [
+        {
+          "key": "caritas-austria",
+          "name": "Caritas Österreich",
+          "homepage": "https://www.caritas.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "caritas-austria-official",
+              "name": "Caritas Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.caritas.at/"
+            }
+          ],
+          "notes": [
+            "National Caritas coordination/institutional Source; diocesan organizations are not automatic additional Sources."
+          ]
+        },
+        {
+          "key": "diakonie-austria",
+          "name": "Diakonie Österreich",
+          "homepage": "https://www.diakonie.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "diakonie-austria-official",
+              "name": "Diakonie Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.diakonie.at/"
+            }
+          ],
+          "notes": [
+            "National Protestant welfare umbrella organization."
+          ]
+        },
+        {
+          "key": "volkshilfe-austria",
+          "name": "Volkshilfe Österreich",
+          "homepage": "https://www.volkshilfe.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "volkshilfe-austria-official",
+              "name": "Volkshilfe Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.volkshilfe.at/"
+            }
+          ],
+          "notes": [
+            "National social-welfare organization."
+          ]
+        },
+        {
+          "key": "hilfswerk-austria",
+          "name": "Hilfswerk Österreich",
+          "homepage": "https://www.hilfswerk.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hilfswerk-austria-official",
+              "name": "Hilfswerk Österreich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.hilfswerk.at/"
+            }
+          ],
+          "notes": [
+            "National social and welfare organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "political_education_institutes",
+      "label": "political education institutes",
+      "entries": [
+        {
+          "key": "campus-tivoli",
+          "name": "Campus Tivoli – Akademie der ÖVP",
+          "homepage": "https://campus-tivoli.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "campus-tivoli-official",
+              "name": "Campus Tivoli – Akademie der ÖVP",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://campus-tivoli.at/"
+            }
+          ],
+          "notes": [
+            "Broad-mission political education institution; remains NGO under ADR 0025 generalization."
+          ]
+        },
+        {
+          "key": "karl-renner-institut",
+          "name": "Karl-Renner-Institut",
+          "homepage": "https://renner-institut.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "karl-renner-institut-official",
+              "name": "Karl-Renner-Institut",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://renner-institut.at/"
+            }
+          ],
+          "notes": [
+            "Broad-mission political education institution; concrete analytical studies can be expert_analysis."
+          ]
+        },
+        {
+          "key": "freiheitliches-bildungsinstitut",
+          "name": "Freiheitliches Bildungsinstitut",
+          "homepage": "https://www.fbi-politikschule.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "freiheitliches-bildungsinstitut-official",
+              "name": "Freiheitliches Bildungsinstitut",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.fbi-politikschule.at/"
+            }
+          ],
+          "notes": [
+            "Broad-mission political education institution rather than a pure think tank."
+          ]
+        },
+        {
+          "key": "freda",
+          "name": "FREDA – DIE AKADEMIE",
+          "homepage": "https://freda.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "freda-official",
+              "name": "FREDA – DIE AKADEMIE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://freda.at/"
+            }
+          ],
+          "notes": [
+            "Political education academy with a broad mission; remains NGO."
+          ]
+        },
+        {
+          "key": "neos-lab",
+          "name": "NEOS Lab – Das liberale Forum",
+          "homepage": "https://lab.neos.eu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "neos-lab-official",
+              "name": "NEOS Lab – Das liberale Forum",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://lab.neos.eu/"
+            }
+          ],
+          "notes": [
+            "Political education and participation institution with think-tank work as one function; remains NGO."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 30,
+  "review_status": {
+    "source_selection": "approved_30_source_at_ngo_core_2026_09_28",
+    "segmentation": "functional_role_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "regional_and_local_chapters",
+      "reason": "Regional chapters are not duplicated automatically."
+    }
+  ],
+  "source_identity_policy": "institution_is_source_projects_campaigns_and_programs_are_not_automatic_sources",
+  "political_education_boundary_policy": "broad_mission_political_education_institutions_remain_ngo_per_adr_0025"
+}

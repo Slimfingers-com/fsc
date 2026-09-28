@@ -1,0 +1,506 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "ACADEMIC",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_research_domain_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "universities",
+      "label": "universities",
+      "entries": [
+        {
+          "key": "university-vienna",
+          "name": "Universität Wien",
+          "homepage": "https://www.univie.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-vienna-official",
+              "name": "Universität Wien",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.univie.ac.at/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "tu-wien",
+          "name": "Technische Universität Wien",
+          "homepage": "https://www.tuwien.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tu-wien-official",
+              "name": "Technische Universität Wien",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.tuwien.at/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "wu-wien",
+          "name": "Wirtschaftsuniversität Wien (WU)",
+          "homepage": "https://www.wu.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wu-wien-official",
+              "name": "Wirtschaftsuniversität Wien (WU)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.wu.ac.at/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "meduni-wien",
+          "name": "Medizinische Universität Wien",
+          "homepage": "https://www.meduniwien.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "meduni-wien-official",
+              "name": "Medizinische Universität Wien",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.meduniwien.ac.at/"
+            }
+          ],
+          "notes": [
+            "University-level medical research Source."
+          ]
+        },
+        {
+          "key": "university-innsbruck",
+          "name": "Universität Innsbruck",
+          "homepage": "https://www.uibk.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-innsbruck-official",
+              "name": "Universität Innsbruck",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.uibk.ac.at/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "university-graz",
+          "name": "Universität Graz",
+          "homepage": "https://www.uni-graz.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-graz-official",
+              "name": "Universität Graz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.uni-graz.at/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "boku",
+          "name": "BOKU University",
+          "homepage": "https://boku.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "boku-official",
+              "name": "BOKU University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://boku.ac.at/"
+            }
+          ],
+          "notes": [
+            "University-level research Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "science_organizations",
+      "label": "science organizations and institutes",
+      "entries": [
+        {
+          "key": "oeaw",
+          "name": "Österreichische Akademie der Wissenschaften (ÖAW)",
+          "homepage": "https://www.oeaw.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oeaw-official",
+              "name": "Österreichische Akademie der Wissenschaften (ÖAW)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.oeaw.ac.at/"
+            }
+          ],
+          "notes": [
+            "National academy and research organization."
+          ]
+        },
+        {
+          "key": "ista",
+          "name": "Institute of Science and Technology Austria (ISTA)",
+          "homepage": "https://ista.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ista-official",
+              "name": "Institute of Science and Technology Austria (ISTA)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://ista.ac.at/"
+            }
+          ],
+          "notes": [
+            "Research institute with primary scientific function."
+          ]
+        },
+        {
+          "key": "iiasa",
+          "name": "International Institute for Applied Systems Analysis (IIASA)",
+          "homepage": "https://iiasa.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "iiasa-official",
+              "name": "International Institute for Applied Systems Analysis (IIASA)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://iiasa.ac.at/"
+            }
+          ],
+          "notes": [
+            "International research institute based in Austria."
+          ]
+        },
+        {
+          "key": "ait",
+          "name": "AIT Austrian Institute of Technology",
+          "homepage": "https://www.ait.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ait-official",
+              "name": "AIT Austrian Institute of Technology",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.ait.ac.at/"
+            }
+          ],
+          "notes": [
+            "Applied-research institution."
+          ]
+        },
+        {
+          "key": "joanneum-research",
+          "name": "JOANNEUM RESEARCH Forschungsgesellschaft mbH",
+          "homepage": "https://www.joanneum.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "joanneum-research-official",
+              "name": "JOANNEUM RESEARCH Forschungsgesellschaft mbH",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.joanneum.at/"
+            }
+          ],
+          "notes": [
+            "Extra-university applied-research organization."
+          ]
+        },
+        {
+          "key": "complexity-science-hub",
+          "name": "Complexity Science Hub",
+          "homepage": "https://csh.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "complexity-science-hub-official",
+              "name": "Complexity Science Hub",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://csh.ac.at/"
+            }
+          ],
+          "notes": [
+            "Independent complexity-science research center."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economy_society_policy_research",
+      "label": "economy, society and policy research",
+      "entries": [
+        {
+          "key": "wifo",
+          "name": "Österreichisches Institut für Wirtschaftsforschung (WIFO)",
+          "homepage": "https://www.wifo.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wifo-official",
+              "name": "Österreichisches Institut für Wirtschaftsforschung (WIFO)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.wifo.ac.at/"
+            }
+          ],
+          "notes": [
+            "Independent economic research institute; policy advice is secondary to primary scientific research function."
+          ]
+        },
+        {
+          "key": "ihs",
+          "name": "Institut für Höhere Studien (IHS)",
+          "homepage": "https://www.ihs.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ihs-official",
+              "name": "Institut für Höhere Studien (IHS)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.ihs.ac.at/"
+            }
+          ],
+          "notes": [
+            "Economic and social-science research institute."
+          ]
+        },
+        {
+          "key": "ecoaustria",
+          "name": "EcoAustria",
+          "homepage": "https://ecoaustria.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ecoaustria-official",
+              "name": "EcoAustria",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://ecoaustria.ac.at/"
+            }
+          ],
+          "notes": [
+            "Independent economic research institute using scientific research methods."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 16,
+  "review_status": {
+    "source_selection": "approved_16_source_at_academic_core_2026_09_28",
+    "segmentation": "functional_research_domain_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [],
+  "academic_boundary_policy": "primary_scientific_research_function_includes_universities_academies_and_extra_university_research_institutes",
+  "think_tank_boundary_policy": "policy_analysis_and_advice_primary_function_is_think_tank_research_primary_function_is_academic",
+  "source_identity_policy": "scientific_institution_is_source_subunits_are_not_automatic_sources"
+}

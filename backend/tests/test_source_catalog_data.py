@@ -3490,3 +3490,189 @@ def test_de_think_tank_catalog_has_no_political_classification() -> None:
 
     assert "editorial_orientation" not in dimensions
     assert "radicality" not in dimensions
+
+
+AT_ORGANIZATION_CATALOGS = {
+    "NGO": {
+        "path": CATALOG_DIR / "at_ngo_v1.json",
+        "count": 30,
+        "group_sizes": [5, 6, 5, 5, 4, 5],
+        "default_role": "advocacy",
+    },
+    "INTEREST_GROUP": {
+        "path": CATALOG_DIR / "at_interest_group_v1.json",
+        "count": 13,
+        "group_sizes": [3, 5, 5],
+        "default_role": "advocacy",
+    },
+    "COMPANY": {
+        "path": CATALOG_DIR / "at_company_v1.json",
+        "count": 18,
+        "group_sizes": [9, 5, 4],
+        "default_role": "advocacy",
+    },
+    "ACADEMIC": {
+        "path": CATALOG_DIR / "at_academic_v1.json",
+        "count": 16,
+        "group_sizes": [7, 6, 3],
+        "default_role": "expert_analysis",
+    },
+    "THINK_TANK": {
+        "path": CATALOG_DIR / "at_think_tank_v1.json",
+        "count": 6,
+        "group_sizes": [3, 3],
+        "default_role": "expert_analysis",
+    },
+}
+
+
+@pytest.mark.parametrize(
+    ("source_type", "expected"),
+    AT_ORGANIZATION_CATALOGS.items(),
+)
+def test_at_organization_catalogs_have_approved_scope(
+    source_type: str,
+    expected: dict,
+) -> None:
+    catalog = json.loads(expected["path"].read_text(encoding="utf-8"))
+    entries = [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+    assert catalog["country"] == "AT"
+    assert catalog["media_category"] == "organization"
+    assert catalog["organization_type"] == source_type
+    assert catalog["default_confirmation_role"] == expected["default_role"]
+    assert catalog["approved_candidate_count"] == expected["count"]
+    assert [len(group["entries"]) for group in catalog["groups"]] == (
+        expected["group_sizes"]
+    )
+    assert len(entries) == expected["count"]
+    assert len({entry["key"] for entry in entries}) == expected["count"]
+    assert len({entry["name"].casefold() for entry in entries}) == expected["count"]
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == source_type for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+
+
+def test_at_political_education_institutions_remain_ngo() -> None:
+    ngo = json.loads(
+        AT_ORGANIZATION_CATALOGS["NGO"]["path"].read_text(encoding="utf-8")
+    )
+    think_tank = json.loads(
+        AT_ORGANIZATION_CATALOGS["THINK_TANK"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    ngo_names = {
+        entry["name"]
+        for group in ngo["groups"]
+        for entry in group["entries"]
+    }
+    think_tank_names = {
+        entry["name"]
+        for group in think_tank["groups"]
+        for entry in group["entries"]
+    }
+    academies = {
+        "Campus Tivoli – Akademie der ÖVP",
+        "Karl-Renner-Institut",
+        "Freiheitliches Bildungsinstitut",
+        "FREDA – DIE AKADEMIE",
+        "NEOS Lab – Das liberale Forum",
+    }
+
+    assert academies <= ngo_names
+    assert academies.isdisjoint(think_tank_names)
+
+
+def test_at_public_law_interest_groups_keep_functional_source_type() -> None:
+    catalog = json.loads(
+        AT_ORGANIZATION_CATALOGS["INTEREST_GROUP"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    entries = {
+        entry["key"]: entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+
+    for key in ("bundesarbeitskammer", "oeh", "wko", "aerztekammer"):
+        assert entries[key]["source_type"] == "INTEREST_GROUP"
+        assert entries[key]["classifications"][0]["dimension"] == "legal_status"
+        assert (
+            entries[key]["classifications"][0]["value"]
+            == "public_law_corporation"
+        )
+
+
+def test_at_research_policy_boundary_matches_adr_0024() -> None:
+    academic = json.loads(
+        AT_ORGANIZATION_CATALOGS["ACADEMIC"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    think_tank = json.loads(
+        AT_ORGANIZATION_CATALOGS["THINK_TANK"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    academic_names = {
+        entry["name"]
+        for group in academic["groups"]
+        for entry in group["entries"]
+    }
+    think_tank_names = {
+        entry["name"]
+        for group in think_tank["groups"]
+        for entry in group["entries"]
+    }
+
+    assert {
+        "Österreichisches Institut für Wirtschaftsforschung (WIFO)",
+        "Institut für Höhere Studien (IHS)",
+        "EcoAustria",
+    } <= academic_names
+    assert {
+        "Agenda Austria",
+        "Momentum Institut",
+        "Austrian Economics Center",
+    } <= think_tank_names
+
+
+def test_at_company_catalog_is_group_first() -> None:
+    catalog = json.loads(
+        AT_ORGANIZATION_CATALOGS["COMPANY"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+
+    assert "ÖBB-Holding AG" in names
+    assert "Telekom Austria AG (A1 Group)" in names
+    assert "Austrian Airlines AG" not in names
+
+
+def test_at_organization_catalogs_are_unique_and_not_politically_classified() -> None:
+    names: list[str] = []
+
+    for expected in AT_ORGANIZATION_CATALOGS.values():
+        catalog = json.loads(expected["path"].read_text(encoding="utf-8"))
+        for group in catalog["groups"]:
+            for entry in group["entries"]:
+                names.append(entry["name"].casefold())
+                dimensions = {
+                    classification["dimension"]
+                    for classification in entry["classifications"]
+                }
+                assert "editorial_orientation" not in dimensions
+                assert "radicality" not in dimensions
+
+    assert len(names) == len(set(names))
