@@ -3877,7 +3877,121 @@ def test_at_organization_catalogs_have_approved_scope(
     assert len({entry["name"].casefold() for entry in entries}) == expected["count"]
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == source_type for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+
+
+AT_INDEPENDENT_FEED_ROLE_POLICY = {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal",
+}
+
+AT_INTEREST_BOUND_FEED_ROLE_POLICY = {
+    **AT_INDEPENDENT_FEED_ROLE_POLICY,
+    "research_publication": "advocacy",
+}
+
+
+def test_at_organization_catalogs_have_reviewed_feed_activation() -> None:
+    catalogs = {
+        source_type: json.loads(
+            expected["path"].read_text(encoding="utf-8")
+        )
+        for source_type, expected in AT_ORGANIZATION_CATALOGS.items()
+    }
+
+    for source_type, catalog in catalogs.items():
+        expected_policy = (
+            AT_INDEPENDENT_FEED_ROLE_POLICY
+            if source_type in {"ACADEMIC", "THINK_TANK"}
+            else AT_INTEREST_BOUND_FEED_ROLE_POLICY
+        )
+        assert catalog["feed_role_policy"] == expected_policy
+        if source_type in {"NGO", "INTEREST_GROUP", "COMPANY"}:
+            assert (
+                catalog["research_independence_policy"]
+                == (
+                    "interest_bound_source_research_does_not_create_"
+                    "independent_confirmation"
+                )
+            )
+
+        all_feeds = [
+            feed
+            for group in catalog["groups"]
+            for entry in group["entries"]
+            for feed in entry["feeds"]
+        ]
+        assert len({feed["url"] for feed in all_feeds}) == len(all_feeds)
+        assert all(
+            feed["default_confirmation_role"]
+            == expected_policy[feed["feed_class"]]
+            for feed in all_feeds
+        )
+        assert all(feed["activation_tier"] in {1, 2} for feed in all_feeds)
+        assert all(
+            feed["active"] is (feed["activation_tier"] == 1)
+            for feed in all_feeds
+        )
+
+    academic_entries = {
+        entry["key"]: entry
+        for group in catalogs["ACADEMIC"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {
+        key for key, entry in academic_entries.items() if entry["feeds"]
+    } == {"university-vienna", "university-innsbruck"}
+    assert not any(
+        feed["active"]
+        for key in ("university-vienna", "university-innsbruck")
+        for feed in academic_entries[key]["feeds"]
+    )
+
+    ngo_entries = {
+        entry["key"]: entry
+        for group in catalogs["NGO"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {
+        key for key, entry in ngo_entries.items() if entry["feeds"]
+    } == {"sos-mitmensch", "epicenter-works"}
+    assert ngo_entries["sos-mitmensch"]["feeds"][0]["feed_class"] == "news"
+    assert (
+        ngo_entries["epicenter-works"]["feeds"][0]["feed_class"]
+        == "position_statement"
+    )
+
+    interest_entries = {
+        entry["key"]: entry
+        for group in catalogs["INTEREST_GROUP"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {
+        key for key, entry in interest_entries.items() if entry["feeds"]
+    } == {"aerztekammer"}
+    assert (
+        interest_entries["aerztekammer"]["feeds"][0]["feed_class"]
+        == "press_release"
+    )
+
+    assert not any(
+        entry["feeds"]
+        for source_type in ("THINK_TANK", "COMPANY")
+        for group in catalogs[source_type]["groups"]
+        for entry in group["entries"]
+    )
 
 
 def test_at_political_education_institutions_remain_ngo() -> None:
