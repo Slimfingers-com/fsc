@@ -3676,3 +3676,178 @@ def test_at_organization_catalogs_are_unique_and_not_politically_classified() ->
                 assert "radicality" not in dimensions
 
     assert len(names) == len(set(names))
+
+
+CH_ORGANIZATION_CATALOGS = {
+    "NGO": {
+        "path": CATALOG_DIR / "ch_ngo_v1.json",
+        "count": 26,
+        "group_sizes": [5, 6, 6, 8, 1],
+        "default_role": "advocacy",
+    },
+    "INTEREST_GROUP": {
+        "path": CATALOG_DIR / "ch_interest_group_v1.json",
+        "count": 16,
+        "group_sizes": [3, 5, 3, 5],
+        "default_role": "advocacy",
+    },
+    "COMPANY": {
+        "path": CATALOG_DIR / "ch_company_v1.json",
+        "count": 22,
+        "group_sizes": [4, 4, 4, 4, 6],
+        "default_role": "advocacy",
+    },
+    "ACADEMIC": {
+        "path": CATALOG_DIR / "ch_academic_v1.json",
+        "count": 15,
+        "group_sizes": [10, 5],
+        "default_role": "expert_analysis",
+    },
+    "THINK_TANK": {
+        "path": CATALOG_DIR / "ch_think_tank_v1.json",
+        "count": 6,
+        "group_sizes": [3, 3],
+        "default_role": "expert_analysis",
+    },
+}
+
+
+@pytest.mark.parametrize(
+    ("source_type", "expected"),
+    CH_ORGANIZATION_CATALOGS.items(),
+)
+def test_ch_organization_catalogs_have_approved_scope(
+    source_type: str,
+    expected: dict,
+) -> None:
+    catalog = json.loads(expected["path"].read_text(encoding="utf-8"))
+    entries = [
+        entry
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    ]
+
+    assert catalog["country"] == "CH"
+    assert catalog["languages"] == ["de", "fr", "it", "rm", "en"]
+    assert catalog["media_category"] == "organization"
+    assert catalog["organization_type"] == source_type
+    assert catalog["default_confirmation_role"] == expected["default_role"]
+    assert catalog["approved_candidate_count"] == expected["count"]
+    assert [len(group["entries"]) for group in catalog["groups"]] == (
+        expected["group_sizes"]
+    )
+    assert len(entries) == expected["count"]
+    assert len({entry["key"] for entry in entries}) == expected["count"]
+    assert len({entry["name"].casefold() for entry in entries}) == expected["count"]
+    assert all(entry["source_action"] == "create_source" for entry in entries)
+    assert all(entry["source_type"] == source_type for entry in entries)
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(entry["language"] == "multi" for entry in entries)
+
+
+def test_ch_gcsp_broad_mission_remains_ngo() -> None:
+    ngo = json.loads(
+        CH_ORGANIZATION_CATALOGS["NGO"]["path"].read_text(encoding="utf-8")
+    )
+    think_tank = json.loads(
+        CH_ORGANIZATION_CATALOGS["THINK_TANK"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    ngo_names = {
+        entry["name"]
+        for group in ngo["groups"]
+        for entry in group["entries"]
+    }
+    think_tank_names = {
+        entry["name"]
+        for group in think_tank["groups"]
+        for entry in group["entries"]
+    }
+
+    assert "Geneva Centre for Security Policy (GCSP)" in ngo_names
+    assert "Geneva Centre for Security Policy (GCSP)" not in think_tank_names
+    assert "DCAF – Geneva Centre for Security Sector Governance" in think_tank_names
+
+
+def test_ch_eth_domain_research_institutes_remain_distinct_academic_sources() -> None:
+    catalog = json.loads(
+        CH_ORGANIZATION_CATALOGS["ACADEMIC"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+
+    assert {
+        "ETH Zürich",
+        "EPFL",
+        "Paul Scherrer Institut (PSI)",
+        "Empa",
+        "Eawag",
+        "WSL – Eidg. Forschungsanstalt für Wald, Schnee und Landschaft",
+    } <= names
+    assert "Geneva Graduate Institute" in names
+
+
+def test_ch_company_catalog_is_group_first_for_swiss_post() -> None:
+    catalog = json.loads(
+        CH_ORGANIZATION_CATALOGS["COMPANY"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+
+    assert "Die Schweizerische Post AG" in names
+    assert "PostFinance AG" not in names
+    assert "PostAuto AG" not in names
+    assert "Post CH AG" not in names
+    assert "Swisscom AG" in names
+    assert "SBB AG" in names
+
+
+def test_ch_think_tank_core_matches_primary_function_boundary() -> None:
+    catalog = json.loads(
+        CH_ORGANIZATION_CATALOGS["THINK_TANK"]["path"].read_text(
+            encoding="utf-8"
+        )
+    )
+    names = {
+        entry["name"]
+        for group in catalog["groups"]
+        for entry in group["entries"]
+    }
+
+    assert names == {
+        "Avenir Suisse",
+        "Liberales Institut",
+        "Denknetz",
+        "foraus – Forum Aussenpolitik",
+        "DCAF – Geneva Centre for Security Sector Governance",
+        "Reatch! Research. Think. Change.",
+    }
+
+
+def test_ch_organization_catalogs_are_unique_and_not_politically_classified() -> None:
+    names: list[str] = []
+
+    for expected in CH_ORGANIZATION_CATALOGS.values():
+        catalog = json.loads(expected["path"].read_text(encoding="utf-8"))
+        for group in catalog["groups"]:
+            for entry in group["entries"]:
+                names.append(entry["name"].casefold())
+                dimensions = {
+                    classification["dimension"]
+                    for classification in entry["classifications"]
+                }
+                assert "editorial_orientation" not in dimensions
+                assert "radicality" not in dimensions
+
+    assert len(names) == len(set(names))

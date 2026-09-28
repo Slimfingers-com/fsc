@@ -1,0 +1,697 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm",
+    "en"
+  ],
+  "media_category": "organization",
+  "organization_type": "COMPANY",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_economic_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "life_science",
+      "label": "life science",
+      "entries": [
+        {
+          "key": "roche",
+          "name": "Roche Holding AG",
+          "homepage": "https://www.roche.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "roche-official",
+              "name": "Roche Holding AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.roche.com/"
+            }
+          ],
+          "notes": [
+            "Group-level pharmaceutical and diagnostics Source."
+          ]
+        },
+        {
+          "key": "novartis",
+          "name": "Novartis AG",
+          "homepage": "https://www.novartis.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "novartis-official",
+              "name": "Novartis AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.novartis.com/"
+            }
+          ],
+          "notes": [
+            "Group-level pharmaceutical Source."
+          ]
+        },
+        {
+          "key": "lonza",
+          "name": "Lonza Group AG",
+          "homepage": "https://www.lonza.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lonza-official",
+              "name": "Lonza Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.lonza.com/"
+            }
+          ],
+          "notes": [
+            "Group-level life-science manufacturing Source."
+          ]
+        },
+        {
+          "key": "sandoz",
+          "name": "Sandoz Group AG",
+          "homepage": "https://www.sandoz.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sandoz-official",
+              "name": "Sandoz Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.sandoz.com/"
+            }
+          ],
+          "notes": [
+            "Group-level generics and biosimilars Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "finance_insurance",
+      "label": "finance and insurance",
+      "entries": [
+        {
+          "key": "ubs",
+          "name": "UBS Group AG",
+          "homepage": "https://www.ubs.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ubs-official",
+              "name": "UBS Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.ubs.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "zurich-insurance",
+          "name": "Zurich Insurance Group AG",
+          "homepage": "https://www.zurich.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "zurich-insurance-official",
+              "name": "Zurich Insurance Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.zurich.com/"
+            }
+          ],
+          "notes": [
+            "Group-level insurance Source."
+          ]
+        },
+        {
+          "key": "swiss-re",
+          "name": "Swiss Re AG",
+          "homepage": "https://www.swissre.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swiss-re-official",
+              "name": "Swiss Re AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.swissre.com/"
+            }
+          ],
+          "notes": [
+            "Group-level reinsurance Source."
+          ]
+        },
+        {
+          "key": "partners-group",
+          "name": "Partners Group Holding AG",
+          "homepage": "https://www.partnersgroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "partners-group-official",
+              "name": "Partners Group Holding AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.partnersgroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level investment-management Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "industry_materials",
+      "label": "industry and materials",
+      "entries": [
+        {
+          "key": "abb",
+          "name": "ABB Ltd",
+          "homepage": "https://global.abb/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "abb-official",
+              "name": "ABB Ltd",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://global.abb/"
+            }
+          ],
+          "notes": [
+            "Group-level industrial technology Source."
+          ]
+        },
+        {
+          "key": "holcim",
+          "name": "Holcim Ltd",
+          "homepage": "https://www.holcim.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "holcim-official",
+              "name": "Holcim Ltd",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.holcim.com/"
+            }
+          ],
+          "notes": [
+            "Group-level building-materials Source."
+          ]
+        },
+        {
+          "key": "sika",
+          "name": "Sika AG",
+          "homepage": "https://www.sika.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sika-official",
+              "name": "Sika AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.sika.com/"
+            }
+          ],
+          "notes": [
+            "Group-level specialty chemicals and construction materials Source."
+          ]
+        },
+        {
+          "key": "georg-fischer",
+          "name": "Georg Fischer AG",
+          "homepage": "https://www.georgfischer.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "georg-fischer-official",
+              "name": "Georg Fischer AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.georgfischer.com/"
+            }
+          ],
+          "notes": [
+            "Group-level industrial technology Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "consumer_retail_luxury",
+      "label": "consumer, retail and luxury",
+      "entries": [
+        {
+          "key": "nestle",
+          "name": "Nestlé S.A.",
+          "homepage": "https://www.nestle.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nestle-official",
+              "name": "Nestlé S.A.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.nestle.com/"
+            }
+          ],
+          "notes": [
+            "Group-level food and consumer-goods Source."
+          ]
+        },
+        {
+          "key": "richemont",
+          "name": "Compagnie Financière Richemont SA",
+          "homepage": "https://www.richemont.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "richemont-official",
+              "name": "Compagnie Financière Richemont SA",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.richemont.com/"
+            }
+          ],
+          "notes": [
+            "Group-level luxury-goods Source."
+          ]
+        },
+        {
+          "key": "migros",
+          "name": "Migros-Genossenschafts-Bund",
+          "homepage": "https://corporate.migros.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "migros-official",
+              "name": "Migros-Genossenschafts-Bund",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://corporate.migros.ch/"
+            }
+          ],
+          "notes": [
+            "Group-level cooperative retail Source."
+          ]
+        },
+        {
+          "key": "coop",
+          "name": "Coop-Gruppe Genossenschaft",
+          "homepage": "https://www.coop.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "coop-official",
+              "name": "Coop-Gruppe Genossenschaft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.coop.ch/"
+            }
+          ],
+          "notes": [
+            "Group-level cooperative retail Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "infrastructure_telecom_transport_energy",
+      "label": "infrastructure, telecom, transport and energy",
+      "entries": [
+        {
+          "key": "swisscom",
+          "name": "Swisscom AG",
+          "homepage": "https://www.swisscom.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swisscom-official",
+              "name": "Swisscom AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.swisscom.ch/"
+            }
+          ],
+          "notes": [
+            "Group-level telecommunications Source; majority public ownership does not change COMPANY."
+          ]
+        },
+        {
+          "key": "sbb",
+          "name": "SBB AG",
+          "homepage": "https://company.sbb.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sbb-official",
+              "name": "SBB AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://company.sbb.ch/"
+            }
+          ],
+          "notes": [
+            "National rail company Source; public ownership does not change COMPANY."
+          ]
+        },
+        {
+          "key": "swiss-post",
+          "name": "Die Schweizerische Post AG",
+          "homepage": "https://www.post.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swiss-post-official",
+              "name": "Die Schweizerische Post AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.post.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss Post group parent Source; strategic subsidiaries such as PostFinance and PostAuto are not automatic additional Sources."
+          ]
+        },
+        {
+          "key": "axpo",
+          "name": "Axpo Holding AG",
+          "homepage": "https://www.axpo.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "axpo-official",
+              "name": "Axpo Holding AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.axpo.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy Source."
+          ]
+        },
+        {
+          "key": "bkw",
+          "name": "BKW AG",
+          "homepage": "https://www.bkw.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bkw-official",
+              "name": "BKW AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.bkw.ch/"
+            }
+          ],
+          "notes": [
+            "Group-level energy and infrastructure Source."
+          ]
+        },
+        {
+          "key": "alpiq",
+          "name": "Alpiq Holding AG",
+          "homepage": "https://www.alpiq.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "alpiq-official",
+              "name": "Alpiq Holding AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.alpiq.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy Source."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 22,
+  "review_status": {
+    "source_selection": "approved_22_source_ch_company_core_2026_09_28",
+    "segmentation": "functional_economic_role_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [],
+  "source_identity_policy": "group_first_corporate_identity_controlled_subsidiaries_and_brands_are_not_automatic_sources",
+  "ownership_policy": "public_or_private_ownership_is_metadata_and_does_not_change_company_source_type"
+}

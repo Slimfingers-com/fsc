@@ -1,0 +1,818 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm",
+    "en"
+  ],
+  "media_category": "organization",
+  "organization_type": "NGO",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "environment_climate_nature",
+      "label": "environment, climate and nature",
+      "entries": [
+        {
+          "key": "greenpeace-switzerland",
+          "name": "Greenpeace Schweiz",
+          "homepage": "https://www.greenpeace.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "greenpeace-switzerland-official",
+              "name": "Greenpeace Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.greenpeace.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss Greenpeace organization."
+          ]
+        },
+        {
+          "key": "wwf-switzerland",
+          "name": "WWF Schweiz",
+          "homepage": "https://www.wwf.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wwf-switzerland-official",
+              "name": "WWF Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.wwf.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss conservation NGO."
+          ]
+        },
+        {
+          "key": "pro-natura",
+          "name": "Pro Natura",
+          "homepage": "https://www.pronatura.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "pro-natura-official",
+              "name": "Pro Natura",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.pronatura.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss nature-conservation NGO."
+          ]
+        },
+        {
+          "key": "birdlife-switzerland",
+          "name": "BirdLife Schweiz",
+          "homepage": "https://www.birdlife.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "birdlife-switzerland-official",
+              "name": "BirdLife Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.birdlife.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss bird and biodiversity conservation organization."
+          ]
+        },
+        {
+          "key": "ses",
+          "name": "Schweizerische Energie-Stiftung (SES)",
+          "homepage": "https://energiestiftung.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ses-official",
+              "name": "Schweizerische Energie-Stiftung (SES)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://energiestiftung.ch/"
+            }
+          ],
+          "notes": [
+            "Energy-policy and environmental civil-society organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "rights_refugee_digital",
+      "label": "human rights, refugee and digital rights",
+      "entries": [
+        {
+          "key": "amnesty-switzerland",
+          "name": "Amnesty International Schweiz",
+          "homepage": "https://www.amnesty.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "amnesty-switzerland-official",
+              "name": "Amnesty International Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.amnesty.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss section of the human-rights movement."
+          ]
+        },
+        {
+          "key": "sfh",
+          "name": "Schweizerische Flüchtlingshilfe (SFH)",
+          "homepage": "https://www.fluechtlingshilfe.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sfh-official",
+              "name": "Schweizerische Flüchtlingshilfe (SFH)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.fluechtlingshilfe.ch/"
+            }
+          ],
+          "notes": [
+            "National refugee-rights umbrella and civil-society organization."
+          ]
+        },
+        {
+          "key": "humanrights-ch",
+          "name": "humanrights.ch",
+          "homepage": "https://www.humanrights.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "humanrights-ch-official",
+              "name": "humanrights.ch",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.humanrights.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss human-rights information and civil-society organization."
+          ]
+        },
+        {
+          "key": "digitale-gesellschaft-ch",
+          "name": "Digitale Gesellschaft",
+          "homepage": "https://www.digitale-gesellschaft.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "digitale-gesellschaft-ch-official",
+              "name": "Digitale Gesellschaft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.digitale-gesellschaft.ch/"
+            }
+          ],
+          "notes": [
+            "Digital-rights civil-society organization."
+          ]
+        },
+        {
+          "key": "algorithmwatch-ch",
+          "name": "AlgorithmWatch CH",
+          "homepage": "https://algorithmwatch.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "algorithmwatch-ch-official",
+              "name": "AlgorithmWatch CH",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://algorithmwatch.ch/"
+            }
+          ],
+          "notes": [
+            "Independent Swiss civil-society organization focused on algorithmic systems and social impacts."
+          ]
+        },
+        {
+          "key": "sbaa",
+          "name": "Schweizerische Beobachtungsstelle für Asyl- und Ausländerrecht (SBAA)",
+          "homepage": "https://beobachtungsstelle.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sbaa-official",
+              "name": "Schweizerische Beobachtungsstelle für Asyl- und Ausländerrecht (SBAA)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://beobachtungsstelle.ch/"
+            }
+          ],
+          "notes": [
+            "Civil-society observatory for asylum and migration law."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "democracy_transparency_global_justice",
+      "label": "democracy, transparency and global justice",
+      "entries": [
+        {
+          "key": "transparency-switzerland",
+          "name": "Transparency International Schweiz",
+          "homepage": "https://transparency.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "transparency-switzerland-official",
+              "name": "Transparency International Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://transparency.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss anti-corruption civil-society organization."
+          ]
+        },
+        {
+          "key": "public-eye",
+          "name": "Public Eye",
+          "homepage": "https://www.publiceye.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "public-eye-official",
+              "name": "Public Eye",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.publiceye.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss public-interest NGO combining research, advocacy and campaigns on global economic issues."
+          ]
+        },
+        {
+          "key": "alliance-sud",
+          "name": "Alliance Sud",
+          "homepage": "https://www.alliancesud.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "alliance-sud-official",
+              "name": "Alliance Sud",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.alliancesud.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss development-policy civil-society alliance."
+          ]
+        },
+        {
+          "key": "operation-libero",
+          "name": "Operation Libero",
+          "homepage": "https://www.operation-libero.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "operation-libero-official",
+              "name": "Operation Libero",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.operation-libero.ch/"
+            }
+          ],
+          "notes": [
+            "Civic campaign and participation organization."
+          ]
+        },
+        {
+          "key": "campax",
+          "name": "Campax",
+          "homepage": "https://campax.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "campax-official",
+              "name": "Campax",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://campax.org/"
+            }
+          ],
+          "notes": [
+            "Swiss campaign organization."
+          ]
+        },
+        {
+          "key": "swissaid",
+          "name": "SWISSAID",
+          "homepage": "https://www.swissaid.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swissaid-official",
+              "name": "SWISSAID",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.swissaid.ch/"
+            }
+          ],
+          "notes": [
+            "Development and global-justice NGO."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "humanitarian_development_social",
+      "label": "humanitarian, development and social welfare",
+      "entries": [
+        {
+          "key": "swiss-red-cross",
+          "name": "Schweizerisches Rotes Kreuz",
+          "homepage": "https://www.redcross.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swiss-red-cross-official",
+              "name": "Schweizerisches Rotes Kreuz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.redcross.ch/"
+            }
+          ],
+          "notes": [
+            "National Red Cross society and humanitarian organization."
+          ]
+        },
+        {
+          "key": "msf-switzerland",
+          "name": "Médecins Sans Frontières Suisse",
+          "homepage": "https://www.msf.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "msf-switzerland-official",
+              "name": "Médecins Sans Frontières Suisse",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.msf.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss humanitarian medical organization."
+          ]
+        },
+        {
+          "key": "caritas-switzerland",
+          "name": "Caritas Schweiz",
+          "homepage": "https://www.caritas.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "caritas-switzerland-official",
+              "name": "Caritas Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.caritas.ch/"
+            }
+          ],
+          "notes": [
+            "National social-welfare and humanitarian NGO."
+          ]
+        },
+        {
+          "key": "heks",
+          "name": "HEKS/EPER",
+          "homepage": "https://www.heks.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "heks-official",
+              "name": "HEKS/EPER",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.heks.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss development, humanitarian and social-integration NGO."
+          ]
+        },
+        {
+          "key": "helvetas",
+          "name": "Helvetas Swiss Intercooperation",
+          "homepage": "https://www.helvetas.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "helvetas-official",
+              "name": "Helvetas Swiss Intercooperation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.helvetas.org/"
+            }
+          ],
+          "notes": [
+            "Swiss international development NGO."
+          ]
+        },
+        {
+          "key": "terre-des-hommes-ch",
+          "name": "Terre des hommes – Kinderhilfe",
+          "homepage": "https://www.tdh.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "terre-des-hommes-ch-official",
+              "name": "Terre des hommes – Kinderhilfe",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.tdh.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss child-rights and humanitarian organization."
+          ]
+        },
+        {
+          "key": "solidar-suisse",
+          "name": "Solidar Suisse",
+          "homepage": "https://solidar.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "solidar-suisse-official",
+              "name": "Solidar Suisse",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://solidar.ch/"
+            }
+          ],
+          "notes": [
+            "International cooperation and social-justice NGO."
+          ]
+        },
+        {
+          "key": "fastenaktion",
+          "name": "Fastenaktion",
+          "homepage": "https://fastenaktion.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fastenaktion-official",
+              "name": "Fastenaktion",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://fastenaktion.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss development and global-justice organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "peace_security_education",
+      "label": "peace, security and executive education",
+      "entries": [
+        {
+          "key": "gcsp",
+          "name": "Geneva Centre for Security Policy (GCSP)",
+          "homepage": "https://www.gcsp.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gcsp-official",
+              "name": "Geneva Centre for Security Policy (GCSP)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.gcsp.ch/"
+            }
+          ],
+          "notes": [
+            "Broad-mission international foundation combining executive education, diplomatic dialogue, research/policy advice and expert networks; remains NGO under the broad-mission rule."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 26,
+  "review_status": {
+    "source_selection": "approved_26_source_ch_ngo_core_2026_09_28",
+    "segmentation": "functional_role_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "cantonal_and_language_regional_organizations",
+      "reason": "Cantonal and language-regional organizations remain eligible when they add material independent coverage."
+    }
+  ],
+  "source_identity_policy": "institution_is_source_projects_campaigns_and_programs_are_not_automatic_sources",
+  "broad_mission_policy": "education_dialogue_and_policy_research_combined_broad_mission_institutions_remain_ngo"
+}
