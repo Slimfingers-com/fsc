@@ -4155,3 +4155,8 @@ def test_us_organization_catalogs_are_unique_and_not_politically_classified() ->
                 assert "radicality" not in dimensions
 
     assert len(names) == len(set(names))
+
+
+def test_signal_sources_have_no_static_country_catalogs() -> None:
+    for country in ("de", "at", "ch", "gb", "us"):
+        assert not (CATALOG_DIR / f"{country}_signal_v1.json").exists()

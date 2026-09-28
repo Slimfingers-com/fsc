@@ -1188,6 +1188,25 @@ The current curated core contains 35 active print titles from Argentina, Austral
 
 Taiwan and Hong Kong are currently deferred. FSC will not overload the existing ISO country field with politically sensitive media-market geography until a more explicit geography model is available.
 
+## SIGNAL sources and dynamic origin identities
+
+`SIGNAL` is intentionally **not** implemented as a static country catalog. DE, AT, CH, GB and US therefore have no fixed `*_signal_v1.json` candidate core.
+
+Signal handling follows ADR 0026:
+
+- a hosting platform such as a social network, forum or messaging service is not one Source for all content it carries;
+- the concrete origin identity is the Source when it exists only as a signal-producing origin;
+- the account/profile/channel is an Outlet or distribution surface;
+- if the origin already exists as NEWS, PRIMARY_SOURCE, NGO, INTEREST_GROUP, COMPANY, ACADEMIC or THINK_TANK, that canonical Source is reused rather than duplicated as SIGNAL;
+- the concrete item receives `confirmation_role=signal` when it is only an attention/OSINT signal;
+- hashtags, trending labels, queries and algorithmic clusters are not Source identities;
+- cross-platform identity linking is conservative and requires reliable identity evidence;
+- reposts, forwards and copied signals do not create additional independent confirmation.
+
+`SourceType.SIGNAL` therefore defaults to `confirmation_role=signal`, while Consensus and Coverage continue to consume the same article-level eligibility rule. Signal content can contribute attention/coverage information but cannot by itself create multi-source independent consensus.
+
+This absence of static national SIGNAL catalogs is a deliberate architecture decision, not a country-coverage gap.
+
 ## Source identity and product outlets
 
 FSC counts an editorially independent newsroom or editorial brand as the Source, not every edition, channel or programme. Multiple products of the same editorial source are modeled as SourceOutlets. Shared ownership alone does not merge editorially independent newsrooms.
@@ -1298,6 +1317,7 @@ Completed catalog blocks:
 51. United States company core (20 group-first corporate Sources)
 52. United States academic core (18 university/scientific-research Sources)
 53. United States think-tank core (15 public-policy research and analysis Sources)
+54. SIGNAL identity/ingestion policy (dynamic origin identities; no static country platform catalogs)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
