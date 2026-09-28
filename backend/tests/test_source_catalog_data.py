@@ -4458,8 +4458,127 @@ def test_gb_organization_catalogs_have_approved_scope(
     assert len({entry["name"].casefold() for entry in entries}) == expected["count"]
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == source_type for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["language"] == "en" for entry in entries)
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+
+
+GB_INDEPENDENT_FEED_ROLE_POLICY = {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal",
+}
+
+GB_INTEREST_BOUND_FEED_ROLE_POLICY = {
+    **GB_INDEPENDENT_FEED_ROLE_POLICY,
+    "research_publication": "advocacy",
+}
+
+
+def test_gb_organization_catalogs_have_reviewed_feed_activation() -> None:
+    catalogs = {
+        source_type: json.loads(
+            expected["path"].read_text(encoding="utf-8")
+        )
+        for source_type, expected in GB_ORGANIZATION_CATALOGS.items()
+    }
+
+    for source_type, catalog in catalogs.items():
+        expected_policy = (
+            GB_INDEPENDENT_FEED_ROLE_POLICY
+            if source_type in {"ACADEMIC", "THINK_TANK"}
+            else GB_INTEREST_BOUND_FEED_ROLE_POLICY
+        )
+        assert catalog["feed_role_policy"] == expected_policy
+        if source_type in {"NGO", "INTEREST_GROUP", "COMPANY"}:
+            assert (
+                catalog["research_independence_policy"]
+                == (
+                    "interest_bound_source_research_does_not_create_"
+                    "independent_confirmation"
+                )
+            )
+
+        feeds = [
+            feed
+            for group in catalog["groups"]
+            for entry in group["entries"]
+            for feed in entry["feeds"]
+        ]
+        assert len({feed["url"] for feed in feeds}) == len(feeds)
+        assert all(
+            feed["default_confirmation_role"]
+            == expected_policy[feed["feed_class"]]
+            for feed in feeds
+        )
+        assert all(feed["activation_tier"] in {1, 2} for feed in feeds)
+        assert all(
+            feed["active"] is (feed["activation_tier"] == 1)
+            for feed in feeds
+        )
+
+    academic = {
+        entry["key"]: entry
+        for group in catalogs["ACADEMIC"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {
+        key for key, entry in academic.items() if entry["feeds"]
+    } == {"cambridge"}
+    assert academic["cambridge"]["feeds"][0]["feed_class"] == "news"
+    assert academic["cambridge"]["feeds"][0]["active"] is True
+
+    think = {
+        entry["key"]: entry
+        for group in catalogs["THINK_TANK"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {
+        key for key, entry in think.items() if entry["feeds"]
+    } == {"chatham-house", "rusi"}
+    assert all(
+        think[key]["feeds"][0]["feed_class"] == "research_publication"
+        and think[key]["feeds"][0]["active"] is True
+        for key in ("chatham-house", "rusi")
+    )
+
+    company = {
+        entry["key"]: entry
+        for group in catalogs["COMPANY"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {
+        key for key, entry in company.items() if entry["feeds"]
+    } == {"gsk"}
+    assert company["gsk"]["feeds"][0]["feed_class"] == "press_release"
+    assert company["gsk"]["feeds"][0]["active"] is False
+
+    interest = {
+        entry["key"]: entry
+        for group in catalogs["INTEREST_GROUP"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {
+        key for key, entry in interest.items() if entry["feeds"]
+    } == {"british-chambers"}
+    assert interest["british-chambers"]["feeds"][0]["feed_class"] == "news"
+    assert interest["british-chambers"]["feeds"][0]["active"] is True
+
+    assert not any(
+        entry["feeds"]
+        for group in catalogs["NGO"]["groups"]
+        for entry in group["entries"]
+    )
 
 
 def test_gb_ngo_catalog_preserves_independent_editorial_boundaries() -> None:
