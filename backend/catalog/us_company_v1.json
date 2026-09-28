@@ -1,0 +1,626 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "COMPANY",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "group_first_corporate_identity_controlled_subsidiaries_and_brands_are_not_automatic_sources",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "ownership_policy": "ownership_and_control_are_metadata_and_do_not_create_editorial_dependency_by_themselves",
+  "groups": [
+    {
+      "key": "technology_platforms",
+      "label": "technology and platforms",
+      "entries": [
+        {
+          "key": "apple",
+          "name": "Apple Inc.",
+          "homepage": "https://www.apple.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "apple-official",
+              "name": "Apple Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.apple.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source."
+          ]
+        },
+        {
+          "key": "microsoft",
+          "name": "Microsoft Corporation",
+          "homepage": "https://www.microsoft.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "microsoft-official",
+              "name": "Microsoft Corporation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.microsoft.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source."
+          ]
+        },
+        {
+          "key": "alphabet",
+          "name": "Alphabet Inc.",
+          "homepage": "https://abc.xyz/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "alphabet-official",
+              "name": "Alphabet Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://abc.xyz/"
+            }
+          ],
+          "notes": [
+            "Group parent Source; Google products and controlled entities are not automatic separate Sources."
+          ]
+        },
+        {
+          "key": "amazon",
+          "name": "Amazon.com, Inc.",
+          "homepage": "https://www.aboutamazon.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "amazon-official",
+              "name": "Amazon.com, Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.aboutamazon.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source."
+          ]
+        },
+        {
+          "key": "meta",
+          "name": "Meta Platforms, Inc.",
+          "homepage": "https://about.meta.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "meta-official",
+              "name": "Meta Platforms, Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://about.meta.com/"
+            }
+          ],
+          "notes": [
+            "Group-level corporate Source."
+          ]
+        },
+        {
+          "key": "nvidia",
+          "name": "NVIDIA Corporation",
+          "homepage": "https://www.nvidia.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nvidia-official",
+              "name": "NVIDIA Corporation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nvidia.com/"
+            }
+          ],
+          "notes": [
+            "Group-level semiconductor and computing Source."
+          ]
+        },
+        {
+          "key": "tesla",
+          "name": "Tesla, Inc.",
+          "homepage": "https://www.tesla.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tesla-official",
+              "name": "Tesla, Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.tesla.com/"
+            }
+          ],
+          "notes": [
+            "Group-level automotive and energy Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "finance_energy_retail_health",
+      "label": "finance, energy, retail and health",
+      "entries": [
+        {
+          "key": "jpmorgan",
+          "name": "JPMorgan Chase & Co.",
+          "homepage": "https://www.jpmorganchase.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "jpmorgan-official",
+              "name": "JPMorgan Chase & Co.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.jpmorganchase.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "bank-america",
+          "name": "Bank of America Corporation",
+          "homepage": "https://about.bankofamerica.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bank-america-official",
+              "name": "Bank of America Corporation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://about.bankofamerica.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "berkshire",
+          "name": "Berkshire Hathaway Inc.",
+          "homepage": "https://www.berkshirehathaway.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "berkshire-official",
+              "name": "Berkshire Hathaway Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.berkshirehathaway.com/"
+            }
+          ],
+          "notes": [
+            "Group-level conglomerate Source."
+          ]
+        },
+        {
+          "key": "exxonmobil",
+          "name": "Exxon Mobil Corporation",
+          "homepage": "https://corporate.exxonmobil.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "exxonmobil-official",
+              "name": "Exxon Mobil Corporation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://corporate.exxonmobil.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy Source."
+          ]
+        },
+        {
+          "key": "chevron",
+          "name": "Chevron Corporation",
+          "homepage": "https://www.chevron.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "chevron-official",
+              "name": "Chevron Corporation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.chevron.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy Source."
+          ]
+        },
+        {
+          "key": "walmart",
+          "name": "Walmart Inc.",
+          "homepage": "https://corporate.walmart.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "walmart-official",
+              "name": "Walmart Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://corporate.walmart.com/"
+            }
+          ],
+          "notes": [
+            "Group-level retail Source."
+          ]
+        },
+        {
+          "key": "unitedhealth",
+          "name": "UnitedHealth Group Incorporated",
+          "homepage": "https://www.unitedhealthgroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unitedhealth-official",
+              "name": "UnitedHealth Group Incorporated",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.unitedhealthgroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level healthcare Source."
+          ]
+        },
+        {
+          "key": "pfizer",
+          "name": "Pfizer Inc.",
+          "homepage": "https://www.pfizer.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "pfizer-official",
+              "name": "Pfizer Inc.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.pfizer.com/"
+            }
+          ],
+          "notes": [
+            "Group-level pharmaceutical Source."
+          ]
+        },
+        {
+          "key": "eli-lilly",
+          "name": "Eli Lilly and Company",
+          "homepage": "https://www.lilly.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "eli-lilly-official",
+              "name": "Eli Lilly and Company",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lilly.com/"
+            }
+          ],
+          "notes": [
+            "Group-level pharmaceutical Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "aerospace_automotive",
+      "label": "aerospace, defence and automotive",
+      "entries": [
+        {
+          "key": "boeing",
+          "name": "The Boeing Company",
+          "homepage": "https://www.boeing.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "boeing-official",
+              "name": "The Boeing Company",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.boeing.com/"
+            }
+          ],
+          "notes": [
+            "Group-level aerospace Source."
+          ]
+        },
+        {
+          "key": "lockheed-martin",
+          "name": "Lockheed Martin Corporation",
+          "homepage": "https://www.lockheedmartin.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lockheed-martin-official",
+              "name": "Lockheed Martin Corporation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lockheedmartin.com/"
+            }
+          ],
+          "notes": [
+            "Group-level aerospace and defence Source."
+          ]
+        },
+        {
+          "key": "general-motors",
+          "name": "General Motors Company",
+          "homepage": "https://www.gm.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "general-motors-official",
+              "name": "General Motors Company",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gm.com/"
+            }
+          ],
+          "notes": [
+            "Group-level automotive Source."
+          ]
+        },
+        {
+          "key": "ford",
+          "name": "Ford Motor Company",
+          "homepage": "https://corporate.ford.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ford-official",
+              "name": "Ford Motor Company",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://corporate.ford.com/"
+            }
+          ],
+          "notes": [
+            "Group-level automotive Source."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 20,
+  "review_status": {
+    "source_selection": "approved_20_source_us_company_core_2026_09_28",
+    "segmentation": "functional_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_national_and_specialist_institutions",
+      "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
+    }
+  ]
+}

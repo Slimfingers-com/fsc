@@ -1,0 +1,474 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "INTEREST_GROUP",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_is_source_programs_brands_and_subunits_are_not_automatic_sources",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "labour_business",
+      "label": "labour, business and sector representation",
+      "entries": [
+        {
+          "key": "afl-cio",
+          "name": "AFL-CIO",
+          "homepage": "https://aflcio.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "afl-cio-official",
+              "name": "AFL-CIO",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://aflcio.org/"
+            }
+          ],
+          "notes": [
+            "National trade-union federation."
+          ]
+        },
+        {
+          "key": "us-chamber",
+          "name": "U.S. Chamber of Commerce",
+          "homepage": "https://www.uschamber.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "us-chamber-official",
+              "name": "U.S. Chamber of Commerce",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.uschamber.com/"
+            }
+          ],
+          "notes": [
+            "Business membership and interest-representation organization."
+          ]
+        },
+        {
+          "key": "business-roundtable",
+          "name": "Business Roundtable",
+          "homepage": "https://www.businessroundtable.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "business-roundtable-official",
+              "name": "Business Roundtable",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.businessroundtable.org/"
+            }
+          ],
+          "notes": [
+            "Association of chief executives representing large-company policy interests."
+          ]
+        },
+        {
+          "key": "nam",
+          "name": "National Association of Manufacturers",
+          "homepage": "https://nam.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nam-official",
+              "name": "National Association of Manufacturers",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://nam.org/"
+            }
+          ],
+          "notes": [
+            "Manufacturing-sector membership association."
+          ]
+        },
+        {
+          "key": "nrf",
+          "name": "National Retail Federation",
+          "homepage": "https://nrf.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nrf-official",
+              "name": "National Retail Federation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://nrf.com/"
+            }
+          ],
+          "notes": [
+            "Retail-sector association."
+          ]
+        },
+        {
+          "key": "farm-bureau",
+          "name": "American Farm Bureau Federation",
+          "homepage": "https://www.fb.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "farm-bureau-official",
+              "name": "American Farm Bureau Federation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.fb.org/"
+            }
+          ],
+          "notes": [
+            "Agricultural membership and interest organization."
+          ]
+        },
+        {
+          "key": "nfib",
+          "name": "National Federation of Independent Business (NFIB)",
+          "homepage": "https://www.nfib.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nfib-official",
+              "name": "National Federation of Independent Business (NFIB)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nfib.com/"
+            }
+          ],
+          "notes": [
+            "Small-business membership and advocacy organization."
+          ]
+        },
+        {
+          "key": "technet",
+          "name": "TechNet",
+          "homepage": "https://www.technet.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "technet-official",
+              "name": "TechNet",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.technet.org/"
+            }
+          ],
+          "notes": [
+            "Technology-industry membership and policy organization."
+          ]
+        },
+        {
+          "key": "airlines-america",
+          "name": "Airlines for America (A4A)",
+          "homepage": "https://www.airlines.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "airlines-america-official",
+              "name": "Airlines for America (A4A)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.airlines.org/"
+            }
+          ],
+          "notes": [
+            "US airline industry association."
+          ]
+        },
+        {
+          "key": "api",
+          "name": "American Petroleum Institute (API)",
+          "homepage": "https://www.api.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "api-official",
+              "name": "American Petroleum Institute (API)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.api.org/"
+            }
+          ],
+          "notes": [
+            "Oil and natural-gas industry association."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "professional_consumer_membership",
+      "label": "professional, consumer and membership interests",
+      "entries": [
+        {
+          "key": "aarp",
+          "name": "AARP",
+          "homepage": "https://www.aarp.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "aarp-official",
+              "name": "AARP",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.aarp.org/"
+            }
+          ],
+          "notes": [
+            "Large membership organization representing older Americans' interests."
+          ]
+        },
+        {
+          "key": "ama",
+          "name": "American Medical Association (AMA)",
+          "homepage": "https://www.ama-assn.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ama-official",
+              "name": "American Medical Association (AMA)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ama-assn.org/"
+            }
+          ],
+          "notes": [
+            "Physician professional association."
+          ]
+        },
+        {
+          "key": "aha",
+          "name": "American Hospital Association (AHA)",
+          "homepage": "https://www.aha.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "aha-official",
+              "name": "American Hospital Association (AHA)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.aha.org/"
+            }
+          ],
+          "notes": [
+            "Hospital and health-system membership association."
+          ]
+        },
+        {
+          "key": "nar",
+          "name": "National Association of Realtors (NAR)",
+          "homepage": "https://www.nar.realtor/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nar-official",
+              "name": "National Association of Realtors (NAR)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nar.realtor/"
+            }
+          ],
+          "notes": [
+            "Real-estate professional membership association."
+          ]
+        },
+        {
+          "key": "consumer-federation",
+          "name": "Consumer Federation of America",
+          "homepage": "https://consumerfed.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "consumer-federation-official",
+              "name": "Consumer Federation of America",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://consumerfed.org/"
+            }
+          ],
+          "notes": [
+            "Consumer-interest federation and advocacy organization."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 15,
+  "review_status": {
+    "source_selection": "approved_15_source_us_interest_group_core_2026_09_28",
+    "segmentation": "functional_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_national_and_specialist_institutions",
+      "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
+    }
+  ]
+}

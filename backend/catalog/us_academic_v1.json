@@ -1,0 +1,563 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "ACADEMIC",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_is_source_programs_brands_and_subunits_are_not_automatic_sources",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "academic_boundary_policy": "primary_scientific_research_function_includes_universities_academies_and_independent_research_institutions",
+  "think_tank_boundary_policy": "policy_analysis_and_advice_primary_function_is_think_tank_research_primary_function_is_academic",
+  "groups": [
+    {
+      "key": "universities",
+      "label": "universities",
+      "entries": [
+        {
+          "key": "harvard",
+          "name": "Harvard University",
+          "homepage": "https://www.harvard.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "harvard-official",
+              "name": "Harvard University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.harvard.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "mit",
+          "name": "Massachusetts Institute of Technology (MIT)",
+          "homepage": "https://www.mit.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mit-official",
+              "name": "Massachusetts Institute of Technology (MIT)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.mit.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "stanford",
+          "name": "Stanford University",
+          "homepage": "https://www.stanford.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "stanford-official",
+              "name": "Stanford University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.stanford.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "uc-berkeley",
+          "name": "University of California, Berkeley",
+          "homepage": "https://www.berkeley.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "uc-berkeley-official",
+              "name": "University of California, Berkeley",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.berkeley.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "yale",
+          "name": "Yale University",
+          "homepage": "https://www.yale.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "yale-official",
+              "name": "Yale University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.yale.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "princeton",
+          "name": "Princeton University",
+          "homepage": "https://www.princeton.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "princeton-official",
+              "name": "Princeton University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.princeton.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "columbia",
+          "name": "Columbia University",
+          "homepage": "https://www.columbia.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "columbia-official",
+              "name": "Columbia University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.columbia.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "uchicago",
+          "name": "University of Chicago",
+          "homepage": "https://www.uchicago.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "uchicago-official",
+              "name": "University of Chicago",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.uchicago.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "johns-hopkins",
+          "name": "Johns Hopkins University",
+          "homepage": "https://www.jhu.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "johns-hopkins-official",
+              "name": "Johns Hopkins University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.jhu.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "upenn",
+          "name": "University of Pennsylvania",
+          "homepage": "https://www.upenn.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "upenn-official",
+              "name": "University of Pennsylvania",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.upenn.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "caltech",
+          "name": "California Institute of Technology (Caltech)",
+          "homepage": "https://www.caltech.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "caltech-official",
+              "name": "California Institute of Technology (Caltech)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.caltech.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "duke",
+          "name": "Duke University",
+          "homepage": "https://www.duke.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "duke-official",
+              "name": "Duke University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.duke.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "carnegie-mellon",
+          "name": "Carnegie Mellon University",
+          "homepage": "https://www.cmu.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "carnegie-mellon-official",
+              "name": "Carnegie Mellon University",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cmu.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "georgia-tech",
+          "name": "Georgia Institute of Technology",
+          "homepage": "https://www.gatech.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "georgia-tech-official",
+              "name": "Georgia Institute of Technology",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gatech.edu/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "science_research_organizations",
+      "label": "science academies and research organizations",
+      "entries": [
+        {
+          "key": "national-academies",
+          "name": "National Academies of Sciences, Engineering, and Medicine",
+          "homepage": "https://www.nationalacademies.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "national-academies-official",
+              "name": "National Academies of Sciences, Engineering, and Medicine",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nationalacademies.org/"
+            }
+          ],
+          "notes": [
+            "Independent scientific academy organization; government advisory role does not change its primary scientific function."
+          ]
+        },
+        {
+          "key": "scripps-research",
+          "name": "Scripps Research",
+          "homepage": "https://www.scripps.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "scripps-research-official",
+              "name": "Scripps Research",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.scripps.edu/"
+            }
+          ],
+          "notes": [
+            "Independent biomedical research institution."
+          ]
+        },
+        {
+          "key": "broad-institute",
+          "name": "Broad Institute",
+          "homepage": "https://www.broadinstitute.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "broad-institute-official",
+              "name": "Broad Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.broadinstitute.org/"
+            }
+          ],
+          "notes": [
+            "Independent biomedical and genomic research institution affiliated with MIT and Harvard."
+          ]
+        },
+        {
+          "key": "cold-spring-harbor",
+          "name": "Cold Spring Harbor Laboratory",
+          "homepage": "https://www.cshl.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cold-spring-harbor-official",
+              "name": "Cold Spring Harbor Laboratory",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cshl.edu/"
+            }
+          ],
+          "notes": [
+            "Independent biomedical research and education institution."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 18,
+  "review_status": {
+    "source_selection": "approved_18_source_us_academic_core_2026_09_28",
+    "segmentation": "functional_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_national_and_specialist_institutions",
+      "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
+    }
+  ]
+}
