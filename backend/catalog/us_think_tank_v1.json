@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "US",
   "language": "en",
   "media_category": "organization",
@@ -471,5 +471,15 @@
       "category": "additional_national_and_specialist_institutions",
       "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
     }
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  }
 }

@@ -4755,8 +4755,115 @@ def test_us_organization_catalogs_have_approved_scope(
     assert len({entry["name"].casefold() for entry in entries}) == expected["count"]
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == source_type for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["language"] == "en" for entry in entries)
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+
+
+US_INDEPENDENT_FEED_ROLE_POLICY = {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal",
+}
+
+US_INTEREST_BOUND_FEED_ROLE_POLICY = {
+    **US_INDEPENDENT_FEED_ROLE_POLICY,
+    "research_publication": "advocacy",
+}
+
+
+def test_us_organization_catalogs_have_reviewed_feed_activation() -> None:
+    catalogs = {
+        source_type: json.loads(expected["path"].read_text(encoding="utf-8"))
+        for source_type, expected in US_ORGANIZATION_CATALOGS.items()
+    }
+
+    for source_type, catalog in catalogs.items():
+        expected_policy = (
+            US_INDEPENDENT_FEED_ROLE_POLICY
+            if source_type in {"ACADEMIC", "THINK_TANK"}
+            else US_INTEREST_BOUND_FEED_ROLE_POLICY
+        )
+        assert catalog["feed_role_policy"] == expected_policy
+        if source_type in {"NGO", "INTEREST_GROUP", "COMPANY"}:
+            assert (
+                catalog["research_independence_policy"]
+                == (
+                    "interest_bound_source_research_does_not_create_"
+                    "independent_confirmation"
+                )
+            )
+
+        feeds = [
+            feed
+            for group in catalog["groups"]
+            for entry in group["entries"]
+            for feed in entry["feeds"]
+        ]
+        assert len({feed["url"] for feed in feeds}) == len(feeds)
+        assert all(
+            feed["default_confirmation_role"]
+            == expected_policy[feed["feed_class"]]
+            for feed in feeds
+        )
+        assert all(feed["activation_tier"] in {1, 2} for feed in feeds)
+        assert all(
+            feed["active"] is (feed["activation_tier"] == 1)
+            for feed in feeds
+        )
+
+    academic = {
+        entry["key"]: entry
+        for group in catalogs["ACADEMIC"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {key for key, entry in academic.items() if entry["feeds"]} == {
+        "harvard",
+        "mit",
+    }
+    assert academic["mit"]["feeds"][0] == {
+        "name": "Research News",
+        "url": "https://news.mit.edu/rss/research",
+        "active": True,
+        "priority": 1,
+        "fetch_interval_minutes": 60,
+        "default_confirmation_role": "primary_evidence",
+        "feed_class": "news",
+        "activation_tier": 1,
+    }
+    assert academic["harvard"]["feeds"][0]["active"] is False
+    assert academic["harvard"]["feeds"][0]["feed_class"] == "news"
+
+    company = {
+        entry["key"]: entry
+        for group in catalogs["COMPANY"]["groups"]
+        for entry in group["entries"]
+    }
+    assert {key for key, entry in company.items() if entry["feeds"]} == {
+        "apple",
+        "nvidia",
+    }
+    assert company["apple"]["feeds"][0]["feed_class"] == "news"
+    assert company["nvidia"]["feeds"][0]["feed_class"] == "press_release"
+    assert company["apple"]["feeds"][0]["active"] is True
+    assert company["nvidia"]["feeds"][0]["active"] is True
+
+    assert not any(
+        entry["feeds"]
+        for source_type in ("THINK_TANK", "NGO", "INTEREST_GROUP")
+        for group in catalogs[source_type]["groups"]
+        for entry in group["entries"]
+    )
 
 
 def test_us_academic_think_tank_boundary_matches_adr_0024() -> None:

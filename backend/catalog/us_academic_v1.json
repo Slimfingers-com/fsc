@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "US",
   "language": "en",
   "media_category": "organization",
@@ -27,7 +27,18 @@
           "source_type": "ACADEMIC",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Harvard Gazette",
+              "url": "https://news.harvard.edu/gazette/feed",
+              "active": false,
+              "priority": 2,
+              "fetch_interval_minutes": 120,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "news",
+              "activation_tier": 2
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -56,7 +67,18 @@
           "source_type": "ACADEMIC",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Research News",
+              "url": "https://news.mit.edu/rss/research",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -559,5 +581,15 @@
       "category": "additional_national_and_specialist_institutions",
       "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
     }
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  }
 }

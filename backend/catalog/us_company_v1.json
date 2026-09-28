@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "US",
   "language": "en",
   "media_category": "organization",
@@ -26,7 +26,18 @@
           "source_type": "COMPANY",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Apple Newsroom",
+              "url": "https://www.apple.com/newsroom/rss-feed.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -171,7 +182,18 @@
           "source_type": "COMPANY",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Press Releases",
+              "url": "https://nvidianews.nvidia.com/cats/press_release.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -622,5 +644,16 @@
       "category": "additional_national_and_specialist_institutions",
       "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
     }
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "advocacy",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  },
+  "research_independence_policy": "interest_bound_source_research_does_not_create_independent_confirmation"
 }
