@@ -387,3 +387,29 @@ def test_consensus_hash_includes_confirmation_role(db):
     )
 
     assert service.analysis_hash(snapshot) != initial_hash
+
+
+def test_consensus_hash_ignores_feed_default_for_existing_articles(db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "confirmation_role": ConfirmationRole.EDITORIAL,
+                "claim_text": "The plan begins Monday.",
+            },
+        ],
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    initial_hash = service.analysis_hash(snapshot)
+    snapshot.rows[0].article.feed.default_confirmation_role = (
+        ConfirmationRole.PRIMARY_EVIDENCE
+    )
+
+    assert service.analysis_hash(snapshot) == initial_hash

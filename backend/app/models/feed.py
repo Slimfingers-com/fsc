@@ -6,6 +6,7 @@ from sqlalchemy import (
     Boolean,
     CheckConstraint,
     DateTime,
+    Enum,
     ForeignKey,
     Integer,
     String,
@@ -17,6 +18,7 @@ from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import BaseModel
+from app.enums.confirmation_role import ConfirmationRole
 
 if TYPE_CHECKING:
     from app.models.article import Article
@@ -85,6 +87,17 @@ class Feed(BaseModel):
         nullable=False,
         default=30,
         server_default=text("30"),
+    )
+
+    default_confirmation_role: Mapped[ConfirmationRole | None] = mapped_column(
+        Enum(
+            ConfirmationRole,
+            name="feed_default_confirmation_role",
+            native_enum=False,
+            length=32,
+            values_callable=lambda enum: [item.value for item in enum],
+        ),
+        nullable=True,
     )
 
     last_fetched_at: Mapped[datetime | None] = mapped_column(

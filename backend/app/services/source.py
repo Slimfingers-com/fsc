@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -16,6 +18,7 @@ from app.models.source_metadata import (
     SourceOutlet,
 )
 from app.repositories.source import SourceRepository
+from app.schemas.feed import FeedCreate, FeedUpdate
 from app.schemas.source import SourceCreate
 from app.schemas.source_dependency import SourceRelationCreate
 from app.schemas.source_metadata import (
@@ -102,6 +105,9 @@ class SourceService:
                     active=feed.active,
                     priority=feed.priority,
                     fetch_interval_minutes=feed.fetch_interval_minutes,
+                    default_confirmation_role=(
+                        feed.default_confirmation_role
+                    ),
                 )
                 for feed in data.feeds
             ],
@@ -158,6 +164,106 @@ class SourceService:
             raise
 
         return source
+
+    def get_feed(
+        self,
+        db: Session,
+        source: Source,
+        feed_id: UUID,
+    ) -> Feed | None:
+        return self.repository.get_feed_for_source(
+            db,
+            source_id=source.id,
+            feed_id=feed_id,
+        )
+
+    def create_feed(
+        self,
+        db: Session,
+        source: Source,
+        data: FeedCreate,
+    ) -> Feed:
+        feed = Feed(
+            source_id=source.id,
+            name=data.name.strip(),
+            url=str(data.url),
+            active=data.active,
+            priority=data.priority,
+            fetch_interval_minutes=data.fetch_interval_minutes,
+            default_confirmation_role=data.default_confirmation_role,
+        )
+        try:
+            db.add(feed)
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_feeds_url":
+                raise BusinessRuleViolationError(
+                    "Diese Feed-URL ist bereits einer anderen Quelle zugeordnet."
+                ) from exc
+            if constraint_name == "uq_feeds_source_id_name":
+                raise BusinessRuleViolationError(
+                    "Feed-Namen müssen innerhalb einer Quelle eindeutig sein."
+                ) from exc
+            raise
+        return feed
+
+    def update_feed(
+        self,
+        db: Session,
+        source: Source,
+        feed_id: UUID,
+        data: FeedUpdate,
+    ) -> Feed:
+        feed = self.repository.get_feed_for_source(
+            db,
+            source_id=source.id,
+            feed_id=feed_id,
+        )
+        if feed is None:
+            raise BusinessRuleViolationError(
+                "Der Feed existiert für diese Quelle nicht."
+            )
+
+        if "name" in data.model_fields_set and data.name is not None:
+            feed.name = data.name.strip()
+        if "url" in data.model_fields_set and data.url is not None:
+            feed.url = str(data.url)
+        if "active" in data.model_fields_set and data.active is not None:
+            feed.active = data.active
+        if "priority" in data.model_fields_set and data.priority is not None:
+            feed.priority = data.priority
+        if (
+            "fetch_interval_minutes" in data.model_fields_set
+            and data.fetch_interval_minutes is not None
+        ):
+            feed.fetch_interval_minutes = data.fetch_interval_minutes
+        if "default_confirmation_role" in data.model_fields_set:
+            feed.default_confirmation_role = data.default_confirmation_role
+
+        try:
+            self.repository.flush(db)
+        except IntegrityError as exc:
+            constraint_name = getattr(
+                getattr(exc.orig, "diag", None),
+                "constraint_name",
+                None,
+            )
+            if constraint_name == "uq_feeds_url":
+                raise BusinessRuleViolationError(
+                    "Diese Feed-URL ist bereits einer anderen Quelle zugeordnet."
+                ) from exc
+            if constraint_name == "uq_feeds_source_id_name":
+                raise BusinessRuleViolationError(
+                    "Feed-Namen müssen innerhalb einer Quelle eindeutig sein."
+                ) from exc
+            raise
+
+        return feed
 
     def create_outlet(
         self,

@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.core.article_identity import ArticleIdentity, build_article_identity
 from app.enums.article_identity_type import ArticleIdentityType
-from app.enums.confirmation_role import default_confirmation_role
+from app.enums.confirmation_role import resolve_confirmation_role
 from app.ingestion.models import FeedFetchResult, ParsedFeed, ParsedFeedEntry
 from app.models.article import Article
 from app.models.feed import Feed
@@ -96,8 +96,9 @@ class FeedPersistenceService:
             "author": self._clean(entry.author),
             "published_at": entry.published_at,
             "source_updated_at": entry.updated_at,
-            "confirmation_role": default_confirmation_role(
-                feed.source.source_type
+            "confirmation_role": resolve_confirmation_role(
+                source_type=feed.source.source_type,
+                feed_default=feed.default_confirmation_role,
             ),
         }
         article_id = db.scalar(

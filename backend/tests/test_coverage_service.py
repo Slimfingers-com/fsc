@@ -426,3 +426,31 @@ def test_signal_content_partition_is_article_role_driven(db):
     assert prepared.metrics.content_source_count == 1
     assert prepared.metrics.signal_source_count == 1
     assert prepared.metrics.independent_content_source_count == 1
+
+
+def test_coverage_hash_ignores_feed_default_for_existing_articles(db):
+    data = build_coverage_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.NEWS,
+                "confirmation_role": ConfirmationRole.EDITORIAL,
+                "claim_text": "The plan begins Monday.",
+                "coverage_scope": CoverageScope.NATIONAL,
+                "country": "DE",
+            },
+        ],
+    )
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    initial_hash = service.analysis_hash(snapshot)
+    snapshot.source_rows[0].article.feed.default_confirmation_role = (
+        ConfirmationRole.PRIMARY_EVIDENCE
+    )
+
+    assert service.analysis_hash(snapshot) == initial_hash

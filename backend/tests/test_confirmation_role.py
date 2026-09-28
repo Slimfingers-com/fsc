@@ -4,6 +4,7 @@ from app.enums.confirmation_role import (
     ConfirmationRole,
     counts_as_independent_confirmation,
     default_confirmation_role,
+    resolve_confirmation_role,
 )
 from app.enums.source_type import SourceType
 
@@ -40,3 +41,27 @@ def test_default_confirmation_role(source_type, expected):
 )
 def test_independent_confirmation_eligibility(role, expected):
     assert counts_as_independent_confirmation(role) is expected
+
+
+def test_confirmation_role_resolution_precedence() -> None:
+    assert (
+        resolve_confirmation_role(
+            source_type=SourceType.COMPANY,
+            feed_default=ConfirmationRole.EXPERT_ANALYSIS,
+            article_role=ConfirmationRole.EDITORIAL,
+        )
+        is ConfirmationRole.EDITORIAL
+    )
+    assert (
+        resolve_confirmation_role(
+            source_type=SourceType.COMPANY,
+            feed_default=ConfirmationRole.EXPERT_ANALYSIS,
+        )
+        is ConfirmationRole.EXPERT_ANALYSIS
+    )
+    assert (
+        resolve_confirmation_role(
+            source_type=SourceType.COMPANY,
+        )
+        is ConfirmationRole.ADVOCACY
+    )

@@ -520,3 +520,89 @@ def test_feed_update_preserves_manual_confirmation_role_override(db):
     )
 
     assert article.confirmation_role is ConfirmationRole.ADVOCACY
+
+
+def test_feed_default_overrides_source_type_for_new_article(db):
+    source = SourceService().create_source(
+        db,
+        SourceCreate(
+            name="Company Research Example",
+            url="https://company-research.example.com",
+            source_type=SourceType.COMPANY,
+            feeds=[
+                FeedCreate(
+                    name="Research Feed",
+                    url="https://company-research.example.com/feed.xml",
+                    default_confirmation_role=(
+                        ConfirmationRole.EXPERT_ANALYSIS
+                    ),
+                )
+            ],
+        ),
+    )
+    feed = source.feeds[0]
+
+    FeedPersistenceService().persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(parsed_entry()),
+    )
+
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    assert article.confirmation_role is ConfirmationRole.EXPERT_ANALYSIS
+
+
+def test_feed_default_change_is_nonretroactive(db):
+    source = SourceService().create_source(
+        db,
+        SourceCreate(
+            name="Changing Feed Example",
+            url="https://changing-feed.example.com",
+            source_type=SourceType.COMPANY,
+            feeds=[
+                FeedCreate(
+                    name="Mixed Feed",
+                    url="https://changing-feed.example.com/feed.xml",
+                )
+            ],
+        ),
+    )
+    feed = source.feeds[0]
+    service = FeedPersistenceService()
+
+    service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(parsed_entry()),
+    )
+    first_article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    assert first_article.confirmation_role is ConfirmationRole.ADVOCACY
+
+    feed.default_confirmation_role = ConfirmationRole.EXPERT_ANALYSIS
+    db.flush()
+
+    service.persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(),
+            parsed_entry(
+                external_id="article-2",
+                title="Second article",
+                link="https://example.com/articles/2",
+            ),
+        ),
+    )
+
+    articles = {
+        article.guid: article
+        for article in ArticleRepository().list_by_feed(db, feed.id)
+    }
+    assert (
+        articles["article-1"].confirmation_role
+        is ConfirmationRole.ADVOCACY
+    )
+    assert (
+        articles["article-2"].confirmation_role
+        is ConfirmationRole.EXPERT_ANALYSIS
+    )
