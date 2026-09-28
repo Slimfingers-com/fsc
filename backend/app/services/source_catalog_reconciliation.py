@@ -125,14 +125,13 @@ class SourceCatalogReconciler:
                     )
                 continue
 
-            conflicts.extend(
-                self._source_identity_conflicts(
-                    source=source,
-                    entry=entry,
-                    catalog=catalog,
-                )
+            source_conflicts = self._source_identity_conflicts(
+                source=source,
+                entry=entry,
+                catalog=catalog,
             )
-            if conflicts:
+            conflicts.extend(source_conflicts)
+            if source_conflicts:
                 continue
 
             active_feeds = [
