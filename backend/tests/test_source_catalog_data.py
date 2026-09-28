@@ -3179,8 +3179,94 @@ def test_de_academic_catalog_has_approved_scope_and_count() -> None:
     assert len({entry["name"].casefold() for entry in entries}) == 23
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == "ACADEMIC" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["classifications"] == [] for entry in entries)
+
+
+DE_FEED_ROLE_POLICY = {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal",
+}
+
+
+def _assert_de_feed_activation_policy(catalog: dict) -> None:
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+    assert catalog["feed_role_policy"] == DE_FEED_ROLE_POLICY
+
+
+def _configured_feed_entries(entries: list[dict]) -> dict[str, list[dict]]:
+    return {
+        entry["key"]: entry["feeds"]
+        for entry in entries
+        if entry["feeds"]
+    }
+
+
+def test_de_academic_catalog_has_reviewed_feed_activation() -> None:
+    catalog = load_de_academic_catalog()
+    entries = de_academic_entries(catalog)
+    configured = _configured_feed_entries(entries)
+
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    _assert_de_feed_activation_policy(catalog)
+
+    assert set(configured) == {
+        "tum",
+        "max-planck-gesellschaft",
+        "fraunhofer-gesellschaft",
+        "diw-berlin",
+        "pik",
+        "kit",
+        "charite",
+    }
+    assert {
+        key
+        for key, feeds in configured.items()
+        if any(feed["active"] for feed in feeds)
+    } == {"diw-berlin", "pik"}
+
+    all_feeds = [
+        feed
+        for feeds in configured.values()
+        for feed in feeds
+    ]
+    assert len({feed["url"] for feed in all_feeds}) == len(all_feeds)
+    assert all(
+        feed["default_confirmation_role"]
+        == DE_FEED_ROLE_POLICY[feed["feed_class"]]
+        for feed in all_feeds
+    )
+    assert all(feed["activation_tier"] in {1, 2} for feed in all_feeds)
+    assert all(
+        feed["active"] is (feed["activation_tier"] == 1)
+        for feed in all_feeds
+    )
+    assert all(1 <= feed["priority"] <= 4 for feed in all_feeds)
+    assert all(feed["fetch_interval_minutes"] > 0 for feed in all_feeds)
+
+    by_key = {entry["key"]: entry for entry in entries}
+    assert by_key["diw-berlin"]["feeds"][0]["url"] == (
+        "https://www.diw.de/de/rss_press.xml"
+    )
+    assert by_key["diw-berlin"]["feeds"][0]["feed_class"] == "press_release"
+    assert by_key["pik"]["feeds"][0]["url"] == (
+        "https://www.pik-potsdam.de/de/aktuelles/nachrichten/"
+        "nachrichten/rss.xml"
+    )
+    assert by_key["pik"]["feeds"][0]["feed_class"] == "news"
+
+    for key in ("wzb", "rwi", "zew"):
+        assert by_key[key]["feeds"] == []
 
 
 def test_de_academic_catalog_matches_approved_core() -> None:
@@ -3358,8 +3444,41 @@ def test_de_think_tank_catalog_has_approved_scope_and_count() -> None:
     assert len({entry["name"].casefold() for entry in entries}) == 15
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == "THINK_TANK" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["classifications"] == [] for entry in entries)
+
+
+def test_de_think_tank_catalog_has_reviewed_feed_activation() -> None:
+    catalog = load_de_think_tank_catalog()
+    entries = de_think_tank_entries(catalog)
+    configured = _configured_feed_entries(entries)
+
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    _assert_de_feed_activation_policy(catalog)
+
+    assert set(configured) == {"swp"}
+    swp_feed = configured["swp"][0]
+    assert swp_feed == {
+        "name": "Official publications (German)",
+        "url": "https://www.swp-berlin.org/SWPPublications.xml",
+        "active": True,
+        "priority": 1,
+        "fetch_interval_minutes": 60,
+        "default_confirmation_role": "expert_analysis",
+        "feed_class": "research_publication",
+        "activation_tier": 1,
+    }
+
+    by_key = {entry["key"]: entry for entry in entries}
+    for key in (
+        "merics",
+        "libmod",
+        "stiftung-marktwirtschaft",
+        "progressives-zentrum",
+        "prometheus",
+        "republik21",
+        "zoe-institute",
+    ):
+        assert by_key[key]["feeds"] == []
 
 
 def test_de_think_tank_catalog_matches_approved_core() -> None:

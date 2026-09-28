@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "DE",
   "language": "de",
   "media_category": "organization",
@@ -11,6 +11,16 @@
   "think_tank_boundary_policy": "policy_analysis_and_advice_primary_function_is_think_tank_research_primary_function_is_academic",
   "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
   "default_confirmation_role": "expert_analysis",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  },
   "coverage_policy": "targets_are_goals_not_quotas",
   "groups": [
     {
@@ -56,7 +66,18 @@
           "source_type": "ACADEMIC",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Aktuelles",
+              "url": "https://www.tum.de/news.rss",
+              "feed_class": "news",
+              "active": false,
+              "priority": 2,
+              "fetch_interval_minutes": 120,
+              "default_confirmation_role": "primary_evidence",
+              "activation_tier": 2
+            }
+          ],
           "classification_status": "functional_research_institution_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -207,7 +228,18 @@
           "source_type": "ACADEMIC",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Forschung",
+              "url": "https://www.mpg.de/de/forschung.rss",
+              "feed_class": "news",
+              "active": false,
+              "priority": 2,
+              "fetch_interval_minutes": 120,
+              "default_confirmation_role": "primary_evidence",
+              "activation_tier": 2
+            }
+          ],
           "classification_status": "functional_research_institution_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -236,7 +268,18 @@
           "source_type": "ACADEMIC",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Presseinformationen",
+              "url": "https://www.fraunhofer.de/de/rss/presse.rss",
+              "feed_class": "press_release",
+              "active": false,
+              "priority": 2,
+              "fetch_interval_minutes": 120,
+              "default_confirmation_role": "primary_evidence",
+              "activation_tier": 2
+            }
+          ],
           "classification_status": "functional_research_institution_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -329,7 +372,18 @@
           "source_type": "ACADEMIC",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Pressemitteilungen",
+              "url": "https://www.diw.de/de/rss_press.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_research_institution_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -480,7 +534,18 @@
           "source_type": "ACADEMIC",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Nachrichten",
+              "url": "https://www.pik-potsdam.de/de/aktuelles/nachrichten/nachrichten/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_research_institution_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -567,7 +632,18 @@
           "source_type": "ACADEMIC",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Presseinformationen",
+              "url": "https://www.kit.edu/pi.rss",
+              "feed_class": "press_release",
+              "active": false,
+              "priority": 2,
+              "fetch_interval_minutes": 120,
+              "default_confirmation_role": "primary_evidence",
+              "activation_tier": 2
+            }
+          ],
           "classification_status": "functional_research_institution_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -602,7 +678,18 @@
           "source_type": "ACADEMIC",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Pressemitteilungen",
+              "url": "https://www.charite.de/service/pressemitteilung/feed/pressefeed?type=102",
+              "feed_class": "press_release",
+              "active": false,
+              "priority": 2,
+              "fetch_interval_minutes": 120,
+              "default_confirmation_role": "primary_evidence",
+              "activation_tier": 2
+            }
+          ],
           "classification_status": "functional_research_institution_not_political_classification",
           "classifications": [],
           "metrics": [],
