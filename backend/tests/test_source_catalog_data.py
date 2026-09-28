@@ -2983,8 +2983,109 @@ def test_de_company_catalog_has_approved_scope_and_count() -> None:
     assert len({entry["name"].casefold() for entry in entries}) == 28
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == "COMPANY" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
     assert all(entry["classifications"] == [] for entry in entries)
+
+
+DE_COMPANY_FEED_ROLE_POLICY = {
+    "research_publication": "advocacy",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal",
+}
+
+
+def test_de_company_catalog_has_reviewed_feed_activation() -> None:
+    catalog = load_de_company_catalog()
+    entries = de_company_entries(catalog)
+    configured = {
+        entry["key"]: entry["feeds"]
+        for entry in entries
+        if entry["feeds"]
+    }
+
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+    assert (
+        catalog["research_independence_policy"]
+        == (
+            "interest_bound_source_research_does_not_create_"
+            "independent_confirmation"
+        )
+    )
+    assert catalog["feed_role_policy"] == DE_COMPANY_FEED_ROLE_POLICY
+
+    assert set(configured) == {
+        "volkswagen-group",
+        "lufthansa-group",
+        "deutsche-bank",
+        "fresenius",
+    }
+    assert {
+        key
+        for key, feeds in configured.items()
+        if any(feed["active"] for feed in feeds)
+    } == {
+        "volkswagen-group",
+        "lufthansa-group",
+        "deutsche-bank",
+    }
+
+    all_feeds = [
+        feed
+        for feeds in configured.values()
+        for feed in feeds
+    ]
+    assert len({feed["url"] for feed in all_feeds}) == len(all_feeds)
+    assert all(
+        feed["default_confirmation_role"]
+        == DE_COMPANY_FEED_ROLE_POLICY[feed["feed_class"]]
+        for feed in all_feeds
+    )
+    assert all(feed["activation_tier"] in {1, 2} for feed in all_feeds)
+    assert all(
+        feed["active"] is (feed["activation_tier"] == 1)
+        for feed in all_feeds
+    )
+    assert all(1 <= feed["priority"] <= 4 for feed in all_feeds)
+    assert all(feed["fetch_interval_minutes"] > 0 for feed in all_feeds)
+
+    by_key = {entry["key"]: entry for entry in entries}
+    assert by_key["volkswagen-group"]["feeds"][0]["url"] == (
+        "https://www.volkswagen-group.com/de/feeds/pressemitteilungen"
+    )
+    assert by_key["lufthansa-group"]["feeds"][0]["url"] == (
+        "https://newsroom.lufthansagroup.com/feed/"
+    )
+    assert by_key["deutsche-bank"]["feeds"][0]["url"] == (
+        "https://www.db.com/api/sitemap/www.db.com/rss/3?newscount=30"
+    )
+    assert by_key["fresenius"]["feeds"][0]["active"] is False
+
+    for key in (
+        "allianz",
+        "bayer",
+        "basf",
+        "deutsche-telekom",
+        "rwe",
+        "siemens",
+    ):
+        assert by_key[key]["feeds"] == []
+
+
+def test_de_company_research_feed_does_not_gain_independent_confirmation() -> None:
+    catalog = load_de_company_catalog()
+
+    assert catalog["default_confirmation_role"] == "advocacy"
+    assert catalog["feed_role_policy"]["research_publication"] == "advocacy"
 
 
 def test_de_company_catalog_matches_approved_core() -> None:
