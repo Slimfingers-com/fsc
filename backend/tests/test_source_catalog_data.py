@@ -2760,7 +2760,110 @@ def test_de_organization_catalogs_have_approved_scope(
     assert len({entry["name"].casefold() for entry in entries}) == count
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == source_type for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+
+
+DE_INTEREST_BOUND_FEED_ROLE_POLICY = {
+    "research_publication": "advocacy",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal",
+}
+
+
+def _configured_de_organization_feeds(catalog: dict) -> dict[str, list[dict]]:
+    return {
+        entry["key"]: entry["feeds"]
+        for entry in de_organization_entries(catalog)
+        if entry["feeds"]
+    }
+
+
+def _assert_de_interest_bound_feed_policy(catalog: dict) -> None:
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+    assert catalog["feed_role_policy"] == DE_INTEREST_BOUND_FEED_ROLE_POLICY
+    assert (
+        catalog["research_independence_policy"]
+        == "interest_bound_source_research_does_not_create_independent_confirmation"
+    )
+    feeds = [
+        feed
+        for entry_feeds in _configured_de_organization_feeds(catalog).values()
+        for feed in entry_feeds
+    ]
+    assert len({feed["url"] for feed in feeds}) == len(feeds)
+    assert all(
+        feed["default_confirmation_role"]
+        == DE_INTEREST_BOUND_FEED_ROLE_POLICY[feed["feed_class"]]
+        for feed in feeds
+    )
+    assert all(feed["activation_tier"] in {1, 2} for feed in feeds)
+    assert all(
+        feed["active"] is (feed["activation_tier"] == 1)
+        for feed in feeds
+    )
+    assert all(1 <= feed["priority"] <= 4 for feed in feeds)
+    assert all(feed["fetch_interval_minutes"] > 0 for feed in feeds)
+
+
+def test_de_ngo_catalog_has_reviewed_feed_activation() -> None:
+    catalog = load_de_organization_catalog(DE_NGO_CATALOG)
+    configured = _configured_de_organization_feeds(catalog)
+    _assert_de_interest_bound_feed_policy(catalog)
+
+    assert set(configured) == {"pro-asyl", "mehr-demokratie"}
+    assert configured["pro-asyl"][0]["url"] == "https://www.proasyl.de/news/feed/"
+    assert configured["pro-asyl"][0]["feed_class"] == "news"
+    assert configured["mehr-demokratie"][0]["url"] == (
+        "https://www.mehr-demokratie.de/rss-press.xml"
+    )
+    assert configured["mehr-demokratie"][0]["feed_class"] == "press_release"
+
+    by_key = {
+        entry["key"]: entry
+        for entry in de_organization_entries(catalog)
+    }
+    for key in (
+        "nabu",
+        "lobbycontrol",
+        "welthungerhilfe",
+        "heinrich-boell-stiftung",
+        "rosa-luxemburg-stiftung",
+        "desiderius-erasmus-stiftung",
+    ):
+        assert by_key[key]["feeds"] == []
+
+
+def test_de_interest_group_catalog_has_reviewed_feed_activation() -> None:
+    catalog = load_de_organization_catalog(DE_INTEREST_GROUP_CATALOG)
+    configured = _configured_de_organization_feeds(catalog)
+    _assert_de_interest_bound_feed_policy(catalog)
+
+    assert set(configured) == {"dgb", "vzbv"}
+    assert configured["dgb"][0]["url"] == (
+        "https://www.dgb.de/pressemitteilungen-rss-feed.xml"
+    )
+    assert configured["dgb"][0]["feed_class"] == "press_release"
+    assert configured["vzbv"][0]["url"] == (
+        "https://www.vzbv.de/presse/pressemitteilungen/rss.xml"
+    )
+    assert configured["vzbv"][0]["feed_class"] == "press_release"
+
+    by_key = {
+        entry["key"]: entry
+        for entry in de_organization_entries(catalog)
+    }
+    for key in ("dbb", "bda", "bdi", "haus-und-grund", "adac"):
+        assert by_key[key]["feeds"] == []
 
 
 @pytest.mark.parametrize("path", [DE_NGO_CATALOG, DE_INTEREST_GROUP_CATALOG])
