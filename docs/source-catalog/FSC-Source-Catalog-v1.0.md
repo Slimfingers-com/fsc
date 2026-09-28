@@ -1053,6 +1053,28 @@ The current department name **Department for Business, Innovation, Science and T
 
 No feed is activated by inclusion in this catalog.
 
+## Great Britain (GB) — Organization Sources
+
+The GB organization catalogs apply ADRs 0022–0025 unchanged: institutional primary function determines `SourceType`, while article-level `confirmation_role` determines whether concrete content can count as independent confirmation. No political orientation or radicality is inferred from organization identity or policy domain.
+
+| Source type | Core size | Boundary notes |
+| --- | ---: | --- |
+| NGO | 28 | Mission-driven public-interest organizations. Full Fact is not duplicated because it already exists as a digital specialist newsroom Source. Liberty remains the NGO Source; the editorially independent Liberty Investigates unit is deferred for separate media-Source review rather than collapsed by ownership. |
+| INTEREST_GROUP | 19 | Trade unions, business/sector bodies, professional associations and Universities UK as a university-membership representative body. |
+| COMPANY | 26 | Group-first corporate identity; controlled subsidiaries and brands are not automatic additional Sources. |
+| ACADEMIC | 19 | Universities plus research institutions such as IFS and NIESR whose primary function is scientific/economic research under ADR 0024. |
+| THINK_TANK | 20 | Institutions whose primary function is policy analysis/advice. New Economics Foundation remains NGO under the broad-mission rule. |
+
+Selected identity rules:
+
+- `Institute for Fiscal Studies (IFS)` and `National Institute of Economic and Social Research (NIESR)` are ACADEMIC despite strong policy relevance because research is their primary institutional function.
+- `Universities UK` is INTEREST_GROUP, not ACADEMIC, because it represents member universities collectively.
+- `Fabian Society` is treated by primary institutional function as THINK_TANK; no political-orientation value is persisted from its affiliations or public identity.
+- Chatham House publications and journals are not automatically separate Sources or automatically collapsed into the institutional Source; editorial identity is reviewed separately if a publication enters the media catalog.
+- New NGO articles default to `advocacy`; ACADEMIC and THINK_TANK articles default to `expert_analysis`; the article role remains authoritative.
+
+No feed is activated by inclusion in these catalogs.
+
 ## United States (US) — Digital
 
 Digital is modeled as a **medium**. Existing broadcast Sources are extended rather than duplicated. Born-digital Sources use `digital_native`; print-origin and cross-format Sources use `other`.
@@ -1122,6 +1144,29 @@ Specific identity rules:
 - All ten selected Sources remain politically unclassified. Public-media status is not used as a substitute for political classification.
 
 No feed is activated by inclusion in this catalog.
+
+## United States (US) — Organization Sources
+
+The US organization catalogs apply ADRs 0022–0025 unchanged: institutional primary function determines `SourceType`, while article-level `confirmation_role` determines whether concrete content can count as independent confirmation. No political orientation or radicality is inferred from organization identity, policy domain or public positioning.
+
+| Source type | Core size | Boundary notes |
+| --- | ---: | --- |
+| NGO | 20 | Mission-driven environmental, rights, civic, humanitarian and social organizations. |
+| INTEREST_GROUP | 15 | Trade unions, business/sector bodies, professional associations and large member/consumer-interest organizations. |
+| COMPANY | 20 | Group-first corporate identity; controlled subsidiaries and product brands are not automatic additional Sources. |
+| ACADEMIC | 18 | Universities, scientific academies and independent research institutions whose primary function is scientific research. |
+| THINK_TANK | 15 | Institutions whose primary function is public-policy research, analysis and advice. |
+
+Selected identity and boundary rules:
+
+- The National Academies of Sciences, Engineering, and Medicine are `ACADEMIC`: their government-advisory role does not replace their primary scientific institutional function.
+- RAND Corporation is `THINK_TANK` because policy research and decision-support analysis are its primary institutional function under ADR 0024.
+- Council on Foreign Relations remains `THINK_TANK` despite also being a membership organization and publisher because policy-relevant analysis and public-policy debate are central institutional functions. Any independently edited publication entering the media catalog is reviewed separately rather than collapsed automatically.
+- Alphabet Inc. is the group-level COMPANY Source; Google product and controlled-entity brands are not automatic separate Sources.
+- NGO and INTEREST_GROUP content defaults to `advocacy`; ACADEMIC and THINK_TANK content defaults to `expert_analysis`; COMPANY content defaults to `advocacy`. The concrete article role always remains authoritative.
+- No SourceType or catalog membership is used as a political classification or as an election-related recommendation.
+
+No feed is activated by inclusion in these catalogs.
 
 ## International comparison set
 
@@ -1243,6 +1288,16 @@ Completed catalog blocks:
 41. Switzerland company core (22 group-first corporate Sources)
 42. Switzerland academic core (15 higher-education/research Sources; ETH Domain institutions remain distinct)
 43. Switzerland think-tank core (6 policy-analysis Sources)
+44. Great Britain NGO core (28 public-interest Sources; existing Full Fact media Source not duplicated)
+45. Great Britain interest-group core (19 labour/business/professional/member-representation Sources)
+46. Great Britain company core (26 group-first corporate Sources)
+47. Great Britain academic core (19 university/research Sources; IFS/NIESR classified by primary research function)
+48. Great Britain think-tank core (20 policy-analysis Sources; broad-mission NEF remains NGO)
+49. United States NGO core (20 mission-driven public-interest Sources)
+50. United States interest-group core (15 labour/business/professional/member-representation Sources)
+51. United States company core (20 group-first corporate Sources)
+52. United States academic core (18 university/scientific-research Sources)
+53. United States think-tank core (15 public-policy research and analysis Sources)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 

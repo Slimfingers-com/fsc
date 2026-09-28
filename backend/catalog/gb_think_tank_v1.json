@@ -1,0 +1,616 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "THINK_TANK",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "source_identity_policy": "policy_analysis_institution_is_source_publications_and_programmes_are_not_automatic_sources",
+  "academic_boundary_policy": "research_primary_function_is_academic_policy_analysis_and_advice_primary_function_is_think_tank",
+  "broad_mission_policy": "new_economics_foundation_remains_ngo_per_adr_0025",
+  "groups": [
+    {
+      "key": "foreign_security_international",
+      "label": "foreign policy, security and international affairs",
+      "entries": [
+        {
+          "key": "chatham-house",
+          "name": "Chatham House",
+          "homepage": "https://www.chathamhouse.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "chatham-house-official",
+              "name": "Chatham House",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.chathamhouse.org/"
+            }
+          ],
+          "notes": [
+            "Independent policy institute; journal/publication identities are not automatically collapsed into this Source."
+          ]
+        },
+        {
+          "key": "rusi",
+          "name": "Royal United Services Institute (RUSI)",
+          "homepage": "https://www.rusi.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rusi-official",
+              "name": "Royal United Services Institute (RUSI)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.rusi.org/"
+            }
+          ],
+          "notes": [
+            "Independent defence, security and international-affairs think tank."
+          ]
+        },
+        {
+          "key": "iiss",
+          "name": "International Institute for Strategic Studies (IISS)",
+          "homepage": "https://www.iiss.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "iiss-official",
+              "name": "International Institute for Strategic Studies (IISS)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.iiss.org/"
+            }
+          ],
+          "notes": [
+            "International-affairs and security think tank."
+          ]
+        },
+        {
+          "key": "cer",
+          "name": "Centre for European Reform",
+          "homepage": "https://www.cer.eu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cer-official",
+              "name": "Centre for European Reform",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cer.eu/"
+            }
+          ],
+          "notes": [
+            "European-policy think tank."
+          ]
+        },
+        {
+          "key": "bfpg",
+          "name": "British Foreign Policy Group",
+          "homepage": "https://bfpg.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bfpg-official",
+              "name": "British Foreign Policy Group",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://bfpg.co.uk/"
+            }
+          ],
+          "notes": [
+            "Independent foreign-policy think tank."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "state_economy_public_services",
+      "label": "state, economy and public services",
+      "entries": [
+        {
+          "key": "resolution-foundation",
+          "name": "Resolution Foundation",
+          "homepage": "https://www.resolutionfoundation.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "resolution-foundation-official",
+              "name": "Resolution Foundation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.resolutionfoundation.org/"
+            }
+          ],
+          "notes": [
+            "Independent economic-policy think tank."
+          ]
+        },
+        {
+          "key": "institute-government",
+          "name": "Institute for Government",
+          "homepage": "https://www.instituteforgovernment.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "institute-government-official",
+              "name": "Institute for Government",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.instituteforgovernment.org.uk/"
+            }
+          ],
+          "notes": [
+            "Independent think tank focused on government effectiveness."
+          ]
+        },
+        {
+          "key": "kings-fund",
+          "name": "The King's Fund",
+          "homepage": "https://www.kingsfund.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kings-fund-official",
+              "name": "The King's Fund",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.kingsfund.org.uk/"
+            }
+          ],
+          "notes": [
+            "Health and care policy think tank and charity; primary policy-analysis function for catalog purposes."
+          ]
+        },
+        {
+          "key": "nuffield-trust",
+          "name": "Nuffield Trust",
+          "homepage": "https://www.nuffieldtrust.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nuffield-trust-official",
+              "name": "Nuffield Trust",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nuffieldtrust.org.uk/"
+            }
+          ],
+          "notes": [
+            "Independent health policy research and analysis organization; policy-analysis primary function."
+          ]
+        },
+        {
+          "key": "centre-cities",
+          "name": "Centre for Cities",
+          "homepage": "https://www.centreforcities.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "centre-cities-official",
+              "name": "Centre for Cities",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.centreforcities.org/"
+            }
+          ],
+          "notes": [
+            "Urban policy think tank."
+          ]
+        },
+        {
+          "key": "social-market-foundation",
+          "name": "Social Market Foundation",
+          "homepage": "https://www.smf.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "social-market-foundation-official",
+              "name": "Social Market Foundation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.smf.co.uk/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "reform",
+          "name": "Reform",
+          "homepage": "https://reform.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "reform-official",
+              "name": "Reform",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://reform.uk/"
+            }
+          ],
+          "notes": [
+            "Public-service policy think tank."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "policy_ideas_society",
+      "label": "policy ideas and society",
+      "entries": [
+        {
+          "key": "ippr",
+          "name": "Institute for Public Policy Research (IPPR)",
+          "homepage": "https://www.ippr.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ippr-official",
+              "name": "Institute for Public Policy Research (IPPR)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ippr.org/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "policy-exchange",
+          "name": "Policy Exchange",
+          "homepage": "https://policyexchange.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "policy-exchange-official",
+              "name": "Policy Exchange",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://policyexchange.org.uk/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "iea",
+          "name": "Institute of Economic Affairs",
+          "homepage": "https://iea.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "iea-official",
+              "name": "Institute of Economic Affairs",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://iea.org.uk/"
+            }
+          ],
+          "notes": [
+            "Economic-policy think tank."
+          ]
+        },
+        {
+          "key": "adam-smith-institute",
+          "name": "Adam Smith Institute",
+          "homepage": "https://www.adamsmith.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "adam-smith-institute-official",
+              "name": "Adam Smith Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.adamsmith.org/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "centre-policy-studies",
+          "name": "Centre for Policy Studies",
+          "homepage": "https://cps.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "centre-policy-studies-official",
+              "name": "Centre for Policy Studies",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://cps.org.uk/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "demos-uk",
+          "name": "Demos",
+          "homepage": "https://demos.co.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "demos-uk-official",
+              "name": "Demos",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://demos.co.uk/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "onward",
+          "name": "Onward",
+          "homepage": "https://www.ukonward.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "onward-official",
+              "name": "Onward",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ukonward.com/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "fabian-society",
+          "name": "Fabian Society",
+          "homepage": "https://fabians.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fabian-society-official",
+              "name": "Fabian Society",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://fabians.org.uk/"
+            }
+          ],
+          "notes": [
+            "Research and policy-debate institution with membership activity; primary think-tank/research function for SourceType. No political orientation is persisted."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 20
+}

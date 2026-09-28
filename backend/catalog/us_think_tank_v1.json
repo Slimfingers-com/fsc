@@ -1,0 +1,475 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "THINK_TANK",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_is_source_programs_brands_and_subunits_are_not_automatic_sources",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "academic_boundary_policy": "research_primary_function_is_academic_policy_analysis_and_advice_primary_function_is_think_tank",
+  "groups": [
+    {
+      "key": "foreign_security_global",
+      "label": "foreign policy, security and global affairs",
+      "entries": [
+        {
+          "key": "cfr",
+          "name": "Council on Foreign Relations (CFR)",
+          "homepage": "https://www.cfr.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cfr-official",
+              "name": "Council on Foreign Relations (CFR)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cfr.org/"
+            }
+          ],
+          "notes": [
+            "Membership organization and think tank whose central output includes policy-relevant analysis and ideas."
+          ]
+        },
+        {
+          "key": "csis",
+          "name": "Center for Strategic and International Studies (CSIS)",
+          "homepage": "https://www.csis.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "csis-official",
+              "name": "Center for Strategic and International Studies (CSIS)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.csis.org/"
+            }
+          ],
+          "notes": [
+            "Nonprofit policy research organization focused on national security and global policy."
+          ]
+        },
+        {
+          "key": "carnegie-endowment",
+          "name": "Carnegie Endowment for International Peace",
+          "homepage": "https://carnegieendowment.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "carnegie-endowment-official",
+              "name": "Carnegie Endowment for International Peace",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://carnegieendowment.org/"
+            }
+          ],
+          "notes": [
+            "International-affairs policy think tank."
+          ]
+        },
+        {
+          "key": "cnas",
+          "name": "Center for a New American Security (CNAS)",
+          "homepage": "https://www.cnas.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cnas-official",
+              "name": "Center for a New American Security (CNAS)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cnas.org/"
+            }
+          ],
+          "notes": [
+            "National-security policy think tank."
+          ]
+        },
+        {
+          "key": "atlantic-council",
+          "name": "Atlantic Council",
+          "homepage": "https://www.atlanticcouncil.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "atlantic-council-official",
+              "name": "Atlantic Council",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.atlanticcouncil.org/"
+            }
+          ],
+          "notes": [
+            "International-affairs policy think tank."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "economy_society_policy",
+      "label": "economy, society and public policy",
+      "entries": [
+        {
+          "key": "brookings",
+          "name": "Brookings Institution",
+          "homepage": "https://www.brookings.edu/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "brookings-official",
+              "name": "Brookings Institution",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.brookings.edu/"
+            }
+          ],
+          "notes": [
+            "Policy research institution focused on economic, social, governance and international issues."
+          ]
+        },
+        {
+          "key": "rand",
+          "name": "RAND Corporation",
+          "homepage": "https://www.rand.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rand-official",
+              "name": "RAND Corporation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.rand.org/"
+            }
+          ],
+          "notes": [
+            "Nonprofit policy research organization; policy research is its primary institutional function."
+          ]
+        },
+        {
+          "key": "urban-institute",
+          "name": "Urban Institute",
+          "homepage": "https://www.urban.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "urban-institute-official",
+              "name": "Urban Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.urban.org/"
+            }
+          ],
+          "notes": [
+            "Nonprofit social and economic policy research organization."
+          ]
+        },
+        {
+          "key": "aei",
+          "name": "American Enterprise Institute (AEI)",
+          "homepage": "https://www.aei.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "aei-official",
+              "name": "American Enterprise Institute (AEI)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.aei.org/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "cato",
+          "name": "Cato Institute",
+          "homepage": "https://www.cato.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cato-official",
+              "name": "Cato Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cato.org/"
+            }
+          ],
+          "notes": [
+            "Public-policy research organization and think tank."
+          ]
+        },
+        {
+          "key": "heritage",
+          "name": "The Heritage Foundation",
+          "homepage": "https://www.heritage.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "heritage-official",
+              "name": "The Heritage Foundation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.heritage.org/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank."
+          ]
+        },
+        {
+          "key": "center-american-progress",
+          "name": "Center for American Progress",
+          "homepage": "https://www.americanprogress.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "center-american-progress-official",
+              "name": "Center for American Progress",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.americanprogress.org/"
+            }
+          ],
+          "notes": [
+            "Policy institute focused on developing and advocating public-policy ideas."
+          ]
+        },
+        {
+          "key": "piie",
+          "name": "Peterson Institute for International Economics (PIIE)",
+          "homepage": "https://www.piie.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "piie-official",
+              "name": "Peterson Institute for International Economics (PIIE)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.piie.com/"
+            }
+          ],
+          "notes": [
+            "International economic-policy think tank."
+          ]
+        },
+        {
+          "key": "bipartisan-policy-center",
+          "name": "Bipartisan Policy Center",
+          "homepage": "https://bipartisanpolicy.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bipartisan-policy-center-official",
+              "name": "Bipartisan Policy Center",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://bipartisanpolicy.org/"
+            }
+          ],
+          "notes": [
+            "Public-policy think tank and convening organization."
+          ]
+        },
+        {
+          "key": "tax-foundation",
+          "name": "Tax Foundation",
+          "homepage": "https://taxfoundation.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tax-foundation-official",
+              "name": "Tax Foundation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://taxfoundation.org/"
+            }
+          ],
+          "notes": [
+            "Tax-policy research and analysis organization."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 15,
+  "review_status": {
+    "source_selection": "approved_15_source_us_think_tank_core_2026_09_28",
+    "segmentation": "functional_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_national_and_specialist_institutions",
+      "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
+    }
+  ]
+}

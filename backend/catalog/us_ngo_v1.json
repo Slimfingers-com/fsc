@@ -1,0 +1,625 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "US",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "NGO",
+  "activation_policy": "catalog_only_until_joint_review",
+  "source_identity_policy": "institution_is_source_programs_brands_and_subunits_are_not_automatic_sources",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "environment_climate_nature",
+      "label": "environment, climate and nature",
+      "entries": [
+        {
+          "key": "greenpeace-usa",
+          "name": "Greenpeace USA",
+          "homepage": "https://www.greenpeace.org/usa/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "greenpeace-usa-official",
+              "name": "Greenpeace USA",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.greenpeace.org/usa/"
+            }
+          ],
+          "notes": [
+            "US environmental advocacy organization."
+          ]
+        },
+        {
+          "key": "sierra-club",
+          "name": "Sierra Club",
+          "homepage": "https://www.sierraclub.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sierra-club-official",
+              "name": "Sierra Club",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.sierraclub.org/"
+            }
+          ],
+          "notes": [
+            "US environmental and conservation organization."
+          ]
+        },
+        {
+          "key": "nrdc",
+          "name": "Natural Resources Defense Council (NRDC)",
+          "homepage": "https://www.nrdc.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nrdc-official",
+              "name": "Natural Resources Defense Council (NRDC)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nrdc.org/"
+            }
+          ],
+          "notes": [
+            "Environmental and public-interest organization."
+          ]
+        },
+        {
+          "key": "wwf-us",
+          "name": "World Wildlife Fund (US)",
+          "homepage": "https://www.worldwildlife.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wwf-us-official",
+              "name": "World Wildlife Fund (US)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.worldwildlife.org/"
+            }
+          ],
+          "notes": [
+            "US conservation organization."
+          ]
+        },
+        {
+          "key": "nature-conservancy",
+          "name": "The Nature Conservancy",
+          "homepage": "https://www.nature.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nature-conservancy-official",
+              "name": "The Nature Conservancy",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nature.org/"
+            }
+          ],
+          "notes": [
+            "Conservation NGO with US headquarters and global programs."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "rights_digital_civic",
+      "label": "rights, digital rights and civic participation",
+      "entries": [
+        {
+          "key": "aclu",
+          "name": "American Civil Liberties Union (ACLU)",
+          "homepage": "https://www.aclu.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "aclu-official",
+              "name": "American Civil Liberties Union (ACLU)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.aclu.org/"
+            }
+          ],
+          "notes": [
+            "Civil-liberties NGO."
+          ]
+        },
+        {
+          "key": "human-rights-watch",
+          "name": "Human Rights Watch",
+          "homepage": "https://www.hrw.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "human-rights-watch-official",
+              "name": "Human Rights Watch",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.hrw.org/"
+            }
+          ],
+          "notes": [
+            "International human-rights NGO headquartered in the US."
+          ]
+        },
+        {
+          "key": "amnesty-usa",
+          "name": "Amnesty International USA",
+          "homepage": "https://www.amnestyusa.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "amnesty-usa-official",
+              "name": "Amnesty International USA",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.amnestyusa.org/"
+            }
+          ],
+          "notes": [
+            "US section of Amnesty International."
+          ]
+        },
+        {
+          "key": "eff",
+          "name": "Electronic Frontier Foundation (EFF)",
+          "homepage": "https://www.eff.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "eff-official",
+              "name": "Electronic Frontier Foundation (EFF)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.eff.org/"
+            }
+          ],
+          "notes": [
+            "Digital civil-liberties NGO."
+          ]
+        },
+        {
+          "key": "cdt",
+          "name": "Center for Democracy & Technology (CDT)",
+          "homepage": "https://cdt.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cdt-official",
+              "name": "Center for Democracy & Technology (CDT)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://cdt.org/"
+            }
+          ],
+          "notes": [
+            "Digital-rights and technology-policy civil-society organization."
+          ]
+        },
+        {
+          "key": "common-cause",
+          "name": "Common Cause",
+          "homepage": "https://www.commoncause.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "common-cause-official",
+              "name": "Common Cause",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.commoncause.org/"
+            }
+          ],
+          "notes": [
+            "Civic-democracy advocacy organization."
+          ]
+        },
+        {
+          "key": "league-women-voters",
+          "name": "League of Women Voters of the United States",
+          "homepage": "https://www.lwv.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "league-women-voters-official",
+              "name": "League of Women Voters of the United States",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lwv.org/"
+            }
+          ],
+          "notes": [
+            "Civic education and participation organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "humanitarian_social",
+      "label": "humanitarian and social mission",
+      "entries": [
+        {
+          "key": "american-red-cross",
+          "name": "American Red Cross",
+          "homepage": "https://www.redcross.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "american-red-cross-official",
+              "name": "American Red Cross",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.redcross.org/"
+            }
+          ],
+          "notes": [
+            "Humanitarian NGO."
+          ]
+        },
+        {
+          "key": "msf-usa",
+          "name": "Doctors Without Borders / Médecins Sans Frontières USA",
+          "homepage": "https://www.doctorswithoutborders.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "msf-usa-official",
+              "name": "Doctors Without Borders / Médecins Sans Frontières USA",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.doctorswithoutborders.org/"
+            }
+          ],
+          "notes": [
+            "US section of the humanitarian medical organization."
+          ]
+        },
+        {
+          "key": "care-usa",
+          "name": "CARE USA",
+          "homepage": "https://www.care.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "care-usa-official",
+              "name": "CARE USA",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.care.org/"
+            }
+          ],
+          "notes": [
+            "Humanitarian and development NGO."
+          ]
+        },
+        {
+          "key": "feeding-america",
+          "name": "Feeding America",
+          "homepage": "https://www.feedingamerica.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "feeding-america-official",
+              "name": "Feeding America",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.feedingamerica.org/"
+            }
+          ],
+          "notes": [
+            "National hunger-relief nonprofit network."
+          ]
+        },
+        {
+          "key": "habitat-humanity",
+          "name": "Habitat for Humanity International",
+          "homepage": "https://www.habitat.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "habitat-humanity-official",
+              "name": "Habitat for Humanity International",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.habitat.org/"
+            }
+          ],
+          "notes": [
+            "Housing and humanitarian nonprofit."
+          ]
+        },
+        {
+          "key": "save-children-us",
+          "name": "Save the Children US",
+          "homepage": "https://www.savethechildren.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "save-children-us-official",
+              "name": "Save the Children US",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.savethechildren.org/"
+            }
+          ],
+          "notes": [
+            "Child-focused humanitarian NGO."
+          ]
+        },
+        {
+          "key": "irc",
+          "name": "International Rescue Committee (IRC)",
+          "homepage": "https://www.rescue.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "irc-official",
+              "name": "International Rescue Committee (IRC)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.rescue.org/"
+            }
+          ],
+          "notes": [
+            "Humanitarian and refugee-support NGO."
+          ]
+        },
+        {
+          "key": "naacp",
+          "name": "NAACP",
+          "homepage": "https://naacp.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "US",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "naacp-official",
+              "name": "NAACP",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://naacp.org/"
+            }
+          ],
+          "notes": [
+            "Civil-rights organization with a broad mission beyond policy analysis."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 20,
+  "review_status": {
+    "source_selection": "approved_20_source_us_ngo_core_2026_09_28",
+    "segmentation": "functional_not_political",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_national_and_specialist_institutions",
+      "reason": "Additional institutions remain eligible when they add material coverage without duplicating an existing Source identity."
+    }
+  ]
+}

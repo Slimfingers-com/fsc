@@ -1,0 +1,592 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "INTEREST_GROUP",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "source_identity_policy": "member_or_sector_representation_is_interest_group",
+  "academic_boundary_policy": "universities_uk_is_membership_representation_not_academic_research_source",
+  "groups": [
+    {
+      "key": "labour",
+      "label": "labour",
+      "entries": [
+        {
+          "key": "tuc",
+          "name": "Trades Union Congress (TUC)",
+          "homepage": "https://www.tuc.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tuc-official",
+              "name": "Trades Union Congress (TUC)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.tuc.org.uk/"
+            }
+          ],
+          "notes": [
+            "National trade-union centre."
+          ]
+        },
+        {
+          "key": "unite",
+          "name": "Unite the Union",
+          "homepage": "https://www.unitetheunion.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unite-official",
+              "name": "Unite the Union",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.unitetheunion.org/"
+            }
+          ],
+          "notes": [
+            "Trade union."
+          ]
+        },
+        {
+          "key": "unison",
+          "name": "UNISON",
+          "homepage": "https://www.unison.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unison-official",
+              "name": "UNISON",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.unison.org.uk/"
+            }
+          ],
+          "notes": [
+            "Trade union."
+          ]
+        },
+        {
+          "key": "gmb",
+          "name": "GMB",
+          "homepage": "https://www.gmb.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gmb-official",
+              "name": "GMB",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gmb.org.uk/"
+            }
+          ],
+          "notes": [
+            "Trade union."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "business_sector",
+      "label": "business and sector representation",
+      "entries": [
+        {
+          "key": "cbi",
+          "name": "Confederation of British Industry (CBI)",
+          "homepage": "https://www.cbi.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cbi-official",
+              "name": "Confederation of British Industry (CBI)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cbi.org.uk/"
+            }
+          ],
+          "notes": [
+            "Business membership organization."
+          ]
+        },
+        {
+          "key": "british-chambers",
+          "name": "British Chambers of Commerce",
+          "homepage": "https://www.britishchambers.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "british-chambers-official",
+              "name": "British Chambers of Commerce",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.britishchambers.org.uk/"
+            }
+          ],
+          "notes": [
+            "Business chamber network and interest representation."
+          ]
+        },
+        {
+          "key": "iod",
+          "name": "Institute of Directors",
+          "homepage": "https://www.iod.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "iod-official",
+              "name": "Institute of Directors",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.iod.com/"
+            }
+          ],
+          "notes": [
+            "Directors' membership and business-interest organization."
+          ]
+        },
+        {
+          "key": "make-uk",
+          "name": "Make UK",
+          "homepage": "https://www.makeuk.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "make-uk-official",
+              "name": "Make UK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.makeuk.org/"
+            }
+          ],
+          "notes": [
+            "Manufacturing industry membership organization."
+          ]
+        },
+        {
+          "key": "fsb",
+          "name": "Federation of Small Businesses",
+          "homepage": "https://www.fsb.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fsb-official",
+              "name": "Federation of Small Businesses",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.fsb.org.uk/"
+            }
+          ],
+          "notes": [
+            "Small-business membership organization."
+          ]
+        },
+        {
+          "key": "techuk",
+          "name": "techUK",
+          "homepage": "https://www.techuk.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "techuk-official",
+              "name": "techUK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.techuk.org/"
+            }
+          ],
+          "notes": [
+            "Technology-sector membership organization."
+          ]
+        },
+        {
+          "key": "british-retail-consortium",
+          "name": "British Retail Consortium",
+          "homepage": "https://brc.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "british-retail-consortium-official",
+              "name": "British Retail Consortium",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://brc.org.uk/"
+            }
+          ],
+          "notes": [
+            "Retail-sector trade association."
+          ]
+        },
+        {
+          "key": "uk-finance",
+          "name": "UK Finance",
+          "homepage": "https://www.ukfinance.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "uk-finance-official",
+              "name": "UK Finance",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ukfinance.org.uk/"
+            }
+          ],
+          "notes": [
+            "Banking and finance-sector membership organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "agriculture_property_housing",
+      "label": "agriculture, property and housing",
+      "entries": [
+        {
+          "key": "nfu",
+          "name": "National Farmers' Union (England and Wales)",
+          "homepage": "https://www.nfuonline.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "nfu-official",
+              "name": "National Farmers' Union (England and Wales)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nfuonline.com/"
+            }
+          ],
+          "notes": [
+            "Agricultural membership organization."
+          ]
+        },
+        {
+          "key": "cla",
+          "name": "Country Land and Business Association (CLA)",
+          "homepage": "https://www.cla.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cla-official",
+              "name": "Country Land and Business Association (CLA)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cla.org.uk/"
+            }
+          ],
+          "notes": [
+            "Rural landowner and business membership organization."
+          ]
+        },
+        {
+          "key": "national-housing-federation",
+          "name": "National Housing Federation",
+          "homepage": "https://www.housing.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "national-housing-federation-official",
+              "name": "National Housing Federation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.housing.org.uk/"
+            }
+          ],
+          "notes": [
+            "Housing-association membership body."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "professional_education",
+      "label": "professional and education interests",
+      "entries": [
+        {
+          "key": "bma",
+          "name": "British Medical Association",
+          "homepage": "https://www.bma.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bma-official",
+              "name": "British Medical Association",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bma.org.uk/"
+            }
+          ],
+          "notes": [
+            "Doctors' professional and trade-union organization."
+          ]
+        },
+        {
+          "key": "rcn",
+          "name": "Royal College of Nursing",
+          "homepage": "https://www.rcn.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rcn-official",
+              "name": "Royal College of Nursing",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.rcn.org.uk/"
+            }
+          ],
+          "notes": [
+            "Professional body and trade union for nursing."
+          ]
+        },
+        {
+          "key": "universities-uk",
+          "name": "Universities UK",
+          "homepage": "https://www.universitiesuk.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "universities-uk-official",
+              "name": "Universities UK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.universitiesuk.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Collective voice and membership body for UK universities; INTEREST_GROUP rather than ACADEMIC."
+          ]
+        },
+        {
+          "key": "law-society-ew",
+          "name": "The Law Society of England and Wales",
+          "homepage": "https://www.lawsociety.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "law-society-ew-official",
+              "name": "The Law Society of England and Wales",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lawsociety.org.uk/"
+            }
+          ],
+          "notes": [
+            "Professional membership body for solicitors."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 19
+}

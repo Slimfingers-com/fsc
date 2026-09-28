@@ -1,0 +1,801 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "COMPANY",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "source_identity_policy": "group_first_corporate_identity_controlled_subsidiaries_and_brands_are_not_automatic_sources",
+  "ownership_policy": "ownership_and_control_are_metadata_and_do_not_create_editorial_dependency_by_themselves",
+  "groups": [
+    {
+      "key": "energy_infrastructure",
+      "label": "energy and infrastructure",
+      "entries": [
+        {
+          "key": "shell",
+          "name": "Shell plc",
+          "homepage": "https://www.shell.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "shell-official",
+              "name": "Shell plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.shell.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy company Source."
+          ]
+        },
+        {
+          "key": "bp",
+          "name": "BP p.l.c.",
+          "homepage": "https://www.bp.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bp-official",
+              "name": "BP p.l.c.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bp.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy company Source."
+          ]
+        },
+        {
+          "key": "national-grid",
+          "name": "National Grid plc",
+          "homepage": "https://www.nationalgrid.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "national-grid-official",
+              "name": "National Grid plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.nationalgrid.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy infrastructure Source."
+          ]
+        },
+        {
+          "key": "sse",
+          "name": "SSE plc",
+          "homepage": "https://www.sse.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sse-official",
+              "name": "SSE plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.sse.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy Source."
+          ]
+        },
+        {
+          "key": "centrica",
+          "name": "Centrica plc",
+          "homepage": "https://www.centrica.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "centrica-official",
+              "name": "Centrica plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.centrica.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy and services Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "industry_materials_defence",
+      "label": "industry, materials and defence",
+      "entries": [
+        {
+          "key": "bae-systems",
+          "name": "BAE Systems plc",
+          "homepage": "https://www.baesystems.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bae-systems-official",
+              "name": "BAE Systems plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.baesystems.com/"
+            }
+          ],
+          "notes": [
+            "Group-level defence and aerospace Source."
+          ]
+        },
+        {
+          "key": "rolls-royce-holdings",
+          "name": "Rolls-Royce Holdings plc",
+          "homepage": "https://www.rolls-royce.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rolls-royce-holdings-official",
+              "name": "Rolls-Royce Holdings plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.rolls-royce.com/"
+            }
+          ],
+          "notes": [
+            "Group-level aerospace and power-systems Source."
+          ]
+        },
+        {
+          "key": "rio-tinto",
+          "name": "Rio Tinto plc",
+          "homepage": "https://www.riotinto.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rio-tinto-official",
+              "name": "Rio Tinto plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.riotinto.com/"
+            }
+          ],
+          "notes": [
+            "Group-level mining and materials Source."
+          ]
+        },
+        {
+          "key": "anglo-american",
+          "name": "Anglo American plc",
+          "homepage": "https://www.angloamerican.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "anglo-american-official",
+              "name": "Anglo American plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.angloamerican.com/"
+            }
+          ],
+          "notes": [
+            "Group-level mining Source."
+          ]
+        },
+        {
+          "key": "melrose-industries",
+          "name": "Melrose Industries PLC",
+          "homepage": "https://www.melroseplc.net/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "melrose-industries-official",
+              "name": "Melrose Industries PLC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.melroseplc.net/"
+            }
+          ],
+          "notes": [
+            "Group-level industrial Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "finance_insurance_markets",
+      "label": "finance, insurance and markets",
+      "entries": [
+        {
+          "key": "hsbc",
+          "name": "HSBC Holdings plc",
+          "homepage": "https://www.hsbc.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hsbc-official",
+              "name": "HSBC Holdings plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.hsbc.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "barclays",
+          "name": "Barclays PLC",
+          "homepage": "https://home.barclays/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "barclays-official",
+              "name": "Barclays PLC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://home.barclays/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "lloyds-banking-group",
+          "name": "Lloyds Banking Group plc",
+          "homepage": "https://www.lloydsbankinggroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lloyds-banking-group-official",
+              "name": "Lloyds Banking Group plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lloydsbankinggroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "natwest-group",
+          "name": "NatWest Group plc",
+          "homepage": "https://www.natwestgroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "natwest-group-official",
+              "name": "NatWest Group plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.natwestgroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "standard-chartered",
+          "name": "Standard Chartered PLC",
+          "homepage": "https://www.sc.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "standard-chartered-official",
+              "name": "Standard Chartered PLC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.sc.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "aviva",
+          "name": "Aviva plc",
+          "homepage": "https://www.aviva.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "aviva-official",
+              "name": "Aviva plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.aviva.com/"
+            }
+          ],
+          "notes": [
+            "Group-level insurance Source."
+          ]
+        },
+        {
+          "key": "lseg",
+          "name": "London Stock Exchange Group plc",
+          "homepage": "https://www.lseg.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lseg-official",
+              "name": "London Stock Exchange Group plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lseg.com/"
+            }
+          ],
+          "notes": [
+            "Group-level financial markets and data Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "technology_telecom_information",
+      "label": "technology, telecom and information",
+      "entries": [
+        {
+          "key": "bt-group",
+          "name": "BT Group plc",
+          "homepage": "https://www.bt.com/about/bt",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bt-group-official",
+              "name": "BT Group plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bt.com/about/bt"
+            }
+          ],
+          "notes": [
+            "Group-level telecommunications Source."
+          ]
+        },
+        {
+          "key": "vodafone-group",
+          "name": "Vodafone Group Plc",
+          "homepage": "https://www.vodafone.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "vodafone-group-official",
+              "name": "Vodafone Group Plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.vodafone.com/"
+            }
+          ],
+          "notes": [
+            "Group-level telecommunications Source."
+          ]
+        },
+        {
+          "key": "relx",
+          "name": "RELX PLC",
+          "homepage": "https://www.relx.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "relx-official",
+              "name": "RELX PLC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.relx.com/"
+            }
+          ],
+          "notes": [
+            "Group-level information and analytics Source."
+          ]
+        },
+        {
+          "key": "sage-group",
+          "name": "Sage Group plc",
+          "homepage": "https://www.sage.com/en-gb/company/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sage-group-official",
+              "name": "Sage Group plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.sage.com/en-gb/company/"
+            }
+          ],
+          "notes": [
+            "Group-level software Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "consumer_health_retail",
+      "label": "consumer, health and retail",
+      "entries": [
+        {
+          "key": "unilever",
+          "name": "Unilever PLC",
+          "homepage": "https://www.unilever.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unilever-official",
+              "name": "Unilever PLC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.unilever.com/"
+            }
+          ],
+          "notes": [
+            "Group-level consumer-goods Source."
+          ]
+        },
+        {
+          "key": "astrazeneca",
+          "name": "AstraZeneca PLC",
+          "homepage": "https://www.astrazeneca.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "astrazeneca-official",
+              "name": "AstraZeneca PLC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.astrazeneca.com/"
+            }
+          ],
+          "notes": [
+            "Group-level biopharmaceutical Source."
+          ]
+        },
+        {
+          "key": "gsk",
+          "name": "GSK plc",
+          "homepage": "https://www.gsk.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gsk-official",
+              "name": "GSK plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.gsk.com/"
+            }
+          ],
+          "notes": [
+            "Group-level biopharmaceutical Source."
+          ]
+        },
+        {
+          "key": "tesco",
+          "name": "Tesco PLC",
+          "homepage": "https://www.tescoplc.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tesco-official",
+              "name": "Tesco PLC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.tescoplc.com/"
+            }
+          ],
+          "notes": [
+            "Group-level retail Source."
+          ]
+        },
+        {
+          "key": "diageo",
+          "name": "Diageo plc",
+          "homepage": "https://www.diageo.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "diageo-official",
+              "name": "Diageo plc",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.diageo.com/"
+            }
+          ],
+          "notes": [
+            "Group-level beverages Source."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 26
+}

@@ -1,0 +1,581 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "ACADEMIC",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "source_identity_policy": "scientific_institution_is_source_subunits_are_not_automatic_sources",
+  "academic_boundary_policy": "primary_scientific_research_function_includes_universities_and_extra_university_research_institutes",
+  "think_tank_boundary_policy": "policy_analysis_and_advice_primary_function_is_think_tank_research_primary_function_is_academic",
+  "groups": [
+    {
+      "key": "universities",
+      "label": "universities",
+      "entries": [
+        {
+          "key": "oxford",
+          "name": "University of Oxford",
+          "homepage": "https://www.ox.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oxford-official",
+              "name": "University of Oxford",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ox.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "cambridge",
+          "name": "University of Cambridge",
+          "homepage": "https://www.cam.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "cambridge-official",
+              "name": "University of Cambridge",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.cam.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "imperial",
+          "name": "Imperial College London",
+          "homepage": "https://www.imperial.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "imperial-official",
+              "name": "Imperial College London",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.imperial.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "ucl",
+          "name": "University College London (UCL)",
+          "homepage": "https://www.ucl.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ucl-official",
+              "name": "University College London (UCL)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ucl.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "lse",
+          "name": "London School of Economics and Political Science (LSE)",
+          "homepage": "https://www.lse.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lse-official",
+              "name": "London School of Economics and Political Science (LSE)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lse.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "kings-college-london",
+          "name": "King's College London",
+          "homepage": "https://www.kcl.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "kings-college-london-official",
+              "name": "King's College London",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.kcl.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "edinburgh",
+          "name": "University of Edinburgh",
+          "homepage": "https://www.ed.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "edinburgh-official",
+              "name": "University of Edinburgh",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.ed.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "manchester",
+          "name": "University of Manchester",
+          "homepage": "https://www.manchester.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "manchester-official",
+              "name": "University of Manchester",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.manchester.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "bristol",
+          "name": "University of Bristol",
+          "homepage": "https://www.bristol.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bristol-official",
+              "name": "University of Bristol",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.bristol.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "warwick",
+          "name": "University of Warwick",
+          "homepage": "https://warwick.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "warwick-official",
+              "name": "University of Warwick",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://warwick.ac.uk/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "lshtm",
+          "name": "London School of Hygiene & Tropical Medicine",
+          "homepage": "https://www.lshtm.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "lshtm-official",
+              "name": "London School of Hygiene & Tropical Medicine",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.lshtm.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Specialist university and research institution."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "research_institutes",
+      "label": "research institutes",
+      "entries": [
+        {
+          "key": "ifs",
+          "name": "Institute for Fiscal Studies (IFS)",
+          "homepage": "https://ifs.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "ifs-official",
+              "name": "Institute for Fiscal Studies (IFS)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://ifs.org.uk/"
+            }
+          ],
+          "notes": [
+            "Independent economics research institute; ACADEMIC under ADR 0024 primary-research-function rule."
+          ]
+        },
+        {
+          "key": "niesr",
+          "name": "National Institute of Economic and Social Research (NIESR)",
+          "homepage": "https://www.niesr.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "niesr-official",
+              "name": "National Institute of Economic and Social Research (NIESR)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.niesr.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Independent economic and social research institute; ACADEMIC under ADR 0024."
+          ]
+        },
+        {
+          "key": "francis-crick",
+          "name": "Francis Crick Institute",
+          "homepage": "https://www.crick.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "francis-crick-official",
+              "name": "Francis Crick Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.crick.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Biomedical research institute."
+          ]
+        },
+        {
+          "key": "alan-turing-institute",
+          "name": "Alan Turing Institute",
+          "homepage": "https://www.turing.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "alan-turing-institute-official",
+              "name": "Alan Turing Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.turing.ac.uk/"
+            }
+          ],
+          "notes": [
+            "National institute for data science and artificial intelligence research."
+          ]
+        },
+        {
+          "key": "wellcome-sanger",
+          "name": "Wellcome Sanger Institute",
+          "homepage": "https://www.sanger.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wellcome-sanger-official",
+              "name": "Wellcome Sanger Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.sanger.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Genomics research institute."
+          ]
+        },
+        {
+          "key": "rothamsted",
+          "name": "Rothamsted Research",
+          "homepage": "https://www.rothamsted.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rothamsted-official",
+              "name": "Rothamsted Research",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.rothamsted.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Agricultural research institute."
+          ]
+        },
+        {
+          "key": "john-innes-centre",
+          "name": "John Innes Centre",
+          "homepage": "https://www.jic.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "john-innes-centre-official",
+              "name": "John Innes Centre",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.jic.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Independent plant and microbial science research institute."
+          ]
+        },
+        {
+          "key": "institute-cancer-research",
+          "name": "Institute of Cancer Research (ICR)",
+          "homepage": "https://www.icr.ac.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "institute-cancer-research-official",
+              "name": "Institute of Cancer Research (ICR)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.icr.ac.uk/"
+            }
+          ],
+          "notes": [
+            "Research institute and higher-education institution focused on cancer research."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 19
+}

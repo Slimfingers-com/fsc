@@ -1,0 +1,857 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "GB",
+  "language": "en",
+  "media_category": "organization",
+  "organization_type": "NGO",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "source_identity_policy": "institution_is_source_editorially_independent_units_are_not_collapsed_by_ownership",
+  "broad_mission_policy": "broad_mission_foundations_and_programme_organizations_remain_ngo_per_adr_0025",
+  "existing_media_source_policy": "full_fact_already_exists_as_digital_source_and_is_not_duplicated_as_ngo",
+  "deferred_independent_editorial_units": [
+    "Liberty Investigates"
+  ],
+  "groups": [
+    {
+      "key": "environment_climate_nature",
+      "label": "environment, climate and nature",
+      "entries": [
+        {
+          "key": "greenpeace-uk",
+          "name": "Greenpeace UK",
+          "homepage": "https://www.greenpeace.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "greenpeace-uk-official",
+              "name": "Greenpeace UK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.greenpeace.org.uk/"
+            }
+          ],
+          "notes": [
+            "UK environmental campaigning organization."
+          ]
+        },
+        {
+          "key": "wwf-uk",
+          "name": "WWF-UK",
+          "homepage": "https://www.wwf.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wwf-uk-official",
+              "name": "WWF-UK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.wwf.org.uk/"
+            }
+          ],
+          "notes": [
+            "UK conservation charity."
+          ]
+        },
+        {
+          "key": "friends-of-earth-ewni",
+          "name": "Friends of the Earth England, Wales and Northern Ireland",
+          "homepage": "https://friendsoftheearth.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "friends-of-earth-ewni-official",
+              "name": "Friends of the Earth England, Wales and Northern Ireland",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://friendsoftheearth.uk/"
+            }
+          ],
+          "notes": [
+            "Environmental campaigning organization for England, Wales and Northern Ireland."
+          ]
+        },
+        {
+          "key": "clientearth",
+          "name": "ClientEarth",
+          "homepage": "https://www.clientearth.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "clientearth-official",
+              "name": "ClientEarth",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.clientearth.org/"
+            }
+          ],
+          "notes": [
+            "Public-interest environmental law organization."
+          ]
+        },
+        {
+          "key": "rspb",
+          "name": "Royal Society for the Protection of Birds (RSPB)",
+          "homepage": "https://www.rspb.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rspb-official",
+              "name": "Royal Society for the Protection of Birds (RSPB)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.rspb.org.uk/"
+            }
+          ],
+          "notes": [
+            "Nature-conservation charity and membership organization; mission-driven conservation is primary."
+          ]
+        },
+        {
+          "key": "wildlife-trusts",
+          "name": "The Wildlife Trusts",
+          "homepage": "https://www.wildlifetrusts.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wildlife-trusts-official",
+              "name": "The Wildlife Trusts",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.wildlifetrusts.org/"
+            }
+          ],
+          "notes": [
+            "Federation of wildlife charities; national institutional Source."
+          ]
+        },
+        {
+          "key": "sustrans",
+          "name": "Sustrans",
+          "homepage": "https://www.sustrans.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sustrans-official",
+              "name": "Sustrans",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.sustrans.org.uk/"
+            }
+          ],
+          "notes": [
+            "Charity focused on walking, wheeling, cycling and sustainable transport."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "rights_refugee_digital",
+      "label": "human rights, refugee and digital rights",
+      "entries": [
+        {
+          "key": "amnesty-uk",
+          "name": "Amnesty International UK",
+          "homepage": "https://www.amnesty.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "amnesty-uk-official",
+              "name": "Amnesty International UK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.amnesty.org.uk/"
+            }
+          ],
+          "notes": [
+            "UK human-rights organization."
+          ]
+        },
+        {
+          "key": "liberty",
+          "name": "Liberty",
+          "homepage": "https://www.libertyhumanrights.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "liberty-official",
+              "name": "Liberty",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.libertyhumanrights.org.uk/"
+            }
+          ],
+          "notes": [
+            "Civil-liberties NGO. Liberty Investigates is editorially independent and is not collapsed into this NGO Source."
+          ]
+        },
+        {
+          "key": "open-rights-group",
+          "name": "Open Rights Group",
+          "homepage": "https://www.openrightsgroup.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "open-rights-group-official",
+              "name": "Open Rights Group",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.openrightsgroup.org/"
+            }
+          ],
+          "notes": [
+            "UK digital-rights campaigning organization."
+          ]
+        },
+        {
+          "key": "privacy-international",
+          "name": "Privacy International",
+          "homepage": "https://privacyinternational.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "privacy-international-official",
+              "name": "Privacy International",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://privacyinternational.org/"
+            }
+          ],
+          "notes": [
+            "Privacy and technology-rights NGO."
+          ]
+        },
+        {
+          "key": "refugee-council",
+          "name": "Refugee Council",
+          "homepage": "https://www.refugeecouncil.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "refugee-council-official",
+              "name": "Refugee Council",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.refugeecouncil.org.uk/"
+            }
+          ],
+          "notes": [
+            "Refugee-support and rights charity."
+          ]
+        },
+        {
+          "key": "stonewall",
+          "name": "Stonewall",
+          "homepage": "https://www.stonewall.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "stonewall-official",
+              "name": "Stonewall",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.stonewall.org.uk/"
+            }
+          ],
+          "notes": [
+            "LGBTQ+ rights charity and campaigning organization."
+          ]
+        },
+        {
+          "key": "freedom-from-torture",
+          "name": "Freedom from Torture",
+          "homepage": "https://www.freedomfromtorture.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "freedom-from-torture-official",
+              "name": "Freedom from Torture",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.freedomfromtorture.org/"
+            }
+          ],
+          "notes": [
+            "Human-rights and rehabilitation charity supporting survivors of torture."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "democracy_transparency_public_interest",
+      "label": "democracy, transparency and public interest",
+      "entries": [
+        {
+          "key": "transparency-uk",
+          "name": "Transparency International UK",
+          "homepage": "https://www.transparency.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "transparency-uk-official",
+              "name": "Transparency International UK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.transparency.org.uk/"
+            }
+          ],
+          "notes": [
+            "UK anti-corruption NGO."
+          ]
+        },
+        {
+          "key": "electoral-reform-society",
+          "name": "Electoral Reform Society",
+          "homepage": "https://www.electoral-reform.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "electoral-reform-society-official",
+              "name": "Electoral Reform Society",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.electoral-reform.org.uk/"
+            }
+          ],
+          "notes": [
+            "Democracy and electoral-reform NGO."
+          ]
+        },
+        {
+          "key": "unlock-democracy",
+          "name": "Unlock Democracy",
+          "homepage": "https://unlockdemocracy.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unlock-democracy-official",
+              "name": "Unlock Democracy",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://unlockdemocracy.org.uk/"
+            }
+          ],
+          "notes": [
+            "Constitutional and democratic-reform campaigning organization."
+          ]
+        },
+        {
+          "key": "good-law-project",
+          "name": "Good Law Project",
+          "homepage": "https://goodlawproject.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "good-law-project-official",
+              "name": "Good Law Project",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://goodlawproject.org/"
+            }
+          ],
+          "notes": [
+            "Public-interest legal campaigning organization."
+          ]
+        },
+        {
+          "key": "mysociety",
+          "name": "mySociety",
+          "homepage": "https://www.mysociety.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mysociety-official",
+              "name": "mySociety",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.mysociety.org/"
+            }
+          ],
+          "notes": [
+            "Civic technology and democracy non-profit."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "humanitarian_social_economic_justice",
+      "label": "humanitarian, social and economic justice",
+      "entries": [
+        {
+          "key": "british-red-cross",
+          "name": "British Red Cross",
+          "homepage": "https://www.redcross.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "british-red-cross-official",
+              "name": "British Red Cross",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.redcross.org.uk/"
+            }
+          ],
+          "notes": [
+            "UK humanitarian charity and Red Cross society."
+          ]
+        },
+        {
+          "key": "oxfam-gb",
+          "name": "Oxfam GB",
+          "homepage": "https://www.oxfam.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oxfam-gb-official",
+              "name": "Oxfam GB",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.oxfam.org.uk/"
+            }
+          ],
+          "notes": [
+            "UK development and humanitarian charity."
+          ]
+        },
+        {
+          "key": "save-children-uk",
+          "name": "Save the Children UK",
+          "homepage": "https://www.savethechildren.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "save-children-uk-official",
+              "name": "Save the Children UK",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.savethechildren.org.uk/"
+            }
+          ],
+          "notes": [
+            "Child-rights and humanitarian charity."
+          ]
+        },
+        {
+          "key": "shelter",
+          "name": "Shelter",
+          "homepage": "https://england.shelter.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "shelter-official",
+              "name": "Shelter",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://england.shelter.org.uk/"
+            }
+          ],
+          "notes": [
+            "Housing and homelessness charity."
+          ]
+        },
+        {
+          "key": "trussell",
+          "name": "Trussell",
+          "homepage": "https://www.trussell.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "trussell-official",
+              "name": "Trussell",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.trussell.org.uk/"
+            }
+          ],
+          "notes": [
+            "Anti-poverty charity and food-bank network organization."
+          ]
+        },
+        {
+          "key": "barnardos",
+          "name": "Barnardo's",
+          "homepage": "https://www.barnardos.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "barnardos-official",
+              "name": "Barnardo's",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.barnardos.org.uk/"
+            }
+          ],
+          "notes": [
+            "Children's charity."
+          ]
+        },
+        {
+          "key": "joseph-rowntree-foundation",
+          "name": "Joseph Rowntree Foundation",
+          "homepage": "https://www.jrf.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "joseph-rowntree-foundation-official",
+              "name": "Joseph Rowntree Foundation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.jrf.org.uk/"
+            }
+          ],
+          "notes": [
+            "Broad-mission social-change foundation combining research, policy and programme work; NGO under ADR 0025."
+          ]
+        },
+        {
+          "key": "new-economics-foundation",
+          "name": "New Economics Foundation",
+          "homepage": "https://neweconomics.org/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "new-economics-foundation-official",
+              "name": "New Economics Foundation",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://neweconomics.org/"
+            }
+          ],
+          "notes": [
+            "Broad-mission charity combining research, campaigns, organizing and projects; NGO under ADR 0025."
+          ]
+        },
+        {
+          "key": "citizens-advice",
+          "name": "Citizens Advice",
+          "homepage": "https://www.citizensadvice.org.uk/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "NGO",
+          "country": "GB",
+          "language": "en",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "citizens-advice-official",
+              "name": "Citizens Advice",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "en",
+              "homepage": "https://www.citizensadvice.org.uk/"
+            }
+          ],
+          "notes": [
+            "National advice and public-interest charity; research and advocacy are part of a broader advice mission, so NGO is the institutional SourceType."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 28
+}
