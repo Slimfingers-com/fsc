@@ -1,0 +1,517 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm",
+    "en"
+  ],
+  "media_category": "organization",
+  "organization_type": "INTEREST_GROUP",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_interest_domain_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "labour",
+      "label": "labour and employees",
+      "entries": [
+        {
+          "key": "sgb",
+          "name": "Schweizerischer Gewerkschaftsbund (SGB)",
+          "homepage": "https://www.sgb.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sgb-official",
+              "name": "Schweizerischer Gewerkschaftsbund (SGB)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.sgb.ch/"
+            }
+          ],
+          "notes": [
+            "National trade-union confederation."
+          ]
+        },
+        {
+          "key": "travail-suisse",
+          "name": "Travail.Suisse",
+          "homepage": "https://www.travailsuisse.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "travail-suisse-official",
+              "name": "Travail.Suisse",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.travailsuisse.ch/"
+            }
+          ],
+          "notes": [
+            "National employee and trade-union umbrella organization."
+          ]
+        },
+        {
+          "key": "unia",
+          "name": "Unia",
+          "homepage": "https://www.unia.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "unia-official",
+              "name": "Unia",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.unia.ch/"
+            }
+          ],
+          "notes": [
+            "Large national trade union and member-interest organization."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "business_employer_sector",
+      "label": "business, employer and sector representation",
+      "entries": [
+        {
+          "key": "economiesuisse",
+          "name": "economiesuisse",
+          "homepage": "https://www.economiesuisse.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "economiesuisse-official",
+              "name": "economiesuisse",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.economiesuisse.ch/"
+            }
+          ],
+          "notes": [
+            "National umbrella organization representing Swiss business interests."
+          ]
+        },
+        {
+          "key": "arbeitgeberverband",
+          "name": "Schweizerischer Arbeitgeberverband",
+          "homepage": "https://www.arbeitgeber.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "arbeitgeberverband-official",
+              "name": "Schweizerischer Arbeitgeberverband",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.arbeitgeber.ch/"
+            }
+          ],
+          "notes": [
+            "National employer umbrella organization."
+          ]
+        },
+        {
+          "key": "sgv",
+          "name": "Schweizerischer Gewerbeverband (sgv)",
+          "homepage": "https://www.sgv-usam.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "sgv-official",
+              "name": "Schweizerischer Gewerbeverband (sgv)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.sgv-usam.ch/"
+            }
+          ],
+          "notes": [
+            "National SME and trade-business interest organization."
+          ]
+        },
+        {
+          "key": "swissmem",
+          "name": "Swissmem",
+          "homepage": "https://www.swissmem.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swissmem-official",
+              "name": "Swissmem",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.swissmem.ch/"
+            }
+          ],
+          "notes": [
+            "Industry association for technology and manufacturing sectors."
+          ]
+        },
+        {
+          "key": "scienceindustries",
+          "name": "scienceindustries",
+          "homepage": "https://www.scienceindustries.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "scienceindustries-official",
+              "name": "scienceindustries",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.scienceindustries.ch/"
+            }
+          ],
+          "notes": [
+            "Business association representing chemistry, pharma and life-science industries."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "agriculture_health",
+      "label": "agriculture and health professions",
+      "entries": [
+        {
+          "key": "bauernverband",
+          "name": "Schweizer Bauernverband",
+          "homepage": "https://www.sbv-usp.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bauernverband-official",
+              "name": "Schweizer Bauernverband",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.sbv-usp.ch/"
+            }
+          ],
+          "notes": [
+            "National agricultural interest organization."
+          ]
+        },
+        {
+          "key": "fmh",
+          "name": "FMH Verbindung der Schweizer Ärztinnen und Ärzte",
+          "homepage": "https://www.fmh.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "fmh-official",
+              "name": "FMH Verbindung der Schweizer Ärztinnen und Ärzte",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.fmh.ch/"
+            }
+          ],
+          "notes": [
+            "National physicians' professional interest organization."
+          ]
+        },
+        {
+          "key": "hplus",
+          "name": "H+ Die Spitäler der Schweiz",
+          "homepage": "https://www.hplus.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hplus-official",
+              "name": "H+ Die Spitäler der Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.hplus.ch/"
+            }
+          ],
+          "notes": [
+            "National hospital-sector association."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "housing_mobility_municipal",
+      "label": "housing, mobility and municipal interests",
+      "entries": [
+        {
+          "key": "mieterverband",
+          "name": "Mieterinnen- und Mieterverband Schweiz",
+          "homepage": "https://www.mieterverband.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mieterverband-official",
+              "name": "Mieterinnen- und Mieterverband Schweiz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.mieterverband.ch/"
+            }
+          ],
+          "notes": [
+            "National tenant-interest organization."
+          ]
+        },
+        {
+          "key": "hev",
+          "name": "Hauseigentümerverband Schweiz (HEV Schweiz)",
+          "homepage": "https://www.hev-schweiz.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hev-official",
+              "name": "Hauseigentümerverband Schweiz (HEV Schweiz)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.hev-schweiz.ch/"
+            }
+          ],
+          "notes": [
+            "National property-owner interest organization."
+          ]
+        },
+        {
+          "key": "tcs",
+          "name": "Touring Club Schweiz (TCS)",
+          "homepage": "https://www.tcs.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "tcs-official",
+              "name": "Touring Club Schweiz (TCS)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.tcs.ch/"
+            }
+          ],
+          "notes": [
+            "Large mobility membership and consumer-interest organization."
+          ]
+        },
+        {
+          "key": "staedteverband",
+          "name": "Schweizerischer Städteverband",
+          "homepage": "https://staedteverband.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "staedteverband-official",
+              "name": "Schweizerischer Städteverband",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://staedteverband.ch/"
+            }
+          ],
+          "notes": [
+            "Association representing Swiss cities."
+          ]
+        },
+        {
+          "key": "gemeindeverband",
+          "name": "Schweizerischer Gemeindeverband",
+          "homepage": "https://www.chgemeinden.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gemeindeverband-official",
+              "name": "Schweizerischer Gemeindeverband",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.chgemeinden.ch/"
+            }
+          ],
+          "notes": [
+            "Association representing Swiss municipalities."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 16,
+  "review_status": {
+    "source_selection": "approved_16_source_ch_interest_group_core_2026_09_28",
+    "segmentation": "functional_interest_domain_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [],
+  "source_identity_policy": "national_institution_is_source_regional_member_bodies_are_not_automatic_sources",
+  "legal_status_policy": "legal_form_and_public_mandate_are_metadata_not_source_type"
+}

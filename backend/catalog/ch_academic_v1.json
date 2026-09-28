@@ -1,0 +1,476 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm",
+    "en"
+  ],
+  "media_category": "organization",
+  "organization_type": "ACADEMIC",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_research_domain_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "universities_higher_education",
+      "label": "universities and higher education",
+      "entries": [
+        {
+          "key": "eth-zurich",
+          "name": "ETH Zürich",
+          "homepage": "https://ethz.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "eth-zurich-official",
+              "name": "ETH Zürich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://ethz.ch/"
+            }
+          ],
+          "notes": [
+            "Federal technical university Source."
+          ]
+        },
+        {
+          "key": "epfl",
+          "name": "EPFL",
+          "homepage": "https://www.epfl.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "epfl-official",
+              "name": "EPFL",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.epfl.ch/"
+            }
+          ],
+          "notes": [
+            "Federal technical university Source."
+          ]
+        },
+        {
+          "key": "university-zurich",
+          "name": "Universität Zürich",
+          "homepage": "https://www.uzh.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-zurich-official",
+              "name": "Universität Zürich",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.uzh.ch/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "university-geneva",
+          "name": "Université de Genève",
+          "homepage": "https://www.unige.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-geneva-official",
+              "name": "Université de Genève",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.unige.ch/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "university-basel",
+          "name": "Universität Basel",
+          "homepage": "https://www.unibas.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-basel-official",
+              "name": "Universität Basel",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.unibas.ch/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "university-bern",
+          "name": "Universität Bern",
+          "homepage": "https://www.unibe.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-bern-official",
+              "name": "Universität Bern",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.unibe.ch/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "university-lausanne",
+          "name": "Université de Lausanne",
+          "homepage": "https://www.unil.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "university-lausanne-official",
+              "name": "Université de Lausanne",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.unil.ch/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "hsg",
+          "name": "Universität St. Gallen (HSG)",
+          "homepage": "https://www.unisg.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "hsg-official",
+              "name": "Universität St. Gallen (HSG)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.unisg.ch/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "usi",
+          "name": "Università della Svizzera italiana (USI)",
+          "homepage": "https://www.usi.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "usi-official",
+              "name": "Università della Svizzera italiana (USI)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.usi.ch/"
+            }
+          ],
+          "notes": [
+            "University-level Source."
+          ]
+        },
+        {
+          "key": "geneva-graduate-institute",
+          "name": "Geneva Graduate Institute",
+          "homepage": "https://www.graduateinstitute.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "geneva-graduate-institute-official",
+              "name": "Geneva Graduate Institute",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.graduateinstitute.ch/"
+            }
+          ],
+          "notes": [
+            "Higher-education and research institution; official English institutional name is Geneva Graduate Institute."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "research_institutes",
+      "label": "research institutes",
+      "entries": [
+        {
+          "key": "psi",
+          "name": "Paul Scherrer Institut (PSI)",
+          "homepage": "https://www.psi.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "psi-official",
+              "name": "Paul Scherrer Institut (PSI)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.psi.ch/"
+            }
+          ],
+          "notes": [
+            "Independent ETH Domain research institute."
+          ]
+        },
+        {
+          "key": "empa",
+          "name": "Empa",
+          "homepage": "https://www.empa.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "empa-official",
+              "name": "Empa",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.empa.ch/"
+            }
+          ],
+          "notes": [
+            "Independent ETH Domain research institute."
+          ]
+        },
+        {
+          "key": "eawag",
+          "name": "Eawag",
+          "homepage": "https://www.eawag.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "eawag-official",
+              "name": "Eawag",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.eawag.ch/"
+            }
+          ],
+          "notes": [
+            "Independent ETH Domain research institute."
+          ]
+        },
+        {
+          "key": "wsl",
+          "name": "WSL – Eidg. Forschungsanstalt für Wald, Schnee und Landschaft",
+          "homepage": "https://www.wsl.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wsl-official",
+              "name": "WSL – Eidg. Forschungsanstalt für Wald, Schnee und Landschaft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.wsl.ch/"
+            }
+          ],
+          "notes": [
+            "Independent ETH Domain research institute."
+          ]
+        },
+        {
+          "key": "swiss-tph",
+          "name": "Swiss Tropical and Public Health Institute (Swiss TPH)",
+          "homepage": "https://www.swisstph.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "ACADEMIC",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "swiss-tph-official",
+              "name": "Swiss Tropical and Public Health Institute (Swiss TPH)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.swisstph.ch/"
+            }
+          ],
+          "notes": [
+            "Research and teaching institution with primary scientific function."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 15,
+  "review_status": {
+    "source_selection": "approved_15_source_ch_academic_core_2026_09_28",
+    "segmentation": "functional_research_domain_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [],
+  "academic_boundary_policy": "primary_scientific_research_function_includes_universities_and_extra_university_research_institutes",
+  "source_identity_policy": "institution_is_source_eth_domain_members_remain_distinct_institutional_sources"
+}

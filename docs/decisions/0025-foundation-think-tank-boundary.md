@@ -1,4 +1,4 @@
-# ADR 0025: Broad-mission political education institutions remain NGO
+# ADR 0025: Broad-mission education, dialogue and foundation institutions remain NGO
 
 ## Status
 
@@ -20,6 +20,11 @@ Freiheitliches Bildungsinstitut, FREDA and NEOS Lab. They also combine
 education, training, events, participation, institutional work and in some
 cases policy analysis.
 
+Switzerland adds another variant: the Geneva Centre for Security Policy (GCSP)
+combines executive education, diplomatic dialogue, research/policy advice and
+expert-network functions. Policy analysis is material, but it is not the sole or
+primary defining function of the complete institution.
+
 Treating the complete institution as `THINK_TANK` would make every newly
 ingested item default to `confirmation_role=expert_analysis`, including
 education, institutional, event, campaign-like or position content that is not
@@ -30,12 +35,14 @@ distinguish individual analytical publications from other institutional output.
 
 ## Decision
 
-Broad-mission political education institutions are `NGO` Sources when their
-overall institutional purpose is mission-driven civic or political education
-and think-tank/policy-analysis activity is only one part of that broader mission.
+Broad-mission education, dialogue and foundation institutions are `NGO`
+Sources when their overall institutional purpose is mission-driven civic or
+political education, executive education, dialogue, public-interest programme
+work or a comparable broader mission and think-tank/policy-analysis activity is
+only one part of that mission.
 
 This rule applies regardless of whether the institution is legally organized
-as a foundation, association, academy or another non-profit form.
+as a foundation, association, academy, centre or another non-profit form.
 
 For the German core this includes:
 
@@ -55,6 +62,10 @@ For the Austrian core this includes:
 - Freiheitliches Bildungsinstitut;
 - FREDA – DIE AKADEMIE;
 - NEOS Lab – Das liberale Forum.
+
+For the Swiss core this includes:
+
+- Geneva Centre for Security Policy (GCSP).
 
 These institutions receive no FSC political-orientation classification merely
 from their identity, name, legal form, party proximity or institutional
@@ -95,8 +106,11 @@ The German NGO core remains at 30 Sources.
 The Austrian NGO core includes the five national political education
 institutions rather than placing them in the think-tank catalog.
 
-German and Austrian THINK_TANK catalogs remain focused on institutions whose
-primary function is policy analysis rather than broad political education.
+German, Austrian and Swiss THINK_TANK catalogs remain focused on institutions
+whose primary function is policy analysis rather than broad education, dialogue
+or foundation activity. GCSP therefore remains NGO while DCAF, whose core work
+centres on policy, legal advice, knowledge products and security-governance
+policy development, is cataloged as THINK_TANK.
 
 No additional SourceType such as `POLITICAL_FOUNDATION` or
 `POLITICAL_EDUCATION_INSTITUTE` is introduced.

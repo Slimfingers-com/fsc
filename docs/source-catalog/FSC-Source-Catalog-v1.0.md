@@ -825,6 +825,71 @@ Federal parliamentary groups are their own political Primary Sources; party orga
 
 No feed is activated by inclusion in this catalog.
 
+## Switzerland (CH) — NGOs
+
+The multilingual CH NGO core contains 26 Source identities:
+
+| Functional group | NGO Sources |
+| --- | --- |
+| Environment / climate / nature | Greenpeace Schweiz, WWF Schweiz, Pro Natura, BirdLife Schweiz, Schweizerische Energie-Stiftung (SES) |
+| Human rights / refugee / digital rights | Amnesty International Schweiz, Schweizerische Flüchtlingshilfe (SFH), humanrights.ch, Digitale Gesellschaft, AlgorithmWatch CH, Schweizerische Beobachtungsstelle für Asyl- und Ausländerrecht (SBAA) |
+| Democracy / transparency / global justice | Transparency International Schweiz, Public Eye, Alliance Sud, Operation Libero, Campax, SWISSAID |
+| Humanitarian / development / social welfare | Schweizerisches Rotes Kreuz, Médecins Sans Frontières Suisse, Caritas Schweiz, HEKS/EPER, Helvetas Swiss Intercooperation, Terre des hommes – Kinderhilfe, Solidar Suisse, Fastenaktion |
+| Peace / security / executive education | Geneva Centre for Security Policy (GCSP) |
+
+GCSP remains NGO because executive education, diplomatic dialogue, research/policy advice and expert-network functions form one broad mission; individual analytical publications may still be \`expert_analysis\`. NGO items otherwise default to \`advocacy\`.
+
+## Switzerland (CH) — Interest groups
+
+The CH INTEREST_GROUP core contains 16 Source identities:
+
+| Functional group | Interest-group Sources |
+| --- | --- |
+| Labour / employees | Schweizerischer Gewerkschaftsbund (SGB), Travail.Suisse, Unia |
+| Business / employer / sector | economiesuisse, Schweizerischer Arbeitgeberverband, Schweizerischer Gewerbeverband (sgv), Swissmem, scienceindustries |
+| Agriculture / health | Schweizer Bauernverband, FMH Verbindung der Schweizer Ärztinnen und Ärzte, H+ Die Spitäler der Schweiz |
+| Housing / mobility / municipal | Mieterinnen- und Mieterverband Schweiz, Hauseigentümerverband Schweiz (HEV Schweiz), Touring Club Schweiz (TCS), Schweizerischer Städteverband, Schweizerischer Gemeindeverband |
+
+The institutional function determines \`INTEREST_GROUP\`; legal form and public mandate remain metadata rather than separate SourceTypes.
+
+## Switzerland (CH) — Companies
+
+The CH COMPANY core contains 22 group-first Source identities:
+
+| Functional group | COMPANY Sources |
+| --- | --- |
+| Life science | Roche Holding AG, Novartis AG, Lonza Group AG, Sandoz Group AG |
+| Finance / insurance | UBS Group AG, Zurich Insurance Group AG, Swiss Re AG, Partners Group Holding AG |
+| Industry / materials | ABB Ltd, Holcim Ltd, Sika AG, Georg Fischer AG |
+| Consumer / retail / luxury | Nestlé S.A., Compagnie Financière Richemont SA, Migros-Genossenschafts-Bund, Coop-Gruppe Genossenschaft |
+| Infrastructure / telecom / transport / energy | Swisscom AG, SBB AG, Die Schweizerische Post AG, Axpo Holding AG, BKW AG, Alpiq Holding AG |
+
+Public ownership does not change \`COMPANY\`. Die Schweizerische Post AG is the group Source; controlled strategic subsidiaries such as PostFinance AG, PostAuto AG and Post CH AG are not automatic additional Sources.
+
+## Switzerland (CH) — Academic
+
+The CH ACADEMIC core contains 15 Source identities:
+
+| Functional group | ACADEMIC Sources |
+| --- | --- |
+| Universities / higher education | ETH Zürich, EPFL, Universität Zürich, Université de Genève, Universität Basel, Universität Bern, Université de Lausanne, Universität St. Gallen (HSG), Università della Svizzera italiana (USI), Geneva Graduate Institute |
+| Research institutes | Paul Scherrer Institut (PSI), Empa, Eawag, WSL – Eidg. Forschungsanstalt für Wald, Schnee und Landschaft, Swiss Tropical and Public Health Institute (Swiss TPH) |
+
+ETH Zürich, EPFL, PSI, Empa, Eawag and WSL remain distinct institutional Sources even though they belong to the ETH Domain. Umbrella membership does not collapse research institutions.
+
+## Switzerland (CH) — Think tanks
+
+The CH THINK_TANK core contains 6 Source identities:
+
+| Functional group | THINK_TANK Sources |
+| --- | --- |
+| Economy / society | Avenir Suisse, Liberales Institut, Denknetz |
+| Foreign / security / science policy | foraus – Forum Aussenpolitik, DCAF – Geneva Centre for Security Sector Governance, Reatch! Research. Think. Change. |
+
+ADR 0024 applies: primary scientific research institutions stay ACADEMIC, while policy analysis/advice as the primary function is THINK_TANK. GCSP remains NGO under the broad-mission rule.
+
+No political-orientation or radicality classification is inferred in any CH organization catalog. No feed is activated by catalog inclusion.
+
 ## Great Britain (GB) — National broadcast
 
 The GB national broadcast catalog uses the same A–F research matrix, but counts television and radio separately and counts editorial newsrooms rather than channels, common owners, production companies or transmission suppliers. The research target remains 3–5 independent Sources per segment and medium; it is a goal, never a quota.
@@ -1173,6 +1238,11 @@ Completed catalog blocks:
 36. Austria company core (18 group-first corporate Sources)
 37. Austria academic core (16 scientific-research Sources)
 38. Austria think-tank core (6 policy-analysis Sources; party academies remain NGO)
+39. Switzerland NGO core (26 multilingual civil-society Sources; GCSP broad-mission NGO)
+40. Switzerland interest-group core (16 labour/business/sector/municipal Sources)
+41. Switzerland company core (22 group-first corporate Sources)
+42. Switzerland academic core (15 higher-education/research Sources; ETH Domain institutions remain distinct)
+43. Switzerland think-tank core (6 policy-analysis Sources)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 

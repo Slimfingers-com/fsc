@@ -1,0 +1,215 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "CH",
+  "languages": [
+    "de",
+    "fr",
+    "it",
+    "rm",
+    "en"
+  ],
+  "media_category": "organization",
+  "organization_type": "THINK_TANK",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_policy_domain_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "expert_analysis",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "economy_society",
+      "label": "economy and society",
+      "entries": [
+        {
+          "key": "avenir-suisse",
+          "name": "Avenir Suisse",
+          "homepage": "https://www.avenir-suisse.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "avenir-suisse-official",
+              "name": "Avenir Suisse",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.avenir-suisse.ch/"
+            }
+          ],
+          "notes": [
+            "Independent Swiss policy think tank."
+          ]
+        },
+        {
+          "key": "liberales-institut",
+          "name": "Liberales Institut",
+          "homepage": "https://www.libinst.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "liberales-institut-official",
+              "name": "Liberales Institut",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.libinst.ch/"
+            }
+          ],
+          "notes": [
+            "Independent Swiss policy think tank."
+          ]
+        },
+        {
+          "key": "denknetz",
+          "name": "Denknetz",
+          "homepage": "https://www.denknetz.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "denknetz-official",
+              "name": "Denknetz",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.denknetz.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss policy think tank and knowledge network."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "foreign_security_science_policy",
+      "label": "foreign, security and science policy",
+      "entries": [
+        {
+          "key": "foraus",
+          "name": "foraus – Forum Aussenpolitik",
+          "homepage": "https://www.foraus.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "foraus-official",
+              "name": "foraus – Forum Aussenpolitik",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.foraus.ch/"
+            }
+          ],
+          "notes": [
+            "Participatory Swiss foreign-policy think tank."
+          ]
+        },
+        {
+          "key": "dcaf",
+          "name": "DCAF – Geneva Centre for Security Sector Governance",
+          "homepage": "https://www.dcaf.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "dcaf-official",
+              "name": "DCAF – Geneva Centre for Security Sector Governance",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://www.dcaf.ch/"
+            }
+          ],
+          "notes": [
+            "Security-sector governance policy and knowledge institution; policy advice and independent expertise are central functions."
+          ]
+        },
+        {
+          "key": "reatch",
+          "name": "Reatch! Research. Think. Change.",
+          "homepage": "https://reatch.ch/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "THINK_TANK",
+          "country": "CH",
+          "language": "multi",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "reatch-official",
+              "name": "Reatch! Research. Think. Change.",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "multi",
+              "homepage": "https://reatch.ch/"
+            }
+          ],
+          "notes": [
+            "Swiss science-policy think tank and community connecting research and public policy."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 6,
+  "review_status": {
+    "source_selection": "approved_6_source_ch_think_tank_core_2026_09_28",
+    "segmentation": "functional_policy_domain_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [],
+  "academic_boundary_policy": "research_primary_function_is_academic_policy_analysis_and_advice_primary_function_is_think_tank",
+  "broad_mission_boundary_policy": "broad_education_dialogue_policy_foundations_such_as_gcsp_remain_ngo"
+}
