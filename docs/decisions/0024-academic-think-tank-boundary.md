@@ -43,8 +43,9 @@ function is policy analysis, strategic advice, policy development or public
 policy debate rather than scientific research as such.
 
 Accordingly, ifo, DIW Berlin, ZEW, RWI, IfW Kiel and WZB are `ACADEMIC` in
-the German source catalog. Institutions such as SWP and DGAP belong to the
-`THINK_TANK` category when that catalog is implemented.
+the German source catalog. SWP and DGAP are `THINK_TANK` Sources in the German
+catalog because policy analysis and advice are their primary institutional
+function.
 
 ## Source identity
 

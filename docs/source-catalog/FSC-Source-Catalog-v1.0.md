@@ -245,7 +245,7 @@ No feed is activated by inclusion in this catalog.
 
 NGOs are grouped by **civil-society function**, not political orientation. They use `SourceType.NGO`, `media_category=organization` and `publication_form=other`. Under ADR 0022, NGO content defaults to `confirmation_role=advocacy`, but the role remains article-specific.
 
-The jointly approved DE NGO core contains 22 Source identities:
+The jointly approved DE NGO core contains 30 Source identities:
 
 | Functional group | NGO Sources |
 | --- | --- |
@@ -253,6 +253,7 @@ The jointly approved DE NGO core contains 22 Source identities:
 | Human rights / civil liberties / migration / press & digital rights | Amnesty International Deutschland, PRO ASYL, Gesellschaft für Freiheitsrechte, Reporter ohne Grenzen Deutschland, HateAid |
 | Democracy / transparency / watchdog / consumer advocacy | Transparency International Deutschland, LobbyControl, Mehr Demokratie, Campact, Parlamentwatch e.V., foodwatch Deutschland |
 | Humanitarian / development / social welfare | Welthungerhilfe, terre des hommes Deutschland, Ärzte ohne Grenzen Deutschland, Deutscher Caritasverband, Diakonie Deutschland, Deutsches Rotes Kreuz |
+| Political / operational foundations | Konrad-Adenauer-Stiftung, Friedrich-Ebert-Stiftung, Heinrich-Böll-Stiftung, Friedrich-Naumann-Stiftung für die Freiheit, Rosa-Luxemburg-Stiftung, Hanns-Seidel-Stiftung, Desiderius-Erasmus-Stiftung, Bertelsmann Stiftung |
 
 Identity and boundary rules:
 
@@ -261,6 +262,8 @@ Identity and boundary rules:
 - **CORRECTIV is not duplicated here.** It already exists as a digital editorial Source.
 - Caritas and Diakonie remain NGOs because welfare/help is their primary institutional mission; their advocacy activity does not turn them into member-sector interest groups.
 - The Deutsches Rotes Kreuz remains an NGO despite its special statutory/humanitarian role; that role does not make all DRK content official state material.
+- Under ADR 0025, political and operational foundations with broad missions remain NGOs even when they also publish policy analysis. A substantive foundation study can still be `expert_analysis` article by article.
+- Internal academies, education programmes, scholarship programmes, international offices and project brands of those foundations are not automatic separate Sources.
 - NGO source type never determines confirmation eligibility by itself. An NGO item can be reclassified article-by-article, for example to `expert_analysis` or `primary_evidence`, when justified.
 
 No political-orientation or radicality classification is inferred from inclusion in these functional groups.
@@ -345,6 +348,32 @@ Identity and boundary rules:
 - No political-orientation or radicality classification is inferred from institution, discipline, funding structure or catalog inclusion.
 
 No feed is activated by inclusion in the academic catalog.
+
+## Germany (DE) — Think tanks
+
+Think tanks are grouped by **policy domain**, not political orientation. Under ADR 0024, `THINK_TANK` is reserved for institutions whose primary institutional function is policy analysis, strategic advice, policy development or public-policy debate. Under ADR 0025, broad-mission political and operational foundations remain `NGO` Sources even when they also publish policy studies.
+
+The jointly approved DE think-tank core contains 15 Source identities:
+
+| Functional group | THINK_TANK Sources |
+| --- | --- |
+| Foreign policy / security / global order / democracy | Stiftung Wissenschaft und Politik (SWP), Deutsche Gesellschaft für Auswärtige Politik (DGAP), Mercator Institute for China Studies (MERICS), Global Public Policy Institute (GPPi), Zentrum Liberale Moderne (LibMod) |
+| Economy / Europe / state / society | Stiftung Marktwirtschaft, cep – Centrum für Europäische Politik, Dezernat Zukunft, Das Progressive Zentrum, Prometheus – Das Freiheitsinstitut, REPUBLIK21 e.V. |
+| Digital / technology policy | interface – Tech analysis and policy ideas for Europe e.V. |
+| Climate / energy / transformation | Agora Think Tanks gGmbH, Agora Transport Transformation gGmbH, ZOE Institute for Future-Fit Economies |
+
+Identity and boundary rules:
+
+- **Primary policy-analysis/advice function determines THINK_TANK.** Institutions whose primary function remains scientific research stay `ACADEMIC`, even when they also conduct policy advice.
+- Under ADR 0025, Konrad-Adenauer-Stiftung, Friedrich-Ebert-Stiftung, Heinrich-Böll-Stiftung, Friedrich-Naumann-Stiftung für die Freiheit, Rosa-Luxemburg-Stiftung, Hanns-Seidel-Stiftung, Desiderius-Erasmus-Stiftung and Bertelsmann Stiftung remain `NGO`.
+- **Legal/institutional carrier is the Source when multiple brands share one organization.** Agora Energiewende, Agora Industry and Agora Agriculture are Outlets of Agora Think Tanks gGmbH.
+- Agora Verkehrswende is a separate Source because its legal carrier is Agora Transport Transformation gGmbH.
+- REPUBLIK21 e.V. is the Source; Denkfabrik R21 is its public brand/Outlet.
+- interface – Tech analysis and policy ideas for Europe e.V. is the Source; `interface` is its public brand.
+- New THINK_TANK articles default to `expert_analysis`, but article-level `confirmation_role` remains authoritative. Own administrative data can be `primary_evidence`; institutional campaigning or position material can be `advocacy`; genuinely editorial content can be `editorial`.
+- No political-orientation or radicality classification is inferred from the institution's policy domain, name, legal form or catalog inclusion.
+
+No feed is activated by inclusion in the think-tank catalog.
 
 ## Austria (AT)
 
@@ -1063,10 +1092,11 @@ Completed catalog blocks:
 26. Switzerland primary-source core (multilingual functional institutional groups; excluded from independent editorial confirmation)
 27. Great Britain primary-source core (functional institutional groups; excluded from independent editorial confirmation)
 28. United States primary-source core (functional institutional groups; excluded from independent editorial confirmation)
-29. Germany NGO core (mission-driven civil-society organizations; article-level confirmation roles)
+29. Germany NGO core (30 mission-driven civil-society and broad-mission foundation Sources; article-level confirmation roles)
 30. Germany interest-group core (member/sector representation; legal status kept separate from SourceType)
 31. Germany company core (28 group-first corporate Sources; controlled subsidiaries deferred unless independently relevant)
 32. Germany academic core (23 scientific-research Sources; extra-university institutes included by primary-function rule)
+33. Germany think-tank core (15 policy-analysis Sources; broad-mission foundations remain NGO)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
