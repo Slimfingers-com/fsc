@@ -1,0 +1,467 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "INTEREST_GROUP",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_interest_domain_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "labour_employees_students",
+      "label": "labour, employees and students",
+      "entries": [
+        {
+          "key": "oegb",
+          "name": "Österreichischer Gewerkschaftsbund (ÖGB)",
+          "homepage": "https://www.oegb.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oegb-official",
+              "name": "Österreichischer Gewerkschaftsbund (ÖGB)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.oegb.at/"
+            }
+          ],
+          "notes": [
+            "National trade-union confederation."
+          ]
+        },
+        {
+          "key": "bundesarbeitskammer",
+          "name": "Bundesarbeitskammer (AK Österreich)",
+          "homepage": "https://www.arbeiterkammer.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [
+            {
+              "dimension": "legal_status",
+              "value": "public_law_corporation",
+              "classifier_type": "self_description",
+              "classifier_name": "Bundesarbeitskammer",
+              "source_url": "https://www.arbeiterkammer.at/ueberuns/leistungen/Allgemeine-Infos-zu-Verbandsklagen.html",
+              "reference_date": "2026-09-28",
+              "retrieved_at": "2026-09-28T05:45:00Z",
+              "notes": "Bundesarbeitskammer identifies itself as a Körperschaft des öffentlichen Rechts."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bundesarbeitskammer-official",
+              "name": "Bundesarbeitskammer (AK Österreich)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.arbeiterkammer.at/"
+            }
+          ],
+          "notes": [
+            "Statutory employee-interest representation; public-law status is metadata."
+          ]
+        },
+        {
+          "key": "oeh",
+          "name": "Österreichische Hochschülerinnen- und Hochschülerschaft (ÖH)",
+          "homepage": "https://www.oeh.ac.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [
+            {
+              "dimension": "legal_status",
+              "value": "public_law_corporation",
+              "classifier_type": "self_description",
+              "classifier_name": "Österreichische Hochschülerinnen- und Hochschülerschaft",
+              "source_url": "https://www.oeh.ac.at/impressum/",
+              "reference_date": "2026-09-28",
+              "retrieved_at": "2026-09-28T05:45:00Z",
+              "notes": "ÖH identifies itself as a Körperschaft öffentlichen Rechts."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oeh-official",
+              "name": "Österreichische Hochschülerinnen- und Hochschülerschaft (ÖH)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.oeh.ac.at/"
+            }
+          ],
+          "notes": [
+            "Statutory student-interest representation."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "business_professional_sector",
+      "label": "business, professional and sector representation",
+      "entries": [
+        {
+          "key": "wko",
+          "name": "Wirtschaftskammer Österreich (WKÖ)",
+          "homepage": "https://www.wko.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [
+            {
+              "dimension": "legal_status",
+              "value": "public_law_corporation",
+              "classifier_type": "self_description",
+              "classifier_name": "Wirtschaftskammer Österreich",
+              "source_url": "https://www.wko.at/ooe/news/5.1-rolle-der-wk-als-unverzichtbare-interessenvertretung-staerke",
+              "reference_date": "2026-09-28",
+              "retrieved_at": "2026-09-28T05:45:00Z",
+              "notes": "WKO describes the chamber organization as a Körperschaft öffentlichen Rechts."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wko-official",
+              "name": "Wirtschaftskammer Österreich (WKÖ)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.wko.at/"
+            }
+          ],
+          "notes": [
+            "Statutory representation of Austrian businesses; public-law status is metadata."
+          ]
+        },
+        {
+          "key": "industriellenvereinigung",
+          "name": "Industriellenvereinigung (IV)",
+          "homepage": "https://www.iv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "industriellenvereinigung-official",
+              "name": "Industriellenvereinigung (IV)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.iv.at/"
+            }
+          ],
+          "notes": [
+            "Voluntary industry and employer interest organization."
+          ]
+        },
+        {
+          "key": "landwirtschaftskammer",
+          "name": "Landwirtschaftskammer Österreich (LKÖ)",
+          "homepage": "https://www.lko.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "landwirtschaftskammer-official",
+              "name": "Landwirtschaftskammer Österreich (LKÖ)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.lko.at/"
+            }
+          ],
+          "notes": [
+            "National agricultural chamber/interest representation."
+          ]
+        },
+        {
+          "key": "aerztekammer",
+          "name": "Österreichische Ärztekammer",
+          "homepage": "https://www.aerztekammer.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [
+            {
+              "dimension": "legal_status",
+              "value": "public_law_corporation",
+              "classifier_type": "self_description",
+              "classifier_name": "Österreichische Ärztekammer",
+              "source_url": "https://www.aerztekammer.at/aufgaben",
+              "reference_date": "2026-09-28",
+              "retrieved_at": "2026-09-28T05:45:00Z",
+              "notes": "Österreichische Ärztekammer identifies itself as a Körperschaft öffentlichen Rechts."
+            }
+          ],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "aerztekammer-official",
+              "name": "Österreichische Ärztekammer",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.aerztekammer.at/"
+            }
+          ],
+          "notes": [
+            "Statutory professional interest representation."
+          ]
+        },
+        {
+          "key": "apothekerkammer",
+          "name": "Österreichische Apothekerkammer",
+          "homepage": "https://www.apothekerkammer.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "apothekerkammer-official",
+              "name": "Österreichische Apothekerkammer",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.apothekerkammer.at/"
+            }
+          ],
+          "notes": [
+            "Statutory professional interest representation."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "municipal_housing_mobility",
+      "label": "municipal, housing and mobility interests",
+      "entries": [
+        {
+          "key": "gemeindebund",
+          "name": "Österreichischer Gemeindebund",
+          "homepage": "https://gemeindebund.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "gemeindebund-official",
+              "name": "Österreichischer Gemeindebund",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://gemeindebund.at/"
+            }
+          ],
+          "notes": [
+            "National association representing municipalities."
+          ]
+        },
+        {
+          "key": "staedtebund",
+          "name": "Österreichischer Städtebund",
+          "homepage": "https://www.staedtebund.gv.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "staedtebund-official",
+              "name": "Österreichischer Städtebund",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.staedtebund.gv.at/"
+            }
+          ],
+          "notes": [
+            "National association representing cities and larger municipalities."
+          ]
+        },
+        {
+          "key": "mietervereinigung",
+          "name": "Mietervereinigung Österreichs",
+          "homepage": "https://mietervereinigung.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "mietervereinigung-official",
+              "name": "Mietervereinigung Österreichs",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://mietervereinigung.at/"
+            }
+          ],
+          "notes": [
+            "Tenant-interest membership organization."
+          ]
+        },
+        {
+          "key": "oeamtc",
+          "name": "ÖAMTC",
+          "homepage": "https://www.oeamtc.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oeamtc-official",
+              "name": "ÖAMTC",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.oeamtc.at/"
+            }
+          ],
+          "notes": [
+            "Large mobility membership and consumer-interest organization."
+          ]
+        },
+        {
+          "key": "arboe",
+          "name": "ARBÖ",
+          "homepage": "https://www.arboe.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "INTEREST_GROUP",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "arboe-official",
+              "name": "ARBÖ",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.arboe.at/"
+            }
+          ],
+          "notes": [
+            "Mobility membership and consumer-interest organization."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 13,
+  "review_status": {
+    "source_selection": "approved_13_source_at_interest_group_core_2026_09_28",
+    "segmentation": "functional_interest_domain_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "additional_professional_associations",
+      "reason": "Further statutory and voluntary professional associations remain eligible for topic-specific expansion."
+    }
+  ],
+  "legal_status_policy": "public_law_status_is_metadata_not_source_type",
+  "source_identity_policy": "national_institution_is_source_regional_chambers_and_member_bodies_are_not_automatic_sources"
+}

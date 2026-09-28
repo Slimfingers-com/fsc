@@ -1,0 +1,568 @@
+{
+  "catalog_version": "1.0-draft.1",
+  "country": "AT",
+  "language": "de",
+  "media_category": "organization",
+  "organization_type": "COMPANY",
+  "activation_policy": "catalog_only_until_joint_review",
+  "segmentation_policy": "functional_economic_role_not_political_orientation",
+  "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
+  "default_confirmation_role": "advocacy",
+  "coverage_policy": "targets_are_goals_not_quotas",
+  "groups": [
+    {
+      "key": "energy_industry_infrastructure",
+      "label": "energy, industry and infrastructure",
+      "entries": [
+        {
+          "key": "omv",
+          "name": "OMV Aktiengesellschaft",
+          "homepage": "https://www.omv.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "omv-official",
+              "name": "OMV Aktiengesellschaft",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.omv.com/"
+            }
+          ],
+          "notes": [
+            "Group-level energy and chemicals Source."
+          ]
+        },
+        {
+          "key": "verbund",
+          "name": "VERBUND AG",
+          "homepage": "https://www.verbund.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "verbund-official",
+              "name": "VERBUND AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.verbund.com/"
+            }
+          ],
+          "notes": [
+            "Group-level electricity Source."
+          ]
+        },
+        {
+          "key": "voestalpine",
+          "name": "voestalpine AG",
+          "homepage": "https://www.voestalpine.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "voestalpine-official",
+              "name": "voestalpine AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.voestalpine.com/"
+            }
+          ],
+          "notes": [
+            "Group-level steel and technology Source."
+          ]
+        },
+        {
+          "key": "andritz",
+          "name": "ANDRITZ AG",
+          "homepage": "https://www.andritz.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "andritz-official",
+              "name": "ANDRITZ AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.andritz.com/"
+            }
+          ],
+          "notes": [
+            "Group-level technology and engineering Source."
+          ]
+        },
+        {
+          "key": "wienerberger",
+          "name": "Wienerberger AG",
+          "homepage": "https://www.wienerberger.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "wienerberger-official",
+              "name": "Wienerberger AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.wienerberger.com/"
+            }
+          ],
+          "notes": [
+            "Group-level building-materials Source."
+          ]
+        },
+        {
+          "key": "strabag",
+          "name": "STRABAG SE",
+          "homepage": "https://www.strabag.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "strabag-official",
+              "name": "STRABAG SE",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.strabag.com/"
+            }
+          ],
+          "notes": [
+            "Group-level construction Source."
+          ]
+        },
+        {
+          "key": "porr",
+          "name": "PORR AG",
+          "homepage": "https://www.porr-group.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "porr-official",
+              "name": "PORR AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.porr-group.com/"
+            }
+          ],
+          "notes": [
+            "Group-level construction Source."
+          ]
+        },
+        {
+          "key": "oebb",
+          "name": "ÖBB-Holding AG",
+          "homepage": "https://www.oebb.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "oebb-official",
+              "name": "ÖBB-Holding AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.oebb.at/"
+            }
+          ],
+          "notes": [
+            "Group-level rail and mobility Source; public ownership does not change COMPANY SourceType."
+          ]
+        },
+        {
+          "key": "asfinag",
+          "name": "ASFINAG",
+          "homepage": "https://www.asfinag.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "asfinag-official",
+              "name": "ASFINAG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.asfinag.at/"
+            }
+          ],
+          "notes": [
+            "State-owned motorway infrastructure company; ownership is metadata, not SourceType."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "finance_insurance",
+      "label": "finance and insurance",
+      "entries": [
+        {
+          "key": "erste-group",
+          "name": "Erste Group Bank AG",
+          "homepage": "https://www.erstegroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "erste-group-official",
+              "name": "Erste Group Bank AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.erstegroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "rbi",
+          "name": "Raiffeisen Bank International AG",
+          "homepage": "https://www.rbinternational.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "rbi-official",
+              "name": "Raiffeisen Bank International AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.rbinternational.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "bawag",
+          "name": "BAWAG Group AG",
+          "homepage": "https://www.bawaggroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "bawag-official",
+              "name": "BAWAG Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.bawaggroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level banking Source."
+          ]
+        },
+        {
+          "key": "vig",
+          "name": "Vienna Insurance Group AG",
+          "homepage": "https://group.vig/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "vig-official",
+              "name": "Vienna Insurance Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://group.vig/"
+            }
+          ],
+          "notes": [
+            "Group-level insurance Source."
+          ]
+        },
+        {
+          "key": "uniqa",
+          "name": "UNIQA Insurance Group AG",
+          "homepage": "https://www.uniqagroup.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "uniqa-official",
+              "name": "UNIQA Insurance Group AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.uniqagroup.com/"
+            }
+          ],
+          "notes": [
+            "Group-level insurance Source."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "telecom_logistics_consumer",
+      "label": "telecom, logistics and consumer",
+      "entries": [
+        {
+          "key": "a1-group",
+          "name": "Telekom Austria AG (A1 Group)",
+          "homepage": "https://a1.group/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "a1-group-official",
+              "name": "Telekom Austria AG (A1 Group)",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://a1.group/"
+            }
+          ],
+          "notes": [
+            "Group-level telecommunications Source."
+          ]
+        },
+        {
+          "key": "austrian-post",
+          "name": "Österreichische Post AG",
+          "homepage": "https://www.post.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "austrian-post-official",
+              "name": "Österreichische Post AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.post.at/"
+            }
+          ],
+          "notes": [
+            "National postal/logistics company Source."
+          ]
+        },
+        {
+          "key": "red-bull",
+          "name": "Red Bull GmbH",
+          "homepage": "https://www.redbull.com/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "red-bull-official",
+              "name": "Red Bull GmbH",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.redbull.com/"
+            }
+          ],
+          "notes": [
+            "Austrian-headquartered consumer and media company Source."
+          ]
+        },
+        {
+          "key": "spar-austria",
+          "name": "SPAR Österreichische Warenhandels-AG",
+          "homepage": "https://www.spar.at/",
+          "activity_status": "active",
+          "catalog_status": "candidate",
+          "source_action": "create_source",
+          "source_type": "COMPANY",
+          "country": "AT",
+          "language": "de",
+          "feeds": [],
+          "classification_status": "functional_organization_type_not_political_classification",
+          "classifications": [],
+          "metrics": [],
+          "outlets": [
+            {
+              "key": "spar-austria-official",
+              "name": "SPAR Österreichische Warenhandels-AG",
+              "media_category": "organization",
+              "publication_form": "other",
+              "scope": "national",
+              "language": "de",
+              "homepage": "https://www.spar.at/"
+            }
+          ],
+          "notes": [
+            "Austrian retail group institutional Source."
+          ]
+        }
+      ]
+    }
+  ],
+  "approved_candidate_count": 18,
+  "review_status": {
+    "source_selection": "approved_18_source_at_company_core_2026_09_28",
+    "segmentation": "functional_economic_role_not_political_orientation",
+    "confirmation_semantics": "article_level_confirmation_role_per_adr_0022"
+  },
+  "deferred_expansion": [
+    {
+      "category": "foreign_controlled_national_subsidiaries",
+      "reason": "Austrian Airlines and other foreign-group subsidiaries are deferred unless their national institutional voice independently warrants a Source."
+    }
+  ],
+  "source_identity_policy": "group_first_national_corporate_identity_controlled_subsidiaries_and_brands_are_not_automatic_sources",
+  "ownership_policy": "ownership_and_control_are_metadata_and_do_not_create_editorial_dependency_by_themselves"
+}

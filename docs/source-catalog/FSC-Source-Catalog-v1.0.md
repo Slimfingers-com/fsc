@@ -577,6 +577,77 @@ Institutional websites and parliamentary hosting systems are Outlets, not additi
 
 No feed is activated by inclusion in this catalog.
 
+## Austria (AT) — NGOs
+
+The jointly approved AT NGO core contains 30 Source identities. Functional grouping does not imply political orientation.
+
+| Functional group | NGO Sources |
+| --- | --- |
+| Environment / climate / nature | Greenpeace in Österreich, GLOBAL 2000, WWF Österreich, Naturschutzbund Österreich, BirdLife Österreich |
+| Human rights / migration / digital rights | Amnesty International Österreich, asylkoordination österreich, SOS Mitmensch, ZARA, epicenter.works, Österreichische Liga für Menschenrechte |
+| Democracy / transparency / global justice | Transparency International – Austrian Chapter, Forum Informationsfreiheit, mehr demokratie!, Attac Österreich, Südwind |
+| Humanitarian / development | Österreichisches Rotes Kreuz, Ärzte ohne Grenzen Österreich, CARE Österreich, Licht für die Welt, SOS-Kinderdorf Österreich |
+| Social welfare | Caritas Österreich, Diakonie Österreich, Volkshilfe Österreich, Hilfswerk Österreich |
+| Political education institutes | Campus Tivoli – Akademie der ÖVP, Karl-Renner-Institut, Freiheitliches Bildungsinstitut, FREDA – DIE AKADEMIE, NEOS Lab – Das liberale Forum |
+
+Identity and boundary rules:
+
+- ADR 0025 applies across legal forms: broad-mission political education institutions remain \`NGO\`, while substantive studies can be \`expert_analysis\` article by article.
+- Party proximity or institutional context does not create an FSC political-orientation classification.
+- SOS Mitmensch is the NGO Source; an editorially independent MO magazine Source is not collapsed merely because SOS Mitmensch publishes it.
+- Südwind is the NGO Source; a separately editorially independent Südwind magazine can remain a media Source if cataloged.
+- National umbrella organizations are the initial Sources; regional/diocesan member organizations are not duplicated automatically.
+- NGO items default to \`advocacy\`; the concrete article-level confirmation role remains authoritative.
+
+## Austria (AT) — Interest groups
+
+The compact AT INTEREST_GROUP core contains 13 Source identities:
+
+| Functional group | Interest-group Sources |
+| --- | --- |
+| Labour / employees / students | Österreichischer Gewerkschaftsbund (ÖGB), Bundesarbeitskammer (AK Österreich), Österreichische Hochschülerinnen- und Hochschülerschaft (ÖH) |
+| Business / professional / sector | Wirtschaftskammer Österreich (WKÖ), Industriellenvereinigung (IV), Landwirtschaftskammer Österreich (LKÖ), Österreichische Ärztekammer, Österreichische Apothekerkammer |
+| Municipal / housing / mobility | Österreichischer Gemeindebund, Österreichischer Städtebund, Mietervereinigung Österreichs, ÖAMTC, ARBÖ |
+
+Public-law or statutory status is stored separately as \`LEGAL_STATUS\` metadata and does not replace the functional \`INTEREST_GROUP\` SourceType.
+
+## Austria (AT) — Companies
+
+The compact AT COMPANY core contains 18 group-first Source identities:
+
+| Functional group | COMPANY Sources |
+| --- | --- |
+| Energy / industry / infrastructure | OMV Aktiengesellschaft, VERBUND AG, voestalpine AG, ANDRITZ AG, Wienerberger AG, STRABAG SE, PORR AG, ÖBB-Holding AG, ASFINAG |
+| Finance / insurance | Erste Group Bank AG, Raiffeisen Bank International AG, BAWAG Group AG, Vienna Insurance Group AG, UNIQA Insurance Group AG |
+| Telecom / logistics / consumer | Telekom Austria AG (A1 Group), Österreichische Post AG, Red Bull GmbH, SPAR Österreichische Warenhandels-AG |
+
+The same group-first rule as Germany applies. Public ownership does not change \`COMPANY\`; controlled subsidiaries and brands are not automatic additional Sources.
+
+## Austria (AT) — Academic
+
+The AT ACADEMIC core contains 16 scientific-research Source identities:
+
+| Functional group | ACADEMIC Sources |
+| --- | --- |
+| Universities | Universität Wien, Technische Universität Wien, Wirtschaftsuniversität Wien (WU), Medizinische Universität Wien, Universität Innsbruck, Universität Graz, BOKU University |
+| Science organizations / institutes | Österreichische Akademie der Wissenschaften (ÖAW), Institute of Science and Technology Austria (ISTA), International Institute for Applied Systems Analysis (IIASA), AIT Austrian Institute of Technology, JOANNEUM RESEARCH Forschungsgesellschaft mbH, Complexity Science Hub |
+| Economy / society / policy research | Österreichisches Institut für Wirtschaftsforschung (WIFO), Institut für Höhere Studien (IHS), EcoAustria |
+
+ADR 0024 applies: WIFO, IHS and EcoAustria remain \`ACADEMIC\` because scientific research is their primary institutional function even though their work informs policy.
+
+## Austria (AT) — Think tanks
+
+The AT THINK_TANK core contains 6 Source identities:
+
+| Functional group | THINK_TANK Sources |
+| --- | --- |
+| Economy / social policy | Agenda Austria, Momentum Institut, Austrian Economics Center |
+| Europe / foreign / security policy | Austrian Institute for European and Security Policy (AIES), Österreichisches Institut für Internationale Politik (oiip), Österreichische Gesellschaft für Europapolitik (ÖGfE) |
+
+Political education institutes remain NGOs under ADR 0025. Scientific research institutes remain ACADEMIC under ADR 0024. THINK_TANK items default to \`expert_analysis\`, but the article-level role remains authoritative.
+
+No feed is activated by inclusion in any AT organization catalog.
+
 ## Switzerland (CH)
 
 ### Print
@@ -1097,6 +1168,11 @@ Completed catalog blocks:
 31. Germany company core (28 group-first corporate Sources; controlled subsidiaries deferred unless independently relevant)
 32. Germany academic core (23 scientific-research Sources; extra-university institutes included by primary-function rule)
 33. Germany think-tank core (15 policy-analysis Sources; broad-mission foundations remain NGO)
+34. Austria NGO core (30 civil-society and political-education Sources)
+35. Austria interest-group core (13 statutory/voluntary interest-representation Sources; legal status kept separate)
+36. Austria company core (18 group-first corporate Sources)
+37. Austria academic core (16 scientific-research Sources)
+38. Austria think-tank core (6 policy-analysis Sources; party academies remain NGO)
 
 Foreign-language media are part of the current product scope. Catalog completeness is defined by comparative value and provenance, not by world or country coverage.
 
