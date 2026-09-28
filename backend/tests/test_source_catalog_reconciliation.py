@@ -287,6 +287,7 @@ def test_catalog_reconciliation_does_not_delete_unmanaged_runtime_feeds(
         catalog_name="test.json",
         apply=True,
     )
+    db.expire(source, ["feeds"])
 
     assert {
         feed.url
