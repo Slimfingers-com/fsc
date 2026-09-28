@@ -130,6 +130,21 @@ class SourceRepository(BaseRepository[Source]):
 
         return list(db.scalars(statement).all())
 
+    def get_feed_for_source(
+        self,
+        db: Session,
+        *,
+        source_id: UUID,
+        feed_id: UUID,
+    ) -> Feed | None:
+        statement = (
+            select(Feed)
+            .where(Feed.id == feed_id)
+            .where(Feed.source_id == source_id)
+            .where(Feed.deleted_at.is_(None))
+        )
+        return db.scalar(statement)
+
     def get_active_outlet(
         self,
         db: Session,

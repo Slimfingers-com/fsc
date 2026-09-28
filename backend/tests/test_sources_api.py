@@ -135,6 +135,7 @@ def test_create_source(client):
                     "url": "https://www.reutersagency.com/feed/",
                     "priority": 1,
                     "fetch_interval_minutes": 10,
+                    "default_confirmation_role": "primary_evidence",
                 },
                 {
                     "name": "Business News",
@@ -164,6 +165,10 @@ def test_create_source(client):
     )
     assert data["feeds"][0]["priority"] == 1
     assert data["feeds"][0]["fetch_interval_minutes"] == 10
+    assert (
+        data["feeds"][0]["default_confirmation_role"]
+        == "primary_evidence"
+    )
 
     assert data["feeds"][1]["name"] == "Business News"
     assert data["feeds"][1]["url"] == (
@@ -171,6 +176,7 @@ def test_create_source(client):
     )
     assert data["feeds"][1]["priority"] == 2
     assert data["feeds"][1]["fetch_interval_minutes"] == 20
+    assert data["feeds"][1]["default_confirmation_role"] is None
 
 
 def test_create_source_without_feeds(client):
@@ -618,3 +624,118 @@ def test_source_relation_requires_admin_key(client):
         },
     )
     assert response.status_code == 401
+
+
+def test_source_feed_admin_create_and_update_round_trip(client):
+    source_response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Feed Admin Example",
+            "url": "https://feed-admin.example.com",
+            "source_type": "COMPANY",
+        },
+    )
+    assert source_response.status_code == 201
+
+    create_response = client.post(
+        "/sources/feed-admin-example/feeds",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Research",
+            "url": "https://feed-admin.example.com/research.xml",
+            "active": False,
+            "priority": 2,
+            "fetch_interval_minutes": 60,
+            "default_confirmation_role": "expert_analysis",
+        },
+    )
+    assert create_response.status_code == 201
+    feed = create_response.json()
+    assert feed["active"] is False
+    assert feed["priority"] == 2
+    assert feed["fetch_interval_minutes"] == 60
+    assert feed["default_confirmation_role"] == "expert_analysis"
+
+    update_response = client.patch(
+        f"/sources/feed-admin-example/feeds/{feed['id']}",
+        headers=ADMIN_HEADERS,
+        json={
+            "active": True,
+            "priority": 1,
+            "default_confirmation_role": "primary_evidence",
+        },
+    )
+    assert update_response.status_code == 200
+    updated = update_response.json()
+    assert updated["active"] is True
+    assert updated["priority"] == 1
+    assert updated["fetch_interval_minutes"] == 60
+    assert updated["default_confirmation_role"] == "primary_evidence"
+
+    clear_response = client.patch(
+        f"/sources/feed-admin-example/feeds/{feed['id']}",
+        headers=ADMIN_HEADERS,
+        json={"default_confirmation_role": None},
+    )
+    assert clear_response.status_code == 200
+    assert clear_response.json()["default_confirmation_role"] is None
+
+
+def test_source_feed_admin_endpoints_require_admin_key(client):
+    source_response = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Protected Feed Admin",
+            "url": "https://protected-feed-admin.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    assert source_response.status_code == 201
+
+    create_response = client.post(
+        "/sources/protected-feed-admin/feeds",
+        json={
+            "name": "Protected",
+            "url": "https://protected-feed-admin.example.com/feed.xml",
+        },
+    )
+    assert create_response.status_code == 401
+
+
+def test_update_source_feed_rejects_feed_from_other_source(client):
+    first = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Feed Owner One",
+            "url": "https://feed-owner-one.example.com",
+            "source_type": "NEWS",
+            "feeds": [
+                {
+                    "name": "One",
+                    "url": "https://feed-owner-one.example.com/feed.xml",
+                }
+            ],
+        },
+    )
+    second = client.post(
+        "/sources",
+        headers=ADMIN_HEADERS,
+        json={
+            "name": "Feed Owner Two",
+            "url": "https://feed-owner-two.example.com",
+            "source_type": "NEWS",
+        },
+    )
+    assert first.status_code == 201
+    assert second.status_code == 201
+    feed_id = first.json()["feeds"][0]["id"]
+
+    response = client.patch(
+        f"/sources/feed-owner-two/feeds/{feed_id}",
+        headers=ADMIN_HEADERS,
+        json={"active": False},
+    )
+    assert response.status_code == 404

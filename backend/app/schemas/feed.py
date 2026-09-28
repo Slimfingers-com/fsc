@@ -3,6 +3,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
+from app.enums.confirmation_role import ConfirmationRole
+
 
 class FeedCreate(BaseModel):
     name: str = Field(min_length=1, max_length=255)
@@ -11,6 +13,7 @@ class FeedCreate(BaseModel):
     active: bool = True
     priority: int = Field(default=3, ge=1, le=4)
     fetch_interval_minutes: int = Field(default=30, gt=0)
+    default_confirmation_role: ConfirmationRole | None = None
 
 
 class FeedUpdate(BaseModel):
@@ -20,6 +23,7 @@ class FeedUpdate(BaseModel):
     active: bool | None = None
     priority: int | None = Field(default=None, ge=1, le=4)
     fetch_interval_minutes: int | None = Field(default=None, gt=0)
+    default_confirmation_role: ConfirmationRole | None = None
 
 
 class FeedRead(BaseModel):
@@ -34,6 +38,7 @@ class FeedRead(BaseModel):
     active: bool
     priority: int
     fetch_interval_minutes: int
+    default_confirmation_role: ConfirmationRole | None
 
     last_fetched_at: datetime | None
     last_success_at: datetime | None

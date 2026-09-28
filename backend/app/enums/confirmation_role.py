@@ -31,6 +31,27 @@ def counts_as_independent_confirmation(
     return value in INDEPENDENT_CONFIRMATION_ROLES
 
 
+def resolve_confirmation_role(
+    *,
+    source_type: SourceType | str,
+    feed_default: ConfirmationRole | str | None = None,
+    article_role: ConfirmationRole | str | None = None,
+) -> ConfirmationRole:
+    if article_role is not None:
+        return (
+            article_role
+            if isinstance(article_role, ConfirmationRole)
+            else ConfirmationRole(article_role)
+        )
+    if feed_default is not None:
+        return (
+            feed_default
+            if isinstance(feed_default, ConfirmationRole)
+            else ConfirmationRole(feed_default)
+        )
+    return default_confirmation_role(source_type)
+
+
 def default_confirmation_role(
     source_type: SourceType | str,
 ) -> ConfirmationRole:

@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 import pytest
 
 from app.core.exceptions import DuplicateSourceError
+from app.enums.confirmation_role import ConfirmationRole
 from app.enums.source_metadata import PublicationForm, SourceMedium
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate
@@ -35,6 +36,9 @@ def test_create_source(db):
                     url="https://www.reutersagency.com/feed/",
                     priority=1,
                     fetch_interval_minutes=15,
+                    default_confirmation_role=(
+                        ConfirmationRole.PRIMARY_EVIDENCE
+                    ),
                 ),
             ],
         ),
@@ -54,6 +58,10 @@ def test_create_source(db):
     assert source.feeds[0].url == "https://www.reutersagency.com/feed/"
     assert source.feeds[0].priority == 1
     assert source.feeds[0].fetch_interval_minutes == 15
+    assert (
+        source.feeds[0].default_confirmation_role
+        is ConfirmationRole.PRIMARY_EVIDENCE
+    )
     assert source.feeds[0].active is True
 
 
