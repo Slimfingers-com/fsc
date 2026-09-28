@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "CH",
   "languages": [
     "de",
@@ -14,6 +14,16 @@
   "segmentation_policy": "functional_research_domain_not_political_orientation",
   "confirmation_policy": "article_confirmation_role_controls_independence_source_type_only_sets_initial_default",
   "default_confirmation_role": "expert_analysis",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "research_publication": "expert_analysis",
+    "official_data": "primary_evidence",
+    "press_release": "primary_evidence",
+    "news": "primary_evidence",
+    "position_statement": "advocacy",
+    "signal": "signal"
+  },
   "coverage_policy": "targets_are_goals_not_quotas",
   "groups": [
     {
@@ -30,7 +40,18 @@
           "source_type": "ACADEMIC",
           "country": "CH",
           "language": "multi",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Medienmitteilungen",
+              "url": "https://www.ethz.ch/de/news-und-veranstaltungen/eth-news/news/_jcr_content.feed.html?tag=news:dossiers/medienmitteilung",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_organization_type_not_political_classification",
           "classifications": [],
           "metrics": [],
