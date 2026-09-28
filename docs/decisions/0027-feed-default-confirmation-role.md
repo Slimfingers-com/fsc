@@ -51,7 +51,12 @@ its content function. Source catalogs may record a `feed_class` and an
 `activation_tier` as **catalog/review metadata only**. Neither field is
 persisted on the `Feed` database row at this stage.
 
-The initial feed-class mapping is:
+Feed class describes the function of a content channel, but it is not by
+itself an independence classifier. The originating SourceType remains relevant
+when choosing a feed default role.
+
+For Sources whose institutional function is independent research or analysis
+(`ACADEMIC` and `THINK_TANK`), the baseline mapping is:
 
 | Feed class | Feed default role | Semantics |
 | --- | --- | --- |
@@ -61,6 +66,18 @@ The initial feed-class mapping is:
 | `news` | `primary_evidence` | Institutional news with the same conservative semantics as press releases. |
 | `position_statement` | `advocacy` | Normative demands, positions or campaigning statements. |
 | `signal` | `signal` | Discovery/update channels that do not independently confirm a claim. |
+
+For interest-bound institutional Sources (`COMPANY`, `NGO` and
+`INTEREST_GROUP`), a `research_publication` channel does **not** by itself
+upgrade articles to independent confirmation. Its conservative default remains
+`advocacy`. `official_data`, `press_release` and `news` may still use
+`primary_evidence` because they can be primary evidence for the originating
+institution's own data, actions or statements. Article-level review can
+explicitly assign a different role when justified.
+
+This prevents corporate research, commissioned advocacy research or
+membership-body analysis from becoming independent confirmation merely because
+the material is analytical in form.
 
 A feed is not classified as `research_publication` merely because its Source
 is `ACADEMIC` or `THINK_TANK`. A mixed channel containing research,
