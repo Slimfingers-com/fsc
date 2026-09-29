@@ -134,6 +134,8 @@ class SourceCatalogReconciler:
                     )
                 continue
 
+            self._refresh_runtime_relationships(db, source)
+
             source_conflicts = self._source_identity_conflicts(
                 source=source,
                 entry=entry,
@@ -175,6 +177,14 @@ class SourceCatalogReconciler:
             actions=tuple(actions),
             conflicts=tuple(conflicts),
         )
+
+    @staticmethod
+    def _refresh_runtime_relationships(
+        db: Session,
+        source: Any,
+    ) -> None:
+        db.flush()
+        db.expire(source, ["feeds", "outlets"])
 
     def _plan_feeds(
         self,
@@ -348,6 +358,8 @@ class SourceCatalogReconciler:
                 )
                 continue
 
+            self._refresh_runtime_relationships(db, source)
+
             self._apply_outlets(
                 db,
                 source=source,
@@ -433,8 +445,10 @@ class SourceCatalogReconciler:
                 source,
                 expected,
             )
-            if expected.is_primary:
-                has_primary = True
+            created = True
+
+        if created:
+            self._refresh_runtime_relationships(db, source)
 
     def _validated_materializable_entries(
         self,
