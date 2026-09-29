@@ -145,15 +145,19 @@ class SourceCatalogReconciler:
             if source_conflicts:
                 continue
 
-            outlet_actions, outlet_conflicts = self._plan_outlets(
-                source=source,
-                catalog=catalog,
-                entry=entry,
-            )
-            actions.extend(outlet_actions)
-            conflicts.extend(outlet_conflicts)
-            if outlet_conflicts:
-                continue
+            outlet_actions: list[CatalogReconciliationAction] = []
+            outlet_conflicts: list[str] = []
+            if source_action == "extend_existing_source":
+                outlet_actions, outlet_conflicts = self._plan_outlets(
+                    db,
+                    source=source,
+                    catalog=catalog,
+                    entry=entry,
+                )
+                actions.extend(outlet_actions)
+                conflicts.extend(outlet_conflicts)
+                if outlet_conflicts:
+                    continue
 
             feed_actions, feed_conflicts = self._plan_feeds(
                 db,
@@ -272,6 +276,7 @@ class SourceCatalogReconciler:
 
     def _plan_outlets(
         self,
+        db: Session,
         *,
         source: Any,
         catalog: dict[str, Any],
@@ -283,11 +288,10 @@ class SourceCatalogReconciler:
         if not outlet_data:
             return actions, conflicts
 
-        active_outlets = [
-            outlet
-            for outlet in source.outlets
-            if outlet.deleted_at is None
-        ]
+        active_outlets = self.source_service.repository.list_outlets_for_source(
+            db,
+            source.id,
+        )
         by_name = {
             outlet.normalized_name: outlet
             for outlet in active_outlets
@@ -360,12 +364,13 @@ class SourceCatalogReconciler:
 
             self._refresh_runtime_relationships(db, source)
 
-            self._apply_outlets(
-                db,
-                source=source,
-                catalog=catalog,
-                entry=entry,
-            )
+            if source_action == "extend_existing_source":
+                self._apply_outlets(
+                    db,
+                    source=source,
+                    catalog=catalog,
+                    entry=entry,
+                )
 
             active_feeds = [
                 feed
@@ -417,11 +422,10 @@ class SourceCatalogReconciler:
         if not outlet_data:
             return
 
-        active_outlets = [
-            outlet
-            for outlet in source.outlets
-            if outlet.deleted_at is None
-        ]
+        active_outlets = self.source_service.repository.list_outlets_for_source(
+            db,
+            source.id,
+        )
         by_name = {
             outlet.normalized_name: outlet
             for outlet in active_outlets
