@@ -60,9 +60,11 @@ reconciliation conflict because the Feed must not create a duplicate Source.
 
 An existing runtime Source is reused by normalized institutional name. Its
 existing business metadata is not silently overwritten. A SourceType mismatch,
-incompatible country or incompatible same-named Outlet is a reconciliation
-conflict. Newly added extension Outlets are non-primary by default so an
-existing primary print, broadcast or digital Outlet is not displaced.
+incompatible country or incompatible same-named Outlet in the same media
+category is a reconciliation conflict. Same-named Outlets in different media
+categories are distinct cross-media outlets under ADR 0030. Newly added extension
+Outlets are non-primary by default so an existing primary print, broadcast or
+digital Outlet is not displaced.
 
 Feeds are reconciled by canonical URL:
 

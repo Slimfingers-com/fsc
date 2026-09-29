@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "CH",
   "languages": [
     "de",
@@ -29,7 +29,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "solidaritéS",
+              "url": "https://solidarites.ch/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -67,7 +78,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Voix Populaire",
+              "url": "https://voixpopulaire.ch/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -149,7 +171,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "WOZ Die Wochenzeitung",
+              "url": "https://www.woz.ch/t/startseite/feed",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -199,7 +232,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Le Courrier",
+              "url": "https://lecourrier.ch/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -628,7 +672,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Neue Zürcher Zeitung",
+              "url": "https://www.nzz.ch/recent.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -703,7 +758,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Schweizerzeit",
+              "url": "https://schweizerzeit.ch/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -1083,5 +1149,12 @@
   "coverage_policy": "targets_are_goals_not_quotas",
   "coverage_policy_notes": "Coverage minima guide research only. FSC does not force, invent, or broaden a political classification to satisfy a numeric target; documented market asymmetries are retained.",
   "edition_policy": "brand_as_source_print_products_as_outlets",
-  "source_identity_policy": "one_editorial_source_multiple_products_as_outlets"
+  "source_identity_policy": "one_editorial_source_multiple_products_as_outlets",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

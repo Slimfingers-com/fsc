@@ -210,8 +210,8 @@ def test_legacy_identity_rejects_conflicting_existing_outlet(db) -> None:
         source,
         SourceOutletCreate(
             name="Deutschlandfunk",
-            media_category=SourceMedium.DIGITAL,
-            publication_form=PublicationForm.OTHER,
+            media_category=SourceMedium.BROADCAST,
+            publication_form=PublicationForm.TELEVISION,
             language="de",
             url="https://www.deutschlandfunk.de/",
             is_primary=False,

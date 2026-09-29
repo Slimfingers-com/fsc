@@ -606,7 +606,7 @@ def _editorial_extension_catalog(
         "outlets": [
             {
                 "key": "example-news-digital-web",
-                "name": "Example News Digital",
+                "name": "Example News",
                 "media_category": "digital",
                 "publication_form": "digital_native",
                 "language": "de",
@@ -645,7 +645,7 @@ def _create_editorial_base_source(db):
             language="de",
             outlets=[
                 SourceOutletCreate(
-                    name="Example News Print",
+                    name="Example News",
                     media_category="print",
                     publication_form="daily_newspaper",
                     language="de",
@@ -690,15 +690,19 @@ def test_catalog_reconciliation_extends_existing_source_without_feed(
         for outlet in refreshed.outlets
         if outlet.deleted_at is None
     } == {
-        "Example News Print",
-        "Example News Digital",
+        "Example News",
     }
+    assert {
+        outlet.media_category
+        for outlet in refreshed.outlets
+        if outlet.deleted_at is None and outlet.name == "Example News"
+    } == {"print", "digital"}
     primary = [
         outlet.name
         for outlet in refreshed.outlets
         if outlet.deleted_at is None and outlet.is_primary
     ]
-    assert primary == ["Example News Print"]
+    assert primary == ["Example News"]
 
 
 def test_catalog_reconciliation_extension_is_idempotent(db) -> None:
@@ -706,6 +710,12 @@ def test_catalog_reconciliation_extension_is_idempotent(db) -> None:
     reconciler = SourceCatalogReconciler()
     catalog = _editorial_extension_catalog()
 
+    reconciler.reconcile(
+        db,
+        catalog,
+        catalog_name="de_digital_test.json",
+        apply=True,
+    )
     reconciler.reconcile(
         db,
         catalog,
@@ -815,7 +825,7 @@ def test_catalog_reconciliation_extension_rejects_conflicting_outlet(
         db,
         source,
         SourceOutletCreate(
-            name="Example News Digital",
+            name="Example News",
             media_category="digital",
             publication_form="digital_native",
             language="de",

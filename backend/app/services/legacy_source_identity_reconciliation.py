@@ -230,14 +230,20 @@ class LegacySourceIdentityReconciler:
                     )
                 )
 
-            outlets_by_name = {
-                outlet.normalized_name: outlet
+            outlets_by_identity = {
+                (
+                    outlet.normalized_name,
+                    str(outlet.media_category),
+                ): outlet
                 for outlet in source.outlets
                 if outlet.deleted_at is None
             }
             for outlet_spec in spec.outlets:
-                normalized = normalize_source_name(outlet_spec.name)
-                existing = outlets_by_name.get(normalized)
+                identity = (
+                    normalize_source_name(outlet_spec.name),
+                    str(outlet_spec.media_category),
+                )
+                existing = outlets_by_identity.get(identity)
                 if existing is None:
                     actions.append(
                         LegacyIdentityAction(
@@ -261,7 +267,10 @@ class LegacySourceIdentityReconciler:
                 source.name == spec.canonical_name
                 and source.url == spec.canonical_url
                 and all(
-                    normalize_source_name(outlet.name) in outlets_by_name
+                    (
+                        normalize_source_name(outlet.name),
+                        str(outlet.media_category),
+                    ) in outlets_by_identity
                     for outlet in spec.outlets
                 )
                 and not any(
@@ -296,14 +305,20 @@ class LegacySourceIdentityReconciler:
             )
             source.url = spec.canonical_url
 
-            outlets_by_name = {
-                outlet.normalized_name: outlet
+            outlets_by_identity = {
+                (
+                    outlet.normalized_name,
+                    str(outlet.media_category),
+                ): outlet
                 for outlet in source.outlets
                 if outlet.deleted_at is None
             }
             for outlet_spec in spec.outlets:
-                normalized = normalize_source_name(outlet_spec.name)
-                if normalized in outlets_by_name:
+                identity = (
+                    normalize_source_name(outlet_spec.name),
+                    str(outlet_spec.media_category),
+                )
+                if identity in outlets_by_identity:
                     continue
                 self.source_service.create_outlet(
                     db,

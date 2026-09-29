@@ -293,13 +293,15 @@ class SourceCatalogReconciler:
             db,
             source.id,
         )
-        by_name = {
-            outlet.normalized_name: outlet
+        by_identity = {
+            (
+                outlet.normalized_name,
+                str(outlet.media_category),
+            ): outlet
             for outlet in active_outlets
         }
         source_action = entry.get("source_action", "create_source")
         has_primary = any(outlet.is_primary for outlet in active_outlets)
-        created = False
 
         for index, data in enumerate(outlet_data):
             expected = self._outlet_create(
@@ -309,8 +311,11 @@ class SourceCatalogReconciler:
                 index=index,
                 source_action=source_action,
             )
-            normalized = normalize_source_name(expected.name)
-            existing = by_name.get(normalized)
+            identity = (
+                normalize_source_name(expected.name),
+                str(expected.media_category),
+            )
+            existing = by_identity.get(identity)
             if existing is None:
                 if expected.is_primary and has_primary:
                     conflicts.append(
@@ -430,12 +435,15 @@ class SourceCatalogReconciler:
             db,
             source.id,
         )
-        by_name = {
-            outlet.normalized_name: outlet
+        by_identity = {
+            (
+                outlet.normalized_name,
+                str(outlet.media_category),
+            ): outlet
             for outlet in active_outlets
         }
         source_action = entry.get("source_action", "create_source")
-        has_primary = any(outlet.is_primary for outlet in active_outlets)
+        created = False
 
         for index, data in enumerate(outlet_data):
             expected = self._outlet_create(
@@ -445,8 +453,11 @@ class SourceCatalogReconciler:
                 index=index,
                 source_action=source_action,
             )
-            normalized = normalize_source_name(expected.name)
-            if normalized in by_name:
+            identity = (
+                normalize_source_name(expected.name),
+                str(expected.media_category),
+            )
+            if identity in by_identity:
                 continue
             self.source_service.create_outlet(
                 db,

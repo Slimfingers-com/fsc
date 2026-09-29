@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "CH",
   "languages": [
     "de",
@@ -718,7 +718,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Infosperber",
+          "url": "https://www.infosperber.ch/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -744,7 +755,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Inside Paradeplatz",
+          "url": "https://insideparadeplatz.ch/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -936,5 +958,12 @@
     "le_matin": "separate_digital_continuation_from_le_matin_dimanche",
     "antithese_bon_pour_la_tete": "one_merged_source",
     "market_gaps": "a_and_f_approved_below_target"
-  }
+  },
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }
