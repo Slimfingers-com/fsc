@@ -757,12 +757,27 @@ def test_catalog_reconciliation_extension_can_add_reviewed_feed(db) -> None:
     )
 
 
-def test_catalog_reconciliation_extension_requires_existing_runtime_source(
+def test_catalog_reconciliation_feedless_extension_without_runtime_source_stays_catalog_only(
     db,
 ) -> None:
     report = SourceCatalogReconciler().reconcile(
         db,
         _editorial_extension_catalog(),
+        catalog_name="de_digital_test.json",
+    )
+
+    assert report.has_conflicts is False
+    assert report.change_count == 0
+    assert report.actions == ()
+    assert SourceService().get_by_slug(db, "example-news") is None
+
+
+def test_catalog_reconciliation_feed_extension_requires_existing_runtime_source(
+    db,
+) -> None:
+    report = SourceCatalogReconciler().reconcile(
+        db,
+        _editorial_extension_catalog(include_feed=True),
         catalog_name="de_digital_test.json",
     )
 

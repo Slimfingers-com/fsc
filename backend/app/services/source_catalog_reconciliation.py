@@ -109,11 +109,12 @@ class SourceCatalogReconciler:
 
             if source is None:
                 if source_action == "extend_existing_source":
-                    conflicts.append(
-                        f"{source_name}: existing_source_key "
-                        f"{entry['existing_source_key']!r} does not resolve "
-                        "to an existing runtime Source"
-                    )
+                    if entry.get("feeds"):
+                        conflicts.append(
+                            f"{source_name}: existing_source_key "
+                            f"{entry['existing_source_key']!r} does not "
+                            "resolve to an existing runtime Source"
+                        )
                     continue
 
                 entry_conflicts = self._new_source_conflicts(
@@ -339,9 +340,11 @@ class SourceCatalogReconciler:
 
             if source is None:
                 if source_action == "extend_existing_source":
-                    raise BusinessRuleViolationError(
-                        f"{source_name}: existing runtime Source is missing"
-                    )
+                    if entry.get("feeds"):
+                        raise BusinessRuleViolationError(
+                            f"{source_name}: existing runtime Source is missing"
+                        )
+                    continue
                 self.source_service.create_source(
                     db,
                     self._source_create(catalog, entry),
