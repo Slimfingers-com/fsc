@@ -319,14 +319,6 @@ class SourceCatalogReconciler:
                 conflicts.append(
                     f"{source.name}: {conflict}"
                 )
-            else:
-                actions.append(
-                    CatalogReconciliationAction(
-                        action="no_change",
-                        source_name=source.name,
-                        detail=f"outlet {expected.name}",
-                    )
-                )
 
         return actions, conflicts
 
