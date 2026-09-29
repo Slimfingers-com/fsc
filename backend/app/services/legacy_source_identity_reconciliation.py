@@ -128,6 +128,31 @@ LEGACY_SOURCE_IDENTITY_SPECS = (
             ),
         ),
     ),
+    LegacySourceIdentitySpec(
+        legacy_slug="zdfheute",
+        accepted_names=("ZDFheute", "ZDF"),
+        canonical_name="ZDF",
+        canonical_url="https://www.zdf.de/nachrichten/",
+        source_type=SourceType.NEWS,
+        coverage_scope=CoverageScope.NATIONAL,
+        country="DE",
+        language="de",
+        outlets=(
+            CanonicalOutletSpec(
+                name="ZDFheute",
+                media_category=SourceMedium.DIGITAL,
+                publication_form=PublicationForm.OTHER,
+                url="https://www.zdf.de/nachrichten/",
+                is_primary=True,
+            ),
+            CanonicalOutletSpec(
+                name="ZDF Nachrichten",
+                media_category=SourceMedium.BROADCAST,
+                publication_form=PublicationForm.TELEVISION,
+                url="https://www.zdf.de/nachrichten/",
+            ),
+        ),
+    ),
 )
 
 
