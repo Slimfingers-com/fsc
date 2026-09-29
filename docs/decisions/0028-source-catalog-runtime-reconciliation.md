@@ -29,22 +29,34 @@ The reconciliation command:
 - requires an explicit `--apply` flag for database writes;
 - receives explicit catalog file paths rather than discovering and importing all
   catalogs automatically;
-- considers only catalog entries that contain at least one reviewed configured
-  feed;
-- leaves entries with an empty `feeds` array catalog-only;
+- materializes `create_source` entries only when they contain at least one
+  reviewed configured feed;
+- leaves `create_source` entries with an empty `feeds` array catalog-only;
+- may materialize an `extend_existing_source` entry without its own Feed when
+  it adds reviewed cross-media Outlets to an already existing canonical
+  runtime Source;
+- requires `existing_source_key` for such extensions and fails closed when
+  the canonical runtime Source is missing;
 - materializes Tier 1 feeds as active and Tier 2 feeds as inactive, exactly as
   reviewed in the catalog;
 - does not persist catalog-only `feed_class` or `activation_tier` metadata;
 - never runs automatically at application startup;
 - is not an Alembic data migration.
 
-A missing runtime Source is created only when its catalog entry contains at
-least one reviewed feed. Its institutional Source identity, country, language
-and catalog outlets are used for initial creation.
+A missing runtime Source is created only for a `create_source` entry that
+contains at least one reviewed feed. Its Source identity, country, language and
+catalog outlets are used for initial creation.
+
+An `extend_existing_source` entry is resolved by the canonical normalized
+Source name while `existing_source_key` remains the required cross-catalog
+identity reference. Catalog tests require the extension name to match the
+referenced base Source name. An extension never creates a missing Source.
 
 An existing runtime Source is reused by normalized institutional name. Its
-existing business metadata is not silently overwritten. A SourceType mismatch
-or incompatible country is a reconciliation conflict.
+existing business metadata is not silently overwritten. A SourceType mismatch,
+incompatible country or incompatible same-named Outlet is a reconciliation
+conflict. Newly added extension Outlets are non-primary by default so an
+existing primary print, broadcast or digital Outlet is not displaced.
 
 Feeds are reconciled by canonical URL:
 
