@@ -170,7 +170,7 @@
           "source_action": "create_source",
           "feeds": [
             {
-              "name": "MOMENT",
+              "name": "MOMENT.at",
               "url": "https://www.moment.at/feed",
               "active": true,
               "priority": 1,
