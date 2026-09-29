@@ -35,8 +35,11 @@ The reconciliation command:
 - may materialize an `extend_existing_source` entry without its own Feed when
   it adds reviewed cross-media Outlets to an already existing canonical
   runtime Source;
-- requires `existing_source_key` for such extensions and fails closed when
-  the canonical runtime Source is missing;
+- keeps a feedless `extend_existing_source` catalog-only when its canonical
+  runtime Source does not yet exist;
+- requires `existing_source_key` for all extensions and fails closed when an
+  extension with its own reviewed Feed cannot resolve the canonical runtime
+  Source;
 - materializes Tier 1 feeds as active and Tier 2 feeds as inactive, exactly as
   reviewed in the catalog;
 - does not persist catalog-only `feed_class` or `activation_tier` metadata;
@@ -51,6 +54,9 @@ An `extend_existing_source` entry is resolved by the canonical normalized
 Source name while `existing_source_key` remains the required cross-catalog
 identity reference. Catalog tests require the extension name to match the
 referenced base Source name. An extension never creates a missing Source.
+A feedless extension whose base Source is not materialized remains catalog-only.
+If the extension itself carries a reviewed Feed, a missing base Source is a
+reconciliation conflict because the Feed must not create a duplicate Source.
 
 An existing runtime Source is reused by normalized institutional name. Its
 existing business metadata is not silently overwritten. A SourceType mismatch,
