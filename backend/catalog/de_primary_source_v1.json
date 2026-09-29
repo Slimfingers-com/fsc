@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "DE",
   "language": "de",
   "media_category": "primary_source",
@@ -24,7 +24,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Pressemitteilungen",
+              "url": "https://www.bundestag.de/static/appdata/includes/rss/pressemitteilungen.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -117,7 +128,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Pressemitteilungen",
+              "url": "https://www.bundesregierung.de/service/rss/breg-de/1151244/feed.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -361,7 +383,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Aktuelle Meldungen",
+              "url": "https://www.destatis.de/SiteGlobals/Functions/RSSFeed/DE/RSSNewsfeed/Aktuell.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_data",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -419,7 +452,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "DE",
           "language": "de",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Pressenotizen",
+              "url": "https://www.bundesbank.de/service/rss/de/633286/feed.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -945,5 +989,12 @@
       "category": "party_organizations",
       "reason": "Party organizations are institutionally distinct from parliamentary factions but are deferred to avoid immediate parallel primary channels."
     }
-  ]
+  ],
+  "source_type": "PRIMARY_SOURCE",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "press_release": "primary_evidence",
+    "official_data": "primary_evidence"
+  }
 }
