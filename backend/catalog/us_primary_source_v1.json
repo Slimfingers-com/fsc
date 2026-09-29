@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "US",
   "language": "en",
   "media_category": "primary_source",
@@ -332,7 +332,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "U.S. Census Bureau - News Releases",
+              "url": "https://www.census.gov/newsroom/press-releases.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -390,7 +401,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Bureau of Economic Analysis",
+              "url": "https://apps.bea.gov/rss/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_data",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -419,7 +441,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Federal Reserve Board - Press Releases",
+              "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -448,7 +481,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "CDC Online Newsroom",
+              "url": "https://tools.cdc.gov/api/v2/resources/media/132608.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -547,7 +591,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "SEC Press Releases",
+              "url": "https://www.sec.gov/news/pressreleases.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -576,7 +631,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "FTC Press Releases",
+              "url": "https://www.ftc.gov/feeds/press-release.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -698,7 +764,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "FBI in the News",
+              "url": "https://www.fbi.gov/feeds/fbi-in-the-news/atom.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -727,7 +804,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "US",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "CISA News",
+              "url": "https://www.cisa.gov/news.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -945,5 +1033,13 @@
       "category": "state_primary_sources",
       "reason": "State governments, legislatures, courts and election authorities are deferred to a state-level primary-source expansion."
     }
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "press_release": "primary_evidence",
+    "official_data": "primary_evidence"
+  },
+  "runtime_source_type": "PRIMARY_SOURCE",
+  "runtime_coverage_scope": "NATIONAL"
 }

@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "US",
   "languages": [
     "en",
@@ -41,7 +41,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Workers World",
+              "url": "https://www.workers.org/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -67,7 +78,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Socialist Alternative",
+              "url": "https://www.socialistalternative.org/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -119,7 +141,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Jacobin",
+              "url": "https://jacobin.com/feed",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -145,7 +178,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Monthly Review",
+              "url": "https://monthlyreview.org/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -178,7 +222,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The New York Times - Top Stories",
+              "url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -204,7 +259,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Washington Post - Politics",
+              "url": "https://feeds.washingtonpost.com/rss/politics",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -256,7 +322,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Los Angeles Times - World & Nation",
+              "url": "https://www.latimes.com/world-nation/rss2.0.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -308,7 +385,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Mother Jones",
+              "url": "https://www.motherjones.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -334,7 +422,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The New Republic",
+              "url": "https://newrepublic.com/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -360,7 +459,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Atlantic",
+              "url": "https://www.theatlantic.com/feed/all/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -438,7 +548,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Dissent Magazine",
+              "url": "https://www.dissentmagazine.org/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -496,7 +617,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Reason",
+              "url": "https://reason.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -522,7 +654,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Newsweek",
+              "url": "https://www.newsweek.com/rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -555,7 +698,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Washington Times - News",
+              "url": "https://www.washingtontimes.com/rss/headlines/news/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -607,7 +761,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "National Review",
+              "url": "https://www.nationalreview.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -633,7 +798,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Washington Examiner",
+              "url": "https://www.washingtonexaminer.com/feed",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -677,7 +853,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "New York Post",
+              "url": "https://nypost.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -769,7 +956,18 @@
       "format_tags": [
         "politically_unclassified"
       ],
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "La Opinión",
+          "url": "https://laopinion.com/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classifications": [],
       "metrics": []
     }
@@ -790,5 +988,12 @@
     "Los Angeles Times is rated Lean Left by AllSides and remains a candidate for left-liberal newspaper coverage.",
     "Washington Times is rated Lean Right by AllSides and remains a conservative/lean-right candidate.",
     "Catalyst was removed from the immediate candidate pool pending stronger verification of an active 2026 US print subscription/product."
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

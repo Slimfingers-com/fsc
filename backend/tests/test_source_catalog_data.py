@@ -119,6 +119,26 @@ def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
                     "financial-times",
                     "the-critic",
                 },
+                "US": {
+                    "workers-world",
+                    "socialist-alternative",
+                    "jacobin",
+                    "monthly-review",
+                    "new-york-times",
+                    "washington-post",
+                    "los-angeles-times",
+                    "mother-jones",
+                    "the-new-republic",
+                    "the-atlantic",
+                    "dissent",
+                    "reason",
+                    "newsweek",
+                    "washington-times",
+                    "national-review",
+                    "washington-examiner",
+                    "new-york-post",
+                    "la-opinion",
+                },
             }
             configured = configured_by_country.get(country, set())
             assert bool(entry["feeds"]) is (entry["key"] in configured)
@@ -1276,7 +1296,19 @@ def test_us_national_broadcast_catalog_has_approved_editorial_sources() -> None:
     assert len({entry["key"] for entry in entries}) == 17
     assert len({entry["name"].casefold() for entry in entries}) == 17
     assert all(entry["source_action"] == "create_source" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {
+        "democracy-now",
+        "pbs-newshour",
+        "npr",
+        "abc-news",
+        "cbs-news",
+        "nbc-news",
+        "fox-news",
+    }
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
 
 
 def test_us_crossmedia_sources_are_not_duplicated_by_medium() -> None:
@@ -2495,7 +2527,22 @@ def test_us_digital_catalog_has_approved_scope_and_counts() -> None:
     assert len(entries) == 32
     assert len({entry["key"] for entry in entries}) == 32
     assert len({entry["name"].casefold() for entry in entries}) == 32
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {
+        "truthout",
+        "vox",
+        "the-intercept",
+        "the-dispatch",
+        "the-bulwark",
+        "breitbart",
+        "gateway-pundit",
+        "propublica",
+        "the-hill",
+        "the-19th",
+    }
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
 
 
 def test_us_digital_planning_segments_match_selected_core() -> None:
@@ -2748,6 +2795,16 @@ def test_remaining_primary_source_catalogs_have_approved_scope(country: str) -> 
             "gb-ncsc",
             "gb-nca",
             "gb-judiciary-ew",
+        },
+        "US": {
+            "us-census",
+            "us-bea",
+            "us-federal-reserve",
+            "us-cdc",
+            "us-sec",
+            "us-ftc",
+            "us-fbi",
+            "us-cisa",
         },
     }
     configured = configured_by_country.get(country, set())
@@ -5199,6 +5256,92 @@ def test_gb_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> No
                 "gb-ncsc",
                 "gb-nca",
                 "gb-judiciary-ew",
+            },
+        },
+    }
+
+    for filename, spec in specs.items():
+        catalog = json.loads(
+            (CATALOG_DIR / filename).read_text(encoding="utf-8")
+        )
+        assert catalog["catalog_version"] == "1.0-draft.2"
+        assert catalog["runtime_source_type"] == spec["source_type"]
+        assert catalog["runtime_coverage_scope"] == "NATIONAL"
+        assert (
+            catalog["feed_activation_policy"]
+            == "only_verified_relevant_official_content_channels_are_activated"
+        )
+        assert (
+            catalog["feed_class_policy"]
+            == "catalog_review_metadata_only_not_persisted"
+        )
+        assert catalog["feed_role_policy"] == spec["role_policy"]
+
+        entries = [
+            *[
+                entry
+                for group in catalog.get("groups", [])
+                for entry in group.get("entries", [])
+            ],
+            *catalog.get("unclassified_entries", []),
+        ]
+        configured = {
+            entry["key"]
+            for entry in entries
+            if entry.get("feeds")
+        }
+        assert configured == spec["configured"]
+
+        for entry in entries:
+            for feed in entry.get("feeds", []):
+                assert feed["active"] is (feed["activation_tier"] == 1)
+                assert feed["activation_tier"] in {1, 2}
+                assert (
+                    feed["default_confirmation_role"]
+                    == spec["role_policy"][feed["feed_class"]]
+                )
+
+
+def test_us_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> None:
+    specs = {
+        "us_print_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "workers-world", "socialist-alternative", "jacobin",
+                "monthly-review", "new-york-times", "washington-post",
+                "los-angeles-times", "mother-jones", "the-new-republic",
+                "the-atlantic", "dissent", "reason", "newsweek",
+                "washington-times", "national-review",
+                "washington-examiner", "new-york-post", "la-opinion",
+            },
+        },
+        "us_broadcast_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "democracy-now", "pbs-newshour", "npr", "abc-news",
+                "cbs-news", "nbc-news", "fox-news",
+            },
+        },
+        "us_digital_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "truthout", "vox", "the-intercept", "the-dispatch",
+                "the-bulwark", "breitbart", "gateway-pundit",
+                "propublica", "the-hill", "the-19th",
+            },
+        },
+        "us_primary_source_v1.json": {
+            "source_type": "PRIMARY_SOURCE",
+            "role_policy": {
+                "press_release": "primary_evidence",
+                "official_data": "primary_evidence",
+            },
+            "configured": {
+                "us-census", "us-bea", "us-federal-reserve", "us-cdc",
+                "us-sec", "us-ftc", "us-fbi", "us-cisa",
             },
         },
     }
