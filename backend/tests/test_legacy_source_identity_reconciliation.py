@@ -9,6 +9,7 @@ from app.schemas.source import SourceCreate
 from app.schemas.source_metadata import SourceOutletCreate
 from app.services.legacy_source_identity_reconciliation import (
     CanonicalOutletSpec,
+    LEGACY_SOURCE_IDENTITY_SPECS,
     LegacySourceIdentityReconciler,
     LegacySourceIdentitySpec,
 )
@@ -233,3 +234,23 @@ def test_legacy_identity_missing_source_is_conflict(db) -> None:
     assert report.has_conflicts is True
     assert report.change_count == 0
     assert "expected legacy Source is missing" in report.conflicts[0]
+
+
+
+def test_default_legacy_identity_specs_include_zdfheute() -> None:
+    spec = next(
+        item
+        for item in LEGACY_SOURCE_IDENTITY_SPECS
+        if item.legacy_slug == "zdfheute"
+    )
+
+    assert spec.canonical_name == "ZDF"
+    assert spec.canonical_url == "https://www.zdf.de/nachrichten/"
+    assert [outlet.name for outlet in spec.outlets] == [
+        "ZDFheute",
+        "ZDF Nachrichten",
+    ]
+    assert spec.outlets[0].media_category == SourceMedium.DIGITAL
+    assert spec.outlets[0].is_primary is True
+    assert spec.outlets[1].media_category == SourceMedium.BROADCAST
+    assert spec.outlets[1].publication_form == PublicationForm.TELEVISION
