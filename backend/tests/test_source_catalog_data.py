@@ -5156,3 +5156,44 @@ def test_at_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> No
         for group in regional.get("groups", [])
         for entry in group.get("entries", [])
     )
+
+
+def test_cross_media_extensions_reference_same_named_base_source() -> None:
+    base_entries_by_key: dict[str, set[str]] = {}
+    extensions: list[tuple[str, dict]] = []
+
+    for path in CATALOG_DIR.glob("*_v1.json"):
+        catalog = json.loads(path.read_text(encoding="utf-8"))
+        entries = [
+            *[
+                entry
+                for group in catalog.get("groups", [])
+                for entry in group.get("entries", [])
+            ],
+            *catalog.get("unclassified_entries", []),
+        ]
+        for entry in entries:
+            if entry.get("source_action") == "extend_existing_source":
+                extensions.append((path.name, entry))
+                continue
+            key = entry.get("key")
+            if key:
+                base_entries_by_key.setdefault(key, set()).add(
+                    entry["name"]
+                )
+
+    assert extensions
+    for filename, entry in extensions:
+        existing_key = entry.get("existing_source_key")
+        assert existing_key, (
+            f"{filename}:{entry.get('key')} is missing existing_source_key"
+        )
+        assert existing_key in base_entries_by_key, (
+            f"{filename}:{entry.get('key')} points to unknown "
+            f"existing_source_key {existing_key!r}"
+        )
+        assert entry["name"] in base_entries_by_key[existing_key], (
+            f"{filename}:{entry.get('key')} uses canonical name "
+            f"{entry['name']!r}, but {existing_key!r} resolves to "
+            f"{sorted(base_entries_by_key[existing_key])!r}"
+        )
