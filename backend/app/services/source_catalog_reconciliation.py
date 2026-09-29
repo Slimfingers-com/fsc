@@ -362,34 +362,34 @@ class SourceCatalogReconciler:
                 )
 
             for feed in feeds:
-                    feed_class = feed.get("feed_class")
-                    expected_role = role_policy.get(feed_class)
-                    if expected_role is None:
-                        raise BusinessRuleViolationError(
-                            f"{entry.get('name')}: unsupported feed_class "
-                            f"{feed_class!r}."
-                        )
-                    if feed.get("default_confirmation_role") != expected_role:
-                        raise BusinessRuleViolationError(
-                            f"{entry.get('name')}: feed role does not match "
-                            "the reviewed feed-class policy."
-                        )
-                    tier = feed.get("activation_tier")
-                    if tier not in {1, 2}:
-                        raise BusinessRuleViolationError(
-                            f"{entry.get('name')}: invalid activation tier."
-                        )
-                    if feed.get("active") is not (tier == 1):
-                        raise BusinessRuleViolationError(
-                            f"{entry.get('name')}: active flag does not match "
-                            "activation tier."
-                        )
-                    url = feed.get("url")
-                    if not url or url in seen_urls:
-                        raise BusinessRuleViolationError(
-                            "Configured feed URLs must be present and unique "
-                            "within a catalog."
-                        )
+                feed_class = feed.get("feed_class")
+                expected_role = role_policy.get(feed_class)
+                if expected_role is None:
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: unsupported feed_class "
+                        f"{feed_class!r}."
+                    )
+                if feed.get("default_confirmation_role") != expected_role:
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: feed role does not match "
+                        "the reviewed feed-class policy."
+                    )
+                tier = feed.get("activation_tier")
+                if tier not in {1, 2}:
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: invalid activation tier."
+                    )
+                if feed.get("active") is not (tier == 1):
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: active flag does not match "
+                        "activation tier."
+                    )
+                url = feed.get("url")
+                if not url or url in seen_urls:
+                    raise BusinessRuleViolationError(
+                        "Configured feed URLs must be present and unique "
+                        "within a catalog."
+                    )
                 seen_urls.add(url)
 
             materializable.append(entry)
