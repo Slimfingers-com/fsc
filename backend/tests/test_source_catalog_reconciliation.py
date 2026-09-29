@@ -757,12 +757,27 @@ def test_catalog_reconciliation_extension_can_add_reviewed_feed(db) -> None:
     )
 
 
-def test_catalog_reconciliation_extension_requires_existing_runtime_source(
+def test_catalog_reconciliation_feedless_extension_stays_catalog_only_without_base(
     db,
 ) -> None:
     report = SourceCatalogReconciler().reconcile(
         db,
         _editorial_extension_catalog(),
+        catalog_name="de_digital_test.json",
+    )
+
+    assert report.has_conflicts is False
+    assert report.change_count == 0
+    assert report.actions == ()
+    assert SourceService().get_by_slug(db, "example-news") is None
+
+
+def test_catalog_reconciliation_feed_extension_requires_existing_runtime_source(
+    db,
+) -> None:
+    report = SourceCatalogReconciler().reconcile(
+        db,
+        _editorial_extension_catalog(include_feed=True),
         catalog_name="de_digital_test.json",
     )
 
@@ -836,4 +851,85 @@ def test_catalog_reconciliation_still_ignores_create_source_without_feed(
     assert report.has_conflicts is False
     assert report.change_count == 0
     assert report.actions == ()
+    assert SourceService().get_by_slug(db, "example-news") is None
+
+
+
+def _editorial_base_feed_catalog() -> dict:
+    return {
+        "catalog_version": "1.0-draft.2",
+        "country": "DE",
+        "language": "de",
+        "media_category": "print",
+        "runtime_source_type": "NEWS",
+        "runtime_coverage_scope": "NATIONAL",
+        "feed_activation_policy": (
+            "only_verified_relevant_official_content_channels_are_activated"
+        ),
+        "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+        "feed_role_policy": {"news": "editorial"},
+        "groups": [
+            {
+                "key": "test",
+                "entries": [
+                    {
+                        "key": "example-news",
+                        "name": "Example News",
+                        "homepage": "https://example.news/",
+                        "source_action": "create_source",
+                        "publication_form": "daily_newspaper",
+                        "feeds": [
+                            {
+                                "name": "Latest",
+                                "url": "https://example.news/feed.xml",
+                                "active": True,
+                                "priority": 1,
+                                "fetch_interval_minutes": 30,
+                                "default_confirmation_role": "editorial",
+                                "feed_class": "news",
+                                "activation_tier": 1,
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+
+
+def test_catalog_reconciliation_staged_batch_resolves_later_extension(
+    db,
+) -> None:
+    reconciler = SourceCatalogReconciler()
+
+    base_report = reconciler.reconcile(
+        db,
+        _editorial_base_feed_catalog(),
+        catalog_name="de_print_test.json",
+    )
+    assert base_report.has_conflicts is False
+    assert base_report.change_count == 1
+    assert base_report.actions[0].action == "create_source"
+
+    # This is how the CLI stages a dry-run catalog before evaluating
+    # dependent later catalogs in the same transaction.
+    reconciler.reconcile(
+        db,
+        _editorial_base_feed_catalog(),
+        catalog_name="de_print_test.json",
+        apply=True,
+    )
+
+    extension_report = reconciler.reconcile(
+        db,
+        _editorial_extension_catalog(),
+        catalog_name="de_digital_test.json",
+    )
+    assert extension_report.has_conflicts is False
+    assert extension_report.change_count == 1
+    assert [action.action for action in extension_report.actions] == [
+        "create_outlet"
+    ]
+
+    db.rollback()
     assert SourceService().get_by_slug(db, "example-news") is None
