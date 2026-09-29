@@ -12,6 +12,7 @@ modeled as outlets of broader editorial Sources:
 
 - `Deutschlandfunk` is an outlet of the `Deutschlandradio` Source.
 - `tagesschau.de` is a distribution outlet of the `ARD-aktuell` Source.
+- `ZDFheute` is a digital distribution outlet of the `ZDF` Source.
 
 Both legacy runtime Sources already own active Feeds and historical Articles.
 Creating replacement Sources and moving those relationships would introduce
@@ -47,6 +48,17 @@ For the Source with legacy slug `tagesschau-de`:
 - preserve all existing Feeds and their UUIDs;
 - add tagesschau.de as a digital outlet and Tagesschau, Tagesthemen and
   tagesschau24 as broadcast/television outlets.
+
+For the Source with legacy slug `zdfheute`:
+
+- preserve the Source UUID;
+- preserve the legacy slug `zdfheute`;
+- rename the Source to `ZDF`;
+- set `normalized_name` to the normalized canonical Source name;
+- set the Source homepage to `https://www.zdf.de/nachrichten/`;
+- preserve all existing Feeds and their UUIDs;
+- add ZDFheute as a digital outlet and ZDF Nachrichten as a
+  broadcast/television outlet.
 
 The legacy slugs intentionally remain unchanged as stable technical identifiers.
 A canonical display name must not force URL/API identity churn.
@@ -86,8 +98,8 @@ Historical Articles remain attached to the same Feed and Source identities.
 Existing external or internal references using the legacy slugs continue to
 resolve.
 
-Future catalog materialization for `ARD-aktuell` and `Deutschlandradio`
-must extend these canonicalized Sources rather than create duplicates.
+Future catalog materialization for `ARD-aktuell`, `Deutschlandradio` and
+`ZDF` must extend these canonicalized Sources rather than create duplicates.
 
 A future explicit Source-alias model could replace legacy-slug compatibility if
 the product needs canonical public slugs, redirects or multiple historical
