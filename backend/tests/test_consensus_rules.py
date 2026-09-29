@@ -53,6 +53,23 @@ def test_one_independent_source_is_not_shared_consensus():
     )
 
 
+def test_zero_independent_sources_are_not_shared_consensus():
+    item = group(0)
+    result = RuleBasedConsensusAnalyzer().analyze(
+        StoryConsensusInput(
+            story_id=uuid4(),
+            language_code="en",
+            groups=(item,),
+            differences=(),
+        )
+    )
+
+    assert (
+        result.consensus[0].consensus_kind
+        == ConsensusKind.SINGLE_SOURCE
+    )
+
+
 def test_contradiction_is_reported_as_difference():
     left = group(1)
     right = group(1)
