@@ -45,7 +45,7 @@ class StoryConsensusSummary(BaseModel):
         ),
         CheckConstraint(
             "claim_count >= 1 AND article_count >= 1 "
-            "AND independent_source_count >= 1 "
+            "AND independent_source_count >= 0 "
             "AND evidence_item_count >= 0 "
             "AND evidence_source_count >= 0 "
             "AND attributed_perspective_count >= 0",
@@ -115,8 +115,8 @@ class StoryDifferenceSummary(BaseModel):
             name="ck_story_difference_distinct_groups",
         ),
         CheckConstraint(
-            "left_independent_source_count >= 1 "
-            "AND right_independent_source_count >= 1 "
+            "left_independent_source_count >= 0 "
+            "AND right_independent_source_count >= 0 "
             "AND left_evidence_source_count >= 0 "
             "AND right_evidence_source_count >= 0",
             name="ck_story_difference_counts",
