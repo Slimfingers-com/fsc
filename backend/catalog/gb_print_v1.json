@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "GB",
   "languages": [
     "en",
@@ -67,7 +67,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Socialist Worker",
+              "url": "https://socialistworker.co.uk/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -121,7 +132,18 @@
           "format_tags": [
             "boulevard"
           ],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Canary",
+              "url": "https://www.thecanary.co/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "media_positioning",
@@ -257,7 +279,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Guardian UK",
+              "url": "https://www.theguardian.com/uk/rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -422,7 +455,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "New Statesman",
+              "url": "https://www.newstatesman.com/feed",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -506,7 +550,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Financial Times",
+              "url": "https://www.ft.com/rss/home",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -822,7 +877,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Critic",
+              "url": "https://thecritic.co.uk/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -993,5 +1059,12 @@
     }
   ],
   "coverage_policy_notes": "Targets are research goals, not quotas. Under-covered groups require a documented coverage_exception; titles are never reclassified to fill a quota.",
-  "source_identity_policy": "one_editorial_source_multiple_products_as_outlets"
+  "source_identity_policy": "one_editorial_source_multiple_products_as_outlets",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

@@ -111,6 +111,14 @@ def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
                     "nzz",
                     "schweizerzeit",
                 },
+                "GB": {
+                    "socialist-worker",
+                    "the-canary",
+                    "guardian",
+                    "new-statesman",
+                    "financial-times",
+                    "the-critic",
+                },
             }
             configured = configured_by_country.get(country, set())
             assert bool(entry["feeds"]) is (entry["key"] in configured)
@@ -1093,7 +1101,11 @@ def test_gb_national_broadcast_catalog_has_approved_editorial_sources() -> None:
     assert len({entry["key"] for entry in entries}) == 14
     assert len({entry["name"].casefold() for entry in entries}) == 14
     assert all(entry["source_action"] == "create_source" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {"channel-4-news", "bbc-news", "sky-news", "gb-news"}
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
 
 
 def test_gb_itn_newsrooms_remain_editorially_distinct_sources() -> None:
@@ -2371,13 +2383,25 @@ def test_gb_digital_catalog_has_approved_scope_and_counts() -> None:
     assert catalog["media_category"] == "digital"
     assert catalog["approved_candidate_count"] == 28
     assert catalog["approved_core_count"] == 23
-    assert catalog["new_source_count"] == 23
-    assert catalog["existing_source_extension_count"] == 5
+    assert catalog["new_source_count"] == 10
+    assert catalog["existing_source_extension_count"] == 18
     entries = gb_digital_entries(catalog)
     assert len(entries) == 28
     assert len({entry["key"] for entry in entries}) == 28
     assert len({entry["name"].casefold() for entry in entries}) == 28
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {
+        "novara-media",
+        "opendemocracy",
+        "byline-times",
+        "unherd",
+        "spiked",
+        "full-fact",
+        "the-conversation-uk",
+    }
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
 
 
 def test_gb_digital_planning_segments_keep_f_market_gap() -> None:
@@ -2390,23 +2414,35 @@ def test_gb_digital_planning_segments_keep_f_market_gap() -> None:
     assert catalog["review_status"]["radical_right"] == "explicit_market_gap_no_quota_filling"
 
 
-def test_gb_digital_reuses_existing_broadcast_sources() -> None:
+def test_gb_digital_reuses_existing_cross_media_sources() -> None:
     catalog = load_gb_digital_catalog()
     extensions = [
         entry for entry in gb_digital_entries(catalog)
         if entry["source_action"] == "extend_existing_source"
     ]
-    assert {entry["existing_source_key"] for entry in extensions} == {
+    expected = {
         "bbc-news", "itv-news", "channel-4-news", "sky-news", "gb-news",
+        "the-canary", "morning-star", "socialist-worker", "guardian",
+        "new-statesman", "financial-times", "the-economist", "times",
+        "telegraph", "the-spectator", "the-critic", "daily-mail", "prospect",
     }
-    broadcast = json.loads((CATALOG_DIR / "gb_broadcast_v1.json").read_text(encoding="utf-8"))
-    known = {
-        entry["key"]
-        for group in broadcast["groups"]
-        for entry in group["entries"]
-    }
-    known.update(entry["key"] for entry in broadcast["unclassified_entries"])
-    assert {entry["existing_source_key"] for entry in extensions} <= known
+    assert {entry["existing_source_key"] for entry in extensions} == expected
+
+    known = set()
+    for filename in ("gb_broadcast_v1.json", "gb_print_v1.json"):
+        base_catalog = json.loads(
+            (CATALOG_DIR / filename).read_text(encoding="utf-8")
+        )
+        known.update(
+            entry["key"]
+            for group in base_catalog["groups"]
+            for entry in group["entries"]
+        )
+        known.update(
+            entry["key"]
+            for entry in base_catalog.get("unclassified_entries", [])
+        )
+    assert expected <= known
 
 
 def test_gb_digital_publication_forms_follow_origin() -> None:
@@ -2698,7 +2734,23 @@ def test_remaining_primary_source_catalogs_have_approved_scope(country: str) -> 
     assert len({entry["name"].casefold() for entry in entries}) == spec["count"]
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == "PRIMARY_SOURCE" for entry in entries)
-    configured = {"CH": {"ch-snb"}}.get(country, set())
+    configured_by_country = {
+        "CH": {"ch-snb"},
+        "GB": {
+            "gb-prime-ministers-office",
+            "gb-fcdo",
+            "gb-home-office",
+            "gb-mod",
+            "gb-hm-treasury",
+            "gb-ukhsa",
+            "gb-bank-england",
+            "gb-fca",
+            "gb-ncsc",
+            "gb-nca",
+            "gb-judiciary-ew",
+        },
+    }
+    configured = configured_by_country.get(country, set())
     assert all(
         bool(entry["feeds"]) is (entry["key"] in configured)
         for entry in entries
@@ -5089,6 +5141,108 @@ def test_de_broadcast_keeps_deutsche_welle_as_unmanaged_global_legacy_source() -
         item["name"]
         for item in catalog["excluded_or_deferred"]
     }
+
+
+def test_gb_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> None:
+    specs = {
+        "gb_print_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "socialist-worker",
+                "the-canary",
+                "guardian",
+                "new-statesman",
+                "financial-times",
+                "the-critic",
+            },
+        },
+        "gb_broadcast_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "channel-4-news",
+                "bbc-news",
+                "sky-news",
+                "gb-news",
+            },
+        },
+        "gb_digital_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "novara-media",
+                "opendemocracy",
+                "byline-times",
+                "unherd",
+                "spiked",
+                "full-fact",
+                "the-conversation-uk",
+            },
+        },
+        "gb_primary_source_v1.json": {
+            "source_type": "PRIMARY_SOURCE",
+            "role_policy": {
+                "press_release": "primary_evidence",
+                "official_data": "primary_evidence",
+                "official_updates": "primary_evidence",
+            },
+            "configured": {
+                "gb-prime-ministers-office",
+                "gb-fcdo",
+                "gb-home-office",
+                "gb-mod",
+                "gb-hm-treasury",
+                "gb-ukhsa",
+                "gb-bank-england",
+                "gb-fca",
+                "gb-ncsc",
+                "gb-nca",
+                "gb-judiciary-ew",
+            },
+        },
+    }
+
+    for filename, spec in specs.items():
+        catalog = json.loads(
+            (CATALOG_DIR / filename).read_text(encoding="utf-8")
+        )
+        assert catalog["catalog_version"] == "1.0-draft.2"
+        assert catalog["runtime_source_type"] == spec["source_type"]
+        assert catalog["runtime_coverage_scope"] == "NATIONAL"
+        assert (
+            catalog["feed_activation_policy"]
+            == "only_verified_relevant_official_content_channels_are_activated"
+        )
+        assert (
+            catalog["feed_class_policy"]
+            == "catalog_review_metadata_only_not_persisted"
+        )
+        assert catalog["feed_role_policy"] == spec["role_policy"]
+
+        entries = [
+            *[
+                entry
+                for group in catalog.get("groups", [])
+                for entry in group.get("entries", [])
+            ],
+            *catalog.get("unclassified_entries", []),
+        ]
+        configured = {
+            entry["key"]
+            for entry in entries
+            if entry.get("feeds")
+        }
+        assert configured == spec["configured"]
+
+        for entry in entries:
+            for feed in entry.get("feeds", []):
+                assert feed["active"] is (feed["activation_tier"] == 1)
+                assert feed["activation_tier"] in {1, 2}
+                assert (
+                    feed["default_confirmation_role"]
+                    == spec["role_policy"][feed["feed_class"]]
+                )
 
 
 def test_ch_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> None:

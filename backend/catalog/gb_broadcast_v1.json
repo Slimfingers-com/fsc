@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "GB",
   "languages": [
     "en"
@@ -40,7 +40,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Channel 4 News",
+              "url": "https://www.channel4.com/news/feed",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "two_source_direction_confirmed",
           "classifications": [
             {
@@ -93,7 +104,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "BBC News",
+              "url": "https://feeds.bbci.co.uk/news/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -211,7 +233,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Sky News",
+              "url": "https://feeds.skynews.com/feeds/rss/home.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "mainstream_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -293,7 +326,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "GB News",
+              "url": "https://www.gbnews.com/feeds/feed.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "two_source_direction_confirmed",
           "classifications": [
             {
@@ -612,5 +656,12 @@
   ],
   "approved_candidate_count": 14,
   "new_source_count": 14,
-  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }
