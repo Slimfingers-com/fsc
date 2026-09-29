@@ -130,6 +130,18 @@ class SourceRepository(BaseRepository[Source]):
 
         return list(db.scalars(statement).all())
 
+    def get_feed_by_url(
+        self,
+        db: Session,
+        url: str,
+    ) -> Feed | None:
+        statement = (
+            select(Feed)
+            .where(Feed.url == url)
+            .where(Feed.deleted_at.is_(None))
+        )
+        return db.scalar(statement)
+
     def get_feed_for_source(
         self,
         db: Session,
