@@ -73,7 +73,8 @@ The reconciler fails closed if:
 - the canonical normalized name belongs to a different Source;
 - SourceType, coverage scope, country or language do not match the expected
   identity;
-- an existing outlet with the same normalized name has incompatible metadata.
+- an existing outlet with the same normalized name and media category has
+  incompatible metadata.
 
 The `--apply` operation uses one database transaction.
 

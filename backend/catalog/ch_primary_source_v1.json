@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "CH",
   "languages": [
     "de",
@@ -395,7 +395,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "CH",
           "language": "multi",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "SNB Medienmitteilungen",
+              "url": "https://www.snb.ch/public/rss/de/pressrel",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "press_release",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -947,5 +958,13 @@
       "category": "federal_offices",
       "reason": "Additional federal offices remain eligible for topic-specific expansion."
     }
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "press_release": "primary_evidence",
+    "official_data": "primary_evidence"
+  },
+  "runtime_source_type": "PRIMARY_SOURCE",
+  "runtime_coverage_scope": "NATIONAL"
 }

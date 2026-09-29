@@ -42,6 +42,61 @@ def test_source_outlet_rejects_invalid_media_category(db):
         db.flush()
 
 
+
+
+def test_source_outlet_allows_same_name_across_media(db):
+    source = make_source(db)
+    db.add_all(
+        [
+            SourceOutlet(
+                source_id=source.id,
+                name="Example",
+                normalized_name="example",
+                media_category="print",
+                publication_form="daily_newspaper",
+                active=True,
+            ),
+            SourceOutlet(
+                source_id=source.id,
+                name="Example",
+                normalized_name="example",
+                media_category="digital",
+                publication_form="other",
+                active=True,
+            ),
+        ]
+    )
+    db.flush()
+
+
+def test_source_outlet_rejects_same_name_within_same_media(db):
+    source = make_source(db)
+    db.add(
+        SourceOutlet(
+            source_id=source.id,
+            name="Example",
+            normalized_name="example",
+            media_category="digital",
+            publication_form="other",
+            active=True,
+        )
+    )
+    db.flush()
+    db.add(
+        SourceOutlet(
+            source_id=source.id,
+            name="EXAMPLE",
+            normalized_name="example",
+            media_category="digital",
+            publication_form="digital_native",
+            active=True,
+        )
+    )
+
+    with pytest.raises(IntegrityError):
+        db.flush()
+
+
 def test_source_classification_rejects_invalid_dimension(db):
     source = make_source(db)
     db.add(

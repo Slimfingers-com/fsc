@@ -156,9 +156,13 @@ class SourceService:
                     "Feed-Namen müssen innerhalb einer Quelle eindeutig sein."
                 ) from exc
 
-            if constraint_name == "uq_source_outlet_source_normalized_name":
+            if constraint_name in {
+                "uq_source_outlet_source_normalized_name",
+                "uq_source_outlet_source_normalized_name_media_category",
+            }:
                 raise BusinessRuleViolationError(
-                    "Outlet-Namen müssen innerhalb einer Quelle eindeutig sein."
+                    "Outlet-Namen müssen innerhalb einer Quelle und eines "
+                    "Mediums eindeutig sein."
                 ) from exc
 
             raise
@@ -293,9 +297,13 @@ class SourceService:
                 "constraint_name",
                 None,
             )
-            if constraint_name == "uq_source_outlet_source_normalized_name":
+            if constraint_name in {
+                "uq_source_outlet_source_normalized_name",
+                "uq_source_outlet_source_normalized_name_media_category",
+            }:
                 raise BusinessRuleViolationError(
-                    "Dieses Outlet existiert für die Quelle bereits."
+                    "Dieses Outlet existiert für die Quelle in diesem Medium "
+                    "bereits."
                 ) from exc
             if constraint_name == "ck_source_outlet_name_nonempty":
                 raise BusinessRuleViolationError(

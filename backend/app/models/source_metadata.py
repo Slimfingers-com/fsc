@@ -38,7 +38,10 @@ class SourceOutlet(BaseModel):
         UniqueConstraint(
             "source_id",
             "normalized_name",
-            name="uq_source_outlet_source_normalized_name",
+            "media_category",
+            name=(
+                "uq_source_outlet_source_normalized_name_media_category"
+            ),
         ),
         CheckConstraint(
             "media_category IN ("

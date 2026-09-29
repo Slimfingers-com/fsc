@@ -52,6 +52,10 @@ Each outlet records:
 This supports, for example, one editorial source with a daily newspaper, a Sunday
 edition and a website without pretending they are three unrelated editorial sources.
 
+Outlet identity is scoped by Source, normalized outlet name and media category.
+The same public name may therefore represent distinct print, digital or broadcast
+outlets of one Source; ADR 0030 defines this identity rule.
+
 ### Classification assertions
 
 FSC stores source classifications as versioned `SourceClassification` records.
