@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "AT",
   "language": "de",
   "scope": "national",
@@ -41,7 +41,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "ORF News",
+              "url": "https://rss.orf.at/news.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [],
           "metrics": [],
           "key": "orf-information",
@@ -283,7 +294,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "AUF1",
+              "url": "https://auf1.tv/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -384,5 +406,12 @@
     }
   ],
   "approved_candidate_count": 8,
-  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+  "review_status": "jointly_approved_candidate_core_with_reviewed_feed_activation",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

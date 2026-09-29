@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "AT",
   "language": "de",
   "media_category": "primary_source",
@@ -974,5 +974,13 @@
       "category": "party_organizations",
       "reason": "Party organizations remain institutionally distinct from parliamentary clubs and can be added in a dedicated expansion."
     }
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "press_release": "primary_evidence",
+    "official_data": "primary_evidence"
+  },
+  "runtime_source_type": "PRIMARY_SOURCE",
+  "runtime_coverage_scope": "NATIONAL"
 }

@@ -5049,3 +5049,110 @@ def test_de_broadcast_keeps_deutsche_welle_as_unmanaged_global_legacy_source() -
         item["name"]
         for item in catalog["excluded_or_deferred"]
     }
+
+
+def test_at_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> None:
+    specs = {
+        "at_print_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "der-standard",
+                "falter",
+                "die-presse",
+                "kurier",
+            },
+        },
+        "at_broadcast_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "orf-information",
+                "auf1",
+            },
+        },
+        "at_digital_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "moment-at",
+                "exxpress",
+                "unzensuriert",
+                "report24",
+                "zackzack",
+            },
+        },
+        "at_primary_source_v1.json": {
+            "source_type": "PRIMARY_SOURCE",
+            "role_policy": {
+                "press_release": "primary_evidence",
+                "official_data": "primary_evidence",
+            },
+            "configured": set(),
+        },
+    }
+
+    for filename, spec in specs.items():
+        catalog = json.loads(
+            (CATALOG_DIR / filename).read_text(encoding="utf-8")
+        )
+        assert catalog["catalog_version"] == "1.0-draft.2"
+        assert catalog["runtime_source_type"] == spec["source_type"]
+        assert catalog["runtime_coverage_scope"] == "NATIONAL"
+        assert (
+            catalog["feed_activation_policy"]
+            == "only_verified_relevant_official_content_channels_are_activated"
+        )
+        assert (
+            catalog["feed_class_policy"]
+            == "catalog_review_metadata_only_not_persisted"
+        )
+        assert catalog["feed_role_policy"] == spec["role_policy"]
+
+        entries = [
+            *[
+                entry
+                for group in catalog.get("groups", [])
+                for entry in group.get("entries", [])
+            ],
+            *catalog.get("unclassified_entries", []),
+        ]
+        configured = {
+            entry["key"]
+            for entry in entries
+            if entry.get("feeds")
+        }
+        assert configured == spec["configured"]
+
+        for entry in entries:
+            for feed in entry.get("feeds", []):
+                assert feed["active"] is (
+                    feed["activation_tier"] == 1
+                )
+                assert feed["activation_tier"] in {1, 2}
+                assert (
+                    feed["default_confirmation_role"]
+                    == spec["role_policy"][feed["feed_class"]]
+                )
+
+    broadcast = json.loads(
+        (CATALOG_DIR / "at_broadcast_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert (
+        broadcast["review_status"]
+        == "jointly_approved_candidate_core_with_reviewed_feed_activation"
+    )
+
+    regional = json.loads(
+        (CATALOG_DIR / "at_regional_broadcast_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert regional.get("feed_activation_policy") is None
+    assert not any(
+        entry.get("feeds")
+        for group in regional.get("groups", [])
+        for entry in group.get("entries", [])
+    )
