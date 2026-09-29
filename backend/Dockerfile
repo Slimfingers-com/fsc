@@ -15,6 +15,7 @@ RUN addgroup --system --gid 10001 fsc \
 COPY --chown=fsc:fsc alembic.ini .
 COPY --chown=fsc:fsc alembic ./alembic
 COPY --chown=fsc:fsc app ./app
+COPY --chown=fsc:fsc catalog ./catalog
 COPY --chown=fsc:fsc scripts ./scripts
 
 USER fsc
