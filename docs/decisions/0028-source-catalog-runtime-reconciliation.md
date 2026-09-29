@@ -86,3 +86,35 @@ decisions rather than automatic reconciliation behavior.
 Future runtime requirements may justify a persisted catalog activation identity
 or a richer source registry, but that is not required for the current reviewed
 feed activation workflow.
+
+
+## Extension to editorial and primary-source catalogs
+
+The same explicit reconciliation mechanism applies to reviewed editorial and
+primary-source catalogs.
+
+Catalogs without an `organization_type` declare:
+
+- `runtime_source_type` for the SourceType to materialize;
+- `runtime_coverage_scope` when the catalog has a defined runtime scope.
+
+Entry-level `source_type`, country and language metadata may still be present,
+but the reconciler falls back to the catalog-level runtime metadata when they
+are omitted.
+
+Only `create_source` entries may currently carry materializable reviewed
+feeds. Cross-media `extend_existing_source` and `reuse_existing_source`
+entries remain feedless in this workflow. A canonical Source feed is configured
+on exactly one creating catalog entry, avoiding ambiguous cross-catalog feed
+ownership.
+
+For print entries that do not define an explicit `outlets` array, the
+reconciler materializes the reviewed print publication itself as the primary
+outlet using the catalog media category and the entry publication form.
+
+`unclassified_entries` participate in reconciliation under the same rules as
+grouped entries. This permits politically unclassified specialist journalism to
+be ingested without assigning it to an A-F planning segment.
+
+These additions do not change the dry-run-first, explicit-path, fail-closed or
+transactional behavior defined above.

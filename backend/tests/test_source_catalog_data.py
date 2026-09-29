@@ -89,7 +89,17 @@ def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
             assert entry["form_group"] in ALLOWED_FORM_GROUPS
             assert entry["activity_status"] in ALLOWED_ACTIVITY
             assert entry["catalog_status"] == "candidate"
-            assert entry["feeds"] == []
+            if country == "DE":
+                configured = {
+                    "taz",
+                    "der-spiegel",
+                    "welt",
+                    "junge-freiheit",
+                    "tichys-einblick",
+                }
+                assert bool(entry["feeds"]) is (entry["key"] in configured)
+            else:
+                assert entry["feeds"] == []
 
             if "language" in entry:
                 assert entry["language"] in catalog_languages(catalog)
@@ -524,7 +534,8 @@ def test_de_national_broadcast_catalog_has_approved_editorial_sources() -> None:
     assert len({entry["name"].casefold() for entry in entries}) == 15
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
     assert all(entry["activity_status"] == "active" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {entry["key"] for entry in entries if entry["feeds"]}
+    assert configured == {"deutschlandradio", "ard-aktuell", "zdf"}
     assert all(entry["outlets"] for entry in entries)
     assert all(
         outlet["publication_form"] in {"radio", "television"}
@@ -1985,7 +1996,8 @@ def test_de_digital_catalog_has_approved_scope_and_counts() -> None:
     assert len({entry["name"].casefold() for entry in entries}) == 36
     assert all(entry["activity_status"] == "active" for entry in entries)
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {entry["key"] for entry in entries if entry["feeds"]}
+    assert configured == {"nachdenkseiten", "apollo-news", "netzpolitik-org"}
 
 
 def test_de_digital_planning_segments_match_approved_core() -> None:
@@ -2511,7 +2523,13 @@ def test_de_primary_source_catalog_has_approved_scope_and_count() -> None:
     assert len({entry["name"].casefold() for entry in entries}) == 30
     assert all(entry["source_action"] == "create_source" for entry in entries)
     assert all(entry["source_type"] == "PRIMARY_SOURCE" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {entry["key"] for entry in entries if entry["feeds"]}
+    assert configured == {
+        "de-bundestag",
+        "de-bundesregierung",
+        "de-destatis",
+        "de-bundesbank",
+    }
     assert all(entry["classifications"] == [] for entry in entries)
 
 
@@ -4928,3 +4946,106 @@ def test_us_organization_catalogs_are_unique_and_not_politically_classified() ->
 def test_signal_sources_have_no_static_country_catalogs() -> None:
     for country in ("de", "at", "ch", "gb", "us"):
         assert not (CATALOG_DIR / f"{country}_signal_v1.json").exists()
+
+
+
+def test_de_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> None:
+    specs = {
+        "de_print_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "taz",
+                "der-spiegel",
+                "welt",
+                "junge-freiheit",
+                "tichys-einblick",
+            },
+        },
+        "de_digital_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {
+                "nachdenkseiten",
+                "apollo-news",
+                "netzpolitik-org",
+            },
+        },
+        "de_broadcast_v1.json": {
+            "source_type": "NEWS",
+            "role_policy": {"news": "editorial"},
+            "configured": {"deutschlandradio", "ard-aktuell", "zdf"},
+        },
+        "de_primary_source_v1.json": {
+            "source_type": "PRIMARY_SOURCE",
+            "role_policy": {
+                "press_release": "primary_evidence",
+                "official_data": "primary_evidence",
+            },
+            "configured": {
+                "de-bundestag",
+                "de-bundesregierung",
+                "de-destatis",
+                "de-bundesbank",
+            },
+        },
+    }
+
+    for filename, spec in specs.items():
+        catalog = json.loads(
+            (CATALOG_DIR / filename).read_text(encoding="utf-8")
+        )
+        assert catalog["catalog_version"] == "1.0-draft.2"
+        assert catalog["runtime_source_type"] == spec["source_type"]
+        assert catalog["runtime_coverage_scope"] == "NATIONAL"
+        assert (
+            catalog["feed_activation_policy"]
+            == "only_verified_relevant_official_content_channels_are_activated"
+        )
+        assert (
+            catalog["feed_class_policy"]
+            == "catalog_review_metadata_only_not_persisted"
+        )
+        assert catalog["feed_role_policy"] == spec["role_policy"]
+
+        entries = [
+            *[
+                entry
+                for group in catalog["groups"]
+                for entry in group["entries"]
+            ],
+            *catalog.get("unclassified_entries", []),
+        ]
+        configured = {
+            entry["key"]
+            for entry in entries
+            if entry.get("feeds")
+        }
+        assert configured == spec["configured"]
+
+        for entry in entries:
+            for feed in entry.get("feeds", []):
+                assert feed["active"] is (
+                    feed["activation_tier"] == 1
+                )
+                assert feed["activation_tier"] in {1, 2}
+                assert (
+                    feed["default_confirmation_role"]
+                    == spec["role_policy"][feed["feed_class"]]
+                )
+
+
+def test_de_broadcast_keeps_deutsche_welle_as_unmanaged_global_legacy_source() -> None:
+    catalog = load_de_broadcast_catalog()
+    exception = catalog["runtime_legacy_exception"]
+
+    assert exception["source"] == "Deutsche Welle"
+    assert (
+        exception["status"]
+        == "active_runtime_global_legacy_source_not_catalog_managed"
+    )
+    assert "GLOBAL" in exception["reason"]
+    assert "Deutsche Welle" in {
+        item["name"]
+        for item in catalog["excluded_or_deferred"]
+    }

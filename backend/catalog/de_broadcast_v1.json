@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "DE",
   "language": "de",
   "scope": "national",
@@ -35,7 +35,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Nachrichten",
+              "url": "https://www.deutschlandfunk.de/nachrichten-100.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -96,7 +107,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Alle Meldungen",
+              "url": "https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -145,7 +167,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Nachrichten",
+              "url": "https://www.zdf.de/rss/zdf/nachrichten",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -628,5 +661,17 @@
     "religious_worldview_scope": "decision_a_include_if_politics_society_regular",
     "source_identity": "one_editorial_source_multiple_outlets",
     "political_mapping": "two_independent_sources_required_for_persisted_assignment"
-  }
+  },
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_legacy_exception": {
+    "source": "Deutsche Welle",
+    "status": "active_runtime_global_legacy_source_not_catalog_managed",
+    "reason": "Coverage is GLOBAL and the approved DE national broadcast catalog explicitly defers Deutsche Welle to a later international/digital review. Keep the healthy existing runtime feed active without treating it as part of DE-national catalog coverage."
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

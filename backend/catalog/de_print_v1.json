@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "DE",
   "language": "de",
   "media_category": "print",
@@ -168,7 +168,18 @@
           "publication_form": "daily_newspaper",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "taz.de",
+              "url": "https://taz.de/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -306,7 +317,18 @@
           "publication_form": "magazine",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "SPIEGEL Schlagzeilen",
+              "url": "https://www.spiegel.de/schlagzeilen/index.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -577,7 +599,18 @@
           "publication_form": "daily_newspaper",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "WELT Nachrichten",
+              "url": "https://www.welt.de/feeds/latest.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -711,7 +744,18 @@
           "publication_form": "weekly_newspaper",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Junge Freiheit",
+              "url": "https://jungefreiheit.de/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -768,7 +812,18 @@
           "publication_form": "magazine",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Tichys Einblick",
+              "url": "https://www.tichyseinblick.de/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [],
           "metrics": [],
           "form_group": "magazine_or_periodical"
@@ -961,5 +1016,12 @@
     }
   ],
   "coverage_policy": "targets_are_goals_not_quotas",
-  "coverage_policy_notes": "Coverage minima guide research only. FSC does not force, invent, or broaden a political classification to satisfy a numeric target; documented market asymmetries are retained."
+  "coverage_policy_notes": "Coverage minima guide research only. FSC does not force, invent, or broaden a political classification to satisfy a numeric target; documented market asymmetries are retained.",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }
