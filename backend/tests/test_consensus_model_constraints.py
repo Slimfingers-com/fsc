@@ -41,7 +41,7 @@ def test_consensus_count_constraint(db):
             consensus_kind=ConsensusKind.SHARED,
             claim_count=2,
             article_count=2,
-            independent_source_count=0,
+            independent_source_count=-1,
             evidence_item_count=2,
             evidence_source_count=2,
             attributed_perspective_count=0,
@@ -52,6 +52,57 @@ def test_consensus_count_constraint(db):
     )
     with pytest.raises(IntegrityError):
         db.flush()
+
+
+def test_consensus_allows_zero_independent_sources(db):
+    data = build_consensus_story(db)
+    run = add_run(db, data["story"])
+    db.add(
+        StoryConsensusSummary(
+            story_id=data["story"].id,
+            processing_run_id=run.id,
+            claim_group_id=data["group"].id,
+            consensus_kind=ConsensusKind.SINGLE_SOURCE,
+            claim_count=1,
+            article_count=1,
+            independent_source_count=0,
+            evidence_item_count=1,
+            evidence_source_count=1,
+            attributed_perspective_count=0,
+            analysis_provider="test",
+            analysis_version="1",
+            analyzed_at=datetime.now(UTC),
+        )
+    )
+
+    db.flush()
+
+
+def test_difference_allows_zero_independent_sources(db):
+    data = build_consensus_story(
+        db,
+        contradictory=True,
+    )
+    run = add_run(db, data["story"])
+    db.add(
+        StoryDifferenceSummary(
+            story_id=data["story"].id,
+            processing_run_id=run.id,
+            claim_relation_id=data["relation"].id,
+            left_group_id=data["group"].id,
+            right_group_id=data["second_group"].id,
+            difference_kind=DifferenceKind.CONTRADICTION,
+            left_independent_source_count=0,
+            right_independent_source_count=0,
+            left_evidence_source_count=1,
+            right_evidence_source_count=1,
+            analysis_provider="test",
+            analysis_version="1",
+            analyzed_at=datetime.now(UTC),
+        )
+    )
+
+    db.flush()
 
 
 def test_difference_requires_distinct_groups(db):
