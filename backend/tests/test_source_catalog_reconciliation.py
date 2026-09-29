@@ -453,3 +453,125 @@ def test_catalog_reconciliation_rejects_unreviewed_or_inconsistent_catalogs(
             catalog,
             catalog_name="test.json",
         )
+
+
+
+def test_catalog_reconciliation_supports_news_media_catalog_defaults(db) -> None:
+    catalog = {
+        "catalog_version": "1.0-draft.2",
+        "country": "DE",
+        "language": "de",
+        "media_category": "digital",
+        "source_type": "NEWS",
+        "feed_activation_policy": (
+            "only_verified_relevant_official_content_channels_are_activated"
+        ),
+        "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+        "feed_role_policy": {"news": "editorial"},
+        "groups": [
+            {
+                "key": "test",
+                "entries": [
+                    {
+                        "key": "example-news",
+                        "name": "Example News",
+                        "homepage": "https://news.example/",
+                        "source_action": "create_source",
+                        "feeds": [
+                            {
+                                "name": "Latest",
+                                "url": "https://news.example/feed.xml",
+                                "active": True,
+                                "priority": 1,
+                                "fetch_interval_minutes": 30,
+                                "default_confirmation_role": "editorial",
+                                "feed_class": "news",
+                                "activation_tier": 1,
+                            }
+                        ],
+                        "outlets": [
+                            {
+                                "key": "example-news-web",
+                                "name": "Example News",
+                                "media_category": "digital",
+                                "publication_form": "digital_native",
+                                "language": "de",
+                                "homepage": "https://news.example/",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+
+    report = SourceCatalogReconciler().reconcile(
+        db,
+        catalog,
+        catalog_name="de_digital_test.json",
+        apply=True,
+    )
+
+    assert report.has_conflicts is False
+    source = SourceService().get_by_slug(db, "example-news")
+    assert source is not None
+    assert source.source_type == SourceType.NEWS
+    assert source.country == "DE"
+    assert source.language == "de"
+    assert source.feeds[0].default_confirmation_role == ConfirmationRole.EDITORIAL
+
+
+def test_catalog_reconciliation_includes_unclassified_entries(db) -> None:
+    catalog = {
+        "catalog_version": "1.0-draft.2",
+        "country": "DE",
+        "language": "de",
+        "media_category": "digital",
+        "source_type": "NEWS",
+        "feed_activation_policy": (
+            "only_verified_relevant_official_content_channels_are_activated"
+        ),
+        "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+        "feed_role_policy": {"news": "editorial"},
+        "groups": [],
+        "unclassified_entries": [
+            {
+                "key": "specialist",
+                "name": "Specialist News",
+                "homepage": "https://specialist.example/",
+                "source_action": "create_source",
+                "feeds": [
+                    {
+                        "name": "Latest",
+                        "url": "https://specialist.example/feed.xml",
+                        "active": True,
+                        "priority": 1,
+                        "fetch_interval_minutes": 30,
+                        "default_confirmation_role": "editorial",
+                        "feed_class": "news",
+                        "activation_tier": 1,
+                    }
+                ],
+                "outlets": [
+                    {
+                        "key": "specialist-web",
+                        "name": "Specialist News",
+                        "media_category": "digital",
+                        "publication_form": "digital_native",
+                        "language": "de",
+                        "homepage": "https://specialist.example/",
+                    }
+                ],
+            }
+        ],
+    }
+
+    report = SourceCatalogReconciler().reconcile(
+        db,
+        catalog,
+        catalog_name="unclassified.json",
+    )
+
+    assert report.has_conflicts is False
+    assert report.change_count == 1
+    assert report.actions[0].source_name == "Specialist News"
