@@ -299,6 +299,7 @@ class SourceCatalogReconciler:
         }
         source_action = entry.get("source_action", "create_source")
         has_primary = any(outlet.is_primary for outlet in active_outlets)
+        created = False
 
         for index, data in enumerate(outlet_data):
             expected = self._outlet_create(
