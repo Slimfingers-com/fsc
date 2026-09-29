@@ -102,9 +102,9 @@ class SourceCatalogReconciler:
         for entry in entries:
             source_name = entry["name"].strip()
             source_action = entry.get("source_action", "create_source")
-            source = self.source_service.repository.get_by_normalized_name(
+            source = self._get_runtime_source(
                 db,
-                normalize_source_name(source_name),
+                source_name,
             )
 
             if source is None:
@@ -297,6 +297,13 @@ class SourceCatalogReconciler:
             normalized = normalize_source_name(expected.name)
             existing = by_name.get(normalized)
             if existing is None:
+                if expected.is_primary and has_primary:
+                    conflicts.append(
+                        f"{source.name}: reviewed primary outlet "
+                        f"{expected.name!r} is missing while another "
+                        "active primary outlet already exists"
+                    )
+                    continue
                 actions.append(
                     CatalogReconciliationAction(
                         action="create_outlet",
@@ -334,9 +341,9 @@ class SourceCatalogReconciler:
         for entry in entries:
             source_name = entry["name"].strip()
             source_action = entry.get("source_action", "create_source")
-            source = self.source_service.repository.get_by_normalized_name(
+            source = self._get_runtime_source(
                 db,
-                normalize_source_name(source_name),
+                source_name,
             )
 
             if source is None:
@@ -542,6 +549,22 @@ class SourceCatalogReconciler:
 
         return materializable
 
+    def _get_runtime_source(
+        self,
+        db: Session,
+        source_name: str,
+    ) -> Any | None:
+        source = self.source_service.repository.get_by_normalized_name(
+            db,
+            normalize_source_name(source_name),
+        )
+        if source is None:
+            return None
+        return (
+            self.source_service.get_by_slug(db, source.slug)
+            or source
+        )
+
     def _new_source_conflicts(
         self,
         db: Session,
@@ -601,7 +624,6 @@ class SourceCatalogReconciler:
         if explicit_primary is None:
             is_primary = (
                 source_action == "create_source"
-                and not source_has_primary
                 and index == 0
             )
         else:
@@ -645,7 +667,7 @@ class SourceCatalogReconciler:
             expected.media_category.value,
             expected.publication_form.value,
             expected.language,
-            expected.url,
+            str(expected.url) if expected.url else None,
             expected.is_primary,
             expected.active,
         )
