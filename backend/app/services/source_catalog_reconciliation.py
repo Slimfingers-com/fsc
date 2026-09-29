@@ -292,7 +292,6 @@ class SourceCatalogReconciler:
                 data,
                 index=index,
                 source_action=source_action,
-                source_has_primary=has_primary,
             )
             normalized = normalize_source_name(expected.name)
             existing = by_name.get(normalized)
@@ -433,7 +432,6 @@ class SourceCatalogReconciler:
                 data,
                 index=index,
                 source_action=source_action,
-                source_has_primary=has_primary,
             )
             normalized = normalize_source_name(expected.name)
             if normalized in by_name:
@@ -618,7 +616,6 @@ class SourceCatalogReconciler:
         *,
         index: int,
         source_action: str,
-        source_has_primary: bool,
     ) -> SourceOutletCreate:
         explicit_primary = data.get("is_primary")
         if explicit_primary is None:
@@ -656,16 +653,16 @@ class SourceCatalogReconciler:
         expected: SourceOutletCreate,
     ) -> str | None:
         actual = (
-            existing.media_category.value,
-            existing.publication_form.value,
+            str(existing.media_category),
+            str(existing.publication_form),
             existing.language,
             existing.url,
             existing.is_primary,
             existing.active,
         )
         wanted = (
-            expected.media_category.value,
-            expected.publication_form.value,
+            str(expected.media_category),
+            str(expected.publication_form),
             expected.language,
             str(expected.url) if expected.url else None,
             expected.is_primary,
@@ -765,7 +762,6 @@ class SourceCatalogReconciler:
                 outlet,
                 index=index,
                 source_action="create_source",
-                source_has_primary=False,
             )
             for index, outlet in enumerate(outlet_data)
         ]
