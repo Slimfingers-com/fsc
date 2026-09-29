@@ -74,12 +74,33 @@ def main() -> int:
         try:
             for path in catalog_paths:
                 catalog = json.loads(path.read_text(encoding="utf-8"))
-                report = reconciler.reconcile(
-                    db,
-                    catalog,
-                    catalog_name=path.name,
-                    apply=args.apply,
-                )
+
+                if args.apply:
+                    report = reconciler.reconcile(
+                        db,
+                        catalog,
+                        catalog_name=path.name,
+                        apply=True,
+                    )
+                else:
+                    report = reconciler.reconcile(
+                        db,
+                        catalog,
+                        catalog_name=path.name,
+                        apply=False,
+                    )
+                    if not report.has_conflicts:
+                        # Stage this catalog in the current transaction so
+                        # later catalogs see Sources/Outlets planned earlier
+                        # in the same dry-run. The transaction is rolled back
+                        # after all catalogs have been evaluated.
+                        reconciler.reconcile(
+                            db,
+                            catalog,
+                            catalog_name=path.name,
+                            apply=True,
+                        )
+
                 reports.append(report)
 
                 if report.has_conflicts and args.apply:
