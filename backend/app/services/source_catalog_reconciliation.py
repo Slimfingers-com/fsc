@@ -301,10 +301,14 @@ class SourceCatalogReconciler:
                 "Catalog feed_class policy is not supported."
             )
 
-        source_type = catalog.get("organization_type")
+        catalog_source_type = (
+            catalog.get("organization_type")
+            or catalog.get("source_type")
+        )
         country = catalog.get("country")
+        language = catalog.get("language")
         role_policy = catalog.get("feed_role_policy") or {}
-        if not source_type or not country or not role_policy:
+        if not country or not role_policy:
             raise BusinessRuleViolationError(
                 "Catalog activation metadata is incomplete."
             )
@@ -312,26 +316,52 @@ class SourceCatalogReconciler:
         materializable: list[dict[str, Any]] = []
         seen_urls: set[str] = set()
 
-        for group in catalog.get("groups", []):
-            for entry in group.get("entries", []):
-                feeds = entry.get("feeds") or []
-                if not feeds:
-                    continue
+        entries = [
+            entry
+            for group in catalog.get("groups", [])
+            for entry in group.get("entries", [])
+        ]
+        entries.extend(catalog.get("unclassified_entries", []))
 
-                if entry.get("source_type") != source_type:
-                    raise BusinessRuleViolationError(
-                        f"{entry.get('name')}: SourceType differs from catalog."
-                    )
-                if entry.get("country") != country:
-                    raise BusinessRuleViolationError(
-                        f"{entry.get('name')}: country differs from catalog."
-                    )
-                if entry.get("source_action") != "create_source":
-                    raise BusinessRuleViolationError(
-                        f"{entry.get('name')}: unsupported source_action."
-                    )
+        for raw_entry in entries:
+            feeds = raw_entry.get("feeds") or []
+            if not feeds:
+                continue
 
-                for feed in feeds:
+            entry = dict(raw_entry)
+            resolved_source_type = (
+                entry.get("source_type")
+                or catalog_source_type
+            )
+            if not resolved_source_type:
+                raise BusinessRuleViolationError(
+                    f"{entry.get('name')}: SourceType is missing."
+                )
+            entry["source_type"] = resolved_source_type
+            entry["country"] = entry.get("country") or country
+            entry["language"] = entry.get("language") or language
+            entry["source_action"] = (
+                entry.get("source_action")
+                or "create_source"
+            )
+
+            if (
+                catalog_source_type
+                and resolved_source_type != catalog_source_type
+            ):
+                raise BusinessRuleViolationError(
+                    f"{entry.get('name')}: SourceType differs from catalog."
+                )
+            if entry.get("country") != country:
+                raise BusinessRuleViolationError(
+                    f"{entry.get('name')}: country differs from catalog."
+                )
+            if entry.get("source_action") != "create_source":
+                raise BusinessRuleViolationError(
+                    f"{entry.get('name')}: unsupported source_action."
+                )
+
+            for feed in feeds:
                     feed_class = feed.get("feed_class")
                     expected_role = role_policy.get(feed_class)
                     if expected_role is None:
@@ -360,9 +390,9 @@ class SourceCatalogReconciler:
                             "Configured feed URLs must be present and unique "
                             "within a catalog."
                         )
-                    seen_urls.add(url)
+                seen_urls.add(url)
 
-                materializable.append(entry)
+            materializable.append(entry)
 
         return materializable
 
