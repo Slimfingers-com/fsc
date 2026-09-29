@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "DE",
   "language": "de",
   "media_category": "digital",
@@ -105,7 +105,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "NachDenkSeiten",
+              "url": "https://www.nachdenkseiten.de/?feed=rss2",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "planning_position_not_persisted",
           "classifications": [],
           "metrics": [],
@@ -122,7 +133,10 @@
           ],
           "notes": [
             "A/B research boundary; kept in A planning pool by joint decision, without persisted FSC political classification."
-          ]
+          ],
+          "source_type": "NEWS",
+          "country": "DE",
+          "language": "de"
         },
         {
           "key": "junge-welt-digital",
@@ -608,7 +622,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Apollo News",
+              "url": "https://apollo-news.net/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "planning_position_not_persisted",
           "classifications": [],
           "metrics": [],
@@ -625,7 +650,10 @@
           ],
           "notes": [
             "E planning placement; no persisted FSC political classification in this catalog."
-          ]
+          ],
+          "source_type": "NEWS",
+          "country": "DE",
+          "language": "de"
         },
         {
           "key": "reitschuster",
@@ -831,7 +859,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "netzpolitik.org",
+          "url": "https://netzpolitik.org/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -848,7 +887,10 @@
       ],
       "notes": [
         "Specialist digital-rights journalism; politically unclassified in FSC."
-      ]
+      ],
+      "source_type": "NEWS",
+      "country": "DE",
+      "language": "de"
     },
     {
       "key": "uebermedien",
@@ -1017,5 +1059,11 @@
     "source_identity": "reuse_existing_cross_media_source",
     "nachdenkseiten_boundary": "approved_a_b_boundary_in_a_planning_pool",
     "multipolar_apolut": "approved_unclassified"
+  },
+  "source_type": "NEWS",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
   }
 }
