@@ -101,13 +101,21 @@ class SourceCatalogReconciler:
 
         for entry in entries:
             source_name = entry["name"].strip()
-            normalized_name = normalize_source_name(source_name)
+            source_action = entry.get("source_action", "create_source")
             source = self.source_service.repository.get_by_normalized_name(
                 db,
-                normalized_name,
+                normalize_source_name(source_name),
             )
 
             if source is None:
+                if source_action == "extend_existing_source":
+                    conflicts.append(
+                        f"{source_name}: existing_source_key "
+                        f"{entry['existing_source_key']!r} does not resolve "
+                        "to an existing runtime Source"
+                    )
+                    continue
+
                 entry_conflicts = self._new_source_conflicts(
                     db,
                     entry,
@@ -119,7 +127,8 @@ class SourceCatalogReconciler:
                             action="create_source",
                             source_name=source_name,
                             detail=(
-                                f"{len(entry['feeds'])} reviewed feed(s)"
+                                f"{len(entry.get('feeds') or [])} reviewed "
+                                "feed(s)"
                             ),
                         )
                     )
@@ -134,86 +143,30 @@ class SourceCatalogReconciler:
             if source_conflicts:
                 continue
 
-            active_feeds = [
-                feed
-                for feed in source.feeds
-                if feed.deleted_at is None
-            ]
-            by_url = {
-                feed.url: feed
-                for feed in active_feeds
-            }
-            by_name = {
-                feed.name.strip().casefold(): feed
-                for feed in active_feeds
-            }
+            outlet_actions, outlet_conflicts = self._plan_outlets(
+                source=source,
+                catalog=catalog,
+                entry=entry,
+            )
+            actions.extend(outlet_actions)
+            conflicts.extend(outlet_conflicts)
+            if outlet_conflicts:
+                continue
 
-            for feed_data in entry["feeds"]:
-                url = feed_data["url"]
-                name = feed_data["name"].strip()
-                existing_by_url = by_url.get(url)
+            feed_actions, feed_conflicts = self._plan_feeds(
+                db,
+                source=source,
+                entry=entry,
+            )
+            actions.extend(feed_actions)
+            conflicts.extend(feed_conflicts)
 
-                if existing_by_url is not None:
-                    if existing_by_url.source_id != source.id:
-                        conflicts.append(
-                            f"{source_name}: feed URL {url} belongs to "
-                            "another Source"
-                        )
-                        continue
-
-                    if self._feed_needs_update(
-                        existing_by_url,
-                        feed_data,
-                    ):
-                        actions.append(
-                            CatalogReconciliationAction(
-                                action="update_feed",
-                                source_name=source_name,
-                                feed_name=name,
-                                detail=url,
-                            )
-                        )
-                    else:
-                        actions.append(
-                            CatalogReconciliationAction(
-                                action="no_change",
-                                source_name=source_name,
-                                feed_name=name,
-                                detail=url,
-                            )
-                        )
-                    continue
-
-                existing_global = (
-                    self.source_service.repository.get_feed_by_url(
-                        db,
-                        url,
-                    )
-                )
-                if (
-                    existing_global is not None
-                    and existing_global.source_id != source.id
-                ):
-                    conflicts.append(
-                        f"{source_name}: feed URL {url} belongs to "
-                        "another Source"
-                    )
-                    continue
-
-                existing_by_name = by_name.get(name.casefold())
-                if existing_by_name is not None:
-                    conflicts.append(
-                        f"{source_name}: feed name {name!r} already exists "
-                        f"with URL {existing_by_name.url}"
-                    )
-                    continue
-
+            if not outlet_actions and not feed_actions:
                 actions.append(
                     CatalogReconciliationAction(
-                        action="create_feed",
+                        action="no_change",
                         source_name=source_name,
-                        feed_name=name,
-                        detail=url,
+                        detail="runtime Source already matches catalog entry",
                     )
                 )
 
@@ -222,6 +175,154 @@ class SourceCatalogReconciler:
             actions=tuple(actions),
             conflicts=tuple(conflicts),
         )
+
+    def _plan_feeds(
+        self,
+        db: Session,
+        *,
+        source: Any,
+        entry: dict[str, Any],
+    ) -> tuple[list[CatalogReconciliationAction], list[str]]:
+        actions: list[CatalogReconciliationAction] = []
+        conflicts: list[str] = []
+        active_feeds = [
+            feed
+            for feed in source.feeds
+            if feed.deleted_at is None
+        ]
+        by_url = {
+            feed.url: feed
+            for feed in active_feeds
+        }
+        by_name = {
+            feed.name.strip().casefold(): feed
+            for feed in active_feeds
+        }
+
+        for feed_data in entry.get("feeds") or []:
+            url = feed_data["url"]
+            name = feed_data["name"].strip()
+            existing_by_url = by_url.get(url)
+
+            if existing_by_url is not None:
+                if self._feed_needs_update(
+                    existing_by_url,
+                    feed_data,
+                ):
+                    actions.append(
+                        CatalogReconciliationAction(
+                            action="update_feed",
+                            source_name=source.name,
+                            feed_name=name,
+                            detail=url,
+                        )
+                    )
+                else:
+                    actions.append(
+                        CatalogReconciliationAction(
+                            action="no_change",
+                            source_name=source.name,
+                            feed_name=name,
+                            detail=url,
+                        )
+                    )
+                continue
+
+            existing_global = self.source_service.repository.get_feed_by_url(
+                db,
+                url,
+            )
+            if (
+                existing_global is not None
+                and existing_global.source_id != source.id
+            ):
+                conflicts.append(
+                    f"{source.name}: feed URL {url} belongs to another Source"
+                )
+                continue
+
+            existing_by_name = by_name.get(name.casefold())
+            if existing_by_name is not None:
+                conflicts.append(
+                    f"{source.name}: feed name {name!r} already exists "
+                    f"with URL {existing_by_name.url}"
+                )
+                continue
+
+            actions.append(
+                CatalogReconciliationAction(
+                    action="create_feed",
+                    source_name=source.name,
+                    feed_name=name,
+                    detail=url,
+                )
+            )
+
+        return actions, conflicts
+
+    def _plan_outlets(
+        self,
+        *,
+        source: Any,
+        catalog: dict[str, Any],
+        entry: dict[str, Any],
+    ) -> tuple[list[CatalogReconciliationAction], list[str]]:
+        actions: list[CatalogReconciliationAction] = []
+        conflicts: list[str] = []
+        outlet_data = self._entry_outlet_data(catalog, entry)
+        if not outlet_data:
+            return actions, conflicts
+
+        active_outlets = [
+            outlet
+            for outlet in source.outlets
+            if outlet.deleted_at is None
+        ]
+        by_name = {
+            outlet.normalized_name: outlet
+            for outlet in active_outlets
+        }
+        source_action = entry.get("source_action", "create_source")
+        has_primary = any(outlet.is_primary for outlet in active_outlets)
+
+        for index, data in enumerate(outlet_data):
+            expected = self._outlet_create(
+                catalog,
+                entry,
+                data,
+                index=index,
+                source_action=source_action,
+                source_has_primary=has_primary,
+            )
+            normalized = normalize_source_name(expected.name)
+            existing = by_name.get(normalized)
+            if existing is None:
+                actions.append(
+                    CatalogReconciliationAction(
+                        action="create_outlet",
+                        source_name=source.name,
+                        detail=expected.name,
+                    )
+                )
+                if expected.is_primary:
+                    has_primary = True
+                continue
+
+            conflict = self._outlet_conflict(existing, expected)
+            if conflict is not None:
+                conflicts.append(
+                    f"{source.name}: {conflict}"
+                )
+            else:
+                actions.append(
+                    CatalogReconciliationAction(
+                        action="no_change",
+                        source_name=source.name,
+                        detail=f"outlet {expected.name}",
+                    )
+                )
+
+        return actions, conflicts
 
     def _apply(
         self,
@@ -232,17 +333,29 @@ class SourceCatalogReconciler:
     ) -> None:
         for entry in entries:
             source_name = entry["name"].strip()
+            source_action = entry.get("source_action", "create_source")
             source = self.source_service.repository.get_by_normalized_name(
                 db,
                 normalize_source_name(source_name),
             )
 
             if source is None:
+                if source_action == "extend_existing_source":
+                    raise BusinessRuleViolationError(
+                        f"{source_name}: existing runtime Source is missing"
+                    )
                 self.source_service.create_source(
                     db,
                     self._source_create(catalog, entry),
                 )
                 continue
+
+            self._apply_outlets(
+                db,
+                source=source,
+                catalog=catalog,
+                entry=entry,
+            )
 
             active_feeds = [
                 feed
@@ -254,7 +367,7 @@ class SourceCatalogReconciler:
                 for feed in active_feeds
             }
 
-            for feed_data in entry["feeds"]:
+            for feed_data in entry.get("feeds") or []:
                 existing = by_url.get(feed_data["url"])
                 if existing is None:
                     self.source_service.create_feed(
@@ -281,6 +394,50 @@ class SourceCatalogReconciler:
                             ),
                         ),
                     )
+
+    def _apply_outlets(
+        self,
+        db: Session,
+        *,
+        source: Any,
+        catalog: dict[str, Any],
+        entry: dict[str, Any],
+    ) -> None:
+        outlet_data = self._entry_outlet_data(catalog, entry)
+        if not outlet_data:
+            return
+
+        active_outlets = [
+            outlet
+            for outlet in source.outlets
+            if outlet.deleted_at is None
+        ]
+        by_name = {
+            outlet.normalized_name: outlet
+            for outlet in active_outlets
+        }
+        source_action = entry.get("source_action", "create_source")
+        has_primary = any(outlet.is_primary for outlet in active_outlets)
+
+        for index, data in enumerate(outlet_data):
+            expected = self._outlet_create(
+                catalog,
+                entry,
+                data,
+                index=index,
+                source_action=source_action,
+                source_has_primary=has_primary,
+            )
+            normalized = normalize_source_name(expected.name)
+            if normalized in by_name:
+                continue
+            self.source_service.create_outlet(
+                db,
+                source,
+                expected,
+            )
+            if expected.is_primary:
+                has_primary = True
 
     def _validated_materializable_entries(
         self,
@@ -317,7 +474,26 @@ class SourceCatalogReconciler:
 
         for entry in self._catalog_entries(catalog):
             feeds = entry.get("feeds") or []
-            if not feeds:
+            source_action = entry.get("source_action", "create_source")
+            outlet_data = self._entry_outlet_data(catalog, entry)
+
+            if source_action == "create_source":
+                if not feeds:
+                    continue
+            elif source_action == "extend_existing_source":
+                if not entry.get("existing_source_key"):
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: extend_existing_source "
+                        "requires existing_source_key."
+                    )
+                if not feeds and not outlet_data:
+                    continue
+            else:
+                if feeds:
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: unsupported source_action "
+                        f"{source_action!r}."
+                    )
                 continue
 
             entry_source_type = entry.get("source_type") or source_type
@@ -329,10 +505,6 @@ class SourceCatalogReconciler:
             if entry_country != country:
                 raise BusinessRuleViolationError(
                     f"{entry.get('name')}: country differs from catalog."
-                )
-            if entry.get("source_action", "create_source") != "create_source":
-                raise BusinessRuleViolationError(
-                    f"{entry.get('name')}: unsupported source_action."
                 )
 
             for feed in feeds:
@@ -416,6 +588,75 @@ class SourceCatalogReconciler:
         return conflicts
 
     @staticmethod
+    def _outlet_create(
+        catalog: dict[str, Any],
+        entry: dict[str, Any],
+        data: dict[str, Any],
+        *,
+        index: int,
+        source_action: str,
+        source_has_primary: bool,
+    ) -> SourceOutletCreate:
+        explicit_primary = data.get("is_primary")
+        if explicit_primary is None:
+            is_primary = (
+                source_action == "create_source"
+                and not source_has_primary
+                and index == 0
+            )
+        else:
+            is_primary = explicit_primary
+
+        return SourceOutletCreate(
+            name=data["name"],
+            media_category=(
+                data.get("media_category")
+                or catalog.get("media_category")
+            ),
+            publication_form=(
+                data.get("publication_form")
+                or entry.get("publication_form")
+                or "other"
+            ),
+            language=(
+                data.get("language")
+                or entry.get("language")
+                or catalog.get("language")
+            ),
+            url=data.get("homepage") or data.get("url"),
+            is_primary=is_primary,
+            active=data.get("active", True),
+        )
+
+    @staticmethod
+    def _outlet_conflict(
+        existing: Any,
+        expected: SourceOutletCreate,
+    ) -> str | None:
+        actual = (
+            existing.media_category.value,
+            existing.publication_form.value,
+            existing.language,
+            existing.url,
+            existing.is_primary,
+            existing.active,
+        )
+        wanted = (
+            expected.media_category.value,
+            expected.publication_form.value,
+            expected.language,
+            expected.url,
+            expected.is_primary,
+            expected.active,
+        )
+        if actual == wanted:
+            return None
+        return (
+            f"existing outlet {expected.name!r} differs from reviewed "
+            "media/form/language/url/primary/active metadata"
+        )
+
+    @staticmethod
     def _feed_needs_update(
         feed: Any,
         data: dict[str, Any],
@@ -493,32 +734,16 @@ class SourceCatalogReconciler:
         catalog: dict[str, Any],
         entry: dict[str, Any],
     ) -> SourceCreate:
-        catalog_media_category = catalog.get("media_category")
         catalog_language = catalog.get("language")
         outlet_data = self._entry_outlet_data(catalog, entry)
         outlets = [
-            SourceOutletCreate(
-                name=outlet["name"],
-                media_category=(
-                    outlet.get("media_category")
-                    or catalog_media_category
-                ),
-                publication_form=(
-                    outlet.get("publication_form")
-                    or entry.get("publication_form")
-                    or "other"
-                ),
-                language=(
-                    outlet.get("language")
-                    or entry.get("language")
-                    or catalog_language
-                ),
-                url=(
-                    outlet.get("homepage")
-                    or outlet.get("url")
-                ),
-                is_primary=outlet.get("is_primary", index == 0),
-                active=outlet.get("active", True),
+            self._outlet_create(
+                catalog,
+                entry,
+                outlet,
+                index=index,
+                source_action="create_source",
+                source_has_primary=False,
             )
             for index, outlet in enumerate(outlet_data)
         ]
