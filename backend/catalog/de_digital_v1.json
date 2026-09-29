@@ -133,10 +133,7 @@
           ],
           "notes": [
             "A/B research boundary; kept in A planning pool by joint decision, without persisted FSC political classification."
-          ],
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de"
+          ]
         },
         {
           "key": "junge-welt-digital",
@@ -650,10 +647,7 @@
           ],
           "notes": [
             "E planning placement; no persisted FSC political classification in this catalog."
-          ],
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de"
+          ]
         },
         {
           "key": "reitschuster",
@@ -887,10 +881,7 @@
       ],
       "notes": [
         "Specialist digital-rights journalism; politically unclassified in FSC."
-      ],
-      "source_type": "NEWS",
-      "country": "DE",
-      "language": "de"
+      ]
     },
     {
       "key": "uebermedien",
@@ -1060,10 +1051,11 @@
     "nachdenkseiten_boundary": "approved_a_b_boundary_in_a_planning_pool",
     "multipolar_apolut": "approved_unclassified"
   },
-  "source_type": "NEWS",
   "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
   "feed_class_policy": "catalog_review_metadata_only_not_persisted",
   "feed_role_policy": {
     "news": "editorial"
-  }
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

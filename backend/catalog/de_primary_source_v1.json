@@ -990,11 +990,12 @@
       "reason": "Party organizations are institutionally distinct from parliamentary factions but are deferred to avoid immediate parallel primary channels."
     }
   ],
-  "source_type": "PRIMARY_SOURCE",
   "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
   "feed_class_policy": "catalog_review_metadata_only_not_persisted",
   "feed_role_policy": {
     "press_release": "primary_evidence",
     "official_data": "primary_evidence"
-  }
+  },
+  "runtime_source_type": "PRIMARY_SOURCE",
+  "runtime_coverage_scope": "NATIONAL"
 }

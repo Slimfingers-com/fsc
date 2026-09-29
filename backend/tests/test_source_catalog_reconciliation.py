@@ -462,7 +462,8 @@ def test_catalog_reconciliation_supports_news_media_catalog_defaults(db) -> None
         "country": "DE",
         "language": "de",
         "media_category": "digital",
-        "source_type": "NEWS",
+        "runtime_source_type": "NEWS",
+        "runtime_coverage_scope": "NATIONAL",
         "feed_activation_policy": (
             "only_verified_relevant_official_content_channels_are_activated"
         ),
@@ -527,7 +528,8 @@ def test_catalog_reconciliation_includes_unclassified_entries(db) -> None:
         "country": "DE",
         "language": "de",
         "media_category": "digital",
-        "source_type": "NEWS",
+        "runtime_source_type": "NEWS",
+        "runtime_coverage_scope": "NATIONAL",
         "feed_activation_policy": (
             "only_verified_relevant_official_content_channels_are_activated"
         ),

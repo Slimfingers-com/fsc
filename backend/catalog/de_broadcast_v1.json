@@ -94,10 +94,7 @@
           ],
           "notes": [
             "Deutschlandfunk, Deutschlandfunk Kultur and Deutschlandfunk Nova are outlets/programmes of one Deutschlandradio Source and must never count as three independent Sources."
-          ],
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de"
+          ]
         }
       ],
       "coverage_exception": "Only one approved national radio Source is a B/C research candidate; no national television Source currently meets the research threshold. Do not fill with regional or digital-only outlets."
@@ -164,10 +161,7 @@
           ],
           "notes": [
             "ARD-aktuell is the central ARD news newsroom; regional ARD broadcasters are excluded from this national catalog."
-          ],
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de"
+          ]
         },
         {
           "activity_status": "active",
@@ -213,10 +207,7 @@
           ],
           "notes": [
             "heute, heute journal and related ZDF news formats are programmes/outlets of one ZDF Source, not separate Sources."
-          ],
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de"
+          ]
         },
         {
           "activity_status": "active",
@@ -671,7 +662,6 @@
     "source_identity": "one_editorial_source_multiple_outlets",
     "political_mapping": "two_independent_sources_required_for_persisted_assignment"
   },
-  "source_type": "NEWS",
   "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
   "feed_class_policy": "catalog_review_metadata_only_not_persisted",
   "feed_role_policy": {
@@ -681,5 +671,7 @@
     "source": "Deutsche Welle",
     "status": "active_runtime_global_legacy_source_not_catalog_managed",
     "reason": "Coverage is GLOBAL and the approved DE national broadcast catalog explicitly defers Deutsche Welle to a later international/digital review. Keep the healthy existing runtime feed active without treating it as part of DE-national catalog coverage."
-  }
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

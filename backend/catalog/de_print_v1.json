@@ -193,22 +193,7 @@
             }
           ],
           "metrics": [],
-          "form_group": "newspaper_or_weekly",
-          "source_action": "create_source",
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de",
-          "outlets": [
-            {
-              "key": "taz-print",
-              "name": "taz",
-              "media_category": "print",
-              "publication_form": "daily_newspaper",
-              "scope": "national",
-              "language": "de",
-              "homepage": "https://taz.de/"
-            }
-          ]
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "sueddeutsche",
@@ -357,22 +342,7 @@
             }
           ],
           "metrics": [],
-          "form_group": "magazine_or_periodical",
-          "source_action": "create_source",
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de",
-          "outlets": [
-            {
-              "key": "der-spiegel-print",
-              "name": "DER SPIEGEL",
-              "media_category": "print",
-              "publication_form": "magazine",
-              "scope": "national",
-              "language": "de",
-              "homepage": "https://www.spiegel.de/"
-            }
-          ]
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "blaetter",
@@ -654,22 +624,7 @@
             }
           ],
           "metrics": [],
-          "form_group": "newspaper_or_weekly",
-          "source_action": "create_source",
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de",
-          "outlets": [
-            {
-              "key": "welt-print",
-              "name": "WELT",
-              "media_category": "print",
-              "publication_form": "daily_newspaper",
-              "scope": "national",
-              "language": "de",
-              "homepage": "https://www.welt.de/"
-            }
-          ]
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "bild",
@@ -824,22 +779,7 @@
             }
           ],
           "metrics": [],
-          "form_group": "newspaper_or_weekly",
-          "source_action": "create_source",
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de",
-          "outlets": [
-            {
-              "key": "junge-freiheit-print",
-              "name": "Junge Freiheit",
-              "media_category": "print",
-              "publication_form": "weekly_newspaper",
-              "scope": "national",
-              "language": "de",
-              "homepage": "https://jungefreiheit.de/"
-            }
-          ]
+          "form_group": "newspaper_or_weekly"
         },
         {
           "key": "preussische-allgemeine",
@@ -886,22 +826,7 @@
           ],
           "classifications": [],
           "metrics": [],
-          "form_group": "magazine_or_periodical",
-          "source_action": "create_source",
-          "source_type": "NEWS",
-          "country": "DE",
-          "language": "de",
-          "outlets": [
-            {
-              "key": "tichys-einblick-print",
-              "name": "Tichys Einblick",
-              "media_category": "print",
-              "publication_form": "magazine",
-              "scope": "national",
-              "language": "de",
-              "homepage": "https://www.tichyseinblick.de/"
-            }
-          ]
+          "form_group": "magazine_or_periodical"
         },
         {
           "key": "cato",
@@ -1092,10 +1017,11 @@
   ],
   "coverage_policy": "targets_are_goals_not_quotas",
   "coverage_policy_notes": "Coverage minima guide research only. FSC does not force, invent, or broaden a political classification to satisfy a numeric target; documented market asymmetries are retained.",
-  "source_type": "NEWS",
   "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
   "feed_class_policy": "catalog_review_metadata_only_not_persisted",
   "feed_role_policy": {
     "news": "editorial"
-  }
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }

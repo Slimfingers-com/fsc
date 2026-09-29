@@ -4996,7 +4996,8 @@ def test_de_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> No
             (CATALOG_DIR / filename).read_text(encoding="utf-8")
         )
         assert catalog["catalog_version"] == "1.0-draft.2"
-        assert catalog["source_type"] == spec["source_type"]
+        assert catalog["runtime_source_type"] == spec["source_type"]
+        assert catalog["runtime_coverage_scope"] == "NATIONAL"
         assert (
             catalog["feed_activation_policy"]
             == "only_verified_relevant_official_content_channels_are_activated"
