@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "GB",
   "language": "en",
   "media_category": "primary_source",
@@ -88,7 +88,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Prime Minister's Office official updates",
+              "url": "https://www.gov.uk/government/organisations/prime-ministers-office-10-downing-street.atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -117,7 +128,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "FCDO official updates",
+              "url": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office.atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -146,7 +168,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Home Office official updates",
+              "url": "https://www.gov.uk/government/organisations/home-office.atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -175,7 +208,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Ministry of Defence official updates",
+              "url": "https://www.gov.uk/government/organisations/ministry-of-defence.atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -210,7 +254,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "HM Treasury official updates",
+              "url": "https://www.gov.uk/government/organisations/hm-treasury.atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -361,7 +416,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Bank of England news",
+              "url": "https://www.bankofengland.co.uk/rss/news",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -448,7 +514,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "UKHSA official updates",
+              "url": "https://www.gov.uk/government/organisations/uk-health-security-agency.atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -512,7 +589,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Courts and Tribunals Judiciary updates",
+              "url": "https://www.judiciary.uk/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -547,7 +635,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "FCA news",
+              "url": "https://www.fca.org.uk/news/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -669,7 +768,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "NCA news",
+              "url": "https://www.nationalcrimeagency.gov.uk/news?format=feed&type=rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -727,7 +837,18 @@
           "source_type": "PRIMARY_SOURCE",
           "country": "GB",
           "language": "en",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "NCSC updates",
+              "url": "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 60,
+              "default_confirmation_role": "primary_evidence",
+              "feed_class": "official_updates",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "functional_primary_source_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -946,5 +1067,14 @@
       "category": "additional_government_departments",
       "reason": "Topic-specific expansion remains eligible outside the compact national core."
     }
-  ]
+  ],
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "press_release": "primary_evidence",
+    "official_data": "primary_evidence",
+    "official_updates": "primary_evidence"
+  },
+  "runtime_source_type": "PRIMARY_SOURCE",
+  "runtime_coverage_scope": "NATIONAL"
 }

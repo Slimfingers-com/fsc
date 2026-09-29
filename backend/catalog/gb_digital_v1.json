@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "GB",
   "language": "en",
   "media_category": "digital",
@@ -27,7 +27,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Novara Media",
+              "url": "https://novaramedia.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "planning_position_not_persisted",
           "classifications": [],
           "metrics": [],
@@ -52,9 +63,9 @@
           "homepage": "https://www.thecanary.co/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -69,8 +80,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "A research-planning placement; active at the 2026-09-25 review date, with reported financial-continuity risk noted separately from source eligibility."
-          ]
+          ],
+          "existing_source_key": "the-canary"
         },
         {
           "key": "morning-star",
@@ -78,9 +91,9 @@
           "homepage": "https://morningstaronline.co.uk/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -95,8 +108,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "A research-planning placement; digital outlet of a print-origin newsroom not otherwise present in FSC."
-          ]
+          ],
+          "existing_source_key": "morning-star"
         },
         {
           "key": "socialist-worker-uk",
@@ -104,9 +119,9 @@
           "homepage": "https://socialistworker.co.uk/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -121,8 +136,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "A research-planning placement; digital outlet of a print-origin socialist newsroom not otherwise present in FSC."
-          ]
+          ],
+          "existing_source_key": "socialist-worker"
         }
       ]
     },
@@ -136,9 +153,9 @@
           "homepage": "https://www.theguardian.com/uk",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -153,8 +170,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "B research-planning placement; print-origin UK newsroom."
-          ]
+          ],
+          "existing_source_key": "guardian"
         },
         {
           "key": "the-independent-uk",
@@ -189,7 +208,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "openDemocracy",
+              "url": "https://www.opendemocracy.net/en/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "planning_position_not_persisted",
           "classifications": [],
           "metrics": [],
@@ -215,7 +245,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Byline Times",
+              "url": "https://bylinetimes.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "planning_position_not_persisted",
           "classifications": [],
           "metrics": [],
@@ -240,9 +281,9 @@
           "homepage": "https://www.newstatesman.com/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -257,8 +298,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "B research-planning placement; print-origin magazine/newsroom."
-          ]
+          ],
+          "existing_source_key": "new-statesman"
         }
       ]
     },
@@ -380,9 +423,9 @@
           "homepage": "https://www.ft.com/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -397,8 +440,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "C research/reference placement; print-origin business and general-news newsroom."
-          ]
+          ],
+          "existing_source_key": "financial-times"
         },
         {
           "key": "the-economist",
@@ -406,9 +451,9 @@
           "homepage": "https://www.economist.com/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -423,8 +468,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "C research/reference placement; print-origin international affairs/economics newsroom."
-          ]
+          ],
+          "existing_source_key": "the-economist"
         }
       ]
     },
@@ -438,9 +485,9 @@
           "homepage": "https://www.thetimes.com/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -455,8 +502,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "D research-planning placement; print-origin newsroom."
-          ]
+          ],
+          "existing_source_key": "times"
         },
         {
           "key": "the-telegraph",
@@ -464,9 +513,9 @@
           "homepage": "https://www.telegraph.co.uk/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -481,8 +530,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "D research-planning placement; print-origin newsroom."
-          ]
+          ],
+          "existing_source_key": "telegraph"
         },
         {
           "key": "the-spectator-uk",
@@ -490,9 +541,9 @@
           "homepage": "https://www.spectator.co.uk/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -507,8 +558,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "D research-planning placement; print-origin magazine/newsroom."
-          ]
+          ],
+          "existing_source_key": "the-spectator"
         }
       ]
     },
@@ -550,7 +603,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "UnHerd",
+              "url": "https://unherd.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "planning_position_not_persisted",
           "classifications": [],
           "metrics": [],
@@ -575,9 +639,9 @@
           "homepage": "https://thecritic.co.uk/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -592,8 +656,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "E research-planning placement; magazine and digital commentary newsroom."
-          ]
+          ],
+          "existing_source_key": "the-critic"
         },
         {
           "key": "spiked",
@@ -602,7 +668,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Spiked",
+              "url": "https://www.spiked-online.com/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "planning_position_not_persisted",
           "classifications": [],
           "metrics": [],
@@ -627,9 +704,9 @@
           "homepage": "https://www.dailymail.co.uk/",
           "activity_status": "active",
           "catalog_status": "candidate",
-          "source_action": "create_source",
+          "source_action": "extend_existing_source",
           "feeds": [],
-          "classification_status": "planning_position_not_persisted",
+          "classification_status": "existing_source_classification_not_duplicated",
           "classifications": [],
           "metrics": [],
           "outlets": [
@@ -644,8 +721,10 @@
             }
           ],
           "notes": [
+            "Digital outlet of existing print Source; do not duplicate source identity.",
             "E research-planning placement; print-origin newsroom."
-          ]
+          ],
+          "existing_source_key": "daily-mail"
         }
       ]
     },
@@ -663,7 +742,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Full Fact",
+          "url": "https://fullfact.org/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -715,7 +805,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "The Conversation UK",
+          "url": "https://theconversation.com/uk/articles.atom",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -766,9 +867,9 @@
       "homepage": "https://www.prospectmagazine.co.uk/",
       "activity_status": "active",
       "catalog_status": "candidate",
-      "source_action": "create_source",
+      "source_action": "extend_existing_source",
       "feeds": [],
-      "classification_status": "unclassified_research_candidate",
+      "classification_status": "existing_source_classification_not_duplicated",
       "classifications": [],
       "metrics": [],
       "outlets": [
@@ -783,18 +884,27 @@
         }
       ],
       "notes": [
+        "Digital outlet of existing print Source; do not duplicate source identity.",
         "Print-origin ideas/current-affairs magazine; politically unclassified in FSC."
-      ]
+      ],
+      "existing_source_key": "prospect"
     }
   ],
   "approved_candidate_count": 28,
   "approved_core_count": 23,
-  "new_source_count": 23,
-  "existing_source_extension_count": 5,
+  "new_source_count": 10,
+  "existing_source_extension_count": 18,
   "review_status": {
     "source_selection": "self_continued_28_candidate_gb_digital_core_2026_09_25",
     "digital_scope": "decision_a_digital_is_medium",
     "source_identity": "reuse_existing_broadcast_sources",
     "radical_right": "explicit_market_gap_no_quota_filling"
-  }
+  },
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }
