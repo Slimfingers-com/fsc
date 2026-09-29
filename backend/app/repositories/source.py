@@ -157,6 +157,19 @@ class SourceRepository(BaseRepository[Source]):
         )
         return db.scalar(statement)
 
+    def list_outlets_for_source(
+        self,
+        db: Session,
+        source_id: UUID,
+    ) -> list[SourceOutlet]:
+        statement = (
+            select(SourceOutlet)
+            .where(SourceOutlet.source_id == source_id)
+            .where(SourceOutlet.deleted_at.is_(None))
+            .order_by(SourceOutlet.created_at, SourceOutlet.id)
+        )
+        return list(db.scalars(statement).all())
+
     def get_active_outlet(
         self,
         db: Session,

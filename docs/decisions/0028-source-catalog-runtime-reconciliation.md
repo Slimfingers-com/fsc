@@ -85,8 +85,9 @@ allows the same reconciliation to be repeated safely.
 
 ## Consequences
 
-Reviewed organization feeds can be deployed consistently across environments
-without activating the full source catalog.
+Reviewed feeds can be deployed consistently across environments without
+activating the full source catalog. Reviewed cross-media Outlet structure can
+also be materialized without forcing feedless base Sources into runtime.
 
 Running reconciliation repeatedly is idempotent when runtime state already
 matches the catalog.
@@ -114,11 +115,20 @@ Entry-level `source_type`, country and language metadata may still be present,
 but the reconciler falls back to the catalog-level runtime metadata when they
 are omitted.
 
-Only `create_source` entries may currently carry materializable reviewed
-feeds. Cross-media `extend_existing_source` and `reuse_existing_source`
-entries remain feedless in this workflow. A canonical Source feed is configured
-on exactly one creating catalog entry, avoiding ambiguous cross-catalog feed
-ownership.
+Cross-media `extend_existing_source` entries may be materialized even when
+they have no Feed of their own. They add only reviewed Outlet metadata to an
+already existing canonical runtime Source; they never create a second Source.
+The required `existing_source_key` remains the cross-catalog identity
+reference, while runtime resolution uses the canonical normalized Source name.
+Catalog validation requires the extension and its referenced base entry to use
+the same canonical Source name.
+
+An extension may also carry its own reviewed Feed when that content channel is
+specific to the extension. Such a Feed is attached to the same canonical
+runtime Source and follows the normal URL-uniqueness and role-policy checks.
+Existing same-named Outlets with incompatible reviewed metadata are conflicts;
+unmanaged runtime Outlets are never deleted. `create_source` entries without a
+reviewed Feed remain catalog-only.
 
 For print entries that do not define an explicit `outlets` array, the
 reconciler materializes the reviewed print publication itself as the primary
