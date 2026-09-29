@@ -89,7 +89,17 @@ def test_print_catalog_is_catalog_only_and_unique(country: str) -> None:
             assert entry["form_group"] in ALLOWED_FORM_GROUPS
             assert entry["activity_status"] in ALLOWED_ACTIVITY
             assert entry["catalog_status"] == "candidate"
-            assert entry["feeds"] == []
+            if country == "DE":
+                configured = {
+                    "taz",
+                    "der-spiegel",
+                    "welt",
+                    "junge-freiheit",
+                    "tichys-einblick",
+                }
+                assert bool(entry["feeds"]) is (entry["key"] in configured)
+            else:
+                assert entry["feeds"] == []
 
             if "language" in entry:
                 assert entry["language"] in catalog_languages(catalog)
