@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "US",
   "languages": [
     "en"
@@ -41,7 +41,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Democracy Now!",
+              "url": "https://www.democracynow.org/democracynow.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "two_source_direction_confirmed",
           "classifications": [
             {
@@ -95,7 +106,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "PBS NewsHour",
+              "url": "https://www.pbs.org/newshour/feeds/rss/headlines",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "two_source_direction_confirmed",
           "classifications": [
             {
@@ -233,7 +255,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "NPR News",
+              "url": "https://feeds.npr.org/1001/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "two_source_direction_confirmed",
           "classifications": [
             {
@@ -302,7 +335,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "ABC News - Top Stories",
+              "url": "https://abcnews.go.com/abcnews/topstories",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "mainstream_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -336,7 +380,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "CBS News",
+              "url": "https://www.cbsnews.com/latest/rss/main",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "mainstream_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -361,7 +416,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "NBC News - Top Stories",
+              "url": "https://feeds.nbcnews.com/nbcnews/public/news",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "mainstream_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -460,7 +526,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Fox News - Latest",
+              "url": "https://moxie.foxnews.com/google-publisher/latest.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 15,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "two_source_direction_confirmed",
           "classifications": [
             {
@@ -831,5 +908,12 @@
   ],
   "approved_candidate_count": 17,
   "new_source_count": 17,
-  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL"
 }
