@@ -289,9 +289,14 @@ def test_catalog_reconciliation_does_not_delete_unmanaged_runtime_feeds(
     )
     db.expire(source, ["feeds"])
 
+    refreshed = reconciler.source_service.get_by_slug(
+        db,
+        source.slug,
+    )
+    assert refreshed is not None
     assert {
         feed.url
-        for feed in source.feeds
+        for feed in refreshed.feeds
         if feed.deleted_at is None
     } == {
         "https://example.org/research.xml",
