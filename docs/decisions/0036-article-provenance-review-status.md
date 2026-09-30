@@ -1,6 +1,6 @@
 # ADR 0036: Canonical article provenance review status
 
-Status: Accepted  
+Status: Accepted
 Date: 2026-09-30
 
 ## Context
