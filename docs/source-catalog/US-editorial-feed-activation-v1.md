@@ -29,11 +29,9 @@ as a coherent editorial or official-content channel.
 - Los Angeles Times — `https://www.latimes.com/world-nation/rss2.0.xml`
 - Mother Jones — `https://www.motherjones.com/feed/`
 - The New Republic — `https://newrepublic.com/rss.xml`
-- The Atlantic — `https://www.theatlantic.com/feed/all/`
 - Dissent — `https://www.dissentmagazine.org/feed/`
 - Reason — `https://reason.com/feed/`
 - Newsweek — `https://www.newsweek.com/rss`
-- The Washington Times — `https://www.washingtontimes.com/rss/headlines/news/`
 - National Review — `https://www.nationalreview.com/feed/`
 - Washington Examiner — `https://www.washingtonexaminer.com/feed`
 - New York Post — `https://nypost.com/feed/`
@@ -67,7 +65,6 @@ Source identity.
 - The Gateway Pundit — `https://www.thegatewaypundit.com/feed/`
 - ProPublica — `https://www.propublica.org/feeds/propublica/main`
 - The Hill — `https://thehill.com/feed/`
-- The 19th — `https://19thnews.org/feed/`
 
 All are configured as `news -> editorial` with a 30-minute interval.
 
@@ -91,11 +88,23 @@ All are configured as `news -> editorial` with a 30-minute interval.
 - Federal Bureau of Investigation —
   `https://www.fbi.gov/feeds/fbi-in-the-news/atom.xml`
   - class: `press_release`
-- Cybersecurity and Infrastructure Security Agency —
-  `https://www.cisa.gov/news.xml`
-  - class: `press_release`
 
 All Primary Source feeds use `primary_evidence` and a 60-minute interval.
+
+## Tier 2: reviewed but production-inactive
+
+The following reviewed endpoints remain catalogued but are inactive in runtime
+because they returned HTTP 403 from the Hetzner production host on 2026-09-30,
+including with a browser-style User-Agent:
+
+- The Atlantic — `https://www.theatlantic.com/feed/all/`
+- The Washington Times — `https://www.washingtontimes.com/rss/headlines/news/`
+- The 19th — `https://19thnews.org/feed/`
+- Cybersecurity and Infrastructure Security Agency —
+  `https://www.cisa.gov/news.xml`
+
+They remain Tier 2 so the reviewed endpoint identity is preserved without
+causing repeated production fetch failures. No replacement URL is guessed.
 
 ## Reviewed but not activated
 

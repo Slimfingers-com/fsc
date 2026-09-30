@@ -808,12 +808,12 @@
             {
               "name": "CISA News",
               "url": "https://www.cisa.gov/news.xml",
-              "active": true,
+              "active": false,
               "priority": 1,
               "fetch_interval_minutes": 60,
               "default_confirmation_role": "primary_evidence",
               "feed_class": "press_release",
-              "activation_tier": 1
+              "activation_tier": 2
             }
           ],
           "classification_status": "functional_primary_source_not_political_classification",

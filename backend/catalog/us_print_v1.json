@@ -463,12 +463,12 @@
             {
               "name": "The Atlantic",
               "url": "https://www.theatlantic.com/feed/all/",
-              "active": true,
+              "active": false,
               "priority": 1,
               "fetch_interval_minutes": 30,
               "default_confirmation_role": "editorial",
               "feed_class": "news",
-              "activation_tier": 1
+              "activation_tier": 2
             }
           ],
           "classifications": [
@@ -702,12 +702,12 @@
             {
               "name": "The Washington Times - News",
               "url": "https://www.washingtontimes.com/rss/headlines/news/",
-              "active": true,
+              "active": false,
               "priority": 1,
               "fetch_interval_minutes": 30,
               "default_confirmation_role": "editorial",
               "feed_class": "news",
-              "activation_tier": 1
+              "activation_tier": 2
             }
           ],
           "classifications": [
