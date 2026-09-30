@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "DE",
   "language": "de",
   "scope": "regional",
@@ -44,7 +44,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "BR24",
+              "url": "https://nachrichtenfeeds.br.de/rss/nachrichten/seiten/QXAPkQJ",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -102,7 +113,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "hessenschau.de",
+              "url": "https://www.hessenschau.de/index.rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -150,7 +172,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "MDR Aktuell",
+              "url": "https://www.mdr.de/nachrichten/index~rss2.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -202,7 +235,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "NDR.de",
+              "url": "https://www.ndr.de/index~rss2.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -256,7 +300,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "buten un binnen - Nachrichten",
+              "url": "https://www.butenunbinnen.de/feed/rss/nachrichten/neuste-nachrichten100.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -304,7 +359,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "rbb24",
+              "url": "https://www.rbb24.de/index.xml/feed=rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -403,7 +469,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "SWR Aktuell",
+              "url": "https://www.swr.de/~rss/swraktuell/index.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -454,7 +531,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "WDR Nachrichten",
+              "url": "https://www1.wdr.de/wissen/uebersicht-nachrichten-100.feed",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -853,5 +941,12 @@
   ],
   "approved_candidate_count": 19,
   "new_source_count": 19,
-  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  },
+  "runtime_source_type": "REGIONAL",
+  "runtime_coverage_scope": "REGIONAL"
 }

@@ -1516,7 +1516,29 @@ def test_de_regional_broadcast_catalog_has_approved_editorial_sources() -> None:
     assert len({entry["key"] for entry in entries}) == 19
     assert len({entry["name"].casefold() for entry in entries}) == 19
     assert all(entry["source_action"] == "create_source" for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {"br", "hr", "mdr", "ndr", "radio-bremen", "rbb", "swr", "wdr"}
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert catalog["runtime_source_type"] == "REGIONAL"
+    assert catalog["runtime_coverage_scope"] == "REGIONAL"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+    assert catalog["feed_role_policy"] == {"news": "editorial"}
+    for entry in entries:
+        for feed in entry.get("feeds", []):
+            assert feed["active"] is True
+            assert feed["activation_tier"] == 1
+            assert feed["feed_class"] == "news"
+            assert feed["default_confirmation_role"] == "editorial"
 
 
 def test_de_regional_broadcast_has_exactly_nine_ard_landesrundfunkanstalten() -> None:
