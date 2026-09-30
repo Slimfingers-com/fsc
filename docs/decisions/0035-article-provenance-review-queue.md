@@ -16,13 +16,13 @@ FSC exposes an admin-only, paginated review queue at:
 
 `GET /article-provenance/review-queue`
 
-The queue defaults to `verified=false` and returns oldest candidates first.
+The queue defaults to `review_status=pending` and returns oldest candidates first.
 Each item includes the provenance identity, downstream article context,
 publisher Source context, upstream Source context, detection method, confidence,
-verification state and review notes.
+review status and review notes.
 
 Supported filters are:
-- verification state;
+- review status;
 - upstream Source;
 - publisher Source;
 - detection method;
@@ -35,11 +35,13 @@ Pagination uses bounded `limit` and non-negative `offset`.
 ## Consequences
 
 The queue is a read-only discovery surface. It never verifies, rejects or
-deletes a candidate. Verification remains the explicit admin PATCH transition
-on the existing ArticleProvenance row.
+deletes a candidate. Review remains the explicit admin PATCH transition on the existing
+ArticleProvenance row. ADR 0036 defines pending, verified and rejected as the
+canonical review states.
 
 No confidence threshold is treated as automatic verification. ADR 0020 remains
-unchanged: only verified provenance influences source-independence semantics.
+unchanged: only provenance with review_status=verified influences
+source-independence semantics.
 
 Queue queries include only active, non-deleted articles, feeds, publishers and
 upstream Sources. Historical provenance rows remain stored even when they are
