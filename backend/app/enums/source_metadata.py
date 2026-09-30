@@ -19,6 +19,7 @@ class PublicationForm(StrEnum):
     PERIODICAL = "periodical"
     RADIO = "radio"
     TELEVISION = "television"
+    DIGITAL = "digital"
     DIGITAL_NATIVE = "digital_native"
     NEWS_AGENCY = "news_agency"
     OTHER = "other"

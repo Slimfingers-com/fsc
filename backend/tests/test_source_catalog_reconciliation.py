@@ -2,6 +2,7 @@ import pytest
 
 from app.core.exceptions import BusinessRuleViolationError
 from app.enums.confirmation_role import ConfirmationRole
+from app.enums.source_metadata import PublicationForm
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate
 from app.schemas.source import SourceCreate
@@ -496,7 +497,7 @@ def test_catalog_reconciliation_supports_news_media_catalog_defaults(db) -> None
                                 "key": "example-news-web",
                                 "name": "Example News",
                                 "media_category": "digital",
-                                "publication_form": "digital_native",
+                                "publication_form": "digital",
                                 "language": "de",
                                 "homepage": "https://news.example/",
                             }
@@ -521,6 +522,7 @@ def test_catalog_reconciliation_supports_news_media_catalog_defaults(db) -> None
     assert source.country == "DE"
     assert source.language == "de"
     assert source.feeds[0].default_confirmation_role == ConfirmationRole.EDITORIAL
+    assert source.outlets[0].publication_form == PublicationForm.DIGITAL
 
 
 def test_catalog_reconciliation_includes_unclassified_entries(db) -> None:

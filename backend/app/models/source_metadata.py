@@ -54,7 +54,7 @@ class SourceOutlet(BaseModel):
             "publication_form IN ("
             "'daily_newspaper', 'weekly_newspaper', 'sunday_newspaper', "
             "'magazine', 'periodical', 'radio', 'television', "
-            "'digital_native', 'news_agency', 'other'"
+            "'digital', 'digital_native', 'news_agency', 'other'"
             ")",
             name="ck_source_outlet_publication_form",
         ),

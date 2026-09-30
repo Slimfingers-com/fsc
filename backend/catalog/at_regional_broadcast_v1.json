@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "AT",
   "language": "de",
   "scope": "regional",
@@ -43,7 +43,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "burgenland.ORF.at",
+              "url": "https://rss.orf.at/burgenland.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -76,7 +87,8 @@
               "region": [
                 "burgenland"
               ],
-              "homepage": "https://burgenland.orf.at/"
+              "homepage": "https://burgenland.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -91,7 +103,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "kaernten.ORF.at",
+              "url": "https://rss.orf.at/kaernten.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -124,7 +147,8 @@
               "region": [
                 "kaernten"
               ],
-              "homepage": "https://kaernten.orf.at/"
+              "homepage": "https://kaernten.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -139,7 +163,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "niederoesterreich.ORF.at",
+              "url": "https://rss.orf.at/noe.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -172,7 +207,8 @@
               "region": [
                 "niederoesterreich"
               ],
-              "homepage": "https://niederoesterreich.orf.at/"
+              "homepage": "https://niederoesterreich.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -187,7 +223,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "oberoesterreich.ORF.at",
+              "url": "https://rss.orf.at/ooe.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -220,7 +267,8 @@
               "region": [
                 "oberoesterreich"
               ],
-              "homepage": "https://oberoesterreich.orf.at/"
+              "homepage": "https://oberoesterreich.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -235,7 +283,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "salzburg.ORF.at",
+              "url": "https://rss.orf.at/salzburg.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -268,7 +327,8 @@
               "region": [
                 "salzburg"
               ],
-              "homepage": "https://salzburg.orf.at/"
+              "homepage": "https://salzburg.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -283,7 +343,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "steiermark.ORF.at",
+              "url": "https://rss.orf.at/steiermark.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -316,7 +387,8 @@
               "region": [
                 "steiermark"
               ],
-              "homepage": "https://steiermark.orf.at/"
+              "homepage": "https://steiermark.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -331,7 +403,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "tirol.ORF.at",
+              "url": "https://rss.orf.at/tirol.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -364,7 +447,8 @@
               "region": [
                 "tirol"
               ],
-              "homepage": "https://tirol.orf.at/"
+              "homepage": "https://tirol.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -379,7 +463,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "vorarlberg.ORF.at",
+              "url": "https://rss.orf.at/vorarlberg.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -412,7 +507,8 @@
               "region": [
                 "vorarlberg"
               ],
-              "homepage": "https://vorarlberg.orf.at/"
+              "homepage": "https://vorarlberg.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -427,7 +523,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "wien.ORF.at",
+              "url": "https://rss.orf.at/wien.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -460,7 +567,8 @@
               "region": [
                 "wien"
               ],
-              "homepage": "https://wien.orf.at/"
+              "homepage": "https://wien.orf.at/",
+              "media_category": "digital"
             }
           ],
           "notes": [
@@ -574,7 +682,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "LT1",
+          "url": "https://www.lt1.at/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -818,5 +937,12 @@
   ],
   "approved_candidate_count": 19,
   "new_source_count": 19,
-  "review_status": "jointly_approved_candidate_core_no_feeds_activated"
+  "review_status": "jointly_approved_candidate_core_no_feeds_activated",
+  "runtime_source_type": "REGIONAL",
+  "runtime_coverage_scope": "REGIONAL",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  }
 }

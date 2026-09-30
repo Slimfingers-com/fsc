@@ -1717,7 +1717,34 @@ def test_at_regional_broadcast_catalog_has_approved_editorial_sources() -> None:
     entries = at_regional_broadcast_entries(catalog)
     assert len(entries) == 19
     assert len({entry["key"] for entry in entries}) == 19
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {
+        "orf-burgenland", "orf-kaernten", "orf-niederoesterreich",
+        "orf-oberoesterreich", "orf-salzburg", "orf-steiermark",
+        "orf-tirol", "orf-vorarlberg", "orf-wien", "lt1",
+    }
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert catalog["runtime_source_type"] == "REGIONAL"
+    assert catalog["runtime_coverage_scope"] == "REGIONAL"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+    assert catalog["feed_role_policy"] == {"news": "editorial"}
+    for entry in entries:
+        for feed in entry.get("feeds", []):
+            assert feed["active"] is True
+            assert feed["priority"] == 1
+            assert feed["activation_tier"] == 1
+            assert feed["feed_class"] == "news"
+            assert feed["default_confirmation_role"] == "editorial"
 
 
 def test_at_regional_broadcast_has_nine_orf_landstudios() -> None:
@@ -1729,6 +1756,14 @@ def test_at_regional_broadcast_has_nine_orf_landstudios() -> None:
     }
     assert all(len(entry["outlets"]) == 3 for entry in centre.values())
     assert all(entry["classification_status"] == "public_service_centre_reference_not_political_classification" for entry in centre.values())
+    digital_outlets = [
+        outlet
+        for entry in centre.values()
+        for outlet in entry["outlets"]
+        if outlet["publication_form"] == "digital"
+    ]
+    assert len(digital_outlets) == 9
+    assert all(outlet["media_category"] == "digital" for outlet in digital_outlets)
 
 
 def test_at_regional_broadcast_r9_does_not_merge_partner_sources() -> None:
@@ -5581,12 +5616,34 @@ def test_at_editorial_and_primary_catalogs_have_reviewed_feed_activation() -> No
             encoding="utf-8"
         )
     )
-    assert regional.get("feed_activation_policy") is None
-    assert not any(
-        entry.get("feeds")
-        for group in regional.get("groups", [])
-        for entry in group.get("entries", [])
+    assert (
+        regional["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
     )
+    regional_entries = [
+        *[
+            entry
+            for group in regional.get("groups", [])
+            for entry in group.get("entries", [])
+        ],
+        *regional.get("unclassified_entries", []),
+    ]
+    assert {
+        entry["key"]
+        for entry in regional_entries
+        if entry.get("feeds")
+    } == {
+        "orf-burgenland",
+        "orf-kaernten",
+        "orf-niederoesterreich",
+        "orf-oberoesterreich",
+        "orf-salzburg",
+        "orf-steiermark",
+        "orf-tirol",
+        "orf-vorarlberg",
+        "orf-wien",
+        "lt1",
+    }
 
 
 def test_cross_media_extensions_reference_same_named_base_source() -> None:
