@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "scope": "europe",
   "country": null,
   "countries_excluded": [
@@ -135,7 +135,7 @@
         {
           "key": "le-monde",
           "name": "Le Monde",
-          "homepage": null,
+          "homepage": "https://www.lemonde.fr/",
           "country": "FR",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -143,7 +143,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Le Monde - Une",
+              "url": "https://www.lemonde.fr/rss/une.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -207,7 +218,7 @@
         {
           "key": "la-repubblica",
           "name": "la Repubblica",
-          "homepage": null,
+          "homepage": "https://www.repubblica.it/",
           "country": "IT",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -215,7 +226,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "la Repubblica - Homepage",
+              "url": "https://www.repubblica.it/rss/homepage/rss2.0.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -258,7 +280,7 @@
         {
           "key": "el-pais",
           "name": "El País",
-          "homepage": null,
+          "homepage": "https://elpais.com/",
           "country": "ES",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -266,7 +288,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "El País - Portada",
+              "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -294,7 +327,7 @@
         {
           "key": "gazeta-wyborcza",
           "name": "Gazeta Wyborcza",
-          "homepage": null,
+          "homepage": "https://wyborcza.pl/",
           "country": "PL",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -302,7 +335,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Gazeta Wyborcza - Najnowsze",
+              "url": "https://wyborcza.pl/pub/rss/najnowsze_wyborcza.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -366,7 +410,7 @@
         {
           "key": "de-groene-amsterdammer",
           "name": "De Groene Amsterdammer",
-          "homepage": null,
+          "homepage": "https://www.groene.nl/",
           "country": "NL",
           "publication_form": "magazine",
           "form_group": "magazine_or_periodical",
@@ -374,7 +418,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "De Groene Amsterdammer",
+              "url": "https://www.groene.nl/feed.atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -540,7 +595,7 @@
         {
           "key": "hvg",
           "name": "HVG",
-          "homepage": null,
+          "homepage": "https://hvg.hu/",
           "country": "HU",
           "publication_form": "magazine",
           "form_group": "magazine_or_periodical",
@@ -548,7 +603,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "HVG",
+              "url": "https://hvg.hu/rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -576,7 +642,7 @@
         {
           "key": "efimerida-ton-syntakton",
           "name": "Efimerida ton Syntakton",
-          "homepage": null,
+          "homepage": "https://www.efsyn.gr/",
           "country": "GR",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -584,7 +650,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Efimerida ton Syntakton",
+              "url": "https://www.efsyn.gr/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -612,7 +689,7 @@
         {
           "key": "danas",
           "name": "Danas",
-          "homepage": null,
+          "homepage": "https://www.danas.rs/",
           "country": "RS",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -620,7 +697,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Danas",
+              "url": "https://www.danas.rs/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -793,7 +881,7 @@
         {
           "key": "nrc",
           "name": "NRC",
-          "homepage": null,
+          "homepage": "https://www.nrc.nl/",
           "country": "NL",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -801,7 +889,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "NRC",
+              "url": "https://www.nrc.nl/rss/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -901,7 +1000,7 @@
         {
           "key": "dagens-nyheter",
           "name": "Dagens Nyheter",
-          "homepage": null,
+          "homepage": "https://www.dn.se/",
           "country": "SE",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -909,7 +1008,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Dagens Nyheter",
+              "url": "https://www.dn.se/rss/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -1081,7 +1191,7 @@
         {
           "key": "hospodarske-noviny",
           "name": "Hospodářské noviny",
-          "homepage": null,
+          "homepage": "https://hn.cz/",
           "country": "CZ",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -1089,7 +1199,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Hospodářské noviny",
+              "url": "https://hn.cz/?m=rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -1153,7 +1274,7 @@
         {
           "key": "delo",
           "name": "Delo",
-          "homepage": null,
+          "homepage": "https://www.delo.si/",
           "country": "SI",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -1161,7 +1282,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Delo",
+              "url": "https://www.delo.si/rss",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -1232,7 +1364,7 @@
         {
           "key": "el-mundo",
           "name": "El Mundo",
-          "homepage": null,
+          "homepage": "https://www.elmundo.es/",
           "country": "ES",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -1240,7 +1372,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "El Mundo - Portada",
+              "url": "https://www.elmundo.es/rss/googlenews/portada.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -1283,7 +1426,7 @@
         {
           "key": "jyllands-posten",
           "name": "Jyllands-Posten",
-          "homepage": null,
+          "homepage": "https://jyllands-posten.dk/",
           "country": "DK",
           "publication_form": "daily_newspaper",
           "form_group": "newspaper_or_weekly",
@@ -1291,7 +1434,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Jyllands-Posten - Latest News",
+              "url": "https://newsletter-proxy.aws.jyllands-posten.dk/v1/latestNewsRss/jyllands-posten.dk?count=10",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -2136,24 +2290,7 @@
     ],
     "needs_more_provenance": []
   },
-  "review_status": {
-    "shortlist_political_mapping": "complete",
-    "entry_level_provenance": "36_of_50_baseline_verified_14_high_attention",
-    "active_print_verification": "in_progress",
-    "metrics_enrichment": "36_of_50_baseline_metrics",
-    "implementation": "entries_generated_needs_homepage_language_and_remaining_provenance",
-    "shortlist_size": 50,
-    "shortlist_curation": "complete",
-    "political_distribution": {
-      "radical_left": 3,
-      "left_liberal": 16,
-      "liberal_centre": 16,
-      "conservative": 8,
-      "right": 6,
-      "radical_right": 1
-    },
-    "language_metadata": "complete"
-  },
+  "review_status": "reviewed_europe_print_feed_activation_v1",
   "verification_queue": [
     {
       "name": "L'Humanité",
@@ -3798,5 +3935,13 @@
       "status": "requires_current_frequency_confirmation"
     }
   },
-  "coverage_policy_notes": "European comparison coverage is relevance-weighted; targets are goals, not quotas."
+  "coverage_policy_notes": "European comparison coverage is relevance-weighted; targets are goals, not quotas.",
+  "runtime_country_policy": "per_entry_required",
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  }
 }
