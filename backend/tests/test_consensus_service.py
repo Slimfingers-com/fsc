@@ -7,6 +7,7 @@ from app.enums.confirmation_role import ConfirmationRole
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
 )
 from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
@@ -218,7 +219,7 @@ def test_co_production_bridges_story_independence_component(db):
             relation_kind=ArticleProvenanceKind.CO_PRODUCED_WITH,
             confidence=1.0,
             detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-            verified=True,
+            review_status=ArticleProvenanceReviewStatus.VERIFIED,
         )
     )
     db.flush()
