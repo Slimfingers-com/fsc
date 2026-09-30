@@ -46,8 +46,13 @@ verified provenance for independence analysis, automatic detection does not
 change Consensus or Coverage counts.
 
 Manual or later verification remains required before an agency dependency can
-affect independence semantics. Existing verified provenance is never downgraded
-by repeated automatic detection.
+affect independence semantics. Verification is an explicit admin-only state
+transition on the existing provenance identity via PATCH; create semantics are
+not overloaded. The transition changes only the verified flag and preserves
+the original detection method, confidence and evidence. Repeating the same
+verification state is idempotent, and an admin may revoke verification by
+setting verified=false. Existing verified provenance is never downgraded by
+repeated automatic detection.
 
 The alias set is code-reviewed and intentionally small. Adding a new agency or
 alias requires an explicit code/catalog review rather than fuzzy entity
