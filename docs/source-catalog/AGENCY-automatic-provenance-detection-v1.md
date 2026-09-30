@@ -24,7 +24,7 @@ continues without creating provenance. Self-provenance is never created.
 
 All automatic candidates are:
 - relation_kind = supplied_by
-- verified = false
+- review_status = pending
 - upstream_article_id = null
 - detection_method = provider_metadata or byline
 
@@ -42,10 +42,11 @@ Repeated ingestion is idempotent and cannot duplicate the same active
 article/upstream-source/relation identity. Existing verified provenance is
 preserved.
 
-Verification is performed separately through the admin-only provenance PATCH
-transition. Only the verified flag changes; detection method, confidence,
-relation identity and evidence remain intact. The transition is idempotent and
-may also revoke a previous verification.
+Review is performed separately through the admin-only provenance PATCH
+transition. The canonical review_status changes between pending, verified and
+rejected; detection method, confidence, relation identity and evidence remain
+intact. reviewed_at is set for verified/rejected and cleared when returned to
+pending.
 
 ## Feed parsing
 
@@ -64,5 +65,5 @@ conservative byline detector through
 
 Historical backfill uses only stored article author/byline metadata; provider
 metadata from past feed documents is deliberately not inferred. All inserted
-rows remain unverified and use the same active provenance identity as live
+rows remain pending and use the same active provenance identity as live
 ingestion, so applying the backfill repeatedly is idempotent.
