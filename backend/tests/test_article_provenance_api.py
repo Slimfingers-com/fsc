@@ -250,3 +250,123 @@ def test_article_provenance_verification_patch_requires_admin_key(
         json={"verified": True},
     )
     assert response.status_code == 401
+
+
+
+def test_article_provenance_review_queue_is_admin_only_and_paginated(
+    client,
+    db,
+):
+    publisher, first_article = make_article(
+        db,
+        "Queue Publisher",
+        "queue-publisher",
+    )
+    _, second_article = make_article(
+        db,
+        "Queue Publisher Two",
+        "queue-publisher-two",
+    )
+    upstream_source, _ = make_article(
+        db,
+        "Queue Agency",
+        "queue-agency",
+    )
+    db.commit()
+
+    for article, confidence, method in (
+        (first_article, 0.90, "byline"),
+        (second_article, 0.95, "provider_metadata"),
+    ):
+        created = client.post(
+            f"/articles/{article.id}/provenance",
+            headers=ADMIN_HEADERS,
+            json={
+                "upstream_source_id": str(upstream_source.id),
+                "relation_kind": "supplied_by",
+                "confidence": confidence,
+                "detection_method": method,
+                "verified": False,
+                "notes": f"Candidate {method}",
+            },
+        )
+        assert created.status_code == 201
+
+    unauthorized = client.get("/article-provenance/review-queue")
+    assert unauthorized.status_code == 401
+
+    response = client.get(
+        "/article-provenance/review-queue",
+        headers=ADMIN_HEADERS,
+        params={"limit": 1, "offset": 0},
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["total"] == 2
+    assert body["limit"] == 1
+    assert body["offset"] == 0
+    assert len(body["items"]) == 1
+    item = body["items"][0]
+    assert item["verified"] is False
+    assert item["upstream_source_id"] == str(upstream_source.id)
+    assert item["upstream_source_name"] == upstream_source.name
+    assert item["publisher_source_id"] in {
+        str(publisher.id),
+        str(second_article.feed.source_id),
+    }
+    assert item["provenance_id"]
+    assert item["article_id"]
+
+
+def test_article_provenance_review_queue_filters_candidates(
+    client,
+    db,
+):
+    publisher, article = make_article(
+        db,
+        "Filtered Publisher",
+        "filtered-publisher",
+    )
+    upstream_source, _ = make_article(
+        db,
+        "Filtered Agency",
+        "filtered-agency",
+    )
+    db.commit()
+
+    created = client.post(
+        f"/articles/{article.id}/provenance",
+        headers=ADMIN_HEADERS,
+        json={
+            "upstream_source_id": str(upstream_source.id),
+            "relation_kind": "supplied_by",
+            "confidence": 0.95,
+            "detection_method": "provider_metadata",
+            "verified": False,
+        },
+    )
+    assert created.status_code == 201
+
+    response = client.get(
+        "/article-provenance/review-queue",
+        headers=ADMIN_HEADERS,
+        params={
+            "upstream_source_id": str(upstream_source.id),
+            "publisher_source_id": str(publisher.id),
+            "detection_method": "provider_metadata",
+            "relation_kind": "supplied_by",
+            "min_confidence": 0.94,
+        },
+    )
+    assert response.status_code == 200
+    body = response.json()
+    assert body["total"] == 1
+    assert body["items"][0]["provenance_id"] == created.json()["id"]
+
+    excluded = client.get(
+        "/article-provenance/review-queue",
+        headers=ADMIN_HEADERS,
+        params={"min_confidence": 0.99},
+    )
+    assert excluded.status_code == 200
+    assert excluded.json()["total"] == 0

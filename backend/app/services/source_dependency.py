@@ -1,14 +1,21 @@
+from datetime import datetime
 from uuid import UUID
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.core.exceptions import BusinessRuleViolationError
+from app.enums.source_dependency import (
+    ArticleProvenanceDetectionMethod,
+    ArticleProvenanceKind,
+)
 from app.models.source_dependency import ArticleProvenance
 from app.repositories.source import SourceRepository
 from app.repositories.source_dependency import SourceDependencyRepository
 from app.schemas.source_dependency import (
     ArticleProvenanceCreate,
+    ArticleProvenanceReviewItem,
+    ArticleProvenanceReviewPage,
     ArticleProvenanceVerificationUpdate,
 )
 
@@ -39,6 +46,62 @@ class SourceDependencyService:
         return self.repository.list_article_provenance(
             db,
             article_id=article_id,
+        )
+
+    def list_article_provenance_review_queue(
+        self,
+        db: Session,
+        *,
+        verified: bool,
+        upstream_source_id: UUID | None,
+        publisher_source_id: UUID | None,
+        detection_method: ArticleProvenanceDetectionMethod | None,
+        relation_kind: ArticleProvenanceKind | None,
+        min_confidence: float | None,
+        created_from: datetime | None,
+        limit: int,
+        offset: int,
+    ) -> ArticleProvenanceReviewPage:
+        total, rows = self.repository.list_article_provenance_review_queue(
+            db,
+            verified=verified,
+            upstream_source_id=upstream_source_id,
+            publisher_source_id=publisher_source_id,
+            detection_method=detection_method,
+            relation_kind=relation_kind,
+            min_confidence=min_confidence,
+            created_from=created_from,
+            limit=limit,
+            offset=offset,
+        )
+        items = [
+            ArticleProvenanceReviewItem(
+                provenance_id=provenance.id,
+                article_id=article.id,
+                article_title=article.title,
+                article_url=article.link,
+                article_author=article.author,
+                article_published_at=article.published_at,
+                publisher_source_id=publisher.id,
+                publisher_source_name=publisher.name,
+                publisher_source_slug=publisher.slug,
+                upstream_source_id=upstream.id,
+                upstream_source_name=upstream.name,
+                upstream_source_slug=upstream.slug,
+                relation_kind=provenance.relation_kind,
+                confidence=provenance.confidence,
+                detection_method=provenance.detection_method,
+                verified=provenance.verified,
+                notes=provenance.notes,
+                created_at=provenance.created_at,
+            )
+            for provenance, article, publisher, upstream in rows
+        ]
+        return ArticleProvenanceReviewPage(
+            total=total,
+            limit=limit,
+            offset=offset,
+            items=items,
         )
 
     def create_article_provenance(
