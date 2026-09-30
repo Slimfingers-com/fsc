@@ -33,7 +33,7 @@ Automatically detected provenance uses:
 - relation_kind: supplied_by;
 - upstream_article_id: null;
 - a fixed detection confidence reflecting metadata strength;
-- verified: false.
+- review_status: pending.
 
 Provider metadata has higher confidence than byline metadata. Repeated ingestion
 is idempotent through the existing active provenance identity. An article from
@@ -46,13 +46,13 @@ verified provenance for independence analysis, automatic detection does not
 change Consensus or Coverage counts.
 
 Manual or later verification remains required before an agency dependency can
-affect independence semantics. Verification is an explicit admin-only state
-transition on the existing provenance identity via PATCH; create semantics are
-not overloaded. The transition changes only the verified flag and preserves
-the original detection method, confidence and evidence. Repeating the same
-verification state is idempotent, and an admin may revoke verification by
-setting verified=false. Existing verified provenance is never downgraded by
-repeated automatic detection.
+affect independence semantics. Verification is an explicit admin-only state transition on the existing
+provenance identity via PATCH; create semantics are not overloaded. ADR 0036
+makes review_status the canonical review state with pending, verified and
+rejected values. The transition preserves the original detection method,
+confidence and evidence. Repeating the same review state is idempotent, and an
+admin may return a reviewed row to pending. Existing reviewed provenance is
+never changed by repeated automatic detection.
 
 The alias set is code-reviewed and intentionally small. Adding a new agency or
 alias requires an explicit code/catalog review rather than fuzzy entity
@@ -72,8 +72,8 @@ the backfill intentionally uses author/byline data only.
 
 The backfill is dry-run-first and transactional. It considers only non-deleted
 articles on active, non-deleted feeds and Sources. It creates the same
-unverified supplied_by candidate identity as live ingestion and therefore
-shares the same idempotence constraint. Existing candidates, including verified
+pending supplied_by candidate identity as live ingestion and therefore
+shares the same idempotence constraint. Existing candidates, including reviewed
 ones, are never duplicated or downgraded.
 
 The backfill reports detected candidates, planned changes, already-present
