@@ -7,6 +7,7 @@ from app.claim_relations.provider import ClaimRelationKind
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
     SourceRelationKind,
 )
 from app.enums.source_type import SourceType
@@ -115,7 +116,11 @@ def build_consensus_story(
                 detection_method=(
                     ArticleProvenanceDetectionMethod.MANUAL
                 ),
-                verified=verified_provenance,
+                review_status=(
+                    ArticleProvenanceReviewStatus.VERIFIED
+                    if verified_provenance
+                    else ArticleProvenanceReviewStatus.PENDING
+                ),
             )
         )
         db.flush()
