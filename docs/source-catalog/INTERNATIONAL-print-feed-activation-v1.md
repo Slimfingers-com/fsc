@@ -21,7 +21,7 @@ Runtime semantics follow ADR 0032:
 
 ## Tier 1: activated
 
-The following nine general newsroom feeds were validated as current parseable
+The following eight general newsroom feeds were validated as current parseable
 RSS/Atom channels and were also verified from the production Hetzner host:
 
 - CartaCapital — `https://www.cartacapital.com.br/feed/`
@@ -32,10 +32,17 @@ RSS/Atom channels and were also verified from the production Hetzner host:
 - Sabah — `https://www.sabah.com.tr/rss/anasayfa.xml`
 - O Globo — `https://oglobo.globo.com/rss/oglobo`
 - The Times of India — `https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms`
-- Business Day — `https://www.businessday.co.za/arc/outboundfeeds/rss/`
 
 These feeds represent the publication/newsroom channel. They do not create new
 digital Sources separate from the reviewed print Source identity.
+
+## Tier 2: reviewed but production-inactive
+
+- Business Day — `https://www.businessday.co.za/arc/outboundfeeds/rss/`
+  remains catalogued but inactive. The endpoint parsed during review, but the
+  production worker and a direct reproduction with FSC's normal anonymous
+  `FeedFetcher` both returned HTTP 429 on 2026-09-30. No alternate User-Agent,
+  throttling bypass or other site-specific workaround is introduced.
 
 ## Reviewed but not activated
 

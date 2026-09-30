@@ -474,9 +474,10 @@ def test_international_catalog_is_regional_and_excludes_us_and_europe() -> None:
     )
     for entry in entries:
         for feed in entry.get("feeds", []):
-            assert feed["active"] is True
+            expected_active = entry["name"] != "Business Day"
+            assert feed["active"] is expected_active
             assert feed["priority"] == 1
-            assert feed["activation_tier"] == 1
+            assert feed["activation_tier"] == (1 if expected_active else 2)
             assert feed["feed_class"] == "news"
             assert feed["default_confirmation_role"] == "editorial"
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
