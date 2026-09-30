@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, model_validator
@@ -74,3 +74,31 @@ class ArticleProvenanceRead(BaseModel):
     verified: bool
     provenance_url: str | None
     notes: str | None
+
+
+class ArticleProvenanceReviewItem(BaseModel):
+    provenance_id: UUID
+    article_id: UUID
+    article_title: str | None
+    article_url: str | None
+    article_author: str | None
+    article_published_at: datetime | None
+    publisher_source_id: UUID
+    publisher_source_name: str
+    publisher_source_slug: str
+    upstream_source_id: UUID
+    upstream_source_name: str
+    upstream_source_slug: str
+    relation_kind: ArticleProvenanceKind
+    confidence: float
+    detection_method: ArticleProvenanceDetectionMethod
+    verified: bool
+    notes: str | None
+    created_at: datetime
+
+
+class ArticleProvenanceReviewPage(BaseModel):
+    total: int
+    limit: int
+    offset: int
+    items: list[ArticleProvenanceReviewItem]
