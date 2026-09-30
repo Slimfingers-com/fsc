@@ -945,3 +945,128 @@ def test_catalog_reconciliation_staged_batch_resolves_later_extension(
 
     db.rollback()
     assert SourceService().get_by_slug(db, "example-news") is None
+
+
+def _multi_country_editorial_catalog() -> dict:
+    return {
+        "catalog_version": "1.0-draft.2",
+        "country": None,
+        "runtime_country_policy": "per_entry_required",
+        "media_category": "print",
+        "runtime_source_type": "NEWS",
+        "runtime_coverage_scope": "NATIONAL",
+        "feed_activation_policy": (
+            "only_verified_relevant_official_content_channels_are_activated"
+        ),
+        "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+        "feed_role_policy": {"news": "editorial"},
+        "groups": [
+            {
+                "key": "test",
+                "entries": [
+                    {
+                        "key": "example-fr",
+                        "name": "Example France",
+                        "homepage": "https://example.fr/",
+                        "country": "FR",
+                        "language": "fr",
+                        "coverage_scope": "REGIONAL",
+                        "source_action": "create_source",
+                        "publication_form": "daily_newspaper",
+                        "feeds": [
+                            {
+                                "name": "Latest",
+                                "url": "https://example.fr/feed.xml",
+                                "active": True,
+                                "priority": 1,
+                                "fetch_interval_minutes": 30,
+                                "default_confirmation_role": "editorial",
+                                "feed_class": "news",
+                                "activation_tier": 1,
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+
+
+def test_multi_country_catalog_requires_per_entry_iso_country_and_uses_scope_override(
+    db,
+) -> None:
+    catalog = _multi_country_editorial_catalog()
+    reconciler = SourceCatalogReconciler()
+
+    report = reconciler.reconcile(
+        db,
+        catalog,
+        catalog_name="europe_print_test.json",
+        apply=True,
+    )
+
+    assert report.has_conflicts is False
+    assert report.change_count == 1
+    source = SourceService().get_by_slug(db, "example-france")
+    assert source is not None
+    assert source.country == "FR"
+    assert source.coverage_scope.value == "REGIONAL"
+
+
+@pytest.mark.parametrize("entry_country", [None, "ZZ", "fr"])
+def test_multi_country_catalog_rejects_missing_or_invalid_entry_country(
+    db,
+    entry_country,
+) -> None:
+    catalog = _multi_country_editorial_catalog()
+    entry = catalog["groups"][0]["entries"][0]
+    if entry_country is None:
+        entry.pop("country")
+    else:
+        entry["country"] = entry_country
+
+    with pytest.raises(BusinessRuleViolationError, match="ISO alpha-2"):
+        SourceCatalogReconciler().reconcile(
+            db,
+            catalog,
+            catalog_name="europe_print_test.json",
+        )
+
+
+def test_multi_country_catalog_rejects_catalog_level_country(db) -> None:
+    catalog = _multi_country_editorial_catalog()
+    catalog["country"] = "FR"
+
+    with pytest.raises(
+        BusinessRuleViolationError,
+        match="must set catalog country to null",
+    ):
+        SourceCatalogReconciler().reconcile(
+            db,
+            catalog,
+            catalog_name="europe_print_test.json",
+        )
+
+
+def test_single_country_catalog_still_rejects_entry_country_mismatch(db) -> None:
+    catalog = _editorial_base_feed_catalog()
+    catalog["groups"][0]["entries"][0]["country"] = "FR"
+
+    with pytest.raises(BusinessRuleViolationError, match="country differs"):
+        SourceCatalogReconciler().reconcile(
+            db,
+            catalog,
+            catalog_name="de_print_test.json",
+        )
+
+
+def test_catalog_reconciliation_rejects_invalid_entry_coverage_scope(db) -> None:
+    catalog = _multi_country_editorial_catalog()
+    catalog["groups"][0]["entries"][0]["coverage_scope"] = "CONTINENTAL"
+
+    with pytest.raises(BusinessRuleViolationError, match="coverage_scope"):
+        SourceCatalogReconciler().reconcile(
+            db,
+            catalog,
+            catalog_name="europe_print_test.json",
+        )
