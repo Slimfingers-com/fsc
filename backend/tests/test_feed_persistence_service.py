@@ -2,6 +2,10 @@ from datetime import UTC, datetime
 
 from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.confirmation_role import ConfirmationRole
+from app.enums.source_dependency import (
+    ArticleProvenanceDetectionMethod,
+    ArticleProvenanceKind,
+)
 from app.enums.source_type import SourceType
 from app.ingestion.models import (
     FeedFetchResult,
@@ -10,6 +14,7 @@ from app.ingestion.models import (
     ParsedFeedEntry,
 )
 from app.repositories.article import ArticleRepository
+from app.repositories.source_dependency import SourceDependencyRepository
 from app.schemas.feed import FeedCreate
 from app.schemas.source import SourceCreate
 from app.services.feed_persistence import FeedPersistenceService
@@ -605,4 +610,88 @@ def test_feed_default_change_is_nonretroactive(db):
     assert (
         articles["article-2"].confirmation_role
         is ConfirmationRole.EXPERT_ANALYSIS
+    )
+
+
+def test_detected_agency_provenance_is_unverified_and_idempotent(db):
+    agency = SourceService().create_source(
+        db,
+        SourceCreate(
+            name="Reuters",
+            url="https://www.reuters.com/",
+            source_type=SourceType.AGENCY,
+        ),
+    )
+    feed = create_feed(db)
+    document = parsed_feed(
+        parsed_entry(
+            author="Jane Doe",
+            provider="Reuters",
+        )
+    )
+    service = FeedPersistenceService()
+
+    service.persist(db, feed=feed, parsed_feed=document)
+    service.persist(db, feed=feed, parsed_feed=document)
+
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    repository = SourceDependencyRepository()
+    provenance = repository.list_article_provenance(
+        db,
+        article_id=article.id,
+    )
+
+    assert len(provenance) == 1
+    assert provenance[0].upstream_source_id == agency.id
+    assert provenance[0].relation_kind == ArticleProvenanceKind.SUPPLIED_BY
+    assert (
+        provenance[0].detection_method
+        == ArticleProvenanceDetectionMethod.PROVIDER_METADATA
+    )
+    assert provenance[0].confidence == 0.95
+    assert provenance[0].verified is False
+    assert (
+        repository.load_verified_article_provenance(
+            db,
+            article_ids=[article.id],
+        )
+        == []
+    )
+
+
+def test_detected_agency_provenance_does_not_create_self_dependency(db):
+    source = SourceService().create_source(
+        db,
+        SourceCreate(
+            name="Reuters",
+            url="https://www.reuters.com/",
+            source_type=SourceType.AGENCY,
+            feeds=[
+                FeedCreate(
+                    name="Licensed Reuters Feed",
+                    url="https://example.com/reuters.xml",
+                )
+            ],
+        ),
+    )
+    feed = source.feeds[0]
+
+    FeedPersistenceService().persist(
+        db,
+        feed=feed,
+        parsed_feed=parsed_feed(
+            parsed_entry(
+                author="Reuters",
+                provider="Reuters",
+            )
+        ),
+    )
+
+    article = ArticleRepository().list_by_feed(db, feed.id)[0]
+    assert (
+        SourceDependencyRepository().list_article_provenance(
+            db,
+            article_id=article.id,
+        )
+        == []
     )

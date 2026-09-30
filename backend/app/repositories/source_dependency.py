@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from sqlalchemy import or_, select
+from sqlalchemy.dialects.postgresql import insert
 
 from app.models.article import Article
 from app.models.feed import Feed
@@ -143,6 +144,56 @@ class SourceDependencyRepository:
     ) -> ArticleProvenance:
         db.add(provenance)
         return provenance
+
+    def add_unverified_article_provenance_candidate(
+        self,
+        db: Session,
+        *,
+        article_id: UUID,
+        upstream_source_id: UUID,
+        relation_kind,
+        confidence: float,
+        detection_method,
+        notes: str | None,
+    ) -> bool:
+        statement = (
+            insert(ArticleProvenance)
+            .values(
+                article_id=article_id,
+                upstream_source_id=upstream_source_id,
+                upstream_article_id=None,
+                relation_kind=relation_kind,
+                confidence=confidence,
+                detection_method=detection_method,
+                verified=False,
+                notes=notes,
+            )
+            .on_conflict_do_nothing(
+                index_elements=[
+                    ArticleProvenance.article_id,
+                    ArticleProvenance.upstream_source_id,
+                    ArticleProvenance.upstream_article_id,
+                    ArticleProvenance.relation_kind,
+                ],
+                index_where=ArticleProvenance.deleted_at.is_(None),
+            )
+            .returning(ArticleProvenance.id)
+        )
+        return db.scalar(statement) is not None
+
+    def get_active_article_provenance(
+        self,
+        db: Session,
+        *,
+        article_id: UUID,
+        provenance_id: UUID,
+    ) -> ArticleProvenance | None:
+        statement = select(ArticleProvenance).where(
+            ArticleProvenance.id == provenance_id,
+            ArticleProvenance.article_id == article_id,
+            ArticleProvenance.deleted_at.is_(None),
+        )
+        return db.scalar(statement)
 
     def list_article_provenance(
         self,

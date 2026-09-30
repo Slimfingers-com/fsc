@@ -8,6 +8,7 @@ from app.db.session import get_db
 from app.schemas.source_dependency import (
     ArticleProvenanceCreate,
     ArticleProvenanceRead,
+    ArticleProvenanceVerificationUpdate,
 )
 from app.services.source_dependency import SourceDependencyService
 
@@ -48,6 +49,28 @@ def create_article_provenance(
     provenance = service.create_article_provenance(
         db,
         article_id=article_id,
+        data=data,
+    )
+    db.commit()
+    db.refresh(provenance)
+    return provenance
+
+
+@router.patch(
+    "/{article_id}/provenance/{provenance_id}",
+    response_model=ArticleProvenanceRead,
+)
+def update_article_provenance_verification(
+    article_id: UUID,
+    provenance_id: UUID,
+    data: ArticleProvenanceVerificationUpdate,
+    db: Session = Depends(get_db),
+    _admin: None = Depends(require_source_admin),
+):
+    provenance = service.update_article_provenance_verification(
+        db,
+        article_id=article_id,
+        provenance_id=provenance_id,
         data=data,
     )
     db.commit()

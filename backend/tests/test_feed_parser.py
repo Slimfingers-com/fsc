@@ -122,3 +122,23 @@ def test_parse_rejects_empty_and_not_modified():
 def test_parse_rejects_unsupported_document():
     with pytest.raises(UnsupportedFeedFormatError):
         FeedParser().parse(fetched(b"<html><body>not a feed</body></html>"))
+
+
+@pytest.mark.filterwarnings("error::DeprecationWarning")
+def test_parse_atom_extracts_entry_source_as_provider():
+    xml = b'''<?xml version="1.0" encoding="utf-8"?>
+    <feed xmlns="http://www.w3.org/2005/Atom">
+      <title>Example Atom</title>
+      <id>tag:example.com,2026:feed</id>
+      <updated>2026-07-21T10:30:00Z</updated>
+      <entry>
+        <id>tag:example.com,2026:provider</id>
+        <title>Agency supplied article</title>
+        <updated>2026-07-21T10:00:00Z</updated>
+        <source><title>Reuters</title></source>
+      </entry>
+    </feed>'''
+
+    feed = FeedParser().parse(fetched(xml))
+
+    assert feed.entries[0].provider == "Reuters"
