@@ -1079,3 +1079,154 @@ def test_catalog_reconciliation_rejects_invalid_entry_coverage_scope(db) -> None
             catalog,
             catalog_name="europe_print_test.json",
         )
+
+
+def _source_only_agency_catalog() -> dict:
+    return {
+        "catalog_version": "1.0-draft.2",
+        "country": "DE",
+        "language": "de",
+        "media_category": "agency",
+        "runtime_source_type": "AGENCY",
+        "runtime_coverage_scope": "NATIONAL",
+        "feed_activation_policy": (
+            "only_verified_relevant_official_content_channels_are_activated"
+        ),
+        "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+        "feed_role_policy": {"news": "editorial"},
+        "groups": [
+            {
+                "key": "test",
+                "entries": [
+                    {
+                        "key": "example-agency",
+                        "name": "Example Agency",
+                        "homepage": "https://agency.example/",
+                        "source_action": "create_source",
+                        "source_type": "AGENCY",
+                        "country": "DE",
+                        "language": "de",
+                        "runtime_materialization": "source_only",
+                        "feeds": [],
+                        "outlets": [
+                            {
+                                "key": "example-agency-wire",
+                                "name": "Example Agency",
+                                "media_category": "agency",
+                                "publication_form": "news_agency",
+                                "language": "de",
+                                "homepage": "https://agency.example/",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+
+
+def test_catalog_reconciliation_source_only_creates_source_and_outlet_without_feed(
+    db,
+) -> None:
+    catalog = _source_only_agency_catalog()
+    reconciler = SourceCatalogReconciler()
+
+    report = reconciler.reconcile(
+        db,
+        catalog,
+        catalog_name="agency_test.json",
+    )
+
+    assert report.has_conflicts is False
+    assert report.change_count == 1
+    assert report.actions[0].action == "create_source"
+    assert report.actions[0].detail == "source-only runtime reference"
+
+    reconciler.reconcile(
+        db,
+        catalog,
+        catalog_name="agency_test.json",
+        apply=True,
+    )
+    source = SourceService().get_by_slug(db, "example-agency")
+    assert source is not None
+    assert source.source_type == SourceType.AGENCY
+    assert source.country == "DE"
+    assert source.coverage_scope.value == "NATIONAL"
+    assert source.feeds == []
+    assert len(source.outlets) == 1
+    assert source.outlets[0].media_category == "agency"
+    assert source.outlets[0].publication_form == PublicationForm.NEWS_AGENCY
+
+
+def test_catalog_reconciliation_source_only_is_idempotent(db) -> None:
+    catalog = _source_only_agency_catalog()
+    reconciler = SourceCatalogReconciler()
+
+    reconciler.reconcile(
+        db,
+        catalog,
+        catalog_name="agency_test.json",
+        apply=True,
+    )
+    report = reconciler.reconcile(
+        db,
+        catalog,
+        catalog_name="agency_test.json",
+    )
+
+    assert report.has_conflicts is False
+    assert report.change_count == 0
+    assert [action.action for action in report.actions] == ["no_change"]
+
+
+def test_catalog_reconciliation_source_only_rejects_configured_feed(db) -> None:
+    catalog = _source_only_agency_catalog()
+    catalog["groups"][0]["entries"][0]["feeds"] = [
+        {
+            "name": "Hidden feed",
+            "url": "https://agency.example/feed.xml",
+            "active": True,
+            "priority": 1,
+            "fetch_interval_minutes": 30,
+            "default_confirmation_role": "editorial",
+            "feed_class": "news",
+            "activation_tier": 1,
+        }
+    ]
+
+    with pytest.raises(BusinessRuleViolationError, match="must not configure feeds"):
+        SourceCatalogReconciler().reconcile(
+            db,
+            catalog,
+            catalog_name="agency_test.json",
+        )
+
+
+def test_catalog_reconciliation_source_only_requires_create_source(db) -> None:
+    catalog = _source_only_agency_catalog()
+    entry = catalog["groups"][0]["entries"][0]
+    entry["source_action"] = "extend_existing_source"
+    entry["existing_source_key"] = "example-agency"
+
+    with pytest.raises(BusinessRuleViolationError, match="requires create_source"):
+        SourceCatalogReconciler().reconcile(
+            db,
+            catalog,
+            catalog_name="agency_test.json",
+        )
+
+
+def test_catalog_reconciliation_rejects_unknown_runtime_materialization(db) -> None:
+    catalog = _source_only_agency_catalog()
+    catalog["groups"][0]["entries"][0]["runtime_materialization"] = "magic"
+
+    with pytest.raises(
+        BusinessRuleViolationError,
+        match="unsupported runtime_materialization",
+    ):
+        SourceCatalogReconciler().reconcile(
+            db,
+            catalog,
+            catalog_name="agency_test.json",
+        )

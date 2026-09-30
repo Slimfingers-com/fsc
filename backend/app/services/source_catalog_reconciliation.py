@@ -22,6 +22,7 @@ CATALOG_ONLY_FEED_CLASS_POLICY = (
 )
 CATALOG_COUNTRY_POLICY = "catalog_required"
 PER_ENTRY_COUNTRY_POLICY = "per_entry_required"
+SOURCE_ONLY_RUNTIME_MATERIALIZATION = "source_only"
 
 
 @dataclass(frozen=True)
@@ -51,7 +52,7 @@ class CatalogReconciliationReport:
 
 
 class SourceCatalogReconciler:
-    """Materialize only reviewed catalog entries that contain configured feeds."""
+    """Materialize reviewed feed-backed or explicitly source-only catalog entries."""
 
     def __init__(
         self,
@@ -132,8 +133,13 @@ class SourceCatalogReconciler:
                             action="create_source",
                             source_name=source_name,
                             detail=(
-                                f"{len(entry.get('feeds') or [])} reviewed "
-                                "feed(s)"
+                                "source-only runtime reference"
+                                if entry.get("runtime_materialization")
+                                == SOURCE_ONLY_RUNTIME_MATERIALIZATION
+                                else (
+                                    f"{len(entry.get('feeds') or [])} reviewed "
+                                    "feed(s)"
+                                )
                             ),
                         )
                     )
@@ -152,7 +158,11 @@ class SourceCatalogReconciler:
 
             outlet_actions: list[CatalogReconciliationAction] = []
             outlet_conflicts: list[str] = []
-            if source_action == "extend_existing_source":
+            if (
+                source_action == "extend_existing_source"
+                or entry.get("runtime_materialization")
+                == SOURCE_ONLY_RUNTIME_MATERIALIZATION
+            ):
                 outlet_actions, outlet_conflicts = self._plan_outlets(
                     db,
                     source=source,
@@ -377,7 +387,11 @@ class SourceCatalogReconciler:
 
             self._refresh_runtime_relationships(db, source)
 
-            if source_action == "extend_existing_source":
+            if (
+                source_action == "extend_existing_source"
+                or entry.get("runtime_materialization")
+                == SOURCE_ONLY_RUNTIME_MATERIALIZATION
+            ):
                 self._apply_outlets(
                     db,
                     source=source,
@@ -528,9 +542,34 @@ class SourceCatalogReconciler:
             feeds = entry.get("feeds") or []
             source_action = entry.get("source_action", "create_source")
             outlet_data = self._entry_outlet_data(catalog, entry)
+            runtime_materialization = entry.get("runtime_materialization")
+
+            if runtime_materialization not in {
+                None,
+                SOURCE_ONLY_RUNTIME_MATERIALIZATION,
+            }:
+                raise BusinessRuleViolationError(
+                    f"{entry.get('name')}: unsupported runtime_materialization "
+                    f"{runtime_materialization!r}."
+                )
+            if runtime_materialization == SOURCE_ONLY_RUNTIME_MATERIALIZATION:
+                if source_action != "create_source":
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: source_only materialization "
+                        "requires create_source."
+                    )
+                if feeds:
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: source_only materialization "
+                        "must not configure feeds."
+                    )
 
             if source_action == "create_source":
-                if not feeds:
+                if (
+                    not feeds
+                    and runtime_materialization
+                    != SOURCE_ONLY_RUNTIME_MATERIALIZATION
+                ):
                     continue
             elif source_action == "extend_existing_source":
                 if not entry.get("existing_source_key"):
@@ -541,7 +580,7 @@ class SourceCatalogReconciler:
                 if not feeds and not outlet_data:
                     continue
             else:
-                if feeds:
+                if feeds or runtime_materialization is not None:
                     raise BusinessRuleViolationError(
                         f"{entry.get('name')}: unsupported source_action "
                         f"{source_action!r}."
@@ -635,7 +674,7 @@ class SourceCatalogReconciler:
         entry: dict[str, Any],
     ) -> list[str]:
         conflicts: list[str] = []
-        for feed_data in entry["feeds"]:
+        for feed_data in entry.get("feeds") or []:
             existing = self.source_service.repository.get_feed_by_url(
                 db,
                 feed_data["url"],
@@ -848,7 +887,7 @@ class SourceCatalogReconciler:
             language=entry.get("language") or catalog_language,
             feeds=[
                 self._feed_create(feed)
-                for feed in entry["feeds"]
+                for feed in (entry.get("feeds") or [])
             ],
             outlets=outlets,
         )

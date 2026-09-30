@@ -2165,7 +2165,14 @@ def load_agency_content_supplier_catalog() -> dict:
 def test_agency_content_supplier_catalog_has_approved_core() -> None:
     catalog = load_agency_content_supplier_catalog()
     assert catalog["media_category"] == "agency_content_supplier"
-    assert catalog["activation_policy"] == "catalog_only_until_joint_review"
+    assert (
+        catalog["activation_policy"]
+        == "reviewed_source_only_runtime_materialization"
+    )
+    assert catalog["runtime_country_policy"] == "per_entry_required"
+    assert catalog["runtime_source_type"] == "AGENCY"
+    assert catalog["runtime_coverage_scope"] == "NATIONAL"
+    assert catalog["country"] is None
     assert catalog["segmentation_policy"] == "functional_role_not_political_orientation"
     assert catalog["approved_candidate_count"] == 9
     assert catalog["provenance_policy"]["political_group_assignment"] == "two_independent_sources_required"
@@ -2183,6 +2190,22 @@ def test_agency_content_supplier_catalog_has_approved_core() -> None:
         "AFP",
         "REGIOCAST Nachrichten",
     }
+    assert all(
+        entry["runtime_materialization"] == "source_only"
+        for entry in entries
+    )
+    assert all(entry["feeds"] == [] for entry in entries)
+    assert all(len(entry["outlets"]) == 1 for entry in entries)
+    assert all(
+        entry["outlets"][0]["media_category"] == "agency"
+        and entry["outlets"][0]["publication_form"] == "news_agency"
+        for entry in entries
+    )
+    assert {
+        entry["name"]
+        for entry in entries
+        if entry.get("coverage_scope") == "GLOBAL"
+    } == {"Reuters", "Associated Press", "AFP"}
 
 
 def test_agency_catalog_is_functional_not_political() -> None:
