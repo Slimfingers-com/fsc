@@ -53,3 +53,16 @@ RSS/Atom author metadata continues to populate the article author field.
 Structured entry source/provider metadata is additionally retained in the
 ParsedFeedEntry ingestion DTO solely for provenance detection. It is not added
 to Article identity and is not persisted as a separate Article column.
+
+
+## Historical rollout
+
+Articles stored before automatic detection can be reviewed with the same
+conservative byline detector through
+`scripts/backfill_agency_provenance.py`. Dry-run is the default and
+`--apply` is required to persist candidates.
+
+Historical backfill uses only stored article author/byline metadata; provider
+metadata from past feed documents is deliberately not inferred. All inserted
+rows remain unverified and use the same active provenance identity as live
+ingestion, so applying the backfill repeatedly is idempotent.

@@ -61,3 +61,21 @@ than breaking feed ingestion.
 
 Provider metadata is now preserved in ParsedFeedEntry for provenance detection;
 it is not persisted as an Article field and does not change article identity.
+
+
+## Historical backfill
+
+The same detector may be applied once to already persisted articles whose
+stored author/byline metadata predates this feature. Historical provider
+metadata cannot be reconstructed because it was not previously persisted, so
+the backfill intentionally uses author/byline data only.
+
+The backfill is dry-run-first and transactional. It considers only non-deleted
+articles on active, non-deleted feeds and Sources. It creates the same
+unverified supplied_by candidate identity as live ingestion and therefore
+shares the same idempotence constraint. Existing candidates, including verified
+ones, are never duplicated or downgraded.
+
+The backfill reports detected candidates, planned changes, already-present
+identities, missing upstream Sources and skipped self-dependencies before any
+production apply.
