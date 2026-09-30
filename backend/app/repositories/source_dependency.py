@@ -1,12 +1,13 @@
+from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import or_, select
+from sqlalchemy import func, or_, select
 from sqlalchemy.dialects.postgresql import insert
 
 from app.models.article import Article
 from app.models.feed import Feed
 from app.models.source import Source
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, aliased
 
 from app.enums.source_dependency import SourceRelationKind
 from app.models.source_dependency import ArticleProvenance, SourceRelation
@@ -214,3 +215,93 @@ class SourceDependencyRepository:
             )
         )
         return list(db.scalars(statement).all())
+
+
+    def list_article_provenance_review_queue(
+        self,
+        db: Session,
+        *,
+        verified: bool,
+        upstream_source_id: UUID | None,
+        publisher_source_id: UUID | None,
+        detection_method,
+        relation_kind,
+        min_confidence: float | None,
+        created_from: datetime | None,
+        limit: int,
+        offset: int,
+    ):
+        publisher_source = aliased(Source)
+        upstream_source = aliased(Source)
+
+        conditions = [
+            ArticleProvenance.deleted_at.is_(None),
+            ArticleProvenance.verified.is_(verified),
+            Article.deleted_at.is_(None),
+            Feed.deleted_at.is_(None),
+            Feed.active.is_(True),
+            publisher_source.deleted_at.is_(None),
+            publisher_source.active.is_(True),
+            upstream_source.deleted_at.is_(None),
+            upstream_source.active.is_(True),
+        ]
+        if upstream_source_id is not None:
+            conditions.append(
+                ArticleProvenance.upstream_source_id == upstream_source_id
+            )
+        if publisher_source_id is not None:
+            conditions.append(Feed.source_id == publisher_source_id)
+        if detection_method is not None:
+            conditions.append(
+                ArticleProvenance.detection_method == detection_method
+            )
+        if relation_kind is not None:
+            conditions.append(
+                ArticleProvenance.relation_kind == relation_kind
+            )
+        if min_confidence is not None:
+            conditions.append(
+                ArticleProvenance.confidence >= min_confidence
+            )
+        if created_from is not None:
+            conditions.append(
+                ArticleProvenance.created_at >= created_from
+            )
+
+        count_statement = (
+            select(func.count(ArticleProvenance.id))
+            .select_from(ArticleProvenance)
+            .join(Article, Article.id == ArticleProvenance.article_id)
+            .join(Feed, Feed.id == Article.feed_id)
+            .join(publisher_source, publisher_source.id == Feed.source_id)
+            .join(
+                upstream_source,
+                upstream_source.id == ArticleProvenance.upstream_source_id,
+            )
+            .where(*conditions)
+        )
+        total = int(db.scalar(count_statement) or 0)
+
+        statement = (
+            select(
+                ArticleProvenance,
+                Article,
+                publisher_source,
+                upstream_source,
+            )
+            .join(Article, Article.id == ArticleProvenance.article_id)
+            .join(Feed, Feed.id == Article.feed_id)
+            .join(publisher_source, publisher_source.id == Feed.source_id)
+            .join(
+                upstream_source,
+                upstream_source.id == ArticleProvenance.upstream_source_id,
+            )
+            .where(*conditions)
+            .order_by(
+                ArticleProvenance.created_at,
+                ArticleProvenance.id,
+            )
+            .offset(offset)
+            .limit(limit)
+        )
+        return total, list(db.execute(statement).all())
