@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "CH",
   "languages": [
     "de",
@@ -154,7 +154,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Léman Bleu - News régionales",
+          "url": "https://www.lemanbleu.ch/documents.rdf?idz=31&cids=10732",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -182,7 +193,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Canal9",
+          "url": "https://canal9.ch/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -447,5 +469,12 @@
   ],
   "approved_candidate_count": 12,
   "new_source_count": 12,
-  "review_status": "autonomously_selected_compact_regional_core_no_feeds_activated"
+  "review_status": "autonomously_selected_compact_regional_core_no_feeds_activated",
+  "runtime_source_type": "REGIONAL",
+  "runtime_coverage_scope": "REGIONAL",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  }
 }
