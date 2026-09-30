@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.3",
+  "catalog_version": "1.0-draft.2",
   "scope": "international",
   "country": null,
   "countries_excluded": [
@@ -61,7 +61,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "CartaCapital",
+              "url": "https://www.cartacapital.com.br/feed/",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -267,7 +278,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Sydney Morning Herald",
+              "url": "https://www.smh.com.au/rss/feed.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -483,7 +505,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "National Post",
+              "url": "https://nationalpost.com/feed/atom",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -675,7 +708,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Reforma - Portada",
+              "url": "https://www.reforma.com/rss/portada.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -711,7 +755,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "The Jerusalem Post - Front Page",
+              "url": "https://www.jpost.com/rss/rssfeedsfrontpage.aspx",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -789,7 +844,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "format_tags": [],
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "Sabah - Anasayfa",
+              "url": "https://www.sabah.com.tr/rss/anasayfa.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classifications": [
             {
               "dimension": "editorial_orientation",
@@ -905,7 +971,18 @@
       "format_tags": [
         "politically_unclassified"
       ],
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "O Globo",
+          "url": "https://oglobo.globo.com/rss/oglobo",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classifications": [],
       "metrics": []
     },
@@ -951,7 +1028,18 @@
       "format_tags": [
         "politically_unclassified"
       ],
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "The Times of India - Top Stories",
+          "url": "https://timesofindia.indiatimes.com/rssfeeds/-2128936835.cms",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classifications": [
         {
           "dimension": "editorial_orientation",
@@ -1035,7 +1123,18 @@
       "format_tags": [
         "politically_unclassified"
       ],
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Business Day",
+          "url": "https://www.businessday.co.za/arc/outboundfeeds/rss/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classifications": [],
       "metrics": []
     },
@@ -1536,7 +1635,8 @@
     "implementation": "35_title_germany_focused_core_structured",
     "curation": "35_title_germany_focused_core_complete",
     "provenance_enrichment": "two_source_assignments_complete_for_supported_current_set",
-    "scope": "decision_c_no_taiwan_hong_kong_currently"
+    "scope": "decision_c_no_taiwan_hong_kong_currently",
+    "feed_activation": "reviewed_international_print_feed_activation_v1"
   },
   "curation_policy": {
     "target": "approximately_40",
@@ -2090,5 +2190,13 @@
       ],
       "reason": "Do not use the current ISO country field for politically sensitive media-market geography until a more explicit geography model is available."
     }
+  },
+  "runtime_country_policy": "per_entry_required",
+  "runtime_source_type": "NEWS",
+  "runtime_coverage_scope": "NATIONAL",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
   }
 }
