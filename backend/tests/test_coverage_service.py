@@ -7,6 +7,7 @@ from app.enums.coverage_scope import CoverageScope
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
     SourceRelationKind,
 )
 from app.enums.source_type import SourceType
@@ -298,7 +299,7 @@ def test_co_production_bridges_coverage_independence_component(db):
             relation_kind=ArticleProvenanceKind.CO_PRODUCED_WITH,
             confidence=1.0,
             detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-            verified=True,
+            review_status=ArticleProvenanceReviewStatus.VERIFIED,
         )
     )
     db.flush()
