@@ -9,7 +9,10 @@ from app.models.feed import Feed
 from app.models.source import Source
 from sqlalchemy.orm import Session, aliased
 
-from app.enums.source_dependency import SourceRelationKind
+from app.enums.source_dependency import (
+    ArticleProvenanceReviewStatus,
+    SourceRelationKind,
+)
 from app.models.source_dependency import ArticleProvenance, SourceRelation
 
 
@@ -33,7 +36,7 @@ class SourceDependencyRepository:
                 .where(
                     ArticleProvenance.article_id.in_(frontier),
                     ArticleProvenance.deleted_at.is_(None),
-                    ArticleProvenance.verified.is_(True),
+                    ArticleProvenance.review_status == ArticleProvenanceReviewStatus.VERIFIED,
                 )
                 .order_by(
                     ArticleProvenance.article_id,
@@ -146,7 +149,7 @@ class SourceDependencyRepository:
         db.add(provenance)
         return provenance
 
-    def add_unverified_article_provenance_candidate(
+    def add_pending_article_provenance_candidate(
         self,
         db: Session,
         *,
@@ -166,7 +169,8 @@ class SourceDependencyRepository:
                 relation_kind=relation_kind,
                 confidence=confidence,
                 detection_method=detection_method,
-                verified=False,
+                review_status=ArticleProvenanceReviewStatus.PENDING,
+                reviewed_at=None,
                 notes=notes,
             )
             .on_conflict_do_nothing(
@@ -209,7 +213,7 @@ class SourceDependencyRepository:
                 ArticleProvenance.deleted_at.is_(None),
             )
             .order_by(
-                ArticleProvenance.verified.desc(),
+                ArticleProvenance.review_status.desc(),
                 ArticleProvenance.upstream_source_id,
                 ArticleProvenance.id,
             )
@@ -221,7 +225,7 @@ class SourceDependencyRepository:
         self,
         db: Session,
         *,
-        verified: bool,
+        review_status: ArticleProvenanceReviewStatus,
         upstream_source_id: UUID | None,
         publisher_source_id: UUID | None,
         detection_method,
@@ -236,7 +240,7 @@ class SourceDependencyRepository:
 
         conditions = [
             ArticleProvenance.deleted_at.is_(None),
-            ArticleProvenance.verified.is_(verified),
+            ArticleProvenance.review_status == review_status,
             Article.deleted_at.is_(None),
             Feed.deleted_at.is_(None),
             Feed.active.is_(True),
