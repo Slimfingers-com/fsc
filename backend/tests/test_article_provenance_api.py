@@ -148,3 +148,105 @@ def test_article_provenance_requires_admin_key(client, db):
         },
     )
     assert response.status_code == 401
+
+
+def test_article_provenance_verification_patch_is_explicit_and_idempotent(
+    client,
+    db,
+):
+    _, downstream_article = make_article(
+        db,
+        "Verification Downstream",
+        "verification-downstream",
+    )
+    upstream_source, _ = make_article(
+        db,
+        "Verification Agency",
+        "verification-agency",
+    )
+    db.commit()
+
+    created = client.post(
+        f"/articles/{downstream_article.id}/provenance",
+        headers=ADMIN_HEADERS,
+        json={
+            "upstream_source_id": str(upstream_source.id),
+            "relation_kind": "supplied_by",
+            "confidence": 0.90,
+            "detection_method": "byline",
+            "verified": False,
+            "notes": "Automatically detected candidate",
+        },
+    )
+    assert created.status_code == 201
+    original = created.json()
+
+    url = (
+        f"/articles/{downstream_article.id}/provenance/"
+        f"{original['id']}"
+    )
+    verified = client.patch(
+        url,
+        headers=ADMIN_HEADERS,
+        json={"verified": True},
+    )
+    assert verified.status_code == 200
+    body = verified.json()
+    assert body["verified"] is True
+    assert body["confidence"] == original["confidence"]
+    assert body["detection_method"] == original["detection_method"]
+    assert body["relation_kind"] == original["relation_kind"]
+    assert body["notes"] == original["notes"]
+
+    repeated = client.patch(
+        url,
+        headers=ADMIN_HEADERS,
+        json={"verified": True},
+    )
+    assert repeated.status_code == 200
+    assert repeated.json()["verified"] is True
+
+    revoked = client.patch(
+        url,
+        headers=ADMIN_HEADERS,
+        json={"verified": False},
+    )
+    assert revoked.status_code == 200
+    assert revoked.json()["verified"] is False
+
+
+def test_article_provenance_verification_patch_requires_admin_key(
+    client,
+    db,
+):
+    _, downstream_article = make_article(
+        db,
+        "Verification Protected Downstream",
+        "verification-protected-downstream",
+    )
+    upstream_source, _ = make_article(
+        db,
+        "Verification Protected Upstream",
+        "verification-protected-upstream",
+    )
+    db.commit()
+
+    created = client.post(
+        f"/articles/{downstream_article.id}/provenance",
+        headers=ADMIN_HEADERS,
+        json={
+            "upstream_source_id": str(upstream_source.id),
+            "relation_kind": "supplied_by",
+            "verified": False,
+        },
+    )
+    provenance_id = created.json()["id"]
+
+    response = client.patch(
+        (
+            f"/articles/{downstream_article.id}/provenance/"
+            f"{provenance_id}"
+        ),
+        json={"verified": True},
+    )
+    assert response.status_code == 401
