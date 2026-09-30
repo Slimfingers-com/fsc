@@ -409,7 +409,7 @@ class ConsensusService:
                 self._enum_value(item.relation_kind),
                 item.confidence,
                 self._enum_value(item.detection_method),
-                item.verified,
+                self._enum_value(item.review_status),
             ]
             for item in snapshot.article_provenance
         ]
