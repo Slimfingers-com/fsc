@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "US",
   "languages": [
     "en"
@@ -92,7 +92,8 @@
             "New York City metro"
           ],
           "language": "en",
-          "homepage": "https://gothamist.com/"
+          "homepage": "https://gothamist.com/",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -132,7 +133,8 @@
             "New Jersey"
           ],
           "language": "en",
-          "homepage": "https://www.njspotlightnews.org/"
+          "homepage": "https://www.njspotlightnews.org/",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -146,7 +148,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "WHYY News",
+          "url": "https://whyy.org/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -173,7 +186,8 @@
             "Delaware Valley"
           ],
           "language": "en",
-          "homepage": "https://whyy.org/news/"
+          "homepage": "https://whyy.org/news/",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -187,7 +201,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "WBEZ",
+          "url": "https://www.wbez.org/rss/index.xml",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -212,7 +237,8 @@
             "Chicago"
           ],
           "language": "en",
-          "homepage": "https://www.wbez.org/"
+          "homepage": "https://www.wbez.org/",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -253,7 +279,8 @@
             "Georgia"
           ],
           "language": "en",
-          "homepage": "https://www.wabe.org/"
+          "homepage": "https://www.wabe.org/",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -306,7 +333,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "KQED News",
+          "url": "https://ww2.kqed.org/news/feed/",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -331,7 +369,8 @@
             "San Francisco Bay Area"
           ],
           "language": "en",
-          "homepage": "https://www.kqed.org/news"
+          "homepage": "https://www.kqed.org/news",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -345,7 +384,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "LAist",
+          "url": "https://laist.com/index.atom",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -370,7 +420,8 @@
             "Southern California"
           ],
           "language": "en",
-          "homepage": "https://laist.com/"
+          "homepage": "https://laist.com/",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -384,7 +435,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Spectrum News NY1 - Local Headlines",
+          "url": "https://www.ny1.com/services/contentfeed.nyc%7Call-boroughs%7Cnews.landing.rss",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -409,7 +471,8 @@
             "New York City"
           ],
           "language": "en",
-          "homepage": "https://ny1.com/nyc/all-boroughs"
+          "homepage": "https://ny1.com/nyc/all-boroughs",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -423,7 +486,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "Spectrum News 1 North Carolina - Local Headlines",
+          "url": "https://spectrumlocalnews.com/services/contentfeed.nc%7ccharlotte%7cnews.landing.rss",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -448,7 +522,8 @@
             "North Carolina"
           ],
           "language": "en",
-          "homepage": "https://spectrumlocalnews.com/nc/charlotte"
+          "homepage": "https://spectrumlocalnews.com/nc/charlotte",
+          "media_category": "digital"
         }
       ],
       "notes": [
@@ -484,5 +559,12 @@
   ],
   "approved_candidate_count": 10,
   "new_source_count": 10,
-  "review_status": "autonomously_selected_representative_regional_core_no_feeds_activated"
+  "review_status": "autonomously_selected_representative_regional_core_no_feeds_activated",
+  "runtime_source_type": "REGIONAL",
+  "runtime_coverage_scope": "REGIONAL",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  }
 }

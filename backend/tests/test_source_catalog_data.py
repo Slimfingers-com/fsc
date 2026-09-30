@@ -2002,6 +2002,36 @@ def test_us_regional_broadcast_catalog_has_representative_core() -> None:
     assert len({entry["key"] for entry in entries}) == 10
     assert all(entry["classification_status"] == "unclassified_research_candidate" for entry in entries)
     assert all(entry["classifications"] == [] for entry in entries)
+    configured = {
+        "whyy-news", "wbez", "kqed-news", "laist",
+        "spectrum-news-ny1", "spectrum-news-nc",
+    }
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert catalog["runtime_source_type"] == "REGIONAL"
+    assert catalog["runtime_coverage_scope"] == "REGIONAL"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+    assert catalog["feed_role_policy"] == {"news": "editorial"}
+    for entry in entries:
+        for feed in entry.get("feeds", []):
+            assert feed["active"] is True
+            assert feed["priority"] == 1
+            assert feed["activation_tier"] == 1
+            assert feed["feed_class"] == "news"
+            assert feed["default_confirmation_role"] == "editorial"
+        for outlet in entry.get("outlets", []):
+            if outlet.get("publication_form") == "digital":
+                assert outlet["media_category"] == "digital"
 
 
 def test_us_regional_broadcast_public_media_affiliation_does_not_merge_national_sources() -> None:
