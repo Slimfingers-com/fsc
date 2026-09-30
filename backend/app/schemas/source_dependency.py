@@ -57,6 +57,10 @@ class ArticleProvenanceCreate(BaseModel):
     notes: str | None = None
 
 
+class ArticleProvenanceVerificationUpdate(BaseModel):
+    verified: bool
+
+
 class ArticleProvenanceRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
