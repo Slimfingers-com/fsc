@@ -9,12 +9,13 @@ from app.db.session import get_db
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
 )
 from app.schemas.source_dependency import (
     ArticleProvenanceCreate,
     ArticleProvenanceRead,
     ArticleProvenanceReviewPage,
-    ArticleProvenanceVerificationUpdate,
+    ArticleProvenanceReviewUpdate,
 )
 from app.services.source_dependency import SourceDependencyService
 
@@ -37,7 +38,9 @@ service = SourceDependencyService()
     response_model=ArticleProvenanceReviewPage,
 )
 def list_article_provenance_review_queue(
-    verified: bool = False,
+    review_status: ArticleProvenanceReviewStatus = (
+        ArticleProvenanceReviewStatus.PENDING
+    ),
     upstream_source_id: UUID | None = None,
     publisher_source_id: UUID | None = None,
     detection_method: ArticleProvenanceDetectionMethod | None = None,
@@ -51,7 +54,7 @@ def list_article_provenance_review_queue(
 ):
     return service.list_article_provenance_review_queue(
         db,
-        verified=verified,
+        review_status=review_status,
         upstream_source_id=upstream_source_id,
         publisher_source_id=publisher_source_id,
         detection_method=detection_method,
@@ -102,14 +105,14 @@ def create_article_provenance(
     "/{article_id}/provenance/{provenance_id}",
     response_model=ArticleProvenanceRead,
 )
-def update_article_provenance_verification(
+def update_article_provenance_review(
     article_id: UUID,
     provenance_id: UUID,
-    data: ArticleProvenanceVerificationUpdate,
+    data: ArticleProvenanceReviewUpdate,
     db: Session = Depends(get_db),
     _admin: None = Depends(require_source_admin),
 ):
-    provenance = service.update_article_provenance_verification(
+    provenance = service.update_article_provenance_review(
         db,
         article_id=article_id,
         provenance_id=provenance_id,
