@@ -7,7 +7,10 @@ from app.core.exceptions import BusinessRuleViolationError
 from app.models.source_dependency import ArticleProvenance
 from app.repositories.source import SourceRepository
 from app.repositories.source_dependency import SourceDependencyRepository
-from app.schemas.source_dependency import ArticleProvenanceCreate
+from app.schemas.source_dependency import (
+    ArticleProvenanceCreate,
+    ArticleProvenanceVerificationUpdate,
+)
 
 
 class SourceDependencyService:
@@ -116,5 +119,39 @@ class SourceDependencyService:
                     "Ein Artikel kann nicht sein eigener Upstream-Artikel sein."
                 ) from exc
             raise
+
+        return provenance
+
+    def update_article_provenance_verification(
+        self,
+        db: Session,
+        *,
+        article_id: UUID,
+        provenance_id: UUID,
+        data: ArticleProvenanceVerificationUpdate,
+    ) -> ArticleProvenance:
+        article_source_id = self.repository.get_active_article_source_id(
+            db,
+            article_id=article_id,
+        )
+        if article_source_id is None:
+            raise BusinessRuleViolationError(
+                "Der Artikel existiert nicht oder ist nicht verfügbar."
+            )
+
+        provenance = self.repository.get_active_article_provenance(
+            db,
+            article_id=article_id,
+            provenance_id=provenance_id,
+        )
+        if provenance is None:
+            raise BusinessRuleViolationError(
+                "Die Artikel-Provenienz existiert nicht oder gehört nicht "
+                "zu diesem Artikel."
+            )
+
+        if provenance.verified != data.verified:
+            provenance.verified = data.verified
+            db.flush()
 
         return provenance
