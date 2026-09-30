@@ -85,7 +85,7 @@ class AgencyProvenanceBackfiller:
                 continue
             inserted = (
                 self.dependency_repository
-                .add_unverified_article_provenance_candidate(
+                .add_pending_article_provenance_candidate(
                     db,
                     article_id=article.id,
                     upstream_source_id=upstream_source.id,
