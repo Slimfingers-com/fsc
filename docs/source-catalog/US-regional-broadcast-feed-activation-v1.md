@@ -22,6 +22,8 @@ Runtime semantics:
   - `https://whyy.org/feed/`
 - WBEZ Chicago — WBEZ
   - `https://www.wbez.org/rss/index.xml`
+- KUT News — KUT All Content
+  - `https://www.kut.org/kut-rss-feed-all-content.rss`
 - KQED News — KQED News
   - `https://ww2.kqed.org/news/feed/`
 - LAist — LAist
@@ -30,9 +32,11 @@ Runtime semantics:
   - `https://www.ny1.com/services/contentfeed.nyc%7Call-boroughs%7Cnews.landing.rss`
 - Spectrum News 1 North Carolina — Local Headlines
   - `https://spectrumlocalnews.com/services/contentfeed.nc%7ccharlotte%7cnews.landing.rss`
-All six selected endpoints were validated on 2026-09-30 as current parseable
+All seven selected endpoints were validated on 2026-09-30 as current parseable
 RSS/Atom feeds with regional newsroom content and were also tested successfully
-from the production Hetzner host.
+from the production Hetzner host. KUT's selected all-content RSS endpoint is
+explicitly advertised by the current official KUT page and returned 12 items
+when validated from Hetzner.
 
 WHYY documents an RSS entry point at `https://whyy.org/rss`; it currently
 redirects to the selected `/feed/` endpoint. WBEZ exposes its feed in the
@@ -49,9 +53,6 @@ pages linking the selected local-headline feeds.
 - WABE News: current newsroom content is available, but no stable public
   article-news RSS/Atom endpoint was established. Podcast feeds are not used as
   substitutes.
-- KUT News: KUT currently advertises a Master RSS Feed, but the corresponding
-  machine-readable feed returned zero items during validation. It is therefore
-  not activated.
 - LAist's separate `/rss/latest-news` representation was not selected because
   the current payload is not well-formed XML; the homepage-advertised Atom feed
   is valid and current instead.
