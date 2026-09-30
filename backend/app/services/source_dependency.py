@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from uuid import UUID
 
 from sqlalchemy.exc import IntegrityError
@@ -8,6 +8,7 @@ from app.core.exceptions import BusinessRuleViolationError
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
 )
 from app.models.source_dependency import ArticleProvenance
 from app.repositories.source import SourceRepository
@@ -16,7 +17,7 @@ from app.schemas.source_dependency import (
     ArticleProvenanceCreate,
     ArticleProvenanceReviewItem,
     ArticleProvenanceReviewPage,
-    ArticleProvenanceVerificationUpdate,
+    ArticleProvenanceReviewUpdate,
 )
 
 
@@ -52,7 +53,7 @@ class SourceDependencyService:
         self,
         db: Session,
         *,
-        verified: bool,
+        review_status: ArticleProvenanceReviewStatus,
         upstream_source_id: UUID | None,
         publisher_source_id: UUID | None,
         detection_method: ArticleProvenanceDetectionMethod | None,
@@ -64,7 +65,7 @@ class SourceDependencyService:
     ) -> ArticleProvenanceReviewPage:
         total, rows = self.repository.list_article_provenance_review_queue(
             db,
-            verified=verified,
+            review_status=review_status,
             upstream_source_id=upstream_source_id,
             publisher_source_id=publisher_source_id,
             detection_method=detection_method,
@@ -91,7 +92,8 @@ class SourceDependencyService:
                 relation_kind=provenance.relation_kind,
                 confidence=provenance.confidence,
                 detection_method=provenance.detection_method,
-                verified=provenance.verified,
+                review_status=provenance.review_status,
+                reviewed_at=provenance.reviewed_at,
                 notes=provenance.notes,
                 created_at=provenance.created_at,
             )
@@ -152,7 +154,12 @@ class SourceDependencyService:
             relation_kind=data.relation_kind,
             confidence=data.confidence,
             detection_method=data.detection_method,
-            verified=data.verified,
+            review_status=data.review_status,
+            reviewed_at=(
+                datetime.now(UTC)
+                if data.review_status is not ArticleProvenanceReviewStatus.PENDING
+                else None
+            ),
             provenance_url=(
                 str(data.provenance_url)
                 if data.provenance_url is not None
@@ -185,13 +192,13 @@ class SourceDependencyService:
 
         return provenance
 
-    def update_article_provenance_verification(
+    def update_article_provenance_review(
         self,
         db: Session,
         *,
         article_id: UUID,
         provenance_id: UUID,
-        data: ArticleProvenanceVerificationUpdate,
+        data: ArticleProvenanceReviewUpdate,
     ) -> ArticleProvenance:
         article_source_id = self.repository.get_active_article_source_id(
             db,
@@ -213,8 +220,13 @@ class SourceDependencyService:
                 "zu diesem Artikel."
             )
 
-        if provenance.verified != data.verified:
-            provenance.verified = data.verified
+        if provenance.review_status != data.review_status:
+            provenance.review_status = data.review_status
+            provenance.reviewed_at = (
+                None
+                if data.review_status is ArticleProvenanceReviewStatus.PENDING
+                else datetime.now(UTC)
+            )
             db.flush()
 
         return provenance
