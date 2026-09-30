@@ -2003,7 +2003,7 @@ def test_us_regional_broadcast_catalog_has_representative_core() -> None:
     assert all(entry["classification_status"] == "unclassified_research_candidate" for entry in entries)
     assert all(entry["classifications"] == [] for entry in entries)
     configured = {
-        "whyy-news", "wbez", "kqed-news", "laist",
+        "whyy-news", "wbez", "kut-news", "kqed-news", "laist",
         "spectrum-news-ny1", "spectrum-news-nc",
     }
     assert all(

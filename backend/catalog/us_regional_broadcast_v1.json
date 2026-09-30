@@ -294,7 +294,18 @@
       "activity_status": "active",
       "catalog_status": "candidate",
       "source_action": "create_source",
-      "feeds": [],
+      "feeds": [
+        {
+          "name": "KUT - All Content",
+          "url": "https://www.kut.org/kut-rss-feed-all-content.rss",
+          "active": true,
+          "priority": 1,
+          "fetch_interval_minutes": 30,
+          "default_confirmation_role": "editorial",
+          "feed_class": "news",
+          "activation_tier": 1
+        }
+      ],
       "classification_status": "unclassified_research_candidate",
       "classifications": [],
       "metrics": [],
@@ -559,7 +570,7 @@
   ],
   "approved_candidate_count": 10,
   "new_source_count": 10,
-  "review_status": "autonomously_selected_representative_regional_core_no_feeds_activated",
+  "review_status": "reviewed_regional_feed_activation_v1",
   "runtime_source_type": "REGIONAL",
   "runtime_coverage_scope": "REGIONAL",
   "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
