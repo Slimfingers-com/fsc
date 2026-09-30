@@ -42,6 +42,11 @@ Repeated ingestion is idempotent and cannot duplicate the same active
 article/upstream-source/relation identity. Existing verified provenance is
 preserved.
 
+Verification is performed separately through the admin-only provenance PATCH
+transition. Only the verified flag changes; detection method, confidence,
+relation identity and evidence remain intact. The transition is idempotent and
+may also revoke a previous verification.
+
 ## Feed parsing
 
 RSS/Atom author metadata continues to populate the article author field.
