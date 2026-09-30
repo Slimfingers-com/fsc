@@ -1913,6 +1913,30 @@ def test_gb_regional_broadcast_catalog_has_six_devolved_sources() -> None:
     assert catalog["approved_candidate_count"] == 6
     assert len(entries) == 6
     assert len({entry["key"] for entry in entries}) == 6
+    configured = {"bbc-scotland", "bbc-cymru-wales", "bbc-northern-ireland"}
+    assert all(
+        bool(entry["feeds"]) is (entry["key"] in configured)
+        for entry in entries
+    )
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert catalog["runtime_source_type"] == "REGIONAL"
+    assert catalog["runtime_coverage_scope"] == "REGIONAL"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert (
+        catalog["feed_class_policy"]
+        == "catalog_review_metadata_only_not_persisted"
+    )
+    assert catalog["feed_role_policy"] == {"news": "editorial"}
+    for entry in entries:
+        for feed in entry.get("feeds", []):
+            assert feed["active"] is True
+            assert feed["priority"] == 1
+            assert feed["activation_tier"] == 1
+            assert feed["feed_class"] == "news"
+            assert feed["default_confirmation_role"] == "editorial"
 
 
 def test_gb_regional_broadcast_bbc_nations_are_three_crossmedia_sources() -> None:

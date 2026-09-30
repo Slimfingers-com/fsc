@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "country": "GB",
   "languages": [
     "en",
@@ -47,7 +47,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "BBC News - Scotland",
+              "url": "https://feeds.bbci.co.uk/news/scotland/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -98,7 +109,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "BBC News - Wales",
+              "url": "https://feeds.bbci.co.uk/news/wales/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -150,7 +172,18 @@
           "activity_status": "active",
           "catalog_status": "candidate",
           "source_action": "create_source",
-          "feeds": [],
+          "feeds": [
+            {
+              "name": "BBC News - Northern Ireland",
+              "url": "https://feeds.bbci.co.uk/news/northern_ireland/rss.xml",
+              "active": true,
+              "priority": 1,
+              "fetch_interval_minutes": 30,
+              "default_confirmation_role": "editorial",
+              "feed_class": "news",
+              "activation_tier": 1
+            }
+          ],
           "classification_status": "public_service_centre_reference_not_political_classification",
           "classifications": [],
           "metrics": [],
@@ -344,5 +377,12 @@
   ],
   "approved_candidate_count": 6,
   "new_source_count": 6,
-  "review_status": "autonomously_selected_devolved_core_no_feeds_activated"
+  "review_status": "autonomously_selected_devolved_core_no_feeds_activated",
+  "runtime_source_type": "REGIONAL",
+  "runtime_coverage_scope": "REGIONAL",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  }
 }
