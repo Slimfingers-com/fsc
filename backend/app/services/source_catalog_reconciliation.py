@@ -3,8 +3,10 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
+from app.core.country_codes import is_iso_alpha2_country_code
 from app.core.exceptions import BusinessRuleViolationError
 from app.core.source_identity import normalize_source_name
+from app.enums.coverage_scope import CoverageScope
 from app.enums.source_type import SourceType
 from app.schemas.feed import FeedCreate, FeedUpdate
 from app.schemas.source import SourceCreate
@@ -18,6 +20,8 @@ REVIEWED_FEED_ACTIVATION_POLICY = (
 CATALOG_ONLY_FEED_CLASS_POLICY = (
     "catalog_review_metadata_only_not_persisted"
 )
+CATALOG_COUNTRY_POLICY = "catalog_required"
+PER_ENTRY_COUNTRY_POLICY = "per_entry_required"
 
 
 @dataclass(frozen=True)
@@ -493,10 +497,28 @@ class SourceCatalogReconciler:
             or catalog.get("runtime_source_type")
         )
         country = catalog.get("country")
+        country_policy = catalog.get(
+            "runtime_country_policy",
+            CATALOG_COUNTRY_POLICY,
+        )
         role_policy = catalog.get("feed_role_policy") or {}
-        if not source_type or not country or not role_policy:
+        if not source_type or not role_policy:
             raise BusinessRuleViolationError(
                 "Catalog activation metadata is incomplete."
+            )
+        if country_policy == CATALOG_COUNTRY_POLICY:
+            if not is_iso_alpha2_country_code(country):
+                raise BusinessRuleViolationError(
+                    "Single-country catalog requires a valid ISO alpha-2 country."
+                )
+        elif country_policy == PER_ENTRY_COUNTRY_POLICY:
+            if country is not None:
+                raise BusinessRuleViolationError(
+                    "Per-entry country catalog must set catalog country to null."
+                )
+        else:
+            raise BusinessRuleViolationError(
+                f"Unsupported runtime_country_policy {country_policy!r}."
             )
 
         materializable: list[dict[str, Any]] = []
@@ -531,10 +553,29 @@ class SourceCatalogReconciler:
                 raise BusinessRuleViolationError(
                     f"{entry.get('name')}: SourceType differs from catalog."
                 )
-            entry_country = entry.get("country") or country
-            if entry_country != country:
+            entry_country = entry.get("country")
+            if country_policy == CATALOG_COUNTRY_POLICY:
+                if entry_country is not None and entry_country != country:
+                    raise BusinessRuleViolationError(
+                        f"{entry.get('name')}: country differs from catalog."
+                    )
+            elif not is_iso_alpha2_country_code(entry_country):
                 raise BusinessRuleViolationError(
-                    f"{entry.get('name')}: country differs from catalog."
+                    f"{entry.get('name')}: per-entry country must be a valid "
+                    "ISO alpha-2 code."
+                )
+
+            coverage_scope = (
+                entry.get("coverage_scope")
+                or catalog.get("runtime_coverage_scope")
+            )
+            if (
+                coverage_scope is not None
+                and coverage_scope not in {item.value for item in CoverageScope}
+            ):
+                raise BusinessRuleViolationError(
+                    f"{entry.get('name')}: invalid coverage_scope "
+                    f"{coverage_scope!r}."
                 )
 
             for feed in feeds:
@@ -799,7 +840,10 @@ class SourceCatalogReconciler:
             name=entry["name"],
             url=entry["homepage"],
             source_type=source_type,
-            coverage_scope=catalog.get("runtime_coverage_scope"),
+            coverage_scope=(
+                entry.get("coverage_scope")
+                or catalog.get("runtime_coverage_scope")
+            ),
             country=entry.get("country") or catalog.get("country"),
             language=entry.get("language") or catalog_language,
             feeds=[
