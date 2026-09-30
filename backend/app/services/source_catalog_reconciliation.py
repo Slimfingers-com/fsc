@@ -666,7 +666,7 @@ class SourceCatalogReconciler:
                 f"{source.source_type.value} differs from "
                 f"{expected_type.value}"
             )
-        expected_country = catalog["country"]
+        expected_country = entry.get("country") or catalog.get("country")
         if source.country not in {None, expected_country}:
             conflicts.append(
                 f"{entry['name']}: runtime country {source.country} differs "

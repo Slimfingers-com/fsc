@@ -1012,6 +1012,15 @@ def test_multi_country_catalog_requires_per_entry_iso_country_and_uses_scope_ove
     assert source.country == "FR"
     assert source.coverage_scope.value == "REGIONAL"
 
+    second_report = reconciler.reconcile(
+        db,
+        catalog,
+        catalog_name="europe_print_test.json",
+    )
+    assert second_report.has_conflicts is False
+    assert second_report.change_count == 0
+    assert [action.action for action in second_report.actions] == ["no_change"]
+
 
 @pytest.mark.parametrize("entry_country", [None, "ZZ", "fr"])
 def test_multi_country_catalog_rejects_missing_or_invalid_entry_country(
