@@ -1,8 +1,8 @@
 {
-  "catalog_version": "1.0-draft.1",
+  "catalog_version": "1.0-draft.2",
   "scope": "international",
   "media_category": "agency_content_supplier",
-  "activation_policy": "catalog_only_until_joint_review",
+  "activation_policy": "reviewed_source_only_runtime_materialization",
   "source_identity_policy": "one_editorial_source_multiple_services_and_distribution_channels_as_outlets",
   "segmentation_policy": "functional_role_not_political_orientation",
   "coverage_policy": "targets_are_goals_not_quotas",
@@ -29,10 +29,20 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "dpa-agency",
+              "name": "dpa",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "de",
+              "homepage": "https://www.dpa.com/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only"
         },
         {
           "key": "dts-nachrichtenagentur",
@@ -48,10 +58,20 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "dts-nachrichtenagentur-agency",
+              "name": "dts Nachrichtenagentur",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "de",
+              "homepage": "https://www.dts-nachrichtenagentur.de/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only"
         },
         {
           "key": "apa",
@@ -67,10 +87,20 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "apa-agency",
+              "name": "APA",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "de",
+              "homepage": "https://apa.at/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only"
         },
         {
           "key": "keystone-sda",
@@ -86,10 +116,20 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "keystone-sda-agency",
+              "name": "Keystone-SDA",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "de",
+              "homepage": "https://www.keystone-sda.ch/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only"
         },
         {
           "key": "pa-media",
@@ -105,10 +145,20 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "pa-media-agency",
+              "name": "PA Media",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "en",
+              "homepage": "https://pa.media/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only"
         }
       ]
     },
@@ -130,10 +180,21 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "reuters-agency",
+              "name": "Reuters",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "en",
+              "homepage": "https://www.reuters.com/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only",
+          "coverage_scope": "GLOBAL"
         },
         {
           "key": "associated-press",
@@ -149,10 +210,21 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "associated-press-agency",
+              "name": "Associated Press",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "en",
+              "homepage": "https://apnews.com/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only",
+          "coverage_scope": "GLOBAL"
         },
         {
           "key": "afp",
@@ -168,10 +240,21 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "afp-agency",
+              "name": "AFP",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "fr",
+              "homepage": "https://www.afp.com/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only",
+          "coverage_scope": "GLOBAL"
         }
       ]
     },
@@ -193,10 +276,20 @@
           "classification_status": "functional_supplier_not_political_classification",
           "classifications": [],
           "metrics": [],
-          "outlets": [],
+          "outlets": [
+            {
+              "key": "regiocast-nachrichten-agency",
+              "name": "REGIOCAST Nachrichten",
+              "media_category": "agency",
+              "publication_form": "news_agency",
+              "language": "de",
+              "homepage": "https://www.regiocast.de/"
+            }
+          ],
           "notes": [
             "Agency/content-supplier Source; functional catalog placement is not a political classification."
-          ]
+          ],
+          "runtime_materialization": "source_only"
         }
       ]
     }
@@ -205,7 +298,9 @@
   "review_status": {
     "source_selection": "approved_9_source_agency_content_supplier_core_2026_09_24",
     "source_identity": "one_editorial_source_multiple_outlets",
-    "political_mapping": "no_functional_group_is_a_political_classification"
+    "political_mapping": "no_functional_group_is_a_political_classification",
+    "runtime_materialization": "reviewed_source_only_9_source_core_2026_09_30",
+    "feed_review": "no_stable_public_general_agency_feeds_established_2026_09_30"
   },
   "deferred_specialists": [
     {
@@ -224,5 +319,15 @@
       "name": "KNA",
       "reason": "Thematic specialist agency; defer to specialist-agency expansion."
     }
-  ]
+  ],
+  "country": null,
+  "language": null,
+  "runtime_country_policy": "per_entry_required",
+  "runtime_source_type": "AGENCY",
+  "runtime_coverage_scope": "NATIONAL",
+  "feed_activation_policy": "only_verified_relevant_official_content_channels_are_activated",
+  "feed_class_policy": "catalog_review_metadata_only_not_persisted",
+  "feed_role_policy": {
+    "news": "editorial"
+  }
 }
