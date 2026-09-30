@@ -650,7 +650,7 @@ def test_detected_agency_provenance_is_unverified_and_idempotent(db):
         == ArticleProvenanceDetectionMethod.PROVIDER_METADATA
     )
     assert provenance[0].confidence == 0.95
-    assert provenance[0].review_status is ArticleProvenanceReviewStatus.PENDING
+    assert provenance[0].review_status == ArticleProvenanceReviewStatus.PENDING
     assert (
         repository.load_verified_article_provenance(
             db,
