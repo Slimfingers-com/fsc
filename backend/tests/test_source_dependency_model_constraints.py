@@ -155,7 +155,7 @@ def test_duplicate_article_provenance_is_rejected(db):
         "relation_kind": ArticleProvenanceKind.SUPPLIED_BY,
         "confidence": 0.9,
         "detection_method": ArticleProvenanceDetectionMethod.MANUAL,
-        "verified": True,
+        "review_status": ArticleProvenanceReviewStatus.VERIFIED,
     }
     db.add(ArticleProvenance(**kwargs))
     db.flush()
