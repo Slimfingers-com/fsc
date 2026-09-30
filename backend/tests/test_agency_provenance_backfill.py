@@ -4,6 +4,7 @@ from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
 )
 from app.enums.source_type import SourceType
 from app.models.article import Article
@@ -103,7 +104,7 @@ def test_agency_provenance_backfill_is_unverified_and_idempotent(db):
         for row in rows
     )
     assert all(row.confidence == 0.90 for row in rows)
-    assert all(row.verified is False for row in rows)
+    assert all(row.review_status is ArticleProvenanceReviewStatus.PENDING for row in rows)
 
     repeated = backfiller.backfill(db)
     assert repeated.detected_candidates == 2
