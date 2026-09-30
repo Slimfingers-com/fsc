@@ -1,11 +1,11 @@
-from datetime import date
+from datetime import date, datetime
 from typing import TYPE_CHECKING
 from uuid import UUID
 
 from sqlalchemy import (
-    Boolean,
     CheckConstraint,
     Date,
+    DateTime,
     Float,
     ForeignKey,
     Index,
@@ -20,6 +20,7 @@ from app.db.base import BaseModel
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
     SourceRelationKind,
 )
 
@@ -139,15 +140,19 @@ class ArticleProvenance(BaseModel):
             "confidence BETWEEN 0 AND 1",
             name="ck_article_provenance_confidence_range",
         ),
-        Index(
-            "ix_article_provenance_article_verified",
-            "article_id",
-            "verified",
+        CheckConstraint(
+            "review_status IN ('pending', 'verified', 'rejected')",
+            name="ck_article_provenance_review_status",
         ),
         Index(
-            "ix_article_provenance_upstream_source_verified",
+            "ix_article_provenance_article_review_status",
+            "article_id",
+            "review_status",
+        ),
+        Index(
+            "ix_article_provenance_upstream_source_review_status",
             "upstream_source_id",
-            "verified",
+            "review_status",
         ),
     )
 
@@ -187,12 +192,16 @@ class ArticleProvenance(BaseModel):
         server_default=text("'manual'"),
         index=True,
     )
-    verified: Mapped[bool] = mapped_column(
-        Boolean,
+    review_status: Mapped[ArticleProvenanceReviewStatus] = mapped_column(
+        String(20),
         nullable=False,
-        default=False,
-        server_default=text("false"),
+        default=ArticleProvenanceReviewStatus.PENDING,
+        server_default=text("'pending'"),
         index=True,
+    )
+    reviewed_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True,
     )
     provenance_url: Mapped[str | None] = mapped_column(Text, nullable=True)
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
