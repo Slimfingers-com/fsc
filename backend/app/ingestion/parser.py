@@ -104,6 +104,7 @@ class FeedParser:
             ),
             categories=self._categories(entry),
             enclosures=self._enclosures(entry, base_url=base_url),
+            provider=self._entry_provider(entry),
         )
 
     def _feed_link(
@@ -165,6 +166,17 @@ class FeedParser:
             if name:
                 return name
         return self._text(entry.get("author"))
+
+    def _entry_provider(self, entry: Mapping[str, Any]) -> str | None:
+        source = entry.get("source")
+        if isinstance(source, Mapping):
+            provider = self._first_text(
+                source.get("title"),
+                source.get("name"),
+            )
+            if provider:
+                return provider
+        return self._text(entry.get("publisher"))
 
     def _categories(self, entry: Mapping[str, Any]) -> tuple[str, ...]:
         values: list[str] = []

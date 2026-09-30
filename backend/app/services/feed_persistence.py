@@ -5,13 +5,17 @@ from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
+from app.core.agency_provenance import detect_agency_provenance
 from app.core.article_identity import ArticleIdentity, build_article_identity
 from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.confirmation_role import resolve_confirmation_role
+from app.enums.source_dependency import ArticleProvenanceKind
 from app.ingestion.models import FeedFetchResult, ParsedFeed, ParsedFeedEntry
 from app.models.article import Article
 from app.models.feed import Feed
 from app.repositories.article import ArticleRepository
+from app.repositories.source import SourceRepository
+from app.repositories.source_dependency import SourceDependencyRepository
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,8 +29,14 @@ class FeedPersistenceService:
     def __init__(
         self,
         article_repository: ArticleRepository | None = None,
+        source_repository: SourceRepository | None = None,
+        source_dependency_repository: SourceDependencyRepository | None = None,
     ) -> None:
         self.article_repository = article_repository or ArticleRepository()
+        self.source_repository = source_repository or SourceRepository()
+        self.source_dependency_repository = (
+            source_dependency_repository or SourceDependencyRepository()
+        )
 
     def persist(
         self,
@@ -61,6 +71,13 @@ class FeedPersistenceService:
             else:
                 unchanged += 1
 
+            self._persist_detected_agency_provenance(
+                db,
+                feed=feed,
+                article=article,
+                entry=entry,
+            )
+
         feed.last_fetched_at = now
         feed.last_success_at = now
         feed.last_error_at = None
@@ -75,6 +92,43 @@ class FeedPersistenceService:
             inserted=inserted,
             updated=updated,
             unchanged=unchanged,
+        )
+
+    def _persist_detected_agency_provenance(
+        self,
+        db: Session,
+        *,
+        feed: Feed,
+        article: Article,
+        entry: ParsedFeedEntry,
+    ) -> None:
+        candidate = detect_agency_provenance(
+            author=entry.author,
+            provider=entry.provider,
+        )
+        if candidate is None:
+            return
+
+        upstream_source = self.source_repository.get_by_slug(
+            db,
+            candidate.source_slug,
+        )
+        if upstream_source is None or not upstream_source.active:
+            return
+        if upstream_source.id == feed.source_id:
+            return
+
+        self.source_dependency_repository.add_unverified_article_provenance_candidate(
+            db,
+            article_id=article.id,
+            upstream_source_id=upstream_source.id,
+            relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
+            confidence=candidate.confidence,
+            detection_method=candidate.detection_method,
+            notes=(
+                "Automatically detected agency provenance candidate from "
+                f"{candidate.detection_method.value}: {candidate.evidence}"
+            ),
         )
 
     def _create_or_get(

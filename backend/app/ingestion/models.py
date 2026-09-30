@@ -49,6 +49,7 @@ class ParsedFeedEntry:
     updated_at: datetime | None
     categories: tuple[str, ...]
     enclosures: tuple[ParsedFeedEnclosure, ...]
+    provider: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
