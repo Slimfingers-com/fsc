@@ -4,6 +4,7 @@ from uuid import uuid4
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
     SourceRelationKind,
 )
 from app.models.source_dependency import ArticleProvenance, SourceRelation
@@ -36,7 +37,7 @@ def provenance(article_id, upstream_source_id):
         relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
         confidence=1.0,
         detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-        verified=True,
+        review_status=ArticleProvenanceReviewStatus.VERIFIED,
     )
 
 
@@ -162,7 +163,7 @@ def test_co_produced_article_bridges_dependency_components_conservatively():
         relation_kind=ArticleProvenanceKind.CO_PRODUCED_WITH,
         confidence=1.0,
         detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-        verified=True,
+        review_status=ArticleProvenanceReviewStatus.VERIFIED,
     )
     resolver = SourceIndependenceResolver(
         relations=(),
@@ -198,7 +199,7 @@ def test_article_provenance_follows_upstream_article_transitively():
                 relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
                 confidence=1.0,
                 detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-                verified=True,
+                review_status=ArticleProvenanceReviewStatus.VERIFIED,
             ),
             ArticleProvenance(
                 id=uuid4(),
@@ -207,7 +208,7 @@ def test_article_provenance_follows_upstream_article_transitively():
                 relation_kind=ArticleProvenanceKind.REPUBLISHED_FROM,
                 confidence=1.0,
                 detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-                verified=True,
+                review_status=ArticleProvenanceReviewStatus.VERIFIED,
             ),
         ),
     )

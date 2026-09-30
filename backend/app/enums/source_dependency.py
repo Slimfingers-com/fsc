@@ -24,3 +24,9 @@ class ArticleProvenanceDetectionMethod(StrEnum):
     BYLINE = "byline"
     CONTENT_SIMILARITY = "content_similarity"
     OTHER = "other"
+
+
+class ArticleProvenanceReviewStatus(StrEnum):
+    PENDING = "pending"
+    VERIFIED = "verified"
+    REJECTED = "rejected"

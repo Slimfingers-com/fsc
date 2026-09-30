@@ -8,6 +8,7 @@ from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
     SourceRelationKind,
 )
 from app.enums.source_type import SourceType
@@ -118,7 +119,7 @@ def test_article_provenance_rejects_invalid_confidence(db):
             relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
             confidence=1.1,
             detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-            verified=True,
+            review_status=ArticleProvenanceReviewStatus.VERIFIED,
         )
     )
     with pytest.raises(IntegrityError):
@@ -136,7 +137,7 @@ def test_article_provenance_rejects_same_upstream_article(db):
             relation_kind=ArticleProvenanceKind.REPUBLISHED_FROM,
             confidence=1.0,
             detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-            verified=True,
+            review_status=ArticleProvenanceReviewStatus.VERIFIED,
         )
     )
     with pytest.raises(IntegrityError):
@@ -154,7 +155,7 @@ def test_duplicate_article_provenance_is_rejected(db):
         "relation_kind": ArticleProvenanceKind.SUPPLIED_BY,
         "confidence": 0.9,
         "detection_method": ArticleProvenanceDetectionMethod.MANUAL,
-        "verified": True,
+        "review_status": ArticleProvenanceReviewStatus.VERIFIED,
     }
     db.add(ArticleProvenance(**kwargs))
     db.flush()
@@ -197,7 +198,7 @@ def test_soft_deleted_article_provenance_can_be_recreated(db):
         relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
         confidence=1.0,
         detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-        verified=True,
+        review_status=ArticleProvenanceReviewStatus.VERIFIED,
     )
     db.add(first_provenance)
     db.flush()
@@ -212,7 +213,7 @@ def test_soft_deleted_article_provenance_can_be_recreated(db):
             relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
             confidence=1.0,
             detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-            verified=True,
+            review_status=ArticleProvenanceReviewStatus.VERIFIED,
         )
     )
     db.flush()
@@ -232,7 +233,7 @@ def test_verified_article_provenance_loads_upstream_chain_recursively(db):
         relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
         confidence=1.0,
         detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-        verified=True,
+        review_status=ArticleProvenanceReviewStatus.VERIFIED,
     )
     second = ArticleProvenance(
         article_id=intermediary_article.id,
@@ -240,7 +241,7 @@ def test_verified_article_provenance_loads_upstream_chain_recursively(db):
         relation_kind=ArticleProvenanceKind.REPUBLISHED_FROM,
         confidence=1.0,
         detection_method=ArticleProvenanceDetectionMethod.MANUAL,
-        verified=True,
+        review_status=ArticleProvenanceReviewStatus.VERIFIED,
     )
     db.add_all([first, second])
     db.flush()
@@ -251,3 +252,47 @@ def test_verified_article_provenance_loads_upstream_chain_recursively(db):
     )
 
     assert {row.id for row in rows} == {first.id, second.id}
+
+
+
+def test_article_provenance_rejects_invalid_review_status(db):
+    downstream = make_source(db, "Invalid Review Downstream")
+    upstream = make_source(db, "Invalid Review Upstream")
+    article = make_article(db, downstream, "invalid-review")
+    db.add(
+        ArticleProvenance(
+            article_id=article.id,
+            upstream_source_id=upstream.id,
+            relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
+            confidence=1.0,
+            detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+            review_status="invalid",
+        )
+    )
+    with pytest.raises(IntegrityError):
+        db.flush()
+
+
+def test_rejected_article_provenance_is_not_loaded_as_verified(db):
+    downstream = make_source(db, "Rejected Review Downstream")
+    upstream = make_source(db, "Rejected Review Upstream")
+    article = make_article(db, downstream, "rejected-review")
+    provenance = ArticleProvenance(
+        article_id=article.id,
+        upstream_source_id=upstream.id,
+        relation_kind=ArticleProvenanceKind.SUPPLIED_BY,
+        confidence=1.0,
+        detection_method=ArticleProvenanceDetectionMethod.MANUAL,
+        review_status=ArticleProvenanceReviewStatus.REJECTED,
+        reviewed_at=datetime.now(UTC),
+    )
+    db.add(provenance)
+    db.flush()
+
+    assert (
+        SourceDependencyRepository().load_verified_article_provenance(
+            db,
+            article_ids=[article.id],
+        )
+        == []
+    )

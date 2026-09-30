@@ -19,6 +19,7 @@ from app.consensus.provider import (
 )
 from app.consensus.rule_based import RuleBasedConsensusAnalyzer
 from app.enums.confirmation_role import counts_as_independent_confirmation
+from app.enums.source_dependency import ArticleProvenanceReviewStatus
 from app.enums.story_pipeline import StoryPipeline
 from app.models.consensus import (
     StoryConsensusSummary,
@@ -409,7 +410,7 @@ class ConsensusService:
                 self._enum_value(item.relation_kind),
                 item.confidence,
                 self._enum_value(item.detection_method),
-                item.verified,
+                item.review_status == ArticleProvenanceReviewStatus.VERIFIED,
             ]
             for item in snapshot.article_provenance
         ]

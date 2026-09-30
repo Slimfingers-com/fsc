@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, HttpUrl, model_validator
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
     SourceRelationKind,
 )
 
@@ -52,13 +53,15 @@ class ArticleProvenanceCreate(BaseModel):
     detection_method: ArticleProvenanceDetectionMethod = (
         ArticleProvenanceDetectionMethod.MANUAL
     )
-    verified: bool = False
+    review_status: ArticleProvenanceReviewStatus = (
+        ArticleProvenanceReviewStatus.PENDING
+    )
     provenance_url: HttpUrl | None = None
     notes: str | None = None
 
 
-class ArticleProvenanceVerificationUpdate(BaseModel):
-    verified: bool
+class ArticleProvenanceReviewUpdate(BaseModel):
+    review_status: ArticleProvenanceReviewStatus
 
 
 class ArticleProvenanceRead(BaseModel):
@@ -71,7 +74,8 @@ class ArticleProvenanceRead(BaseModel):
     relation_kind: ArticleProvenanceKind
     confidence: float
     detection_method: ArticleProvenanceDetectionMethod
-    verified: bool
+    review_status: ArticleProvenanceReviewStatus
+    reviewed_at: datetime | None
     provenance_url: str | None
     notes: str | None
 
@@ -92,7 +96,8 @@ class ArticleProvenanceReviewItem(BaseModel):
     relation_kind: ArticleProvenanceKind
     confidence: float
     detection_method: ArticleProvenanceDetectionMethod
-    verified: bool
+    review_status: ArticleProvenanceReviewStatus
+    reviewed_at: datetime | None
     notes: str | None
     created_at: datetime
 

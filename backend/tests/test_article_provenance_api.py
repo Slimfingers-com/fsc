@@ -73,7 +73,7 @@ def test_article_provenance_round_trip(client, db):
             "relation_kind": "supplied_by",
             "confidence": 0.98,
             "detection_method": "provider_metadata",
-            "verified": True,
+            "review_status": "verified",
             "provenance_url": "https://upstream.example.com/provenance",
         },
     )
@@ -82,7 +82,8 @@ def test_article_provenance_round_trip(client, db):
     assert body["article_id"] == str(downstream_article.id)
     assert body["upstream_source_id"] == str(upstream_source.id)
     assert body["upstream_article_id"] == str(upstream_article.id)
-    assert body["verified"] is True
+    assert body["review_status"] == "verified"
+    assert body["reviewed_at"] is not None
 
     listing = client.get(
         f"/articles/{downstream_article.id}/provenance"
@@ -120,7 +121,7 @@ def test_article_provenance_rejects_upstream_article_from_other_source(
             "upstream_source_id": str(declared_upstream.id),
             "upstream_article_id": str(wrong_article.id),
             "relation_kind": "republished_from",
-            "verified": True,
+            "review_status": "verified",
         },
     )
     assert response.status_code == 422
@@ -150,7 +151,7 @@ def test_article_provenance_requires_admin_key(client, db):
     assert response.status_code == 401
 
 
-def test_article_provenance_verification_patch_is_explicit_and_idempotent(
+def test_article_provenance_review_patch_is_explicit_and_idempotent(
     client,
     db,
 ):
@@ -174,7 +175,7 @@ def test_article_provenance_verification_patch_is_explicit_and_idempotent(
             "relation_kind": "supplied_by",
             "confidence": 0.90,
             "detection_method": "byline",
-            "verified": False,
+            "review_status": "pending",
             "notes": "Automatically detected candidate",
         },
     )
@@ -188,11 +189,13 @@ def test_article_provenance_verification_patch_is_explicit_and_idempotent(
     verified = client.patch(
         url,
         headers=ADMIN_HEADERS,
-        json={"verified": True},
+        json={"review_status": "verified"},
     )
     assert verified.status_code == 200
     body = verified.json()
-    assert body["verified"] is True
+    assert body["review_status"] == "verified"
+    assert body["reviewed_at"] is not None
+    first_reviewed_at = body["reviewed_at"]
     assert body["confidence"] == original["confidence"]
     assert body["detection_method"] == original["detection_method"]
     assert body["relation_kind"] == original["relation_kind"]
@@ -201,21 +204,32 @@ def test_article_provenance_verification_patch_is_explicit_and_idempotent(
     repeated = client.patch(
         url,
         headers=ADMIN_HEADERS,
-        json={"verified": True},
+        json={"review_status": "verified"},
     )
     assert repeated.status_code == 200
-    assert repeated.json()["verified"] is True
+    assert repeated.json()["review_status"] == "verified"
+    assert repeated.json()["reviewed_at"] == first_reviewed_at
+
+    rejected = client.patch(
+        url,
+        headers=ADMIN_HEADERS,
+        json={"review_status": "rejected"},
+    )
+    assert rejected.status_code == 200
+    assert rejected.json()["review_status"] == "rejected"
+    assert rejected.json()["reviewed_at"] is not None
 
     revoked = client.patch(
         url,
         headers=ADMIN_HEADERS,
-        json={"verified": False},
+        json={"review_status": "pending"},
     )
     assert revoked.status_code == 200
-    assert revoked.json()["verified"] is False
+    assert revoked.json()["review_status"] == "pending"
+    assert revoked.json()["reviewed_at"] is None
 
 
-def test_article_provenance_verification_patch_requires_admin_key(
+def test_article_provenance_review_patch_requires_admin_key(
     client,
     db,
 ):
@@ -237,7 +251,7 @@ def test_article_provenance_verification_patch_requires_admin_key(
         json={
             "upstream_source_id": str(upstream_source.id),
             "relation_kind": "supplied_by",
-            "verified": False,
+            "review_status": "pending",
         },
     )
     provenance_id = created.json()["id"]
@@ -247,7 +261,7 @@ def test_article_provenance_verification_patch_requires_admin_key(
             f"/articles/{downstream_article.id}/provenance/"
             f"{provenance_id}"
         ),
-        json={"verified": True},
+        json={"review_status": "verified"},
     )
     assert response.status_code == 401
 
@@ -286,7 +300,7 @@ def test_article_provenance_review_queue_is_admin_only_and_paginated(
                 "relation_kind": "supplied_by",
                 "confidence": confidence,
                 "detection_method": method,
-                "verified": False,
+                "review_status": "pending",
                 "notes": f"Candidate {method}",
             },
         )
@@ -307,7 +321,7 @@ def test_article_provenance_review_queue_is_admin_only_and_paginated(
     assert body["offset"] == 0
     assert len(body["items"]) == 1
     item = body["items"][0]
-    assert item["verified"] is False
+    assert item["review_status"] == "pending"
     assert item["upstream_source_id"] == str(upstream_source.id)
     assert item["upstream_source_name"] == upstream_source.name
     assert item["publisher_source_id"] in {
@@ -342,7 +356,7 @@ def test_article_provenance_review_queue_filters_candidates(
             "relation_kind": "supplied_by",
             "confidence": 0.95,
             "detection_method": "provider_metadata",
-            "verified": False,
+            "review_status": "pending",
         },
     )
     assert created.status_code == 201
@@ -370,3 +384,63 @@ def test_article_provenance_review_queue_filters_candidates(
     )
     assert excluded.status_code == 200
     assert excluded.json()["total"] == 0
+
+
+
+def test_article_provenance_rejected_candidate_leaves_default_queue(
+    client,
+    db,
+):
+    _, article = make_article(
+        db,
+        "Rejected Queue Publisher",
+        "rejected-queue-publisher",
+    )
+    upstream_source, _ = make_article(
+        db,
+        "Rejected Queue Agency",
+        "rejected-queue-agency",
+    )
+    db.commit()
+
+    created = client.post(
+        f"/articles/{article.id}/provenance",
+        headers=ADMIN_HEADERS,
+        json={
+            "upstream_source_id": str(upstream_source.id),
+            "relation_kind": "supplied_by",
+            "detection_method": "byline",
+        },
+    )
+    assert created.status_code == 201
+    provenance_id = created.json()["id"]
+
+    reviewed = client.patch(
+        f"/articles/{article.id}/provenance/{provenance_id}",
+        headers=ADMIN_HEADERS,
+        json={"review_status": "rejected"},
+    )
+    assert reviewed.status_code == 200
+    assert reviewed.json()["review_status"] == "rejected"
+    assert reviewed.json()["reviewed_at"] is not None
+
+    pending = client.get(
+        "/article-provenance/review-queue",
+        headers=ADMIN_HEADERS,
+    )
+    assert pending.status_code == 200
+    assert all(
+        item["provenance_id"] != provenance_id
+        for item in pending.json()["items"]
+    )
+
+    rejected = client.get(
+        "/article-provenance/review-queue",
+        headers=ADMIN_HEADERS,
+        params={"review_status": "rejected"},
+    )
+    assert rejected.status_code == 200
+    assert any(
+        item["provenance_id"] == provenance_id
+        for item in rejected.json()["items"]
+    )

@@ -24,7 +24,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--apply",
         action="store_true",
-        help="Persist the planned unverified provenance candidates.",
+        help="Persist the planned pending provenance candidates.",
     )
     return parser
 

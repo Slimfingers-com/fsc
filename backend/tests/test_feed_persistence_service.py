@@ -5,6 +5,7 @@ from app.enums.confirmation_role import ConfirmationRole
 from app.enums.source_dependency import (
     ArticleProvenanceDetectionMethod,
     ArticleProvenanceKind,
+    ArticleProvenanceReviewStatus,
 )
 from app.enums.source_type import SourceType
 from app.ingestion.models import (
@@ -649,7 +650,7 @@ def test_detected_agency_provenance_is_unverified_and_idempotent(db):
         == ArticleProvenanceDetectionMethod.PROVIDER_METADATA
     )
     assert provenance[0].confidence == 0.95
-    assert provenance[0].verified is False
+    assert provenance[0].review_status == ArticleProvenanceReviewStatus.PENDING
     assert (
         repository.load_verified_article_provenance(
             db,
