@@ -378,7 +378,33 @@ def test_europe_catalog_is_regional_and_country_metadata_is_per_entry() -> None:
     assert len({entry["key"] for entry in entries}) == 50
     assert all(entry["country"] not in catalog["countries_excluded"] for entry in entries)
     assert all(entry["country"] for entry in entries)
-    assert all(entry["feeds"] == [] for entry in entries)
+    configured = {
+        "Le Monde", "El País", "la Repubblica", "Gazeta Wyborcza",
+        "De Groene Amsterdammer", "HVG", "Efimerida ton Syntakton",
+        "Danas", "NRC", "Dagens Nyheter", "Hospodářské noviny",
+        "Delo", "El Mundo", "Jyllands-Posten",
+    }
+    assert all(
+        bool(entry["feeds"]) is (entry["name"] in configured)
+        for entry in entries
+    )
+    assert catalog["catalog_version"] == "1.0-draft.2"
+    assert catalog["runtime_country_policy"] == "per_entry_required"
+    assert catalog["runtime_source_type"] == "NEWS"
+    assert catalog["runtime_coverage_scope"] == "NATIONAL"
+    assert (
+        catalog["feed_activation_policy"]
+        == "only_verified_relevant_official_content_channels_are_activated"
+    )
+    assert catalog["feed_class_policy"] == "catalog_review_metadata_only_not_persisted"
+    assert catalog["feed_role_policy"] == {"news": "editorial"}
+    for entry in entries:
+        for feed in entry.get("feeds", []):
+            assert feed["active"] is True
+            assert feed["priority"] == 1
+            assert feed["activation_tier"] == 1
+            assert feed["feed_class"] == "news"
+            assert feed["default_confirmation_role"] == "editorial"
     assert all(entry["catalog_status"] == "candidate" for entry in entries)
     assert all(entry["publication_form"] in ALLOWED_FORMS for entry in entries)
     assert all(entry["form_group"] in ALLOWED_FORM_GROUPS for entry in entries)
