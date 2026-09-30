@@ -181,6 +181,20 @@ class SourceDependencyRepository:
         )
         return db.scalar(statement) is not None
 
+    def get_active_article_provenance(
+        self,
+        db: Session,
+        *,
+        article_id: UUID,
+        provenance_id: UUID,
+    ) -> ArticleProvenance | None:
+        statement = select(ArticleProvenance).where(
+            ArticleProvenance.id == provenance_id,
+            ArticleProvenance.article_id == article_id,
+            ArticleProvenance.deleted_at.is_(None),
+        )
+        return db.scalar(statement)
+
     def list_article_provenance(
         self,
         db: Session,
