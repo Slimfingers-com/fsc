@@ -32,6 +32,9 @@ services:
     environment:
       FSC_API_URL: http://backend:8000
       FSC_API_TIMEOUT_MS: 8000
+      SOURCE_ADMIN_API_KEY: ${SOURCE_ADMIN_API_KEY:-}
+      FSC_ADMIN_PASSWORD: ${FSC_ADMIN_PASSWORD:-}
+      FSC_ADMIN_SESSION_SECRET: ${FSC_ADMIN_SESSION_SECRET:-}
     ports:
       - "127.0.0.1:3000:3000"
     depends_on:
