@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { hasAdminSession } from "@/lib/admin-auth";
 import { listProvenanceReviewQueue } from "@/lib/admin-api";
 import type { ProvenanceReviewStatus } from "@/lib/types";
-import { logoutAdmin, reviewProvenance } from "../actions";
+import { reviewProvenance } from "../actions";
 
 export const metadata: Metadata = { title: "Provenance Review" };
 export const dynamic = "force-dynamic";
@@ -35,7 +35,7 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
           <h1>Provenance Review</h1>
           <p className="lead compact">{result.total} Einträge mit Status {status}.</p>
         </div>
-        <form action={logoutAdmin}><button className="button secondary">Abmelden</button></form>
+        <a className="button secondary" href="/api/auth/signout?callbackUrl=/admin/login">Abmelden</a>
       </div>
       <nav className="admin-tabs" aria-label="Review-Status">
         {statuses.map((item) => (
