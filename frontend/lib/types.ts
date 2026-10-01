@@ -155,3 +155,34 @@ export type StoryAnalysis = {
     minimum_expected: number | null;
   }[];
 };
+
+export type ProvenanceReviewStatus = "pending" | "verified" | "rejected";
+
+export type ProvenanceReviewItem = {
+  provenance_id: string;
+  article_id: string;
+  article_title: string | null;
+  article_url: string | null;
+  article_author: string | null;
+  article_published_at: string | null;
+  publisher_source_id: string;
+  publisher_source_name: string;
+  publisher_source_slug: string;
+  upstream_source_id: string;
+  upstream_source_name: string;
+  upstream_source_slug: string;
+  relation_kind: string;
+  confidence: number;
+  detection_method: string;
+  review_status: ProvenanceReviewStatus;
+  reviewed_at: string | null;
+  notes: string | null;
+  created_at: string;
+};
+
+export type ProvenanceReviewPage = {
+  total: number;
+  limit: number;
+  offset: number;
+  items: ProvenanceReviewItem[];
+};
