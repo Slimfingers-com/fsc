@@ -45,7 +45,7 @@ class StoryConsensusSummary(BaseModel):
         ),
         CheckConstraint(
             "claim_count >= 1 AND article_count >= 1 "
-            "AND independent_source_count >= 1 "
+            "AND independent_source_count >= 0 "
             "AND evidence_item_count >= 0 "
             "AND evidence_source_count >= 0 "
             "AND attributed_perspective_count >= 0",
