@@ -47,7 +47,9 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
         ))}
       </nav>
       <div className="stack">
-        {result.items.map((item) => (
+        {result.items.map((item) => {
+          const articleUrl = safeExternalUrl(item.article_url);
+          return (
           <article className="card provenance-card" key={item.provenance_id}>
             <div className="provenance-heading">
               <div>
@@ -63,7 +65,7 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
             </div>
             {item.notes ? <p>{item.notes}</p> : null}
             <div className="card-actions">
-              {safeExternalUrl(item.article_url) ? <a className="button secondary" href={safeExternalUrl(item.article_url)!} target="_blank" rel="noreferrer">Original öffnen</a> : null}
+              {articleUrl ? <a className="button secondary" href={articleUrl} target="_blank" rel="noreferrer">Original öffnen</a> : null}
               {statuses.filter((target) => target !== item.review_status).map((target) => (
                 <form action={reviewProvenance} key={target}>
                   <input type="hidden" name="article_id" value={item.article_id} />
@@ -74,7 +76,8 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
               ))}
             </div>
           </article>
-        ))}
+          );
+        })}
         {result.items.length === 0 ? <div className="empty">Keine Einträge.</div> : null}
       </div>
       <div className="pagination">
