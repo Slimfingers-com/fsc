@@ -126,7 +126,10 @@ class StoryClaimRelation(BaseModel):
             name="ck_story_claim_relations_distinct_groups",
         ),
         CheckConstraint("confidence BETWEEN 0 AND 1", name="ck_story_claim_relations_confidence"),
-        CheckConstraint("relation_kind = 'contradicts'", name="ck_story_claim_relations_kind"),
+        CheckConstraint(
+            "relation_kind IN ('contradicts', 'disputes')",
+            name="ck_story_claim_relations_kind",
+        ),
     )
 
     story_id: Mapped[UUID] = mapped_column(

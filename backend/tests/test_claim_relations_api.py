@@ -388,3 +388,25 @@ def test_missing_story_and_group_return_404(client):
     assert client.get(
         f"/claim-groups/{missing}"
     ).status_code == 404
+
+
+def test_claim_relation_endpoint_exposes_disputes(client, db):
+    data = build_story_results(db)
+    data["relation"].relation_kind = ClaimRelationKind.DISPUTES
+    db.flush()
+
+    response = client.get(
+        f"/stories/{data['story'].id}/claim-relations",
+        params={"relation_kind": "disputes"},
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["total"] == 1
+    assert payload["items"][0]["relation_kind"] == "disputes"
+
+    contradictions = client.get(
+        f"/stories/{data['story'].id}/claim-relations",
+        params={"relation_kind": "contradicts"},
+    )
+    assert contradictions.status_code == 200
+    assert contradictions.json()["total"] == 0

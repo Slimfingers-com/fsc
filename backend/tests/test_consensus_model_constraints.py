@@ -128,3 +128,29 @@ def test_difference_count_constraint_allows_zero_independent_sources(db):
         )
     )
     db.flush()
+
+
+def test_difference_allows_dispute_kind(db):
+    data = build_consensus_story(
+        db,
+        contradictory=True,
+    )
+    run = add_run(db, data["story"])
+    summary = StoryDifferenceSummary(
+        story_id=data["story"].id,
+        processing_run_id=run.id,
+        claim_relation_id=data["relation"].id,
+        left_group_id=data["group"].id,
+        right_group_id=data["second_group"].id,
+        difference_kind=DifferenceKind.DISPUTE,
+        left_independent_source_count=1,
+        right_independent_source_count=1,
+        left_evidence_source_count=1,
+        right_evidence_source_count=1,
+        analysis_provider="test",
+        analysis_version="1",
+        analyzed_at=datetime.now(UTC),
+    )
+    db.add(summary)
+    db.flush()
+    assert summary.difference_kind == DifferenceKind.DISPUTE

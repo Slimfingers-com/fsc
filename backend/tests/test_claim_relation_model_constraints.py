@@ -239,3 +239,35 @@ def test_relation_rejects_same_group_and_invalid_confidence(db):
         analyzed_at=datetime.now(UTC),
     )
     assert_flush_fails(db, invalid_confidence)
+
+
+def test_relation_allows_dispute_kind(db):
+    story, claim, run, first_group = create_bundle(db)
+    second_group = StoryClaimGroup(
+        story_id=story.id,
+        processing_run_id=run.id,
+        representative_claim_id=claim.id,
+        group_hash="d" * 64,
+        confidence=0.9,
+        analysis_provider="test",
+        analysis_version="1",
+        analyzed_at=datetime.now(UTC),
+    )
+    db.add(second_group)
+    db.flush()
+
+    relation = StoryClaimRelation(
+        story_id=story.id,
+        processing_run_id=run.id,
+        left_group_id=first_group.id,
+        right_group_id=second_group.id,
+        relation_kind=ClaimRelationKind.DISPUTES,
+        confidence=0.95,
+        analysis_provider="test",
+        analysis_version="1",
+        analyzed_at=datetime.now(UTC),
+    )
+    db.add(relation)
+    db.flush()
+
+    assert relation.relation_kind == ClaimRelationKind.DISPUTES

@@ -12,6 +12,7 @@ export function label(value: string): string {
     shared: "Mehrere unabhängige Quellen",
     single_source: "Ein unabhängiger Quellenverbund",
     contradiction: "Widerspruch",
+    dispute: "Strittige Aussage",
     no_attributed_perspective: "Keine attribuierte Perspektive",
     limited_independent_content_sources: "Begrenzte unabhängige Quellenabdeckung",
     signal_without_content_coverage: "Signal ohne Inhaltsabdeckung",

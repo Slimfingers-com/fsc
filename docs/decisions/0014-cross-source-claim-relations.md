@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted; relation semantics extended by ADR 0041.
 
 ## Context
 

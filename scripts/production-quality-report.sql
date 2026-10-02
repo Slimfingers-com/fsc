@@ -23,9 +23,13 @@ union all select 'multi_article_stories', count(*)::text from story_sizes where 
 union all select 'multi_source_stories', count(*)::text from story_sizes where feed_count>=2
 union all select 'active_claim_groups', count(*)::text from story_claim_groups where deleted_at is null
 union all select 'active_claim_relations', count(*)::text from story_claim_relations where deleted_at is null
+union all select 'active_contradictions', count(*)::text from story_claim_relations where deleted_at is null and relation_kind='contradicts'
+union all select 'active_disputes', count(*)::text from story_claim_relations where deleted_at is null and relation_kind='disputes'
 union all select 'active_evidence', count(*)::text from story_evidence where deleted_at is null
 union all select 'active_consensus', count(*)::text from story_consensus_summaries where deleted_at is null
 union all select 'active_differences', count(*)::text from story_difference_summaries where deleted_at is null
+union all select 'active_contradiction_differences', count(*)::text from story_difference_summaries where deleted_at is null and difference_kind='contradiction'
+union all select 'active_dispute_differences', count(*)::text from story_difference_summaries where deleted_at is null and difference_kind='dispute'
 union all select 'active_coverage', count(*)::text from story_coverage_summaries where deleted_at is null
 union all select 'article_states_with_error', count(*)::text
   from article_processing_states aps

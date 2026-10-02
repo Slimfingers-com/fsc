@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from enum import StrEnum
 from uuid import UUID
 
+from app.claim_relations.provider import ClaimRelationKind
+
 
 class ConsensusKind(StrEnum):
     SINGLE_SOURCE = "single_source"
@@ -11,6 +13,7 @@ class ConsensusKind(StrEnum):
 
 class DifferenceKind(StrEnum):
     CONTRADICTION = "contradiction"
+    DISPUTE = "dispute"
 
 
 @dataclass(frozen=True, slots=True)
@@ -37,6 +40,7 @@ class ClaimDifferenceInput:
     right_independent_source_count: int
     left_evidence_source_count: int
     right_evidence_source_count: int
+    relation_kind: ClaimRelationKind = ClaimRelationKind.CONTRADICTS
 
 
 @dataclass(frozen=True, slots=True)

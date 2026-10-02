@@ -1,5 +1,6 @@
 from datetime import UTC, datetime
 
+from app.claim_relations.provider import ClaimRelationKind
 from app.enums.story_pipeline import StoryPipeline
 from app.models.story_processing import StoryProcessingRun
 from app.services.consensus import ConsensusService
@@ -85,3 +86,22 @@ def test_consensus_read_hides_ineligible_representative(client, db):
     )
     assert response.status_code == 200
     assert response.json()["total"] == 0
+
+
+def test_differences_endpoint_exposes_dispute(client, db):
+    data = build_consensus_story(
+        db,
+        contradictory=True,
+    )
+    data["relation"].relation_kind = ClaimRelationKind.DISPUTES
+    db.flush()
+    persist_consensus(db, data)
+
+    response = client.get(
+        f"/stories/{data['story'].id}/differences",
+        params={"difference_kind": "dispute"},
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["total"] == 1
+    assert payload["items"][0]["difference_kind"] == "dispute"

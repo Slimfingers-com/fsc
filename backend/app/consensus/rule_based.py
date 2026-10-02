@@ -1,3 +1,4 @@
+from app.claim_relations.provider import ClaimRelationKind
 from app.consensus.provider import (
     ConsensusAnalyzer,
     ConsensusKind,
@@ -11,7 +12,7 @@ from app.consensus.provider import (
 
 class RuleBasedConsensusAnalyzer(ConsensusAnalyzer):
     provider = "local-rules"
-    version = "1.0.0"
+    version = "1.1.0"
 
     def __init__(
         self,
@@ -55,7 +56,12 @@ class RuleBasedConsensusAnalyzer(ConsensusAnalyzer):
         differences = tuple(
             DifferenceSummaryResult(
                 relation_id=item.relation_id,
-                difference_kind=DifferenceKind.CONTRADICTION,
+                difference_kind=(
+                    DifferenceKind.CONTRADICTION
+                    if item.relation_kind
+                    == ClaimRelationKind.CONTRADICTS
+                    else DifferenceKind.DISPUTE
+                ),
             )
             for item in sorted(
                 story.differences,
