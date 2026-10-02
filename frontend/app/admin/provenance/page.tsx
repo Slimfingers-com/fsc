@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { AdminSignOutButton } from "@/components/admin-auth-buttons";
 import { hasAdminSession } from "@/lib/admin-auth";
 import { listProvenanceReviewQueue } from "@/lib/admin-api";
 import { safeExternalUrl } from "@/lib/format";
@@ -36,7 +37,7 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
           <h1>Provenance Review</h1>
           <p className="lead compact">{result.total} Einträge mit Status {status}.</p>
         </div>
-        <a className="button secondary" href="/api/auth/signout?callbackUrl=/admin/login">Abmelden</a>
+        <AdminSignOutButton />
       </div>
       <nav className="admin-tabs" aria-label="Review-Status">
         {statuses.map((item) => (
