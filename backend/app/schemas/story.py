@@ -33,6 +33,7 @@ class StoryArticleRead(BaseModel):
 
     membership_id: UUID
     article_id: UUID
+    language_code: str | None
     title: str | None
     url: str | None
     published_at: datetime | None
