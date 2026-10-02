@@ -226,7 +226,8 @@ class StoryClusteringService:
                 Source.active.is_(True),
             )
             .with_for_update(
-                of=Article
+                of=Article,
+                key_share=True,
             )
             .execution_options(
                 populate_existing=True
