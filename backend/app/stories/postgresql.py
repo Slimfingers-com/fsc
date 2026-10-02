@@ -35,6 +35,9 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 StoryArticle.story_id.label("story_id"),
                 StoryArticle.article_id.label("article_id"),
                 Article.title.label("article_title"),
+                Article.language_code.label(
+                    "article_language_code"
+                ),
                 Article.published_at.label("published_at"),
                 func.coalesce(
                     Article.published_at,
@@ -603,6 +606,9 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                         value.membership_id
                     ),
                     article_id=value.article_id,
+                    language_code=(
+                        value.article_language_code
+                    ),
                     title=value.article_title,
                     url=value.url,
                     published_at=value.published_at,
