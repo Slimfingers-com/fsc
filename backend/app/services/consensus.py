@@ -8,6 +8,7 @@ from uuid import UUID, uuid4
 
 from sqlalchemy.orm import Session, sessionmaker
 
+from app.claim_relations.provider import ClaimRelationKind
 from app.consensus.provider import (
     ClaimDifferenceInput,
     ClaimGroupConsensusInput,
@@ -573,6 +574,7 @@ class ConsensusService:
                         relation.right_group_id
                     ].evidence_source_count
                 ),
+                relation_kind=relation.relation_kind,
             )
             for relation in snapshot.relations
         )
@@ -621,22 +623,29 @@ class ConsensusService:
         ):
             raise ValueError("invalid consensus kind")
 
-        expected_relations = {
-            item.relation_id
+        expected_difference_kinds = {
+            item.relation_id: (
+                DifferenceKind.CONTRADICTION
+                if item.relation_kind
+                == ClaimRelationKind.CONTRADICTS
+                else DifferenceKind.DISPUTE
+            )
             for item in prepared.analysis_input.differences
         }
+        expected_relations = set(expected_difference_kinds)
         actual_relations = {
             item.relation_id
             for item in result.differences
         }
         if actual_relations != expected_relations:
             raise ValueError(
-                "difference result must cover every contradiction exactly once"
+                "difference result must cover every claim relation exactly once"
             )
         if len(actual_relations) != len(result.differences):
             raise ValueError("duplicate difference relation")
         if any(
-            item.difference_kind != DifferenceKind.CONTRADICTION
+            expected_difference_kinds.get(item.relation_id)
+            != item.difference_kind
             for item in result.differences
         ):
             raise ValueError("invalid difference kind")

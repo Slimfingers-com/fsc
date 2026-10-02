@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from enum import StrEnum
 from uuid import UUID
 
+from app.consensus.provider import DifferenceKind
+
 
 class CoverageGapKind(StrEnum):
     LIMITED_INDEPENDENT_CONTENT_SOURCES = (
@@ -44,6 +46,7 @@ class CoverageDifferenceInput:
     relation_id: UUID
     left_group_id: UUID
     right_group_id: UUID
+    difference_kind: DifferenceKind = DifferenceKind.CONTRADICTION
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from app.claim_relations.provider import ClaimRelationKind
 from app.consensus.provider import (
     ClaimDifferenceInput,
     ClaimGroupConsensusInput,
@@ -82,4 +83,37 @@ def test_contradiction_is_reported_as_difference():
     assert (
         result.differences[0].difference_kind
         == DifferenceKind.CONTRADICTION
+    )
+
+
+def test_dispute_is_reported_as_dispute_difference():
+    left = group(1)
+    right = group(1)
+    relation_id = uuid4()
+    result = RuleBasedConsensusAnalyzer().analyze(
+        StoryConsensusInput(
+            story_id=uuid4(),
+            language_code="en",
+            groups=(left, right),
+            differences=(
+                ClaimDifferenceInput(
+                    relation_id=relation_id,
+                    left_group_id=left.group_id,
+                    right_group_id=right.group_id,
+                    left_claim_text="The package costs 5 billion euros.",
+                    right_claim_text="The package costs 50 billion euros.",
+                    left_independent_source_count=1,
+                    right_independent_source_count=1,
+                    left_evidence_source_count=1,
+                    right_evidence_source_count=1,
+                    relation_kind=ClaimRelationKind.DISPUTES,
+                ),
+            ),
+        )
+    )
+    assert len(result.differences) == 1
+    assert result.differences[0].relation_id == relation_id
+    assert (
+        result.differences[0].difference_kind
+        == DifferenceKind.DISPUTE
     )

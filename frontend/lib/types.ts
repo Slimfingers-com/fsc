@@ -128,7 +128,7 @@ export type StoryAnalysis = {
     right_group_id: string;
     left_claim_text: string;
     right_claim_text: string;
-    difference_kind: "contradiction";
+    difference_kind: "contradiction" | "dispute";
     left_independent_source_count: number;
     right_independent_source_count: number;
     left_evidence_source_count: number;

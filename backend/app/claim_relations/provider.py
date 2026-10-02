@@ -12,6 +12,7 @@ class ClaimGroupMatchKind(StrEnum):
 
 class ClaimRelationKind(StrEnum):
     CONTRADICTS = "contradicts"
+    DISPUTES = "disputes"
 
 
 @dataclass(frozen=True, slots=True)

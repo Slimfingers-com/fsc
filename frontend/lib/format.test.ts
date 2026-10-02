@@ -24,6 +24,7 @@ describe("frontend helpers", () => {
   it("labels analysis values", () => {
     expect(label("shared")).toBe("Mehrere unabhängige Quellen");
     expect(label("contradiction")).toBe("Widerspruch");
+    expect(label("dispute")).toBe("Strittige Aussage");
   });
 
   it("formats percentages", () => {

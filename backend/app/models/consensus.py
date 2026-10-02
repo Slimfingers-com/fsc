@@ -107,7 +107,7 @@ class StoryDifferenceSummary(BaseModel):
             postgresql_where=text("deleted_at IS NULL"),
         ),
         CheckConstraint(
-            "difference_kind = 'contradiction'",
+            "difference_kind IN ('contradiction', 'dispute')",
             name="ck_story_difference_kind",
         ),
         CheckConstraint(

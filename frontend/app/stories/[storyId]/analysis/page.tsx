@@ -36,7 +36,7 @@ export default async function AnalysisPage({ params }: Props) {
         <div>
           <p className="eyebrow">Integrierte Analyse</p>
           <h1>{story.title ?? "Story ohne Titel"}</h1>
-          <p className="lead compact">Beobachtbare Aussagen, Evidenz, Konsens, Widersprüche und Coverage – ohne Truth- oder Glaubwürdigkeits-Score.</p>
+          <p className="lead compact">Beobachtbare Aussagen, Evidenz, Konsens, Unterschiede und Coverage – ohne Truth- oder Glaubwürdigkeits-Score.</p>
         </div>
         <Link className="button secondary" href={`/stories/${storyId}`}>← Story</Link>
       </section>
@@ -44,7 +44,7 @@ export default async function AnalysisPage({ params }: Props) {
       <section className="metric-grid">
         <div className="metric"><strong>{analysis.coverage.claim_group_count}</strong><span>Aussagegruppen</span></div>
         <div className="metric"><strong>{analysis.coverage.shared_group_count}</strong><span>Geteilte Aussagen</span></div>
-        <div className="metric"><strong>{analysis.coverage.difference_count}</strong><span>Widersprüche</span></div>
+        <div className="metric"><strong>{analysis.coverage.difference_count}</strong><span>Unterschiede</span></div>
         <div className="metric"><strong>{analysis.coverage.independent_content_source_count}</strong><span>Unabh. Quellen</span></div>
       </section>
 
@@ -64,13 +64,13 @@ export default async function AnalysisPage({ params }: Props) {
 
       {analysis.differences.length > 0 ? (
         <section className="section">
-          <p className="eyebrow">Differences</p><h2>Explizite Widersprüche</h2>
+          <p className="eyebrow">Differences</p><h2>Widersprüche und strittige Aussagen</h2>
           <div className="stack">
             {analysis.differences.map((difference) => (
               <article className="difference" key={difference.id}>
-                <div><span className="badge danger">{label(difference.difference_kind)}</span><p>{difference.left_claim_text}</p><small>{difference.left_independent_source_count} unabhängige Quellenverbünde</small></div>
+                <div><span className={difference.difference_kind === "contradiction" ? "badge danger" : "badge warning"}>{label(difference.difference_kind)}</span><p>{difference.left_claim_text}</p><small>{difference.left_independent_source_count} unabhängige Quellenverbünde</small></div>
                 <span className="versus">↔</span>
-                <div><span className="badge danger">{label(difference.difference_kind)}</span><p>{difference.right_claim_text}</p><small>{difference.right_independent_source_count} unabhängige Quellenverbünde</small></div>
+                <div><span className={difference.difference_kind === "contradiction" ? "badge danger" : "badge warning"}>{label(difference.difference_kind)}</span><p>{difference.right_claim_text}</p><small>{difference.right_independent_source_count} unabhängige Quellenverbünde</small></div>
               </article>
             ))}
           </div>

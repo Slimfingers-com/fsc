@@ -8,6 +8,7 @@ from uuid import UUID, uuid4
 
 from sqlalchemy.orm import Session, sessionmaker
 
+from app.consensus.provider import DifferenceKind
 from app.consensus.rule_based import RuleBasedConsensusAnalyzer
 from app.coverage.provider import (
     CoverageAnalyzer,
@@ -531,6 +532,7 @@ class CoverageService:
                 ),
                 left_group_id=item.left_group_id,
                 right_group_id=item.right_group_id,
+                difference_kind=item.difference_kind,
             )
             for item
             in snapshot.difference_summaries
@@ -849,6 +851,11 @@ class CoverageService:
         for item in (
             prepared.analysis_input.differences
         ):
+            if (
+                item.difference_kind
+                != DifferenceKind.CONTRADICTION
+            ):
+                continue
             difference_ids_by_group.setdefault(
                 item.left_group_id,
                 set(),

@@ -2,6 +2,7 @@ from datetime import UTC, datetime
 
 from sqlalchemy import func, select
 
+from app.claim_relations.provider import ClaimRelationKind
 from app.enums.confirmation_role import ConfirmationRole
 from app.enums.coverage_scope import CoverageScope
 from app.enums.source_dependency import (
@@ -455,3 +456,47 @@ def test_coverage_hash_ignores_feed_default_for_existing_articles(db):
     )
 
     assert service.analysis_hash(snapshot) == initial_hash
+
+
+def test_missing_perspective_excludes_dispute_from_contradiction_context(db):
+    data = build_consensus_story(
+        db,
+        contradictory=True,
+    )
+    data["relation"].relation_kind = ClaimRelationKind.DISPUTES
+    db.flush()
+    persist_current_consensus(db, data)
+
+    service = CoverageService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+    prepared = service.prepare(snapshot)
+    assert prepared.metrics.difference_count == 1
+    result = service.run_provider(prepared)
+    run = add_run(db, service, prepared)
+    service.persist_result(
+        db,
+        snapshot,
+        prepared=prepared,
+        result=result,
+        processing_run_id=run.id,
+        analyzed_at=datetime.now(UTC),
+    )
+    db.flush()
+    missing = list(
+        db.scalars(
+            select(StoryMissingPerspective).where(
+                StoryMissingPerspective.story_id
+                == data["story"].id,
+                StoryMissingPerspective.deleted_at.is_(None),
+            )
+        ).all()
+    )
+    assert len(missing) == 2
+    assert all(
+        item.contradiction_relation_ids == []
+        for item in missing
+    )
