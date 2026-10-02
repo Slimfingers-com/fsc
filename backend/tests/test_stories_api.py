@@ -601,6 +601,7 @@ def test_story_detail_contains_current_evidence(
         matched.id
     )
     assert latest_data["source_slug"] == "beta"
+    assert latest_data["language_code"] == "de"
     assert datetime.fromisoformat(
         latest_data["published_at"]
     ) == latest.published_at
