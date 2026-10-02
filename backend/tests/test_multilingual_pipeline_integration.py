@@ -430,3 +430,165 @@ def test_multilingual_story_runs_from_ingestion_through_integrated_analysis(
             )
             == 2
         )
+
+
+def test_german_french_story_clusters_and_preserves_article_languages(
+    client,
+):
+    now = datetime(
+        2026,
+        10,
+        2,
+        11,
+        0,
+        tzinfo=UTC,
+    )
+    token = uuid4().hex
+    german_body = (
+        "Die European Commission hat in Brussels ein neues "
+        "Klimapaket beschlossen. Die Mitgliedstaaten beraten "
+        "nun über Umsetzung und Zeitplan."
+    )
+    french_body = (
+        "La European Commission a approuvé à Brussels un nouveau "
+        "paquet climatique. Les États membres discutent maintenant "
+        "de la mise en œuvre et du calendrier."
+    )
+    with TestSessionLocal.begin() as db:
+        de_feed = _feed(
+            db,
+            token=f"de-fr-de-{token}",
+            country="DE",
+        )
+        fr_feed = _feed(
+            db,
+            token=f"de-fr-fr-{token}",
+            country="FR",
+        )
+        persistence = FeedPersistenceService()
+
+        fixtures = (
+            (
+                de_feed,
+                "de",
+                "de",
+                "European Commission beschließt Klimapaket in Brussels",
+                german_body,
+            ),
+            (
+                fr_feed,
+                "fr",
+                "fr",
+                "European Commission approuve un paquet climatique à Brussels",
+                french_body,
+            ),
+        )
+        for feed, language, prefix, title, content in fixtures:
+            result = persistence.persist(
+                db,
+                feed=feed,
+                parsed_feed=_parsed_feed(
+                    feed_url=feed.url,
+                    language=language,
+                    external_id=f"{prefix}-{token}",
+                    title=title,
+                    content=content,
+                    published_at=now,
+                ),
+                fetched_at=now,
+            )
+            assert result.inserted == 1
+
+    normalization = ArticleNormalizationRunner(
+        TestSessionLocal,
+        worker_id="de-fr-normalization",
+    )
+    normalization_result = normalization.run_pending(limit=10)
+    assert normalization_result.processed == 2
+    assert normalization_result.changed == 2
+
+    with TestSessionLocal() as db:
+        articles = list(
+            db.scalars(
+                select(Article).order_by(Article.language_code)
+            ).all()
+        )
+        assert {
+            article.language_code
+            for article in articles
+        } == {"de", "fr"}
+        article_ids = {
+            article.language_code: article.id
+            for article in articles
+        }
+
+    entity_topic = EntityTopicAnalysisRunner(
+        TestSessionLocal,
+        service=EntityTopicAnalysisService(
+            analyzer=SharedCrossLanguageAnalyzer(),
+        ),
+        worker_id="de-fr-entity-topic",
+    )
+    _assert_batch(
+        entity_topic.run_pending(limit=10),
+        processed=2,
+    )
+
+    clustering = StoryClusteringRunner(
+        TestSessionLocal,
+        StoryClusteringService(
+            clusterer=RuleBasedStoryClusterer(),
+        ),
+        worker_id="de-fr-story-clustering",
+        window_hours=48.0,
+        candidate_limit=250,
+    )
+    _assert_batch(
+        clustering.run_pending(limit=10),
+        processed=2,
+    )
+
+    with TestSessionLocal() as db:
+        stories = list(
+            db.scalars(
+                select(Story).where(Story.deleted_at.is_(None))
+            ).all()
+        )
+        assert len(stories) == 1
+        story_id = stories[0].id
+        assert stories[0].language_code == "mul"
+        memberships = list(
+            db.scalars(
+                select(StoryArticle)
+                .where(
+                    StoryArticle.story_id == story_id,
+                    StoryArticle.deleted_at.is_(None),
+                )
+                .order_by(StoryArticle.clustered_at)
+            ).all()
+        )
+        assert len(memberships) == 2
+        matched = [
+            membership
+            for membership in memberships
+            if membership.match_kind == "matched"
+        ]
+        assert len(matched) == 1
+        assert matched[0].match_details is not None
+        assert matched[0].match_details["cross_language"] is True
+        assert set(
+            matched[0].match_details["language_pair"]
+        ) == {"de", "fr"}
+
+    response = client.get(f"/stories/{story_id}")
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["language_code"] == "mul"
+    assert payload["article_count"] == 2
+    assert {
+        article["article_id"]: article["language_code"]
+        for article in payload["articles"]
+    } == {
+        str(article_ids["de"]): "de",
+        str(article_ids["fr"]): "fr",
+    }
