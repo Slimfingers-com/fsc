@@ -886,6 +886,30 @@ def test_processing_configuration_tracks_clusterer_configuration():
     assert first_version != second_version
 
 
+def test_processing_configuration_tracks_single_entity_title_threshold():
+    first = StoryClusteringService(
+        clusterer=RuleBasedStoryClusterer(
+            single_entity_title_similarity_threshold=0.30,
+        ),
+    )
+    second = StoryClusteringService(
+        clusterer=RuleBasedStoryClusterer(
+            single_entity_title_similarity_threshold=0.35,
+        ),
+    )
+
+    first_version = first.processing_configuration_version(
+        window_hours=24.0,
+        candidate_limit=100,
+    )
+    second_version = second.processing_configuration_version(
+        window_hours=24.0,
+        candidate_limit=100,
+    )
+
+    assert first_version != second_version
+
+
 def test_prepare_carries_semantic_features_into_cluster_input():
     article = make_processing_article()
     article.normalized_at = datetime.now(UTC)
