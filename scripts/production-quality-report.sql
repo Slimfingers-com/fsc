@@ -1,0 +1,40 @@
+with active_sa as (
+  select sa.story_id, sa.article_id, a.feed_id
+  from story_articles sa
+  join articles a on a.id = sa.article_id
+  where sa.deleted_at is null and a.deleted_at is null
+),
+story_sizes as (
+  select story_id, count(*) as article_count, count(distinct feed_id) as feed_count
+  from active_sa
+  group by story_id
+)
+select 'articles', count(*)::text from articles where deleted_at is null
+union all select 'normalized_articles', count(*)::text from articles where deleted_at is null and normalized_at is not null
+union all select 'search_documents', count(*)::text from search_documents where deleted_at is null
+union all select 'entity_topic_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='entity_topic' and processed_input_hash is not null
+union all select 'claim_extraction_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='claim_extraction' and processed_input_hash is not null
+union all select 'perspective_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='perspective_analysis' and processed_input_hash is not null
+union all select 'story_clustering_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='story_clustering' and processed_input_hash is not null
+union all select 'active_stories', count(*)::text from stories where deleted_at is null
+union all select 'active_story_assignments', count(*)::text from story_articles where deleted_at is null
+union all select 'singleton_stories', count(*)::text from story_sizes where article_count=1
+union all select 'multi_article_stories', count(*)::text from story_sizes where article_count>=2
+union all select 'multi_source_stories', count(*)::text from story_sizes where feed_count>=2
+union all select 'active_claim_groups', count(*)::text from story_claim_groups where deleted_at is null
+union all select 'active_claim_relations', count(*)::text from story_claim_relations where deleted_at is null
+union all select 'active_evidence', count(*)::text from story_evidence where deleted_at is null
+union all select 'active_consensus', count(*)::text from story_consensus_summaries where deleted_at is null
+union all select 'active_differences', count(*)::text from story_difference_summaries where deleted_at is null
+union all select 'active_coverage', count(*)::text from story_coverage_summaries where deleted_at is null
+union all select 'article_states_with_error', count(*)::text
+  from article_processing_states
+  where deleted_at is null
+    and last_error_at is not null
+    and (last_processed_at is null or last_error_at > last_processed_at)
+union all select 'story_states_with_error', count(*)::text
+  from story_processing_states
+  where deleted_at is null
+    and last_error_at is not null
+    and (last_processed_at is null or last_error_at > last_processed_at)
+order by 1;
