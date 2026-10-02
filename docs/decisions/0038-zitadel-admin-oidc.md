@@ -1,7 +1,7 @@
 # ADR 0038: ZITADEL OIDC for admin identity
 
 Status: Accepted
-Date: 2026-10-01
+Date: 2026-10-02
 
 ## Context
 
