@@ -54,6 +54,7 @@ class Settings(BaseSettings):
     story_clustering_window_hours: float = 48.0
     story_clustering_candidate_limit: int = 250
     story_clustering_min_similarity: float = 0.45
+    story_clustering_single_entity_title_similarity_threshold: float = 0.30
     story_clustering_semantic_similarity_threshold: float = 0.72
 
     claim_extraction_worker_poll_interval_seconds: float = 60.0

@@ -11,17 +11,23 @@ from app.clustering.provider import (
 
 class RuleBasedStoryClusterer(StoryClusterer):
     provider = "local-rules"
-    version = "3"
+    version = "4"
 
     def __init__(
         self,
         *,
         min_similarity: float = 0.45,
+        single_entity_title_similarity_threshold: float = 0.30,
         semantic_similarity_threshold: float = 0.72,
     ) -> None:
         if not 0 <= min_similarity <= 1:
             raise ValueError(
                 "min_similarity must be between 0 and 1"
+            )
+
+        if not 0 <= single_entity_title_similarity_threshold <= 1:
+            raise ValueError(
+                "single_entity_title_similarity_threshold must be between 0 and 1"
             )
 
         if not 0 <= semantic_similarity_threshold <= 1:
@@ -30,6 +36,9 @@ class RuleBasedStoryClusterer(StoryClusterer):
             )
 
         self.min_similarity = min_similarity
+        self.single_entity_title_similarity_threshold = (
+            single_entity_title_similarity_threshold
+        )
         self.semantic_similarity_threshold = semantic_similarity_threshold
 
     def configuration(
@@ -37,6 +46,9 @@ class RuleBasedStoryClusterer(StoryClusterer):
     ) -> dict[str, object]:
         return {
             "min_similarity": self.min_similarity,
+            "single_entity_title_similarity_threshold": (
+                self.single_entity_title_similarity_threshold
+            ),
             "semantic_similarity_threshold": (
                 self.semantic_similarity_threshold
             ),
@@ -126,7 +138,8 @@ class RuleBasedStoryClusterer(StoryClusterer):
         entity_title_match = (
             not cross_language
             and shared_entities >= 1
-            and title_similarity >= 0.15
+            and title_similarity
+            >= self.single_entity_title_similarity_threshold
         )
         multi_entity_match = (
             not cross_language

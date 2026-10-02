@@ -111,6 +111,16 @@ def test_rule_based_clusterer_rejects_invalid_threshold(
         )
 
 
+def test_rule_based_clusterer_rejects_invalid_single_entity_title_threshold():
+    with pytest.raises(
+        ValueError,
+        match="single_entity_title_similarity_threshold",
+    ):
+        RuleBasedStoryClusterer(
+            single_entity_title_similarity_threshold=1.01,
+        )
+
+
 def test_rule_based_clusterer_returns_no_match_without_candidates():
     clusterer = RuleBasedStoryClusterer()
 
@@ -144,6 +154,100 @@ def test_rule_based_clusterer_matches_strong_title_overlap():
     assert result.matched_membership_id == candidate.membership_id
     assert result.matched_article_id == candidate.article_id
     assert result.similarity_score == 1.0
+
+
+def test_single_entity_weak_title_without_semantics_does_not_match():
+    clusterer = RuleBasedStoryClusterer()
+    shared_entity = uuid4()
+    shared_topic = uuid4()
+
+    candidate = make_candidate(
+        title_terms=("alpha", "delta", "epsilon"),
+        entity_ids=(shared_entity,),
+        topic_ids=(shared_topic,),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=("alpha", "beta", "gamma"),
+            entity_ids=(shared_entity,),
+            topic_ids=(shared_topic,),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id is None
+
+
+def test_single_entity_title_match_at_conservative_threshold_matches():
+    clusterer = RuleBasedStoryClusterer()
+    shared_entity = uuid4()
+
+    candidate = make_candidate(
+        title_terms=("alpha", "beta", "delta", "epsilon"),
+        entity_ids=(shared_entity,),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=("alpha", "beta", "gamma"),
+            entity_ids=(shared_entity,),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id == candidate.story_id
+    assert result.details["title_similarity"] == pytest.approx(0.4)
+    assert "entity_title" in result.details["match_basis"]
+    assert "title" not in result.details["match_basis"]
+
+
+def test_multi_entity_match_remains_available_below_single_entity_threshold():
+    clusterer = RuleBasedStoryClusterer()
+    first_entity = uuid4()
+    second_entity = uuid4()
+    shared_topic = uuid4()
+
+    candidate = make_candidate(
+        title_terms=("alpha", "delta", "epsilon"),
+        entity_ids=(first_entity, second_entity),
+        topic_ids=(shared_topic,),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=("alpha", "beta", "gamma"),
+            entity_ids=(first_entity, second_entity),
+            topic_ids=(shared_topic,),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id == candidate.story_id
+    assert result.details["title_similarity"] == pytest.approx(0.2)
+    assert "multi_entity" in result.details["match_basis"]
+
+
+def test_semantic_match_remains_available_below_single_entity_threshold():
+    clusterer = RuleBasedStoryClusterer()
+    shared_entity = uuid4()
+
+    candidate = make_candidate(
+        title_terms=("delta", "epsilon"),
+        entity_ids=(shared_entity,),
+        semantic_embedding=(0.99, 0.05, 0.0),
+        semantic_model="test-multilingual",
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=("alpha", "beta"),
+            entity_ids=(shared_entity,),
+            semantic_embedding=(1.0, 0.0, 0.0),
+            semantic_model="test-multilingual",
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id == candidate.story_id
+    assert result.details["title_similarity"] == 0.0
+    assert result.details["match_basis"] == ["semantic"]
 
 
 def test_rule_based_clusterer_does_not_match_unrelated_candidate():

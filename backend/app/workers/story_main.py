@@ -27,6 +27,9 @@ def main() -> None:
         min_similarity=(
             settings.story_clustering_min_similarity
         ),
+        single_entity_title_similarity_threshold=(
+            settings.story_clustering_single_entity_title_similarity_threshold
+        ),
         semantic_similarity_threshold=(
             settings.story_clustering_semantic_similarity_threshold
         ),
