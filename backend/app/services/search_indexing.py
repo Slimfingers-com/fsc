@@ -153,6 +153,42 @@ class SearchIndexingRunner:
             lambda: datetime.now(UTC)
         )
 
+    @staticmethod
+    def _load_claimed_article(
+        db: Session,
+        article_id: UUID,
+    ) -> Article | None:
+        return db.scalar(
+            select(Article)
+            .join(Article.feed)
+            .join(Feed.source)
+            .where(
+                Article.id == article_id,
+                Article.deleted_at.is_(None),
+                Article.normalized_at.is_not(None),
+                Article.content_hash.is_not(None),
+                Feed.deleted_at.is_(None),
+                Feed.active.is_(True),
+                Source.deleted_at.is_(None),
+                Source.active.is_(True),
+            )
+            .options(
+                joinedload(
+                    Article.feed
+                ).joinedload(
+                    Feed.source
+                )
+            )
+            .with_for_update(
+                of=Article,
+                read=True,
+                key_share=True,
+            )
+            .execution_options(
+                populate_existing=True
+            )
+        )
+
     def _claim_pending(
         self,
         db: Session,
@@ -340,33 +376,9 @@ class SearchIndexingRunner:
             for claim in claims:
                 try:
                     with db.begin():
-                        article = db.scalar(
-                            select(Article)
-                            .join(Article.feed)
-                            .join(Feed.source)
-                            .where(
-                                Article.id == claim.article_id,
-                                Article.deleted_at.is_(None),
-                                Article.normalized_at.is_not(None),
-                                Article.content_hash.is_not(None),
-                                Feed.deleted_at.is_(None),
-                                Feed.active.is_(True),
-                                Source.deleted_at.is_(None),
-                                Source.active.is_(True),
-                            )
-                            .options(
-                                joinedload(
-                                    Article.feed
-                                ).joinedload(
-                                    Feed.source
-                                )
-                            )
-                            .with_for_update(
-                                of=Article
-                            )
-                            .execution_options(
-                                populate_existing=True
-                            )
+                        article = self._load_claimed_article(
+                            db,
+                            claim.article_id,
                         )
 
                         if article is None:

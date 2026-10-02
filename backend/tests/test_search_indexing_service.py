@@ -1,7 +1,7 @@
 from datetime import UTC, datetime
 from uuid import uuid4
 
-from sqlalchemy import select
+from sqlalchemy import select, text
 
 from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.article_pipeline import ArticlePipeline
@@ -255,6 +255,37 @@ def test_runner_indexes_and_records_success():
         assert run is not None
         assert run.outcome == "succeeded"
         assert run.finished_at is not None
+
+
+def test_search_article_lock_is_compatible_with_no_key_update():
+    article_id, _, _ = _create_normalized_article()
+    runner = SearchIndexingRunner(
+        TestSessionLocal,
+        worker_id="search-lock-test",
+    )
+
+    with TestSessionLocal.begin() as first_db:
+        held = first_db.scalar(
+            select(Article)
+            .where(Article.id == article_id)
+            .with_for_update(
+                of=Article,
+                key_share=True,
+            )
+        )
+        assert held is not None
+
+        with TestSessionLocal.begin() as second_db:
+            second_db.execute(
+                text("SET LOCAL lock_timeout = '250ms'")
+            )
+            loaded = runner._load_claimed_article(
+                second_db,
+                article_id,
+            )
+
+            assert loaded is not None
+            assert loaded.id == article_id
 
 
 def test_runner_does_not_index_unchanged_article_twice():
