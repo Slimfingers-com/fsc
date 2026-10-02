@@ -456,6 +456,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
             select(
                 eligible.c.membership_id,
                 eligible.c.article_id,
+                eligible.c.article_language_code,
                 eligible.c.article_title,
                 eligible.c.url,
                 eligible.c.published_at,
