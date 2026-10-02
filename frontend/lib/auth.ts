@@ -21,6 +21,12 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.ZITADEL_CLIENT_SECRET ?? "unconfigured",
       authorization: { params: { scope: "openid email profile" } },
       idToken: true,
+      userinfo: {
+        async request({ client, tokens }) {
+          if (!tokens.access_token) throw new Error("ZITADEL did not return an access token");
+          return client.userinfo(tokens.access_token);
+        },
+      },
       checks: ["pkce", "state"],
       profile(profile) {
         return {
