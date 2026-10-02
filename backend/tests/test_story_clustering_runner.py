@@ -737,6 +737,39 @@ def test_story_row_mutation_lock_is_compatible_with_key_share():
             assert locked.id == story_id
 
 
+def test_story_prepare_article_lock_is_compatible_with_key_share():
+    article_id = create_committed_articles(1)[0]
+    service = StoryClusteringService(
+        clusterer=RuleBasedStoryClusterer(),
+    )
+
+    with TestSessionLocal.begin() as first_db:
+        held = first_db.scalar(
+            select(Article)
+            .where(Article.id == article_id)
+            .with_for_update(
+                of=Article,
+                read=True,
+                key_share=True,
+            )
+        )
+        assert held is not None
+
+        with TestSessionLocal.begin() as second_db:
+            second_db.execute(
+                text("SET LOCAL lock_timeout = '250ms'")
+            )
+            prepared = service.prepare(
+                second_db,
+                article_id=article_id,
+                window_hours=48.0,
+                candidate_limit=250,
+            )
+
+            assert prepared is not None
+            assert prepared.article.article_id == article_id
+
+
 def test_runner_skips_claim_when_input_changes_before_processing(
     monkeypatch,
 ):
