@@ -11,7 +11,7 @@ from app.clustering.provider import (
 
 class RuleBasedStoryClusterer(StoryClusterer):
     provider = "local-rules"
-    version = "2"
+    version = "3"
 
     def __init__(
         self,
@@ -115,18 +115,36 @@ class RuleBasedStoryClusterer(StoryClusterer):
                 >= self.semantic_similarity_threshold
             )
 
+        cross_language = (
+            article.language_code
+            != candidate.language_code
+        )
         strong_title_match = (
-            title_similarity >= 0.50
+            not cross_language
+            and title_similarity >= 0.50
         )
         entity_title_match = (
-            shared_entities >= 1
+            not cross_language
+            and shared_entities >= 1
             and title_similarity >= 0.15
         )
         multi_entity_match = (
-            shared_entities >= 2
+            not cross_language
+            and shared_entities >= 2
+        )
+        cross_language_entity_match = (
+            cross_language
+            and shared_entities >= 2
+            and entity_similarity >= 0.50
         )
 
-        if not (
+        if cross_language:
+            if not (
+                semantic_match
+                or cross_language_entity_match
+            ):
+                return None
+        elif not (
             strong_title_match
             or entity_title_match
             or multi_entity_match
@@ -140,14 +158,34 @@ class RuleBasedStoryClusterer(StoryClusterer):
             + 0.15 * topic_similarity
         )
 
-        similarity = max(
-            title_similarity,
-            weighted_similarity,
-            semantic_similarity,
-        )
+        if cross_language:
+            similarity = max(
+                entity_similarity
+                if cross_language_entity_match
+                else 0.0,
+                semantic_similarity,
+            )
+        else:
+            similarity = max(
+                title_similarity,
+                weighted_similarity,
+                semantic_similarity,
+            )
 
         if similarity < self.min_similarity:
             return None
+
+        match_basis = []
+        if strong_title_match:
+            match_basis.append("title")
+        if entity_title_match:
+            match_basis.append("entity_title")
+        if multi_entity_match:
+            match_basis.append("multi_entity")
+        if cross_language_entity_match:
+            match_basis.append("cross_language_entities")
+        if semantic_match:
+            match_basis.append("semantic")
 
         return (
             similarity,
@@ -163,6 +201,12 @@ class RuleBasedStoryClusterer(StoryClusterer):
                     if semantic_match
                     else None
                 ),
+                "cross_language": cross_language,
+                "language_pair": [
+                    article.language_code,
+                    candidate.language_code,
+                ],
+                "match_basis": match_basis,
             },
         )
 

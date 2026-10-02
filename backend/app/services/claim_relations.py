@@ -1051,12 +1051,7 @@ class ClaimRelationRunner:
                             skipped += 1
                             continue
 
-                        self.story_repository.acquire_clustering_lock(
-                            db,
-                            language_code=(
-                                story.language_code
-                            ),
-                        )
+                        self.story_repository.acquire_clustering_lock(db)
 
                         snapshot = (
                             self.service.load_snapshot(

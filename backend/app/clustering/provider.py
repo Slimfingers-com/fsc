@@ -25,7 +25,7 @@ class StoryCandidate:
     title_terms: tuple[str, ...]
     entity_ids: tuple[UUID, ...]
     topic_ids: tuple[UUID, ...]
-    language_code: str | None = None
+    language_code: str | None
     semantic_embedding: tuple[float, ...] | None = None
     semantic_model: str | None = None
 

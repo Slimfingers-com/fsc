@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from sqlalchemy import func, select, text
 
+from app.clustering.provider import StoryClusteringInput
 from app.clustering.rule_based import RuleBasedStoryClusterer
 from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.article_pipeline import ArticlePipeline
@@ -647,29 +648,15 @@ def test_runner_acquires_story_lock_before_processing_heartbeat(
 
     assert "lock" in events[:heartbeat_index]
 
-def test_story_partition_locks_allow_different_languages_in_parallel():
+def test_story_mutation_lock_serializes_cross_language_clustering():
     repository = StoryRepository()
-
-    english_lock = (
-        repository.clustering_partition_lock_key(
-            "en"
-        )
-    )
-    german_lock = (
-        repository.clustering_partition_lock_key(
-            "de"
-        )
-    )
-
-    assert english_lock != german_lock
 
     with TestSessionLocal.begin() as first_db:
         repository.acquire_processing_coordination_lock(
             first_db
         )
         repository.acquire_clustering_lock(
-            first_db,
-            language_code="en",
+            first_db
         )
 
         with TestSessionLocal.begin() as second_db:
@@ -685,24 +672,16 @@ def test_story_partition_locks_allow_different_languages_in_parallel():
                     )
                 },
             )
-            german_acquired = second_db.scalar(
+            mutation_acquired = second_db.scalar(
                 text(
                     "SELECT "
                     "pg_try_advisory_xact_lock"
                     "(:lock_key)"
                 ),
                 {
-                    "lock_key": german_lock,
-                },
-            )
-            english_acquired = second_db.scalar(
-                text(
-                    "SELECT "
-                    "pg_try_advisory_xact_lock"
-                    "(:lock_key)"
-                ),
-                {
-                    "lock_key": english_lock,
+                    "lock_key": (
+                        repository.STORY_MUTATION_LOCK_KEY
+                    )
                 },
             )
             cleanup_acquired = second_db.scalar(
@@ -719,8 +698,7 @@ def test_story_partition_locks_allow_different_languages_in_parallel():
             )
 
             assert shared_coordination is True
-            assert german_acquired is True
-            assert english_acquired is False
+            assert mutation_acquired is False
             assert cleanup_acquired is False
 
 
@@ -1059,3 +1037,78 @@ def test_runner_releases_story_lock_before_claim_scan(
     )
 
     assert result.processed == 1
+
+
+def test_candidate_discovery_allows_cross_language_shared_entities_without_semantics():
+    article_ids = create_committed_articles(2)
+    candidate_article_id, input_article_id = article_ids
+    shared_entities = (uuid4(), uuid4())
+    now = datetime.now(UTC)
+
+    with TestSessionLocal.begin() as db:
+        candidate_article = db.get(Article, candidate_article_id)
+        input_article = db.get(Article, input_article_id)
+        assert candidate_article is not None
+        assert input_article is not None
+        candidate_article.language_code = "en"
+        input_article.language_code = "de"
+
+        story = Story(language_code="en")
+        db.add(story)
+        db.flush()
+
+        run = ArticleProcessingRun(
+            article_id=candidate_article.id,
+            processing_state_id=None,
+            pipeline=ArticlePipeline.STORY_CLUSTERING.value,
+            input_hash=uuid4().hex * 2,
+            provider="test",
+            provider_version="1",
+            configuration_version="1",
+            worker_id="test-worker",
+            attempt_number=1,
+            started_at=now,
+            finished_at=now,
+            outcome="succeeded",
+        )
+        db.add(run)
+        db.flush()
+
+        db.add(
+            StoryArticle(
+                story_id=story.id,
+                article_id=candidate_article.id,
+                processing_run_id=run.id,
+                article_title=candidate_article.title,
+                article_time=candidate_article.published_at or candidate_article.created_at,
+                title_terms=["budget", "parliament"],
+                entity_ids=list(shared_entities),
+                topic_ids=[],
+                similarity_score=0.0,
+                match_kind="created",
+                match_details=None,
+                clustered_at=now,
+            )
+        )
+        db.flush()
+
+        candidates = StoryRepository().list_candidates(
+            db,
+            article=StoryClusteringInput(
+                article_id=input_article.id,
+                language_code="de",
+                article_time=input_article.published_at or input_article.created_at,
+                title_terms=("haushalt", "bundestag"),
+                entity_ids=shared_entities,
+                topic_ids=(),
+                semantic_embedding=None,
+                semantic_model=None,
+            ),
+            window_hours=24.0,
+            limit=100,
+        )
+
+    assert len(candidates) == 1
+    assert candidates[0].article_id == candidate_article_id
+    assert candidates[0].language_code == "en"
+    assert candidates[0].entity_ids == shared_entities

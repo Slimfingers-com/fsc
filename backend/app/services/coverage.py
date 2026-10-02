@@ -1195,13 +1195,7 @@ class CoverageRunner:
                                 "during coverage"
                             )
 
-                        self.story_repository.acquire_clustering_lock(
-                            db,
-                            language_code=(
-                                consensus_story
-                                .language_code
-                            ),
-                        )
+                        self.story_repository.acquire_clustering_lock(db)
 
                         snapshot = (
                             self.service
