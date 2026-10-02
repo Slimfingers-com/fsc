@@ -364,6 +364,40 @@ def test_signal_role_cannot_create_multi_source_consensus(db):
     )
 
 
+def test_nonconfirming_roles_produce_zero_independent_sources(db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.PRIMARY_SOURCE,
+                "confirmation_role": ConfirmationRole.PRIMARY_EVIDENCE,
+                "claim_text": "The filing was published Monday.",
+            },
+            {
+                "source_type": SourceType.SIGNAL,
+                "confirmation_role": ConfirmationRole.SIGNAL,
+                "claim_text": "The filing was published Monday.",
+            },
+        ],
+    )
+    service = ConsensusService()
+    snapshot = service.load_snapshot(
+        db,
+        story_id=data["story"].id,
+    )
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+    group = prepared.analysis_input.groups[0]
+
+    assert group.article_count == 2
+    assert group.independent_source_count == 0
+    assert (
+        service.run_provider(prepared).consensus[0].consensus_kind
+        == ConsensusKind.SINGLE_SOURCE
+    )
+
+
 def test_consensus_hash_includes_confirmation_role(db):
     data = build_consensus_story(
         db,
