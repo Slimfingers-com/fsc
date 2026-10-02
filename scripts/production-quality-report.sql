@@ -28,13 +28,17 @@ union all select 'active_consensus', count(*)::text from story_consensus_summari
 union all select 'active_differences', count(*)::text from story_difference_summaries where deleted_at is null
 union all select 'active_coverage', count(*)::text from story_coverage_summaries where deleted_at is null
 union all select 'article_states_with_error', count(*)::text
-  from article_processing_states
-  where deleted_at is null
-    and last_error_at is not null
-    and (last_processed_at is null or last_error_at > last_processed_at)
+  from article_processing_states aps
+  join articles a on a.id = aps.article_id
+  where aps.deleted_at is null
+    and a.deleted_at is null
+    and aps.last_error_at is not null
+    and (aps.last_processed_at is null or aps.last_error_at > aps.last_processed_at)
 union all select 'story_states_with_error', count(*)::text
-  from story_processing_states
-  where deleted_at is null
-    and last_error_at is not null
-    and (last_processed_at is null or last_error_at > last_processed_at)
+  from story_processing_states sps
+  join stories s on s.id = sps.story_id
+  where sps.deleted_at is null
+    and s.deleted_at is null
+    and sps.last_error_at is not null
+    and (sps.last_processed_at is null or sps.last_error_at > sps.last_processed_at)
 order by 1;
