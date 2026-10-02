@@ -235,10 +235,12 @@ def test_multilingual_story_runs_from_ingestion_through_integrated_analysis(
         TestSessionLocal,
         worker_id="multilingual-normalization",
     )
-    _assert_batch(
-        normalization.run_pending(limit=10),
-        processed=2,
+    normalization_result = normalization.run_pending(
+        limit=10
     )
+    assert normalization_result.processed == 2
+    assert normalization_result.changed == 2
+    assert normalization_result.unchanged == 0
 
     with TestSessionLocal() as db:
         articles = list(
