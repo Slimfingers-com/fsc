@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { hasAdminSession } from "@/lib/admin-auth";
 import { listProvenanceReviewQueue } from "@/lib/admin-api";
+import { safeExternalUrl } from "@/lib/format";
 import type { ProvenanceReviewStatus } from "@/lib/types";
 import { reviewProvenance } from "../actions";
 
@@ -61,7 +62,7 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
             </div>
             {item.notes ? <p>{item.notes}</p> : null}
             <div className="card-actions">
-              {item.article_url ? <a className="button secondary" href={item.article_url} target="_blank" rel="noreferrer">Original öffnen</a> : null}
+              {safeExternalUrl(item.article_url) ? <a className="button secondary" href={safeExternalUrl(item.article_url)!} target="_blank" rel="noreferrer">Original öffnen</a> : null}
               {statuses.filter((target) => target !== item.review_status).map((target) => (
                 <form action={reviewProvenance} key={target}>
                   <input type="hidden" name="article_id" value={item.article_id} />
