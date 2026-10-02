@@ -3,8 +3,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { hasAdminSession } from "@/lib/admin-auth";
 import { listProvenanceReviewQueue } from "@/lib/admin-api";
+import { safeExternalUrl } from "@/lib/format";
 import type { ProvenanceReviewStatus } from "@/lib/types";
-import { logoutAdmin, reviewProvenance } from "../actions";
+import { reviewProvenance } from "../actions";
 
 export const metadata: Metadata = { title: "Provenance Review" };
 export const dynamic = "force-dynamic";
@@ -35,7 +36,7 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
           <h1>Provenance Review</h1>
           <p className="lead compact">{result.total} Einträge mit Status {status}.</p>
         </div>
-        <form action={logoutAdmin}><button className="button secondary">Abmelden</button></form>
+        <a className="button secondary" href="/api/auth/signout?callbackUrl=/admin/login">Abmelden</a>
       </div>
       <nav className="admin-tabs" aria-label="Review-Status">
         {statuses.map((item) => (
@@ -61,7 +62,7 @@ export default async function ProvenanceReviewPage({ searchParams }: Props) {
             </div>
             {item.notes ? <p>{item.notes}</p> : null}
             <div className="card-actions">
-              {item.article_url ? <a className="button secondary" href={item.article_url} target="_blank" rel="noreferrer">Original öffnen</a> : null}
+              {safeExternalUrl(item.article_url) ? <a className="button secondary" href={safeExternalUrl(item.article_url)!} target="_blank" rel="noreferrer">Original öffnen</a> : null}
               {statuses.filter((target) => target !== item.review_status).map((target) => (
                 <form action={reviewProvenance} key={target}>
                   <input type="hidden" name="article_id" value={item.article_id} />
