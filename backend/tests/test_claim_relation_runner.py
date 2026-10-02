@@ -801,3 +801,37 @@ def test_claim_relation_story_lock_is_compatible_with_key_share():
 
             assert locked is not None
             assert locked.id == story_id
+
+
+def test_claim_relation_article_lock_is_compatible_with_key_share():
+    story_ids, _ = create_committed_stories(1)
+    repository = ClaimRelationRepository()
+
+    with TestSessionLocal() as lookup_db:
+        article_id = lookup_db.scalar(
+            select(StoryArticle.article_id).where(
+                StoryArticle.story_id == story_ids[0]
+            ).limit(1)
+        )
+    assert article_id is not None
+
+    with TestSessionLocal.begin() as first_db:
+        held = first_db.scalar(
+            select(Article)
+            .where(Article.id == article_id)
+            .with_for_update(
+                of=Article,
+                read=True,
+                key_share=True,
+            )
+        )
+        assert held is not None
+
+        with TestSessionLocal.begin() as second_db:
+            second_db.execute(
+                text("SET LOCAL lock_timeout = '250ms'")
+            )
+            repository.lock_articles(
+                second_db,
+                article_ids=[article_id],
+            )
