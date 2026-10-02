@@ -394,6 +394,13 @@ def test_multilingual_story_runs_from_ingestion_through_integrated_analysis(
         str(article_ids["de"]),
         str(article_ids["en"]),
     }
+    assert {
+        article["article_id"]: article["language_code"]
+        for article in story_payload["articles"]
+    } == {
+        str(article_ids["de"]): "de",
+        str(article_ids["en"]): "en",
+    }
 
     analysis_response = client.get(
         f"/stories/{story_id}/analysis"
