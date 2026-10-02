@@ -631,10 +631,7 @@ def test_claim_relation_finalization_blocks_claim_extraction_article_lock():
             story_repository.acquire_processing_coordination_lock(
                 db
             )
-            story_repository.acquire_clustering_lock(
-                db,
-                language_code="en",
-            )
+            story_repository.acquire_clustering_lock(db)
             snapshot = (
                 ClaimRelationService()
                 .load_snapshot(
@@ -697,7 +694,7 @@ def test_claim_relation_finalization_blocks_claim_extraction_article_lock():
     assert extraction_acquired.is_set()
 
 
-def test_claim_relation_finalization_blocks_story_clustering_partition_lock():
+def test_claim_relation_finalization_blocks_story_mutation_lock():
     story_ids, _ = (
         create_committed_stories(
             1
@@ -715,10 +712,7 @@ def test_claim_relation_finalization_blocks_story_clustering_partition_lock():
             story_repository.acquire_processing_coordination_lock(
                 db
             )
-            story_repository.acquire_clustering_lock(
-                db,
-                language_code="en",
-            )
+            story_repository.acquire_clustering_lock(db)
             snapshot = (
                 ClaimRelationService()
                 .load_snapshot(
@@ -743,10 +737,7 @@ def test_claim_relation_finalization_blocks_story_clustering_partition_lock():
             story_repository.acquire_processing_coordination_lock(
                 db
             )
-            story_repository.acquire_clustering_lock(
-                db,
-                language_code="en",
-            )
+            story_repository.acquire_clustering_lock(db)
             clustering_acquired.set()
 
     with ThreadPoolExecutor(

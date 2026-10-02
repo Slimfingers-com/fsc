@@ -64,7 +64,7 @@ class StoryClusteringBatchResult:
 
 
 class StoryClusteringService:
-    CONFIG_VERSION = "2"
+    CONFIG_VERSION = "3"
 
     def __init__(
         self,
@@ -304,18 +304,6 @@ class StoryClusteringService:
             prepared.candidates,
         )
 
-    @staticmethod
-    def _partition_for_input(
-        article: StoryClusteringInput,
-    ) -> str:
-        if article.semantic_embedding and article.semantic_model:
-            return f"semantic:{article.semantic_model}"
-        return (
-            f"language:{article.language_code}"
-            if article.language_code is not None
-            else "language:<none>"
-        )
-
     def cluster_article(
         self,
         db: Session,
@@ -331,20 +319,13 @@ class StoryClusteringService:
             db
         )
 
-        eligible, lock_partition = (
-            self.repository.get_clustering_partition(
-                db,
-                article_id,
-            )
-        )
-
-        if not eligible:
+        if not self.repository.is_clustering_eligible(
+            db,
+            article_id,
+        ):
             return None
 
-        self.repository.acquire_clustering_lock(
-            db,
-            language_code=lock_partition,
-        )
+        self.repository.acquire_clustering_lock(db)
 
         prepared = self.prepare(
             db,
@@ -355,15 +336,6 @@ class StoryClusteringService:
 
         if prepared is None:
             return None
-
-        if (
-            self._partition_for_input(prepared.article)
-            != lock_partition
-        ):
-            raise StoryClusteringInputChangedError(
-                "story clustering partition changed "
-                "while acquiring its lock"
-            )
 
         if (
             expected_input_hash is not None
@@ -406,12 +378,7 @@ class StoryClusteringService:
         self.repository.acquire_processing_coordination_lock(
             db
         )
-        self.repository.acquire_clustering_lock(
-            db,
-            language_code=self._partition_for_input(
-                prepared.article
-            ),
-        )
+        self.repository.acquire_clustering_lock(db)
 
         return self._apply_result_locked(
             db,

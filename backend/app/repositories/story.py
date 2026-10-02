@@ -1,8 +1,7 @@
-import hashlib
 from datetime import datetime, timedelta
 from uuid import UUID
 
-from sqlalchemy import exists, func, or_, select, text, update
+from sqlalchemy import and_, exists, func, or_, select, text, update
 from sqlalchemy.orm import Session
 
 from app.clustering.provider import (
@@ -19,28 +18,7 @@ from app.models.topic import ArticleTopic, Topic
 
 class StoryRepository:
     CLUSTERING_LOCK_KEY = 0x46534353544F5259
-
-    @staticmethod
-    def clustering_partition_lock_key(
-        language_code: str | None,
-    ) -> int:
-        partition = (
-            language_code
-            if language_code is not None
-            else "<none>"
-        )
-        digest = hashlib.sha256(
-            (
-                "fsc:story-clustering:"
-                + partition
-            ).encode("utf-8")
-        ).digest()
-
-        return int.from_bytes(
-            digest[:8],
-            "big",
-            signed=True,
-        )
+    STORY_MUTATION_LOCK_KEY = 0x46534353544D5554
 
     def acquire_processing_coordination_lock(
         self,
@@ -72,98 +50,44 @@ class StoryRepository:
     def acquire_clustering_lock(
         self,
         db: Session,
-        *,
-        language_code: str | None,
     ) -> None:
         db.execute(
             text(
                 "SELECT pg_advisory_xact_lock(:lock_key)"
             ),
             {
-                "lock_key": (
-                    self.clustering_partition_lock_key(
-                        language_code
-                    )
-                ),
+                "lock_key": self.STORY_MUTATION_LOCK_KEY,
             },
         )
 
-    def get_clustering_language(
+    def is_clustering_eligible(
         self,
         db: Session,
         article_id: UUID,
-    ) -> tuple[bool, str | None]:
-        row = db.execute(
-            select(
-                Article.language_code
+    ) -> bool:
+        return (
+            db.scalar(
+                select(Article.id)
+                .join(
+                    Feed,
+                    Feed.id == Article.feed_id,
+                )
+                .join(
+                    Source,
+                    Source.id == Feed.source_id,
+                )
+                .where(
+                    Article.id == article_id,
+                    Article.deleted_at.is_(None),
+                    Article.normalized_at.is_not(None),
+                    Article.normalized_text.is_not(None),
+                    Feed.deleted_at.is_(None),
+                    Feed.active.is_(True),
+                    Source.deleted_at.is_(None),
+                    Source.active.is_(True),
+                )
             )
-            .join(
-                Feed,
-                Feed.id == Article.feed_id,
-            )
-            .join(
-                Source,
-                Source.id == Feed.source_id,
-            )
-            .where(
-                Article.id == article_id,
-                Article.deleted_at.is_(None),
-                Article.normalized_at.is_not(None),
-                Article.normalized_text.is_not(None),
-                Feed.deleted_at.is_(None),
-                Feed.active.is_(True),
-                Source.deleted_at.is_(None),
-                Source.active.is_(True),
-            )
-        ).one_or_none()
-
-        if row is None:
-            return False, None
-
-        return True, row[0]
-
-    def get_clustering_partition(
-        self,
-        db: Session,
-        article_id: UUID,
-    ) -> tuple[bool, str | None]:
-        row = db.execute(
-            select(
-                Article.language_code,
-                Article.semantic_model,
-                Article.semantic_embedding,
-            )
-            .join(
-                Feed,
-                Feed.id == Article.feed_id,
-            )
-            .join(
-                Source,
-                Source.id == Feed.source_id,
-            )
-            .where(
-                Article.id == article_id,
-                Article.deleted_at.is_(None),
-                Article.normalized_at.is_not(None),
-                Article.normalized_text.is_not(None),
-                Feed.deleted_at.is_(None),
-                Feed.active.is_(True),
-                Source.deleted_at.is_(None),
-                Source.active.is_(True),
-            )
-        ).one_or_none()
-
-        if row is None:
-            return False, None
-
-        language_code, semantic_model, semantic_embedding = row
-        if semantic_model and semantic_embedding:
-            return True, f"semantic:{semantic_model}"
-
-        return True, (
-            f"language:{language_code}"
-            if language_code is not None
-            else "language:<none>"
+            is not None
         )
 
     def get_story(
@@ -376,18 +300,29 @@ class StoryRepository:
 
         candidate_conditions = []
         if not semantic_enabled:
-            if article.language_code is None:
+            same_language = (
+                Article.language_code.is_(None)
+                if article.language_code is None
+                else Article.language_code
+                == article.language_code
+            )
+            same_language_overlap = and_(
+                same_language,
+                or_(*overlap_conditions),
+            )
+            if article.entity_ids:
                 candidate_conditions.append(
-                    Story.language_code.is_(None)
+                    or_(
+                        same_language_overlap,
+                        StoryArticle.entity_ids.overlap(
+                            list(article.entity_ids)
+                        ),
+                    )
                 )
             else:
                 candidate_conditions.append(
-                    Story.language_code
-                    == article.language_code
+                    same_language_overlap
                 )
-            candidate_conditions.append(
-                or_(*overlap_conditions)
-            )
 
         ranked_candidates = (
             select(
@@ -396,6 +331,9 @@ class StoryRepository:
                 ),
                 StoryArticle.article_time.label(
                     "article_time"
+                ),
+                Article.language_code.label(
+                    "language_code"
                 ),
                 func.row_number()
                 .over(
@@ -449,8 +387,11 @@ class StoryRepository:
         )
 
         memberships = list(
-            db.scalars(
-                select(StoryArticle)
+            db.execute(
+                select(
+                    StoryArticle,
+                    ranked_candidates.c.language_code,
+                )
                 .join(
                     ranked_candidates,
                     ranked_candidates.c.membership_id
@@ -479,6 +420,7 @@ class StoryRepository:
                 topic_ids=tuple(
                     membership.topic_ids
                 ),
+                language_code=language_code,
                 semantic_embedding=(
                     tuple(membership.semantic_embedding)
                     if membership.semantic_embedding
@@ -486,7 +428,8 @@ class StoryRepository:
                 ),
                 semantic_model=membership.semantic_model,
             )
-            for membership in memberships
+            for membership, language_code
+            in memberships
         )
 
     def has_other_active_memberships(

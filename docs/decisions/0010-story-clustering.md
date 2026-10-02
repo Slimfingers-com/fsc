@@ -4,6 +4,8 @@
 
 Accepted
 
+Candidate-language and language-partition-lock details are superseded by ADR 0039.
+
 ## Context
 
 FSC needs to group eligible normalized articles into reproducible stories while preserving article-level processing history, supporting reprocessing and allowing multiple workers without duplicate active memberships or inconsistent clusters.

@@ -941,10 +941,7 @@ class ConsensusRunner:
                             raise StoryProcessingLeaseLostError(
                                 "story inactive during consensus"
                             )
-                        self.story_repository.acquire_clustering_lock(
-                            db,
-                            language_code=story.language_code,
-                        )
+                        self.story_repository.acquire_clustering_lock(db)
                         snapshot = self.service.load_snapshot(
                             db,
                             story_id=claim.story_id,

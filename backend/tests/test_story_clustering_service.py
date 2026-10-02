@@ -44,7 +44,6 @@ class FakeStoryRepository:
 
         self.coordination_lock_acquired = False
         self.lock_acquired = False
-        self.lock_language_code = None
         self.create_story_called = False
         self.replace_membership_called = False
         self.replace_kwargs = None
@@ -60,18 +59,15 @@ class FakeStoryRepository:
     def acquire_clustering_lock(
         self,
         db,
-        *,
-        language_code,
     ) -> None:
         self.lock_acquired = True
-        self.lock_language_code = language_code
 
-    def get_clustering_partition(
+    def is_clustering_eligible(
         self,
         db,
         article_id,
     ):
-        return True, "language:de"
+        return True
 
     def get_membership_by_processing_run(
         self,
@@ -197,6 +193,7 @@ def make_prepared(
                 title_terms=("bundestag",),
                 entity_ids=(),
                 topic_ids=(),
+                language_code="de",
             ),
         )
 
@@ -577,21 +574,15 @@ def test_cluster_article_acquires_lock_before_preparing(
     def acquire_coordination_lock(db):
         events.append("coordination")
 
-    def get_partition(
+    def is_eligible(
         db,
         article_id,
     ):
-        events.append("partition")
-        return True, "language:de"
+        events.append("eligibility")
+        return True
 
-    def acquire_lock(
-        db,
-        *,
-        language_code,
-    ):
-        events.append(
-            f"lock:{language_code}"
-        )
+    def acquire_lock(db):
+        events.append("lock")
 
     def prepare(
         db,
@@ -631,8 +622,8 @@ def test_cluster_article_acquires_lock_before_preparing(
     )
     monkeypatch.setattr(
         repository,
-        "get_clustering_partition",
-        get_partition,
+        "is_clustering_eligible",
+        is_eligible,
     )
     monkeypatch.setattr(
         repository,
@@ -667,8 +658,8 @@ def test_cluster_article_acquires_lock_before_preparing(
     assert applied is not None
     assert events == [
         "coordination",
-        "partition",
-        "lock:language:de",
+        "eligibility",
+        "lock",
         "prepare",
         "cluster",
         "apply",

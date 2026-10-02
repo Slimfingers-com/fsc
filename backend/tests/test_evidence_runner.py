@@ -191,10 +191,7 @@ def test_claim_relation_finalization_waits_for_evidence_finalization_lock_order(
         with TestSessionLocal.begin() as db:
             story_repository = StoryRepository()
             story_repository.acquire_processing_coordination_lock(db)
-            story_repository.acquire_clustering_lock(
-                db,
-                language_code="en",
-            )
+            story_repository.acquire_clustering_lock(db)
             snapshot = EvidenceService().load_snapshot(
                 db,
                 story_id=story_id,
@@ -210,10 +207,7 @@ def test_claim_relation_finalization_waits_for_evidence_finalization_lock_order(
         with TestSessionLocal.begin() as db:
             story_repository = StoryRepository()
             story_repository.acquire_processing_coordination_lock(db)
-            story_repository.acquire_clustering_lock(
-                db,
-                language_code="en",
-            )
+            story_repository.acquire_clustering_lock(db)
             snapshot = ClaimRelationService().load_snapshot(
                 db,
                 story_id=story_id,
