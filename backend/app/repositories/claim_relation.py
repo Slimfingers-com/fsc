@@ -138,7 +138,7 @@ class ClaimRelationRepository:
                 select(Article)
                 .where(Article.id.in_(article_ids))
                 .order_by(Article.id)
-                .with_for_update(of=Article)
+                .with_for_update(of=Article, key_share=True)
                 .execution_options(populate_existing=True)
             ).all()
         )
