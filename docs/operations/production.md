@@ -157,6 +157,25 @@ Monitor at minimum:
 - container restart loops;
 - ingestion/analysis worker error rates.
 
+### Production quality report
+
+`scripts/production-quality-report.sh` appends a compact production-quality
+snapshot to `/home/sven/fsc-monitor/quality.log` by default. It measures
+pipeline completion, Story/source coverage and integrated-analysis output.
+`article_states_with_error` and `story_states_with_error` count only unresolved
+current errors: a historical error no longer counts after a newer successful
+processing timestamp.
+
+A daily production schedule can invoke the versioned script directly, for
+example:
+
+```cron
+5 3 * * * /home/sven/fsc/scripts/production-quality-report.sh
+```
+
+The runner uses an overlap lock and keeps the SQL definition versioned in
+`scripts/production-quality-report.sql`.
+
 ## Release checklist
 
 Before promoting a release candidate:
