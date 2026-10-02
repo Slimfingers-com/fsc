@@ -6,7 +6,7 @@ import hashlib
 import threading
 from uuid import uuid4
 
-from sqlalchemy import func, select
+from sqlalchemy import func, select, text
 
 from app.analysis.provider import TextPart
 from app.claim_relations.rule_based import (
@@ -38,6 +38,9 @@ from app.models.story import Story, StoryArticle
 from app.models.story_processing import (
     StoryProcessingRun,
     StoryProcessingState,
+)
+from app.repositories.claim_relation import (
+    ClaimRelationRepository,
 )
 from app.repositories.story import (
     StoryRepository,
@@ -767,3 +770,34 @@ def test_claim_relation_finalization_blocks_story_mutation_lock():
         )
 
     assert clustering_acquired.is_set()
+
+
+def test_claim_relation_story_lock_is_compatible_with_key_share():
+    story_ids, _ = create_committed_stories(1)
+    story_id = story_ids[0]
+    repository = ClaimRelationRepository()
+
+    with TestSessionLocal.begin() as first_db:
+        held = first_db.scalar(
+            select(Story)
+            .where(Story.id == story_id)
+            .with_for_update(
+                of=Story,
+                read=True,
+                key_share=True,
+            )
+        )
+        assert held is not None
+
+        with TestSessionLocal.begin() as second_db:
+            second_db.execute(
+                text("SET LOCAL lock_timeout = '250ms'")
+            )
+            locked = repository.get_story(
+                second_db,
+                story_id=story_id,
+                for_update=True,
+            )
+
+            assert locked is not None
+            assert locked.id == story_id

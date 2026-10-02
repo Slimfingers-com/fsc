@@ -87,7 +87,10 @@ class ClaimRelationRepository:
             Story.deleted_at.is_(None),
         )
         if for_update:
-            statement = statement.with_for_update(of=Story).execution_options(
+            statement = statement.with_for_update(
+                of=Story,
+                key_share=True,
+            ).execution_options(
                 populate_existing=True
             )
         return db.scalar(statement)
