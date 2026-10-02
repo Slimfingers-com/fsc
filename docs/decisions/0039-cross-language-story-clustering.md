@@ -59,7 +59,12 @@ The existing global coordination lock remains separate:
 
 The lock order is therefore coordination lock, lease heartbeat where
 applicable, global Story mutation lock, then Story/StoryArticle/Article and
-analysis row locks.
+analysis row locks. Story rows are locked with `FOR NO KEY UPDATE` rather than
+`FOR UPDATE`: FSC mutates Story metadata but never its identity key, and the
+weaker row lock remains compatible with PostgreSQL `KEY SHARE` locks taken by
+concurrent processing-state foreign-key work. This avoids a lock convoy in
+which a Story worker holds the global mutation lock while waiting on an
+unrelated downstream claim transaction.
 
 This intentionally trades some parallelism for deterministic cross-language
 membership decisions in v1.0. It avoids races where articles in different

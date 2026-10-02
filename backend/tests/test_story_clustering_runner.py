@@ -702,6 +702,41 @@ def test_story_mutation_lock_serializes_cross_language_clustering():
             assert cleanup_acquired is False
 
 
+def test_story_row_mutation_lock_is_compatible_with_key_share():
+    repository = StoryRepository()
+
+    with TestSessionLocal.begin() as setup_db:
+        story = Story(language_code="en")
+        setup_db.add(story)
+        setup_db.flush()
+        story_id = story.id
+
+    with TestSessionLocal.begin() as first_db:
+        held = first_db.scalar(
+            select(Story)
+            .where(Story.id == story_id)
+            .with_for_update(
+                of=Story,
+                read=True,
+                key_share=True,
+            )
+        )
+        assert held is not None
+
+        with TestSessionLocal.begin() as second_db:
+            second_db.execute(
+                text("SET LOCAL lock_timeout = '250ms'")
+            )
+            locked = repository.get_story(
+                second_db,
+                story_id,
+                for_update=True,
+            )
+
+            assert locked is not None
+            assert locked.id == story_id
+
+
 def test_runner_skips_claim_when_input_changes_before_processing(
     monkeypatch,
 ):

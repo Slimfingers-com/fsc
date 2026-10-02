@@ -104,7 +104,8 @@ class StoryRepository:
 
         if for_update:
             statement = statement.with_for_update(
-                of=Story
+                of=Story,
+                key_share=True,
             )
 
         return db.scalar(statement)
