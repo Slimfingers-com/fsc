@@ -1144,3 +1144,60 @@ def test_story_api_validation_and_not_found(
         f"/stories/{uuid4()}"
     )
     assert missing.status_code == 404
+
+
+def test_multilingual_story_exposes_and_filters_member_languages(client, db):
+    now = datetime.now(UTC)
+    _, de_feed = add_source(
+        db,
+        name="Deutsch",
+        slug="de-source",
+    )
+    _, en_feed = add_source(
+        db,
+        name="English",
+        slug="en-source",
+    )
+    story = add_story(db, language="mul")
+    de_article = add_article(
+        db,
+        feed=de_feed,
+        title="Deutscher Bericht",
+        language="de",
+        published_at=now,
+    )
+    en_article = add_article(
+        db,
+        feed=en_feed,
+        title="English report",
+        language="en",
+        published_at=now + timedelta(minutes=1),
+    )
+    add_membership(db, story=story, article=de_article)
+    add_membership(
+        db,
+        story=story,
+        article=en_article,
+        match_kind="matched",
+        similarity=0.9,
+    )
+
+    detail = client.get(f"/stories/{story.id}")
+    assert detail.status_code == 200
+    payload = detail.json()
+    assert payload["language_code"] == "mul"
+    assert payload["language_codes"] == ["de", "en"]
+    assert {
+        item["language_code"]
+        for item in payload["articles"]
+    } == {"de", "en"}
+
+    for language in ("de", "en"):
+        response = client.get("/stories", params={"language": language})
+        assert response.status_code == 200
+        assert response.json()["total"] == 1
+        assert response.json()["items"][0]["story_id"] == str(story.id)
+
+    missing = client.get("/stories", params={"language": "fr"})
+    assert missing.status_code == 200
+    assert missing.json()["total"] == 0

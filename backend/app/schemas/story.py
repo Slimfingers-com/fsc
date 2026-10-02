@@ -13,6 +13,7 @@ class StorySummaryRead(BaseModel):
     story_id: UUID
     title: str | None
     language_code: str | None
+    language_codes: list[str]
     article_count: int = Field(ge=1)
     source_count: int = Field(ge=1)
     first_article_at: datetime
@@ -37,6 +38,7 @@ class StoryArticleRead(BaseModel):
     url: str | None
     published_at: datetime | None
     article_time: datetime
+    language_code: str | None
     source_id: UUID
     source_name: str
     source_slug: str
