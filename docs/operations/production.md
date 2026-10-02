@@ -170,7 +170,7 @@ A daily production schedule can invoke the versioned script directly, for
 example:
 
 ```cron
-5 3 * * * /home/sven/fsc/scripts/production-quality-report.sh
+5 3 * * * /bin/bash /home/sven/fsc/scripts/production-quality-report.sh
 ```
 
 The runner uses an overlap lock and keeps the SQL definition versioned in
