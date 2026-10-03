@@ -55,8 +55,10 @@ data and instructs the model not to follow instructions embedded in source text.
 The adapter records token usage returned by the API, but never includes the API
 key in provider configuration or processing identity. Shadow evaluation also
 paces requests and retries temporary HTTP 429 rate limits using server-provided
-retry/reset headers where available. Spend/quota-limit 429 responses remain
-fatal and are never retried blindly.
+retry/reset headers where available. Shadow candidates are classified in bounded
+request batches so a single large story cannot exhaust the structured-output
+budget while still requiring every candidate to receive a validated decision.
+Spend/quota-limit 429 responses remain fatal and are never retried blindly.
 
 ## Shadow-only activation
 
