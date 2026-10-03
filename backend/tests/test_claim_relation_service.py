@@ -6,6 +6,7 @@ import pytest
 from sqlalchemy import func, select
 
 from app.analysis.provider import TextPart
+from app.claim_relations.hybrid import HybridClaimRelationAnalyzer
 from app.claim_relations.provider import (
     ClaimGroupMemberResult,
     ClaimGroupResult,
@@ -537,3 +538,61 @@ def test_invalid_provider_partition_preserves_previous_generation(
             .is_(None),
         )
     ) == active_id
+
+
+def test_prepare_exposes_bounded_article_context(db):
+    story, _ = create_story(
+        db,
+        ["The officer said there was no vehicle contact."],
+    )
+    service = ClaimRelationService()
+    snapshot = service.load_snapshot(db, story_id=story.id)
+    assert snapshot is not None
+
+    prepared = service.prepare(snapshot)
+    claim = prepared.analysis_input.claims[0]
+
+    assert claim.article_title == "Article 0"
+    assert claim.article_context is not None
+    assert "Article 0" in claim.article_context
+    assert "vehicle contact" in claim.article_context
+
+
+def test_rule_only_identity_ignores_unused_article_context(db):
+    story, _ = create_story(
+        db,
+        ["The officer said there was no vehicle contact."],
+    )
+    service = ClaimRelationService()
+    snapshot = service.load_snapshot(db, story_id=story.id)
+    assert snapshot is not None
+    first = service.candidate(snapshot)
+
+    snapshot.memberships[0].article.normalized_title = "Changed title"
+    db.flush()
+    changed = service.load_snapshot(db, story_id=story.id)
+    assert changed is not None
+    second = service.candidate(changed)
+
+    assert first.input_hash == second.input_hash
+
+
+def test_hybrid_identity_tracks_article_context(db):
+    story, _ = create_story(
+        db,
+        ["The officer said there was no vehicle contact."],
+    )
+    service = ClaimRelationService(
+        analyzer=HybridClaimRelationAnalyzer(),
+    )
+    snapshot = service.load_snapshot(db, story_id=story.id)
+    assert snapshot is not None
+    first = service.candidate(snapshot)
+
+    snapshot.memberships[0].article.normalized_title = "Changed title"
+    db.flush()
+    changed = service.load_snapshot(db, story_id=story.id)
+    assert changed is not None
+    second = service.candidate(changed)
+
+    assert first.input_hash != second.input_hash
