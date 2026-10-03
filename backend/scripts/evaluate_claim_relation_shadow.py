@@ -208,6 +208,41 @@ def conflict_hint(candidate: SemanticRelationCandidate) -> int:
     )
 
 
+def rank_conflict_candidates(
+    candidates: tuple[SemanticRelationCandidate, ...],
+    hybrid: HybridClaimRelationAnalyzer,
+    limit: int,
+) -> tuple[SemanticRelationCandidate, ...]:
+    if limit <= 0:
+        raise ValueError("conflict candidate limit must be greater than zero")
+
+    ranked: list[
+        tuple[int, float, float, SemanticRelationCandidate]
+    ] = []
+    for candidate in candidates:
+        hint = conflict_hint(candidate)
+        if hint <= 0:
+            continue
+        _, claim_similarity = hybrid._candidate_scores(
+            candidate.left_claim,
+            candidate.right_claim,
+        )
+        ranked.append(
+            (
+                hint,
+                claim_similarity,
+                candidate.candidate_score,
+                candidate,
+            )
+        )
+
+    ranked.sort(
+        key=lambda item: (item[0], item[1], item[2]),
+        reverse=True,
+    )
+    return tuple(item[3] for item in ranked[:limit])
+
+
 def conflict_rich_story_ids(
     *,
     service: ClaimRelationService,
@@ -297,6 +332,14 @@ def main() -> None:
             .claim_relation_shadow_rate_limit_fallback_seconds
         ),
     )
+    selected_candidate_limit = (
+        settings.claim_relation_shadow_max_candidates_per_story
+    )
+    candidate_pool_limit = (
+        max(128, selected_candidate_limit)
+        if args.selection == "conflict-rich"
+        else selected_candidate_limit
+    )
     hybrid = HybridClaimRelationAnalyzer(
         base_analyzer=RuleBasedClaimRelationAnalyzer(
             group_similarity_threshold=(
@@ -311,10 +354,7 @@ def main() -> None:
             settings
             .claim_relation_shadow_candidate_similarity_threshold
         ),
-        max_semantic_candidates=(
-            settings
-            .claim_relation_shadow_max_candidates_per_story
-        ),
+        max_semantic_candidates=candidate_pool_limit,
     )
     service = ClaimRelationService(analyzer=hybrid)
 
@@ -362,6 +402,12 @@ def main() -> None:
                     prepared.analysis_input,
                     base,
                 )
+                if args.selection == "conflict-rich":
+                    candidates = rank_conflict_candidates(
+                        candidates,
+                        hybrid,
+                        selected_candidate_limit,
+                    )
                 if not candidates:
                     continue
 

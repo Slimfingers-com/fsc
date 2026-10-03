@@ -1,10 +1,15 @@
 from uuid import uuid4
 
+from app.claim_relations.hybrid import HybridClaimRelationAnalyzer
 from app.claim_relations.provider import (
     SemanticRelationCandidate,
     StoryClaimInput,
 )
-from scripts.evaluate_claim_relation_shadow import candidate_batches, conflict_hint
+from scripts.evaluate_claim_relation_shadow import (
+    candidate_batches,
+    conflict_hint,
+    rank_conflict_candidates,
+)
 
 
 def make_claim(text: str) -> StoryClaimInput:
@@ -101,3 +106,28 @@ def test_conflict_hint_does_not_use_candidate_score():
     )
 
     assert conflict_hint(high) == conflict_hint(normal)
+
+
+def test_rank_conflict_candidates_prefers_real_negation_conflict():
+    neutral = make_candidate(
+        "The hearing was held on Tuesday.",
+        "The court released its schedule.",
+        score=1.0,
+    )
+    disputed = make_candidate(
+        "The officer said there was no vehicle contact.",
+        "The witness said the vehicle made contact.",
+        score=0.66,
+    )
+    hybrid = HybridClaimRelationAnalyzer(
+        semantic_provider=None,
+        max_semantic_candidates=8,
+    )
+
+    ranked = rank_conflict_candidates(
+        (neutral, disputed),
+        hybrid,
+        1,
+    )
+
+    assert ranked == (disputed,)
