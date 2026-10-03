@@ -292,9 +292,14 @@ def main() -> None:
                     story_id=story_id,
                 )
                 if snapshot is None:
+                    db.rollback()
                     continue
 
                 prepared = service.prepare(snapshot)
+                # The shadow evaluator intentionally waits between API
+                # requests. End the read transaction before that wait so
+                # PostgreSQL never sees a long idle-in-transaction session.
+                db.rollback()
                 base = hybrid.base_analyzer.analyze(
                     prepared.analysis_input
                 )
