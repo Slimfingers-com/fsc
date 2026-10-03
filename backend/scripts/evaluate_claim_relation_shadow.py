@@ -128,18 +128,8 @@ _NUMBER_RE = re.compile(r"\b\d+(?:[.,]\d+)?\b")
 
 
 def conflict_hint(candidate: SemanticRelationCandidate) -> int:
-    def combined(claim) -> str:
-        return " ".join(
-            part
-            for part in (
-                claim.claim_text,
-                claim.article_title,
-            )
-            if part
-        ).casefold()
-
-    left = combined(candidate.left_claim)
-    right = combined(candidate.right_claim)
+    left = candidate.left_claim.claim_text.casefold()
+    right = candidate.right_claim.claim_text.casefold()
     left_tokens = frozenset(_WORD_RE.findall(left))
     right_tokens = frozenset(_WORD_RE.findall(right))
 
@@ -162,7 +152,6 @@ def conflict_hint(candidate: SemanticRelationCandidate) -> int:
         (3 if negation_delta else 0)
         + (2 if numeric_delta else 0)
         + (1 if explicit_dispute else 0)
-        + (1 if candidate.candidate_score >= 0.85 else 0)
     )
 
 
@@ -196,10 +185,23 @@ def conflict_rich_story_ids(
                 continue
 
             hints = tuple(conflict_hint(item) for item in candidates)
+            candidate_ranks = []
+            for candidate, hint in zip(candidates, hints, strict=True):
+                _, claim_similarity = hybrid._candidate_scores(
+                    candidate.left_claim,
+                    candidate.right_claim,
+                )
+                candidate_ranks.append(
+                    (
+                        float(hint),
+                        float(claim_similarity),
+                        float(candidate.candidate_score),
+                    )
+                )
+            best_candidate_rank = max(candidate_ranks)
             rank = (
-                float(max(hints)),
+                *best_candidate_rank,
                 float(sum(1 for item in hints if item > 0)),
-                float(max(item.candidate_score for item in candidates)),
                 float(len(candidates)),
                 float(-recency_index),
             )
@@ -364,6 +366,10 @@ def main() -> None:
                         "candidate_score": (
                             candidate.candidate_score
                         ),
+                        "claim_similarity": hybrid._candidate_scores(
+                            candidate.left_claim,
+                            candidate.right_claim,
+                        )[1],
                         "conflict_hint": conflict_hint(candidate),
                         "relation_kind": (
                             decision.relation_kind.value
