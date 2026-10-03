@@ -28,7 +28,7 @@ class OpenAIUsage:
 class OpenAISemanticClaimRelationProvider(SemanticClaimRelationProvider):
     provider = "openai-responses"
     version = "1.0.0"
-    PROMPT_VERSION = "2"
+    PROMPT_VERSION = "3"
     NON_RETRYABLE_429_IDENTIFIERS = frozenset(
         {
             "insufficient_quota",
@@ -164,8 +164,28 @@ A dispute requires an actual point of incompatibility. Mere differences in
 detail, specificity, granularity, emphasis, wording, scope, attribution, or the
 addition of compatible facts are NOT disputes. A broad headline and a more
 specific claim about the same event are not in dispute unless they make
-incompatible assertions about the same aspect. If both claims can comfortably
-be true at the same time, do not label disputes.
+incompatible assertions about the same aspect.
+
+Apply this decision procedure before choosing disputes:
+1. Identify the exact factual aspect asserted by each claim.
+2. Ask whether both assertions can be true at the same time without changing
+   the event, subject, time, metric, or meaning.
+3. If yes, NEVER choose disputes. Use equivalent when they express materially
+   the same proposition; otherwise use unrelated.
+4. Choose disputes only when you can state the incompatible alternatives in
+   the reason, in the form "left says X; right says Y; X and Y cannot both be
+   true about the same aspect."
+
+Examples:
+- "Patient alleges the wrong leg was amputated" versus "records indicate the
+  correct leg was marked before the wrong leg was amputated" are compatible,
+  not a dispute. The second adds detail.
+- "Hospital is sued over an alleged wrong-leg amputation" versus "the mark was
+  still on the correct leg after the wrong leg was removed" are compatible,
+  not a dispute. They concern different levels of detail.
+- "The officer says there was no vehicle contact" versus "the driver says the
+  officer's SUV rammed his vehicle" are competing accounts of the same contact
+  and may be disputes.
 
 Do not decide which source is true. Treat attribution as evidence about whose
 account is being reported, not as proof of the underlying assertion.
