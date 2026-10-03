@@ -106,6 +106,17 @@ def main() -> None:
         max_output_tokens=(
             settings.claim_relation_openai_max_output_tokens
         ),
+        min_request_interval_seconds=(
+            settings
+            .claim_relation_shadow_min_request_interval_seconds
+        ),
+        rate_limit_max_retries=(
+            settings.claim_relation_shadow_rate_limit_max_retries
+        ),
+        rate_limit_fallback_seconds=(
+            settings
+            .claim_relation_shadow_rate_limit_fallback_seconds
+        ),
     )
     hybrid = HybridClaimRelationAnalyzer(
         base_analyzer=RuleBasedClaimRelationAnalyzer(
