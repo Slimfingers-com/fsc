@@ -155,7 +155,7 @@ def main() -> None:
 
                 stories_with_candidates += 1
                 decisions = provider.classify(candidates)
-                hybrid._validate_decisions(
+                hybrid.validate_decisions(
                     candidates,
                     decisions,
                 )
