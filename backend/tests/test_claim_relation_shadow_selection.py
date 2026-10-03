@@ -4,7 +4,7 @@ from app.claim_relations.provider import (
     SemanticRelationCandidate,
     StoryClaimInput,
 )
-from scripts.evaluate_claim_relation_shadow import conflict_hint
+from scripts.evaluate_claim_relation_shadow import candidate_batches, conflict_hint
 
 
 def make_claim(text: str) -> StoryClaimInput:
@@ -36,6 +36,30 @@ def make_candidate(
         right_claim=make_claim(right),
         candidate_score=score,
     )
+
+
+def test_candidate_batches_preserves_all_candidates():
+    candidates = tuple(
+        make_candidate(
+            f"left {index}",
+            f"right {index}",
+        )
+        for index in range(10)
+    )
+
+    batches = candidate_batches(candidates, 4)
+
+    assert tuple(map(len, batches)) == (4, 4, 2)
+    assert tuple(item for batch in batches for item in batch) == candidates
+
+
+def test_candidate_batches_rejects_non_positive_size():
+    try:
+        candidate_batches((make_candidate("a", "b"),), 0)
+    except ValueError as exc:
+        assert "greater than zero" in str(exc)
+    else:
+        raise AssertionError("expected ValueError")
 
 
 def test_conflict_hint_prioritizes_negation_difference():

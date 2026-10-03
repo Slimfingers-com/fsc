@@ -67,6 +67,20 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def candidate_batches(
+    candidates: tuple[SemanticRelationCandidate, ...],
+    max_per_request: int,
+) -> tuple[tuple[SemanticRelationCandidate, ...], ...]:
+    if max_per_request <= 0:
+        raise ValueError(
+            "max candidates per request must be greater than zero"
+        )
+    return tuple(
+        candidates[index : index + max_per_request]
+        for index in range(0, len(candidates), max_per_request)
+    )
+
+
 def candidate_story_ids(limit: int) -> tuple[UUID, ...]:
     if limit <= 0:
         raise ValueError("story limit must be greater than zero")
@@ -313,17 +327,30 @@ def main() -> None:
                     continue
 
                 stories_with_candidates += 1
-                decisions = provider.classify(candidates)
+                decisions_list = []
+                for batch in candidate_batches(
+                    candidates,
+                    settings
+                    .claim_relation_shadow_max_candidates_per_request,
+                ):
+                    batch_decisions = provider.classify(batch)
+                    hybrid.validate_decisions(
+                        batch,
+                        batch_decisions,
+                    )
+                    decisions_list.extend(batch_decisions)
+
+                    usage = provider.last_usage
+                    if usage is not None:
+                        total_input_tokens += usage.input_tokens
+                        total_output_tokens += usage.output_tokens
+
+                decisions = tuple(decisions_list)
                 hybrid.validate_decisions(
                     candidates,
                     decisions,
                 )
                 candidate_count += len(candidates)
-
-                usage = provider.last_usage
-                if usage is not None:
-                    total_input_tokens += usage.input_tokens
-                    total_output_tokens += usage.output_tokens
 
                 candidate_by_pair = {
                     tuple(
