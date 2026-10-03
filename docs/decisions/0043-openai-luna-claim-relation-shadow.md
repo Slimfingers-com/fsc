@@ -44,9 +44,13 @@ The provider returns exactly one of:
 - `insufficient`.
 
 The prompt is conservative and explicitly requires the model to prefer
-`insufficient` or `unrelated` instead of inventing a dispute. It also treats
-article content as untrusted quoted data and instructs the model not to follow
-instructions embedded in source text.
+`insufficient` or `unrelated` instead of inventing a dispute. Prompt version
+2 further requires an actual incompatible point between the claims: compatible
+differences in detail, specificity, granularity, emphasis, wording, scope, or
+attribution are not disputes. A broad headline and a more specific claim about
+the same event remain non-disputing unless they make incompatible assertions
+about the same aspect. The prompt also treats article content as untrusted quoted
+data and instructs the model not to follow instructions embedded in source text.
 
 The adapter records token usage returned by the API, but never includes the API
 key in provider configuration or processing identity. Shadow evaluation also
