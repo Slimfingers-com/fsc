@@ -244,7 +244,16 @@ def test_luna_provider_configuration_never_contains_api_key():
     assert configuration["base_url"] == (
         "https://api.openai.com/v1"
     )
+    assert configuration["prompt_version"] == "2"
     assert "super-secret" not in str(configuration)
+
+
+def test_luna_prompt_requires_actual_incompatibility_for_disputes():
+    prompt = OpenAISemanticClaimRelationProvider._system_prompt()
+
+    assert "actual point of incompatibility" in prompt
+    assert "addition of compatible facts are NOT disputes" in prompt
+    assert "If both claims can comfortably" in prompt
 
 
 def test_luna_provider_retries_temporary_rate_limit(monkeypatch):

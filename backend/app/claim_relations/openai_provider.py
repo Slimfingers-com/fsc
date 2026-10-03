@@ -28,7 +28,7 @@ class OpenAIUsage:
 class OpenAISemanticClaimRelationProvider(SemanticClaimRelationProvider):
     provider = "openai-responses"
     version = "1.0.0"
-    PROMPT_VERSION = "1"
+    PROMPT_VERSION = "2"
     NON_RETRYABLE_429_IDENTIFIERS = frozenset(
         {
             "insufficient_quota",
@@ -153,12 +153,20 @@ Labels:
 - equivalent: materially the same factual proposition.
 - contradicts: the two underlying factual propositions concern the same subject,
   event, time and measurement context and cannot both be true.
-- disputes: materially competing or incompatible accounts of the same event or
-  proposition, but not a strict logical contradiction.
+- disputes: two materially competing accounts of the same event or proposition
+  that cannot both describe that specific aspect of the event as stated, but do
+  not form a strict logical contradiction.
 - unrelated: the claims concern different propositions or events.
 - insufficient: the supplied context is not sufficient to classify safely.
 
 Be conservative. Prefer insufficient or unrelated over inventing a dispute.
+A dispute requires an actual point of incompatibility. Mere differences in
+detail, specificity, granularity, emphasis, wording, scope, attribution, or the
+addition of compatible facts are NOT disputes. A broad headline and a more
+specific claim about the same event are not in dispute unless they make
+incompatible assertions about the same aspect. If both claims can comfortably
+be true at the same time, do not label disputes.
+
 Do not decide which source is true. Treat attribution as evidence about whose
 account is being reported, not as proof of the underlying assertion.
 Different numbers are only conflicting when event, metric, unit and time basis
