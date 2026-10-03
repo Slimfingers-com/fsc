@@ -1,0 +1,79 @@
+from uuid import uuid4
+
+from app.claim_relations.provider import (
+    SemanticRelationCandidate,
+    StoryClaimInput,
+)
+from scripts.evaluate_claim_relation_shadow import conflict_hint
+
+
+def make_claim(text: str) -> StoryClaimInput:
+    return StoryClaimInput(
+        claim_id=uuid4(),
+        article_id=uuid4(),
+        source_id=uuid4(),
+        claim_text=text,
+        normalized_claim=text.casefold(),
+        claim_hash="test",
+        confidence=1.0,
+        article_title="Shared story",
+        article_context=None,
+    )
+
+
+def make_candidate(
+    left: str,
+    right: str,
+    *,
+    score: float = 0.7,
+) -> SemanticRelationCandidate:
+    return SemanticRelationCandidate(
+        story_id=uuid4(),
+        language_code="en",
+        left_group_key="left",
+        right_group_key="right",
+        left_claim=make_claim(left),
+        right_claim=make_claim(right),
+        candidate_score=score,
+    )
+
+
+def test_conflict_hint_prioritizes_negation_difference():
+    neutral = make_candidate(
+        "The officer described the collision.",
+        "The witness described the collision.",
+    )
+    disputed = make_candidate(
+        "The officer said there was no vehicle contact.",
+        "The witness said the vehicle caused the collision.",
+    )
+
+    assert conflict_hint(disputed) > conflict_hint(neutral)
+
+
+def test_conflict_hint_prioritizes_numeric_difference():
+    neutral = make_candidate(
+        "The ticket costs 63 euros.",
+        "The ticket price is 63 euros.",
+    )
+    differing = make_candidate(
+        "The ticket costs 63 euros.",
+        "The ticket costs 67 euros.",
+    )
+
+    assert conflict_hint(differing) > conflict_hint(neutral)
+
+
+def test_conflict_hint_rewards_very_high_candidate_score():
+    normal = make_candidate(
+        "One account describes the event.",
+        "Another account describes the event.",
+        score=0.8,
+    )
+    high = make_candidate(
+        "One account describes the event.",
+        "Another account describes the event.",
+        score=0.9,
+    )
+
+    assert conflict_hint(high) == conflict_hint(normal) + 1
