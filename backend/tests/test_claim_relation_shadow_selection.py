@@ -131,3 +131,34 @@ def test_rank_conflict_candidates_prefers_real_negation_conflict():
     )
 
     assert ranked == (disputed,)
+
+
+def test_rank_conflict_candidates_fills_with_non_hint_recall_lane():
+    hinted = make_candidate(
+        "The officer said there was no vehicle contact.",
+        "The witness said the vehicle made contact.",
+        score=0.66,
+    )
+    no_hint = make_candidate(
+        "Garces-Perez said the officer's SUV rammed his vehicle.",
+        "The complaint says Garces-Perez rammed an officer's vehicle.",
+        score=0.66,
+    )
+    weak = make_candidate(
+        "The hearing was held on Tuesday.",
+        "The court released its schedule.",
+        score=0.66,
+    )
+    hybrid = HybridClaimRelationAnalyzer(
+        semantic_provider=None,
+        max_semantic_candidates=8,
+    )
+
+    ranked = rank_conflict_candidates(
+        (weak, no_hint, hinted),
+        hybrid,
+        2,
+    )
+
+    assert ranked[0] == hinted
+    assert ranked[1] == no_hint

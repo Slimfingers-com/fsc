@@ -79,6 +79,14 @@ score because article-title similarity dominates, claim-level similarity is
 used as the secondary ranking signal before deterministic group-key ordering.
 This keeps the bounded candidate window focused on materially comparable claims.
 
+Conflict-rich evaluation prioritizes candidates with local disagreement hints
+such as negation or differing numeric values, but does not discard every
+candidate without such a hint. Any remaining slots in the bounded 16-candidate
+window are filled by the strongest non-hint candidates. This recall lane is
+important for role-reversal disputes that use compatible vocabulary without an
+explicit negation token, such as two accounts that disagree over which vehicle
+rammed the other.
+
 The normal claim-relation worker remains configured with
 `RuleBasedClaimRelationAnalyzer`. Merely deploying the Luna adapter therefore
 does not cause model calls, new processing identity, reprocessing or API cost.

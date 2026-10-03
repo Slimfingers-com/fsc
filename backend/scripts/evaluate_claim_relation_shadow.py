@@ -217,18 +217,17 @@ def rank_conflict_candidates(
         raise ValueError("conflict candidate limit must be greater than zero")
 
     ranked: list[
-        tuple[int, float, float, SemanticRelationCandidate]
+        tuple[int, int, float, float, SemanticRelationCandidate]
     ] = []
     for candidate in candidates:
         hint = conflict_hint(candidate)
-        if hint <= 0:
-            continue
         _, claim_similarity = hybrid._candidate_scores(
             candidate.left_claim,
             candidate.right_claim,
         )
         ranked.append(
             (
+                1 if hint > 0 else 0,
                 hint,
                 claim_similarity,
                 candidate.candidate_score,
@@ -237,10 +236,10 @@ def rank_conflict_candidates(
         )
 
     ranked.sort(
-        key=lambda item: (item[0], item[1], item[2]),
+        key=lambda item: (item[0], item[1], item[2], item[3]),
         reverse=True,
     )
-    return tuple(item[3] for item in ranked[:limit])
+    return tuple(item[4] for item in ranked[:limit])
 
 
 def conflict_rich_story_ids(
