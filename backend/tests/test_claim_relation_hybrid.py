@@ -172,6 +172,44 @@ def test_hybrid_does_not_send_single_source_pair():
     assert provider.calls == []
 
 
+def test_semantic_candidate_ties_prefer_claim_similarity():
+    source_a = uuid4()
+    source_b = uuid4()
+    irrelevant = make_claim(
+        "A detention hearing is scheduled for October.",
+        source_id=source_a,
+        title="Austin ICE shooting",
+    )
+    relevant = make_claim(
+        "Garces-Perez said the officer SUV rammed his vehicle.",
+        source_id=source_a,
+        title="Austin ICE shooting",
+    )
+    counterpart = make_claim(
+        "The report says Garces-Perez rammed an officer vehicle.",
+        source_id=source_b,
+        title="Austin ICE shooting",
+    )
+    analyzer = HybridClaimRelationAnalyzer(
+        candidate_similarity_threshold=0.55,
+        max_semantic_candidates=1,
+    )
+    analysis_input = story(irrelevant, relevant, counterpart)
+    base = analyzer.base_analyzer.analyze(analysis_input)
+
+    candidates = analyzer.semantic_candidates(analysis_input, base)
+
+    assert len(candidates) == 1
+    candidate_claim_ids = {
+        candidates[0].left_claim.claim_id,
+        candidates[0].right_claim.claim_id,
+    }
+    assert candidate_claim_ids == {
+        relevant.claim_id,
+        counterpart.claim_id,
+    }
+
+
 def test_hybrid_requires_dispute_confidence_threshold():
     first = make_claim(
         "The officer said there was no vehicle contact."

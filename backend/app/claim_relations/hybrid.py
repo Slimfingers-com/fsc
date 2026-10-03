@@ -96,11 +96,11 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
         return min(jaccard, order)
 
     @classmethod
-    def _candidate_score(
+    def _candidate_scores(
         cls,
         left: StoryClaimInput,
         right: StoryClaimInput,
-    ) -> float:
+    ) -> tuple[float, float]:
         lexical = cls._text_similarity(
             left.normalized_claim,
             right.normalized_claim,
@@ -123,7 +123,17 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
                     right.semantic_embedding,
                 ),
             )
-        return max(lexical, semantic, title)
+        claim_similarity = max(lexical, semantic)
+        return max(claim_similarity, title), claim_similarity
+
+    @classmethod
+    def _candidate_score(
+        cls,
+        left: StoryClaimInput,
+        right: StoryClaimInput,
+    ) -> float:
+        score, _ = cls._candidate_scores(left, right)
+        return score
 
     @staticmethod
     def validate_decisions(
@@ -171,7 +181,9 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
             tuple(sorted((item.left_group_key, item.right_group_key)))
             for item in base.relations
         }
-        scored: list[tuple[float, SemanticRelationCandidate]] = []
+        scored: list[
+            tuple[float, float, SemanticRelationCandidate]
+        ] = []
 
         for left_index, left_group in enumerate(base.groups):
             left_claim = claim_by_id[left_group.representative_claim_id]
@@ -194,7 +206,10 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 if len(left_sources | right_sources) < 2:
                     continue
 
-                score = self._candidate_score(left_claim, right_claim)
+                score, claim_similarity = self._candidate_scores(
+                    left_claim,
+                    right_claim,
+                )
                 if score < self.candidate_similarity_threshold:
                     continue
 
@@ -207,17 +222,18 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
                     right_claim=right_claim,
                     candidate_score=score,
                 )
-                scored.append((score, candidate))
+                scored.append((score, claim_similarity, candidate))
 
         scored.sort(
             key=lambda item: (
                 -item[0],
-                item[1].left_group_key,
-                item[1].right_group_key,
+                -item[1],
+                item[2].left_group_key,
+                item[2].right_group_key,
             )
         )
         return tuple(
-            item[1]
+            item[2]
             for item in scored[: self.max_semantic_candidates]
         )
 
