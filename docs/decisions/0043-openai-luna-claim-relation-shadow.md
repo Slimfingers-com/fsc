@@ -49,7 +49,10 @@ article content as untrusted quoted data and instructs the model not to follow
 instructions embedded in source text.
 
 The adapter records token usage returned by the API, but never includes the API
-key in provider configuration or processing identity.
+key in provider configuration or processing identity. Shadow evaluation also
+paces requests and retries temporary HTTP 429 rate limits using server-provided
+retry/reset headers where available. Spend/quota-limit 429 responses remain
+fatal and are never retried blindly.
 
 ## Shadow-only activation
 

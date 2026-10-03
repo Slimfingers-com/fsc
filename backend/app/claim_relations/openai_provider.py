@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import logging
+import re
+import time
 from dataclasses import dataclass
 
 import httpx
@@ -27,6 +29,15 @@ class OpenAISemanticClaimRelationProvider(SemanticClaimRelationProvider):
     provider = "openai-responses"
     version = "1.0.0"
     PROMPT_VERSION = "1"
+    NON_RETRYABLE_429_IDENTIFIERS = frozenset(
+        {
+            "insufficient_quota",
+            "project_spend_limit_exceeded",
+            "organization_spend_limit_exceeded",
+            "project_usage_limit_exceeded",
+            "organization_usage_limit_exceeded",
+        }
+    )
 
     def __init__(
         self,
@@ -37,6 +48,9 @@ class OpenAISemanticClaimRelationProvider(SemanticClaimRelationProvider):
         timeout_seconds: float = 30.0,
         reasoning_effort: str = "low",
         max_output_tokens: int = 4000,
+        min_request_interval_seconds: float = 0.0,
+        rate_limit_max_retries: int = 0,
+        rate_limit_fallback_seconds: float = 60.0,
     ) -> None:
         if not api_key:
             raise ValueError("OpenAI API key must not be empty")
@@ -55,6 +69,16 @@ class OpenAISemanticClaimRelationProvider(SemanticClaimRelationProvider):
             raise ValueError("unsupported OpenAI reasoning effort")
         if max_output_tokens <= 0:
             raise ValueError("max_output_tokens must be greater than zero")
+        if min_request_interval_seconds < 0:
+            raise ValueError(
+                "min_request_interval_seconds must not be negative"
+            )
+        if rate_limit_max_retries < 0:
+            raise ValueError("rate_limit_max_retries must not be negative")
+        if rate_limit_fallback_seconds <= 0:
+            raise ValueError(
+                "rate_limit_fallback_seconds must be greater than zero"
+            )
 
         self.api_key = api_key
         self.model = model
@@ -62,7 +86,11 @@ class OpenAISemanticClaimRelationProvider(SemanticClaimRelationProvider):
         self.timeout_seconds = timeout_seconds
         self.reasoning_effort = reasoning_effort
         self.max_output_tokens = max_output_tokens
+        self.min_request_interval_seconds = min_request_interval_seconds
+        self.rate_limit_max_retries = rate_limit_max_retries
+        self.rate_limit_fallback_seconds = rate_limit_fallback_seconds
         self.last_usage: OpenAIUsage | None = None
+        self._last_request_started: float | None = None
 
     def configuration(self) -> dict[str, object]:
         return {
@@ -200,6 +228,104 @@ is factually true. Keep the reason short and factual."""
             raise ValueError("OpenAI response does not contain output text")
         return "".join(text_parts)
 
+    @staticmethod
+    def _duration_seconds(value: str | None) -> float | None:
+        if not value:
+            return None
+        stripped = value.strip()
+        try:
+            return max(0.0, float(stripped))
+        except ValueError:
+            pass
+
+        if not re.fullmatch(
+            r"(?:\d+(?:\.\d+)?(?:ms|s|m|h))+",
+            stripped,
+        ):
+            return None
+
+        multiplier = {
+            "ms": 0.001,
+            "s": 1.0,
+            "m": 60.0,
+            "h": 3600.0,
+        }
+        return sum(
+            float(amount) * multiplier[unit]
+            for amount, unit in re.findall(
+                r"(\d+(?:\.\d+)?)(ms|s|m|h)",
+                stripped,
+            )
+        )
+
+    @classmethod
+    def _error_identifiers(
+        cls,
+        response: httpx.Response,
+    ) -> set[str]:
+        try:
+            payload = response.json()
+        except ValueError:
+            return set()
+        if not isinstance(payload, dict):
+            return set()
+        error = payload.get("error")
+        if not isinstance(error, dict):
+            return set()
+        return {
+            value
+            for key in ("code", "type")
+            if isinstance((value := error.get(key)), str)
+        }
+
+    def _retry_delay_seconds(
+        self,
+        response: httpx.Response,
+        *,
+        attempt: int,
+    ) -> float:
+        retry_after = self._duration_seconds(
+            response.headers.get("Retry-After")
+        )
+        if retry_after is not None:
+            return retry_after + 0.5
+
+        reset_delays = [
+            delay
+            for name in (
+                "x-ratelimit-reset-project-tokens",
+                "x-ratelimit-reset-tokens",
+                "x-ratelimit-reset-requests",
+            )
+            if (
+                delay := self._duration_seconds(
+                    response.headers.get(name)
+                )
+            )
+            is not None
+        ]
+        if reset_delays:
+            return max(reset_delays) + 0.5
+
+        return min(
+            self.rate_limit_fallback_seconds * (2**attempt),
+            300.0,
+        )
+
+    def _wait_for_request_slot(self) -> None:
+        if self.min_request_interval_seconds <= 0:
+            self._last_request_started = time.monotonic()
+            return
+        now = time.monotonic()
+        if self._last_request_started is not None:
+            wait_seconds = (
+                self.min_request_interval_seconds
+                - (now - self._last_request_started)
+            )
+            if wait_seconds > 0:
+                time.sleep(wait_seconds)
+        self._last_request_started = time.monotonic()
+
     def classify(
         self,
         candidates: tuple[SemanticRelationCandidate, ...],
@@ -242,16 +368,46 @@ is factually true. Keep the reason short and factual."""
             },
         }
 
-        response = httpx.post(
-            f"{self.base_url}/responses",
-            headers={
-                "Authorization": f"Bearer {self.api_key}",
-                "Content-Type": "application/json",
-            },
-            json=request_payload,
-            timeout=self.timeout_seconds,
-        )
-        response.raise_for_status()
+        attempt = 0
+        while True:
+            self._wait_for_request_slot()
+            response = httpx.post(
+                f"{self.base_url}/responses",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                },
+                json=request_payload,
+                timeout=self.timeout_seconds,
+            )
+            if response.status_code != 429:
+                response.raise_for_status()
+                break
+
+            identifiers = self._error_identifiers(response)
+            should_retry = not (
+                identifiers & self.NON_RETRYABLE_429_IDENTIFIERS
+            )
+            if (
+                not should_retry
+                or attempt >= self.rate_limit_max_retries
+            ):
+                response.raise_for_status()
+
+            delay_seconds = self._retry_delay_seconds(
+                response,
+                attempt=attempt,
+            )
+            logger.warning(
+                "OpenAI rate limit reached; retrying in %.1fs "
+                "(attempt %s/%s)",
+                delay_seconds,
+                attempt + 1,
+                self.rate_limit_max_retries,
+            )
+            time.sleep(delay_seconds)
+            attempt += 1
+
         payload = response.json()
         if not isinstance(payload, dict):
             raise ValueError("OpenAI response payload must be an object")
