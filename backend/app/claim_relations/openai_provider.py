@@ -33,7 +33,7 @@ class OpenAISemanticClaimRelationProvider(SemanticClaimRelationProvider):
         *,
         api_key: str,
         model: str = "gpt-6-luna",
-        base_url: str = "https://eu.api.openai.com/v1",
+        base_url: str = "https://api.openai.com/v1",
         timeout_seconds: float = 30.0,
         reasoning_effort: str = "low",
         max_output_tokens: int = 4000,

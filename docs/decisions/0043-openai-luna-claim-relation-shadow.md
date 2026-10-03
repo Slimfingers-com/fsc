@@ -28,7 +28,7 @@ FSC selects OpenAI `gpt-6-luna` as the first semantic claim-relation adapter.
 The adapter uses the OpenAI Responses API with:
 
 - model `gpt-6-luna`;
-- the EU regional endpoint `https://eu.api.openai.com/v1`;
+- the global OpenAI endpoint `https://api.openai.com/v1`;
 - `store: false`;
 - strict Structured Outputs through `text.format`;
 - low reasoning effort by default;
@@ -73,10 +73,10 @@ with Luna and persist `disputes`.
 
 ## Data handling
 
-The default endpoint is the OpenAI EU regional endpoint. Requests use
-`store: false`. The input is restricted to representative claim text, article
-title and the already bounded claim-adjacent context created by the hybrid
-architecture.
+The default endpoint is the global OpenAI API endpoint. Requests use
+`store: false`. FSC does not claim EU data residency for this integration path.
+The input is restricted to representative claim text, article title and the
+already bounded claim-adjacent context created by the hybrid architecture.
 
 Shadow JSONL output is an operational evaluation artifact and is not committed to
 Git.
