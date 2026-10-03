@@ -216,8 +216,11 @@ def rank_conflict_candidates(
     if limit <= 0:
         raise ValueError("conflict candidate limit must be greater than zero")
 
-    ranked: list[
-        tuple[int, int, float, float, SemanticRelationCandidate]
+    hinted: list[
+        tuple[int, float, float, SemanticRelationCandidate]
+    ] = []
+    recall: list[
+        tuple[float, float, SemanticRelationCandidate]
     ] = []
     for candidate in candidates:
         hint = conflict_hint(candidate)
@@ -225,21 +228,53 @@ def rank_conflict_candidates(
             candidate.left_claim,
             candidate.right_claim,
         )
-        ranked.append(
-            (
-                1 if hint > 0 else 0,
-                hint,
-                claim_similarity,
-                candidate.candidate_score,
-                candidate,
+        if hint > 0:
+            hinted.append(
+                (
+                    hint,
+                    claim_similarity,
+                    candidate.candidate_score,
+                    candidate,
+                )
             )
-        )
+        else:
+            recall.append(
+                (
+                    claim_similarity,
+                    candidate.candidate_score,
+                    candidate,
+                )
+            )
 
-    ranked.sort(
-        key=lambda item: (item[0], item[1], item[2], item[3]),
+    hinted.sort(
+        key=lambda item: (item[0], item[1], item[2]),
         reverse=True,
     )
-    return tuple(item[4] for item in ranked[:limit])
+    recall.sort(
+        key=lambda item: (item[0], item[1]),
+        reverse=True,
+    )
+
+    hint_slots = (limit + 1) // 2
+    recall_slots = limit - hint_slots
+    selected_hinted = hinted[:hint_slots]
+    selected_recall = recall[:recall_slots]
+
+    remaining = limit - len(selected_hinted) - len(selected_recall)
+    if remaining > 0 and len(selected_hinted) < hint_slots:
+        selected_recall += recall[
+            len(selected_recall) : len(selected_recall) + remaining
+        ]
+    elif remaining > 0 and len(selected_recall) < recall_slots:
+        selected_hinted += hinted[
+            len(selected_hinted) : len(selected_hinted) + remaining
+        ]
+
+    return tuple(
+        item[3] for item in selected_hinted
+    ) + tuple(
+        item[2] for item in selected_recall
+    )
 
 
 def conflict_rich_story_ids(
