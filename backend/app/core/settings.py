@@ -84,7 +84,7 @@ class Settings(BaseSettings):
     claim_relation_group_similarity_threshold: float = 0.82
     claim_relation_contradiction_similarity_threshold: float = 0.82
     claim_relation_openai_model: str = "gpt-6-luna"
-    claim_relation_openai_base_url: str = "https://eu.api.openai.com/v1"
+    claim_relation_openai_base_url: str = "https://api.openai.com/v1"
     claim_relation_openai_timeout_seconds: float = 30.0
     claim_relation_openai_reasoning_effort: str = "low"
     claim_relation_openai_max_output_tokens: int = 4000

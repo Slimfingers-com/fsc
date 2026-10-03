@@ -56,7 +56,7 @@ def make_candidate():
     )
 
 
-def test_luna_provider_uses_eu_responses_structured_output(monkeypatch):
+def test_luna_provider_uses_responses_structured_output(monkeypatch):
     captured = {}
 
     def fake_post(url, **kwargs):
@@ -104,7 +104,7 @@ def test_luna_provider_uses_eu_responses_structured_output(monkeypatch):
     decisions = provider.classify((make_candidate(),))
 
     assert captured["url"] == (
-        "https://eu.api.openai.com/v1/responses"
+        "https://api.openai.com/v1/responses"
     )
     request = captured["json"]
     assert request["model"] == "gpt-6-luna"
@@ -190,6 +190,6 @@ def test_luna_provider_configuration_never_contains_api_key():
 
     assert configuration["model"] == "gpt-6-luna"
     assert configuration["base_url"] == (
-        "https://eu.api.openai.com/v1"
+        "https://api.openai.com/v1"
     )
     assert "super-secret" not in str(configuration)
