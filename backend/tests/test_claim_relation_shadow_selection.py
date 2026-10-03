@@ -1,5 +1,7 @@
 from uuid import uuid4
 
+import pytest
+
 from app.claim_relations.hybrid import HybridClaimRelationAnalyzer
 from app.claim_relations.provider import (
     SemanticRelationCandidate,
@@ -228,3 +230,22 @@ def test_select_balanced_story_ids_fills_missing_lane():
     assert len(selected) == 3
     assert selected[0] == hinted[0][1]
     assert selected[1:] == tuple(item[1] for item in recall[:2])
+
+def test_select_balanced_story_ids_applies_balanced_offset():
+    hinted = [((float(10 - index),), uuid4()) for index in range(6)]
+    recall = [((float(10 - index),), uuid4()) for index in range(6)]
+
+    selected = select_balanced_story_ids(
+        hinted,
+        recall,
+        4,
+        offset=4,
+    )
+
+    assert selected[:2] == tuple(item[1] for item in hinted[2:4])
+    assert selected[2:] == tuple(item[1] for item in recall[2:4])
+
+
+def test_select_balanced_story_ids_rejects_negative_offset():
+    with pytest.raises(ValueError, match="offset"):
+        select_balanced_story_ids([], [], 1, offset=-1)
