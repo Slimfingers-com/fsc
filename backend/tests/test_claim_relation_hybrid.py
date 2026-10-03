@@ -187,3 +187,26 @@ def test_hybrid_requires_dispute_confidence_threshold():
     ).analyze(story(first, second))
 
     assert result.relations == ()
+
+
+class IncompleteSemanticProvider(FakeSemanticProvider):
+    def classify(self, candidates):
+        self.calls.append(candidates)
+        return ()
+
+
+def test_invalid_semantic_result_falls_back_to_rules():
+    first = make_claim(
+        "The officer said there was no vehicle contact."
+    )
+    second = make_claim(
+        "Garces-Perez said the ICE SUV caused the collision."
+    )
+    provider = IncompleteSemanticProvider()
+
+    result = HybridClaimRelationAnalyzer(
+        semantic_provider=provider,
+    ).analyze(story(first, second))
+
+    assert len(provider.calls) == 1
+    assert result.relations == ()
