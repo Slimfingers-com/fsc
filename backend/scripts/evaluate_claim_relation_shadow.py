@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import Counter
 from datetime import UTC, datetime
@@ -19,6 +20,7 @@ from app.claim_relations.hybrid import HybridClaimRelationAnalyzer
 from app.claim_relations.openai_provider import (
     OpenAISemanticClaimRelationProvider,
 )
+from app.claim_relations.provider import SemanticRelationCandidate
 from app.claim_relations.rule_based import RuleBasedClaimRelationAnalyzer
 from app.core.settings import settings
 from app.db.session import SessionLocal
@@ -37,6 +39,24 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=100,
         help="maximum recent multi-source stories to inspect",
+    )
+    parser.add_argument(
+        "--selection",
+        choices=("recent", "conflict-rich"),
+        default="recent",
+        help=(
+            "story selection strategy; conflict-rich scans recent stories "
+            "locally and prioritizes candidates with disagreement hints"
+        ),
+    )
+    parser.add_argument(
+        "--scan-limit",
+        type=int,
+        default=250,
+        help=(
+            "recent multi-source stories to inspect locally when using "
+            "conflict-rich selection"
+        ),
     )
     parser.add_argument(
         "--output",
@@ -86,6 +106,110 @@ def candidate_story_ids(limit: int) -> tuple[UUID, ...]:
         return tuple(
             db.scalars(query, {"limit": limit}).all()
         )
+
+
+_NEGATION_TOKENS = frozenset(
+    {
+        "no", "not", "never", "none", "without",
+        "kein", "keine", "keinen", "keinem", "keiner",
+        "nicht", "nie", "ohne",
+        "non", "pas", "jamais", "sans",
+    }
+)
+_DISPUTE_TOKENS = frozenset(
+    {
+        "deny", "denies", "denied", "dispute", "disputes",
+        "reject", "rejects", "rejected", "refute", "refutes",
+        "bestreitet", "widerspricht", "dementiert", "zurueckweist",
+    }
+)
+_WORD_RE = re.compile(r"\b[^\W_]+\b", re.UNICODE)
+_NUMBER_RE = re.compile(r"\b\d+(?:[.,]\d+)?\b")
+
+
+def conflict_hint(candidate: SemanticRelationCandidate) -> int:
+    def combined(claim) -> str:
+        return " ".join(
+            part
+            for part in (
+                claim.claim_text,
+                claim.article_title,
+            )
+            if part
+        ).casefold()
+
+    left = combined(candidate.left_claim)
+    right = combined(candidate.right_claim)
+    left_tokens = frozenset(_WORD_RE.findall(left))
+    right_tokens = frozenset(_WORD_RE.findall(right))
+
+    left_negated = bool(left_tokens & _NEGATION_TOKENS)
+    right_negated = bool(right_tokens & _NEGATION_TOKENS)
+    negation_delta = left_negated != right_negated
+
+    left_numbers = frozenset(_NUMBER_RE.findall(left))
+    right_numbers = frozenset(_NUMBER_RE.findall(right))
+    numeric_delta = bool(
+        left_numbers
+        and right_numbers
+        and left_numbers != right_numbers
+    )
+    explicit_dispute = bool(
+        (left_tokens | right_tokens) & _DISPUTE_TOKENS
+    )
+
+    return (
+        (3 if negation_delta else 0)
+        + (2 if numeric_delta else 0)
+        + (1 if explicit_dispute else 0)
+        + (1 if candidate.candidate_score >= 0.85 else 0)
+    )
+
+
+def conflict_rich_story_ids(
+    *,
+    service: ClaimRelationService,
+    hybrid: HybridClaimRelationAnalyzer,
+    story_limit: int,
+    scan_limit: int,
+) -> tuple[tuple[UUID, ...], int]:
+    if scan_limit <= 0:
+        raise ValueError("scan limit must be greater than zero")
+
+    scan_ids = candidate_story_ids(max(scan_limit, story_limit))
+    ranked: list[tuple[tuple[float, ...], UUID]] = []
+
+    with SessionLocal() as db:
+        for recency_index, story_id in enumerate(scan_ids):
+            snapshot = service.load_snapshot(db, story_id=story_id)
+            if snapshot is None:
+                continue
+            prepared = service.prepare(snapshot)
+            base = hybrid.base_analyzer.analyze(
+                prepared.analysis_input
+            )
+            candidates = hybrid.semantic_candidates(
+                prepared.analysis_input,
+                base,
+            )
+            if not candidates:
+                continue
+
+            hints = tuple(conflict_hint(item) for item in candidates)
+            rank = (
+                float(max(hints)),
+                float(sum(1 for item in hints if item > 0)),
+                float(max(item.candidate_score for item in candidates)),
+                float(len(candidates)),
+                float(-recency_index),
+            )
+            ranked.append((rank, story_id))
+
+    ranked.sort(key=lambda item: item[0], reverse=True)
+    return (
+        tuple(item[1] for item in ranked[:story_limit]),
+        len(scan_ids),
+    )
 
 
 def main() -> None:
@@ -139,6 +263,17 @@ def main() -> None:
     )
     service = ClaimRelationService(analyzer=hybrid)
 
+    if args.selection == "conflict-rich":
+        story_ids, stories_scanned = conflict_rich_story_ids(
+            service=service,
+            hybrid=hybrid,
+            story_limit=args.story_limit,
+            scan_limit=args.scan_limit,
+        )
+    else:
+        story_ids = candidate_story_ids(args.story_limit)
+        stories_scanned = len(story_ids)
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
     relation_counts: Counter[str] = Counter()
     stories_considered = 0
@@ -150,7 +285,7 @@ def main() -> None:
 
     with args.output.open("w", encoding="utf-8") as output:
         with SessionLocal() as db:
-            for story_id in candidate_story_ids(args.story_limit):
+            for story_id in story_ids:
                 stories_considered += 1
                 snapshot = service.load_snapshot(
                     db,
@@ -224,6 +359,7 @@ def main() -> None:
                         "candidate_score": (
                             candidate.candidate_score
                         ),
+                        "conflict_hint": conflict_hint(candidate),
                         "relation_kind": (
                             decision.relation_kind.value
                         ),
@@ -283,6 +419,8 @@ def main() -> None:
         "shadow_only": True,
         "model": provider.model,
         "output": str(args.output),
+        "selection": args.selection,
+        "stories_scanned": stories_scanned,
         "stories_considered": stories_considered,
         "stories_with_candidates": stories_with_candidates,
         "candidate_count": candidate_count,

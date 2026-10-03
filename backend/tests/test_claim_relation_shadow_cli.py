@@ -21,3 +21,4 @@ def test_luna_shadow_cli_help_is_runnable():
 
     assert completed.returncode == 0
     assert "shadow mode" in completed.stdout.casefold()
+    assert "conflict-rich" in completed.stdout
