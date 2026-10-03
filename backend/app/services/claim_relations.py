@@ -176,6 +176,20 @@ class ClaimRelationService:
                 ),
             )
         ]
+        context_identity = []
+        if getattr(self.analyzer, "uses_article_context", False):
+            context_identity = [
+                [
+                    str(item.article.id),
+                    item.article.content_hash or "",
+                    item.article.normalized_title or item.article.title or "",
+                ]
+                for item in sorted(
+                    snapshot.memberships,
+                    key=lambda value: str(value.article.id),
+                )
+            ]
+
         claim_identity = [
             [
                 str(claim.id),
@@ -208,6 +222,7 @@ class ClaimRelationService:
             str(snapshot.story.id),
             snapshot.story.language_code or "",
             membership_identity,
+            context_identity,
             claim_identity,
             self.analyzer.provider,
             self.analyzer.version,
@@ -241,6 +256,27 @@ class ClaimRelationService:
             item.article.id: item.source_id
             for item in snapshot.memberships
         }
+        article_by_id = {
+            item.article.id: item.article
+            for item in snapshot.memberships
+        }
+
+        def claim_context(claim: ArticleClaim) -> str | None:
+            article = article_by_id[claim.article_id]
+            body = article.normalized_text or ""
+            title = article.normalized_title or article.title or ""
+            if not body:
+                return title or None
+            start = max(0, min(claim.start_offset, len(body)) - 280)
+            end = min(
+                len(body),
+                max(claim.end_offset, claim.start_offset) + 280,
+            )
+            excerpt = body[start:end].strip()
+            if title and excerpt:
+                return f"{title}\n\n{excerpt}"
+            return title or excerpt or None
+
         claims = tuple(
             StoryClaimInput(
                 claim_id=claim.id,
@@ -256,6 +292,11 @@ class ClaimRelationService:
                     else None
                 ),
                 semantic_model=claim.semantic_model,
+                article_title=(
+                    article_by_id[claim.article_id].normalized_title
+                    or article_by_id[claim.article_id].title
+                ),
+                article_context=claim_context(claim),
             )
             for claim in sorted(
                 snapshot.claims,
