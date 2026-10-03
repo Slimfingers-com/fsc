@@ -87,6 +87,13 @@ from the other lane. This recall lane is important for role-reversal disputes
 that use compatible vocabulary without an explicit negation token, such as two
 accounts that disagree over which vehicle rammed the other.
 
+Story selection uses the same principle. Half of the bounded story window is
+reserved for stories with explicit local conflict hints; the other half is
+reserved for stories whose strongest candidates have no hint but high claim
+similarity. Unused slots flow to the other lane. This prevents hint-heavy stories
+from crowding zero-hint semantic disputes out of the shadow sample before Luna
+is called.
+
 The normal claim-relation worker remains configured with
 `RuleBasedClaimRelationAnalyzer`. Merely deploying the Luna adapter therefore
 does not cause model calls, new processing identity, reprocessing or API cost.

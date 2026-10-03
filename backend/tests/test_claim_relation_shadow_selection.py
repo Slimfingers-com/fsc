@@ -9,6 +9,7 @@ from scripts.evaluate_claim_relation_shadow import (
     candidate_batches,
     conflict_hint,
     rank_conflict_candidates,
+    select_balanced_story_ids,
 )
 
 
@@ -193,3 +194,37 @@ def test_rank_conflict_candidates_reserves_half_for_recall_lane():
     assert len(ranked) == 4
     assert sum(conflict_hint(item) > 0 for item in ranked) == 2
     assert sum(conflict_hint(item) == 0 for item in ranked) == 2
+
+
+def test_select_balanced_story_ids_reserves_recall_lane():
+    hinted = [
+        ((4.0, 0.9), uuid4()),
+        ((3.0, 0.8), uuid4()),
+        ((2.0, 0.7), uuid4()),
+    ]
+    recall = [
+        ((0.95, 0.8), uuid4()),
+        ((0.90, 0.8), uuid4()),
+        ((0.85, 0.8), uuid4()),
+    ]
+
+    selected = select_balanced_story_ids(hinted, recall, 4)
+
+    assert len(selected) == 4
+    assert selected[:2] == tuple(item[1] for item in hinted[:2])
+    assert selected[2:] == tuple(item[1] for item in recall[:2])
+
+
+def test_select_balanced_story_ids_fills_missing_lane():
+    hinted = [((4.0, 0.9), uuid4())]
+    recall = [
+        ((0.95, 0.8), uuid4()),
+        ((0.90, 0.8), uuid4()),
+        ((0.85, 0.8), uuid4()),
+    ]
+
+    selected = select_balanced_story_ids(hinted, recall, 3)
+
+    assert len(selected) == 3
+    assert selected[0] == hinted[0][1]
+    assert selected[1:] == tuple(item[1] for item in recall[:2])

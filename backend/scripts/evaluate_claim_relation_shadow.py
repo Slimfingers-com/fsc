@@ -277,6 +277,37 @@ def rank_conflict_candidates(
     )
 
 
+def select_balanced_story_ids(
+    hinted: list[tuple[tuple[float, ...], UUID]],
+    recall: list[tuple[tuple[float, ...], UUID]],
+    limit: int,
+) -> tuple[UUID, ...]:
+    if limit <= 0:
+        raise ValueError("story selection limit must be greater than zero")
+
+    hinted = sorted(hinted, key=lambda item: item[0], reverse=True)
+    recall = sorted(recall, key=lambda item: item[0], reverse=True)
+
+    hint_slots = (limit + 1) // 2
+    recall_slots = limit - hint_slots
+    selected_hinted = hinted[:hint_slots]
+    selected_recall = recall[:recall_slots]
+
+    remaining = limit - len(selected_hinted) - len(selected_recall)
+    if remaining > 0 and len(selected_hinted) < hint_slots:
+        selected_recall += recall[
+            len(selected_recall) : len(selected_recall) + remaining
+        ]
+    elif remaining > 0 and len(selected_recall) < recall_slots:
+        selected_hinted += hinted[
+            len(selected_hinted) : len(selected_hinted) + remaining
+        ]
+
+    return tuple(item[1] for item in selected_hinted) + tuple(
+        item[1] for item in selected_recall
+    )
+
+
 def conflict_rich_story_ids(
     *,
     service: ClaimRelationService,
@@ -288,7 +319,8 @@ def conflict_rich_story_ids(
         raise ValueError("scan limit must be greater than zero")
 
     scan_ids = candidate_story_ids(max(scan_limit, story_limit))
-    ranked: list[tuple[tuple[float, ...], UUID]] = []
+    hinted: list[tuple[tuple[float, ...], UUID]] = []
+    recall: list[tuple[tuple[float, ...], UUID]] = []
 
     with SessionLocal() as db:
         for recency_index, story_id in enumerate(scan_ids):
@@ -306,32 +338,61 @@ def conflict_rich_story_ids(
             if not candidates:
                 continue
 
-            hints = tuple(conflict_hint(item) for item in candidates)
-            candidate_ranks = []
-            for candidate, hint in zip(candidates, hints, strict=True):
+            hinted_ranks: list[tuple[float, ...]] = []
+            recall_ranks: list[tuple[float, ...]] = []
+            for candidate in candidates:
+                hint = conflict_hint(candidate)
                 _, claim_similarity = hybrid._candidate_scores(
                     candidate.left_claim,
                     candidate.right_claim,
                 )
-                candidate_ranks.append(
+                if hint > 0:
+                    hinted_ranks.append(
+                        (
+                            float(hint),
+                            float(claim_similarity),
+                            float(candidate.candidate_score),
+                        )
+                    )
+                else:
+                    recall_ranks.append(
+                        (
+                            float(claim_similarity),
+                            float(candidate.candidate_score),
+                        )
+                    )
+
+            if hinted_ranks:
+                hinted.append(
                     (
-                        float(hint),
-                        float(claim_similarity),
-                        float(candidate.candidate_score),
+                        (
+                            *max(hinted_ranks),
+                            float(len(hinted_ranks)),
+                            float(len(candidates)),
+                            float(-recency_index),
+                        ),
+                        story_id,
                     )
                 )
-            best_candidate_rank = max(candidate_ranks)
-            rank = (
-                *best_candidate_rank,
-                float(sum(1 for item in hints if item > 0)),
-                float(len(candidates)),
-                float(-recency_index),
-            )
-            ranked.append((rank, story_id))
+            else:
+                best_recall = max(recall_ranks)
+                recall.append(
+                    (
+                        (
+                            *best_recall,
+                            float(len(candidates)),
+                            float(-recency_index),
+                        ),
+                        story_id,
+                    )
+                )
 
-    ranked.sort(key=lambda item: item[0], reverse=True)
     return (
-        tuple(item[1] for item in ranked[:story_limit]),
+        select_balanced_story_ids(
+            hinted,
+            recall,
+            story_limit,
+        ),
         len(scan_ids),
     )
 
