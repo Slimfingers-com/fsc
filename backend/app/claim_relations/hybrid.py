@@ -158,7 +158,7 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 "semantic relation provider must classify every candidate"
             )
 
-    def _semantic_candidates(
+    def semantic_candidates(
         self,
         story: StoryClaimAnalysisInput,
         base: StoryClaimAnalysisResult,
@@ -229,7 +229,7 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
         if self.semantic_provider is None:
             return base
 
-        candidates = self._semantic_candidates(story, base)
+        candidates = self.semantic_candidates(story, base)
         if not candidates:
             return base
 
