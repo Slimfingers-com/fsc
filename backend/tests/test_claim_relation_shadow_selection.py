@@ -162,3 +162,34 @@ def test_rank_conflict_candidates_fills_with_non_hint_recall_lane():
 
     assert ranked[0] == hinted
     assert ranked[1] == no_hint
+
+
+def test_rank_conflict_candidates_reserves_half_for_recall_lane():
+    hinted = tuple(
+        make_candidate(
+            f"The officer said there was no contact {index}.",
+            f"The witness described contact {index}.",
+        )
+        for index in range(4)
+    )
+    recall = tuple(
+        make_candidate(
+            f"Account alpha describes event {index}.",
+            f"Account beta describes event {index}.",
+        )
+        for index in range(4)
+    )
+    hybrid = HybridClaimRelationAnalyzer(
+        semantic_provider=None,
+        max_semantic_candidates=8,
+    )
+
+    ranked = rank_conflict_candidates(
+        hinted + recall,
+        hybrid,
+        4,
+    )
+
+    assert len(ranked) == 4
+    assert sum(conflict_hint(item) > 0 for item in ranked) == 2
+    assert sum(conflict_hint(item) == 0 for item in ranked) == 2
