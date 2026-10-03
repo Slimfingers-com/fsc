@@ -64,7 +64,7 @@ def test_conflict_hint_prioritizes_numeric_difference():
     assert conflict_hint(differing) > conflict_hint(neutral)
 
 
-def test_conflict_hint_rewards_very_high_candidate_score():
+def test_conflict_hint_does_not_use_candidate_score():
     normal = make_candidate(
         "One account describes the event.",
         "Another account describes the event.",
@@ -76,4 +76,4 @@ def test_conflict_hint_rewards_very_high_candidate_score():
         score=0.9,
     )
 
-    assert conflict_hint(high) == conflict_hint(normal) + 1
+    assert conflict_hint(high) == conflict_hint(normal)
