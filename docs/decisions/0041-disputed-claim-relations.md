@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted; provider execution architecture extended by ADR 0042.
 
 ## Context
 

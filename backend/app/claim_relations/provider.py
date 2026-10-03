@@ -15,6 +15,14 @@ class ClaimRelationKind(StrEnum):
     DISPUTES = "disputes"
 
 
+class SemanticRelationKind(StrEnum):
+    EQUIVALENT = "equivalent"
+    CONTRADICTS = "contradicts"
+    DISPUTES = "disputes"
+    UNRELATED = "unrelated"
+    INSUFFICIENT = "insufficient"
+
+
 @dataclass(frozen=True, slots=True)
 class StoryClaimInput:
     claim_id: UUID
@@ -26,6 +34,8 @@ class StoryClaimInput:
     confidence: float
     semantic_embedding: tuple[float, ...] | None = None
     semantic_model: str | None = None
+    article_title: str | None = None
+    article_context: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -64,9 +74,43 @@ class StoryClaimAnalysisResult:
     relations: tuple[ClaimGroupRelationResult, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class SemanticRelationCandidate:
+    story_id: UUID
+    language_code: str | None
+    left_group_key: str
+    right_group_key: str
+    left_claim: StoryClaimInput
+    right_claim: StoryClaimInput
+    candidate_score: float
+
+
+@dataclass(frozen=True, slots=True)
+class SemanticRelationDecision:
+    left_group_key: str
+    right_group_key: str
+    relation_kind: SemanticRelationKind
+    confidence: float
+
+
+class SemanticClaimRelationProvider(ABC):
+    provider: str
+    version: str
+
+    @abstractmethod
+    def configuration(self) -> dict[str, object]: ...
+
+    @abstractmethod
+    def classify(
+        self,
+        candidates: tuple[SemanticRelationCandidate, ...],
+    ) -> tuple[SemanticRelationDecision, ...]: ...
+
+
 class ClaimRelationAnalyzer(ABC):
     provider: str
     version: str
+    uses_article_context = False
 
     @abstractmethod
     def configuration(self) -> dict[str, object]: ...
