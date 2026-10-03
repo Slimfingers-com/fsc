@@ -87,9 +87,9 @@ class Settings(BaseSettings):
     claim_relation_openai_base_url: str = "https://api.openai.com/v1"
     claim_relation_openai_timeout_seconds: float = 30.0
     claim_relation_openai_reasoning_effort: str = "low"
-    claim_relation_openai_max_output_tokens: int = 4000
+    claim_relation_openai_max_output_tokens: int = 3000
     claim_relation_shadow_candidate_similarity_threshold: float = 0.55
-    claim_relation_shadow_max_candidates_per_story: int = 24
+    claim_relation_shadow_max_candidates_per_story: int = 16
     claim_relation_shadow_min_request_interval_seconds: float = 31.0
     claim_relation_shadow_rate_limit_max_retries: int = 3
     claim_relation_shadow_rate_limit_fallback_seconds: float = 61.0

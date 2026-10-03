@@ -67,6 +67,12 @@ A dedicated evaluator:
   short reason;
 - does not persist any claim relation, difference, consensus or coverage change.
 
+Shadow evaluation is deliberately bounded to 16 semantic candidates per story
+and 3000 output tokens per response. When candidates have the same overall
+score because article-title similarity dominates, claim-level similarity is
+used as the secondary ranking signal before deterministic group-key ordering.
+This keeps the bounded candidate window focused on materially comparable claims.
+
 The normal claim-relation worker remains configured with
 `RuleBasedClaimRelationAnalyzer`. Merely deploying the Luna adapter therefore
 does not cause model calls, new processing identity, reprocessing or API cost.
