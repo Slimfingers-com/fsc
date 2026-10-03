@@ -91,6 +91,7 @@ class SemanticRelationDecision:
     right_group_key: str
     relation_kind: SemanticRelationKind
     confidence: float
+    reason: str | None = None
 
 
 class SemanticClaimRelationProvider(ABC):

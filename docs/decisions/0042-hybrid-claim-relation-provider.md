@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted; first semantic adapter selected by ADR 0043.
 
 ## Context
 

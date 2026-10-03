@@ -126,7 +126,7 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
         return max(lexical, semantic, title)
 
     @staticmethod
-    def _validate_decisions(
+    def validate_decisions(
         candidates: tuple[SemanticRelationCandidate, ...],
         decisions: tuple[SemanticRelationDecision, ...],
     ) -> None:
@@ -158,7 +158,7 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 "semantic relation provider must classify every candidate"
             )
 
-    def _semantic_candidates(
+    def semantic_candidates(
         self,
         story: StoryClaimAnalysisInput,
         base: StoryClaimAnalysisResult,
@@ -229,13 +229,13 @@ class HybridClaimRelationAnalyzer(ClaimRelationAnalyzer):
         if self.semantic_provider is None:
             return base
 
-        candidates = self._semantic_candidates(story, base)
+        candidates = self.semantic_candidates(story, base)
         if not candidates:
             return base
 
         try:
             decisions = self.semantic_provider.classify(candidates)
-            self._validate_decisions(candidates, decisions)
+            self.validate_decisions(candidates, decisions)
         except Exception:
             logger.exception(
                 "Semantic claim relation provider failed; "

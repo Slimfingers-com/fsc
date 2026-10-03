@@ -83,6 +83,13 @@ class Settings(BaseSettings):
     claim_relation_retry_max_seconds: float = 3600.0
     claim_relation_group_similarity_threshold: float = 0.82
     claim_relation_contradiction_similarity_threshold: float = 0.82
+    claim_relation_openai_model: str = "gpt-6-luna"
+    claim_relation_openai_base_url: str = "https://eu.api.openai.com/v1"
+    claim_relation_openai_timeout_seconds: float = 30.0
+    claim_relation_openai_reasoning_effort: str = "low"
+    claim_relation_openai_max_output_tokens: int = 4000
+    claim_relation_shadow_candidate_similarity_threshold: float = 0.55
+    claim_relation_shadow_max_candidates_per_story: int = 24
     claim_relation_default_page_size: int = 50
     claim_relation_max_page_size: int = 200
 
