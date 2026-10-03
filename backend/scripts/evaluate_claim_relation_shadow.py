@@ -20,7 +20,10 @@ from app.claim_relations.hybrid import HybridClaimRelationAnalyzer
 from app.claim_relations.openai_provider import (
     OpenAISemanticClaimRelationProvider,
 )
-from app.claim_relations.provider import SemanticRelationCandidate
+from app.claim_relations.provider import (
+    SemanticRelationCandidate,
+    SemanticRelationDecision,
+)
 from app.claim_relations.rule_based import RuleBasedClaimRelationAnalyzer
 from app.core.settings import settings
 from app.db.session import SessionLocal
@@ -79,6 +82,42 @@ def candidate_batches(
         candidates[index : index + max_per_request]
         for index in range(0, len(candidates), max_per_request)
     )
+
+
+def classify_batch_with_fallback(
+    *,
+    provider: OpenAISemanticClaimRelationProvider,
+    hybrid: HybridClaimRelationAnalyzer,
+    candidates: tuple[SemanticRelationCandidate, ...],
+) -> tuple[tuple[SemanticRelationDecision, ...], int, int]:
+    decisions = provider.classify(candidates)
+    usage = provider.last_usage
+    input_tokens = usage.input_tokens if usage is not None else 0
+    output_tokens = usage.output_tokens if usage is not None else 0
+
+    try:
+        hybrid.validate_decisions(candidates, decisions)
+    except ValueError:
+        if len(candidates) <= 1:
+            raise
+        midpoint = len(candidates) // 2
+        left, left_input, left_output = classify_batch_with_fallback(
+            provider=provider,
+            hybrid=hybrid,
+            candidates=candidates[:midpoint],
+        )
+        right, right_input, right_output = classify_batch_with_fallback(
+            provider=provider,
+            hybrid=hybrid,
+            candidates=candidates[midpoint:],
+        )
+        return (
+            left + right,
+            input_tokens + left_input + right_input,
+            output_tokens + left_output + right_output,
+        )
+
+    return decisions, input_tokens, output_tokens
 
 
 def candidate_story_ids(limit: int) -> tuple[UUID, ...]:
@@ -333,17 +372,18 @@ def main() -> None:
                     settings
                     .claim_relation_shadow_max_candidates_per_request,
                 ):
-                    batch_decisions = provider.classify(batch)
-                    hybrid.validate_decisions(
-                        batch,
+                    (
                         batch_decisions,
+                        batch_input_tokens,
+                        batch_output_tokens,
+                    ) = classify_batch_with_fallback(
+                        provider=provider,
+                        hybrid=hybrid,
+                        candidates=batch,
                     )
                     decisions_list.extend(batch_decisions)
-
-                    usage = provider.last_usage
-                    if usage is not None:
-                        total_input_tokens += usage.input_tokens
-                        total_output_tokens += usage.output_tokens
+                    total_input_tokens += batch_input_tokens
+                    total_output_tokens += batch_output_tokens
 
                 decisions = tuple(decisions_list)
                 hybrid.validate_decisions(
