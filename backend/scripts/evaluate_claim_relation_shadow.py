@@ -62,6 +62,15 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--story-offset",
+        type=int,
+        default=0,
+        help=(
+            "skip this many ranked stories before applying --story-limit; "
+            "primarily useful for conflict-rich pagination"
+        ),
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         required=True,
@@ -281,26 +290,33 @@ def select_balanced_story_ids(
     hinted: list[tuple[tuple[float, ...], UUID]],
     recall: list[tuple[tuple[float, ...], UUID]],
     limit: int,
+    offset: int = 0,
 ) -> tuple[UUID, ...]:
     if limit <= 0:
         raise ValueError("story selection limit must be greater than zero")
+    if offset < 0:
+        raise ValueError("story selection offset must not be negative")
 
     hinted = sorted(hinted, key=lambda item: item[0], reverse=True)
     recall = sorted(recall, key=lambda item: item[0], reverse=True)
 
     hint_slots = (limit + 1) // 2
     recall_slots = limit - hint_slots
-    selected_hinted = hinted[:hint_slots]
-    selected_recall = recall[:recall_slots]
+    hint_offset = (offset + 1) // 2
+    recall_offset = offset // 2
+    selected_hinted = hinted[hint_offset : hint_offset + hint_slots]
+    selected_recall = recall[recall_offset : recall_offset + recall_slots]
 
     remaining = limit - len(selected_hinted) - len(selected_recall)
     if remaining > 0 and len(selected_hinted) < hint_slots:
+        recall_start = recall_offset + len(selected_recall)
         selected_recall += recall[
-            len(selected_recall) : len(selected_recall) + remaining
+            recall_start : recall_start + remaining
         ]
     elif remaining > 0 and len(selected_recall) < recall_slots:
+        hinted_start = hint_offset + len(selected_hinted)
         selected_hinted += hinted[
-            len(selected_hinted) : len(selected_hinted) + remaining
+            hinted_start : hinted_start + remaining
         ]
 
     return tuple(item[1] for item in selected_hinted) + tuple(
@@ -314,11 +330,14 @@ def conflict_rich_story_ids(
     hybrid: HybridClaimRelationAnalyzer,
     story_limit: int,
     scan_limit: int,
+    story_offset: int = 0,
 ) -> tuple[tuple[UUID, ...], int]:
     if scan_limit <= 0:
         raise ValueError("scan limit must be greater than zero")
 
-    scan_ids = candidate_story_ids(max(scan_limit, story_limit))
+    scan_ids = candidate_story_ids(
+        max(scan_limit, story_limit + story_offset)
+    )
     hinted: list[tuple[tuple[float, ...], UUID]] = []
     recall: list[tuple[tuple[float, ...], UUID]] = []
 
@@ -392,6 +411,7 @@ def conflict_rich_story_ids(
             hinted,
             recall,
             story_limit,
+            story_offset,
         ),
         len(scan_ids),
     )
@@ -459,9 +479,14 @@ def main() -> None:
             hybrid=hybrid,
             story_limit=args.story_limit,
             scan_limit=args.scan_limit,
+            story_offset=args.story_offset,
         )
     else:
-        story_ids = candidate_story_ids(args.story_limit)
+        if args.story_offset < 0:
+            raise ValueError("story offset must not be negative")
+        story_ids = candidate_story_ids(
+            args.story_limit + args.story_offset
+        )[args.story_offset :]
         stories_scanned = len(story_ids)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -639,6 +664,7 @@ def main() -> None:
         "model": provider.model,
         "output": str(args.output),
         "selection": args.selection,
+        "story_offset": args.story_offset,
         "stories_scanned": stories_scanned,
         "stories_considered": stories_considered,
         "stories_with_candidates": stories_with_candidates,
