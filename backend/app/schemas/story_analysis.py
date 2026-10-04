@@ -66,7 +66,7 @@ class StoryAnalysisConsensusRead(BaseModel):
     claim_count: int = Field(ge=1)
     article_count: int = Field(ge=1)
     independent_source_count: int = Field(
-        ge=1
+        ge=0
     )
     evidence_item_count: int = Field(ge=0)
     evidence_source_count: int = Field(ge=0)
