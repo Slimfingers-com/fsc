@@ -33,30 +33,67 @@ _NEGATIONS = {
     "niet", "geen", "nooit",
     "nie", "żaden", "zadna", "żadna",
 }
+_SEMANTIC_GROUPING_META = (
+    re.compile(r"^\s*read in full\s*:", re.IGNORECASE),
+    re.compile(r"\bappeared first on\b", re.IGNORECASE),
+    re.compile(r"^\s*the post\b", re.IGNORECASE),
+)
+_RELATIVE_TIME = (
+    re.compile(r"\b(today|heute)\b", re.IGNORECASE),
+    re.compile(r"\b(yesterday|gestern)\b", re.IGNORECASE),
+    re.compile(r"\b(tomorrow|morgen)\b", re.IGNORECASE),
+    re.compile(
+        r"\b(this\s+week|diese[rns]?\s+woche)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(next\s+week|nächste[nrsm]?\s+woche|naechste[nrsm]?\s+woche)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(last\s+week|letzte[nrsm]?\s+woche)\b",
+        re.IGNORECASE,
+    ),
+)
 
 
 class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
     provider = "local-rules"
-    version = "2.1.0"
+    version = "2.2.0"
 
     def __init__(
         self,
         *,
         group_similarity_threshold: float = 0.82,
+        semantic_group_similarity_threshold: float = 0.82,
+        semantic_group_lexical_floor: float = 0.35,
         contradiction_similarity_threshold: float = 0.82,
     ) -> None:
         for name, value in (
             ("group_similarity_threshold", group_similarity_threshold),
+            (
+                "semantic_group_similarity_threshold",
+                semantic_group_similarity_threshold,
+            ),
+            ("semantic_group_lexical_floor", semantic_group_lexical_floor),
             ("contradiction_similarity_threshold", contradiction_similarity_threshold),
         ):
             if not 0 <= value <= 1:
                 raise ValueError(f"{name} must be between zero and one")
         self.group_similarity_threshold = group_similarity_threshold
+        self.semantic_group_similarity_threshold = (
+            semantic_group_similarity_threshold
+        )
+        self.semantic_group_lexical_floor = semantic_group_lexical_floor
         self.contradiction_similarity_threshold = contradiction_similarity_threshold
 
     def configuration(self) -> dict[str, object]:
         return {
             "group_similarity_threshold": self.group_similarity_threshold,
+            "semantic_group_similarity_threshold": (
+                self.semantic_group_similarity_threshold
+            ),
+            "semantic_group_lexical_floor": self.semantic_group_lexical_floor,
             "contradiction_similarity_threshold": self.contradiction_similarity_threshold,
         }
 
@@ -110,11 +147,11 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         return left_content == right_content
 
     @classmethod
-    def _similarity(
+    def _similarity_components(
         cls,
         left: StoryClaimInput,
         right: StoryClaimInput,
-    ) -> tuple[float, bool, bool, bool]:
+    ) -> tuple[float, float, bool, bool, bool]:
         (
             left_tokens,
             left_ordered,
@@ -128,7 +165,7 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
             right_numbers,
         ) = cls._features(right.normalized_claim)
         if left_numbers != right_numbers:
-            return 0.0, left_negative, right_negative, False
+            return 0.0, 0.0, left_negative, right_negative, False
 
         lexical_score = cls._jaccard(left_tokens, right_tokens)
         order_score = SequenceMatcher(
@@ -154,6 +191,30 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 ),
             )
 
+        return (
+            lexical_similarity,
+            semantic_similarity,
+            left_negative,
+            right_negative,
+            True,
+        )
+
+    @classmethod
+    def _similarity(
+        cls,
+        left: StoryClaimInput,
+        right: StoryClaimInput,
+    ) -> tuple[float, bool, bool, bool]:
+        (
+            lexical_similarity,
+            semantic_similarity,
+            left_negative,
+            right_negative,
+            comparable,
+        ) = cls._similarity_components(left, right)
+        if not comparable:
+            return 0.0, left_negative, right_negative, False
+
         semantic_used = semantic_similarity > lexical_similarity
         return (
             max(lexical_similarity, semantic_similarity),
@@ -161,6 +222,59 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
             right_negative,
             semantic_used,
         )
+
+    @staticmethod
+    def _semantic_grouping_noise(value: str) -> bool:
+        return any(pattern.search(value) for pattern in _SEMANTIC_GROUPING_META)
+
+    @staticmethod
+    def _relative_time_markers(value: str) -> frozenset[int]:
+        return frozenset(
+            index
+            for index, pattern in enumerate(_RELATIVE_TIME)
+            if pattern.search(value)
+        )
+
+    def _group_match(
+        self,
+        left: StoryClaimInput,
+        right: StoryClaimInput,
+        *,
+        cross_language: bool,
+    ) -> tuple[float, ClaimGroupMatchKind] | None:
+        (
+            lexical_similarity,
+            semantic_similarity,
+            left_negative,
+            right_negative,
+            comparable,
+        ) = self._similarity_components(left, right)
+        if not comparable or left_negative != right_negative:
+            return None
+
+        if lexical_similarity >= self.group_similarity_threshold:
+            return lexical_similarity, ClaimGroupMatchKind.LEXICAL
+
+        if semantic_similarity < self.semantic_group_similarity_threshold:
+            return None
+
+        if cross_language:
+            return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
+
+        if lexical_similarity < self.semantic_group_lexical_floor:
+            return None
+        if (
+            self._semantic_grouping_noise(left.claim_text)
+            or self._semantic_grouping_noise(right.claim_text)
+        ):
+            return None
+        if (
+            self._relative_time_markers(left.claim_text)
+            != self._relative_time_markers(right.claim_text)
+        ):
+            return None
+
+        return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
 
     def analyze(self, story: StoryClaimAnalysisInput) -> StoryClaimAnalysisResult:
         claims = sorted(
@@ -181,24 +295,14 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                     score = 1.0
                     kind = ClaimGroupMatchKind.EXACT
                 else:
-                    (
-                        score,
-                        claim_negative,
-                        representative_negative,
-                        semantic_used,
-                    ) = self._similarity(
+                    match = self._group_match(
                         claim,
                         representative,
+                        cross_language=(story.language_code == "mul"),
                     )
-                    if claim_negative != representative_negative:
+                    if match is None:
                         continue
-                    if score < self.group_similarity_threshold:
-                        continue
-                    kind = (
-                        ClaimGroupMatchKind.SEMANTIC
-                        if semantic_used
-                        else ClaimGroupMatchKind.LEXICAL
-                    )
+                    score, kind = match
 
                 if score > best_score:
                     best_index = index
