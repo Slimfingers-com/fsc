@@ -250,6 +250,63 @@ def test_semantic_match_remains_available_below_single_entity_threshold():
     assert result.details["match_basis"] == ["semantic"]
 
 
+def test_four_specific_shared_title_terms_match():
+    clusterer = RuleBasedStoryClusterer()
+    candidate = make_candidate(
+        title_terms=(
+            "bolsonaro", "brasilien", "gegen", "lula",
+            "welche", "wählt", "zukunft",
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=(
+                "bekannter", "bolsonaro", "brasilien", "duell",
+                "gegen", "lula", "namen",
+            ),
+        ),
+        (candidate,),
+    )
+    assert result.story_id == candidate.story_id
+    assert result.details["shared_title_terms"] == 4
+    assert result.details["title_similarity"] == pytest.approx(0.4)
+    assert "substantial_title" in result.details["match_basis"]
+
+
+def test_short_title_containment_matches():
+    clusterer = RuleBasedStoryClusterer()
+    candidate = make_candidate(
+        title_terms=(
+            "bekannter", "bolsonaro", "brasilien", "duell",
+            "gegen", "lula", "namen",
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=("bekannter", "brasilianisches", "duell", "namen"),
+        ),
+        (candidate,),
+    )
+    assert result.story_id == candidate.story_id
+    assert result.details["shared_title_terms"] == 3
+    assert result.details["title_overlap"] == pytest.approx(0.75)
+    assert "title_containment" in result.details["match_basis"]
+
+
+def test_three_shared_terms_without_containment_remain_split():
+    clusterer = RuleBasedStoryClusterer()
+    candidate = make_candidate(
+        title_terms=("alpha", "beta", "gamma", "delta", "epsilon"),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=("alpha", "beta", "gamma", "zeta", "eta"),
+        ),
+        (candidate,),
+    )
+    assert result.story_id is None
+
+
 def test_rule_based_clusterer_does_not_match_unrelated_candidate():
     clusterer = RuleBasedStoryClusterer()
 
