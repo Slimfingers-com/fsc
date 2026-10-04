@@ -231,6 +231,82 @@ class SemanticEmbeddingService:
             claims=prepared_claims,
         )
 
+    @staticmethod
+    def request_character_count(
+        prepared: PreparedSemanticEmbedding,
+    ) -> int:
+        return (
+            len(prepared.article_text or "")
+            + sum(len(claim.text) for claim in prepared.claims)
+        )
+
+    def embed_batch(
+        self,
+        prepared_items: tuple[PreparedSemanticEmbedding, ...],
+    ) -> dict[
+        UUID,
+        tuple[
+            EmbeddingVector | None,
+            dict[UUID, EmbeddingVector],
+        ],
+    ]:
+        texts: list[str] = []
+        article_indexes: dict[UUID, int] = {}
+        claim_indexes: dict[UUID, dict[UUID, int]] = {}
+        seen_articles: set[UUID] = set()
+
+        for prepared in prepared_items:
+            if prepared.article_id in seen_articles:
+                raise ValueError(
+                    "semantic embedding batch contains duplicate article ids"
+                )
+            seen_articles.add(prepared.article_id)
+
+            if prepared.article_text is not None:
+                article_indexes[prepared.article_id] = len(texts)
+                texts.append(prepared.article_text)
+
+            per_article_claims: dict[UUID, int] = {}
+            for claim in prepared.claims:
+                per_article_claims[claim.claim_id] = len(texts)
+                texts.append(claim.text)
+            claim_indexes[prepared.article_id] = per_article_claims
+
+        if texts:
+            vectors = self.provider.embed(tuple(texts))
+            if len(vectors) != len(texts):
+                raise ValueError(
+                    "embedding provider result count does not match inputs"
+                )
+        else:
+            vectors = ()
+
+        result: dict[
+            UUID,
+            tuple[
+                EmbeddingVector | None,
+                dict[UUID, EmbeddingVector],
+            ],
+        ] = {}
+        for prepared in prepared_items:
+            article_index = article_indexes.get(prepared.article_id)
+            article_vector = (
+                vectors[article_index]
+                if article_index is not None
+                else None
+            )
+            result[prepared.article_id] = (
+                article_vector,
+                {
+                    claim_id: vectors[index]
+                    for claim_id, index in claim_indexes[
+                        prepared.article_id
+                    ].items()
+                },
+            )
+
+        return result
+
     def embed(
         self,
         prepared: PreparedSemanticEmbedding,
@@ -238,38 +314,7 @@ class SemanticEmbeddingService:
         EmbeddingVector | None,
         dict[UUID, EmbeddingVector],
     ]:
-        texts: list[str] = []
-        article_index: int | None = None
-
-        if prepared.article_text is not None:
-            article_index = len(texts)
-            texts.append(prepared.article_text)
-
-        claim_indexes: dict[UUID, int] = {}
-        for claim in prepared.claims:
-            claim_indexes[claim.claim_id] = len(texts)
-            texts.append(claim.text)
-
-        if not texts:
-            return None, {}
-
-        vectors = self.provider.embed(tuple(texts))
-        if len(vectors) != len(texts):
-            raise ValueError(
-                "embedding provider result count does not match inputs"
-            )
-
-        article_vector = (
-            vectors[article_index]
-            if article_index is not None
-            else None
-        )
-        claim_vectors = {
-            claim_id: vectors[index]
-            for claim_id, index in claim_indexes.items()
-        }
-
-        return article_vector, claim_vectors
+        return self.embed_batch((prepared,))[prepared.article_id]
 
 
 class SemanticEmbeddingRunner:
@@ -282,6 +327,7 @@ class SemanticEmbeddingRunner:
         claim_ttl_seconds: float = 300,
         retry_base_seconds: float = 30,
         retry_max_seconds: float = 3600,
+        max_batch_characters: int = 24000,
         worker_id: str | None = None,
         clock: Callable[[], datetime] | None = None,
     ) -> None:
@@ -289,6 +335,7 @@ class SemanticEmbeddingRunner:
             claim_ttl_seconds <= 0
             or retry_base_seconds <= 0
             or retry_max_seconds < retry_base_seconds
+            or max_batch_characters <= 0
         ):
             raise ValueError("semantic embedding runner settings are invalid")
 
@@ -301,6 +348,7 @@ class SemanticEmbeddingRunner:
         self.claim_ttl_seconds = claim_ttl_seconds
         self.retry_base_seconds = retry_base_seconds
         self.retry_max_seconds = retry_max_seconds
+        self.max_batch_characters = max_batch_characters
         self.worker_id = worker_id or str(uuid4())
         self.clock = clock or (lambda: datetime.now(UTC))
 
@@ -452,6 +500,120 @@ class SemanticEmbeddingRunner:
                 ),
             )
 
+    def _bounded_batch(
+        self,
+        prepared_items: list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ],
+    ) -> tuple[
+        list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ],
+        list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ],
+    ]:
+        selected: list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ] = []
+        used_characters = 0
+
+        for index, item in enumerate(prepared_items):
+            _, prepared = item
+            item_characters = self.service.request_character_count(
+                prepared
+            )
+            if (
+                selected
+                and used_characters + item_characters
+                > self.max_batch_characters
+            ):
+                return selected, prepared_items[index:]
+
+            selected.append(item)
+            used_characters += item_characters
+
+        return selected, []
+
+    def _defer_batch_items(
+        self,
+        db: Session,
+        items: list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ],
+    ) -> int:
+        deferred = 0
+        for claim, _ in items:
+            try:
+                with db.begin():
+                    self.processing_repository.skip(
+                        db,
+                        state_id=claim.state_id,
+                        run_id=claim.run_id,
+                        worker_id=self.worker_id,
+                        now=self.clock(),
+                        reason=(
+                            "deferred by semantic embedding "
+                            "batch character budget"
+                        ),
+                    )
+                deferred += 1
+            except ArticleProcessingLeaseLostError:
+                db.rollback()
+                with db.begin():
+                    self.processing_repository.mark_lease_lost(
+                        db,
+                        run_id=claim.run_id,
+                        now=self.clock(),
+                        error_message=(
+                            "processing lease expired while deferring "
+                            "semantic embedding batch item"
+                        ),
+                    )
+                deferred += 1
+        return deferred
+
+    def _record_batch_failure(
+        self,
+        db: Session,
+        *,
+        items: list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ],
+        exc: Exception,
+    ) -> int:
+        failed = 0
+        for claim, _ in items:
+            db.rollback()
+            failure_time = self.clock()
+            with db.begin():
+                self._record_failure(
+                    db,
+                    claim=claim,
+                    failure_time=failure_time,
+                    exc=exc,
+                )
+            failed += 1
+        return failed
+
     def run_pending(
         self,
         *,
@@ -472,6 +634,13 @@ class SemanticEmbeddingRunner:
                     limit=limit,
                     now=claim_now,
                 )
+
+            prepared_items: list[
+                tuple[
+                    ArticleProcessingClaim,
+                    PreparedSemanticEmbedding,
+                ]
+            ] = []
 
             for claim in claims:
                 try:
@@ -504,7 +673,9 @@ class SemanticEmbeddingRunner:
                             article,
                             active_claims,
                         )
-                        if not claim.matches_candidate(current_candidate):
+                        if not claim.matches_candidate(
+                            current_candidate
+                        ):
                             self.processing_repository.skip(
                                 db,
                                 state_id=claim.state_id,
@@ -519,29 +690,108 @@ class SemanticEmbeddingRunner:
                             skipped += 1
                             continue
 
-                        prepared = self.service.prepare(
-                            article,
-                            active_claims,
+                        prepared_items.append(
+                            (
+                                claim,
+                                self.service.prepare(
+                                    article,
+                                    active_claims,
+                                ),
+                            )
                         )
 
-                    article_vector, claim_vectors = self.service.embed(
-                        prepared
+                except ArticleProcessingLeaseLostError as exc:
+                    db.rollback()
+                    with db.begin():
+                        self.processing_repository.mark_lease_lost(
+                            db,
+                            run_id=claim.run_id,
+                            now=self.clock(),
+                            error_message=str(exc),
+                        )
+                    skipped += 1
+
+                except Exception as exc:
+                    db.rollback()
+                    failure_time = self.clock()
+                    with db.begin():
+                        self._record_failure(
+                            db,
+                            claim=claim,
+                            failure_time=failure_time,
+                            exc=exc,
+                        )
+                    failed += 1
+                    logger.exception(
+                        "Semantic embedding preparation failed",
+                        extra={
+                            "article_id": str(claim.article_id),
+                            "provider": (
+                                self.service.provider.provider
+                            ),
+                            "model": self.service.provider.model,
+                            "processing_run_id": str(claim.run_id),
+                        },
                     )
+
+            batch_items, deferred_items = self._bounded_batch(
+                prepared_items
+            )
+            skipped += self._defer_batch_items(
+                db,
+                deferred_items,
+            )
+
+            if batch_items:
+                try:
+                    vectors_by_article = self.service.embed_batch(
+                        tuple(
+                            prepared
+                            for _, prepared in batch_items
+                        )
+                    )
+                except Exception as exc:
+                    failed += self._record_batch_failure(
+                        db,
+                        items=batch_items,
+                        exc=exc,
+                    )
+                    logger.exception(
+                        "Semantic embedding provider batch failed",
+                        extra={
+                            "article_count": len(batch_items),
+                            "provider": self.service.provider.provider,
+                            "model": self.service.provider.model,
+                        },
+                    )
+                    batch_items = []
+                    vectors_by_article = {}
+            else:
+                vectors_by_article = {}
+
+            for claim, prepared in batch_items:
+                try:
+                    (
+                        article_vector,
+                        claim_vectors,
+                    ) = vectors_by_article[prepared.article_id]
 
                     with db.begin():
                         finalization_time = self.clock()
-                        lease_valid = self.processing_repository.heartbeat(
-                            db,
-                            state_id=claim.state_id,
-                            run_id=claim.run_id,
-                            worker_id=self.worker_id,
-                            now=finalization_time,
-                            claim_expires_at=(
-                                finalization_time
-                                + timedelta(
-                                    seconds=self.claim_ttl_seconds
-                                )
-                            ),
+                        lease_valid = (
+                            self.processing_repository.heartbeat(
+                                db,
+                                state_id=claim.state_id,
+                                run_id=claim.run_id,
+                                worker_id=self.worker_id,
+                                now=finalization_time,
+                                claim_expires_at=(
+                                    finalization_time
+                                    + timedelta(
+                                        seconds=self.claim_ttl_seconds
+                                    )
+                                ),
+                            )
                         )
                         if not lease_valid:
                             raise ArticleProcessingLeaseLostError(
@@ -598,7 +848,9 @@ class SemanticEmbeddingRunner:
                         }
                         for claim_id, vector in claim_vectors.items():
                             current = claims_by_id.get(claim_id)
-                            prepared_claim = prepared_by_id.get(claim_id)
+                            prepared_claim = prepared_by_id.get(
+                                claim_id
+                            )
                             if (
                                 current is None
                                 or prepared_claim is None
@@ -669,10 +921,12 @@ class SemanticEmbeddingRunner:
                         )
                     failed += 1
                     logger.exception(
-                        "Semantic embedding failed",
+                        "Semantic embedding persistence failed",
                         extra={
                             "article_id": str(claim.article_id),
-                            "provider": self.service.provider.provider,
+                            "provider": (
+                                self.service.provider.provider
+                            ),
                             "model": self.service.provider.model,
                             "processing_run_id": str(claim.run_id),
                         },

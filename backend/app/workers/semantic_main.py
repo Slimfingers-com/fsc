@@ -55,6 +55,9 @@ def main() -> None:
             retry_max_seconds=(
                 settings.semantic_embedding_retry_max_seconds
             ),
+            max_batch_characters=(
+                settings.semantic_embedding_max_batch_characters
+            ),
         )
 
     worker = SemanticEmbeddingWorker(
