@@ -50,6 +50,7 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
         model: str = "text-embedding-3-small",
         timeout_seconds: float = 30.0,
         base_url: str = "https://api.openai.com/v1",
+        dimensions: int | None = None,
     ) -> None:
         if not api_key:
             raise ValueError("OpenAI API key must not be empty")
@@ -57,11 +58,14 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
             raise ValueError("embedding model must not be empty")
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be greater than zero")
+        if dimensions is not None and dimensions <= 0:
+            raise ValueError("dimensions must be greater than zero")
 
         self.api_key = api_key
         self.model = model
         self.timeout_seconds = timeout_seconds
         self.base_url = base_url.rstrip("/")
+        self.dimensions = dimensions
 
     def embed(
         self,
@@ -80,6 +84,11 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
                 "model": self.model,
                 "input": list(texts),
                 "encoding_format": "float",
+                **(
+                    {"dimensions": self.dimensions}
+                    if self.dimensions is not None
+                    else {}
+                ),
             },
             timeout=self.timeout_seconds,
         )

@@ -38,6 +38,8 @@ class Settings(BaseSettings):
 
     semantic_embedding_enabled: bool = False
     semantic_embedding_model: str = "text-embedding-3-small"
+    semantic_embedding_dimensions: int | None = None
+    semantic_embedding_include_articles: bool = True
     semantic_embedding_timeout_seconds: float = 30.0
     semantic_embedding_max_article_characters: int = 12000
     semantic_embedding_worker_poll_interval_seconds: float = 60.0

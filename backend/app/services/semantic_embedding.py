@@ -64,6 +64,7 @@ class SemanticEmbeddingService:
         *,
         provider: EmbeddingProvider,
         max_article_characters: int = 12000,
+        include_article_embeddings: bool = True,
         config_version: str = CONFIG_VERSION,
     ) -> None:
         if max_article_characters <= 0:
@@ -75,6 +76,7 @@ class SemanticEmbeddingService:
 
         self.provider = provider
         self.max_article_characters = max_article_characters
+        self.include_article_embeddings = include_article_embeddings
         self.config_version = config_version
 
     @property
@@ -82,7 +84,9 @@ class SemanticEmbeddingService:
         payload = {
             "base_version": self.config_version,
             "model": self.provider.model,
+            "dimensions": getattr(self.provider, "dimensions", None),
             "max_article_characters": self.max_article_characters,
+            "include_article_embeddings": self.include_article_embeddings,
         }
         return hashlib.sha256(
             json.dumps(
@@ -186,10 +190,15 @@ class SemanticEmbeddingService:
         claims: tuple[ArticleClaim, ...],
     ) -> PreparedSemanticEmbedding:
         article_input_hash = article.content_hash or ""
-        article_stale = (
+        expected_dimensions = getattr(self.provider, "dimensions", None)
+        article_stale = self.include_article_embeddings and (
             not article.semantic_embedding
             or article.semantic_model != self.provider.model
             or article.semantic_input_hash != article_input_hash
+            or (
+                expected_dimensions is not None
+                and len(article.semantic_embedding) != expected_dimensions
+            )
         )
 
         prepared_claims = tuple(
@@ -203,6 +212,10 @@ class SemanticEmbeddingService:
                 not claim.semantic_embedding
                 or claim.semantic_model != self.provider.model
                 or claim.semantic_input_hash != claim.claim_hash
+                or (
+                    expected_dimensions is not None
+                    and len(claim.semantic_embedding) != expected_dimensions
+                )
             )
         )
 
