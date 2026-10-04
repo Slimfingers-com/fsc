@@ -11,7 +11,11 @@ from app.clustering.provider import (
 
 class RuleBasedStoryClusterer(StoryClusterer):
     provider = "local-rules"
-    version = "4"
+    version = "5"
+    substantial_title_min_shared_terms = 4
+    substantial_title_min_jaccard = 0.35
+    title_containment_min_shared_terms = 3
+    title_containment_threshold = 0.75
 
     def __init__(
         self,
@@ -52,6 +56,18 @@ class RuleBasedStoryClusterer(StoryClusterer):
             "semantic_similarity_threshold": (
                 self.semantic_similarity_threshold
             ),
+            "substantial_title_min_shared_terms": (
+                self.substantial_title_min_shared_terms
+            ),
+            "substantial_title_min_jaccard": (
+                self.substantial_title_min_jaccard
+            ),
+            "title_containment_min_shared_terms": (
+                self.title_containment_min_shared_terms
+            ),
+            "title_containment_threshold": (
+                self.title_containment_threshold
+            ),
         }
 
     @staticmethod
@@ -73,11 +89,25 @@ class RuleBasedStoryClusterer(StoryClusterer):
 
     @staticmethod
     def _shared_count(
-        left: tuple[UUID, ...],
-        right: tuple[UUID, ...],
+        left: tuple[object, ...],
+        right: tuple[object, ...],
     ) -> int:
         return len(
             set(left) & set(right)
+        )
+
+    @staticmethod
+    def _overlap_coefficient(
+        left: tuple[object, ...],
+        right: tuple[object, ...],
+    ) -> float:
+        left_set = set(left)
+        right_set = set(right)
+        if not left_set or not right_set:
+            return 0.0
+        return len(left_set & right_set) / min(
+            len(left_set),
+            len(right_set),
         )
 
     def _score(
@@ -98,6 +128,14 @@ class RuleBasedStoryClusterer(StoryClusterer):
             candidate.topic_ids,
         )
 
+        shared_title_terms = self._shared_count(
+            article.title_terms,
+            candidate.title_terms,
+        )
+        title_overlap = self._overlap_coefficient(
+            article.title_terms,
+            candidate.title_terms,
+        )
         shared_entities = self._shared_count(
             article.entity_ids,
             candidate.entity_ids,
@@ -135,6 +173,19 @@ class RuleBasedStoryClusterer(StoryClusterer):
             not cross_language
             and title_similarity >= 0.50
         )
+        substantial_title_match = (
+            not cross_language
+            and shared_title_terms
+            >= self.substantial_title_min_shared_terms
+            and title_similarity
+            >= self.substantial_title_min_jaccard
+        )
+        title_containment_match = (
+            not cross_language
+            and shared_title_terms
+            >= self.title_containment_min_shared_terms
+            and title_overlap >= self.title_containment_threshold
+        )
         entity_title_match = (
             not cross_language
             and shared_entities >= 1
@@ -159,6 +210,8 @@ class RuleBasedStoryClusterer(StoryClusterer):
                 return None
         elif not (
             strong_title_match
+            or substantial_title_match
+            or title_containment_match
             or entity_title_match
             or multi_entity_match
             or semantic_match
@@ -179,8 +232,17 @@ class RuleBasedStoryClusterer(StoryClusterer):
                 semantic_similarity,
             )
         else:
+            title_overlap_similarity = (
+                title_overlap
+                if (
+                    substantial_title_match
+                    or title_containment_match
+                )
+                else 0.0
+            )
             similarity = max(
                 title_similarity,
+                title_overlap_similarity,
                 weighted_similarity,
                 semantic_similarity,
             )
@@ -191,6 +253,10 @@ class RuleBasedStoryClusterer(StoryClusterer):
         match_basis = []
         if strong_title_match:
             match_basis.append("title")
+        if substantial_title_match:
+            match_basis.append("substantial_title")
+        if title_containment_match:
+            match_basis.append("title_containment")
         if entity_title_match:
             match_basis.append("entity_title")
         if multi_entity_match:
@@ -204,6 +270,8 @@ class RuleBasedStoryClusterer(StoryClusterer):
             similarity,
             {
                 "title_similarity": title_similarity,
+                "title_overlap": title_overlap,
+                "shared_title_terms": shared_title_terms,
                 "entity_similarity": entity_similarity,
                 "topic_similarity": topic_similarity,
                 "shared_entities": shared_entities,
