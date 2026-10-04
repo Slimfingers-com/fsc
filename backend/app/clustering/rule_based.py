@@ -9,13 +9,23 @@ from app.clustering.provider import (
 )
 
 
+_LOW_SIGNAL_TITLE_TERMS = frozenset({
+    "arrest", "arrested", "assault", "case", "charge", "charged",
+    "charges", "guilty", "man", "officer", "pleaded", "pleads",
+    "police", "woman",
+})
+
+
 class RuleBasedStoryClusterer(StoryClusterer):
     provider = "local-rules"
-    version = "5"
+    version = "6"
     substantial_title_min_shared_terms = 4
     substantial_title_min_jaccard = 0.35
     title_containment_min_shared_terms = 3
     title_containment_threshold = 0.75
+    cross_language_min_shared_entities = 2
+    cross_language_strong_entity_count = 3
+    cross_language_min_shared_title_terms = 3
 
     def __init__(
         self,
@@ -67,6 +77,18 @@ class RuleBasedStoryClusterer(StoryClusterer):
             ),
             "title_containment_threshold": (
                 self.title_containment_threshold
+            ),
+            "cross_language_min_shared_entities": (
+                self.cross_language_min_shared_entities
+            ),
+            "cross_language_strong_entity_count": (
+                self.cross_language_strong_entity_count
+            ),
+            "cross_language_min_shared_title_terms": (
+                self.cross_language_min_shared_title_terms
+            ),
+            "low_signal_title_terms": sorted(
+                _LOW_SIGNAL_TITLE_TERMS
             ),
         }
 
@@ -169,12 +191,26 @@ class RuleBasedStoryClusterer(StoryClusterer):
             article.language_code
             != candidate.language_code
         )
+        shared_title_term_values = (
+            set(article.title_terms)
+            & set(candidate.title_terms)
+        )
+        low_signal_title_only = (
+            not cross_language
+            and shared_entities == 0
+            and bool(shared_title_term_values)
+            and shared_title_term_values.issubset(
+                _LOW_SIGNAL_TITLE_TERMS
+            )
+        )
         strong_title_match = (
             not cross_language
+            and not low_signal_title_only
             and title_similarity >= 0.50
         )
         substantial_title_match = (
             not cross_language
+            and not low_signal_title_only
             and shared_title_terms
             >= self.substantial_title_min_shared_terms
             and title_similarity
@@ -182,6 +218,7 @@ class RuleBasedStoryClusterer(StoryClusterer):
         )
         title_containment_match = (
             not cross_language
+            and not low_signal_title_only
             and shared_title_terms
             >= self.title_containment_min_shared_terms
             and title_overlap >= self.title_containment_threshold
@@ -198,8 +235,15 @@ class RuleBasedStoryClusterer(StoryClusterer):
         )
         cross_language_entity_match = (
             cross_language
-            and shared_entities >= 2
+            and shared_entities
+            >= self.cross_language_min_shared_entities
             and entity_similarity >= 0.50
+            and (
+                shared_entities
+                >= self.cross_language_strong_entity_count
+                or shared_title_terms
+                >= self.cross_language_min_shared_title_terms
+            )
         )
 
         if cross_language:
@@ -272,6 +316,7 @@ class RuleBasedStoryClusterer(StoryClusterer):
                 "title_similarity": title_similarity,
                 "title_overlap": title_overlap,
                 "shared_title_terms": shared_title_terms,
+                "low_signal_title_only": low_signal_title_only,
                 "entity_similarity": entity_similarity,
                 "topic_similarity": topic_similarity,
                 "shared_entities": shared_entities,

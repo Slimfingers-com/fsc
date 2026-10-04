@@ -37,7 +37,7 @@ _NEGATIONS = {
 
 class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
     provider = "local-rules"
-    version = "2.0.0"
+    version = "2.1.0"
 
     def __init__(
         self,
@@ -94,6 +94,20 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         if not left or not right:
             return 0.0
         return len(left & right) / len(left | right)
+
+    @classmethod
+    def _same_proposition_content(
+        cls,
+        left: StoryClaimInput,
+        right: StoryClaimInput,
+    ) -> bool:
+        left_content, _, _, _ = cls._features(
+            left.normalized_claim
+        )
+        right_content, _, _, _ = cls._features(
+            right.normalized_claim
+        )
+        return left_content == right_content
 
     @classmethod
     def _similarity(
@@ -229,14 +243,26 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                     score,
                     left_negative,
                     right_negative,
-                    _semantic_used,
+                    semantic_used,
                 ) = self._similarity(
                     representatives[left.key],
                     representatives[right.key],
                 )
+                same_proposition = self._same_proposition_content(
+                    representatives[left.key],
+                    representatives[right.key],
+                )
+                cross_language_semantic_proposition = (
+                    story.language_code == "mul"
+                    and semantic_used
+                )
                 if (
                     left_negative != right_negative
                     and score >= self.contradiction_similarity_threshold
+                    and (
+                        same_proposition
+                        or cross_language_semantic_proposition
+                    )
                 ):
                     relations.append(
                         ClaimGroupRelationResult(
