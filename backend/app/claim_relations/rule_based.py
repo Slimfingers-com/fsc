@@ -35,8 +35,10 @@ _NEGATIONS = {
 }
 _SEMANTIC_GROUPING_META = (
     re.compile(r"^\s*read in full\s*:", re.IGNORECASE),
-    re.compile(r"\bappeared first on\b", re.IGNORECASE),
-    re.compile(r"^\s*the post\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:appeared first on|first appeared on|originally appeared on)\b",
+        re.IGNORECASE,
+    ),
 )
 _RELATIVE_TIME = (
     re.compile(r"\b(today|heute)\b", re.IGNORECASE),
@@ -59,7 +61,7 @@ _RELATIVE_TIME = (
 
 class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
     provider = "local-rules"
-    version = "2.2.0"
+    version = "2.2.1"
 
     def __init__(
         self,

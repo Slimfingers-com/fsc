@@ -103,8 +103,10 @@ _GERMAN_ORDINAL_CONTEXT = frozenset(
 
 _PUBLISHING_META = (
     re.compile(r"^\s*read in full\s*:", re.IGNORECASE),
-    re.compile(r"\bappeared first on\b", re.IGNORECASE),
-    re.compile(r"^\s*the post\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:appeared first on|first appeared on|originally appeared on)\b",
+        re.IGNORECASE,
+    ),
     re.compile(r"^\s*our standards\s*:", re.IGNORECASE),
     re.compile(
         r"\b(?:pic\.)?(?:twitter|x)\.com/",
@@ -116,11 +118,19 @@ _PUBLISHING_META = (
         re.IGNORECASE,
     ),
 )
+_PUBLISHING_FOOTER_BLOCK = re.compile(
+    r"\bthe post\b"
+    r".{0,1200}?"
+    r"\b(?:appeared first on|first appeared on|originally appeared on)\b"
+    r".{0,250}?"
+    r"(?:[.!?](?=\s|$)|$)",
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 class RuleBasedClaimExtractor(ClaimExtractor):
     provider = "local-rules"
-    version = "1.1.0"
+    version = "1.1.1"
 
     MIN_WORDS = 4
     MAX_WORDS = 80
@@ -381,6 +391,40 @@ class RuleBasedClaimExtractor(ClaimExtractor):
         if span[0] < span[1]:
             yield span
 
+    @staticmethod
+    def _publishing_footer_spans(
+        text: str,
+    ) -> tuple[tuple[int, int], ...]:
+        if not text:
+            return ()
+
+        search_start = max(
+            0,
+            len(text) - 2500,
+        )
+        suffix = text[search_start:]
+        return tuple(
+            (
+                search_start + match.start(),
+                search_start + match.end(),
+            )
+            for match in _PUBLISHING_FOOTER_BLOCK.finditer(
+                suffix
+            )
+        )
+
+    @staticmethod
+    def _overlaps_any(
+        start: int,
+        end: int,
+        spans: tuple[tuple[int, int], ...],
+    ) -> bool:
+        return any(
+            start < span_end
+            and end > span_start
+            for span_start, span_end in spans
+        )
+
     @classmethod
     def _candidate(
         cls,
@@ -446,6 +490,11 @@ class RuleBasedClaimExtractor(ClaimExtractor):
 
         for text_source, field_text in fields:
             sentence_index = 0
+            publishing_footer_spans = (
+                self._publishing_footer_spans(
+                    field_text
+                )
+            )
 
             for start, end in self._sentence_spans(
                 field_text,
@@ -454,6 +503,14 @@ class RuleBasedClaimExtractor(ClaimExtractor):
                 claim_text = field_text[
                     start:end
                 ]
+
+                if self._overlaps_any(
+                    start,
+                    end,
+                    publishing_footer_spans,
+                ):
+                    sentence_index += 1
+                    continue
 
                 if not self._candidate(
                     claim_text
