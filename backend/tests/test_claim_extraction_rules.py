@@ -359,3 +359,106 @@ def test_rule_based_extractor_keeps_hyphenated_initialism_together():
         "The talks reinforced the Japan-U.S. military alliance.",
         "Officials welcomed the agreement.",
     ]
+
+
+def test_rule_based_extractor_keeps_legitimate_the_post_sentence():
+    body = (
+        "The post started with a Polaroid image of the actor at the lake. "
+        "The next slide showed her water-skiing behind a boat."
+    )
+
+    result = RuleBasedClaimExtractor().extract(
+        ClaimExtractionInput(
+            article_id=uuid4(),
+            title="Actor shares photos from lake holiday",
+            normalized_text=body,
+            language_code="en",
+            published_at=None,
+        )
+    )
+
+    body_claims = [
+        claim.claim_text
+        for claim in result.claims
+        if claim.text_source == TextPart.BODY
+    ]
+    assert (
+        "The post started with a Polaroid image of the actor at the lake."
+        in body_claims
+    )
+
+
+def test_rule_based_extractor_filters_multisentence_publishing_footer():
+    body = (
+        "Police seized the shipment after a traffic stop. "
+        "The post Police Allegedly Destroyed $37,000 of Legal Hemp. "
+        "Georgia's Supreme Court Just Upended 60 Years of Precedent. "
+        "appeared first on Reason Magazine."
+    )
+
+    result = RuleBasedClaimExtractor().extract(
+        ClaimExtractionInput(
+            article_id=uuid4(),
+            title="Police seize hemp shipment",
+            normalized_text=body,
+            language_code="en",
+            published_at=None,
+        )
+    )
+
+    body_claims = [
+        claim.claim_text
+        for claim in result.claims
+        if claim.text_source == TextPart.BODY
+    ]
+    assert body_claims == [
+        "Police seized the shipment after a traffic stop.",
+    ]
+
+
+def test_rule_based_extractor_filters_first_appeared_on_footer_variant():
+    body = (
+        "The organisation announced its anniversary programme. "
+        "The post Festwoche zum 40. Jubiläum first appeared on PRO ASYL."
+    )
+
+    result = RuleBasedClaimExtractor().extract(
+        ClaimExtractionInput(
+            article_id=uuid4(),
+            title="Organisation announces anniversary programme",
+            normalized_text=body,
+            language_code="en",
+            published_at=None,
+        )
+    )
+
+    assert all(
+        "first appeared on" not in claim.claim_text.lower()
+        for claim in result.claims
+    )
+    assert all(
+        "Festwoche zum 40." not in claim.claim_text
+        for claim in result.claims
+    )
+
+
+def test_rule_based_extractor_keeps_the_post_also_came_prose():
+    body = (
+        "The opposition released an attack advert in the morning. "
+        "The post also came just hours after the party published its manifesto."
+    )
+
+    result = RuleBasedClaimExtractor().extract(
+        ClaimExtractionInput(
+            article_id=uuid4(),
+            title="Opposition releases attack advert",
+            normalized_text=body,
+            language_code="en",
+            published_at=None,
+        )
+    )
+
+    assert any(
+        claim.claim_text.startswith("The post also came just hours")
+        for claim in result.claims
+    )

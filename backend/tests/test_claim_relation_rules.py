@@ -269,3 +269,20 @@ def test_semantic_grouping_rejects_relative_time_mismatch():
     result = analyze(first, second)
 
     assert len(result.groups) == 2
+
+
+def test_semantic_grouping_allows_legitimate_the_post_prose():
+    first = make_semantic_claim(
+        "The post started with a Polaroid image at the lake."
+    )
+    second = make_semantic_claim(
+        "The article started with a Polaroid image at the lake."
+    )
+
+    result = analyze(first, second)
+
+    assert len(result.groups) == 1
+    assert any(
+        member.match_kind == ClaimGroupMatchKind.SEMANTIC
+        for member in result.groups[0].members
+    )
