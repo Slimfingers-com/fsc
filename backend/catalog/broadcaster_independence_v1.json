@@ -1,0 +1,25 @@
+{
+  "catalog_version": "1.0",
+  "relation_kind": "editorial_parent",
+  "notes": "Regional broadcaster Sources remain separate for discovery and presentation but collapse into one independence family for Consensus/Coverage.",
+  "families": [
+    {
+      "parent": "bbc-news",
+      "members": ["bbc-scotland", "bbc-cymru-wales", "bbc-northern-ireland"]
+    },
+    {
+      "parent": "orf-information",
+      "members": [
+        "orf-burgenland",
+        "orf-karnten",
+        "orf-niederosterreich",
+        "orf-oberosterreich",
+        "orf-salzburg",
+        "orf-steiermark",
+        "orf-tirol",
+        "orf-vorarlberg",
+        "orf-wien"
+      ]
+    }
+  ]
+}
