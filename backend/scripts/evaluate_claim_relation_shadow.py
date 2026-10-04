@@ -71,6 +71,16 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--story-id",
+        action="append",
+        type=UUID,
+        default=[],
+        help=(
+            "evaluate this exact story ID; may be repeated. When supplied, "
+            "ranked story selection, limits and offsets are bypassed"
+        ),
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         required=True,
@@ -473,7 +483,11 @@ def main() -> None:
     )
     service = ClaimRelationService(analyzer=hybrid)
 
-    if args.selection == "conflict-rich":
+    if args.story_id:
+        story_ids = tuple(dict.fromkeys(args.story_id))
+        stories_scanned = len(story_ids)
+        selection = "explicit"
+    elif args.selection == "conflict-rich":
         story_ids, stories_scanned = conflict_rich_story_ids(
             service=service,
             hybrid=hybrid,
@@ -481,6 +495,7 @@ def main() -> None:
             scan_limit=args.scan_limit,
             story_offset=args.story_offset,
         )
+        selection = args.selection
     else:
         if args.story_offset < 0:
             raise ValueError("story offset must not be negative")
@@ -488,6 +503,7 @@ def main() -> None:
             args.story_limit + args.story_offset
         )[args.story_offset :]
         stories_scanned = len(story_ids)
+        selection = args.selection
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     relation_counts: Counter[str] = Counter()
@@ -588,6 +604,8 @@ def main() -> None:
                         "shadow_only": True,
                         "evaluated_at": evaluated_at,
                         "model": provider.model,
+                        "prompt_version": provider.PROMPT_VERSION,
+                        "candidate_selection": args.selection,
                         "story_id": str(story_id),
                         "language_code": candidate.language_code,
                         "left_group_key": (
@@ -662,9 +680,14 @@ def main() -> None:
     summary = {
         "shadow_only": True,
         "model": provider.model,
+        "prompt_version": provider.PROMPT_VERSION,
         "output": str(args.output),
-        "selection": args.selection,
+        "selection": selection,
+        "candidate_selection": args.selection,
+        "story_limit": args.story_limit,
+        "scan_limit": args.scan_limit,
         "story_offset": args.story_offset,
+        "story_ids": [str(story_id) for story_id in story_ids],
         "stories_scanned": stories_scanned,
         "stories_considered": stories_considered,
         "stories_with_candidates": stories_with_candidates,
