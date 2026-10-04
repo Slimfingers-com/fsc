@@ -1,6 +1,8 @@
 from datetime import UTC, datetime
 
 from app.claim_relations.provider import ClaimRelationKind
+from app.enums.confirmation_role import ConfirmationRole
+from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
 from app.models.story_processing import StoryProcessingRun
 from app.services.consensus import ConsensusService
@@ -56,6 +58,34 @@ def test_consensus_endpoint_exposes_shared_group(client, db):
     assert payload["total"] == 1
     assert payload["items"][0]["consensus_kind"] == "shared"
     assert payload["items"][0]["independent_source_count"] == 2
+
+
+def test_consensus_endpoint_allows_zero_independent_sources(client, db):
+    data = build_consensus_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.PRIMARY_SOURCE,
+                "confirmation_role": ConfirmationRole.PRIMARY_EVIDENCE,
+                "claim_text": "The filing was published Monday.",
+            },
+            {
+                "source_type": SourceType.SIGNAL,
+                "confirmation_role": ConfirmationRole.SIGNAL,
+                "claim_text": "The filing was published Monday.",
+            },
+        ],
+    )
+    persist_consensus(db, data)
+
+    response = client.get(
+        f"/stories/{data['story'].id}/consensus"
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["total"] == 1
+    assert payload["items"][0]["consensus_kind"] == "single_source"
+    assert payload["items"][0]["independent_source_count"] == 0
 
 
 def test_differences_endpoint_exposes_contradiction(client, db):

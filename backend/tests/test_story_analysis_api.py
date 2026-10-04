@@ -1,5 +1,7 @@
 from datetime import UTC, datetime
 
+from app.enums.confirmation_role import ConfirmationRole
+from app.enums.source_type import SourceType
 from app.enums.story_pipeline import StoryPipeline
 from app.models.claim_relation import StoryClaimGroupMember
 from app.models.evidence import StoryEvidence
@@ -86,6 +88,40 @@ def test_story_analysis_composes_all_current_generations(
 
     assert "truth_score" not in payload
     assert "credibility_score" not in payload
+
+
+def test_story_analysis_allows_zero_independent_sources(
+    client,
+    db,
+):
+    data = build_complete_analysis_story(
+        db,
+        specs=[
+            {
+                "source_type": SourceType.PRIMARY_SOURCE,
+                "confirmation_role": ConfirmationRole.PRIMARY_EVIDENCE,
+                "claim_text": "The filing was published Monday.",
+            },
+            {
+                "source_type": SourceType.SIGNAL,
+                "confirmation_role": ConfirmationRole.SIGNAL,
+                "claim_text": "The filing was published Monday.",
+            },
+        ],
+    )
+
+    response = client.get(
+        f"/stories/{data['story'].id}/analysis"
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert len(payload["claim_groups"]) == 1
+    assert (
+        payload["claim_groups"][0]["consensus"][
+            "independent_source_count"
+        ]
+        == 0
+    )
 
 
 def test_story_analysis_is_unavailable_before_coverage(
