@@ -32,11 +32,15 @@ def main() -> None:
             timeout_seconds=(
                 settings.semantic_embedding_timeout_seconds
             ),
+            dimensions=settings.semantic_embedding_dimensions,
         )
         service = SemanticEmbeddingService(
             provider=provider,
             max_article_characters=(
                 settings.semantic_embedding_max_article_characters
+            ),
+            include_article_embeddings=(
+                settings.semantic_embedding_include_articles
             ),
         )
         runner = SemanticEmbeddingRunner(

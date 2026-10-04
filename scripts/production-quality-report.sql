@@ -21,6 +21,16 @@ union all select 'normalized_articles', count(*)::text from articles where delet
 union all select 'search_documents', count(*)::text from search_documents where deleted_at is null
 union all select 'entity_topic_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='entity_topic' and processed_input_hash is not null
 union all select 'claim_extraction_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='claim_extraction' and processed_input_hash is not null
+union all select 'active_claims', count(*)::text from article_claims where deleted_at is null
+union all select 'claims_with_semantic_embedding', count(*)::text
+  from article_claims where deleted_at is null and semantic_embedding is not null
+union all select 'articles_with_semantic_embedding', count(*)::text
+  from articles where deleted_at is null and semantic_embedding is not null
+union all select 'semantic_embedding_processed', count(*)::text
+  from article_processing_states
+  where deleted_at is null
+    and pipeline='semantic_embedding'
+    and processed_input_hash is not null
 union all select 'perspective_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='perspective_analysis' and processed_input_hash is not null
 union all select 'story_clustering_processed', count(*)::text from article_processing_states where deleted_at is null and pipeline='story_clustering' and processed_input_hash is not null
 union all select 'active_stories', count(*)::text from stories where deleted_at is null
