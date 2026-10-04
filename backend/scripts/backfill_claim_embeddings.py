@@ -56,6 +56,9 @@ def main() -> int:
         claim_ttl_seconds=settings.semantic_embedding_worker_claim_ttl_seconds,
         retry_base_seconds=settings.semantic_embedding_retry_base_seconds,
         retry_max_seconds=settings.semantic_embedding_retry_max_seconds,
+        max_batch_characters=(
+            settings.semantic_embedding_max_batch_characters
+        ),
     )
     result = runner.run_pending(limit=args.limit)
     print(

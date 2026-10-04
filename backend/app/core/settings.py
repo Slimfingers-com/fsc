@@ -44,6 +44,7 @@ class Settings(BaseSettings):
     semantic_embedding_max_article_characters: int = 12000
     semantic_embedding_worker_poll_interval_seconds: float = 60.0
     semantic_embedding_worker_batch_limit: int = 25
+    semantic_embedding_max_batch_characters: int = 24000
     semantic_embedding_worker_claim_ttl_seconds: float = 300.0
     semantic_embedding_retry_base_seconds: float = 30.0
     semantic_embedding_retry_max_seconds: float = 3600.0
