@@ -307,6 +307,37 @@ def test_three_shared_terms_without_containment_remain_split():
     assert result.story_id is None
 
 
+def test_generic_legal_title_overlap_without_entities_does_not_match():
+    clusterer = RuleBasedStoryClusterer()
+
+    candidate = make_candidate(
+        language_code="en",
+        title_terms=(
+            "zuni",
+            "man",
+            "pleads",
+            "guilty",
+            "assault",
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            language_code="en",
+            title_terms=(
+                "man",
+                "pleads",
+                "guilty",
+                "possessing",
+                "assault",
+                "rifle",
+            ),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id is None
+
+
 def test_rule_based_clusterer_does_not_match_unrelated_candidate():
     clusterer = RuleBasedStoryClusterer()
 
@@ -462,7 +493,9 @@ def test_cross_language_topic_overlap_alone_does_not_match():
 
 
 @pytest.mark.parametrize("candidate_language", ["en", "fr"])
-def test_cross_language_two_canonical_entities_can_match(candidate_language):
+def test_cross_language_two_generic_entities_without_lexical_support_do_not_match(
+    candidate_language,
+):
     clusterer = RuleBasedStoryClusterer()
     first_entity = uuid4()
     second_entity = uuid4()
@@ -481,9 +514,66 @@ def test_cross_language_two_canonical_entities_can_match(candidate_language):
         (candidate,),
     )
 
+    assert result.story_id is None
+
+
+@pytest.mark.parametrize("candidate_language", ["en", "fr"])
+def test_cross_language_two_entities_with_three_shared_title_terms_can_match(
+    candidate_language,
+):
+    clusterer = RuleBasedStoryClusterer()
+    first_entity = uuid4()
+    second_entity = uuid4()
+
+    candidate = make_candidate(
+        language_code=candidate_language,
+        title_terms=(
+            "european",
+            "commission",
+            "brussels",
+            "climate",
+        ),
+        entity_ids=(first_entity, second_entity),
+    )
+    result = clusterer.cluster(
+        make_article(
+            language_code="de",
+            title_terms=(
+                "european",
+                "commission",
+                "brussels",
+                "klimapaket",
+            ),
+            entity_ids=(first_entity, second_entity),
+        ),
+        (candidate,),
+    )
+
     assert result.story_id == candidate.story_id
     assert result.details["cross_language"] is True
     assert result.details["language_pair"] == ["de", candidate_language]
+    assert "cross_language_entities" in result.details["match_basis"]
+
+
+def test_cross_language_three_shared_entities_can_match_without_title_support():
+    clusterer = RuleBasedStoryClusterer()
+    entities = (uuid4(), uuid4(), uuid4())
+
+    candidate = make_candidate(
+        language_code="en",
+        title_terms=("budget", "parliament"),
+        entity_ids=entities,
+    )
+    result = clusterer.cluster(
+        make_article(
+            language_code="de",
+            title_terms=("haushalt", "bundestag"),
+            entity_ids=entities,
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id == candidate.story_id
     assert "cross_language_entities" in result.details["match_basis"]
 
 

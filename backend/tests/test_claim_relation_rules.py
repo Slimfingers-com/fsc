@@ -158,6 +158,23 @@ def test_role_reversal_with_negation_does_not_create_contradiction():
     assert result.relations == ()
 
 
+def test_negation_in_additional_detail_is_not_hard_contradiction():
+    first = make_claim(
+        "Israel election committee excludes Arab parties."
+    )
+    second = make_claim(
+        "Israel election committee excludes Arab parties, not far-right parties."
+    )
+
+    result = analyze(
+        first,
+        second,
+    )
+
+    assert len(result.groups) == 2
+    assert result.relations == ()
+
+
 def test_german_negation_creates_contradiction_for_same_ordered_claim():
     first = make_claim(
         "Der Plan beginnt am Montag."
