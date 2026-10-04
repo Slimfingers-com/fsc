@@ -1,6 +1,7 @@
-from uuid import uuid4
+﻿from uuid import uuid4
 
 from app.claim_relations.provider import (
+    ClaimGroupMatchKind,
     ClaimRelationKind,
     StoryClaimAnalysisInput,
     StoryClaimInput,
@@ -34,6 +35,24 @@ def make_claim(
             uuid4().hex * 2
         ),
         confidence=0.9,
+    )
+
+
+def make_semantic_claim(
+    text: str,
+    vector: tuple[float, ...] = (1.0, 0.0, 0.0),
+):
+    claim = make_claim(text)
+    return StoryClaimInput(
+        claim_id=claim.claim_id,
+        article_id=claim.article_id,
+        source_id=claim.source_id,
+        claim_text=claim.claim_text,
+        normalized_claim=claim.normalized_claim,
+        claim_hash=claim.claim_hash,
+        confidence=claim.confidence,
+        semantic_embedding=vector,
+        semantic_model="test-embedding",
     )
 
 
@@ -194,3 +213,59 @@ def test_german_negation_creates_contradiction_for_same_ordered_claim():
         result.relations[0].relation_kind
         == ClaimRelationKind.CONTRADICTS
     )
+
+
+def test_semantic_grouping_recovers_same_language_paraphrase():
+    first = make_semantic_claim(
+        "Nordkorea feuert erneut ballistische Rakete ab."
+    )
+    second = make_semantic_claim(
+        "Nordkorea hat erneut eine Rakete abgefeuert."
+    )
+
+    result = analyze(first, second)
+
+    assert len(result.groups) == 1
+    assert any(
+        member.match_kind == ClaimGroupMatchKind.SEMANTIC
+        for member in result.groups[0].members
+    )
+
+
+def test_semantic_grouping_requires_same_language_lexical_floor():
+    first = make_semantic_claim(
+        "The government approved the climate package."
+    )
+    second = make_semantic_claim(
+        "Flood warnings remain in force across the region."
+    )
+
+    result = analyze(first, second)
+
+    assert len(result.groups) == 2
+
+
+def test_semantic_grouping_rejects_publishing_meta_claims():
+    first = make_semantic_claim(
+        "READ IN FULL: Trump and tech leaders' White House Accord."
+    )
+    second = make_semantic_claim(
+        "Trump and tech leaders sign the White House Accord."
+    )
+
+    result = analyze(first, second)
+
+    assert len(result.groups) == 2
+
+
+def test_semantic_grouping_rejects_relative_time_mismatch():
+    first = make_semantic_claim(
+        "Selenskyj announced a meeting with Trump this week in New York."
+    )
+    second = make_semantic_claim(
+        "Selenskyj plans talks with Trump in New York."
+    )
+
+    result = analyze(first, second)
+
+    assert len(result.groups) == 2
