@@ -51,6 +51,7 @@ class Settings(BaseSettings):
 
     story_clustering_worker_poll_interval_seconds: float = 60.0
     story_clustering_worker_batch_limit: int = 100
+    story_clustering_live_claim_fraction: float = 0.8
     story_clustering_worker_claim_ttl_seconds: float = 300.0
     story_clustering_retry_base_seconds: float = 30.0
     story_clustering_retry_max_seconds: float = 3600.0

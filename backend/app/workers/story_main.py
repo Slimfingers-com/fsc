@@ -57,6 +57,9 @@ def main() -> None:
         candidate_limit=(
             settings.story_clustering_candidate_limit
         ),
+        live_claim_fraction=(
+            settings.story_clustering_live_claim_fraction
+        ),
     )
 
     worker = StoryClusteringWorker(

@@ -90,9 +90,14 @@ def make_runner(
     clock=None,
     claim_ttl_seconds: float = 300,
     candidate_limit: int = 100,
+    live_claim_fraction: float = 0.8,
+    clusterer=None,
 ) -> StoryClusteringRunner:
     service = StoryClusteringService(
-        clusterer=RuleBasedStoryClusterer(),
+        clusterer=(
+            clusterer
+            or RuleBasedStoryClusterer()
+        ),
     )
 
     return StoryClusteringRunner(
@@ -103,7 +108,156 @@ def make_runner(
         claim_ttl_seconds=claim_ttl_seconds,
         window_hours=24.0,
         candidate_limit=candidate_limit,
+        live_claim_fraction=live_claim_fraction,
     )
+
+
+def test_runner_prioritizes_live_work_and_reserves_backfill_capacity():
+    old_article_ids = create_committed_articles(3)
+
+    initial_runner = make_runner(
+        worker_id="initial-story-worker",
+    )
+    initial = initial_runner.run_pending(limit=3)
+    assert initial.processed == 3
+
+    live_article_id = create_committed_articles(1)[0]
+
+    class NextVersionClusterer(
+        RuleBasedStoryClusterer
+    ):
+        version = "priority-test"
+
+    runner = make_runner(
+        worker_id="priority-story-worker",
+        live_claim_fraction=0.5,
+        clusterer=NextVersionClusterer(),
+    )
+    result = runner.run_pending(limit=2)
+
+    assert (
+        result.selected,
+        result.processed,
+        result.skipped,
+        result.failed,
+    ) == (2, 2, 0, 0)
+
+    with TestSessionLocal() as db:
+        states = {
+            state.article_id: state
+            for state in db.scalars(
+                select(
+                    ArticleProcessingState
+                ).where(
+                    ArticleProcessingState.article_id.in_(
+                        [
+                            *old_article_ids,
+                            live_article_id,
+                        ]
+                    ),
+                    ArticleProcessingState.pipeline
+                    == ArticlePipeline.STORY_CLUSTERING.value,
+                )
+            )
+        }
+
+    assert (
+        states[
+            live_article_id
+        ].processed_provider_version
+        == "priority-test"
+    )
+    assert sum(
+        states[
+            article_id
+        ].processed_provider_version
+        == "priority-test"
+        for article_id in old_article_ids
+    ) == 1
+
+
+def test_runner_reuses_unused_backfill_capacity_for_live_work():
+    article_ids = create_committed_articles(3)
+
+    runner = make_runner(
+        worker_id="live-capacity-worker",
+        live_claim_fraction=0.5,
+    )
+    result = runner.run_pending(limit=3)
+
+    assert (
+        result.selected,
+        result.processed,
+        result.skipped,
+        result.failed,
+    ) == (3, 3, 0, 0)
+
+    with TestSessionLocal() as db:
+        processed_count = db.scalar(
+            select(func.count())
+            .select_from(
+                ArticleProcessingState
+            )
+            .where(
+                ArticleProcessingState.article_id.in_(
+                    article_ids
+                ),
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+                ArticleProcessingState.processed_input_hash
+                .is_not(None),
+            )
+        )
+
+    assert processed_count == 3
+
+
+def test_runner_reuses_unused_live_capacity_for_backfill_work():
+    article_ids = create_committed_articles(3)
+
+    initial_runner = make_runner(
+        worker_id="initial-backfill-worker",
+    )
+    initial = initial_runner.run_pending(limit=3)
+    assert initial.processed == 3
+
+    class NextVersionClusterer(
+        RuleBasedStoryClusterer
+    ):
+        version = "backfill-capacity-test"
+
+    runner = make_runner(
+        worker_id="backfill-capacity-worker",
+        live_claim_fraction=0.5,
+        clusterer=NextVersionClusterer(),
+    )
+    result = runner.run_pending(limit=3)
+
+    assert (
+        result.selected,
+        result.processed,
+        result.skipped,
+        result.failed,
+    ) == (3, 3, 0, 0)
+
+    with TestSessionLocal() as db:
+        upgraded_count = db.scalar(
+            select(func.count())
+            .select_from(
+                ArticleProcessingState
+            )
+            .where(
+                ArticleProcessingState.article_id.in_(
+                    article_ids
+                ),
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+                ArticleProcessingState.processed_provider_version
+                == "backfill-capacity-test",
+            )
+        )
+
+    assert upgraded_count == 3
 
 
 def test_runner_processes_article_and_does_not_reclaim_unchanged_input():
