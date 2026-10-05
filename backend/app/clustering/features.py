@@ -2,7 +2,7 @@ import re
 import unicodedata
 
 
-TITLE_FEATURE_VERSION = "1"
+TITLE_FEATURE_VERSION = "2"
 
 _WORD_PATTERN = re.compile(r"[^\W_]+", re.UNICODE)
 
@@ -49,6 +49,11 @@ _STOPWORDS = frozenset(
         "into",
         "not",
         "of",
+        "news",
+        "kompakt",
+        "wichtigste",
+        "kurz",
+        "gefasst",
         "on",
         "or",
         "that",

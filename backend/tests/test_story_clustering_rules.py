@@ -307,6 +307,57 @@ def test_three_shared_terms_without_containment_remain_split():
     assert result.story_id is None
 
 
+def test_news_compact_boilerplate_is_removed_from_title_terms():
+    assert extract_title_terms(
+        "USA laden Putin zu G20-Gipfel in Miami ein - News kompakt: Das Wichtigste kurz gefasst"
+    ) == (
+        "g20",
+        "gipfel",
+        "laden",
+        "miami",
+        "putin",
+        "usa",
+    )
+
+
+def test_news_compact_boilerplate_does_not_merge_unrelated_us_topics():
+    clusterer = RuleBasedStoryClusterer()
+    candidate = make_candidate(
+        title_terms=extract_title_terms(
+            "USA laden Putin zu G20-Gipfel in Miami ein - News kompakt: Das Wichtigste kurz gefasst"
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=extract_title_terms(
+                "Die USA und China richten Kommunikationskanal für KI-Zwischenfälle ein - News kompakt: Das Wichtigste kurz gefasst"
+            ),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id is None
+
+
+def test_news_compact_same_event_still_matches_on_specific_terms():
+    clusterer = RuleBasedStoryClusterer()
+    candidate = make_candidate(
+        title_terms=extract_title_terms(
+            "USA laden Putin zu G20-Gipfel in Miami ein - News kompakt: Das Wichtigste kurz gefasst"
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=extract_title_terms(
+                "Putin zu G20-Gipfel in Miami eingeladen - News kompakt: Das Wichtigste kurz gefasst"
+            ),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id == candidate.story_id
+
+
 def test_generic_legal_title_overlap_without_entities_does_not_match():
     clusterer = RuleBasedStoryClusterer()
 

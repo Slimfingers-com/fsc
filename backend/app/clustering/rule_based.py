@@ -19,7 +19,7 @@ _LOW_SIGNAL_TITLE_TERMS = frozenset({
 
 class RuleBasedStoryClusterer(StoryClusterer):
     provider = "local-rules"
-    version = "7"
+    version = "8"
     substantial_title_min_shared_terms = 4
     substantial_title_min_jaccard = 0.35
     title_containment_min_shared_terms = 3
