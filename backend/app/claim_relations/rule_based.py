@@ -311,24 +311,54 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
 
         return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
 
-    def _high_confidence_group_match(
+    def _high_confidence_group_match_from_features(
         self,
         left: StoryClaimInput,
         right: StoryClaimInput,
+        *,
+        left_features: tuple[
+            frozenset[str],
+            tuple[str, ...],
+            bool,
+            tuple[str, ...],
+        ],
+        right_features: tuple[
+            frozenset[str],
+            tuple[str, ...],
+            bool,
+            tuple[str, ...],
+        ],
     ) -> tuple[float, ClaimGroupMatchKind] | None:
         (
-            lexical_similarity,
-            semantic_similarity,
+            left_tokens,
+            left_ordered,
             left_negative,
+            left_numbers,
+        ) = left_features
+        (
+            right_tokens,
+            right_ordered,
             right_negative,
-            comparable,
-        ) = self._similarity_components(left, right)
-        if not comparable or left_negative != right_negative:
-            return None
+            right_numbers,
+        ) = right_features
+
         if (
-            semantic_similarity
-            < self.semantic_high_confidence_threshold
-            or lexical_similarity
+            left_numbers != right_numbers
+            or left_negative != right_negative
+        ):
+            return None
+
+        lexical_similarity = min(
+            self._jaccard(left_tokens, right_tokens),
+            SequenceMatcher(
+                None,
+                left_ordered,
+                right_ordered,
+                autojunk=False,
+            ).ratio(),
+        )
+        if (
+            lexical_similarity
             < self.semantic_high_confidence_lexical_floor
         ):
             return None
@@ -342,7 +372,40 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
             != self._relative_time_markers(right.claim_text)
         ):
             return None
+        if (
+            not left.semantic_embedding
+            or not right.semantic_embedding
+            or not left.semantic_model
+            or left.semantic_model != right.semantic_model
+        ):
+            return None
+
+        semantic_similarity = max(
+            0.0,
+            cosine_similarity(
+                left.semantic_embedding,
+                right.semantic_embedding,
+            ),
+        )
+        if (
+            semantic_similarity
+            < self.semantic_high_confidence_threshold
+        ):
+            return None
+
         return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
+
+    def _high_confidence_group_match(
+        self,
+        left: StoryClaimInput,
+        right: StoryClaimInput,
+    ) -> tuple[float, ClaimGroupMatchKind] | None:
+        return self._high_confidence_group_match_from_features(
+            left,
+            right,
+            left_features=self._features(left.normalized_claim),
+            right_features=self._features(right.normalized_claim),
+        )
 
     def analyze(self, story: StoryClaimAnalysisInput) -> StoryClaimAnalysisResult:
         claims = sorted(
@@ -390,6 +453,16 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 members.append(member)
 
         if story.language_code != "mul":
+            high_confidence_features = {
+                claim.claim_id: self._features(
+                    claim.normalized_claim
+                )
+                for claim in claims
+            }
+            claims_by_id = {
+                claim.claim_id: claim
+                for claim in claims
+            }
             singleton_groups = tuple(
                 group
                 for group in working
@@ -419,9 +492,35 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                         target_representative,
                         StoryClaimInput,
                     )
-                    match = self._high_confidence_group_match(
-                        representative,
-                        target_representative,
+                    left_features = high_confidence_features[
+                        representative.claim_id
+                    ]
+                    right_features = high_confidence_features[
+                        target_representative.claim_id
+                    ]
+                    if not (
+                        left_features[0]
+                        & right_features[0]
+                    ):
+                        continue
+
+                    target_members = target["members"]
+                    assert isinstance(target_members, list)
+                    if not any(
+                        claims_by_id[member.claim_id].source_id
+                        != representative.source_id
+                        for member in target_members
+                    ):
+                        continue
+
+                    match = (
+                        self
+                        ._high_confidence_group_match_from_features(
+                            representative,
+                            target_representative,
+                            left_features=left_features,
+                            right_features=right_features,
+                        )
                     )
                     if match is None:
                         continue

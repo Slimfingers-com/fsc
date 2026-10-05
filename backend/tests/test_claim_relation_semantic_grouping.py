@@ -1,4 +1,5 @@
 import math
+from dataclasses import replace
 from uuid import uuid4
 
 from app.claim_relations.provider import (
@@ -51,7 +52,7 @@ def test_high_confidence_semantic_path_accepts_anchored_paraphrase():
             "Search suspended for 6 aboard medical flight "
             "that went missing near Nantucket: Coast Guard"
         ),
-        cosine_embedding(0.84),
+        cosine_embedding(0.87),
     )
 
     (
@@ -72,7 +73,7 @@ def test_high_confidence_semantic_path_accepts_anchored_paraphrase():
         <= lexical_similarity
         < analyzer.semantic_group_lexical_floor
     )
-    assert semantic_similarity >= 0.83
+    assert semantic_similarity >= 0.86
     assert match is not None
     assert match[1] is ClaimGroupMatchKind.SEMANTIC
 
@@ -148,7 +149,7 @@ def test_high_confidence_second_phase_preserves_base_group():
             "Search suspended for 6 aboard medical flight "
             "that went missing near Nantucket Coast Guard"
         ),
-        cosine_embedding(0.84),
+        cosine_embedding(0.87),
     )
     base_member = make_claim(
         (
@@ -183,3 +184,37 @@ def test_high_confidence_second_phase_preserves_base_group():
         base_representative.claim_id,
         base_member.claim_id,
     }
+
+
+def test_high_confidence_second_phase_only_merges_cross_source():
+    analyzer = RuleBasedClaimRelationAnalyzer()
+    left = make_claim(
+        (
+            "Following the backlash, Green Party leader Zack Polanski "
+            "has been barred from entering Israel altogether, the "
+            "country’s ministry of foreign affairs has said."
+        ),
+        (1.0, 0.0),
+    )
+    right = make_claim(
+        (
+            "Israel has banned Green leader Zack Polanski from entering "
+            "the country after members of his party approved a motion "
+            "defining Zionism as a racist ideology."
+        ),
+        cosine_embedding(0.90),
+    )
+    right = replace(
+        right,
+        source_id=left.source_id,
+    )
+
+    result = analyzer.analyze(
+        StoryClaimAnalysisInput(
+            story_id=uuid4(),
+            language_code="en",
+            claims=(left, right),
+        )
+    )
+
+    assert len(result.groups) == 2
