@@ -13,12 +13,13 @@ _LOW_SIGNAL_TITLE_TERMS = frozenset({
     "arrest", "arrested", "assault", "case", "charge", "charged",
     "charges", "guilty", "man", "officer", "pleaded", "pleads",
     "police", "woman",
+    "berät", "bundestag", "erstmals", "reform", "über",
 })
 
 
 class RuleBasedStoryClusterer(StoryClusterer):
     provider = "local-rules"
-    version = "6"
+    version = "7"
     substantial_title_min_shared_terms = 4
     substantial_title_min_jaccard = 0.35
     title_containment_min_shared_terms = 3
