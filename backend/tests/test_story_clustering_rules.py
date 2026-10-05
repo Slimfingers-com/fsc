@@ -320,6 +320,12 @@ def test_news_compact_boilerplate_is_removed_from_title_terms():
     )
 
 
+def test_news_compact_boilerplate_does_not_remove_kurz_name_elsewhere():
+    assert "kurz" in extract_title_terms(
+        "Sebastian Kurz spricht über Österreich"
+    )
+
+
 def test_news_compact_boilerplate_does_not_merge_unrelated_us_topics():
     clusterer = RuleBasedStoryClusterer()
     candidate = make_candidate(
