@@ -296,6 +296,8 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         if cross_language:
             return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
 
+        if lexical_similarity < self.semantic_group_lexical_floor:
+            return None
         if (
             self._semantic_grouping_noise(left.claim_text)
             or self._semantic_grouping_noise(right.claim_text)
@@ -307,22 +309,39 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         ):
             return None
 
-        regular_semantic_match = (
-            lexical_similarity
-            >= self.semantic_group_lexical_floor
-        )
-        high_confidence_semantic_match = (
+        return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
+
+    def _high_confidence_group_match(
+        self,
+        left: StoryClaimInput,
+        right: StoryClaimInput,
+    ) -> tuple[float, ClaimGroupMatchKind] | None:
+        (
+            lexical_similarity,
+            semantic_similarity,
+            left_negative,
+            right_negative,
+            comparable,
+        ) = self._similarity_components(left, right)
+        if not comparable or left_negative != right_negative:
+            return None
+        if (
             semantic_similarity
-            >= self.semantic_high_confidence_threshold
-            and lexical_similarity
-            >= self.semantic_high_confidence_lexical_floor
-        )
-        if not (
-            regular_semantic_match
-            or high_confidence_semantic_match
+            < self.semantic_high_confidence_threshold
+            or lexical_similarity
+            < self.semantic_high_confidence_lexical_floor
         ):
             return None
-
+        if (
+            self._semantic_grouping_noise(left.claim_text)
+            or self._semantic_grouping_noise(right.claim_text)
+        ):
+            return None
+        if (
+            self._relative_time_markers(left.claim_text)
+            != self._relative_time_markers(right.claim_text)
+        ):
+            return None
         return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
 
     def analyze(self, story: StoryClaimAnalysisInput) -> StoryClaimAnalysisResult:
@@ -369,6 +388,64 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 members = working[best_index]["members"]
                 assert isinstance(members, list)
                 members.append(member)
+
+        if story.language_code != "mul":
+            singleton_groups = tuple(
+                group
+                for group in working
+                if isinstance(group["members"], list)
+                and len(group["members"]) == 1
+            )
+            for singleton in singleton_groups:
+                if not any(
+                    group is singleton
+                    for group in working
+                ):
+                    continue
+                singleton_members = singleton["members"]
+                assert isinstance(singleton_members, list)
+                if len(singleton_members) != 1:
+                    continue
+                representative = singleton["representative"]
+                assert isinstance(representative, StoryClaimInput)
+
+                best_group: dict[str, object] | None = None
+                best_score = -1.0
+                for target in working:
+                    if target is singleton:
+                        continue
+                    target_representative = target["representative"]
+                    assert isinstance(
+                        target_representative,
+                        StoryClaimInput,
+                    )
+                    match = self._high_confidence_group_match(
+                        representative,
+                        target_representative,
+                    )
+                    if match is None:
+                        continue
+                    score, _ = match
+                    if score > best_score:
+                        best_group = target
+                        best_score = score
+
+                if best_group is None:
+                    continue
+
+                target_members = best_group["members"]
+                assert isinstance(target_members, list)
+                target_members.append(
+                    ClaimGroupMemberResult(
+                        claim_id=representative.claim_id,
+                        similarity_score=best_score,
+                        match_kind=ClaimGroupMatchKind.SEMANTIC,
+                    )
+                )
+                for index, candidate in enumerate(working):
+                    if candidate is singleton:
+                        del working[index]
+                        break
 
         groups: list[ClaimGroupResult] = []
         representatives: dict[str, StoryClaimInput] = {}

@@ -3,6 +3,7 @@ from uuid import uuid4
 
 from app.claim_relations.provider import (
     ClaimGroupMatchKind,
+    StoryClaimAnalysisInput,
     StoryClaimInput,
 )
 from app.claim_relations.rule_based import (
@@ -61,10 +62,9 @@ def test_high_confidence_semantic_path_accepts_anchored_paraphrase():
         left,
         right,
     )
-    match = analyzer._group_match(
+    match = analyzer._high_confidence_group_match(
         left,
         right,
-        cross_language=False,
     )
 
     assert (
@@ -88,10 +88,9 @@ def test_high_confidence_semantic_path_requires_lexical_anchor():
         cosine_embedding(0.95),
     )
 
-    assert analyzer._group_match(
+    assert analyzer._high_confidence_group_match(
         left,
         right,
-        cross_language=False,
     ) is None
 
 
@@ -112,10 +111,9 @@ def test_high_confidence_semantic_path_keeps_number_guard():
         cosine_embedding(0.95),
     )
 
-    assert analyzer._group_match(
+    assert analyzer._high_confidence_group_match(
         left,
         right,
-        cross_language=False,
     ) is None
 
 
@@ -130,8 +128,58 @@ def test_high_confidence_semantic_path_keeps_relative_time_guard():
         cosine_embedding(0.95),
     )
 
-    assert analyzer._group_match(
+    assert analyzer._high_confidence_group_match(
         left,
         right,
-        cross_language=False,
     ) is None
+
+
+def test_high_confidence_second_phase_preserves_base_group():
+    analyzer = RuleBasedClaimRelationAnalyzer()
+    anchor = make_claim(
+        (
+            "Coast Guard suspends search for 6 missing "
+            "medical jet passengers off Nantucket"
+        ),
+        (1.0, 0.0),
+    )
+    base_representative = make_claim(
+        (
+            "Search suspended for 6 aboard medical flight "
+            "that went missing near Nantucket Coast Guard"
+        ),
+        cosine_embedding(0.84),
+    )
+    base_member = make_claim(
+        (
+            "Search suspended for 6 aboard medical flight "
+            "that went missing near Nantucket Coast Guard says"
+        ),
+        (0.0, 1.0),
+    )
+
+    result = analyzer.analyze(
+        StoryClaimAnalysisInput(
+            story_id=uuid4(),
+            language_code="en",
+            claims=(
+                anchor,
+                base_representative,
+                base_member,
+            ),
+        )
+    )
+
+    assert len(result.groups) == 1
+    assert (
+        result.groups[0].representative_claim_id
+        == base_representative.claim_id
+    )
+    assert {
+        member.claim_id
+        for member in result.groups[0].members
+    } == {
+        anchor.claim_id,
+        base_representative.claim_id,
+        base_member.claim_id,
+    }
