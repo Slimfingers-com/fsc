@@ -42,8 +42,28 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo "Ensuring PostgreSQL is healthy..." >&2
-"${compose[@]}" up -d --wait postgres >&2
+echo "Verifying PostgreSQL is already running and healthy..." >&2
+postgres_container="$("${compose[@]}" ps -q postgres)"
+if [[ -z "$postgres_container" ]]; then
+  echo "PostgreSQL container does not exist; refusing to mutate production during backup." >&2
+  exit 1
+fi
+
+postgres_running="$(
+  docker inspect --format '{{.State.Running}}' "$postgres_container"
+)"
+if [[ "$postgres_running" != "true" ]]; then
+  echo "PostgreSQL container is not running; refusing to start or recreate it during backup." >&2
+  exit 1
+fi
+
+postgres_health="$(
+  docker inspect --format '{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' "$postgres_container"
+)"
+if [[ "$postgres_health" != "healthy" ]]; then
+  echo "PostgreSQL container is not healthy (status: $postgres_health); backup aborted." >&2
+  exit 1
+fi
 
 echo "Creating PostgreSQL backup..." >&2
 "${compose[@]}" exec -T postgres sh -ec '
