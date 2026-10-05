@@ -8,7 +8,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Callable
 from uuid import UUID, uuid4
 
-from sqlalchemy import and_, or_, select
+from sqlalchemy import and_, exists, or_, select
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.enums.article_pipeline import ArticlePipeline
@@ -420,8 +420,33 @@ class SemanticEmbeddingRunner:
             ]
 
             if processed:
-                conditions.append(
-                    ArticleProcessingState.processed_input_hash.is_not(None)
+                conditions.extend(
+                    [
+                        ArticleProcessingState.processed_input_hash.is_not(None),
+                        or_(
+                            ArticleProcessingState.processed_provider
+                            != self.service.provider.provider,
+                            ArticleProcessingState.processed_provider_version
+                            != self.service.provider.version,
+                            ArticleProcessingState.processed_configuration_version
+                            != self.service.processing_configuration_version,
+                            Article.updated_at
+                            > ArticleProcessingState.last_processed_at,
+                            exists(
+                                select(ArticleClaim.id).where(
+                                    ArticleClaim.article_id == Article.id,
+                                    or_(
+                                        ArticleClaim.created_at
+                                        > ArticleProcessingState.last_processed_at,
+                                        ArticleClaim.updated_at
+                                        > ArticleProcessingState.last_processed_at,
+                                        ArticleClaim.deleted_at
+                                        > ArticleProcessingState.last_processed_at,
+                                    ),
+                                )
+                            ),
+                        ),
+                    ]
                 )
             else:
                 conditions.append(
