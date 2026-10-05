@@ -467,9 +467,12 @@ class SemanticEmbeddingRunner:
                 )
             )
 
-            articles = list(
-                db.scalars(
-                    select(Article)
+            article_keys = list(
+                db.execute(
+                    select(
+                        Article.id,
+                        Article.created_at,
+                    )
                     .join(Feed)
                     .join(Source)
                     .outerjoin(
@@ -479,16 +482,32 @@ class SemanticEmbeddingRunner:
                     .where(*conditions)
                     .order_by(*order_by)
                     .limit(page_size)
-                ).all()
+                ).tuples()
             )
-            if not articles:
+            if not article_keys:
                 break
 
             remaining = limit - len(claims)
-            candidate_articles = articles[:remaining]
+            candidate_keys = article_keys[:remaining]
+            candidate_ids = [
+                article_id
+                for article_id, _ in candidate_keys
+            ]
+            articles_by_id = {
+                article.id: article
+                for article in db.scalars(
+                    select(Article).where(
+                        Article.id.in_(candidate_ids)
+                    )
+                ).all()
+            }
+            candidate_articles = [
+                articles_by_id[article_id]
+                for article_id in candidate_ids
+            ]
             claims_by_article = self.service.load_active_claims(
                 db,
-                [article.id for article in candidate_articles],
+                candidate_ids,
             )
             candidates = [
                 self.service.candidate(
@@ -512,12 +531,10 @@ class SemanticEmbeddingRunner:
                 )
             )
 
-            last_article = candidate_articles[-1]
-            last_created_at = last_article.created_at
-            last_article_id = last_article.id
+            last_article_id, last_created_at = candidate_keys[-1]
             if (
-                len(articles) < page_size
-                and len(candidate_articles) == len(articles)
+                len(article_keys) < page_size
+                and len(candidate_keys) == len(article_keys)
             ):
                 break
 
