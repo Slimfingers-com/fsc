@@ -29,9 +29,13 @@ class VersionedProvider:
         return tuple((1.0, 0.0) for _ in texts)
 
 
-def create_committed_articles(count: int) -> list:
+def create_committed_articles(
+    count: int,
+    *,
+    created_at: datetime | None = None,
+) -> list:
     token = uuid4().hex
-    now = datetime.now(UTC)
+    now = created_at or datetime.now(UTC)
 
     with TestSessionLocal.begin() as db:
         source = Source(
@@ -85,6 +89,43 @@ def make_runner(
         worker_id=worker_id,
         live_claim_fraction=live_claim_fraction,
     )
+
+
+def test_runner_prioritizes_newest_unprocessed_articles():
+    old_article_ids = create_committed_articles(
+        3,
+        created_at=datetime(2026, 10, 1, tzinfo=UTC),
+    )
+    newest_article_id = create_committed_articles(
+        1,
+        created_at=datetime(2026, 10, 5, tzinfo=UTC),
+    )[0]
+
+    runner = make_runner(
+        worker_id="newest-live-semantic-worker",
+    )
+    result = runner.run_pending(limit=1)
+
+    assert (
+        result.selected,
+        result.processed,
+        result.skipped,
+        result.failed,
+    ) == (1, 1, 0, 0)
+
+    with TestSessionLocal() as db:
+        processed_ids = set(
+            db.scalars(
+                select(ArticleProcessingState.article_id).where(
+                    ArticleProcessingState.pipeline
+                    == ArticlePipeline.SEMANTIC_EMBEDDING.value,
+                    ArticleProcessingState.processed_input_hash.is_not(None),
+                )
+            )
+        )
+
+    assert newest_article_id in processed_ids
+    assert not processed_ids.intersection(old_article_ids)
 
 
 def test_runner_prioritizes_live_work_and_reserves_backfill_capacity():
