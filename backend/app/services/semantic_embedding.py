@@ -440,15 +440,32 @@ class SemanticEmbeddingRunner:
                 last_created_at is not None
                 and last_article_id is not None
             ):
-                conditions.append(
-                    or_(
+                if processed:
+                    page_condition = or_(
                         Article.created_at > last_created_at,
                         and_(
                             Article.created_at == last_created_at,
                             Article.id > last_article_id,
                         ),
                     )
+                else:
+                    page_condition = or_(
+                        Article.created_at < last_created_at,
+                        and_(
+                            Article.created_at == last_created_at,
+                            Article.id < last_article_id,
+                        ),
+                    )
+                conditions.append(page_condition)
+
+            order_by = (
+                (Article.created_at, Article.id)
+                if processed
+                else (
+                    Article.created_at.desc(),
+                    Article.id.desc(),
                 )
+            )
 
             articles = list(
                 db.scalars(
@@ -460,25 +477,26 @@ class SemanticEmbeddingRunner:
                         state_join,
                     )
                     .where(*conditions)
-                    .order_by(Article.created_at, Article.id)
+                    .order_by(*order_by)
                     .limit(page_size)
                 ).all()
             )
             if not articles:
                 break
 
+            remaining = limit - len(claims)
+            candidate_articles = articles[:remaining]
             claims_by_article = self.service.load_active_claims(
                 db,
-                [article.id for article in articles],
+                [article.id for article in candidate_articles],
             )
             candidates = [
                 self.service.candidate(
                     article,
                     claims_by_article.get(article.id, ()),
                 )
-                for article in articles
+                for article in candidate_articles
             ]
-            remaining = limit - len(claims)
             claims.extend(
                 self.processing_repository.claim_candidates(
                     db,
@@ -494,10 +512,13 @@ class SemanticEmbeddingRunner:
                 )
             )
 
-            last_article = articles[-1]
+            last_article = candidate_articles[-1]
             last_created_at = last_article.created_at
             last_article_id = last_article.id
-            if len(articles) < page_size:
+            if (
+                len(articles) < page_size
+                and len(candidate_articles) == len(articles)
+            ):
                 break
 
         return claims
