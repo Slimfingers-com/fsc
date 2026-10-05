@@ -61,7 +61,7 @@ _RELATIVE_TIME = (
 
 class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
     provider = "local-rules"
-    version = "2.2.1"
+    version = "2.3.0"
 
     def __init__(
         self,
@@ -69,6 +69,8 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         group_similarity_threshold: float = 0.82,
         semantic_group_similarity_threshold: float = 0.82,
         semantic_group_lexical_floor: float = 0.35,
+        semantic_high_confidence_threshold: float = 0.83,
+        semantic_high_confidence_lexical_floor: float = 0.15,
         contradiction_similarity_threshold: float = 0.82,
     ) -> None:
         for name, value in (
@@ -78,6 +80,14 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 semantic_group_similarity_threshold,
             ),
             ("semantic_group_lexical_floor", semantic_group_lexical_floor),
+            (
+                "semantic_high_confidence_threshold",
+                semantic_high_confidence_threshold,
+            ),
+            (
+                "semantic_high_confidence_lexical_floor",
+                semantic_high_confidence_lexical_floor,
+            ),
             ("contradiction_similarity_threshold", contradiction_similarity_threshold),
         ):
             if not 0 <= value <= 1:
@@ -86,7 +96,24 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         self.semantic_group_similarity_threshold = (
             semantic_group_similarity_threshold
         )
+        if (
+            semantic_high_confidence_threshold
+            < semantic_group_similarity_threshold
+            or semantic_high_confidence_lexical_floor
+            > semantic_group_lexical_floor
+        ):
+            raise ValueError(
+                "semantic high-confidence settings must be stricter "
+                "in semantic similarity and looser in lexical anchoring"
+            )
+
         self.semantic_group_lexical_floor = semantic_group_lexical_floor
+        self.semantic_high_confidence_threshold = (
+            semantic_high_confidence_threshold
+        )
+        self.semantic_high_confidence_lexical_floor = (
+            semantic_high_confidence_lexical_floor
+        )
         self.contradiction_similarity_threshold = contradiction_similarity_threshold
 
     def configuration(self) -> dict[str, object]:
@@ -96,6 +123,12 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
                 self.semantic_group_similarity_threshold
             ),
             "semantic_group_lexical_floor": self.semantic_group_lexical_floor,
+            "semantic_high_confidence_threshold": (
+                self.semantic_high_confidence_threshold
+            ),
+            "semantic_high_confidence_lexical_floor": (
+                self.semantic_high_confidence_lexical_floor
+            ),
             "contradiction_similarity_threshold": self.contradiction_similarity_threshold,
         }
 
@@ -263,8 +296,6 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         if cross_language:
             return semantic_similarity, ClaimGroupMatchKind.SEMANTIC
 
-        if lexical_similarity < self.semantic_group_lexical_floor:
-            return None
         if (
             self._semantic_grouping_noise(left.claim_text)
             or self._semantic_grouping_noise(right.claim_text)
@@ -273,6 +304,22 @@ class RuleBasedClaimRelationAnalyzer(ClaimRelationAnalyzer):
         if (
             self._relative_time_markers(left.claim_text)
             != self._relative_time_markers(right.claim_text)
+        ):
+            return None
+
+        regular_semantic_match = (
+            lexical_similarity
+            >= self.semantic_group_lexical_floor
+        )
+        high_confidence_semantic_match = (
+            semantic_similarity
+            >= self.semantic_high_confidence_threshold
+            and lexical_similarity
+            >= self.semantic_high_confidence_lexical_floor
+        )
+        if not (
+            regular_semantic_match
+            or high_confidence_semantic_match
         ):
             return None
 
