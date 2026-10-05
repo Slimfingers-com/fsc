@@ -2,9 +2,12 @@ import re
 import unicodedata
 
 
-TITLE_FEATURE_VERSION = "1"
+TITLE_FEATURE_VERSION = "2"
 
 _WORD_PATTERN = re.compile(r"[^\W_]+", re.UNICODE)
+_NEWS_COMPACT_BOILERPLATE = re.compile(
+    r"\bnews\s+kompakt\s*:?\s*das\s+wichtigste\s+kurz\s+gefasst\b"
+)
 
 _STOPWORDS = frozenset(
     {
@@ -72,6 +75,10 @@ def extract_title_terms(
         "NFKC",
         title,
     ).casefold()
+    normalized = _NEWS_COMPACT_BOILERPLATE.sub(
+        " ",
+        normalized,
+    )
 
     terms = {
         token
