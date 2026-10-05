@@ -338,6 +338,102 @@ def test_generic_legal_title_overlap_without_entities_does_not_match():
     assert result.story_id is None
 
 
+def test_generic_german_parliamentary_reform_overlap_does_not_match():
+    clusterer = RuleBasedStoryClusterer()
+
+    candidate = make_candidate(
+        title_terms=(
+            "berät",
+            "bundestag",
+            "organspende",
+            "reform",
+            "widerspruchsregelung",
+            "über",
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=(
+                "berlin",
+                "berät",
+                "bundestag",
+                "erstmals",
+                "nachrichtendienste",
+                "reform",
+                "umfassende",
+                "über",
+            ),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id is None
+
+
+def test_generic_german_parliamentary_first_reading_overlap_does_not_match():
+    clusterer = RuleBasedStoryClusterer()
+
+    candidate = make_candidate(
+        title_terms=(
+            "berlin",
+            "berät",
+            "bundestag",
+            "erstmals",
+            "nachrichtendienste",
+            "reform",
+            "umfassende",
+            "über",
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=(
+                "berät",
+                "bundestag",
+                "erstmals",
+                "frühstartrente",
+                "jahren",
+                "sechs",
+                "über",
+            ),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id is None
+
+
+def test_german_low_signal_terms_still_match_with_specific_shared_term():
+    clusterer = RuleBasedStoryClusterer()
+
+    candidate = make_candidate(
+        title_terms=(
+            "berät",
+            "bundestag",
+            "organspende",
+            "reform",
+            "widerspruchsregelung",
+            "über",
+        ),
+    )
+    result = clusterer.cluster(
+        make_article(
+            title_terms=(
+                "anlauf",
+                "berät",
+                "bundestag",
+                "erneuter",
+                "organspende",
+                "reform",
+                "über",
+            ),
+        ),
+        (candidate,),
+    )
+
+    assert result.story_id == candidate.story_id
+
+
 def test_rule_based_clusterer_does_not_match_unrelated_candidate():
     clusterer = RuleBasedStoryClusterer()
 
