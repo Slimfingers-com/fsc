@@ -58,6 +58,9 @@ def main() -> None:
             max_batch_characters=(
                 settings.semantic_embedding_max_batch_characters
             ),
+            live_claim_fraction=(
+                settings.semantic_embedding_live_claim_fraction
+            ),
         )
 
     worker = SemanticEmbeddingWorker(

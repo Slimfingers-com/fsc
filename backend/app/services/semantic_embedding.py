@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.enums.article_pipeline import ArticlePipeline
 from app.models.article import Article
+from app.models.article_processing import ArticleProcessingState
 from app.models.claim import ArticleClaim
 from app.models.feed import Feed
 from app.models.source import Source
@@ -328,6 +329,7 @@ class SemanticEmbeddingRunner:
         retry_base_seconds: float = 30,
         retry_max_seconds: float = 3600,
         max_batch_characters: int = 24000,
+        live_claim_fraction: float = 0.8,
         worker_id: str | None = None,
         clock: Callable[[], datetime] | None = None,
     ) -> None:
@@ -336,6 +338,7 @@ class SemanticEmbeddingRunner:
             or retry_base_seconds <= 0
             or retry_max_seconds < retry_base_seconds
             or max_batch_characters <= 0
+            or not 0 < live_claim_fraction < 1
         ):
             raise ValueError("semantic embedding runner settings are invalid")
 
@@ -349,6 +352,7 @@ class SemanticEmbeddingRunner:
         self.retry_base_seconds = retry_base_seconds
         self.retry_max_seconds = retry_max_seconds
         self.max_batch_characters = max_batch_characters
+        self.live_claim_fraction = live_claim_fraction
         self.worker_id = worker_id or str(uuid4())
         self.clock = clock or (lambda: datetime.now(UTC))
 
@@ -379,17 +383,30 @@ class SemanticEmbeddingRunner:
             statement = statement.with_for_update(of=Article)
         return db.scalar(statement)
 
-    def _claim_pending(
+    def _claim_pending_pool(
         self,
         db: Session,
         *,
         limit: int,
         now: datetime,
+        processed: bool,
+        excluded_article_ids: set[UUID] | None = None,
     ) -> list[ArticleProcessingClaim]:
+        if limit <= 0:
+            return []
+
         claims: list[ArticleProcessingClaim] = []
+        excluded_article_ids = excluded_article_ids or set()
         page_size = max(100, limit * 4)
         last_created_at = None
         last_article_id = None
+
+        state_join = and_(
+            ArticleProcessingState.article_id == Article.id,
+            ArticleProcessingState.pipeline
+            == ArticlePipeline.SEMANTIC_EMBEDDING.value,
+            ArticleProcessingState.deleted_at.is_(None),
+        )
 
         while len(claims) < limit:
             conditions = [
@@ -401,6 +418,24 @@ class SemanticEmbeddingRunner:
                 Source.deleted_at.is_(None),
                 Source.active.is_(True),
             ]
+
+            if processed:
+                conditions.append(
+                    ArticleProcessingState.processed_input_hash.is_not(None)
+                )
+            else:
+                conditions.append(
+                    or_(
+                        ArticleProcessingState.id.is_(None),
+                        ArticleProcessingState.processed_input_hash.is_(None),
+                    )
+                )
+
+            if excluded_article_ids:
+                conditions.append(
+                    Article.id.not_in(excluded_article_ids)
+                )
+
             if (
                 last_created_at is not None
                 and last_article_id is not None
@@ -420,6 +455,10 @@ class SemanticEmbeddingRunner:
                     select(Article)
                     .join(Feed)
                     .join(Source)
+                    .outerjoin(
+                        ArticleProcessingState,
+                        state_join,
+                    )
                     .where(*conditions)
                     .order_by(Article.created_at, Article.id)
                     .limit(page_size)
@@ -460,6 +499,64 @@ class SemanticEmbeddingRunner:
             last_article_id = last_article.id
             if len(articles) < page_size:
                 break
+
+        return claims
+
+    def _claim_pending(
+        self,
+        db: Session,
+        *,
+        limit: int,
+        now: datetime,
+    ) -> list[ArticleProcessingClaim]:
+        if limit <= 0:
+            return []
+
+        live_limit = (
+            limit
+            if limit == 1
+            else max(
+                1,
+                int(limit * self.live_claim_fraction),
+            )
+        )
+
+        claims = self._claim_pending_pool(
+            db,
+            limit=live_limit,
+            now=now,
+            processed=False,
+        )
+        claimed_article_ids = {
+            claim.article_id
+            for claim in claims
+        }
+
+        backfill_limit = limit - len(claims)
+        backfill_claims = self._claim_pending_pool(
+            db,
+            limit=backfill_limit,
+            now=now,
+            processed=True,
+            excluded_article_ids=claimed_article_ids,
+        )
+        claims.extend(backfill_claims)
+        claimed_article_ids.update(
+            claim.article_id
+            for claim in backfill_claims
+        )
+
+        remaining = limit - len(claims)
+        if remaining > 0:
+            claims.extend(
+                self._claim_pending_pool(
+                    db,
+                    limit=remaining,
+                    now=now,
+                    processed=False,
+                    excluded_article_ids=claimed_article_ids,
+                )
+            )
 
         return claims
 
