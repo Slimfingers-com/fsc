@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import and_, or_, select, update
+from sqlalchemy import and_, case, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, aliased
 
 from app.models.article_processing import (
     ArticleProcessingRun,
@@ -106,6 +106,207 @@ class ArticleProcessingRepository:
 
         return state
 
+    def select_candidate_article_ids(
+        self,
+        db: Session,
+        *,
+        pipeline: str,
+        eligible_articles,
+        provider: str,
+        provider_version: str,
+        configuration_version: str,
+        now: datetime,
+        limit: int,
+        live_share: float = 0.8,
+    ) -> list[UUID]:
+        if limit <= 0:
+            return []
+
+        if not 0 < live_share <= 1:
+            raise ValueError(
+                "live_share must be greater than zero and at most one"
+            )
+
+        eligible = eligible_articles.subquery(
+            "eligible_article_processing_candidates"
+        )
+
+        required_columns = {
+            "article_id",
+            "priority_at",
+            "freshness_at",
+        }
+        missing_columns = (
+            required_columns
+            - set(eligible.c.keys())
+        )
+        if missing_columns:
+            raise ValueError(
+                "eligible_articles must expose article_id, "
+                "priority_at and freshness_at"
+            )
+
+        state = aliased(
+            ArticleProcessingState,
+            name="candidate_processing_state",
+        )
+
+        join_condition = and_(
+            state.article_id
+            == eligible.c.article_id,
+            state.pipeline == pipeline,
+            state.deleted_at.is_(None),
+        )
+
+        state_claimable = and_(
+            or_(
+                state.retry_after.is_(None),
+                state.retry_after <= now,
+            ),
+            or_(
+                state.claim_expires_at.is_(None),
+                state.claim_expires_at <= now,
+            ),
+        )
+
+        unprocessed = or_(
+            state.id.is_(None),
+            state.last_processed_at.is_(None),
+        )
+
+        identity_stale = and_(
+            state.id.is_not(None),
+            state.last_processed_at.is_not(None),
+            or_(
+                state.processed_provider.is_distinct_from(
+                    provider
+                ),
+                state.processed_provider_version.is_distinct_from(
+                    provider_version
+                ),
+                state.processed_configuration_version.is_distinct_from(
+                    configuration_version
+                ),
+            ),
+        )
+
+        freshness_stale = and_(
+            state.id.is_not(None),
+            state.last_processed_at.is_not(None),
+            eligible.c.freshness_at.is_not(None),
+            state.last_processed_at
+            < eligible.c.freshness_at,
+        )
+
+        claimable = or_(
+            state.id.is_(None),
+            state_claimable,
+        )
+        pending = and_(
+            claimable,
+            or_(
+                unprocessed,
+                identity_stale,
+                freshness_stale,
+            ),
+        )
+
+        base = (
+            select(
+                eligible.c.article_id,
+                eligible.c.priority_at,
+                state.last_processed_at,
+            )
+            .select_from(eligible)
+            .outerjoin(
+                state,
+                join_condition,
+            )
+            .where(pending)
+        )
+
+        live_limit = max(
+            1,
+            int(
+                limit * live_share
+            ),
+        )
+        live_limit = min(
+            live_limit,
+            limit,
+        )
+        backfill_limit = (
+            limit
+            - live_limit
+        )
+
+        live_ids = list(
+            db.scalars(
+                base.where(
+                    unprocessed
+                )
+                .order_by(
+                    eligible.c.priority_at.desc().nullslast(),
+                    eligible.c.article_id.desc(),
+                )
+                .limit(live_limit)
+            ).all()
+        )
+
+        selected = list(live_ids)
+
+        def backlog_statement(
+            requested: int,
+        ):
+            statement = base
+
+            if selected:
+                statement = statement.where(
+                    eligible.c.article_id.not_in(
+                        selected
+                    )
+                )
+
+            backlog_order = case(
+                (
+                    state.last_processed_at.is_(None),
+                    eligible.c.priority_at,
+                ),
+                else_=state.last_processed_at,
+            )
+
+            return (
+                statement.order_by(
+                    backlog_order.asc().nullsfirst(),
+                    eligible.c.article_id.asc(),
+                )
+                .limit(requested)
+            )
+
+        if backfill_limit > 0:
+            selected.extend(
+                db.scalars(
+                    backlog_statement(
+                        backfill_limit
+                    )
+                ).all()
+            )
+
+        remaining = (
+            limit
+            - len(selected)
+        )
+        if remaining > 0:
+            selected.extend(
+                db.scalars(
+                    backlog_statement(
+                        remaining
+                    )
+                ).all()
+            )
+
+        return selected
+
     def claim_candidates(
         self,
         db: Session,
@@ -116,6 +317,7 @@ class ArticleProcessingRepository:
         now: datetime,
         claim_expires_at: datetime,
         limit: int,
+        preserve_candidate_order: bool = False,
     ) -> list[ArticleProcessingClaim]:
         if limit <= 0 or not candidates:
             return []
@@ -182,7 +384,23 @@ class ArticleProcessingRepository:
                     or_(*pending_identity_conditions),
                 )
                 .order_by(
-                    ArticleProcessingState.created_at,
+                    (
+                        case(
+                            {
+                                article_id: position
+                                for position, article_id
+                                in enumerate(
+                                    candidates_by_article_id
+                                )
+                            },
+                            value=ArticleProcessingState.article_id,
+                            else_=len(
+                                candidates_by_article_id
+                            ),
+                        )
+                        if preserve_candidate_order
+                        else ArticleProcessingState.created_at
+                    ),
                     ArticleProcessingState.id,
                 )
                 .limit(limit)
