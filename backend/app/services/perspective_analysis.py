@@ -7,7 +7,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Callable
 from uuid import UUID, uuid4
 
-from sqlalchemy import and_, exists, or_, select
+from sqlalchemy import and_, exists, func, or_, select
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.enums.article_pipeline import ArticlePipeline
@@ -1151,173 +1151,156 @@ class PerspectiveAnalysisRunner:
         *,
         limit: int,
         now: datetime,
-    ) -> list[
-        ArticleProcessingClaim
-    ]:
-        claims: list[
-            ArticleProcessingClaim
-        ] = []
-        page_size = max(
-            100,
-            limit * 4,
+    ) -> list[ArticleProcessingClaim]:
+        candidate_limit = max(100, limit * 4)
+
+        claim_freshness = (
+            select(
+                func.max(
+                    ArticleClaim.updated_at
+                )
+            )
+            .where(
+                ArticleClaim.article_id
+                == Article.id,
+                ArticleClaim.deleted_at.is_(
+                    None
+                ),
+            )
+            .correlate(Article)
+            .scalar_subquery()
         )
-        last_created_at = None
-        last_article_id = None
-
-        while len(claims) < limit:
-            conditions = list(
-                self._eligibility_conditions()
+        entity_freshness = (
+            select(
+                func.max(
+                    ArticleEntity.updated_at
+                )
             )
-            conditions.append(
+            .where(
+                ArticleEntity.article_id
+                == Article.id,
+                ArticleEntity.deleted_at.is_(
+                    None
+                ),
+            )
+            .correlate(Article)
+            .scalar_subquery()
+        )
+        upstream_freshness = func.greatest(
+            Article.updated_at,
+            claim_freshness,
+            entity_freshness,
+        )
+
+        eligible_articles = (
+            select(
+                Article.id.label("article_id"),
+                Article.created_at.label("priority_at"),
+                upstream_freshness.label("freshness_at"),
+            )
+            .join(Feed)
+            .join(Source)
+            .where(
+                *self._eligibility_conditions(),
                 exists(
-                    select(
-                        ArticleClaim.id
-                    ).where(
-                        ArticleClaim.article_id
-                        == Article.id,
-                        ArticleClaim.deleted_at.is_(
-                            None
-                        ),
+                    select(ArticleClaim.id).where(
+                        ArticleClaim.article_id == Article.id,
+                        ArticleClaim.deleted_at.is_(None),
                     )
+                ),
+            )
+        )
+
+        article_ids = (
+            self.processing_repository
+            .select_candidate_article_ids(
+                db,
+                pipeline=(
+                    ArticlePipeline.PERSPECTIVE_ANALYSIS.value
+                ),
+                eligible_articles=eligible_articles,
+                provider=self.service.analyzer.provider,
+                provider_version=self.service.analyzer.version,
+                configuration_version=(
+                    self.service.processing_configuration_version
+                ),
+                now=now,
+                limit=candidate_limit,
+            )
+        )
+
+        if not article_ids:
+            return []
+
+        articles_by_id = {
+            article.id: article
+            for article in db.scalars(
+                select(Article)
+                .join(Feed)
+                .join(Source)
+                .where(
+                    Article.id.in_(article_ids),
+                    *self._eligibility_conditions(),
                 )
+            ).all()
+        }
+
+        claims_by_article = (
+            self.service.repository.load_active_claims(
+                db,
+                article_ids=article_ids,
+            )
+        )
+        mentions_by_article = (
+            self.service.repository.load_active_mentions(
+                db,
+                article_ids=article_ids,
+            )
+        )
+
+        candidates: list[ArticleProcessingCandidate] = []
+
+        for article_id in article_ids:
+            article = articles_by_id.get(article_id)
+            if article is None:
+                continue
+
+            article_claims = claims_by_article.get(
+                article_id,
+                [],
+            )
+            article_mentions = mentions_by_article.get(
+                article_id,
+                [],
             )
 
-            if (
-                last_created_at
-                is not None
-                and last_article_id
-                is not None
+            if not self.service.inputs_are_current(
+                article,
+                article_claims,
+                article_mentions,
             ):
-                conditions.append(
-                    or_(
-                        Article.created_at
-                        > last_created_at,
-                        and_(
-                            Article.created_at
-                            == last_created_at,
-                            Article.id
-                            > last_article_id,
-                        ),
-                    )
-                )
+                continue
 
-            articles = list(
-                db.scalars(
-                    select(Article)
-                    .join(Feed)
-                    .join(Source)
-                    .where(
-                        *conditions
-                    )
-                    .order_by(
-                        Article.created_at,
-                        Article.id,
-                    )
-                    .limit(
-                        page_size
-                    )
-                ).all()
-            )
-
-            if not articles:
-                break
-
-            article_ids = [
-                article.id
-                for article in articles
-            ]
-            claims_by_article = (
-                self.service.repository
-                .load_active_claims(
-                    db,
-                    article_ids=article_ids,
-                )
-            )
-            mentions_by_article = (
-                self.service.repository
-                .load_active_mentions(
-                    db,
-                    article_ids=article_ids,
-                )
-            )
-
-            candidates: list[
-                ArticleProcessingCandidate
-            ] = []
-
-            for article in articles:
-                article_claims = (
-                    claims_by_article.get(
-                        article.id,
-                        [],
-                    )
-                )
-                article_mentions = (
-                    mentions_by_article.get(
-                        article.id,
-                        [],
-                    )
-                )
-
-                if not self.service.inputs_are_current(
+            candidates.append(
+                self.service.candidate(
                     article,
-                    article_claims,
-                    article_mentions,
-                ):
-                    continue
-
-                candidates.append(
-                    self.service.candidate(
-                        article,
-                        claims=article_claims,
-                        mentions=article_mentions,
-                    )
+                    claims=article_claims,
+                    mentions=article_mentions,
                 )
-
-            if candidates:
-                claims.extend(
-                    self.processing_repository.claim_candidates(
-                        db,
-                        pipeline=(
-                            ArticlePipeline
-                            .PERSPECTIVE_ANALYSIS
-                            .value
-                        ),
-                        candidates=candidates,
-                        worker_id=(
-                            self.worker_id
-                        ),
-                        now=now,
-                        claim_expires_at=(
-                            now
-                            + timedelta(
-                                seconds=(
-                                    self.claim_ttl_seconds
-                                )
-                            )
-                        ),
-                        limit=(
-                            limit
-                            - len(claims)
-                        ),
-                    )
-                )
-
-            last = articles[-1]
-            last_created_at = (
-                last.created_at
-            )
-            last_article_id = (
-                last.id
             )
 
-            if (
-                len(articles)
-                < page_size
-            ):
-                break
-
-        return claims
+        return self.processing_repository.claim_candidates(
+            db,
+            pipeline=ArticlePipeline.PERSPECTIVE_ANALYSIS.value,
+            candidates=candidates,
+            worker_id=self.worker_id,
+            now=now,
+            claim_expires_at=(
+                now + timedelta(seconds=self.claim_ttl_seconds)
+            ),
+            limit=limit,
+            preserve_candidate_order=True,
+        )
 
     def _record_failure(
         self,

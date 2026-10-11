@@ -617,118 +617,70 @@ class ClaimExtractionRunner:
         *,
         limit: int,
         now: datetime,
-    ) -> list[
-        ArticleProcessingClaim
-    ]:
-        claims: list[
-            ArticleProcessingClaim
-        ] = []
-        page_size = max(
-            100,
-            limit * 4,
+    ) -> list[ArticleProcessingClaim]:
+        candidate_limit = max(100, limit * 4)
+
+        eligible_articles = (
+            select(
+                Article.id.label("article_id"),
+                Article.created_at.label("priority_at"),
+                Article.updated_at.label("freshness_at"),
+            )
+            .join(Feed)
+            .join(Source)
+            .where(*self._eligibility_conditions())
         )
-        last_created_at = None
-        last_article_id = None
 
-        while (
-            len(claims)
-            < limit
-        ):
-            conditions = list(
-                self._eligibility_conditions()
+        article_ids = (
+            self.processing_repository
+            .select_candidate_article_ids(
+                db,
+                pipeline=ArticlePipeline.CLAIM_EXTRACTION.value,
+                eligible_articles=eligible_articles,
+                provider=self.service.extractor.provider,
+                provider_version=self.service.extractor.version,
+                configuration_version=(
+                    self.service.processing_configuration_version
+                ),
+                now=now,
+                limit=candidate_limit,
             )
+        )
 
-            if (
-                last_created_at
-                is not None
-                and last_article_id
-                is not None
-            ):
-                conditions.append(
-                    or_(
-                        Article.created_at
-                        > last_created_at,
-                        and_(
-                            Article.created_at
-                            == last_created_at,
-                            Article.id
-                            > last_article_id,
-                        ),
-                    )
+        if not article_ids:
+            return []
+
+        articles_by_id = {
+            article.id: article
+            for article in db.scalars(
+                select(Article)
+                .join(Feed)
+                .join(Source)
+                .where(
+                    Article.id.in_(article_ids),
+                    *self._eligibility_conditions(),
                 )
+            ).all()
+        }
 
-            articles = list(
-                db.scalars(
-                    select(Article)
-                    .join(Feed)
-                    .join(Source)
-                    .where(
-                        *conditions
-                    )
-                    .order_by(
-                        Article.created_at,
-                        Article.id,
-                    )
-                    .limit(
-                        page_size
-                    )
-                ).all()
-            )
+        candidates = [
+            self.service.candidate(articles_by_id[article_id])
+            for article_id in article_ids
+            if article_id in articles_by_id
+        ]
 
-            if not articles:
-                break
-
-            candidates = [
-                self.service.candidate(
-                    article
-                )
-                for article
-                in articles
-            ]
-
-            claims.extend(
-                self.processing_repository.claim_candidates(
-                    db,
-                    pipeline=(
-                        ArticlePipeline
-                        .CLAIM_EXTRACTION
-                        .value
-                    ),
-                    candidates=candidates,
-                    worker_id=(
-                        self.worker_id
-                    ),
-                    now=now,
-                    claim_expires_at=(
-                        now
-                        + timedelta(
-                            seconds=(
-                                self.claim_ttl_seconds
-                            )
-                        )
-                    ),
-                    limit=(
-                        limit
-                        - len(claims)
-                    ),
-                )
-            )
-
-            last = articles[-1]
-            last_created_at = (
-                last.created_at
-            )
-            last_article_id = (
-                last.id
-            )
-
-            if (
-                len(articles)
-                < page_size
-            ):
-                break
-
-        return claims
+        return self.processing_repository.claim_candidates(
+            db,
+            pipeline=ArticlePipeline.CLAIM_EXTRACTION.value,
+            candidates=candidates,
+            worker_id=self.worker_id,
+            now=now,
+            claim_expires_at=(
+                now + timedelta(seconds=self.claim_ttl_seconds)
+            ),
+            limit=limit,
+            preserve_candidate_order=True,
+        )
 
     def _record_failure(
         self,

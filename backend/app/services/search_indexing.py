@@ -209,7 +209,7 @@ class SearchIndexingRunner:
                 Article.normalized_at.label(
                     "priority_at"
                 ),
-                Article.normalized_at.label(
+                Article.updated_at.label(
                     "freshness_at"
                 ),
             )
