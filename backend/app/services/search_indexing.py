@@ -196,6 +196,10 @@ class SearchIndexingRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
+        candidate_limit = (
+            limit * 2
+        )
+
         eligible_articles = (
             select(
                 Article.id.label(
@@ -246,6 +250,7 @@ class SearchIndexingRunner:
                 ),
                 now=now,
                 limit=limit,
+                candidate_limit=candidate_limit,
             )
         )
 
@@ -280,7 +285,7 @@ class SearchIndexingRunner:
                     Article.normalized_at.desc(),
                     Article.id.desc(),
                 )
-                .limit(limit)
+                .limit(candidate_limit)
             ).all()
         )
 

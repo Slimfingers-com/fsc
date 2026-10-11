@@ -172,6 +172,10 @@ class ArticleNormalizationRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
+        candidate_limit = (
+            limit * 2
+        )
+
         eligible_articles = (
             select(
                 Article.id.label(
@@ -214,6 +218,7 @@ class ArticleNormalizationRunner:
                 ),
                 now=now,
                 limit=limit,
+                candidate_limit=candidate_limit,
             )
         )
 

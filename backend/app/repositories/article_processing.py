@@ -236,122 +236,163 @@ class ArticleProcessingRepository:
             .where(pending)
         )
 
-        selected: list[UUID] = []
+        stale = or_(
+            identity_stale,
+            freshness_stale,
+        )
 
-        def exclude_selected(statement):
-            if selected:
-                return statement.where(
-                    eligible.c.article_id.not_in(
-                        selected
-                    )
-                )
-            return statement
-
-        def live_statement(
-            requested: int,
-        ):
-            return (
-                exclude_selected(
-                    base.where(
-                        unprocessed
-                    )
+        live_ids = list(
+            db.scalars(
+                base.where(
+                    unprocessed
                 )
                 .order_by(
                     eligible.c.priority_at.desc().nullslast(),
                     eligible.c.article_id.desc(),
                 )
-                .limit(requested)
-            )
-
-        def backlog_statement(
-            requested: int,
-        ):
-            backlog_order = case(
-                (
-                    state.last_processed_at.is_(None),
-                    eligible.c.priority_at,
-                ),
-                else_=state.last_processed_at,
-            )
-
-            return (
-                exclude_selected(base)
+                .limit(selection_limit)
+            ).all()
+        )
+        stale_ids = list(
+            db.scalars(
+                base.where(
+                    stale
+                )
                 .order_by(
-                    backlog_order.asc().nullsfirst(),
+                    state.last_processed_at.asc(),
                     eligible.c.article_id.asc(),
                 )
-                .limit(requested)
-            )
-
-        live_limit = min(
-            max(
-                1,
-                int(
-                    limit * live_share
-                ),
-            ),
-            limit,
-        )
-        backfill_limit = (
-            limit
-            - live_limit
-        )
-
-        selected.extend(
-            db.scalars(
-                live_statement(
-                    live_limit
-                )
+                .limit(selection_limit)
             ).all()
         )
 
-        if backfill_limit > 0:
-            selected.extend(
-                db.scalars(
-                    backlog_statement(
-                        backfill_limit
-                    )
-                ).all()
+        selected: list[UUID] = []
+        live_index = 0
+        stale_index = 0
+
+        while len(selected) < selection_limit:
+            wave_size = min(
+                limit,
+                selection_limit - len(selected),
+            )
+            live_target = min(
+                max(
+                    1,
+                    int(
+                        wave_size * live_share
+                    ),
+                ),
+                wave_size,
+            )
+            stale_target = (
+                wave_size
+                - live_target
             )
 
-        primary_remaining = (
-            limit
-            - len(selected)
-        )
-        if primary_remaining > 0:
-            selected.extend(
-                db.scalars(
-                    backlog_statement(
-                        primary_remaining
-                    )
-                ).all()
+            live_take = min(
+                live_target,
+                len(live_ids) - live_index,
+            )
+            if live_take > 0:
+                selected.extend(
+                    live_ids[
+                        live_index:
+                        live_index + live_take
+                    ]
+                )
+                live_index += live_take
+
+            stale_take = min(
+                stale_target,
+                len(stale_ids) - stale_index,
+            )
+            if stale_take > 0:
+                selected.extend(
+                    stale_ids[
+                        stale_index:
+                        stale_index + stale_take
+                    ]
+                )
+                stale_index += stale_take
+
+            wave_missing = (
+                wave_size
+                - live_take
+                - stale_take
             )
 
-        reserve_remaining = (
-            selection_limit
-            - len(selected)
-        )
-        if reserve_remaining > 0:
-            selected.extend(
-                db.scalars(
-                    live_statement(
-                        reserve_remaining
+            if wave_missing > 0 and live_take < live_target:
+                extra_stale = min(
+                    wave_missing,
+                    len(stale_ids) - stale_index,
+                )
+                if extra_stale > 0:
+                    selected.extend(
+                        stale_ids[
+                            stale_index:
+                            stale_index + extra_stale
+                        ]
                     )
-                ).all()
-            )
+                    stale_index += extra_stale
+                    wave_missing -= extra_stale
 
-        reserve_remaining = (
-            selection_limit
-            - len(selected)
-        )
-        if reserve_remaining > 0:
-            selected.extend(
-                db.scalars(
-                    backlog_statement(
-                        reserve_remaining
+            if wave_missing > 0 and stale_take < stale_target:
+                extra_live = min(
+                    wave_missing,
+                    len(live_ids) - live_index,
+                )
+                if extra_live > 0:
+                    selected.extend(
+                        live_ids[
+                            live_index:
+                            live_index + extra_live
+                        ]
                     )
-                ).all()
-            )
+                    live_index += extra_live
+                    wave_missing -= extra_live
+
+            if wave_missing > 0:
+                extra_live = min(
+                    wave_missing,
+                    len(live_ids) - live_index,
+                )
+                if extra_live > 0:
+                    selected.extend(
+                        live_ids[
+                            live_index:
+                            live_index + extra_live
+                        ]
+                    )
+                    live_index += extra_live
+                    wave_missing -= extra_live
+
+            if wave_missing > 0:
+                extra_stale = min(
+                    wave_missing,
+                    len(stale_ids) - stale_index,
+                )
+                if extra_stale > 0:
+                    selected.extend(
+                        stale_ids[
+                            stale_index:
+                            stale_index + extra_stale
+                        ]
+                    )
+                    stale_index += extra_stale
+                    wave_missing -= extra_stale
+
+            if (
+                live_take == 0
+                and stale_take == 0
+                and wave_missing == wave_size
+            ):
+                break
+
+            if (
+                live_index >= len(live_ids)
+                and stale_index >= len(stale_ids)
+            ):
+                break
 
         return selected
 
