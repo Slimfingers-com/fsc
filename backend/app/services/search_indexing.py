@@ -6,7 +6,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Callable
 from uuid import UUID, uuid4
 
-from sqlalchemy import and_, or_, select
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.orm import Session, joinedload, sessionmaker
 
 from app.enums.article_pipeline import ArticlePipeline
@@ -196,6 +196,11 @@ class SearchIndexingRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
+        candidate_limit = max(
+            100,
+            limit * 4,
+        )
+
         eligible_articles = (
             select(
                 Article.id.label(
@@ -204,7 +209,10 @@ class SearchIndexingRunner:
                 Article.normalized_at.label(
                     "priority_at"
                 ),
-                Article.updated_at.label(
+                func.greatest(
+                    Article.updated_at,
+                    Source.updated_at,
+                ).label(
                     "freshness_at"
                 ),
             )
@@ -245,7 +253,7 @@ class SearchIndexingRunner:
                     .config_version
                 ),
                 now=now,
-                limit=limit,
+                limit=candidate_limit,
             )
         )
 

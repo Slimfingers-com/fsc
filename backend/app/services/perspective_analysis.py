@@ -1155,6 +1155,8 @@ class PerspectiveAnalysisRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
+        candidate_limit = max(100, limit * 4)
+
         claim_state = aliased(
             ArticleProcessingState,
             name="perspective_claim_state",
@@ -1163,7 +1165,25 @@ class PerspectiveAnalysisRunner:
             ArticleProcessingState,
             name="perspective_entity_state",
         )
-        manual_entity_freshness = (
+        claim_row_freshness = (
+            select(
+                ArticleClaim.article_id.label(
+                    "article_id"
+                ),
+                func.max(
+                    ArticleClaim.updated_at
+                ).label(
+                    "freshness_at"
+                ),
+            )
+            .group_by(
+                ArticleClaim.article_id
+            )
+            .subquery(
+                "perspective_claim_row_freshness"
+            )
+        )
+        entity_row_freshness = (
             select(
                 ArticleEntity.article_id.label(
                     "article_id"
@@ -1174,26 +1194,19 @@ class PerspectiveAnalysisRunner:
                     "freshness_at"
                 ),
             )
-            .where(
-                ArticleEntity.deleted_at.is_(
-                    None
-                ),
-                ArticleEntity.processing_run_id.is_(
-                    None
-                ),
-            )
             .group_by(
                 ArticleEntity.article_id
             )
             .subquery(
-                "perspective_manual_entity_freshness"
+                "perspective_entity_row_freshness"
             )
         )
         upstream_freshness = func.greatest(
             Article.updated_at,
             claim_state.last_processed_at,
             entity_state.last_processed_at,
-            manual_entity_freshness.c.freshness_at,
+            claim_row_freshness.c.freshness_at,
+            entity_row_freshness.c.freshness_at,
         )
 
         eligible_articles = (
@@ -1229,8 +1242,13 @@ class PerspectiveAnalysisRunner:
                 ),
             )
             .outerjoin(
-                manual_entity_freshness,
-                manual_entity_freshness.c.article_id
+                claim_row_freshness,
+                claim_row_freshness.c.article_id
+                == Article.id,
+            )
+            .outerjoin(
+                entity_row_freshness,
+                entity_row_freshness.c.article_id
                 == Article.id,
             )
             .where(
@@ -1261,7 +1279,7 @@ class PerspectiveAnalysisRunner:
                     self.service.processing_configuration_version
                 ),
                 now=now,
-                limit=limit,
+                limit=candidate_limit,
             )
         )
 
