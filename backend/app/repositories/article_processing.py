@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import and_, or_, select, update
+from sqlalchemy import and_, case, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, aliased
 from sqlalchemy.sql import Select
@@ -176,7 +176,10 @@ class ArticleProcessingRepository:
                         state.deleted_at.is_(None),
                     ),
                 )
-                .where(claimable)
+                .where(
+                    claimable,
+                    directly_stale,
+                )
                 .order_by(
                     state.last_processed_at.asc().nullsfirst(),
                     eligible.c.live_order_at.desc().nullslast(),
