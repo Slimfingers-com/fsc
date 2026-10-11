@@ -117,6 +117,7 @@ class ArticleProcessingRepository:
         configuration_version: str,
         now: datetime,
         limit: int,
+        candidate_limit: int | None = None,
         live_share: float = 0.8,
     ) -> list[UUID]:
         if limit <= 0:
@@ -125,6 +126,16 @@ class ArticleProcessingRepository:
         if not 0 < live_share <= 1:
             raise ValueError(
                 "live_share must be greater than zero and at most one"
+            )
+
+        selection_limit = (
+            limit
+            if candidate_limit is None
+            else candidate_limit
+        )
+        if selection_limit < limit:
+            raise ValueError(
+                "candidate_limit must be at least limit"
             )
 
         eligible = eligible_articles.subquery(
@@ -225,48 +236,36 @@ class ArticleProcessingRepository:
             .where(pending)
         )
 
-        live_limit = max(
-            1,
-            int(
-                limit * live_share
-            ),
-        )
-        live_limit = min(
-            live_limit,
-            limit,
-        )
-        backfill_limit = (
-            limit
-            - live_limit
-        )
+        selected: list[UUID] = []
 
-        live_ids = list(
-            db.scalars(
-                base.where(
-                    unprocessed
+        def exclude_selected(statement):
+            if selected:
+                return statement.where(
+                    eligible.c.article_id.not_in(
+                        selected
+                    )
+                )
+            return statement
+
+        def live_statement(
+            requested: int,
+        ):
+            return (
+                exclude_selected(
+                    base.where(
+                        unprocessed
+                    )
                 )
                 .order_by(
                     eligible.c.priority_at.desc().nullslast(),
                     eligible.c.article_id.desc(),
                 )
-                .limit(live_limit)
-            ).all()
-        )
-
-        selected = list(live_ids)
+                .limit(requested)
+            )
 
         def backlog_statement(
             requested: int,
         ):
-            statement = base
-
-            if selected:
-                statement = statement.where(
-                    eligible.c.article_id.not_in(
-                        selected
-                    )
-                )
-
             backlog_order = case(
                 (
                     state.last_processed_at.is_(None),
@@ -276,12 +275,35 @@ class ArticleProcessingRepository:
             )
 
             return (
-                statement.order_by(
+                exclude_selected(base)
+                .order_by(
                     backlog_order.asc().nullsfirst(),
                     eligible.c.article_id.asc(),
                 )
                 .limit(requested)
             )
+
+        live_limit = min(
+            max(
+                1,
+                int(
+                    limit * live_share
+                ),
+            ),
+            limit,
+        )
+        backfill_limit = (
+            limit
+            - live_limit
+        )
+
+        selected.extend(
+            db.scalars(
+                live_statement(
+                    live_limit
+                )
+            ).all()
+        )
 
         if backfill_limit > 0:
             selected.extend(
@@ -292,15 +314,41 @@ class ArticleProcessingRepository:
                 ).all()
             )
 
-        remaining = (
+        primary_remaining = (
             limit
             - len(selected)
         )
-        if remaining > 0:
+        if primary_remaining > 0:
             selected.extend(
                 db.scalars(
                     backlog_statement(
-                        remaining
+                        primary_remaining
+                    )
+                ).all()
+            )
+
+        reserve_remaining = (
+            selection_limit
+            - len(selected)
+        )
+        if reserve_remaining > 0:
+            selected.extend(
+                db.scalars(
+                    live_statement(
+                        reserve_remaining
+                    )
+                ).all()
+            )
+
+        reserve_remaining = (
+            selection_limit
+            - len(selected)
+        )
+        if reserve_remaining > 0:
+            selected.extend(
+                db.scalars(
+                    backlog_statement(
+                        reserve_remaining
                     )
                 ).all()
             )
