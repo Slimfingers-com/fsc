@@ -512,8 +512,6 @@ class EntityTopicAnalysisRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
-        candidate_limit = max(100, limit * 4)
-
         eligible_articles = (
             select(
                 Article.id.label("article_id"),
@@ -545,7 +543,7 @@ class EntityTopicAnalysisRunner:
                     self.service.processing_configuration_version
                 ),
                 now=now,
-                limit=candidate_limit,
+                limit=limit,
             )
         )
 

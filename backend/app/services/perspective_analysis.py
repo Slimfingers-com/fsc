@@ -1155,8 +1155,6 @@ class PerspectiveAnalysisRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
-        candidate_limit = max(100, limit * 4)
-
         claim_state = aliased(
             ArticleProcessingState,
             name="perspective_claim_state",
@@ -1263,7 +1261,7 @@ class PerspectiveAnalysisRunner:
                     self.service.processing_configuration_version
                 ),
                 now=now,
-                limit=candidate_limit,
+                limit=limit,
             )
         )
 

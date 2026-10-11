@@ -196,11 +196,6 @@ class SearchIndexingRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
-        candidate_limit = max(
-            100,
-            limit * 4,
-        )
-
         eligible_articles = (
             select(
                 Article.id.label(
@@ -250,7 +245,7 @@ class SearchIndexingRunner:
                     .config_version
                 ),
                 now=now,
-                limit=candidate_limit,
+                limit=limit,
             )
         )
 
