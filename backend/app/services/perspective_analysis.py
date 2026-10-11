@@ -7,12 +7,15 @@ from datetime import UTC, datetime, timedelta
 from typing import Callable
 from uuid import UUID, uuid4
 
-from sqlalchemy import and_, func, or_, select
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy import and_, exists, func, or_, select
+from sqlalchemy.orm import Session, aliased, sessionmaker
 
 from app.enums.article_pipeline import ArticlePipeline
 from app.models.article import Article
-from app.models.article_processing import ArticleProcessingRun
+from app.models.article_processing import (
+    ArticleProcessingRun,
+    ArticleProcessingState,
+)
 from app.models.claim import ArticleClaim
 from app.models.entity import ArticleEntity
 from app.models.feed import Feed
@@ -1154,30 +1157,15 @@ class PerspectiveAnalysisRunner:
     ) -> list[ArticleProcessingClaim]:
         candidate_limit = max(100, limit * 4)
 
-        claim_freshness = (
-            select(
-                ArticleClaim.article_id.label(
-                    "article_id"
-                ),
-                func.max(
-                    ArticleClaim.updated_at
-                ).label(
-                    "freshness_at"
-                ),
-            )
-            .where(
-                ArticleClaim.deleted_at.is_(
-                    None
-                ),
-            )
-            .group_by(
-                ArticleClaim.article_id
-            )
-            .subquery(
-                "perspective_claim_freshness"
-            )
+        claim_state = aliased(
+            ArticleProcessingState,
+            name="perspective_claim_state",
         )
-        entity_freshness = (
+        entity_state = aliased(
+            ArticleProcessingState,
+            name="perspective_entity_state",
+        )
+        manual_entity_freshness = (
             select(
                 ArticleEntity.article_id.label(
                     "article_id"
@@ -1192,18 +1180,22 @@ class PerspectiveAnalysisRunner:
                 ArticleEntity.deleted_at.is_(
                     None
                 ),
+                ArticleEntity.processing_run_id.is_(
+                    None
+                ),
             )
             .group_by(
                 ArticleEntity.article_id
             )
             .subquery(
-                "perspective_entity_freshness"
+                "perspective_manual_entity_freshness"
             )
         )
         upstream_freshness = func.greatest(
             Article.updated_at,
-            claim_freshness.c.freshness_at,
-            entity_freshness.c.freshness_at,
+            claim_state.last_processed_at,
+            entity_state.last_processed_at,
+            manual_entity_freshness.c.freshness_at,
         )
 
         eligible_articles = (
@@ -1214,18 +1206,46 @@ class PerspectiveAnalysisRunner:
             )
             .join(Feed)
             .join(Source)
-            .join(
-                claim_freshness,
-                claim_freshness.c.article_id
-                == Article.id,
+            .outerjoin(
+                claim_state,
+                and_(
+                    claim_state.article_id
+                    == Article.id,
+                    claim_state.pipeline
+                    == ArticlePipeline.CLAIM_EXTRACTION.value,
+                    claim_state.deleted_at.is_(
+                        None
+                    ),
+                ),
             )
             .outerjoin(
-                entity_freshness,
-                entity_freshness.c.article_id
+                entity_state,
+                and_(
+                    entity_state.article_id
+                    == Article.id,
+                    entity_state.pipeline
+                    == ArticlePipeline.ENTITY_TOPIC.value,
+                    entity_state.deleted_at.is_(
+                        None
+                    ),
+                ),
+            )
+            .outerjoin(
+                manual_entity_freshness,
+                manual_entity_freshness.c.article_id
                 == Article.id,
             )
             .where(
                 *self._eligibility_conditions(),
+                exists(
+                    select(ArticleClaim.id).where(
+                        ArticleClaim.article_id
+                        == Article.id,
+                        ArticleClaim.deleted_at.is_(
+                            None
+                        ),
+                    )
+                ),
             )
         )
 
