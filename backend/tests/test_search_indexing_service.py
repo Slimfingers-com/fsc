@@ -323,6 +323,50 @@ def test_runner_does_not_index_unchanged_article_twice():
         assert len(runs) == 1
 
 
+def test_source_metadata_change_is_reindexed():
+    article_id, _, source_id = (
+        _create_normalized_article()
+    )
+
+    runner = SearchIndexingRunner(
+        TestSessionLocal,
+        worker_id="search-source-freshness",
+    )
+
+    assert runner.run_pending(
+        limit=1
+    ).created == 1
+
+    with TestSessionLocal.begin() as db:
+        source = db.get(
+            Source,
+            source_id,
+        )
+        assert source is not None
+        source.name = (
+            f"{source.name}-renamed"
+        )
+
+    result = runner.run_pending(
+        limit=1
+    )
+
+    assert result.processed == 1
+    assert result.updated == 1
+
+    with TestSessionLocal() as db:
+        document = db.scalar(
+            select(SearchDocument).where(
+                SearchDocument.article_id
+                == article_id
+            )
+        )
+        assert document is not None
+        assert document.source_name.endswith(
+            "-renamed"
+        )
+
+
 def test_reactivated_feed_is_reindexed():
     article_id, feed_id, _ = (
         _create_normalized_article()

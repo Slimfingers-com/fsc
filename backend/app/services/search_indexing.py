@@ -249,6 +249,52 @@ class SearchIndexingRunner:
             )
         )
 
+        source_metadata_ids = list(
+            db.scalars(
+                select(Article.id)
+                .join(Article.feed)
+                .join(Feed.source)
+                .join(
+                    SearchDocument,
+                    SearchDocument.article_id
+                    == Article.id,
+                )
+                .where(
+                    Article.deleted_at.is_(None),
+                    Article.normalized_at.is_not(None),
+                    Article.content_hash.is_not(None),
+                    Feed.deleted_at.is_(None),
+                    Feed.active.is_(True),
+                    Source.deleted_at.is_(None),
+                    Source.active.is_(True),
+                    or_(
+                        SearchDocument.source_id
+                        != Source.id,
+                        SearchDocument.source_name
+                        != Source.name,
+                        SearchDocument.source_slug
+                        != Source.slug,
+                    ),
+                )
+                .order_by(
+                    Article.normalized_at.desc(),
+                    Article.id.desc(),
+                )
+                .limit(limit)
+            ).all()
+        )
+
+        if source_metadata_ids:
+            seen = set(source_metadata_ids)
+            article_ids = (
+                source_metadata_ids
+                + [
+                    article_id
+                    for article_id in article_ids
+                    if article_id not in seen
+                ]
+            )
+
         if not article_ids:
             return []
 
