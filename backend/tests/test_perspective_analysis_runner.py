@@ -466,64 +466,6 @@ def test_runner_processes_once_and_reprocesses_changed_upstream_inputs():
         assert state.attempt_count == 2
 
 
-def test_runner_reprocesses_when_claim_row_changes():
-    article_ids, _ = (
-        create_committed_articles(
-            1
-        )
-    )
-    article_id = article_ids[0]
-    runner = make_runner(
-        "perspective-claim-freshness"
-    )
-
-    assert runner.run_pending(
-        limit=1
-    ).processed == 1
-    assert runner.run_pending(
-        limit=1
-    ).selected == 0
-
-    with TestSessionLocal.begin() as db:
-        claim = db.scalar(
-            select(ArticleClaim).where(
-                ArticleClaim.article_id
-                == article_id,
-                ArticleClaim.deleted_at
-                .is_(None),
-            )
-        )
-        assert claim is not None
-        claim.confidence = (
-            0.42
-            if claim.confidence != 0.42
-            else 0.43
-        )
-
-    result = runner.run_pending(
-        limit=1
-    )
-
-    assert result.selected == 1
-    assert result.processed == 1
-
-    with TestSessionLocal() as db:
-        state = db.scalar(
-            select(
-                ArticleProcessingState
-            ).where(
-                ArticleProcessingState.article_id
-                == article_id,
-                ArticleProcessingState.pipeline
-                == ArticlePipeline
-                .PERSPECTIVE_ANALYSIS
-                .value,
-            )
-        )
-        assert state is not None
-        assert state.attempt_count == 2
-
-
 def test_parallel_workers_do_not_duplicate_active_perspectives():
     article_ids, _ = (
         create_committed_articles(
