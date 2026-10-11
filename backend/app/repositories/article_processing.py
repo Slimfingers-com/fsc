@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import and_, case, or_, select, update
+from sqlalchemy import and_, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session, aliased
 from sqlalchemy.sql import Select
