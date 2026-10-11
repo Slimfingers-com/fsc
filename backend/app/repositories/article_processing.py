@@ -2,9 +2,10 @@ from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import and_, or_, select, update
+from sqlalchemy import and_, case, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, aliased
+from sqlalchemy.sql import Select
 
 from app.models.article_processing import (
     ArticleProcessingRun,
@@ -51,6 +52,187 @@ class ArticleProcessingClaim:
 
 
 class ArticleProcessingRepository:
+    def select_candidate_article_ids(
+        self,
+        db: Session,
+        *,
+        eligible_articles: Select,
+        pipeline: str,
+        provider: str,
+        provider_version: str,
+        configuration_version: str,
+        now: datetime,
+        limit: int,
+        live_fraction: float = 0.8,
+    ) -> list[UUID]:
+        if limit <= 0:
+            return []
+        if not 0 < live_fraction <= 1:
+            raise ValueError(
+                "live_fraction must be greater than zero and at most one"
+            )
+
+        eligible = eligible_articles.subquery()
+        required_columns = {
+            "article_id",
+            "live_order_at",
+            "input_updated_at",
+        }
+        if not required_columns.issubset(eligible.c.keys()):
+            raise ValueError(
+                "eligible_articles must expose article_id, "
+                "live_order_at and input_updated_at"
+            )
+
+        state = aliased(ArticleProcessingState)
+
+        claimable = or_(
+            state.id.is_(None),
+            and_(
+                or_(
+                    state.retry_after.is_(None),
+                    state.retry_after <= now,
+                ),
+                or_(
+                    state.claim_expires_at.is_(None),
+                    state.claim_expires_at <= now,
+                ),
+            ),
+        )
+
+        directly_stale = or_(
+            state.id.is_(None),
+            state.last_processed_at.is_(None),
+            state.processed_provider.is_distinct_from(provider),
+            state.processed_provider_version.is_distinct_from(
+                provider_version
+            ),
+            state.processed_configuration_version.is_distinct_from(
+                configuration_version
+            ),
+            and_(
+                eligible.c.input_updated_at.is_not(None),
+                state.last_processed_at.is_not(None),
+                eligible.c.input_updated_at > state.last_processed_at,
+            ),
+        )
+
+        live_target = max(
+            1,
+            min(
+                limit,
+                int(limit * live_fraction),
+            ),
+        )
+        backfill_target = limit - live_target
+
+        def live_statement(
+            *,
+            selected: list[UUID],
+            batch_limit: int,
+        ):
+            statement = (
+                select(eligible.c.article_id)
+                .outerjoin(
+                    state,
+                    and_(
+                        state.article_id == eligible.c.article_id,
+                        state.pipeline == pipeline,
+                        state.deleted_at.is_(None),
+                    ),
+                )
+                .where(
+                    claimable,
+                    directly_stale,
+                )
+                .order_by(
+                    case(
+                        (state.id.is_(None), 0),
+                        else_=1,
+                    ),
+                    eligible.c.live_order_at.desc().nullslast(),
+                    eligible.c.article_id.desc(),
+                )
+                .limit(batch_limit)
+            )
+            if selected:
+                statement = statement.where(
+                    eligible.c.article_id.not_in(selected)
+                )
+            return statement
+
+        def backfill_statement(
+            *,
+            selected: list[UUID],
+            batch_limit: int,
+        ):
+            statement = (
+                select(eligible.c.article_id)
+                .join(
+                    state,
+                    and_(
+                        state.article_id == eligible.c.article_id,
+                        state.pipeline == pipeline,
+                        state.deleted_at.is_(None),
+                    ),
+                )
+                .where(claimable)
+                .order_by(
+                    state.last_processed_at.asc().nullsfirst(),
+                    eligible.c.live_order_at.desc().nullslast(),
+                    eligible.c.article_id.desc(),
+                )
+                .limit(batch_limit)
+            )
+            if selected:
+                statement = statement.where(
+                    eligible.c.article_id.not_in(selected)
+                )
+            return statement
+
+        selected = list(
+            db.scalars(
+                live_statement(
+                    selected=[],
+                    batch_limit=live_target,
+                )
+            ).all()
+        )
+
+        if backfill_target > 0:
+            selected.extend(
+                db.scalars(
+                    backfill_statement(
+                        selected=selected,
+                        batch_limit=backfill_target,
+                    )
+                ).all()
+            )
+
+        remaining = limit - len(selected)
+        if remaining > 0:
+            selected.extend(
+                db.scalars(
+                    live_statement(
+                        selected=selected,
+                        batch_limit=remaining,
+                    )
+                ).all()
+            )
+
+        remaining = limit - len(selected)
+        if remaining > 0:
+            selected.extend(
+                db.scalars(
+                    backfill_statement(
+                        selected=selected,
+                        batch_limit=remaining,
+                    )
+                ).all()
+            )
+
+        return selected
+
     def ensure_state(
         self,
         db: Session,
