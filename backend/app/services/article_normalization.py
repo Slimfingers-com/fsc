@@ -172,80 +172,102 @@ class ArticleNormalizationRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
-        claims: list[ArticleProcessingClaim] = []
-
-        page_size = max(
+        candidate_limit = max(
             100,
             limit * 4,
         )
 
-        last_created_at = None
-        last_article_id = None
-
-        while len(claims) < limit:
-            conditions = [
+        eligible_articles = (
+            select(
+                Article.id.label(
+                    "article_id"
+                ),
+                Article.created_at.label(
+                    "priority_at"
+                ),
+                Article.updated_at.label(
+                    "freshness_at"
+                ),
+            )
+            .where(
                 Article.deleted_at.is_(None),
-            ]
+            )
+        )
 
-            if (
-                last_created_at is not None
-                and last_article_id is not None
-            ):
-                conditions.append(
-                    or_(
-                        Article.created_at > last_created_at,
-                        and_(
-                            Article.created_at == last_created_at,
-                            Article.id > last_article_id,
-                        ),
+        article_ids = (
+            self.processing_repository
+            .select_candidate_article_ids(
+                db,
+                pipeline=(
+                    ArticlePipeline
+                    .NORMALIZATION
+                    .value
+                ),
+                eligible_articles=(
+                    eligible_articles
+                ),
+                provider=(
+                    self.service.PROVIDER
+                ),
+                provider_version=(
+                    self.service
+                    .provider_version
+                ),
+                configuration_version=(
+                    self.service
+                    .config_version
+                ),
+                now=now,
+                limit=candidate_limit,
+            )
+        )
+
+        if not article_ids:
+            return []
+
+        articles_by_id = {
+            article.id: article
+            for article in db.scalars(
+                select(Article).where(
+                    Article.id.in_(
+                        article_ids
                     )
                 )
+            ).all()
+        }
 
-            articles = list(
-                db.scalars(
-                    select(Article)
-                    .where(*conditions)
-                    .order_by(
-                        Article.created_at,
-                        Article.id,
-                    )
-                    .limit(page_size)
-                ).all()
+        candidates = [
+            self.service.candidate(
+                articles_by_id[article_id]
             )
+            for article_id in article_ids
+            if article_id in articles_by_id
+        ]
 
-            if not articles:
-                break
-
-            candidates = [
-                self.service.candidate(article)
-                for article in articles
-            ]
-
-            claims.extend(
-                self.processing_repository.claim_candidates(
-                    db,
-                    pipeline=ArticlePipeline.NORMALIZATION.value,
-                    candidates=candidates,
-                    worker_id=self.worker_id,
-                    now=now,
-                    claim_expires_at=(
-                        now
-                        + timedelta(
-                            seconds=self.claim_ttl_seconds
+        return (
+            self.processing_repository
+            .claim_candidates(
+                db,
+                pipeline=(
+                    ArticlePipeline
+                    .NORMALIZATION
+                    .value
+                ),
+                candidates=candidates,
+                worker_id=self.worker_id,
+                now=now,
+                claim_expires_at=(
+                    now
+                    + timedelta(
+                        seconds=(
+                            self.claim_ttl_seconds
                         )
-                    ),
-                    limit=limit - len(claims),
-                )
+                    )
+                ),
+                limit=limit,
+                preserve_candidate_order=True,
             )
-
-            last_article = articles[-1]
-            last_created_at = last_article.created_at
-            last_article_id = last_article.id
-
-            if len(articles) < page_size:
-                break
-
-        return claims
+        )
 
     def _record_failure(
         self,
