@@ -7,7 +7,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Callable
 from uuid import UUID, uuid4
 
-from sqlalchemy import and_, exists, func, or_, select
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.enums.article_pipeline import ArticlePipeline
@@ -1156,40 +1156,54 @@ class PerspectiveAnalysisRunner:
 
         claim_freshness = (
             select(
+                ArticleClaim.article_id.label(
+                    "article_id"
+                ),
                 func.max(
                     ArticleClaim.updated_at
-                )
+                ).label(
+                    "freshness_at"
+                ),
             )
             .where(
-                ArticleClaim.article_id
-                == Article.id,
                 ArticleClaim.deleted_at.is_(
                     None
                 ),
             )
-            .correlate(Article)
-            .scalar_subquery()
+            .group_by(
+                ArticleClaim.article_id
+            )
+            .subquery(
+                "perspective_claim_freshness"
+            )
         )
         entity_freshness = (
             select(
+                ArticleEntity.article_id.label(
+                    "article_id"
+                ),
                 func.max(
                     ArticleEntity.updated_at
-                )
+                ).label(
+                    "freshness_at"
+                ),
             )
             .where(
-                ArticleEntity.article_id
-                == Article.id,
                 ArticleEntity.deleted_at.is_(
                     None
                 ),
             )
-            .correlate(Article)
-            .scalar_subquery()
+            .group_by(
+                ArticleEntity.article_id
+            )
+            .subquery(
+                "perspective_entity_freshness"
+            )
         )
         upstream_freshness = func.greatest(
             Article.updated_at,
-            claim_freshness,
-            entity_freshness,
+            claim_freshness.c.freshness_at,
+            entity_freshness.c.freshness_at,
         )
 
         eligible_articles = (
@@ -1200,14 +1214,18 @@ class PerspectiveAnalysisRunner:
             )
             .join(Feed)
             .join(Source)
+            .join(
+                claim_freshness,
+                claim_freshness.c.article_id
+                == Article.id,
+            )
+            .outerjoin(
+                entity_freshness,
+                entity_freshness.c.article_id
+                == Article.id,
+            )
             .where(
                 *self._eligibility_conditions(),
-                exists(
-                    select(ArticleClaim.id).where(
-                        ArticleClaim.article_id == Article.id,
-                        ArticleClaim.deleted_at.is_(None),
-                    )
-                ),
             )
         )
 
