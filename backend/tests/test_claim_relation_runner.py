@@ -1,9 +1,10 @@
 from concurrent.futures import (
     ThreadPoolExecutor,
 )
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 import hashlib
 import threading
+from types import SimpleNamespace
 from uuid import uuid4
 
 from sqlalchemy import func, select, text
@@ -906,3 +907,66 @@ def test_claim_relation_backfill_is_reserved_alongside_live():
         )
     assert set(fresh_ids).issubset(changed)
     assert len(changed.intersection(prior_ids)) == 3
+
+
+def test_stale_claim_relation_scan_is_bounded_and_resumes(monkeypatch):
+    now = datetime.now(UTC)
+    stories = [
+        SimpleNamespace(
+            id=uuid4(),
+            created_at=now + timedelta(seconds=index),
+        )
+        for index in range(145)
+    ]
+    runner = make_runner("bounded-stale-claim-relation")
+    scanned = []
+    pages = []
+
+    def list_candidates(
+        _db, *, processed, after_created_at, after_id, limit, **_kwargs
+    ):
+        assert processed is True
+        assert limit == 16
+        pages.append((after_created_at, after_id))
+        if after_created_at is None:
+            start = 0
+        else:
+            start = next(
+                idx + 1
+                for idx, story in enumerate(stories)
+                if story.id == after_id
+            )
+        return stories[start:start + limit]
+
+    def snapshot(_db, *, story_id):
+        scanned.append(story_id)
+        return story_id
+
+    monkeypatch.setattr(
+        runner.service.repository, "list_candidate_stories", list_candidates
+    )
+    monkeypatch.setattr(runner.service, "load_snapshot", snapshot)
+    monkeypatch.setattr(
+        runner.service, "candidate", lambda story_id: story_id,
+    )
+    # All are false-positive stale candidates; the existing atomic gate
+    # correctly rejects their unchanged input hashes.
+    monkeypatch.setattr(
+        runner.processing_repository,
+        "claim_candidates",
+        lambda *_args, **_kwargs: [],
+    )
+
+    assert runner._claim_pending_pool(
+        None, limit=1, now=now, processed=True,
+    ) == []
+    assert len(pages) == 8
+    assert len(scanned) == 128
+    assert runner._stale_scan_cursor is not None
+
+    assert runner._claim_pending_pool(
+        None, limit=1, now=now, processed=True,
+    ) == []
+    assert len(scanned) == 145
+    assert scanned == [item.id for item in stories]
+    assert runner._stale_scan_cursor is None
