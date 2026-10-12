@@ -1065,6 +1065,22 @@ def test_selector_prioritizes_new_live_and_old_backfill():
                 )
                 article.updated_at = article.created_at
 
+            for index, article_id in enumerate(article_ids[:2]):
+                state = repository.ensure_state(
+                    db,
+                    article_id=article_id,
+                    pipeline=PIPELINE,
+                )
+                state.processed_input_hash = (
+                    chr(ord("a") + index) * 64
+                )
+                state.processed_provider = "test-provider"
+                state.processed_provider_version = "0"
+                state.processed_configuration_version = "1"
+                state.last_processed_at = (
+                    now - timedelta(hours=4 - index)
+                )
+
         with TestSessionLocal.begin() as db:
             selected = repository.select_candidate_article_ids(
                 db,
