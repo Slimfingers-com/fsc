@@ -30,13 +30,31 @@ export default async function AnalysisPage({ params }: Props) {
     );
   }
 
+  const germanArticleIds = new Set(
+    story.articles.filter((article) => article.language_code?.toLowerCase().startsWith("de")).map((article) => article.article_id),
+  );
+  const germanArticles = story.articles.filter((article) => germanArticleIds.has(article.article_id));
+  const title = germanArticles.find((article) => article.title)?.title
+    ?? story.title ?? "Ereignis im Überblick";
+  const visibleGroups = analysis.claim_groups.filter((group) =>
+    group.members.some((member) => germanArticleIds.has(member.article_id)),
+  );
+  const groupTitles = new Map(visibleGroups.map((group) => [
+    group.id,
+    group.members.find((member) => germanArticleIds.has(member.article_id))?.claim_text
+      ?? group.representative_claim_text,
+  ]));
+  const visibleDifferences = analysis.differences.filter(
+    (difference) => groupTitles.has(difference.left_group_id) && groupTitles.has(difference.right_group_id),
+  );
+
   return (
     <>
       <section className="story-hero top-space">
         <div>
-          <p className="eyebrow">Integrierte Analyse</p>
-          <h1>{story.title ?? "Story ohne Titel"}</h1>
-          <p className="lead compact">Beobachtbare Aussagen, Evidenz, Konsens, Unterschiede und Coverage – ohne Truth- oder Glaubwürdigkeits-Score.</p>
+          <p className="eyebrow">AUSSAGEN UND QUELLEN</p>
+          <h1>{title}</h1>
+          <p className="lead compact">Aussagen, Belege und Unterschiede transparent nebeneinanderstellen. Sichtbar sind hier nur deutschsprachige Textbeiträge; die integrierte Berechnung berücksichtigt weiterhin alle zugehörigen Quellen.</p>
         </div>
         <Link className="button secondary" href={`/stories/${storyId}`}>← Story</Link>
       </section>
@@ -50,7 +68,7 @@ export default async function AnalysisPage({ params }: Props) {
 
       {analysis.coverage_gaps.length > 0 ? (
         <section className="section">
-          <p className="eyebrow">Coverage</p><h2>Beobachtbare Abdeckungslücken</h2>
+          <p className="eyebrow">ABDECKUNG</p><h2>Beobachtbare Abdeckungslücken</h2>
           <div className="notice-grid">
             {analysis.coverage_gaps.map((gap) => (
               <div className="notice" key={gap.id}>
@@ -62,15 +80,15 @@ export default async function AnalysisPage({ params }: Props) {
         </section>
       ) : null}
 
-      {analysis.differences.length > 0 ? (
+      {visibleDifferences.length > 0 ? (
         <section className="section">
-          <p className="eyebrow">Differences</p><h2>Widersprüche und strittige Aussagen</h2>
+          <p className="eyebrow">Differences</p><h2>Unterschiedliche Aussagen</h2>
           <div className="stack">
-            {analysis.differences.map((difference) => (
+            {visibleDifferences.map((difference) => (
               <article className="difference" key={difference.id}>
-                <div><span className={difference.difference_kind === "contradiction" ? "badge danger" : "badge warning"}>{label(difference.difference_kind)}</span><p>{difference.left_claim_text}</p><small>{difference.left_independent_source_count} unabhängige Quellenverbünde</small></div>
+                <div><span className={difference.difference_kind === "contradiction" ? "badge danger" : "badge warning"}>{label(difference.difference_kind)}</span><p>{groupTitles.get(difference.left_group_id)}</p><small>{difference.left_independent_source_count} unabhängige Quellenverbünde</small></div>
                 <span className="versus">↔</span>
-                <div><span className={difference.difference_kind === "contradiction" ? "badge danger" : "badge warning"}>{label(difference.difference_kind)}</span><p>{difference.right_claim_text}</p><small>{difference.right_independent_source_count} unabhängige Quellenverbünde</small></div>
+                <div><span className={difference.difference_kind === "contradiction" ? "badge danger" : "badge warning"}>{label(difference.difference_kind)}</span><p>{groupTitles.get(difference.right_group_id)}</p><small>{difference.right_independent_source_count} unabhängige Quellenverbünde</small></div>
               </article>
             ))}
           </div>
@@ -78,9 +96,9 @@ export default async function AnalysisPage({ params }: Props) {
       ) : null}
 
       <section className="section">
-        <p className="eyebrow">Claim Groups</p><h2>Aussagen und Evidenz</h2>
+        <p className="eyebrow">NACHVOLLZIEHBARE AUSSAGEN</p><h2>Aussagen und Belege</h2>
         <div className="stack">
-          {analysis.claim_groups.map((group) => (
+          {visibleGroups.map((group) => (
             <article className="claim-card" key={group.id}>
               <div className="claim-header">
                 <div>
@@ -88,7 +106,7 @@ export default async function AnalysisPage({ params }: Props) {
                     <span className={group.consensus.consensus_kind === "shared" ? "badge success" : "badge"}>{label(group.consensus.consensus_kind)}</span>
                     {group.missing_perspective ? <span className="badge warning">{label(group.missing_perspective.missing_kind)}</span> : null}
                   </div>
-                  <h3>{group.representative_claim_text}</h3>
+                  <h3>{groupTitles.get(group.id)}</h3>
                 </div>
                 <span className="confidence">
                   Gruppierungs-Konfidenz {percent(group.confidence)}
@@ -99,10 +117,10 @@ export default async function AnalysisPage({ params }: Props) {
                 <span>{group.consensus.evidence_item_count} Evidenzen</span>
                 <span>{group.consensus.attributed_perspective_count} attribuierte Perspektiven</span>
               </div>
-              {group.evidence.length > 0 ? (
+              {group.evidence.some((evidence) => germanArticleIds.has(evidence.article_id)) ? (
                 <div className="evidence-list">
                   <h4>Evidenz</h4>
-                  {group.evidence.map((evidence) => (
+                  {group.evidence.filter((evidence) => germanArticleIds.has(evidence.article_id)).map((evidence) => (
                     <blockquote key={evidence.id}>
                       <div className="meta-row"><span>{evidence.source_name}</span><span>{label(evidence.evidence_kind)}</span><span>{label(evidence.relation_kind)}</span></div>
                       <p>{evidence.evidence_text}</p>
@@ -111,9 +129,9 @@ export default async function AnalysisPage({ params }: Props) {
                 </div>
               ) : null}
               <details>
-                <summary>{group.members.length} zugrunde liegende Claims</summary>
+                <summary>{group.members.filter((member) => germanArticleIds.has(member.article_id)).length} zugrunde liegende deutschsprachige Aussagen</summary>
                 <div className="member-list">
-                  {group.members.map((member) => {
+                  {group.members.filter((member) => germanArticleIds.has(member.article_id)).map((member) => {
                     const externalUrl = safeExternalUrl(member.article_url);
                     return (
                     <div key={member.claim_id}>
