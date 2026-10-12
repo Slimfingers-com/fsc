@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "FSC", template: "%s · FSC" },
-  description: "Quellenübergreifende Story- und Debattenanalyse",
+  description: "Nachrichten vergleichen, Aussagen prüfen und unterschiedliche Perspektiven verstehen.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -16,17 +16,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="shell nav">
             <Link className="brand" href="/">
               <span className="brand-mark">FSC</span>
-              <span className="brand-text">Story Intelligence</span>
+              <span className="brand-text">Nachrichten im Vergleich</span>
             </Link>
             <nav className="nav-links" aria-label="Hauptnavigation">
-              <Link href="/">Suche</Link>
-              <Link href="/stories">Stories</Link>
+              <Link href="/">Startseite</Link>
+              <Link href="/stories">Ereignisse</Link>
             </nav>
           </div>
         </header>
         <main className="shell">{children}</main>
         <footer className="shell footer">
-          FSC zeigt Quellen, Aussagen und beobachtbare Unterschiede. Keine Truth- oder Glaubwürdigkeits-Scores.
+          FSC · Deutschsprachige Nachrichten im Vergleich. Aussagen und Quellen transparent einordnen – ohne Wahrheits- oder Glaubwürdigkeitsurteile.
         </footer>
       </body>
     </html>
