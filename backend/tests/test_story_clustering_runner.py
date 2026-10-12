@@ -1334,3 +1334,56 @@ def test_candidate_discovery_allows_cross_language_shared_entities_without_seman
     assert candidates[0].article_id == candidate_article_id
     assert candidates[0].language_code == "en"
     assert candidates[0].entity_ids == shared_entities
+
+
+def test_current_story_states_are_prefiltered_before_feature_loading(
+    monkeypatch,
+):
+    create_committed_articles(3)
+    runner = make_runner(worker_id="prefilter-current-stories")
+
+    initial = runner.run_pending(limit=3)
+    assert initial.processed == 3
+
+    def reject_reloading_current_features(*args, **kwargs):
+        raise AssertionError(
+            "Current stories must not enter expensive feature loading"
+        )
+
+    monkeypatch.setattr(
+        runner.service.repository,
+        "load_feature_ids",
+        reject_reloading_current_features,
+    )
+
+    again = runner.run_pending(limit=3)
+    assert (again.selected, again.processed) == (0, 0)
+
+
+def test_story_selector_detects_article_freshness_without_version_change():
+    article_id = create_committed_articles(1)[0]
+    runner = make_runner(worker_id="prefilter-freshness-stories")
+
+    first = runner.run_pending(limit=1)
+    assert first.processed == 1
+
+    with TestSessionLocal.begin() as db:
+        article = db.get(Article, article_id)
+        state = db.scalar(
+            select(ArticleProcessingState).where(
+                ArticleProcessingState.article_id == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+            )
+        )
+        assert state is not None
+        article.title = "Updated title after story clustering"
+        article.normalized_title = "updated title after story clustering"
+        article.updated_at = state.last_processed_at + timedelta(
+            seconds=1
+        )
+
+    second = runner.run_pending(limit=1)
+    assert (second.selected, second.processed, second.failed) == (
+        1, 1, 0
+    )

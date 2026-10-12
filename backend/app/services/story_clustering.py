@@ -6,8 +6,8 @@ from datetime import UTC, datetime, timedelta
 from typing import Callable
 from uuid import UUID, uuid4
 
-from sqlalchemy import and_, or_, select
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy import and_, exists, or_, select
+from sqlalchemy.orm import Session, aliased, sessionmaker
 
 from app.clustering.features import (
     TITLE_FEATURE_VERSION,
@@ -21,6 +21,8 @@ from app.clustering.provider import (
 )
 from app.enums.article_pipeline import ArticlePipeline
 from app.models.article import Article
+from app.models.entity import ArticleEntity
+from app.models.topic import ArticleTopic
 from app.models.article_processing import ArticleProcessingState
 from app.models.feed import Feed
 from app.models.source import Source
@@ -668,19 +670,93 @@ class StoryClusteringRunner:
                 Source.active.is_(True),
             ]
 
+            # Filter the already-current rows in SQL rather than
+            # loading their entity/topic features and asking the
+            # final atomic claim gate to reject them one page at a time.
+            state = ArticleProcessingState
+            claimable = or_(
+                state.id.is_(None),
+                and_(
+                    or_(
+                        state.retry_after.is_(None),
+                        state.retry_after <= now,
+                    ),
+                    or_(
+                        state.claim_expires_at.is_(None),
+                        state.claim_expires_at <= now,
+                    ),
+                ),
+            )
+            conditions.append(claimable)
             if processed:
-                conditions.append(
-                    ArticleProcessingState
-                    .processed_input_hash
-                    .is_not(None)
+                version_stale = or_(
+                    state.processed_provider.is_distinct_from(
+                        self.service.clusterer.provider
+                    ),
+                    state.processed_provider_version.is_distinct_from(
+                        self.service.clusterer.version
+                    ),
+                    state.processed_configuration_version.is_distinct_from(
+                        self.service.processing_configuration_version(
+                            window_hours=self.window_hours,
+                            candidate_limit=self.candidate_limit,
+                        )
+                    ),
+                )
+                upstream_state = aliased(ArticleProcessingState)
+                upstream_newer = exists(
+                    select(upstream_state.id).where(
+                        upstream_state.article_id == Article.id,
+                        upstream_state.pipeline.in_(
+                            [
+                                ArticlePipeline.ENTITY_TOPIC.value,
+                                ArticlePipeline.SEMANTIC_EMBEDDING.value,
+                            ]
+                        ),
+                        upstream_state.deleted_at.is_(None),
+                        upstream_state.last_processed_at
+                        > state.last_processed_at,
+                    )
+                    .correlate(Article, ArticleProcessingState)
+                )
+                entities_changed = exists(
+                    select(ArticleEntity.id).where(
+                        ArticleEntity.article_id == Article.id,
+                        or_(
+                            ArticleEntity.updated_at > state.last_processed_at,
+                            ArticleEntity.deleted_at > state.last_processed_at,
+                        ),
+                    )
+                    .correlate(Article, ArticleProcessingState)
+                )
+                topics_changed = exists(
+                    select(ArticleTopic.id).where(
+                        ArticleTopic.article_id == Article.id,
+                        or_(
+                            ArticleTopic.updated_at > state.last_processed_at,
+                            ArticleTopic.deleted_at > state.last_processed_at,
+                        ),
+                    )
+                    .correlate(Article, ArticleProcessingState)
+                )
+                conditions.extend(
+                    [
+                        state.processed_input_hash.is_not(None),
+                        or_(
+                            version_stale,
+                            Article.updated_at > state.last_processed_at,
+                            Article.semantic_embedded_at > state.last_processed_at,
+                            upstream_newer,
+                            entities_changed,
+                            topics_changed,
+                        ),
+                    ]
                 )
             else:
                 conditions.append(
                     or_(
-                        ArticleProcessingState.id.is_(None),
-                        ArticleProcessingState
-                        .processed_input_hash
-                        .is_(None),
+                        state.id.is_(None),
+                        state.processed_input_hash.is_(None),
                     )
                 )
 
@@ -695,18 +771,23 @@ class StoryClusteringRunner:
                 last_created_at is not None
                 and last_article_id is not None
             ):
-                conditions.append(
-                    or_(
-                        Article.created_at
-                        > last_created_at,
+                if processed:
+                    page_condition = or_(
+                        Article.created_at > last_created_at,
                         and_(
-                            Article.created_at
-                            == last_created_at,
-                            Article.id
-                            > last_article_id,
+                            Article.created_at == last_created_at,
+                            Article.id > last_article_id,
                         ),
                     )
-                )
+                else:
+                    page_condition = or_(
+                        Article.created_at < last_created_at,
+                        and_(
+                            Article.created_at == last_created_at,
+                            Article.id < last_article_id,
+                        ),
+                    )
+                conditions.append(page_condition)
 
             articles = list(
                 db.scalars(
@@ -719,8 +800,14 @@ class StoryClusteringRunner:
                     )
                     .where(*conditions)
                     .order_by(
-                        Article.created_at,
-                        Article.id,
+                        *(
+                            (Article.created_at, Article.id)
+                            if processed
+                            else (
+                                Article.created_at.desc(),
+                                Article.id.desc(),
+                            )
+                        )
                     )
                     .limit(page_size)
                 ).all()
