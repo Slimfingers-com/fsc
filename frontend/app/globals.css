@@ -71,10 +71,10 @@ p { overflow-wrap: break-word; }
 .lead.compact { max-width: 650px; margin: 0; }
 input, select { background: var(--paper); color: var(--text); border: 1px solid #ccd5d0; border-radius: 4px; min-height: 45px; padding: .75rem .9rem; }
 input:focus-visible, select:focus-visible, a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #e2b58c; outline-offset: 3px; }
-.front-hero { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(290px, .85fr); margin: 1.7rem 0 2.4rem; min-height: 505px; background: #1b3532; color: #f6f7f0; }
-.front-hero-main { padding: clamp(2rem, 5vw, 4.8rem); display: flex; flex-direction: column; align-items: flex-start; }
+.front-hero { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(290px, .85fr); margin: 1.7rem 0 2.4rem; min-height: 425px; background: #1b3532; color: #f6f7f0; }
+.front-hero-main { padding: clamp(1.8rem, 3.5vw, 3.5rem); display: flex; flex-direction: column; align-items: flex-start; }
 .front-hero .eyebrow { color: #e4b991; }
-.front-hero h1 { margin: .3rem 0 1.25rem; font-size: clamp(2.4rem, 4.65vw, 4.45rem); }
+.front-hero h1 { margin: .3rem 0 1.25rem; font-size: clamp(2.3rem, 4.2vw, 3.85rem); }
 .front-hero h1 em { color: #edc8a7; font-weight: 400; }
 .front-hero .lead { color: #d5ded9; max-width: 610px; margin: 0; }
 .hero-hint { margin: 1.2rem 0 0; color: #becdc7; font-size: .76rem; }
@@ -83,9 +83,9 @@ input:focus-visible, select:focus-visible, a:focus-visible, button:focus-visible
 .search-form input { flex: 1; min-width: 0; }
 .search-form button { background: #dfac83; border-color: #dfac83; color: #1b302d; white-space: nowrap; }
 .search-form button:hover { background: #f4c29e; border-color: #f4c29e; }
-.front-hero-aside { padding: 2.1rem 2rem; border-left: 1px solid #47605b; display: flex; flex-direction: column; }
+.front-hero-aside { padding: 1.8rem 1.85rem; border-left: 1px solid #47605b; display: flex; flex-direction: column; }
 .aside-heading { display: flex; gap: 1rem; justify-content: space-between; color: #d8bca3; font-size: .63rem; letter-spacing: .12em; margin-bottom: 1.25rem; }
-.aside-step { display: flex; gap: 1rem; padding: 1.15rem 0; border-top: 1px solid #49615a; }
+.aside-step { display: flex; gap: 1rem; padding: .85rem 0; border-top: 1px solid #49615a; }
 .aside-step > span { color: #e2ba93; font: 600 1.1rem Georgia, serif; }
 .aside-step strong { font-weight: 700; }
 .aside-step p { color: #ced8d2; font-size: .85rem; line-height: 1.65; margin: .3rem 0 0; }

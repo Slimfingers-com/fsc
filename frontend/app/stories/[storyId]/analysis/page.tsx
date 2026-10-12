@@ -1,3 +1,4 @@
+import { isGermanLanguage } from "@/lib/language";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ApiError, getStory, getStoryAnalysis } from "@/lib/api";
@@ -17,6 +18,13 @@ export default async function AnalysisPage({ params }: Props) {
     if (error instanceof ApiError && error.status === 404) notFound();
     throw error;
   }
+  // A direct link must follow the same German-language rule as
+  // public search and discovery, even for a wholly foreign Story.
+  if (!story.articles.some((article) =>
+    isGermanLanguage(article.language_code)
+  )) {
+    notFound();
+  }
   const analysis = await getStoryAnalysis(storyId);
 
   if (!analysis) {
@@ -31,11 +39,11 @@ export default async function AnalysisPage({ params }: Props) {
   }
 
   const germanArticleIds = new Set(
-    story.articles.filter((article) => article.language_code?.toLowerCase().startsWith("de")).map((article) => article.article_id),
+    story.articles.filter((article) => isGermanLanguage(article.language_code)).map((article) => article.article_id),
   );
   const germanArticles = story.articles.filter((article) => germanArticleIds.has(article.article_id));
   const title = germanArticles.find((article) => article.title)?.title
-    ?? story.title ?? "Ereignis im Überblick";
+    ?? "Ereignis im Überblick";
   const visibleGroups = analysis.claim_groups.filter((group) =>
     group.members.some((member) => germanArticleIds.has(member.article_id)),
   );

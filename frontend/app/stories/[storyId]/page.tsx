@@ -1,3 +1,4 @@
+import { isGermanLanguage } from "@/lib/language";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,7 +10,13 @@ type Props = { params: Promise<{ storyId: string }> };
 
 async function load(storyId: string) {
   try {
-    return await getStory(storyId);
+    const story = await getStory(storyId);
+    if (!story.articles.some((article) =>
+      isGermanLanguage(article.language_code)
+    )) {
+      notFound();
+    }
+    return story;
   } catch (error) {
     if (error instanceof ApiError && error.status === 404) notFound();
     throw error;
@@ -20,8 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { storyId } = await params;
   const story = await load(storyId);
   return {
-    title: story.articles.find((article) => article.language_code?.toLowerCase().startsWith("de") && article.title)?.title
-      ?? story.title ?? "Ereignis",
+    title: story.articles.find((article) => isGermanLanguage(article.language_code) && article.title)?.title
+      ?? "Ereignis",
   };
 }
 
@@ -29,11 +36,11 @@ export default async function StoryPage({ params }: Props) {
   const { storyId } = await params;
   const story = await load(storyId);
   const germanArticles = story.articles.filter(
-    (article) => article.language_code?.toLowerCase().startsWith("de"),
+    (article) => isGermanLanguage(article.language_code),
   );
   const germanSourceCount = new Set(germanArticles.map((article) => article.source_id)).size;
   const displayTitle = germanArticles.find((article) => article.title)?.title
-    ?? story.title ?? "Ereignis ohne Titel";
+    ?? "Ereignis ohne Titel";
 
   return (
     <>
