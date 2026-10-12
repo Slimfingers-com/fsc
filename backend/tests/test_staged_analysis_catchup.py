@@ -105,3 +105,46 @@ def test_deadline_defers_work_without_starting_a_stage(monkeypatch):
 
     monkeypatch.setattr(job, "TargetedClaimRelations", FakeRunner)
     assert job.execute_stages(ids, monotonic() - 1, 1) == 0
+
+
+def test_targeted_selection_does_not_skip_claimable_stories():
+    from datetime import timedelta
+
+    target_ids = [uuid4() for _ in range(13)]
+
+    class Service:
+        def load_snapshot(self, _db, *, story_id):
+            return story_id
+
+        def candidate(self, story_id):
+            return SimpleNamespace(story_id=story_id)
+
+    class Repository:
+        def claim_candidates(
+            self, _db, *, candidates, limit, **_kwargs
+        ):
+            assert len(candidates) <= limit
+            return [
+                SimpleNamespace(story_id=c.story_id)
+                for c in candidates[:limit]
+            ]
+
+    runner = job.TargetedMixin(target_ids=target_ids)
+    runner.service = Service()
+    runner.processing_repository = Repository()
+    runner.pipeline = "claim_relations"
+    runner.worker_id = "staged-cursor-test"
+    runner.claim_ttl_seconds = int(timedelta(minutes=15).total_seconds())
+
+    claimed = []
+    while runner.cursor < len(target_ids):
+        claimed.extend(
+            runner._claim_pending(
+                None,
+                limit=3,
+                now=datetime.now(UTC),
+            )
+        )
+
+    assert len(claimed) == len(target_ids)
+    assert [item.story_id for item in claimed] == target_ids
