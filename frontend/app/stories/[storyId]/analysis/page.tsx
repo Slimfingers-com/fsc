@@ -48,6 +48,11 @@ export default async function AnalysisPage({ params }: Props) {
     (difference) => groupTitles.has(difference.left_group_id) && groupTitles.has(difference.right_group_id),
   );
 
+  const germanSourceCount = new Set(germanArticles.map((article) => article.source_id)).size;
+  const sharedVisibleGroupCount = visibleGroups.filter(
+    (group) => group.consensus.consensus_kind === "shared",
+  ).length;
+
   return (
     <>
       <section className="story-hero top-space">
@@ -60,10 +65,10 @@ export default async function AnalysisPage({ params }: Props) {
       </section>
 
       <section className="metric-grid">
-        <div className="metric"><strong>{analysis.coverage.claim_group_count}</strong><span>Aussagegruppen</span></div>
-        <div className="metric"><strong>{analysis.coverage.shared_group_count}</strong><span>Geteilte Aussagen</span></div>
-        <div className="metric"><strong>{analysis.coverage.difference_count}</strong><span>Unterschiede</span></div>
-        <div className="metric"><strong>{analysis.coverage.independent_content_source_count}</strong><span>Unabh. Quellen</span></div>
+        <div className="metric"><strong>{visibleGroups.length}</strong><span>Deutschsprachige Aussagegruppen</span></div>
+        <div className="metric"><strong>{sharedVisibleGroupCount}</strong><span>Quellenübergreifende Gruppen</span></div>
+        <div className="metric"><strong>{visibleDifferences.length}</strong><span>Unterschiede in sichtbaren Gruppen</span></div>
+        <div className="metric"><strong>{germanSourceCount}</strong><span>Deutschsprachige Quellen</span></div>
       </section>
 
       {analysis.coverage_gaps.length > 0 ? (
@@ -82,7 +87,7 @@ export default async function AnalysisPage({ params }: Props) {
 
       {visibleDifferences.length > 0 ? (
         <section className="section">
-          <p className="eyebrow">Differences</p><h2>Unterschiedliche Aussagen</h2>
+          <p className="eyebrow">UNTERSCHIEDE</p><h2>Unterschiedliche Aussagen</h2>
           <div className="stack">
             {visibleDifferences.map((difference) => (
               <article className="difference" key={difference.id}>
