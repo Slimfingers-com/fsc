@@ -104,8 +104,8 @@ class ReleaseGateTests(unittest.TestCase):
             Path(__file__).resolve().parents[2]
             / ".github/workflows/publish-release.yml"
         ).read_text(encoding="utf-8")
-        event_block = workflow.split("\\non:\\n", 1)[1].split(
-            "\\npermissions:", 1
+        event_block = workflow.split("\non:\n", 1)[1].split(
+            "\npermissions:", 1
         )[0]
         self.assertIn("  workflow_dispatch:", event_block)
         self.assertNotIn("  workflow_run:", event_block)
