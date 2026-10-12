@@ -1200,3 +1200,41 @@ def test_language_filter_includes_multilingual_story_and_local_title(client, db)
     assert all_item["article_count"] == 2
     assert all_item["source_count"] == 2
     assert client.get("/stories", params={"language": "fr"}).json()["total"] == 0
+
+
+def test_german_language_filter_includes_german_from_other_countries(client, db):
+    now = datetime.now(UTC)
+    _, swiss_feed = add_source(db, name="Schweizer Medium", slug="swiss-de")
+    _, austrian_feed = add_source(db, name="Österreichisches Medium", slug="austrian-de")
+    _, english_feed = add_source(db, name="English Media", slug="english-world")
+    story = add_story(db, language="mul")
+    swiss = add_article(
+        db, feed=swiss_feed, title="Schweizer Bericht",
+        language="de-CH", published_at=now - timedelta(hours=2),
+    )
+    austrian = add_article(
+        db, feed=austrian_feed, title="Österreichischer Bericht",
+        language="de-AT", published_at=now - timedelta(hours=1),
+    )
+    english = add_article(
+        db, feed=english_feed, title="English report",
+        language="en", published_at=now,
+    )
+    for article in (swiss, austrian, english):
+        add_membership(db, story=story, article=article)
+
+    response = client.get("/stories", params={"language": "de", "min_sources": 2})
+    assert response.status_code == 200
+    assert response.json()["total"] == 1
+    item = response.json()["items"][0]
+    assert item["story_id"] == str(story.id)
+    assert item["title"] == "Österreichischer Bericht"
+    assert item["article_count"] == 2
+    assert item["source_count"] == 2
+    assert datetime.fromisoformat(item["last_article_at"].replace("Z", "+00:00")) == austrian.published_at
+    assert client.get("/stories", params={"language": "de", "min_sources": 3}).json()["total"] == 0
+
+    # The multilingual corpus itself still contains all three originals.
+    all_item = client.get("/stories").json()["items"][0]
+    assert all_item["article_count"] == 3
+    assert all_item["source_count"] == 3
