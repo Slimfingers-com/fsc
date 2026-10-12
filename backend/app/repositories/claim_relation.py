@@ -11,6 +11,7 @@ from app.models.claim_relation import StoryClaimGroup, StoryClaimRelation
 from app.models.feed import Feed
 from app.models.source import Source
 from app.models.story import Story, StoryArticle
+from app.models.story_processing import StoryProcessingState
 
 
 @dataclass(frozen=True, slots=True)
@@ -41,6 +42,13 @@ class ClaimRelationRepository:
         after_created_at: datetime | None,
         after_id: UUID | None,
         limit: int,
+        processed: bool | None = None,
+        now: datetime | None = None,
+        pipeline: str = "claim_relations",
+        provider: str | None = None,
+        provider_version: str | None = None,
+        configuration_version: str | None = None,
+        excluded_story_ids: set[UUID] | None = None,
     ) -> list[Story]:
         eligible_claim = exists(
             select(ArticleClaim.id)
@@ -56,22 +64,146 @@ class ClaimRelationRepository:
             )
         )
         conditions = [Story.deleted_at.is_(None), eligible_claim]
-        if after_created_at is not None and after_id is not None:
-            conditions.append(
-                or_(
-                    Story.created_at > after_created_at,
-                    and_(
-                        Story.created_at == after_created_at,
-                        Story.id > after_id,
-                    ),
+        if excluded_story_ids:
+            conditions.append(Story.id.not_in(excluded_story_ids))
+
+        query = select(Story)
+        if processed is not None:
+            if (
+                now is None
+                or provider is None
+                or provider_version is None
+                or configuration_version is None
+            ):
+                raise ValueError(
+                    "state-prefilter requires now and provider identity"
                 )
+            state = StoryProcessingState
+            query = query.outerjoin(
+                state,
+                and_(
+                    state.story_id == Story.id,
+                    state.pipeline == pipeline,
+                    state.deleted_at.is_(None),
+                ),
             )
+            conditions.extend(
+                [
+                    or_(
+                        state.retry_after.is_(None),
+                        state.retry_after <= now,
+                    ),
+                    or_(
+                        state.claim_expires_at.is_(None),
+                        state.claim_expires_at <= now,
+                    ),
+                ]
+            )
+            if processed:
+                # SQL prefilter only. The exact snapshot hash and
+                # atomic claim gate remain authoritative.
+                membership_changed = exists(
+                    select(StoryArticle.id)
+                    .where(
+                        StoryArticle.story_id == Story.id,
+                        or_(
+                            StoryArticle.created_at > state.last_processed_at,
+                            StoryArticle.updated_at > state.last_processed_at,
+                            StoryArticle.deleted_at > state.last_processed_at,
+                        ),
+                    )
+                    .correlate(Story, state)
+                )
+                claim_changed = exists(
+                    select(ArticleClaim.id)
+                    .select_from(StoryArticle)
+                    .join(
+                        ArticleClaim,
+                        ArticleClaim.article_id == StoryArticle.article_id,
+                    )
+                    .where(
+                        StoryArticle.story_id == Story.id,
+                        StoryArticle.deleted_at.is_(None),
+                        or_(
+                            ArticleClaim.created_at > state.last_processed_at,
+                            ArticleClaim.updated_at > state.last_processed_at,
+                            ArticleClaim.deleted_at > state.last_processed_at,
+                            ArticleClaim.semantic_embedded_at
+                            > state.last_processed_at,
+                        ),
+                    )
+                    .correlate(Story, state)
+                )
+                article_or_feed_changed = exists(
+                    select(Article.id)
+                    .select_from(StoryArticle)
+                    .join(Article, Article.id == StoryArticle.article_id)
+                    .join(Feed, Feed.id == Article.feed_id)
+                    .where(
+                        StoryArticle.story_id == Story.id,
+                        StoryArticle.deleted_at.is_(None),
+                        or_(
+                            Article.updated_at > state.last_processed_at,
+                            Feed.updated_at > state.last_processed_at,
+                        ),
+                    )
+                    .correlate(Story, state)
+                )
+                conditions.extend(
+                    [
+                        state.processed_input_hash.is_not(None),
+                        or_(
+                            state.processed_provider.is_distinct_from(provider),
+                            state.processed_provider_version.is_distinct_from(
+                                provider_version
+                            ),
+                            state.processed_configuration_version.is_distinct_from(
+                                configuration_version
+                            ),
+                            Story.updated_at > state.last_processed_at,
+                            membership_changed,
+                            claim_changed,
+                            article_or_feed_changed,
+                        ),
+                    ]
+                )
+            else:
+                conditions.append(
+                    or_(
+                        state.id.is_(None),
+                        state.processed_input_hash.is_(None),
+                    )
+                )
+
+        if after_created_at is not None and after_id is not None:
+            if processed is False:
+                conditions.append(
+                    or_(
+                        Story.created_at < after_created_at,
+                        and_(
+                            Story.created_at == after_created_at,
+                            Story.id < after_id,
+                        ),
+                    )
+                )
+            else:
+                conditions.append(
+                    or_(
+                        Story.created_at > after_created_at,
+                        and_(
+                            Story.created_at == after_created_at,
+                            Story.id > after_id,
+                        ),
+                    )
+                )
+        order_by = (
+            (Story.created_at.desc(), Story.id.desc())
+            if processed is False
+            else (Story.created_at, Story.id)
+        )
         return list(
             db.scalars(
-                select(Story)
-                .where(*conditions)
-                .order_by(Story.created_at, Story.id)
-                .limit(limit)
+                query.where(*conditions).order_by(*order_by).limit(limit)
             ).all()
         )
 
