@@ -835,3 +835,66 @@ def test_claim_relation_article_lock_is_compatible_with_key_share():
                 second_db,
                 article_ids=[article_id],
             )
+
+
+def test_claim_relation_live_selection_is_newest_first():
+    story_ids, _ = create_committed_stories(3)
+    runner = make_runner("claim-relation-newest-live")
+    result = runner.run_pending(limit=1)
+    assert (result.selected, result.processed, result.failed) == (1, 1, 0)
+    with TestSessionLocal() as db:
+        processed = set(
+            db.scalars(
+                select(StoryProcessingState.story_id).where(
+                    StoryProcessingState.pipeline
+                    == StoryPipeline.CLAIM_RELATIONS.value,
+                    StoryProcessingState.processed_input_hash.is_not(None),
+                )
+            )
+        )
+    assert story_ids[-1] in processed
+    assert not processed.intersection(story_ids[:-1])
+
+
+def test_claim_relation_current_stories_skip_snapshot_loading(monkeypatch):
+    story_ids, _ = create_committed_stories(2)
+    runner = make_runner("claim-relation-current-prefilter")
+    initial = runner.run_pending(limit=2)
+    assert initial.processed == 2
+
+    def no_snapshot_for_current(*args, **kwargs):
+        raise AssertionError("current stories should not load claim snapshots")
+
+    monkeypatch.setattr(runner.service, "load_snapshot", no_snapshot_for_current)
+    again = runner.run_pending(limit=2)
+    assert (again.selected, again.processed, again.failed) == (0, 0, 0)
+
+
+def test_claim_relation_backfill_is_reserved_alongside_live():
+    prior_ids, _ = create_committed_stories(4)
+    first = make_runner("claim-relation-initial")
+    assert first.run_pending(limit=4).processed == 4
+    fresh_ids, _ = create_committed_stories(2)
+
+    class NextVersionAnalyzer(RuleBasedClaimRelationAnalyzer):
+        version = "prefilter-next-version"
+
+    runner = make_runner(
+        "claim-relation-priority",
+        analyzer=NextVersionAnalyzer(),
+    )
+    result = runner.run_pending(limit=5)
+    assert (result.selected, result.processed, result.failed) == (5, 5, 0)
+    with TestSessionLocal() as db:
+        changed = set(
+            db.scalars(
+                select(StoryProcessingState.story_id).where(
+                    StoryProcessingState.pipeline
+                    == StoryPipeline.CLAIM_RELATIONS.value,
+                    StoryProcessingState.processed_provider_version
+                    == "prefilter-next-version",
+                )
+            )
+        )
+    assert set(fresh_ids).issubset(changed)
+    assert len(changed.intersection(prior_ids)) == 3
