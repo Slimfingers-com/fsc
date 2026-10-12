@@ -9,6 +9,8 @@ on:
       - "frontend/**"
       - "infrastructure/**"
       - ".github/workflows/full-stack-e2e.yml"
+      - ".github/workflows/publish-release.yml"
+  workflow_dispatch:
   push:
     branches:
       - main

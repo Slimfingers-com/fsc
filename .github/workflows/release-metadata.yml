@@ -10,6 +10,9 @@ on:
       - "scripts/verify_release_version.py"
       - "docs/operations/release-*.md"
       - ".github/workflows/release-metadata.yml"
+      - ".github/workflows/publish-release.yml"
+      - "scripts/check_release_gates.py"
+      - "scripts/tests/test_release_gates.py"
   push:
     branches:
       - main
@@ -32,3 +35,6 @@ jobs:
       - name: Verify release tag
         if: github.ref_type == 'tag'
         run: python scripts/verify_release_version.py --tag "$GITHUB_REF_NAME"
+
+      - name: Test fail-closed manual release checks
+        run: python -m unittest discover -s scripts/tests -p 'test_release_gates.py'

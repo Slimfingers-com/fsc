@@ -190,3 +190,58 @@ Before promoting a release candidate:
 - `.env` contains no placeholder secrets.
 - TLS termination and firewall rules are active.
 - A recent encrypted off-host database backup exists.
+
+
+## Controlled FSC release publication (manual approval)
+
+**Policy A:** Passing CI, a successful production deployment, or closing a
+GitHub issue must **never** publish a GitHub Release automatically. In
+particular, do not enable the old `workflow_run` publication proposal in PR
+#24. Publishing is a separate, deliberate operator action.
+
+### Prepare and verify the exact release commit
+
+1. Complete the v1.0 product-quality acceptance in issue
+   [#29](https://github.com/Slimfingers-com/fsc/issues/29). Keep that issue
+   open until its full production-cycle and manual quality requirements are
+   actually met. Release publication is blocked while it is open.
+2. In a reviewed PR, update `VERSION`, `CHANGELOG.md`, the frontend package
+   and lock versions, and `docs/operations/release-<version>.md`. Do not
+   create the version tag or GitHub Release in the PR.
+3. Merge the reviewed release metadata to `main`. The Backend Tests,
+   Frontend Tests, Full Stack E2E and Release Metadata workflows run
+   automatically on the resulting main commit. Record its full 40-character
+   SHA. If any check is missing, failing, or not finished, do not publish.
+   Each workflow also supports manual reruns on main for operational recovery.
+4. The Release Metadata workflow automatically verifies metadata consistency
+   and the fail-closed release gate regression tests. No release is produced.
+
+### Manually publish after approval
+
+1. On GitHub, open **Actions → Publish FSC Release (Manual Approval) →
+   Run workflow** and select **main**.
+2. Enter the exact version (such as `1.0.0`), the full reviewed `main`
+   commit SHA, and the confirmation phrase
+   `PUBLISH FSC <version>` (for example `PUBLISH FSC 1.0.0`).
+3. The workflow fails closed unless the selected commit is still `main`
+   HEAD, version metadata and release notes agree, issue #29 is **closed**,
+   no tag already exists, and **all four** required CI workflows succeeded
+   on that **exact commit**. Green checks on earlier commits or PR-only
+   runs are not acceptable.
+4. The publish job uses the `release-publication` GitHub Environment.
+   **Repository maintainers should configure required reviewers** in
+   Settings → Environments → release-publication for an additional
+   human approval after preflight. The workflow does not configure
+   those reviewer settings and cannot assume they are enabled.
+5. After any environment approval, the workflow rechecks the exact commit,
+   product-acceptance issue, metadata, existing tag and CI gates before
+   creating the release. It verifies the resulting tag points to the
+   approved SHA. Prerelease versions are published as prereleases.
+
+Only the explicit **Run workflow** action with the version-specific
+confirmation phrase can start publication. Normal commits, tags, CI
+successes, deploys, and the production-quality monitor never publish.
+This workflow creates a GitHub Release; it does **not** deploy to Hetzner.
+
+Existing `v1.0.0-rc.1` and `v1.0.0-rc.2` tags/releases remain untouched.
+Do not reuse an existing tag or bump the production VERSION silently.
