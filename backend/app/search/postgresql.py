@@ -1,6 +1,6 @@
 import re
 
-from sqlalchemy import Float, cast, func, literal, literal_column, select
+from sqlalchemy import Float, cast, func, literal, literal_column, or_, select
 from sqlalchemy.sql.elements import ColumnElement
 from sqlalchemy.orm import Session
 
@@ -41,7 +41,14 @@ class PostgreSQLFullTextSearchProvider(SearchProvider):
         if tsquery is not None:
             conditions.append(SearchDocument.search_vector.op("@@")(tsquery))
         if filters.language_code:
-            conditions.append(SearchDocument.language_code == filters.language_code)
+            conditions.append(
+                or_(
+                    SearchDocument.language_code == "de",
+                    SearchDocument.language_code.like("de-%"),
+                )
+                if filters.language_code == "de"
+                else SearchDocument.language_code == filters.language_code
+            )
         if filters.source_id:
             conditions.append(SearchDocument.source_id == filters.source_id)
         if filters.source_slug:

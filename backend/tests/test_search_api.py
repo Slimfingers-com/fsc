@@ -180,3 +180,28 @@ def test_search_excludes_deleted_and_inactive_entities(client, db):
     response = client.get("/search", params={"q": "searchable"})
     assert response.status_code == 200
     assert [item["source_slug"] for item in response.json()["items"]] == ["active"]
+
+
+def test_german_search_includes_swiss_and_austrian_german(client, db):
+    now = datetime.now(UTC)
+    add_indexed_article(
+        db, source_name="Swiss German", source_slug="swiss-search",
+        title="Schweizer Nachrichten", body="Schweizer Bericht",
+        language="de-CH", published_at=now,
+    )
+    add_indexed_article(
+        db, source_name="Austrian German", source_slug="austrian-search",
+        title="Österreichische Nachrichten", body="Österreichischer Bericht",
+        language="de-AT", published_at=now,
+    )
+    add_indexed_article(
+        db, source_name="English Medium", source_slug="english-search",
+        title="English report", body="English text",
+        language="en", published_at=now,
+    )
+    filtered = client.get("/search", params={"language": "de"})
+    assert filtered.status_code == 200
+    assert filtered.json()["total"] == 2
+    assert {item["source_slug"] for item in filtered.json()["items"]} == {
+        "swiss-search", "austrian-search",
+    }
