@@ -41,6 +41,7 @@ export type StoryDetail = StorySummary & {
   articles: {
     membership_id: string;
     article_id: string;
+    language_code: string | null;
     title: string | null;
     url: string | null;
     published_at: string | null;
