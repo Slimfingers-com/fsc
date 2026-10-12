@@ -1,6 +1,7 @@
 name: Release Metadata
 
 on:
+  workflow_call:
   pull_request:
     paths:
       - "VERSION"
