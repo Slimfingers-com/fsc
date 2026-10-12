@@ -108,12 +108,19 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
         )
 
     @staticmethod
-    def _representative_title_cte(eligible):
-        return (
-            select(
-                eligible.c.story_id,
-                eligible.c.article_title.label("title"),
+    def _representative_title_cte(eligible, language_code: str | None = None):
+        statement = select(
+            eligible.c.story_id,
+            eligible.c.article_title.label("title"),
+        )
+        if language_code is not None:
+            # A multilingual Story must use an original article title
+            # in the requested language, not an arbitrary foreign title.
+            statement = statement.where(
+                eligible.c.article_language_code == language_code
             )
+        return (
+            statement
             .distinct(eligible.c.story_id)
             .order_by(
                 eligible.c.story_id,
@@ -290,7 +297,7 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
         summary = self._summary_cte(eligible)
         representative = (
             self._representative_title_cte(
-                eligible
+                eligible, filters.language_code
             )
         )
 
@@ -318,9 +325,16 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
         )
 
         if filters.language_code is not None:
+            # Match the original languages of member Articles. Stories
+            # with Story.language_code='mul' must remain discoverable.
             statement = statement.where(
-                summary.c.language_code
-                == filters.language_code
+                summary.c.story_id.in_(
+                    select(eligible.c.story_id)
+                    .where(
+                        eligible.c.article_language_code
+                        == filters.language_code
+                    )
+                )
             )
 
         membership_filters_present = any(
