@@ -742,14 +742,16 @@ class ClaimRelationRunner:
             StoryProcessingClaim
         ] = []
         excluded_story_ids = excluded_story_ids or set()
-        page_size = max(
-            50,
-            limit * 4,
-        )
         last_created_at = None
         last_story_id = None
 
         while len(claimed) < limit:
+            # The atomic repository orders State rows by State.created_at,
+            # which need not match Story.created_at (ties use random UUIDs).
+            # Pass at most the remaining capacity so SQL's newest-first
+            # live / oldest-first backfill priority cannot be reshuffled
+            # by the final correctness gate.
+            page_size = limit - len(claimed)
             stories = (
                 self.service.repository.list_candidate_stories(
                     db,
