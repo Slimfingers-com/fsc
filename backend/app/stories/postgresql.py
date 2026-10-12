@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
 from app.models.article import Article
@@ -116,9 +116,17 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
         if language_code is not None:
             # A multilingual Story must use an original article title
             # in the requested language, not an arbitrary foreign title.
-            statement = statement.where(
-                eligible.c.article_language_code == language_code
-            )
+            if language_code == "de":
+                statement = statement.where(
+                    or_(
+                        eligible.c.article_language_code == "de",
+                        eligible.c.article_language_code.like("de-%"),
+                    )
+                )
+            else:
+                statement = statement.where(
+                    eligible.c.article_language_code == language_code
+                )
         return (
             statement
             .distinct(eligible.c.story_id)
@@ -299,12 +307,17 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
             # articles visible in that language, not all multilingual
             # members of the Story. Source country is intentionally
             # unrestricted.
+            language_condition = (
+                or_(
+                    eligible.c.article_language_code == "de",
+                    eligible.c.article_language_code.like("de-%"),
+                )
+                if filters.language_code == "de"
+                else eligible.c.article_language_code == filters.language_code
+            )
             eligible = (
                 select(eligible)
-                .where(
-                    eligible.c.article_language_code
-                    == filters.language_code
-                )
+                .where(language_condition)
                 .cte("visible_language_story_memberships")
             )
         summary = self._summary_cte(eligible)
@@ -336,19 +349,6 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 >= filters.min_sources,
             )
         )
-
-        if filters.language_code is not None:
-            # Match the original languages of member Articles. Stories
-            # with Story.language_code='mul' must remain discoverable.
-            statement = statement.where(
-                summary.c.story_id.in_(
-                    select(eligible.c.story_id)
-                    .where(
-                        eligible.c.article_language_code
-                        == filters.language_code
-                    )
-                )
-            )
 
         membership_filters_present = any(
             value is not None
