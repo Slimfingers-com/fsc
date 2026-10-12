@@ -19,29 +19,38 @@ async function load(storyId: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { storyId } = await params;
   const story = await load(storyId);
-  return { title: story.title ?? "Story" };
+  return {
+    title: story.articles.find((article) => article.language_code?.toLowerCase().startsWith("de") && article.title)?.title
+      ?? story.title ?? "Ereignis",
+  };
 }
 
 export default async function StoryPage({ params }: Props) {
   const { storyId } = await params;
   const story = await load(storyId);
+  const germanArticles = story.articles.filter(
+    (article) => article.language_code?.toLowerCase().startsWith("de"),
+  );
+  const germanSourceCount = new Set(germanArticles.map((article) => article.source_id)).size;
+  const displayTitle = germanArticles.find((article) => article.title)?.title
+    ?? story.title ?? "Ereignis ohne Titel";
 
   return (
     <>
       <section className="story-hero top-space">
         <div>
-          <p className="eyebrow">Story</p>
-          <h1>{story.title ?? "Story ohne Titel"}</h1>
+          <p className="eyebrow">NACHRICHTEN IM VERGLEICH</p>
+          <h1>{displayTitle}</h1>
           <div className="meta-row large">
-            <span>{story.article_count} Artikel</span><span>{story.source_count} Quellen</span>
+            <span>{germanArticles.length} deutschsprachige Artikel</span><span>{germanSourceCount} Quellen</span>
             <span>{formatDate(story.first_article_at)} – {formatDate(story.last_article_at)}</span>
           </div>
         </div>
-        <Link className="button primary-large" href={`/stories/${storyId}/analysis`}>Analyse öffnen →</Link>
+        <Link className="button primary-large" href={`/stories/${storyId}/analysis`}>Aussagen vergleichen ↗</Link>
       </section>
       <section className="metric-grid">
-        <div className="metric"><strong>{story.source_count}</strong><span>Quellen</span></div>
-        <div className="metric"><strong>{story.article_count}</strong><span>Artikel</span></div>
+        <div className="metric"><strong>{germanSourceCount}</strong><span>Deutschsprachige Quellen</span></div>
+        <div className="metric"><strong>{germanArticles.length}</strong><span>Deutschsprachige Artikel</span></div>
         <div className="metric"><strong>{story.entities.length}</strong><span>Entitäten</span></div>
         <div className="metric"><strong>{story.topics.length}</strong><span>Themen</span></div>
       </section>
@@ -55,14 +64,14 @@ export default async function StoryPage({ params }: Props) {
         </section>
       ) : null}
       <section className="section">
-        <p className="eyebrow">Quellenlage</p><h2>Artikel in dieser Story</h2>
+        <p className="eyebrow">DIE ORIGINALBERICHTE</p><h2>So berichten die Quellen</h2><p className="section-description">Die Ansicht zeigt nur deutschsprachige Artikel. Internationale Berichte bleiben für die Hintergrundanalyse erhalten.</p>
         <div className="stack">
-          {story.articles.map((article) => {
+          {germanArticles.map((article) => {
             const externalUrl = safeExternalUrl(article.url);
             return (
             <article className="card article-row" key={article.membership_id}>
               <div>
-                <div className="meta-row"><span>{article.source_name}</span><span>{formatDate(article.published_at)}</span><span>{percent(article.similarity_score)} Cluster-Match</span></div>
+                <div className="meta-row"><span>{article.source_name}</span><span>{formatDate(article.published_at)}</span><span>Zuordnung: {percent(article.similarity_score)}</span></div>
                 <h3>{article.title ?? "Artikel ohne Titel"}</h3>
               </div>
               {externalUrl ? <a className="text-link" href={externalUrl} target="_blank" rel="noopener noreferrer">Quelle ↗</a> : null}
