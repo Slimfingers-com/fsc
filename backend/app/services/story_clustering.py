@@ -703,16 +703,17 @@ class StoryClusteringRunner:
                         )
                     ),
                 )
+                # Only Entity/Topic processing contributes upstream
+                # feature changes. Claim-only Semantic processing does
+                # not change Article semantic features; the actual
+                # Article.semantic_embedded_at timestamp below covers
+                # future article embedding updates.
                 upstream_state = aliased(ArticleProcessingState)
                 upstream_newer = exists(
                     select(upstream_state.id).where(
                         upstream_state.article_id == Article.id,
-                        upstream_state.pipeline.in_(
-                            [
-                                ArticlePipeline.ENTITY_TOPIC.value,
-                                ArticlePipeline.SEMANTIC_EMBEDDING.value,
-                            ]
-                        ),
+                        upstream_state.pipeline
+                        == ArticlePipeline.ENTITY_TOPIC.value,
                         upstream_state.deleted_at.is_(None),
                         upstream_state.last_processed_at
                         > state.last_processed_at,
