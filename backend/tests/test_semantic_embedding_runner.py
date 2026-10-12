@@ -334,6 +334,8 @@ def test_runner_skips_expired_lease_without_paid_provider_call(
             .where(
                 ArticleProcessingRun.pipeline
                 == ArticlePipeline.SEMANTIC_EMBEDDING.value,
+                ArticleProcessingRun.worker_id
+                == "expired-lease-semantic-worker",
             )
             .order_by(ArticleProcessingRun.started_at.desc())
             .limit(1)
