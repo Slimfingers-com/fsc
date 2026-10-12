@@ -1,3 +1,4 @@
+import { isGermanLanguage } from "@/lib/language";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ApiError, getStory, getStoryAnalysis } from "@/lib/api";
@@ -20,7 +21,7 @@ export default async function AnalysisPage({ params }: Props) {
   // A direct link must follow the same German-language rule as
   // public search and discovery, even for a wholly foreign Story.
   if (!story.articles.some((article) =>
-    article.language_code?.toLowerCase().startsWith("de")
+    isGermanLanguage(article.language_code)
   )) {
     notFound();
   }
@@ -38,7 +39,7 @@ export default async function AnalysisPage({ params }: Props) {
   }
 
   const germanArticleIds = new Set(
-    story.articles.filter((article) => article.language_code?.toLowerCase().startsWith("de")).map((article) => article.article_id),
+    story.articles.filter((article) => isGermanLanguage(article.language_code)).map((article) => article.article_id),
   );
   const germanArticles = story.articles.filter((article) => germanArticleIds.has(article.article_id));
   const title = germanArticles.find((article) => article.title)?.title
