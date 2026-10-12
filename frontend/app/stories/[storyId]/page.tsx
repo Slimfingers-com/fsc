@@ -9,7 +9,13 @@ type Props = { params: Promise<{ storyId: string }> };
 
 async function load(storyId: string) {
   try {
-    return await getStory(storyId);
+    const story = await getStory(storyId);
+    if (!story.articles.some((article) =>
+      article.language_code?.toLowerCase().startsWith("de")
+    )) {
+      notFound();
+    }
+    return story;
   } catch (error) {
     if (error instanceof ApiError && error.status === 404) notFound();
     throw error;
@@ -21,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const story = await load(storyId);
   return {
     title: story.articles.find((article) => article.language_code?.toLowerCase().startsWith("de") && article.title)?.title
-      ?? story.title ?? "Ereignis",
+      ?? "Ereignis",
   };
 }
 
@@ -33,7 +39,7 @@ export default async function StoryPage({ params }: Props) {
   );
   const germanSourceCount = new Set(germanArticles.map((article) => article.source_id)).size;
   const displayTitle = germanArticles.find((article) => article.title)?.title
-    ?? story.title ?? "Ereignis ohne Titel";
+    ?? "Ereignis ohne Titel";
 
   return (
     <>
