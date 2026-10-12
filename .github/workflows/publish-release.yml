@@ -67,7 +67,7 @@ jobs:
             echo "Selected commit does not match workflow checkout." >&2
             exit 1
           }
-          test "$TARGET_SHA" = "$(git ls-remote origin refs/heads/main | cut -f1)" || {
+          test "$TARGET_SHA" = "$(gh api "/repos/$GH_REPO/branches/main" --jq '.commit.sha')" || {
             echo "Selected commit is no longer main HEAD." >&2
             exit 1
           }
@@ -83,7 +83,8 @@ jobs:
             echo "Issue #29 product-quality acceptance is not closed." >&2
             exit 1
           }
-          if [[ -n "$(git ls-remote --tags origin "refs/tags/v$RELEASE_VERSION")" ]]; then
+          tags="$(gh api "/repos/$GH_REPO/git/matching-refs/tags/v$RELEASE_VERSION" --jq '.[].ref')"
+          if printf '%s\n' "$tags" | grep -Fxq "refs/tags/v$RELEASE_VERSION"; then
             echo "A tag for this version already exists; will not republish." >&2
             exit 1
           fi
@@ -128,11 +129,12 @@ jobs:
         run: |
           set -Eeuo pipefail
           test "$TARGET_SHA" = "$(git rev-parse HEAD)"
-          test "$TARGET_SHA" = "$(git ls-remote origin refs/heads/main | cut -f1)"
+          test "$TARGET_SHA" = "$(gh api "/repos/$GH_REPO/branches/main" --jq '.commit.sha')"
           test "$RELEASE_VERSION" = "$(tr -d '[:space:]' < VERSION)"
           python scripts/verify_release_version.py --tag "v$RELEASE_VERSION"
           test "$(gh api "/repos/$GH_REPO/issues/29" --jq '.state')" = "closed"
-          if [[ -n "$(git ls-remote --tags origin "refs/tags/v$RELEASE_VERSION")" ]]; then
+          tags="$(gh api "/repos/$GH_REPO/git/matching-refs/tags/v$RELEASE_VERSION" --jq '.[].ref')"
+          if printf '%s\n' "$tags" | grep -Fxq "refs/tags/v$RELEASE_VERSION"; then
             echo "Release tag appeared during approval; refusing duplicate." >&2
             exit 1
           fi
