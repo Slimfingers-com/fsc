@@ -148,12 +148,12 @@ jobs:
       - name: Verify rendered Next.js routes through Nginx
         run: |
           home="$(curl --fail --silent http://127.0.0.1:8080/)"
-          echo "$home" | grep -F 'Artikel finden.'
-          echo "$home" | grep -F 'Neueste Artikel'
+          echo "$home" | grep -F 'Was passiert.'
+          echo "$home" | grep -F 'Neueste Meldungen'
 
           stories="$(curl --fail --silent http://127.0.0.1:8080/stories)"
-          echo "$stories" | grep -F 'Story-Cluster'
-          echo "$stories" | grep -F 'Mind. Quellen'
+          echo "$stories" | grep -F 'Ereignisse im Überblick'
+          echo "$stories" | grep -F 'Mindestens Quellen'
 
       - name: Verify Nginx is published on loopback only
         run: |
