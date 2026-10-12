@@ -294,6 +294,19 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
         )
 
         eligible = self._eligible_memberships()
+        if filters.language_code is not None:
+            # A language-filtered public listing must count and sort only
+            # articles visible in that language, not all multilingual
+            # members of the Story. Source country is intentionally
+            # unrestricted.
+            eligible = (
+                select(eligible)
+                .where(
+                    eligible.c.article_language_code
+                    == filters.language_code
+                )
+                .cte("visible_language_story_memberships")
+            )
         summary = self._summary_cte(eligible)
         representative = (
             self._representative_title_cte(
