@@ -22,8 +22,8 @@ afterEach(() => {
 describe("server API client", () => {
 
   it("restricts both public discovery APIs to German member content", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(
-      new Response(JSON.stringify({
+    const fetchMock = vi.fn().mockImplementation(
+      async () => new Response(JSON.stringify({
         items: [], total: 0, page: 1, page_size: 20, pages: 0,
       }), { status: 200 }),
     );
