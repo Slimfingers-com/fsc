@@ -1387,3 +1387,40 @@ def test_story_selector_detects_article_freshness_without_version_change():
     assert (second.selected, second.processed, second.failed) == (
         1, 1, 0
     )
+
+
+def test_claim_only_semantic_completion_does_not_recluster_story():
+    article_id = create_committed_articles(1)[0]
+    runner = make_runner(worker_id="claim-semantic-story-freshness")
+
+    assert runner.run_pending(limit=1).processed == 1
+
+    with TestSessionLocal.begin() as db:
+        story_state = db.scalar(
+            select(ArticleProcessingState).where(
+                ArticleProcessingState.article_id == article_id,
+                ArticleProcessingState.pipeline
+                == ArticlePipeline.STORY_CLUSTERING.value,
+            )
+        )
+        assert story_state is not None
+        semantic_state = ArticleProcessingState(
+            article_id=article_id,
+            pipeline=ArticlePipeline.SEMANTIC_EMBEDDING.value,
+            processed_input_hash="a" * 64,
+            processed_provider="test-semantic",
+            processed_provider_version="1",
+            processed_configuration_version="1",
+            last_processed_at=(
+                story_state.last_processed_at
+                + timedelta(seconds=10)
+            ),
+        )
+        db.add(semantic_state)
+
+    # Claim embeddings alone do not change the story's article-level
+    # semantic vector, title, entity or topic features.
+    second = runner.run_pending(limit=1)
+    assert (second.selected, second.processed, second.failed) == (
+        0, 0, 0
+    )
