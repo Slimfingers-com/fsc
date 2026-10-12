@@ -85,10 +85,8 @@ describe("German-language public presentation", () => {
     expect(JSON.stringify(differences)).not.toContain("English");
   });
 
-  it("never exposes foreign-only claim groups", () => {
-    const visible = germanClaimGroups(germanAnalysis(), new Set(["en-us"]));
-    expect(visible).toHaveLength(1);
-    expect(visible[0].title).toBe("English claim");
+  it("does not expose any claim groups without German articles", () => {
     expect(germanClaimGroups(germanAnalysis(), new Set())).toEqual([]);
+    expect(germanDifferences(germanAnalysis(), [])).toEqual([]);
   });
 });
