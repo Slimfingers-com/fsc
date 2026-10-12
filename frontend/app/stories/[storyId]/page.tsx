@@ -1,3 +1,4 @@
+import { isGermanLanguage } from "@/lib/language";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -11,7 +12,7 @@ async function load(storyId: string) {
   try {
     const story = await getStory(storyId);
     if (!story.articles.some((article) =>
-      article.language_code?.toLowerCase().startsWith("de")
+      isGermanLanguage(article.language_code)
     )) {
       notFound();
     }
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { storyId } = await params;
   const story = await load(storyId);
   return {
-    title: story.articles.find((article) => article.language_code?.toLowerCase().startsWith("de") && article.title)?.title
+    title: story.articles.find((article) => isGermanLanguage(article.language_code) && article.title)?.title
       ?? "Ereignis",
   };
 }
@@ -35,7 +36,7 @@ export default async function StoryPage({ params }: Props) {
   const { storyId } = await params;
   const story = await load(storyId);
   const germanArticles = story.articles.filter(
-    (article) => article.language_code?.toLowerCase().startsWith("de"),
+    (article) => isGermanLanguage(article.language_code),
   );
   const germanSourceCount = new Set(germanArticles.map((article) => article.source_id)).size;
   const displayTitle = germanArticles.find((article) => article.title)?.title
