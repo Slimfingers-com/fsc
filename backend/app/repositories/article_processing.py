@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import and_, or_, select, update
+from sqlalchemy import and_, case, or_, select, update
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, aliased
 
 from app.models.article_processing import (
     ArticleProcessingRun,
@@ -106,6 +106,296 @@ class ArticleProcessingRepository:
 
         return state
 
+    def select_candidate_article_ids(
+        self,
+        db: Session,
+        *,
+        pipeline: str,
+        eligible_articles,
+        provider: str,
+        provider_version: str,
+        configuration_version: str,
+        now: datetime,
+        limit: int,
+        candidate_limit: int | None = None,
+        live_share: float = 0.8,
+    ) -> list[UUID]:
+        if limit <= 0:
+            return []
+
+        if not 0 < live_share <= 1:
+            raise ValueError(
+                "live_share must be greater than zero and at most one"
+            )
+
+        selection_limit = (
+            limit
+            if candidate_limit is None
+            else candidate_limit
+        )
+        if selection_limit < limit:
+            raise ValueError(
+                "candidate_limit must be at least limit"
+            )
+
+        eligible = eligible_articles.subquery(
+            "eligible_article_processing_candidates"
+        )
+
+        required_columns = {
+            "article_id",
+            "priority_at",
+            "freshness_at",
+        }
+        missing_columns = (
+            required_columns
+            - set(eligible.c.keys())
+        )
+        if missing_columns:
+            raise ValueError(
+                "eligible_articles must expose article_id, "
+                "priority_at and freshness_at"
+            )
+
+        state = aliased(
+            ArticleProcessingState,
+            name="candidate_processing_state",
+        )
+
+        join_condition = and_(
+            state.article_id
+            == eligible.c.article_id,
+            state.pipeline == pipeline,
+            state.deleted_at.is_(None),
+        )
+
+        state_claimable = and_(
+            or_(
+                state.retry_after.is_(None),
+                state.retry_after <= now,
+            ),
+            or_(
+                state.claim_expires_at.is_(None),
+                state.claim_expires_at <= now,
+            ),
+        )
+
+        unprocessed = or_(
+            state.id.is_(None),
+            state.last_processed_at.is_(None),
+        )
+
+        identity_stale = and_(
+            state.id.is_not(None),
+            state.last_processed_at.is_not(None),
+            or_(
+                state.processed_provider.is_distinct_from(
+                    provider
+                ),
+                state.processed_provider_version.is_distinct_from(
+                    provider_version
+                ),
+                state.processed_configuration_version.is_distinct_from(
+                    configuration_version
+                ),
+            ),
+        )
+
+        freshness_stale = and_(
+            state.id.is_not(None),
+            state.last_processed_at.is_not(None),
+            eligible.c.freshness_at.is_not(None),
+            state.last_processed_at
+            < eligible.c.freshness_at,
+        )
+
+        claimable = or_(
+            state.id.is_(None),
+            state_claimable,
+        )
+        pending = and_(
+            claimable,
+            or_(
+                unprocessed,
+                identity_stale,
+                freshness_stale,
+            ),
+        )
+
+        base = (
+            select(
+                eligible.c.article_id,
+                eligible.c.priority_at,
+                state.last_processed_at,
+            )
+            .select_from(eligible)
+            .outerjoin(
+                state,
+                join_condition,
+            )
+            .where(pending)
+        )
+
+        stale = or_(
+            identity_stale,
+            freshness_stale,
+        )
+
+        live_ids = list(
+            db.scalars(
+                base.where(
+                    unprocessed
+                )
+                .order_by(
+                    eligible.c.priority_at.desc().nullslast(),
+                    eligible.c.article_id.desc(),
+                )
+                .limit(selection_limit)
+            ).all()
+        )
+        stale_ids = list(
+            db.scalars(
+                base.where(
+                    stale
+                )
+                .order_by(
+                    state.last_processed_at.asc(),
+                    eligible.c.article_id.asc(),
+                )
+                .limit(selection_limit)
+            ).all()
+        )
+
+        selected: list[UUID] = []
+        live_index = 0
+        stale_index = 0
+
+        while len(selected) < selection_limit:
+            wave_size = min(
+                limit,
+                selection_limit - len(selected),
+            )
+            live_target = min(
+                max(
+                    1,
+                    int(
+                        wave_size * live_share
+                    ),
+                ),
+                wave_size,
+            )
+            stale_target = (
+                wave_size
+                - live_target
+            )
+
+            live_take = min(
+                live_target,
+                len(live_ids) - live_index,
+            )
+            if live_take > 0:
+                selected.extend(
+                    live_ids[
+                        live_index:
+                        live_index + live_take
+                    ]
+                )
+                live_index += live_take
+
+            stale_take = min(
+                stale_target,
+                len(stale_ids) - stale_index,
+            )
+            if stale_take > 0:
+                selected.extend(
+                    stale_ids[
+                        stale_index:
+                        stale_index + stale_take
+                    ]
+                )
+                stale_index += stale_take
+
+            wave_missing = (
+                wave_size
+                - live_take
+                - stale_take
+            )
+
+            if wave_missing > 0 and live_take < live_target:
+                extra_stale = min(
+                    wave_missing,
+                    len(stale_ids) - stale_index,
+                )
+                if extra_stale > 0:
+                    selected.extend(
+                        stale_ids[
+                            stale_index:
+                            stale_index + extra_stale
+                        ]
+                    )
+                    stale_index += extra_stale
+                    wave_missing -= extra_stale
+
+            if wave_missing > 0 and stale_take < stale_target:
+                extra_live = min(
+                    wave_missing,
+                    len(live_ids) - live_index,
+                )
+                if extra_live > 0:
+                    selected.extend(
+                        live_ids[
+                            live_index:
+                            live_index + extra_live
+                        ]
+                    )
+                    live_index += extra_live
+                    wave_missing -= extra_live
+
+            if wave_missing > 0:
+                extra_live = min(
+                    wave_missing,
+                    len(live_ids) - live_index,
+                )
+                if extra_live > 0:
+                    selected.extend(
+                        live_ids[
+                            live_index:
+                            live_index + extra_live
+                        ]
+                    )
+                    live_index += extra_live
+                    wave_missing -= extra_live
+
+            if wave_missing > 0:
+                extra_stale = min(
+                    wave_missing,
+                    len(stale_ids) - stale_index,
+                )
+                if extra_stale > 0:
+                    selected.extend(
+                        stale_ids[
+                            stale_index:
+                            stale_index + extra_stale
+                        ]
+                    )
+                    stale_index += extra_stale
+                    wave_missing -= extra_stale
+
+            if (
+                live_take == 0
+                and stale_take == 0
+                and wave_missing == wave_size
+            ):
+                break
+
+            if (
+                live_index >= len(live_ids)
+                and stale_index >= len(stale_ids)
+            ):
+                break
+
+        return selected
+
     def claim_candidates(
         self,
         db: Session,
@@ -116,6 +406,7 @@ class ArticleProcessingRepository:
         now: datetime,
         claim_expires_at: datetime,
         limit: int,
+        preserve_candidate_order: bool = False,
     ) -> list[ArticleProcessingClaim]:
         if limit <= 0 or not candidates:
             return []
@@ -182,7 +473,23 @@ class ArticleProcessingRepository:
                     or_(*pending_identity_conditions),
                 )
                 .order_by(
-                    ArticleProcessingState.created_at,
+                    (
+                        case(
+                            {
+                                article_id: position
+                                for position, article_id
+                                in enumerate(
+                                    candidates_by_article_id
+                                )
+                            },
+                            value=ArticleProcessingState.article_id,
+                            else_=len(
+                                candidates_by_article_id
+                            ),
+                        )
+                        if preserve_candidate_order
+                        else ArticleProcessingState.created_at
+                    ),
                     ArticleProcessingState.id,
                 )
                 .limit(limit)

@@ -196,18 +196,25 @@ class SearchIndexingRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
-        claims: list[ArticleProcessingClaim] = []
-
-        page_size = max(
-            100,
-            limit * 4,
+        candidate_limit = (
+            limit * 2
         )
 
-        last_normalized_at = None
-        last_article_id = None
-
-        while len(claims) < limit:
-            conditions = [
+        eligible_articles = (
+            select(
+                Article.id.label(
+                    "article_id"
+                ),
+                Article.normalized_at.label(
+                    "priority_at"
+                ),
+                Article.updated_at.label(
+                    "freshness_at"
+                ),
+            )
+            .join(Article.feed)
+            .join(Feed.source)
+            .where(
                 Article.deleted_at.is_(None),
                 Article.normalized_at.is_not(None),
                 Article.content_hash.is_not(None),
@@ -215,31 +222,99 @@ class SearchIndexingRunner:
                 Feed.active.is_(True),
                 Source.deleted_at.is_(None),
                 Source.active.is_(True),
-            ]
+            )
+        )
 
-            if (
-                last_normalized_at is not None
-                and last_article_id is not None
-            ):
-                conditions.append(
-                    or_(
-                        Article.normalized_at
-                        > last_normalized_at,
-                        and_(
-                            Article.normalized_at
-                            == last_normalized_at,
-                            Article.id
-                            > last_article_id,
-                        ),
-                    )
+        article_ids = (
+            self.processing_repository
+            .select_candidate_article_ids(
+                db,
+                pipeline=(
+                    ArticlePipeline
+                    .SEARCH_INDEXING
+                    .value
+                ),
+                eligible_articles=(
+                    eligible_articles
+                ),
+                provider=(
+                    self.service.PROVIDER
+                ),
+                provider_version=(
+                    self.service
+                    .provider_version
+                ),
+                configuration_version=(
+                    self.service
+                    .config_version
+                ),
+                now=now,
+                limit=limit,
+                candidate_limit=candidate_limit,
+            )
+        )
+
+        source_metadata_ids = list(
+            db.scalars(
+                select(Article.id)
+                .join(Article.feed)
+                .join(Feed.source)
+                .join(
+                    SearchDocument,
+                    SearchDocument.article_id
+                    == Article.id,
                 )
+                .where(
+                    Article.deleted_at.is_(None),
+                    Article.normalized_at.is_not(None),
+                    Article.content_hash.is_not(None),
+                    Feed.deleted_at.is_(None),
+                    Feed.active.is_(True),
+                    Source.deleted_at.is_(None),
+                    Source.active.is_(True),
+                    or_(
+                        SearchDocument.source_id
+                        != Source.id,
+                        SearchDocument.source_name
+                        != Source.name,
+                        SearchDocument.source_slug
+                        != Source.slug,
+                    ),
+                )
+                .order_by(
+                    Article.normalized_at.desc(),
+                    Article.id.desc(),
+                )
+                .limit(candidate_limit)
+            ).all()
+        )
 
-            articles = list(
+        if source_metadata_ids:
+            seen = set(source_metadata_ids)
+            article_ids = (
+                source_metadata_ids
+                + [
+                    article_id
+                    for article_id in article_ids
+                    if article_id not in seen
+                ]
+            )
+
+        if not article_ids:
+            return []
+
+        articles_by_id = {
+            article.id: article
+            for article in (
                 db.scalars(
                     select(Article)
                     .join(Article.feed)
                     .join(Feed.source)
-                    .where(*conditions)
+                    .where(
+                        Article.id.in_(
+                            article_ids
+                        )
+                    )
                     .options(
                         joinedload(
                             Article.feed
@@ -247,49 +322,44 @@ class SearchIndexingRunner:
                             Feed.source
                         )
                     )
-                    .order_by(
-                        Article.normalized_at,
-                        Article.id,
-                    )
-                    .limit(page_size)
                 )
                 .unique()
                 .all()
             )
+        }
 
-            if not articles:
-                break
-
-            candidates = [
-                self.service.candidate(article)
-                for article in articles
-            ]
-
-            claims.extend(
-                self.processing_repository.claim_candidates(
-                    db,
-                    pipeline=ArticlePipeline.SEARCH_INDEXING.value,
-                    candidates=candidates,
-                    worker_id=self.worker_id,
-                    now=now,
-                    claim_expires_at=(
-                        now
-                        + timedelta(
-                            seconds=self.claim_ttl_seconds
-                        )
-                    ),
-                    limit=limit - len(claims),
-                )
+        candidates = [
+            self.service.candidate(
+                articles_by_id[article_id]
             )
+            for article_id in article_ids
+            if article_id in articles_by_id
+        ]
 
-            last_article = articles[-1]
-            last_normalized_at = last_article.normalized_at
-            last_article_id = last_article.id
-
-            if len(articles) < page_size:
-                break
-
-        return claims
+        return (
+            self.processing_repository
+            .claim_candidates(
+                db,
+                pipeline=(
+                    ArticlePipeline
+                    .SEARCH_INDEXING
+                    .value
+                ),
+                candidates=candidates,
+                worker_id=self.worker_id,
+                now=now,
+                claim_expires_at=(
+                    now
+                    + timedelta(
+                        seconds=(
+                            self.claim_ttl_seconds
+                        )
+                    )
+                ),
+                limit=limit,
+                preserve_candidate_order=True,
+            )
+        )
 
     def _record_failure(
         self,

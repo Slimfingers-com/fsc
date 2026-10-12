@@ -512,18 +512,19 @@ class EntityTopicAnalysisRunner:
         limit: int,
         now: datetime,
     ) -> list[ArticleProcessingClaim]:
-        claims: list[ArticleProcessingClaim] = []
-
-        page_size = max(
-            100,
-            limit * 4,
+        candidate_limit = (
+            limit * 2
         )
 
-        last_created_at = None
-        last_article_id = None
-
-        while len(claims) < limit:
-            conditions = [
+        eligible_articles = (
+            select(
+                Article.id.label("article_id"),
+                Article.created_at.label("priority_at"),
+                Article.updated_at.label("freshness_at"),
+            )
+            .join(Feed)
+            .join(Source)
+            .where(
                 Article.deleted_at.is_(None),
                 Article.normalized_at.is_not(None),
                 Article.normalized_text.is_not(None),
@@ -531,93 +532,57 @@ class EntityTopicAnalysisRunner:
                 Feed.active.is_(True),
                 Source.deleted_at.is_(None),
                 Source.active.is_(True),
-            ]
-
-            if (
-                last_created_at is not None
-                and last_article_id is not None
-            ):
-                conditions.append(
-                    or_(
-                        Article.created_at
-                        > last_created_at,
-                        and_(
-                            Article.created_at
-                            == last_created_at,
-                            Article.id
-                            > last_article_id,
-                        ),
-                    )
-                )
-
-            articles = list(
-                db.scalars(
-                    select(Article)
-                    .join(Feed)
-                    .join(Source)
-                    .where(
-                        *conditions
-                    )
-                    .order_by(
-                        Article.created_at,
-                        Article.id,
-                    )
-                    .limit(
-                        page_size
-                    )
-                ).all()
             )
+        )
 
-            if not articles:
-                break
-
-            candidates = [
-                self.service.candidate(
-                    article
-                )
-                for article in articles
-            ]
-
-            remaining = (
-                limit
-                - len(claims)
+        article_ids = (
+            self.processing_repository
+            .select_candidate_article_ids(
+                db,
+                pipeline=ArticlePipeline.ENTITY_TOPIC.value,
+                eligible_articles=eligible_articles,
+                provider=self.service.analyzer.provider,
+                provider_version=self.service.analyzer.version,
+                configuration_version=(
+                    self.service.processing_configuration_version
+                ),
+                now=now,
+                limit=limit,
+                candidate_limit=candidate_limit,
             )
+        )
 
-            claims.extend(
-                self.processing_repository.claim_candidates(
-                    db,
-                    pipeline=(
-                        ArticlePipeline
-                        .ENTITY_TOPIC
-                        .value
-                    ),
-                    candidates=candidates,
-                    worker_id=self.worker_id,
-                    now=now,
-                    claim_expires_at=(
-                        now
-                        + timedelta(
-                            seconds=(
-                                self.claim_ttl_seconds
-                            )
-                        )
-                    ),
-                    limit=remaining,
-                )
-            )
+        if not article_ids:
+            return []
 
-            last_article = articles[-1]
-            last_created_at = (
-                last_article.created_at
-            )
-            last_article_id = (
-                last_article.id
-            )
+        articles_by_id = {
+            article.id: article
+            for article in db.scalars(
+                select(Article)
+                .join(Feed)
+                .join(Source)
+                .where(Article.id.in_(article_ids))
+            ).all()
+        }
 
-            if len(articles) < page_size:
-                break
+        candidates = [
+            self.service.candidate(articles_by_id[article_id])
+            for article_id in article_ids
+            if article_id in articles_by_id
+        ]
 
-        return claims
+        return self.processing_repository.claim_candidates(
+            db,
+            pipeline=ArticlePipeline.ENTITY_TOPIC.value,
+            candidates=candidates,
+            worker_id=self.worker_id,
+            now=now,
+            claim_expires_at=(
+                now + timedelta(seconds=self.claim_ttl_seconds)
+            ),
+            limit=limit,
+            preserve_candidate_order=True,
+        )
 
     def _record_failure(
         self,

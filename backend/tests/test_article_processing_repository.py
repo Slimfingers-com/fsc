@@ -1027,3 +1027,357 @@ def test_invalidate_processed_forces_reprocessing():
 
     finally:
         _cleanup_source(source_id)
+
+
+
+def _selector_statement(article_ids: list[UUID]):
+    return (
+        select(
+            Article.id.label("article_id"),
+            Article.created_at.label("priority_at"),
+            Article.updated_at.label("freshness_at"),
+        )
+        .where(Article.id.in_(article_ids))
+    )
+
+
+def test_selector_prioritizes_new_live_and_old_backfill():
+    article_ids, source_id = _create_articles(5)
+    repository = ArticleProcessingRepository()
+    now = datetime.now(UTC)
+
+    try:
+        with TestSessionLocal.begin() as db:
+            articles = {
+                article.id: article
+                for article in db.scalars(
+                    select(Article).where(
+                        Article.id.in_(article_ids)
+                    )
+                )
+            }
+
+            for index, article_id in enumerate(article_ids):
+                article = articles[article_id]
+                article.created_at = (
+                    now
+                    + timedelta(minutes=index)
+                )
+                article.updated_at = article.created_at
+
+            for index, article_id in enumerate(article_ids[:2]):
+                state = repository.ensure_state(
+                    db,
+                    article_id=article_id,
+                    pipeline=PIPELINE,
+                )
+                state.processed_input_hash = (
+                    chr(ord("a") + index) * 64
+                )
+                state.processed_provider = "test-provider"
+                state.processed_provider_version = "0"
+                state.processed_configuration_version = "1"
+                state.last_processed_at = (
+                    now - timedelta(hours=4 - index)
+                )
+
+        with TestSessionLocal.begin() as db:
+            selected = repository.select_candidate_article_ids(
+                db,
+                pipeline=PIPELINE,
+                eligible_articles=_selector_statement(
+                    article_ids
+                ),
+                provider="test-provider",
+                provider_version="1",
+                configuration_version="1",
+                now=now + timedelta(hours=1),
+                limit=5,
+                live_share=0.6,
+            )
+
+        assert selected[:3] == list(
+            reversed(article_ids[-3:])
+        )
+        assert selected[3:] == article_ids[:2]
+
+    finally:
+        _cleanup_source(source_id)
+
+
+def test_selector_reserve_preserves_quota_for_next_worker():
+    article_ids, source_id = _create_articles(20)
+    repository = ArticleProcessingRepository()
+    now = datetime.now(UTC)
+    stale_ids = set(article_ids[:4])
+    live_ids = set(article_ids[4:])
+
+    try:
+        with TestSessionLocal.begin() as db:
+            articles = {
+                article.id: article
+                for article in db.scalars(
+                    select(Article).where(
+                        Article.id.in_(article_ids)
+                    )
+                )
+            }
+
+            for index, article_id in enumerate(article_ids):
+                article = articles[article_id]
+                article.created_at = (
+                    now
+                    + timedelta(minutes=index)
+                )
+                article.updated_at = article.created_at
+
+            for index, article_id in enumerate(article_ids[:4]):
+                state = repository.ensure_state(
+                    db,
+                    article_id=article_id,
+                    pipeline=PIPELINE,
+                )
+                state.processed_input_hash = (
+                    chr(ord("a") + index)
+                    * 64
+                )
+                state.processed_provider = "test-provider"
+                state.processed_provider_version = "1"
+                state.processed_configuration_version = "1"
+                state.last_processed_at = (
+                    now
+                    - timedelta(hours=4 - index)
+                )
+
+        with TestSessionLocal.begin() as db:
+            selected = repository.select_candidate_article_ids(
+                db,
+                pipeline=PIPELINE,
+                eligible_articles=_selector_statement(
+                    article_ids
+                ),
+                provider="test-provider",
+                provider_version="2",
+                configuration_version="1",
+                now=now + timedelta(hours=1),
+                limit=10,
+                candidate_limit=20,
+                live_share=0.8,
+            )
+
+        assert len(selected) == 20
+        assert len(set(selected)) == 20
+
+        first_wave = selected[:10]
+        second_wave = selected[10:20]
+
+        for wave in (first_wave, second_wave):
+            assert len(
+                set(wave) & live_ids
+            ) == 8
+            assert len(
+                set(wave) & stale_ids
+            ) == 2
+
+        candidates = [
+            ArticleProcessingCandidate(
+                article_id=article_id,
+                input_hash=(
+                    f"{index + 20:064x}"
+                ),
+                provider="test-provider",
+                provider_version="2",
+                configuration_version="1",
+            )
+            for index, article_id
+            in enumerate(selected)
+        ]
+
+        with TestSessionLocal.begin() as db:
+            first_claims = repository.claim_candidates(
+                db,
+                pipeline=PIPELINE,
+                candidates=candidates,
+                worker_id="reserve-worker-1",
+                now=now + timedelta(hours=1),
+                claim_expires_at=(
+                    now
+                    + timedelta(hours=1, minutes=5)
+                ),
+                limit=10,
+                preserve_candidate_order=True,
+            )
+
+        with TestSessionLocal.begin() as db:
+            second_claims = repository.claim_candidates(
+                db,
+                pipeline=PIPELINE,
+                candidates=candidates,
+                worker_id="reserve-worker-2",
+                now=now + timedelta(hours=1, seconds=1),
+                claim_expires_at=(
+                    now
+                    + timedelta(hours=1, minutes=5)
+                ),
+                limit=10,
+                preserve_candidate_order=True,
+            )
+
+        assert [
+            claim.article_id
+            for claim in first_claims
+        ] == first_wave
+        assert [
+            claim.article_id
+            for claim in second_claims
+        ] == second_wave
+
+    finally:
+        _cleanup_source(source_id)
+
+
+def test_selector_excludes_current_state_then_detects_freshness():
+    article_ids, source_id = _create_articles(1)
+    repository = ArticleProcessingRepository()
+    now = datetime.now(UTC)
+    processed_at = now + timedelta(minutes=10)
+
+    try:
+        with TestSessionLocal.begin() as db:
+            article = db.get(Article, article_ids[0])
+            assert article is not None
+            article.updated_at = now
+
+            state = repository.ensure_state(
+                db,
+                article_id=article.id,
+                pipeline=PIPELINE,
+            )
+            candidate = _candidate(article.id, "a")
+            state.processed_input_hash = candidate.input_hash
+            state.processed_provider = candidate.provider
+            state.processed_provider_version = (
+                candidate.provider_version
+            )
+            state.processed_configuration_version = (
+                candidate.configuration_version
+            )
+            state.last_processed_at = processed_at
+
+        with TestSessionLocal.begin() as db:
+            assert repository.select_candidate_article_ids(
+                db,
+                pipeline=PIPELINE,
+                eligible_articles=_selector_statement(
+                    article_ids
+                ),
+                provider="test-provider",
+                provider_version="1",
+                configuration_version="1",
+                now=processed_at + timedelta(minutes=1),
+                limit=10,
+            ) == []
+
+        with TestSessionLocal.begin() as db:
+            article = db.get(Article, article_ids[0])
+            assert article is not None
+            article.updated_at = (
+                processed_at
+                + timedelta(seconds=1)
+            )
+
+        with TestSessionLocal.begin() as db:
+            assert repository.select_candidate_article_ids(
+                db,
+                pipeline=PIPELINE,
+                eligible_articles=_selector_statement(
+                    article_ids
+                ),
+                provider="test-provider",
+                provider_version="1",
+                configuration_version="1",
+                now=processed_at + timedelta(minutes=1),
+                limit=10,
+            ) == article_ids
+
+    finally:
+        _cleanup_source(source_id)
+
+
+def test_selector_detects_version_staleness_and_claim_order():
+    article_ids, source_id = _create_articles(3)
+    repository = ArticleProcessingRepository()
+    now = datetime.now(UTC)
+
+    try:
+        with TestSessionLocal.begin() as db:
+            for article_id in article_ids:
+                state = repository.ensure_state(
+                    db,
+                    article_id=article_id,
+                    pipeline=PIPELINE,
+                )
+                candidate = _candidate(
+                    article_id,
+                    "a",
+                )
+                state.processed_input_hash = (
+                    candidate.input_hash
+                )
+                state.processed_provider = (
+                    candidate.provider
+                )
+                state.processed_provider_version = "1"
+                state.processed_configuration_version = "1"
+                state.last_processed_at = now
+
+        with TestSessionLocal.begin() as db:
+            selected = repository.select_candidate_article_ids(
+                db,
+                pipeline=PIPELINE,
+                eligible_articles=_selector_statement(
+                    article_ids
+                ),
+                provider="test-provider",
+                provider_version="2",
+                configuration_version="1",
+                now=now + timedelta(seconds=1),
+                limit=3,
+            )
+
+            candidates = [
+                ArticleProcessingCandidate(
+                    article_id=article_id,
+                    input_hash=(
+                        chr(ord("b") + index)
+                        * 64
+                    ),
+                    provider="test-provider",
+                    provider_version="2",
+                    configuration_version="1",
+                )
+                for index, article_id
+                in enumerate(selected)
+            ]
+
+            claims = repository.claim_candidates(
+                db,
+                pipeline=PIPELINE,
+                candidates=candidates,
+                worker_id="priority-worker",
+                now=now + timedelta(seconds=1),
+                claim_expires_at=(
+                    now
+                    + timedelta(minutes=5)
+                ),
+                limit=2,
+                preserve_candidate_order=True,
+            )
+
+        assert [
+            claim.article_id
+            for claim in claims
+        ] == selected[:2]
+
+    finally:
+        _cleanup_source(source_id)
