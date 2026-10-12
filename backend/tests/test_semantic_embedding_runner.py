@@ -7,7 +7,10 @@ from app.enums.article_identity_type import ArticleIdentityType
 from app.enums.article_pipeline import ArticlePipeline
 from app.enums.source_type import SourceType
 from app.models.article import Article
-from app.models.article_processing import ArticleProcessingState
+from app.models.article_processing import (
+    ArticleProcessingRun,
+    ArticleProcessingState,
+)
 from app.models.feed import Feed
 from app.models.source import Source
 from app.services.semantic_embedding import (
@@ -244,3 +247,96 @@ def test_runner_reuses_unused_live_capacity_for_backfill_work():
         )
 
     assert upgraded_count == 3
+
+
+def test_runner_preparation_does_not_lock_articles(monkeypatch):
+    create_committed_articles(1)
+    runner = make_runner(
+        worker_id="lock-free-semantic-preparation-worker",
+    )
+    original = runner._eligible_article
+    lock_modes = []
+
+    def record_lock_mode(db, article_id, *, for_update=False):
+        lock_modes.append(for_update)
+        return original(
+            db,
+            article_id,
+            for_update=for_update,
+        )
+
+    monkeypatch.setattr(
+        runner,
+        "_eligible_article",
+        record_lock_mode,
+    )
+    result = runner.run_pending(limit=1)
+
+    assert result.processed == 1
+    # Optimistic preparation; final persistence still locks and
+    # rechecks the full claim/article input identity.
+    assert lock_modes == [False, True]
+
+
+def test_runner_skips_expired_lease_without_paid_provider_call(
+    monkeypatch,
+):
+    create_committed_articles(1)
+    now = datetime.now(UTC)
+    current_time = {"value": now}
+
+    class CountingProvider(VersionedProvider):
+        def __init__(self):
+            super().__init__("1")
+            self.calls = 0
+
+        def embed(self, texts):
+            self.calls += 1
+            return super().embed(texts)
+
+    provider = CountingProvider()
+    service = SemanticEmbeddingService(
+        provider=provider,
+        include_article_embeddings=True,
+    )
+    runner = SemanticEmbeddingRunner(
+        TestSessionLocal,
+        service,
+        worker_id="expired-lease-semantic-worker",
+        clock=lambda: current_time["value"],
+        claim_ttl_seconds=60,
+    )
+    original_bounded_batch = runner._bounded_batch
+
+    def advance_time_after_preparation(items):
+        result = original_bounded_batch(items)
+        current_time["value"] = now + timedelta(seconds=65)
+        return result
+
+    monkeypatch.setattr(
+        runner,
+        "_bounded_batch",
+        advance_time_after_preparation,
+    )
+
+    result = runner.run_pending(limit=1)
+    assert (
+        result.selected,
+        result.processed,
+        result.skipped,
+        result.failed,
+    ) == (1, 0, 1, 0)
+    assert provider.calls == 0
+
+    with TestSessionLocal() as db:
+        last_run = db.scalar(
+            select(ArticleProcessingRun)
+            .where(
+                ArticleProcessingRun.pipeline
+                == ArticlePipeline.SEMANTIC_EMBEDDING.value,
+            )
+            .order_by(ArticleProcessingRun.started_at.desc())
+            .limit(1)
+        )
+    assert last_run is not None
+    assert last_run.outcome == "lease_lost"
