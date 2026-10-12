@@ -839,6 +839,15 @@ def test_claim_relation_article_lock_is_compatible_with_key_share():
 
 def test_claim_relation_live_selection_is_newest_first():
     story_ids, _ = create_committed_stories(3)
+    # A transaction can give all three Stories the same created_at.
+    # Newest-first then falls back to UUID ordering, not insert order.
+    with TestSessionLocal() as db:
+        expected = db.scalar(
+            select(Story.id)
+            .where(Story.id.in_(story_ids))
+            .order_by(Story.created_at.desc(), Story.id.desc())
+            .limit(1)
+        )
     runner = make_runner("claim-relation-newest-live")
     result = runner.run_pending(limit=1)
     assert (result.selected, result.processed, result.failed) == (1, 1, 0)
@@ -852,8 +861,7 @@ def test_claim_relation_live_selection_is_newest_first():
                 )
             )
         )
-    assert story_ids[-1] in processed
-    assert not processed.intersection(story_ids[:-1])
+    assert processed == {expected}
 
 
 def test_claim_relation_current_stories_skip_snapshot_loading(monkeypatch):
