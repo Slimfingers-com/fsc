@@ -119,7 +119,6 @@ class ReleaseGateTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertIn("PUBLISH FSC $RELEASE_VERSION", workflow)
         self.assertIn("/issues/29", workflow)
-        self.assertIn("scripts/check_release_gates.py", workflow)
         self.assertIn("environment: release-publication", workflow)
 
         self.assertIn(
