@@ -7,7 +7,7 @@ from typing import Callable
 from uuid import UUID, uuid4
 
 from sqlalchemy import and_, exists, or_, select
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import Session, aliased, sessionmaker
 
 from app.clustering.features import (
     TITLE_FEATURE_VERSION,
@@ -703,20 +703,21 @@ class StoryClusteringRunner:
                         )
                     ),
                 )
+                upstream_state = aliased(ArticleProcessingState)
                 upstream_newer = exists(
-                    select(ArticleProcessingState.id).where(
-                        ArticleProcessingState.article_id == Article.id,
-                        ArticleProcessingState.pipeline.in_(
+                    select(upstream_state.id).where(
+                        upstream_state.article_id == Article.id,
+                        upstream_state.pipeline.in_(
                             [
                                 ArticlePipeline.ENTITY_TOPIC.value,
                                 ArticlePipeline.SEMANTIC_EMBEDDING.value,
                             ]
                         ),
-                        ArticleProcessingState.deleted_at.is_(None),
-                        ArticleProcessingState.last_processed_at
+                        upstream_state.deleted_at.is_(None),
+                        upstream_state.last_processed_at
                         > state.last_processed_at,
                     )
-                    .correlate(Article)
+                    .correlate(Article, ArticleProcessingState)
                 )
                 entities_changed = exists(
                     select(ArticleEntity.id).where(
@@ -726,7 +727,7 @@ class StoryClusteringRunner:
                             ArticleEntity.deleted_at > state.last_processed_at,
                         ),
                     )
-                    .correlate(Article)
+                    .correlate(Article, ArticleProcessingState)
                 )
                 topics_changed = exists(
                     select(ArticleTopic.id).where(
@@ -736,7 +737,7 @@ class StoryClusteringRunner:
                             ArticleTopic.deleted_at > state.last_processed_at,
                         ),
                     )
-                    .correlate(Article)
+                    .correlate(Article, ArticleProcessingState)
                 )
                 conditions.extend(
                     [
