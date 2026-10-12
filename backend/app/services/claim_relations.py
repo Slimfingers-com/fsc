@@ -724,6 +724,11 @@ class ClaimRelationRunner:
                 )
             )
         )
+        # A feed fetch touches Feed.updated_at, so the SQL stale
+        # prefilter deliberately overselects. Keep its conservative
+        # freshness guarantees while bounding how many exact hashes we
+        # recheck per tick. Resume the scan on subsequent ticks.
+        self._stale_scan_cursor: tuple[datetime, UUID] | None = None
 
     def _claim_pending_pool(
         self,
@@ -742,16 +747,35 @@ class ClaimRelationRunner:
             StoryProcessingClaim
         ] = []
         excluded_story_ids = excluded_story_ids or set()
-        last_created_at = None
-        last_story_id = None
+        if processed and self._stale_scan_cursor is not None:
+            last_created_at, last_story_id = self._stale_scan_cursor
+        else:
+            last_created_at = None
+            last_story_id = None
 
-        while len(claimed) < limit:
+        pages_scanned = 0
+        # A false-positive stale candidate is not an error: the exact
+        # hash gate rejects it. Never scan an unbounded backlog of such
+        # candidates in a single batch.
+        max_pages = 8 if processed else None
+        while (
+            len(claimed) < limit
+            and (max_pages is None or pages_scanned < max_pages)
+        ):
             # The atomic repository orders State rows by State.created_at,
             # which need not match Story.created_at (ties use random UUIDs).
             # Pass at most the remaining capacity so SQL's newest-first
             # live / oldest-first backfill priority cannot be reshuffled
             # by the final correctness gate.
-            page_size = limit - len(claimed)
+            # Amortize SQL round trips on the stale path while retaining
+            # the atomic claim gate's exact capacity and provider/hash
+            # checks. Keep live selection strictly quota-sized.
+            page_size = (
+                max(16, limit - len(claimed))
+                if processed
+                else limit - len(claimed)
+            )
+            pages_scanned += 1
             stories = (
                 self.service.repository.list_candidate_stories(
                     db,
@@ -770,6 +794,8 @@ class ClaimRelationRunner:
                 )
             )
             if not stories:
+                if processed:
+                    self._stale_scan_cursor = None
                 break
 
             candidates: list[
@@ -825,8 +851,12 @@ class ClaimRelationRunner:
             last_story_id = (
                 last.id
             )
+            if processed:
+                self._stale_scan_cursor = (last_created_at, last_story_id)
 
             if len(stories) < page_size:
+                if processed:
+                    self._stale_scan_cursor = None
                 break
 
         return claimed
