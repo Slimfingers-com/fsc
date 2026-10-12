@@ -1175,11 +1175,28 @@ def test_language_filter_includes_multilingual_story_and_local_title(client, db)
     assert de_item["story_id"] == str(multilingual.id)
     assert de_item["title"] == "Deutscher Bericht zum Ereignis"
     assert de_item["language_code"] == "mul"
-    assert de_item["article_count"] == 2
+    assert de_item["article_count"] == 1
+    assert de_item["source_count"] == 1
+    assert datetime.fromisoformat(de_item["last_article_at"].replace("Z", "+00:00")) == german_article.published_at
+
+    # A foreign-language outlet cannot satisfy a German-public-view
+    # minimum of two visible sources.
+    de_multi_source = client.get(
+        "/stories", params={"language": "de", "min_sources": 2},
+    )
+    assert de_multi_source.status_code == 200
+    assert de_multi_source.json()["total"] == 0
 
     en_response = client.get("/stories", params={"language": "en"})
     assert en_response.status_code == 200
     assert en_response.json()["items"][0]["title"] == (
         "English report about same event"
     )
+    assert en_response.json()["items"][0]["article_count"] == 1
+    assert en_response.json()["items"][0]["source_count"] == 1
+    # With no language filter the underlying international Story still
+    # represents both original reports.
+    all_item = client.get("/stories").json()["items"][0]
+    assert all_item["article_count"] == 2
+    assert all_item["source_count"] == 2
     assert client.get("/stories", params={"language": "fr"}).json()["total"] == 0
