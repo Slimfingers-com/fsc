@@ -774,6 +774,60 @@ class SemanticEmbeddingRunner:
             failed += 1
         return failed
 
+    def _renew_batch_leases(
+        self,
+        db: Session,
+        items: list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ],
+    ) -> tuple[
+        list[
+            tuple[
+                ArticleProcessingClaim,
+                PreparedSemanticEmbedding,
+            ]
+        ],
+        int,
+    ]:
+        # Preparation may wait on upstream work. Never call the paid
+        # embedding provider after a claimed lease has already expired.
+        valid_items = []
+        lost = 0
+        for claim, prepared in items:
+            lease_now = self.clock()
+            try:
+                with db.begin():
+                    if not self.processing_repository.heartbeat(
+                        db,
+                        state_id=claim.state_id,
+                        run_id=claim.run_id,
+                        worker_id=self.worker_id,
+                        now=lease_now,
+                        claim_expires_at=(
+                            lease_now
+                            + timedelta(seconds=self.claim_ttl_seconds)
+                        ),
+                    ):
+                        raise ArticleProcessingLeaseLostError(
+                            "semantic lease expired before provider call"
+                        )
+            except ArticleProcessingLeaseLostError as exc:
+                db.rollback()
+                with db.begin():
+                    self.processing_repository.mark_lease_lost(
+                        db,
+                        run_id=claim.run_id,
+                        now=self.clock(),
+                        error_message=str(exc),
+                    )
+                lost += 1
+            else:
+                valid_items.append((claim, prepared))
+        return valid_items, lost
+
     def run_pending(
         self,
         *,
@@ -808,7 +862,6 @@ class SemanticEmbeddingRunner:
                         article = self._eligible_article(
                             db,
                             claim.article_id,
-                            for_update=True,
                         )
                         if article is None:
                             self.processing_repository.skip(
@@ -901,6 +954,16 @@ class SemanticEmbeddingRunner:
                 db,
                 deferred_items,
             )
+            batch_items, lost_before_provider = (
+                self._renew_batch_leases(db, batch_items)
+            )
+            skipped += lost_before_provider
+            if lost_before_provider:
+                logger.warning(
+                    "Semantic embedding discarded %s expired leases "
+                    "before provider request",
+                    lost_before_provider,
+                )
 
             if batch_items:
                 try:
