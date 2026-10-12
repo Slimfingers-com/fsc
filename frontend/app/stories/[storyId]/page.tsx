@@ -50,9 +50,9 @@ export default async function StoryPage({ params }: Props) {
     }, new Map<string, { name: string; count: number }>()),
   ).map(([id, data]) => ({ id, ...data }))
     .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name, "de"));
-  const newest = articles[0]?.published_at ?? articles[0]?.article_time;
+  const newest = articles[0]?.published_at ?? articles[0]?.article_time ?? null;
   const oldest = articles[articles.length - 1]?.published_at
-    ?? articles[articles.length - 1]?.article_time;
+    ?? articles[articles.length - 1]?.article_time ?? null;
 
   return (
     <>
@@ -81,7 +81,7 @@ export default async function StoryPage({ params }: Props) {
       </header>
 
       <div className="reading-layout">
-        <main className="reading-content" id="originalberichte">
+        <div className="reading-content" id="originalberichte">
           <section aria-labelledby="original-heading">
             <p className="eyebrow">DIE QUELLEN IM ÜBERBLICK</p>
             <h2 id="original-heading">So berichten die Medien</h2>
@@ -112,7 +112,7 @@ export default async function StoryPage({ params }: Props) {
               })}
             </div>
           </section>
-        </main>
+        </div>
 
         <aside className="reading-sidebar" aria-label="Quellen und Einordnung">
           <section className="reading-aside-card">
