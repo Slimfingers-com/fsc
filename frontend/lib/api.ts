@@ -195,6 +195,9 @@ export async function searchArticles(
   },
 ): Promise<Page<SearchHit>> {
   const params = new URLSearchParams();
+  // Product presentation is German-first. The backend corpus stays
+  // multilingual and can still cluster cross-language events.
+  set(params, "language", "de");
   set(params, "q", options.q);
   set(
     params,
@@ -220,6 +223,7 @@ export async function listStories(
   },
 ): Promise<Page<StorySummary>> {
   const params = new URLSearchParams();
+  set(params, "language", "de");
   set(
     params,
     "sort",

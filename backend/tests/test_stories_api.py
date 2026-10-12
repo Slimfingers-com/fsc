@@ -1145,3 +1145,41 @@ def test_story_api_validation_and_not_found(
         f"/stories/{uuid4()}"
     )
     assert missing.status_code == 404
+
+
+def test_language_filter_includes_multilingual_story_and_local_title(client, db):
+    now = datetime.now(UTC)
+    _, german_feed = add_source(db, name="German media", slug="german-media")
+    _, english_feed = add_source(db, name="English media", slug="english-media")
+    multilingual = add_story(db, language="mul")
+    german_article = add_article(
+        db,
+        feed=german_feed,
+        title="Deutscher Bericht zum Ereignis",
+        language="de",
+        published_at=now - timedelta(minutes=10),
+    )
+    english_article = add_article(
+        db,
+        feed=english_feed,
+        title="English report about same event",
+        language="en",
+        published_at=now,
+    )
+    add_membership(db, story=multilingual, article=german_article)
+    add_membership(db, story=multilingual, article=english_article)
+    de_response = client.get("/stories", params={"language": "de"})
+    assert de_response.status_code == 200
+    assert de_response.json()["total"] == 1
+    de_item = de_response.json()["items"][0]
+    assert de_item["story_id"] == str(multilingual.id)
+    assert de_item["title"] == "Deutscher Bericht zum Ereignis"
+    assert de_item["language_code"] == "mul"
+    assert de_item["article_count"] == 2
+
+    en_response = client.get("/stories", params={"language": "en"})
+    assert en_response.status_code == 200
+    assert en_response.json()["items"][0]["title"] == (
+        "English report about same event"
+    )
+    assert client.get("/stories", params={"language": "fr"}).json()["total"] == 0
