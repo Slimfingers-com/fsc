@@ -143,7 +143,7 @@ class ReleaseGateTests(unittest.TestCase):
             "release-metadata.yml",
         ):
             source = (root / name).read_text(encoding="utf-8")
-            self.assertIn("on:\\n  workflow_call:\\n", source)
+            self.assertIn("on:\n  workflow_call:\n", source)
 
 
 if __name__ == "__main__":
