@@ -64,7 +64,12 @@ class TargetedMixin:
         claims = []
         # Avoid scanning/claiming the entire target list in one transaction.
         while self.cursor < len(self.target_ids) and len(claims) < limit:
-            chunk = self.target_ids[self.cursor:self.cursor + limit * 4]
+            # Never advance past candidates the atomic claim gate was not
+            # given room to process. Previously this selected limit*4
+            # IDs, claimed at most limit, then permanently skipped the
+            # remaining IDs in that chunk.
+            capacity = limit - len(claims)
+            chunk = self.target_ids[self.cursor:self.cursor + capacity]
             self.cursor += len(chunk)
             candidates = []
             for story_id in chunk:
