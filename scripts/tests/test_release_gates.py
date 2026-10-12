@@ -119,8 +119,30 @@ class ReleaseGateTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertIn("PUBLISH FSC $RELEASE_VERSION", workflow)
         self.assertIn("/issues/29", workflow)
-        self.assertIn("scripts/check_release_gates.py", workflow)
         self.assertIn("environment: release-publication", workflow)
+
+        self.assertIn(
+            "needs: [preflight, backend_ci, frontend_ci, fullstack_ci, metadata_ci]",
+            workflow,
+        )
+        for name in ("backend", "frontend", "full-stack-e2e", "release-metadata"):
+            self.assertIn(
+                f"uses: ./.github/workflows/{name}-tests.yml"
+                if name in ("backend", "frontend")
+                else f"uses: ./.github/workflows/{name}.yml",
+                workflow,
+            )
+
+    def test_reusable_release_checks_are_supported_by_all_suites(self) -> None:
+        root = Path(__file__).resolve().parents[2] / ".github/workflows"
+        for name in (
+            "backend-tests.yml",
+            "frontend-tests.yml",
+            "full-stack-e2e.yml",
+            "release-metadata.yml",
+        ):
+            source = (root / name).read_text(encoding="utf-8")
+            self.assertIn("on:\n  workflow_call:\n", source)
 
 
 if __name__ == "__main__":

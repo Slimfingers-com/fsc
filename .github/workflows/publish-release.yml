@@ -89,22 +89,36 @@ jobs:
             exit 1
           fi
 
-      - name: Require successful CI for the exact commit
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          TARGET_SHA: ${{ inputs.expected_commit }}
-        run: |
-          set -Eeuo pipefail
-          gh api --method GET "/repos/$GH_REPO/actions/runs" \
-            -f "head_sha=$TARGET_SHA" -f per_page=100 \
-            > "$RUNNER_TEMP/fsc-gates.json"
-          python scripts/check_release_gates.py --sha "$TARGET_SHA" \
-            < "$RUNNER_TEMP/fsc-gates.json"
+  # These are reusable copies of the ordinary CI workflows. They execute
+  # on this workflow_dispatch's reviewed main SHA even when bot-originated
+  # merges do not emit ordinary push workflow runs.
+  backend_ci:
+    needs: preflight
+    uses: ./.github/workflows/backend-tests.yml
+    permissions:
+      contents: read
+
+  frontend_ci:
+    needs: preflight
+    uses: ./.github/workflows/frontend-tests.yml
+    permissions:
+      contents: read
+
+  fullstack_ci:
+    needs: preflight
+    uses: ./.github/workflows/full-stack-e2e.yml
+    permissions:
+      contents: read
+
+  metadata_ci:
+    needs: preflight
+    uses: ./.github/workflows/release-metadata.yml
+    permissions:
+      contents: read
 
   publish:
     name: Publish explicitly approved FSC release
-    needs: preflight
+    needs: [preflight, backend_ci, frontend_ci, fullstack_ci, metadata_ci]
     runs-on: ubuntu-latest
     # An environment with required reviewers provides an optional second
     # approval boundary; workflow_dispatch + typed phrase is always required.
@@ -126,6 +140,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
           TARGET_SHA: ${{ inputs.expected_commit }}
           RELEASE_VERSION: ${{ inputs.release_version }}
+          BACKEND_GATE: ${{ needs.backend_ci.result }}
+          FRONTEND_GATE: ${{ needs.frontend_ci.result }}
+          FULLSTACK_GATE: ${{ needs.fullstack_ci.result }}
+          METADATA_GATE: ${{ needs.metadata_ci.result }}
         run: |
           set -Eeuo pipefail
           test "$TARGET_SHA" = "$(git rev-parse HEAD)"
@@ -138,11 +156,13 @@ jobs:
             echo "Release tag appeared during approval; refusing duplicate." >&2
             exit 1
           fi
-          gh api --method GET "/repos/$GH_REPO/actions/runs" \
-            -f "head_sha=$TARGET_SHA" -f per_page=100 \
-            > "$RUNNER_TEMP/fsc-gates.json"
-          python scripts/check_release_gates.py --sha "$TARGET_SHA" \
-            < "$RUNNER_TEMP/fsc-gates.json"
+          # All four reusable CI jobs must succeed before this job starts.
+          # The jobs run on the workflow's exact SHA, already checked by
+          # preflight and rechecked against main HEAD above.
+          test "$BACKEND_GATE" = success
+          test "$FRONTEND_GATE" = success
+          test "$FULLSTACK_GATE" = success
+          test "$METADATA_GATE" = success
 
       - name: Create public release from the approved SHA
         env:

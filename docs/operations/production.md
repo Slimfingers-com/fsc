@@ -208,13 +208,16 @@ particular, do not enable the old `workflow_run` publication proposal in PR
 2. In a reviewed PR, update `VERSION`, `CHANGELOG.md`, the frontend package
    and lock versions, and `docs/operations/release-<version>.md`. Do not
    create the version tag or GitHub Release in the PR.
-3. Merge the reviewed release metadata to `main`. The Backend Tests,
-   Frontend Tests, Full Stack E2E and Release Metadata workflows run
-   automatically on the resulting main commit. Record its full 40-character
-   SHA. If any check is missing, failing, or not finished, do not publish.
-   Each workflow also supports manual reruns on main for operational recovery.
-4. The Release Metadata workflow automatically verifies metadata consistency
-   and the fail-closed release gate regression tests. No release is produced.
+3. Merge the reviewed release metadata to `main` and record the exact
+   40-character main commit SHA. The ordinary Backend Tests, Frontend Tests,
+   Full Stack E2E and Release Metadata workflows continue running on PRs
+   and applicable pushes. A bot-originated merge may not itself create
+   new main-push runs, so green PR checks alone are **not** publication
+   authorization.
+4. Release Metadata verifies metadata consistency and gate regression tests.
+   The manual publisher **also reruns all four complete workflows as reusable
+   CI jobs on the exact approved SHA**. Missing, skipped, failed or incomplete
+   reusable jobs prevent publication. No release is produced during preparation.
 
 ### Manually publish after approval
 
@@ -225,9 +228,10 @@ particular, do not enable the old `workflow_run` publication proposal in PR
    `PUBLISH FSC <version>` (for example `PUBLISH FSC 1.0.0`).
 3. The workflow fails closed unless the selected commit is still `main`
    HEAD, version metadata and release notes agree, issue #29 is **closed**,
-   no tag already exists, and **all four** required CI workflows succeeded
-   on that **exact commit**. Green checks on earlier commits or PR-only
-   runs are not acceptable.
+   and no tag already exists. It then executes **all four** required CI
+   workflows as reusable jobs on that **exact commit**; a single failure
+   prevents the publisher job from starting. Previous PR checks or
+   missing main-push runs cannot substitute for these tests.
 4. The publish job uses the `release-publication` GitHub Environment.
    **Repository maintainers should configure required reviewers** in
    Settings → Environments → release-publication for an additional
