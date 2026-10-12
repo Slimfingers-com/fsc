@@ -148,8 +148,8 @@ jobs:
       - name: Verify rendered Next.js routes through Nginx
         run: |
           home="$(curl --fail --silent http://127.0.0.1:8080/)"
-          echo "$home" | grep -F 'Was passiert.'
-          echo "$home" | grep -F 'Neueste Meldungen'
+          echo "$home" | grep -F 'Ein Ereignis.'
+          echo "$home" | grep -F 'Die neuesten Berichte'
 
           stories="$(curl --fail --silent http://127.0.0.1:8080/stories)"
           echo "$stories" | grep -F 'Ereignisse im Überblick'
