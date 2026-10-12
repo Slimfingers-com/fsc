@@ -99,6 +99,29 @@ class ReleaseGateTests(unittest.TestCase):
     def test_malformed_api_data_fails_closed(self) -> None:
         self.assertTrue(failures_for_release({}, SHA))
 
+    def test_publisher_has_only_manual_dispatch_trigger(self) -> None:
+        workflow = (
+            Path(__file__).resolve().parents[2]
+            / ".github/workflows/publish-release.yml"
+        ).read_text(encoding="utf-8")
+        event_block = workflow.split("\\non:\\n", 1)[1].split(
+            "\\npermissions:", 1
+        )[0]
+        self.assertIn("  workflow_dispatch:", event_block)
+        self.assertNotIn("  workflow_run:", event_block)
+        self.assertNotIn("  push:", event_block)
+        self.assertNotIn("  release:", event_block)
+
+    def test_manual_publication_gates_include_issue_and_confirmation(self) -> None:
+        workflow = (
+            Path(__file__).resolve().parents[2]
+            / ".github/workflows/publish-release.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("PUBLISH FSC $RELEASE_VERSION", workflow)
+        self.assertIn("/issues/29", workflow)
+        self.assertIn("scripts/check_release_gates.py", workflow)
+        self.assertIn("environment: release-publication", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()
