@@ -8,11 +8,17 @@ from __future__ import annotations
 
 import argparse
 import logging
+import sys
 from datetime import timedelta
+from pathlib import Path
 from time import monotonic
 from uuid import UUID
 
 from sqlalchemy import text
+
+BACKEND_ROOT = Path(__file__).resolve().parents[1]
+if str(BACKEND_ROOT) not in sys.path:
+    sys.path.insert(0, str(BACKEND_ROOT))
 
 from app.claim_relations.rule_based import RuleBasedClaimRelationAnalyzer
 from app.consensus.rule_based import RuleBasedConsensusAnalyzer
