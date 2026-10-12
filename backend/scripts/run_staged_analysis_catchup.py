@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 import sys
 from datetime import timedelta
 from pathlib import Path
@@ -213,6 +214,9 @@ def main() -> int:
         parser.error("limits must be positive")
 
     logging.basicConfig(level=logging.WARNING)
+    # Yield CPU to the nine required live workers on the 2-vCPU host.
+    if os.name == "posix":
+        os.nice(10)
     start = monotonic()
     _, _, _, coverage = build_services()
     eligible, missing, exceptions = find_missing(coverage)
