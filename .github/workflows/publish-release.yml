@@ -1,0 +1,175 @@
+name: Publish FSC Release (Manual Approval)
+
+# Never publish automatically from a successful push or completed CI workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: "Exact version from VERSION (e.g. 1.0.0)"
+        required: true
+        type: string
+      expected_commit:
+        description: "Full 40-character SHA of the reviewed main commit"
+        required: true
+        type: string
+      approval_phrase:
+        description: "Type PUBLISH FSC followed by a space and the exact version"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fsc-manual-release-publication
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Validate explicit release approval
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Verify release selection and product acceptance
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TARGET_SHA: ${{ inputs.expected_commit }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+          APPROVAL: ${{ inputs.approval_phrase }}
+        run: |
+          set -Eeuo pipefail
+          test "$GITHUB_REF" = "refs/heads/main" || {
+            echo "Manual publication must be dispatched from main." >&2
+            exit 1
+          }
+          [[ "$TARGET_SHA" =~ ^[0-9a-f]{40}$ ]] || {
+            echo "A full lowercase commit SHA is required." >&2
+            exit 1
+          }
+          test "$APPROVAL" = "PUBLISH FSC $RELEASE_VERSION" || {
+            echo "Explicit version-specific publication phrase required." >&2
+            exit 1
+          }
+          test "$TARGET_SHA" = "$(git rev-parse HEAD)" || {
+            echo "Selected commit does not match workflow checkout." >&2
+            exit 1
+          }
+          test "$TARGET_SHA" = "$(git ls-remote origin refs/heads/main | cut -f1)" || {
+            echo "Selected commit is no longer main HEAD." >&2
+            exit 1
+          }
+          test "$RELEASE_VERSION" = "$(tr -d '[:space:]' < VERSION)" || {
+            echo "Version does not match VERSION." >&2
+            exit 1
+          }
+          python scripts/verify_release_version.py --tag "v$RELEASE_VERSION"
+          python -m unittest discover -s scripts/tests -p 'test_release_gates.py'
+
+          issue_state="$(gh api "/repos/$GH_REPO/issues/29" --jq '.state')"
+          test "$issue_state" = "closed" || {
+            echo "Issue #29 product-quality acceptance is not closed." >&2
+            exit 1
+          }
+          if [[ -n "$(git ls-remote --tags origin "refs/tags/v$RELEASE_VERSION")" ]]; then
+            echo "A tag for this version already exists; will not republish." >&2
+            exit 1
+          fi
+
+      - name: Require successful CI for the exact commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TARGET_SHA: ${{ inputs.expected_commit }}
+        run: |
+          set -Eeuo pipefail
+          gh api --method GET "/repos/$GH_REPO/actions/runs" \
+            -f "head_sha=$TARGET_SHA" -f per_page=100 \
+            > "$RUNNER_TEMP/fsc-gates.json"
+          python scripts/check_release_gates.py --sha "$TARGET_SHA" \
+            < "$RUNNER_TEMP/fsc-gates.json"
+
+  publish:
+    name: Publish explicitly approved FSC release
+    needs: preflight
+    runs-on: ubuntu-latest
+    # An environment with required reviewers provides an optional second
+    # approval boundary; workflow_dispatch + typed phrase is always required.
+    environment: release-publication
+    permissions:
+      contents: write
+      issues: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.expected_commit }}
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Revalidate after environment approval
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TARGET_SHA: ${{ inputs.expected_commit }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+        run: |
+          set -Eeuo pipefail
+          test "$TARGET_SHA" = "$(git rev-parse HEAD)"
+          test "$TARGET_SHA" = "$(git ls-remote origin refs/heads/main | cut -f1)"
+          test "$RELEASE_VERSION" = "$(tr -d '[:space:]' < VERSION)"
+          python scripts/verify_release_version.py --tag "v$RELEASE_VERSION"
+          test "$(gh api "/repos/$GH_REPO/issues/29" --jq '.state')" = "closed"
+          if [[ -n "$(git ls-remote --tags origin "refs/tags/v$RELEASE_VERSION")" ]]; then
+            echo "Release tag appeared during approval; refusing duplicate." >&2
+            exit 1
+          fi
+          gh api --method GET "/repos/$GH_REPO/actions/runs" \
+            -f "head_sha=$TARGET_SHA" -f per_page=100 \
+            > "$RUNNER_TEMP/fsc-gates.json"
+          python scripts/check_release_gates.py --sha "$TARGET_SHA" \
+            < "$RUNNER_TEMP/fsc-gates.json"
+
+      - name: Create public release from the approved SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+          TARGET_SHA: ${{ inputs.expected_commit }}
+        run: |
+          set -Eeuo pipefail
+          args=()
+          case "$RELEASE_VERSION" in
+            *-*) args+=(--prerelease) ;;
+            *) args+=(--latest) ;;
+          esac
+          gh release create "v$RELEASE_VERSION" \
+            --repo "$GH_REPO" \
+            --target "$TARGET_SHA" \
+            --title "FSC $RELEASE_VERSION" \
+            --notes-file "docs/operations/release-$RELEASE_VERSION.md" \
+            "${args[@]}"
+
+      - name: Verify published release tag resolves to approved SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+          TARGET_SHA: ${{ inputs.expected_commit }}
+        run: |
+          set -Eeuo pipefail
+          published_sha="$(gh api "/repos/$GH_REPO/git/ref/tags/v$RELEASE_VERSION" --jq '.object.sha')"
+          test "$published_sha" = "$TARGET_SHA"
+          gh release view "v$RELEASE_VERSION" --repo "$GH_REPO"
