@@ -725,18 +725,23 @@ class ClaimRelationRunner:
             )
         )
 
-    def _claim_pending(
+    def _claim_pending_pool(
         self,
         db: Session,
         *,
         limit: int,
         now: datetime,
+        processed: bool,
+        excluded_story_ids: set[UUID] | None = None,
     ) -> list[
         StoryProcessingClaim
     ]:
+        if limit <= 0:
+            return []
         claimed: list[
             StoryProcessingClaim
         ] = []
+        excluded_story_ids = excluded_story_ids or set()
         page_size = max(
             50,
             limit * 4,
@@ -753,6 +758,13 @@ class ClaimRelationRunner:
                     ),
                     after_id=last_story_id,
                     limit=page_size,
+                    processed=processed,
+                    now=now,
+                    pipeline=StoryPipeline.CLAIM_RELATIONS.value,
+                    provider=self.service.analyzer.provider,
+                    provider_version=self.service.analyzer.version,
+                    configuration_version=self.service.processing_configuration_version,
+                    excluded_story_ids=excluded_story_ids,
                 )
             )
             if not stories:
@@ -816,6 +828,43 @@ class ClaimRelationRunner:
                 break
 
         return claimed
+
+
+    def _claim_pending(
+        self,
+        db: Session,
+        *,
+        limit: int,
+        now: datetime,
+    ) -> list[StoryProcessingClaim]:
+        if limit <= 0:
+            return []
+        # Keep live stories moving while reserving backfill capacity.
+        live_quota = limit if limit == 1 else max(1, int(limit * 0.8))
+        claims = self._claim_pending_pool(
+            db, limit=live_quota, now=now, processed=False,
+        )
+        excluded = {claim.story_id for claim in claims}
+        stale_claims = self._claim_pending_pool(
+            db,
+            limit=limit - len(claims),
+            now=now,
+            processed=True,
+            excluded_story_ids=excluded,
+        )
+        claims.extend(stale_claims)
+        excluded.update(claim.story_id for claim in stale_claims)
+        if len(claims) < limit:
+            claims.extend(
+                self._claim_pending_pool(
+                    db,
+                    limit=limit - len(claims),
+                    now=now,
+                    processed=False,
+                    excluded_story_ids=excluded,
+                )
+            )
+        return claims
 
     def _record_failure(
         self,
