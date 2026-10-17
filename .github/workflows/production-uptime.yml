@@ -4,12 +4,15 @@ on:
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/production-uptime.yml"
 
 permissions:
   contents: read
 
 concurrency:
-  group: production-uptime
+  group: production-uptime-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -17,17 +20,43 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Check public homepage
+      - name: Check public pages
         shell: bash
         run: |
           set -euo pipefail
-          curl             --fail             --silent             --show-error             --location             --retry 2             --retry-delay 2             --max-time 20             https://fsc.eu/             --output /tmp/fsc-home.html
-          grep -Fq 'Story Intelligence' /tmp/fsc-home.html
-          grep -Fq 'Artikel finden. Story verstehen. Unterschiede nachvollziehen.' /tmp/fsc-home.html
 
-      - name: Check stories page
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl             --fail             --silent             --show-error             --location             --retry 2             --retry-delay 2             --max-time 20             https://fsc.eu/stories             --output /tmp/fsc-stories.html
-          grep -Fq 'Story-Cluster' /tmp/fsc-stories.html
+          # Monitor working pages, not editorial copy: headlines and marketing
+          # wording change, but these semantic IDs are part of the page structure.
+          fetch_page() {
+            local url="$1"
+            local output="$2"
+            curl --fail --silent --show-error --location \
+              --retry 3 --retry-all-errors --retry-delay 3 \
+              --connect-timeout 10 --max-time 20 \
+              "$url" --output "$output"
+
+            if ! grep -Eq '<html[^>]+lang="de"' "$output"; then
+              echo "::error title=Production uptime::German document missing at $url"
+              return 1
+            fi
+          }
+
+          require_marker() {
+            local file="$1"
+            local marker="$2"
+            local page="$3"
+            if ! grep -Fq "$marker" "$file"; then
+              echo "::error title=Production uptime::Expected $page page element missing: $marker"
+              return 1
+            fi
+          }
+
+          fetch_page "https://fsc.eu/" "/tmp/fsc-home.html"
+          require_marker "/tmp/fsc-home.html" 'id="home-title"' "homepage"
+          require_marker "/tmp/fsc-home.html" 'role="search"' "homepage"
+
+          fetch_page "https://fsc.eu/stories" "/tmp/fsc-stories.html"
+          require_marker "/tmp/fsc-stories.html" 'id="story-sort"' "stories"
+          require_marker "/tmp/fsc-stories.html" 'id="story-sources"' "stories"
+
+          echo "Production uptime OK: German homepage and story discovery rendered."
