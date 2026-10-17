@@ -47,3 +47,14 @@ def test_unrelated_text_does_not_match_short_alias():
         )
         is None
     )
+
+
+def test_the_associated_press_alias_is_recognized():
+    candidate = detect_agency_provenance(
+        author="The Associated Press",
+        provider=None,
+    )
+
+    assert candidate is not None
+    assert candidate.source_slug == "associated-press"
+    assert candidate.detection_method is ArticleProvenanceDetectionMethod.BYLINE
