@@ -145,15 +145,22 @@ jobs:
           grep -Fi 'X-Request-ID: e2e-request-id' "$headers"
           grep -Fi 'X-Content-Type-Options: nosniff' "$headers"
 
-      - name: Verify rendered Next.js routes through Nginx
+      - name: Verify rendered German Next.js routes through Nginx
         run: |
-          home="$(curl --fail --silent http://127.0.0.1:8080/)"
-          echo "$home" | grep -F 'Ein Ereignis.'
-          echo "$home" | grep -F 'Die neuesten Berichte'
+          set -euo pipefail
 
-          stories="$(curl --fail --silent http://127.0.0.1:8080/stories)"
-          echo "$stories" | grep -F 'Ereignisse im Überblick'
-          echo "$stories" | grep -F 'Mindestens Quellen'
+          # Verify semantic page structure, not changeable editorial wording.
+          curl --fail --silent --show-error http://127.0.0.1:8080/ \
+            --output /tmp/fsc-e2e-home.html
+          grep -Fq 'lang="de"' /tmp/fsc-e2e-home.html
+          grep -Fq 'id="home-title"' /tmp/fsc-e2e-home.html
+          grep -Fq 'role="search"' /tmp/fsc-e2e-home.html
+
+          curl --fail --silent --show-error http://127.0.0.1:8080/stories \
+            --output /tmp/fsc-e2e-stories.html
+          grep -Fq 'lang="de"' /tmp/fsc-e2e-stories.html
+          grep -Fq 'id="story-sort"' /tmp/fsc-e2e-stories.html
+          grep -Fq 'id="story-sources"' /tmp/fsc-e2e-stories.html
 
       - name: Verify Nginx is published on loopback only
         run: |
