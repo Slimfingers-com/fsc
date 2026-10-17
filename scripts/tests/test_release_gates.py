@@ -145,5 +145,22 @@ class ReleaseGateTests(unittest.TestCase):
             self.assertIn("on:\n  workflow_call:\n", source)
 
 
+    def test_no_obsolete_automatic_publisher_can_run(self) -> None:
+        workflows = Path(__file__).resolve().parents[2] / ".github/workflows"
+        self.assertFalse(
+            (workflows / "promote-release-candidate.yml").exists(),
+            "Automatic release-candidate promotion must stay disabled.",
+        )
+        release_creators = [
+            path.name
+            for path in sorted(workflows.glob("*.yml"))
+            if "gh release create" in path.read_text(encoding="utf-8")
+        ]
+        self.assertEqual(
+            release_creators, ["publish-release.yml"],
+            "Only the explicitly approved manual workflow may publish releases.",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
