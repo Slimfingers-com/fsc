@@ -53,6 +53,14 @@ jobs:
         run: |
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml up -d --wait postgres
 
+      - name: Verify PostgreSQL shared memory headroom
+        run: |
+          postgres_id="$(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml ps -q postgres)"
+          test -n "$postgres_id"
+          shm_bytes="$(docker inspect --format '{{.HostConfig.ShmSize}}' "$postgres_id")"
+          test "$shm_bytes" -ge 268435456
+          docker exec "$postgres_id" df -h /dev/shm
+
       - name: Apply migrations from backend image
         run: |
           docker compose --env-file .env -f infrastructure/docker/docker-compose.yml run --rm backend alembic upgrade head
