@@ -7,6 +7,8 @@ on:
   pull_request:
     paths:
       - ".github/workflows/production-uptime.yml"
+      - "scripts/check_public_uptime.py"
+      - "scripts/tests/test_public_uptime.py"
 
 permissions:
   contents: read
@@ -18,45 +20,11 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 4
     steps:
-      - name: Check public pages
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          # Monitor working pages, not editorial copy: headlines and marketing
-          # wording change, but these semantic IDs are part of the page structure.
-          fetch_page() {
-            local url="$1"
-            local output="$2"
-            curl --fail --silent --show-error --location \
-              --retry 3 --retry-all-errors --retry-delay 3 \
-              --connect-timeout 10 --max-time 20 \
-              "$url" --output "$output"
-
-            if ! grep -Eq '<html[^>]+lang="de"' "$output"; then
-              echo "::error title=Production uptime::German document missing at $url"
-              return 1
-            fi
-          }
-
-          require_marker() {
-            local file="$1"
-            local marker="$2"
-            local page="$3"
-            if ! grep -Fq "$marker" "$file"; then
-              echo "::error title=Production uptime::Expected $page page element missing: $marker"
-              return 1
-            fi
-          }
-
-          fetch_page "https://fsc.eu/" "/tmp/fsc-home.html"
-          require_marker "/tmp/fsc-home.html" 'id="home-title"' "homepage"
-          require_marker "/tmp/fsc-home.html" 'role="search"' "homepage"
-
-          fetch_page "https://fsc.eu/stories" "/tmp/fsc-stories.html"
-          require_marker "/tmp/fsc-stories.html" 'id="story-sort"' "stories"
-          require_marker "/tmp/fsc-stories.html" 'id="story-sources"' "stories"
-
-          echo "Production uptime OK: German homepage and story discovery rendered."
+      - name: Checkout monitor and tests
+        uses: actions/checkout@v5
+      - name: Test failure and recovery handling
+        run: python3 -m unittest discover -s scripts/tests -p test_public_uptime.py -v
+      - name: Check full public-page rendering with bounded retries
+        run: python3 scripts/check_public_uptime.py
