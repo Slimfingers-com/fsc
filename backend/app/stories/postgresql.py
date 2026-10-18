@@ -108,11 +108,22 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
         )
 
     @staticmethod
-    def _representative_title_cte(eligible, language_code: str | None = None):
+    def _representative_title_cte(
+        eligible,
+        language_code: str | None = None,
+        *,
+        story_ids=None,
+    ):
         statement = select(
             eligible.c.story_id,
             eligible.c.article_title.label("title"),
         )
+        # A full-corpus DISTINCT ON is costly for a paginated listing.
+        # Restrict representative selection to the already selected IDs.
+        if story_ids is not None:
+            statement = statement.where(
+                eligible.c.story_id.in_(story_ids)
+            )
         if language_code is not None:
             # A multilingual Story must use an original article title
             # in the requested language, not an arbitrary foreign title.
@@ -321,32 +332,22 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 .cte("visible_language_story_memberships")
             )
         summary = self._summary_cte(eligible)
-        representative = (
-            self._representative_title_cte(
-                eligible, filters.language_code
-            )
-        )
 
+        # Determine eligibility and counts before joining a representative
+        # title. The summary and source thresholds are based solely on
+        # visible members, independent of which article supplies the title.
         statement = (
             select(
                 summary.c.story_id,
-                representative.c.title,
                 summary.c.language_code,
                 summary.c.article_count,
                 summary.c.source_count,
                 summary.c.first_article_at,
                 summary.c.last_article_at,
             )
-            .join(
-                representative,
-                representative.c.story_id
-                == summary.c.story_id,
-            )
             .where(
-                summary.c.article_count
-                >= filters.min_articles,
-                summary.c.source_count
-                >= filters.min_sources,
+                summary.c.article_count >= filters.min_articles,
+                summary.c.source_count >= filters.min_sources,
             )
         )
 
@@ -402,10 +403,30 @@ class PostgreSQLStoryReadProvider(StoryReadProvider):
                 summary.c.story_id.asc(),
             )
 
-        rows = self.db.execute(
+        page_summaries = (
             statement
             .offset((page - 1) * page_size)
             .limit(page_size)
+            .cte("story_page_summaries")
+        )
+        representative = self._representative_title_cte(
+            eligible,
+            filters.language_code,
+            story_ids=select(page_summaries.c.story_id),
+        )
+        rows = self.db.execute(
+            select(
+                page_summaries.c.story_id,
+                representative.c.title,
+                page_summaries.c.language_code,
+                page_summaries.c.article_count,
+                page_summaries.c.source_count,
+                page_summaries.c.first_article_at,
+                page_summaries.c.last_article_at,
+            ).join(
+                representative,
+                representative.c.story_id == page_summaries.c.story_id,
+            )
         ).all()
 
         return StoryPage(
