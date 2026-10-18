@@ -284,6 +284,10 @@ services:
     image: postgres:17
     container_name: fsc-postgres
     restart: unless-stopped
+    # Default Docker /dev/shm is only 64 MiB. Parallel Postgres queries
+    # exhausted it in production even with ample free filesystem space.
+    # tmpfs consumes host RAM only as populated, not the entire limit.
+    shm_size: "256m"
     logging: *default-logging
     env_file:
       - ../../.env
