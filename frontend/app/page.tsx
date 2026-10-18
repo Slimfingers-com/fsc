@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Pagination } from "@/components/pagination";
-import { listStories, searchArticles } from "@/lib/api";
+import { searchArticles } from "@/lib/api";
+import { loadFeaturedStories } from "@/lib/featured-stories";
 import {
   allowedSearchParam,
   cleanSearchParam,
@@ -31,9 +32,7 @@ export default async function HomePage({ searchParams }: Props) {
   // Avoid an expensive, otherwise-unused second backend query on those routes.
   const [result, stories] = await Promise.all([
     searchArticles({ q, sort, page }),
-    !q && page === 1
-      ? listStories({ sort: "newest", page: 1, minSources: 2 })
-      : Promise.resolve(null),
+    loadFeaturedStories(!q && page === 1),
   ]);
 
   return (
