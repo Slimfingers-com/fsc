@@ -27,9 +27,13 @@ export default async function HomePage({ searchParams }: Props) {
     raw.sort, ["relevance", "newest", "oldest"], "newest",
   );
   const page = positivePage(cleanSearchParam(raw.page));
+  // Featured stories are not displayed for searches or later result pages.
+  // Avoid an expensive, otherwise-unused second backend query on those routes.
   const [result, stories] = await Promise.all([
     searchArticles({ q, sort, page }),
-    listStories({ sort: "newest", page: 1, minSources: 2 }),
+    !q && page === 1
+      ? listStories({ sort: "newest", page: 1, minSources: 2 })
+      : Promise.resolve(null),
   ]);
 
   return (
@@ -52,7 +56,7 @@ export default async function HomePage({ searchParams }: Props) {
         </div>
       </section>
 
-      {!q && page === 1 ? (
+      {stories ? (
         <section className="section featured-section" aria-labelledby="featured-heading">
           <div className="section-heading">
             <div><p className="eyebrow">DAS BEWEGT DIE NACHRICHTEN</p><h2 id="featured-heading">Mehrere Medien, ein Thema</h2></div>
