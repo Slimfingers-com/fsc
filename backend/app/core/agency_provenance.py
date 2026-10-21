@@ -24,7 +24,12 @@ _AGENCY_ALIASES = {
     },
     "pa-media": {"pa media", "press association"},
     "reuters": {"reuters"},
-    "associated-press": {"ap", "ap news", "associated press"},
+    "associated-press": {
+        "ap",
+        "ap news",
+        "associated press",
+        "the associated press",
+    },
     "afp": {"afp", "agence france presse"},
     "regiocast-nachrichten": {
         "regiocast nachrichten",
