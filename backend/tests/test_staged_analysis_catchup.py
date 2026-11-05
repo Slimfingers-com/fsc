@@ -37,13 +37,14 @@ def test_stages_run_sequentially_in_dependency_order(monkeypatch):
     def fake_runner(name):
         class Runner:
             def __init__(self, *_args, target_ids, **_kwargs):
-                assert target_ids == ids
+                assert len(target_ids) == 1
+            self.target_ids = target_ids
                 self.cursor = 0
 
             def run_pending(self, *, limit):
-                assert limit == 2
+                assert limit == 1
                 stages.append(name)
-                taken = min(limit, len(ids) - self.cursor)
+                taken = min(limit, len(self.target_ids) - self.cursor)
                 self.cursor += taken
                 return SimpleNamespace(
                     selected=taken,
@@ -63,7 +64,40 @@ def test_stages_run_sequentially_in_dependency_order(monkeypatch):
     ):
         monkeypatch.setattr(job, attribute, fake_runner(name))
     assert job.execute_stages(ids, monotonic() + 120, 2) == 0
-    assert stages == [name for name in labels for _ in range(3)]
+    assert stages == labels * len(ids)
+
+
+
+def test_one_story_finishes_all_stages_before_next_story(monkeypatch):
+    ids = [uuid4(), uuid4(), uuid4()]
+    calls = []
+    names = ("claim_relations", "evidence", "consensus", "coverage")
+    monkeypatch.setattr(job, "build_services", lambda: (1, 2, 3, 4))
+
+    def fake_runner(stage):
+        class Runner:
+            def __init__(self, *_args, target_ids, **_kwargs):
+                assert len(target_ids) == 1
+                self.story_id = target_ids[0]
+
+            def run_pending(self, *, limit):
+                assert limit == 1
+                calls.append((self.story_id, stage))
+                return SimpleNamespace(
+                    selected=1, processed=1, skipped=0, failed=0
+                )
+        return Runner
+
+    for name, attr in zip(
+        names,
+        ("TargetedClaimRelations", "TargetedEvidence",
+         "TargetedConsensus", "TargetedCoverage"),
+    ):
+        monkeypatch.setattr(job, attr, fake_runner(name))
+    assert job.execute_stages(ids, monotonic() + 120, 2) == 0
+    assert calls == [
+        (story_id, stage) for story_id in ids for stage in names
+    ]
 
 
 def test_failure_stops_before_downstream_stage(monkeypatch):
