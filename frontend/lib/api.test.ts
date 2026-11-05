@@ -9,6 +9,7 @@ import {
 import {
   ApiError,
   listStories,
+  listReadyAnalyses,
   searchArticles,
 } from "./api";
 
@@ -20,6 +21,18 @@ afterEach(() => {
 
 
 describe("server API client", () => {
+
+  it("requests finished analyses from the separate verified discovery API", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify([]), { status: 200 }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    expect(await listReadyAnalyses(6)).toEqual([]);
+    const url = new URL(String(fetchMock.mock.calls[0][0]));
+    expect(url.pathname).toBe("/analyses/ready");
+    expect(url.searchParams.get("limit")).toBe("6");
+  });
+
 
   it("restricts both public discovery APIs to German member content", async () => {
     const fetchMock = vi.fn().mockImplementation(
