@@ -10,7 +10,7 @@ import argparse
 import logging
 import os
 import sys
-from datetime import timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from time import monotonic
 from uuid import UUID
@@ -50,6 +50,31 @@ def choose_targets(missing: list[UUID], limit: int) -> list[UUID]:
     selected = missing[:live]
     backfill = list(reversed(missing))[: limit - live]
     return selected + backfill
+
+
+def choose_audit_candidates(
+    story_ids: list[UUID], *, newest_count: int, rotating_count: int,
+    slot: int,
+) -> list[UUID]:
+    """Audit a bounded recent cohort and rotating older cohort per 15-min slot.
+
+    Avoid repeatedly loading full coverage snapshots for every eligible story.
+    A prime stride rotates the older cohort without a persisted cursor or
+    extra database writes. Expensive currentness checks stay unchanged.
+    """
+    if newest_count < 0 or rotating_count < 0 or slot < 0:
+        raise ValueError("audit limits and slot must not be negative")
+    if len(set(story_ids)) != len(story_ids):
+        raise ValueError("eligible story IDs must be unique")
+    newest = story_ids[:newest_count]
+    older = story_ids[len(newest):]
+    if not older or not rotating_count:
+        return newest
+    start = (slot * 997) % len(older)
+    return newest + [
+        older[(start + index) % len(older)]
+        for index in range(min(rotating_count, len(older)))
+    ]
 
 
 class TargetedMixin:
@@ -135,8 +160,16 @@ def build_services():
     return relations, evidence, consensus, coverage
 
 
-def find_missing(coverage_service: CoverageService) -> tuple[int, list[UUID], int]:
-    # Exactly the same eligibility window as product exit criterion #29.
+def find_missing(
+    coverage_service: CoverageService, *, target_limit: int,
+    audit_deadline: float,
+) -> tuple[int, list[UUID], int, int]:
+    """Bound exact freshness checks so the scheduled job can process work.
+
+    The earlier job read and verified *all* ~5,500 eligible StoryAnalysis
+    snapshots at every invocation. Auditing alone took the entire 20-minute
+    budget, leaving claim_relations cursor=0 on every run.
+    """
     with SessionLocal() as db:
         story_ids = list(
             db.scalars(
@@ -155,13 +188,25 @@ def find_missing(coverage_service: CoverageService) -> tuple[int, list[UUID], in
         )
         db.rollback()
 
+    # Newer Stories receive repeated attention. For older Stories, the
+    # rotating quarter-hour cohort prevents repeatedly inspecting the
+    # same initial pages. It eventually samples the whole eligible set
+    # without weakening the exact generation/hash checks.
+    slot = int(datetime.now(UTC).timestamp() // 900)
+    audit_ids = choose_audit_candidates(
+        story_ids,
+        newest_count=max(16, target_limit * 2),
+        rotating_count=max(24, target_limit * 4),
+        slot=slot,
+    )
     analysis = StoryAnalysisService(coverage_service)
-    missing = []
-    exceptions = 0
-    # End each read transaction promptly, so a long audit cannot hold
-    # back cleanup/vacuum while other production workers update articles.
+    missing: list[UUID] = []
+    exceptions = checked = 0
     with SessionLocal() as db:
-        for story_id in story_ids:
+        for story_id in audit_ids:
+            if monotonic() >= audit_deadline:
+                break
+            checked += 1
             try:
                 if analysis.load(db, story_id=story_id) is None:
                     missing.append(story_id)
@@ -171,7 +216,7 @@ def find_missing(coverage_service: CoverageService) -> tuple[int, list[UUID], in
                 logging.exception("Integrated freshness audit failed for %s", story_id)
             finally:
                 db.rollback()
-    return len(story_ids), missing, exceptions
+    return len(story_ids), missing, exceptions, checked
 
 
 def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> int:
@@ -182,6 +227,7 @@ def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> 
         ("consensus", TargetedConsensus, consensus),
         ("coverage", TargetedCoverage, coverage),
     ]
+    any_progress = False
     for name, runner_type, service in configs:
         runner = runner_type(
             SessionLocal,
@@ -194,12 +240,16 @@ def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> 
             if monotonic() >= deadline:
                 print(f"TIME_BUDGET_EXHAUSTED stage={name} cursor={runner.cursor}",
                       flush=True)
+                if not any_progress:
+                    print("NO_PROGRESS: deadline expired before a stage completed", flush=True)
+                    return 1
                 return 0  # safe to resume next scheduled run
             result = runner.run_pending(limit=batch_size)
             selected += result.selected
             processed += result.processed
             skipped += result.skipped
             failed += result.failed
+            any_progress = any_progress or bool(result.processed)
             if result.failed:
                 print(f"STAGE_FAILURE stage={name} failed={result.failed}", flush=True)
                 return 1  # do not build later generations from failing stage
@@ -210,7 +260,7 @@ def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--max-targets", type=int, default=160)
+    parser.add_argument("--max-targets", type=int, default=12)
     parser.add_argument("--batch-size", type=int, default=5)
     parser.add_argument("--max-minutes", type=int, default=20)
     parser.add_argument("--dry-run", action="store_true")
@@ -224,20 +274,26 @@ def main() -> int:
         os.nice(10)
     start = monotonic()
     _, _, _, coverage = build_services()
-    eligible, missing, exceptions = find_missing(coverage)
+    deadline = start + args.max_minutes * 60
+    audit_deadline = min(deadline, start + min(90, args.max_minutes * 12))
+    eligible, missing, exceptions, checked = find_missing(
+        coverage, target_limit=args.max_targets, audit_deadline=audit_deadline,
+    )
     target_ids = choose_targets(missing, args.max_targets)
     print(
-        f"AUDIT eligible={eligible} current={eligible-len(missing)} "
-        f"missing={len(missing)} errors={exceptions} targets={len(target_ids)}",
+        f"AUDIT eligible={eligible} audited={checked} "
+        f"current_in_sample={checked-len(missing)} "
+        f"missing_in_sample={len(missing)} errors={exceptions} "
+        f"targets={len(target_ids)}",
         flush=True,
     )
-    if exceptions:
+    if exceptions or (eligible and not checked):
         return 1
     if args.dry_run or not target_ids:
         return 0
     return execute_stages(
         target_ids,
-        deadline=start + args.max_minutes * 60,
+        deadline=deadline,
         batch_size=args.batch_size,
     )
 
