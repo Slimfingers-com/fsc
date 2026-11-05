@@ -6,6 +6,7 @@ import type {
   StoryAnalysis,
   StoryDetail,
   StorySummary,
+  ReadyAnalysisSummary,
 } from "./types";
 
 const API_URL = (
@@ -275,4 +276,14 @@ export async function getStoryAnalysis(
     }
     throw error;
   }
+}
+
+
+/** Only fully current analyses with at least two visible German sources. */
+export async function listReadyAnalyses(
+  limit = 6,
+): Promise<ReadyAnalysisSummary[]> {
+  const params = new URLSearchParams();
+  set(params, "limit", limit);
+  return request<ReadyAnalysisSummary[]>("/analyses/ready", params);
 }

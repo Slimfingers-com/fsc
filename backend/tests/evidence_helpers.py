@@ -99,7 +99,7 @@ def build_evidence_story(
                 spec.get("title") or f"Evidence {index}"
             ).casefold(),
             normalized_text=text,
-            language_code="en",
+            language_code=spec.get("language_code", "en"),
             content_hash=uuid4().hex * 2,
             normalization_version=1,
             normalized_at=datetime.now(UTC),

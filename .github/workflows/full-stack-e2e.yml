@@ -172,6 +172,11 @@ jobs:
           grep -Fq 'id="story-sort"' /tmp/fsc-e2e-stories.html
           grep -Fq 'id="story-sources"' /tmp/fsc-e2e-stories.html
 
+          curl --fail --silent --show-error http://127.0.0.1:8080/analysen \
+            --output /tmp/fsc-e2e-analysen.html
+          grep -Fq 'lang="de"' /tmp/fsc-e2e-analysen.html
+          grep -Fq 'Fertige Analysen' /tmp/fsc-e2e-analysen.html
+
       - name: Verify Nginx is published on loopback only
         run: |
           published="$(
