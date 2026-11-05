@@ -13,10 +13,10 @@ fi
 log="$state_dir/staged-analysis.log"
 printf '%s START staged-integrated-analysis\n' "$(date -u +%FT%TZ)" >> "$log"
 
-# A one-shot, bounded pass. No Evidence/Consensus/Coverage daemon is started.
+# A one-shot, bounded pass. Each run audits a limited, rotating cohort.\n# Keep target batches small on 2 vCPUs so downstream analysis can finish.\n# No Evidence/Consensus/Coverage daemon is started.
 if timeout --signal=TERM --kill-after=60s 30m \
     docker exec fsc-backend python /app/scripts/run_staged_analysis_catchup.py \
-      --max-targets 160 --batch-size 5 --max-minutes 20 >> "$log" 2>&1; then
+      --max-targets 12 --batch-size 2 --max-minutes 20 >> "$log" 2>&1; then
   printf '%s DONE status=OK\n' "$(date -u +%FT%TZ)" >> "$log"
 else
   result=$?
