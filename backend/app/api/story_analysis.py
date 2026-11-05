@@ -126,7 +126,6 @@ def ready_analyses(
             .limit(max(16, limit * 4))
         ).all()
     )
-    db.rollback()
 
     reader = PostgreSQLStoryReadProvider(db)
     ready: list[ReadyAnalysisSummaryRead] = []
@@ -164,7 +163,7 @@ def ready_analyses(
             if len(ready) >= limit:
                 break
         finally:
-            # Do not hold a long read transaction while checking other
-            # candidates; production workers must continue uninterrupted.
-            db.rollback()
+            # Bound identity-map growth without rolling back the request's
+            # read view (or uncommitted fixtures in transactional tests).
+            db.expire_all()
     return ready
