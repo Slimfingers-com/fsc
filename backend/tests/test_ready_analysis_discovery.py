@@ -69,3 +69,17 @@ def test_ready_discovery_limit_is_bounded(client, db):
     assert len(client.get("/analyses/ready?limit=1").json()) == 1
     assert client.get("/analyses/ready?limit=0").status_code == 422
     assert client.get("/analyses/ready?limit=100").status_code == 422
+
+
+def test_ready_discovery_does_not_load_each_story_details(client, db, monkeypatch):
+    from app.stories.postgresql import PostgreSQLStoryReadProvider
+
+    build_complete_analysis_story(db, specs=specs())
+
+    def forbidden(*_args, **_kwargs):
+        raise AssertionError("No per-story detail queries in ready discovery")
+
+    monkeypatch.setattr(PostgreSQLStoryReadProvider, "get_story", forbidden)
+    response = client.get("/analyses/ready")
+    assert response.status_code == 200, response.text
+    assert len(response.json()) == 1
