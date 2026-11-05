@@ -220,6 +220,14 @@ def find_missing(
 
 
 def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> int:
+    """Finish all four dependent generations for each Story before moving on.
+
+    Running Claim Relations for *all* targets first starved Evidence,
+    Consensus, and Coverage when the time budget expired. This resulted
+    in no fully current public StoryAnalysis despite expensive work.
+    One complete Story per pass is more useful than many partial Stories.
+    The atomic processing claim gate and input-hash validation remain intact.
+    """
     relations, evidence, consensus, coverage = build_services()
     configs = [
         ("claim_relations", TargetedClaimRelations, relations),
@@ -227,34 +235,44 @@ def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> 
         ("consensus", TargetedConsensus, consensus),
         ("coverage", TargetedCoverage, coverage),
     ]
+    completed = 0
     any_progress = False
-    for name, runner_type, service in configs:
-        runner = runner_type(
-            SessionLocal,
-            service,
-            target_ids=target_ids,
-            claim_ttl_seconds=900,
-        )
-        selected = processed = skipped = failed = 0
-        while runner.cursor < len(target_ids):
+    for story_id in target_ids:
+        for name, runner_type, service in configs:
             if monotonic() >= deadline:
-                print(f"TIME_BUDGET_EXHAUSTED stage={name} cursor={runner.cursor}",
-                      flush=True)
-                if not any_progress:
-                    print("NO_PROGRESS: deadline expired before a stage completed", flush=True)
-                    return 1
-                return 0  # safe to resume next scheduled run
-            result = runner.run_pending(limit=batch_size)
-            selected += result.selected
-            processed += result.processed
-            skipped += result.skipped
-            failed += result.failed
+                print(
+                    f"TIME_BUDGET_EXHAUSTED stage={name} "
+                    f"completed_stories={completed} of {len(target_ids)}",
+                    flush=True,
+                )
+                return 0 if any_progress else 1
+            runner = runner_type(
+                SessionLocal,
+                service,
+                target_ids=[story_id],
+                claim_ttl_seconds=900,
+            )
+            result = runner.run_pending(limit=1)
             any_progress = any_progress or bool(result.processed)
             if result.failed:
-                print(f"STAGE_FAILURE stage={name} failed={result.failed}", flush=True)
-                return 1  # do not build later generations from failing stage
-        print(f"STAGE_OK stage={name} selected={selected} processed={processed} "
-              f"skipped={skipped} failed={failed}", flush=True)
+                print(
+                    f"STAGE_FAILURE stage={name} story_id={story_id} "
+                    f"failed={result.failed}",
+                    flush=True,
+                )
+                return 1
+            print(
+                f"STAGE_OK stage={name} story_id={story_id} "
+                f"selected={result.selected} processed={result.processed} "
+                f"skipped={result.skipped}",
+                flush=True,
+            )
+        completed += 1
+        print(
+            f"STORY_PIPELINE_COMPLETE story_id={story_id} "
+            f"completed={completed} of {len(target_ids)}",
+            flush=True,
+        )
     return 0
 
 
