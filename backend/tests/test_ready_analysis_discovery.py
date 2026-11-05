@@ -30,6 +30,25 @@ def test_ready_discovery_requires_two_german_sources_and_full_generations(client
     unprocessed["sources"][0].country = "DE"
     db.flush()
 
+    from sqlalchemy import select
+    from app.models.coverage import StoryCoverageSummary
+    from app.api.story_analysis import service
+
+    candidate = db.scalar(
+        select(StoryCoverageSummary.story_id)
+        .where(StoryCoverageSummary.story_id == german["story"].id)
+    )
+    assert candidate == german["story"].id, "coverage candidate missing"
+    assert service.load(db, story_id=german["story"].id) is not None, (
+        "German StoryAnalysis generation is not current"
+    )
+    detail_response = client.get(f"/stories/{german['story'].id}")
+    assert detail_response.status_code == 200, detail_response.text
+    assert len([
+        a for a in detail_response.json()["articles"]
+        if a["language_code"] == "de"
+    ]) == 2, detail_response.json()["articles"]
+
     response = client.get("/analyses/ready")
     assert response.status_code == 200, response.text
     results = response.json()
