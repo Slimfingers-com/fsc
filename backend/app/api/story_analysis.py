@@ -2,7 +2,7 @@ from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
 from app.consensus.rule_based import (
@@ -13,11 +13,13 @@ from app.coverage.rule_based import (
     RuleBasedCoverageAnalyzer,
 )
 from app.db.session import get_db
-from app.models.story import Story
+from app.models.story import Story, StoryArticle
+from app.models.article import Article
+from app.models.feed import Feed
+from app.models.source import Source
 from app.models.coverage import StoryCoverageSummary
 from app.models.story_processing import StoryProcessingRun
 from app.enums.story_pipeline import StoryPipeline
-from app.stories.postgresql import PostgreSQLStoryReadProvider
 from app.schemas.story_analysis import (
     StoryAnalysisRead,
     ReadyAnalysisSummaryRead,
