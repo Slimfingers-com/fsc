@@ -44,6 +44,8 @@ jobs:
         run: |
           bash -n infrastructure/backup/backup.sh
           bash -n infrastructure/backup/restore.sh
+          bash -n infrastructure/backup/production-nightly.sh
+          python3 -m unittest discover -s scripts/tests -p 'test_local_backup_retention.py' -v
 
       - name: Build production images
         run: |
