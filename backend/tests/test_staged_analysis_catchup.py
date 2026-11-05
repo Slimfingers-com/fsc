@@ -104,7 +104,7 @@ def test_deadline_defers_work_without_starting_a_stage(monkeypatch):
             raise AssertionError("Expired budget must not execute work")
 
     monkeypatch.setattr(job, "TargetedClaimRelations", FakeRunner)
-    assert job.execute_stages(ids, monotonic() - 1, 1) == 0
+    assert job.execute_stages(ids, monotonic() - 1, 1) == 1
 
 
 def test_targeted_selection_does_not_skip_claimable_stories():
@@ -148,3 +148,72 @@ def test_targeted_selection_does_not_skip_claimable_stories():
 
     assert len(claimed) == len(target_ids)
     assert [item.story_id for item in claimed] == target_ids
+
+
+def test_rotating_audit_is_bounded_and_preserves_recent_stories():
+    ids = [uuid4() for _ in range(600)]
+    first = job.choose_audit_candidates(
+        ids, newest_count=16, rotating_count=24, slot=100,
+    )
+    second = job.choose_audit_candidates(
+        ids, newest_count=16, rotating_count=24, slot=101,
+    )
+    assert len(first) == len(second) == 40
+    assert first[:16] == second[:16] == ids[:16]
+    assert len(set(first)) == 40
+    assert set(first[16:]) != set(second[16:])
+    assert set(first[16:]).isdisjoint(ids[:16])
+    assert set(second[16:]).isdisjoint(ids[:16])
+
+
+def test_rotating_audit_short_list_has_no_duplicates():
+    ids = [uuid4() for _ in range(5)]
+    assert job.choose_audit_candidates(
+        ids, newest_count=16, rotating_count=24, slot=0,
+    ) == ids
+    assert job.choose_audit_candidates(
+        ids, newest_count=2, rotating_count=10, slot=2,
+    )[:2] == ids[:2]
+    assert set(job.choose_audit_candidates(
+        ids, newest_count=2, rotating_count=10, slot=2,
+    )) == set(ids)
+
+
+def test_rotating_audit_rejects_invalid_arguments():
+    ids = [uuid4()]
+    with pytest.raises(ValueError, match="negative"):
+        job.choose_audit_candidates(
+            ids, newest_count=-1, rotating_count=1, slot=0,
+        )
+    with pytest.raises(ValueError, match="unique"):
+        job.choose_audit_candidates(
+            ids + ids, newest_count=1, rotating_count=1, slot=0,
+        )
+
+
+def test_main_reports_sample_only_not_false_global_freshness(monkeypatch, capsys):
+    import sys
+
+    story_id = uuid4()
+    monkeypatch.setattr(job, "build_services", lambda: (None, None, None, None))
+    monkeypatch.setattr(
+        job, "find_missing",
+        lambda _coverage, *, target_limit, audit_deadline: (
+            5500, [story_id], 0, 50,
+        ),
+    )
+    received = []
+    monkeypatch.setattr(
+        job, "execute_stages",
+        lambda ids, **kwargs: received.extend(ids) or 0,
+    )
+    monkeypatch.setattr(sys, "argv", [
+        "run_staged_analysis_catchup.py",
+        "--max-targets", "12", "--max-minutes", "20",
+    ])
+    assert job.main() == 0
+    assert received == [story_id]
+    output = capsys.readouterr().out
+    assert "eligible=5500 audited=50" in output
+    assert "current_in_sample=49 missing_in_sample=1" in output
+    assert "current=5499" not in output
