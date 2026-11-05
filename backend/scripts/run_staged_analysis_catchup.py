@@ -235,14 +235,14 @@ def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> 
         ("consensus", TargetedConsensus, consensus),
         ("coverage", TargetedCoverage, coverage),
     ]
-    completed = 0
+    attempted_stories = 0
     any_progress = False
     for story_id in target_ids:
         for name, runner_type, service in configs:
             if monotonic() >= deadline:
                 print(
                     f"TIME_BUDGET_EXHAUSTED stage={name} "
-                    f"completed_stories={completed} of {len(target_ids)}",
+                    f"attempted_stories={attempted_stories} of {len(target_ids)}",
                     flush=True,
                 )
                 return 0 if any_progress else 1
@@ -267,10 +267,12 @@ def execute_stages(target_ids: list[UUID], deadline: float, batch_size: int) -> 
                 f"skipped={result.skipped}",
                 flush=True,
             )
-        completed += 1
+        attempted_stories += 1
+        # 'run_pending' may legitimately skip an in-flight/leased candidate.
+        # Do not claim a StoryAnalysis is ready until the reader verifies it.
         print(
-            f"STORY_PIPELINE_COMPLETE story_id={story_id} "
-            f"completed={completed} of {len(target_ids)}",
+            f"STORY_STAGES_ATTEMPTED story_id={story_id} "
+            f"attempted={attempted_stories} of {len(target_ids)}",
             flush=True,
         )
     return 0
