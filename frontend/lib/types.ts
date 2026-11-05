@@ -187,3 +187,12 @@ export type ProvenanceReviewPage = {
   offset: number;
   items: ProvenanceReviewItem[];
 };
+
+
+export type ReadyAnalysisSummary = {
+  story_id: string;
+  title: string;
+  source_count: number;
+  article_count: number;
+  last_article_at: string;
+};
