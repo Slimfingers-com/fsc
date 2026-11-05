@@ -129,43 +129,63 @@ def ready_analyses(
         ).all()
     )
 
-    reader = PostgreSQLStoryReadProvider(db)
+    if not candidates:
+        return []
+
+    # Fetch only public German metadata in a single indexed query.
+    rows = db.execute(
+        select(StoryArticle.story_id, Article.title, Feed.source_id,
+               StoryArticle.article_time)
+        .join(Article, Article.id == StoryArticle.article_id)
+        .join(Feed, Feed.id == Article.feed_id)
+        .join(Source, Source.id == Feed.source_id)
+        .join(Story, Story.id == StoryArticle.story_id)
+        .where(
+            StoryArticle.story_id.in_(candidates),
+            StoryArticle.deleted_at.is_(None),
+            Story.deleted_at.is_(None),
+            Article.deleted_at.is_(None),
+            Article.normalized_at.is_not(None),
+            Article.normalized_text.is_not(None),
+            Feed.deleted_at.is_(None),
+            Feed.active.is_(True),
+            Source.deleted_at.is_(None),
+            Source.active.is_(True),
+            or_(Article.language_code == "de",
+                Article.language_code.like("de-%")),
+        )
+        .order_by(StoryArticle.article_time.desc())
+    ).all()
+    german_by_story = {}
+    for story_id, title, source_id, article_time in rows:
+        german_by_story.setdefault(story_id, []).append(
+            (title, source_id, article_time)
+        )
+
     ready: list[ReadyAnalysisSummaryRead] = []
     for story_id in candidates:
+        german = german_by_story.get(story_id, [])
+        sources = {source_id for _, source_id, _ in german}
+        if len(sources) < 2:
+            continue
+        title = next((title.strip() for title, _, _ in german
+                      if title and title.strip()), None)
+        if not title:
+            continue
         try:
+            # Persisted coverage alone is insufficient: validate every
+            # generation and hash with the full currentness service.
             if service.load(db, story_id=story_id) is None:
-                continue
-            detail = reader.get_story(story_id)
-            if detail is None:
-                continue
-            german = [
-                item for item in detail.articles
-                if (item.language_code or "").strip().lower() == "de"
-                or (item.language_code or "").strip().lower().startswith("de-")
-            ]
-            sources = {article.source_id for article in german}
-            if len(sources) < 2:
-                continue
-            title = next(
-                (article.title.strip() for article in german
-                 if article.title and article.title.strip()),
-                None,
-            )
-            if not title:
                 continue
             ready.append(
                 ReadyAnalysisSummaryRead(
-                    story_id=story_id,
-                    title=title,
-                    source_count=len(sources),
-                    article_count=len(german),
-                    last_article_at=max(article.article_time for article in german),
+                    story_id=story_id, title=title,
+                    source_count=len(sources), article_count=len(german),
+                    last_article_at=max(time for _, _, time in german),
                 )
             )
             if len(ready) >= limit:
                 break
         finally:
-            # Bound identity-map growth without rolling back the request's
-            # read view (or uncommitted fixtures in transactional tests).
             db.expire_all()
     return ready
