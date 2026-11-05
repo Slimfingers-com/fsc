@@ -159,3 +159,13 @@ class StoryAnalysisRead(BaseModel):
     coverage_gaps: list[
         StoryAnalysisCoverageGapRead
     ]
+
+
+class ReadyAnalysisSummaryRead(BaseModel):
+    """Public discovery only for fully current analyses with German sources."""
+
+    story_id: UUID
+    title: str
+    source_count: int = Field(ge=2)
+    article_count: int = Field(ge=2)
+    last_article_at: datetime
