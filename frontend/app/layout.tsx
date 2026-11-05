@@ -21,6 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <nav className="nav-links" aria-label="Hauptnavigation">
               <Link href="/">Startseite</Link>
               <Link href="/stories">Ereignisse</Link>
+              <Link href="/analysen">Fertige Analysen</Link>
             </nav>
           </div>
         </header>
