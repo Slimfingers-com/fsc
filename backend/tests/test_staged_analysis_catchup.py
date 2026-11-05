@@ -38,7 +38,7 @@ def test_stages_run_sequentially_in_dependency_order(monkeypatch):
         class Runner:
             def __init__(self, *_args, target_ids, **_kwargs):
                 assert len(target_ids) == 1
-            self.target_ids = target_ids
+                self.target_ids = target_ids
                 self.cursor = 0
 
             def run_pending(self, *, limit):
