@@ -1,11 +1,11 @@
-fastapi==0.141.1
-uvicorn[standard]==0.53.0
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
 
-sqlalchemy==2.0.54
-psycopg[binary]==3.3.6
-alembic==1.20.0
+sqlalchemy==2.1.8
+psycopg[binary]==3.3.8
+alembic==1.20.1
 
-pydantic-settings==2.15.0
+pydantic-settings==2.16.2
 httpx==0.28.1
 feedparser==6.0.14
 beautifulsoup4==4.15.0
