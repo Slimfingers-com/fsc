@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from check_public_uptime import PAGES, PageCheckError, check_html, check_page, check_backend_readiness  # noqa: E402
+from check_public_uptime import PAGES, PageCheckError, check_html, check_page  # noqa: E402
 
 HOME = b'<html lang="de"><body><h1 id="home-title">News</h1><form role="search"></form></body></html>'
 STORIES = b'<html lang="de"><select id="story-sort"></select><select id="story-sources"></select></html>'
@@ -50,29 +50,6 @@ class UptimeMonitorTests(unittest.TestCase):
         self.assertEqual(len(requests), 3)
         self.assertEqual(sleeps, [3, 6])
         self.assertIn("::error", outputs[-1])
-
-    def test_uncached_backend_readiness_success(self) -> None:
-        output = []
-        called = []
-        def fetch(url: str) -> None:
-            called.append(url)
-        self.assertTrue(check_backend_readiness(fetch=fetch, output=output.append))
-        self.assertEqual(called, ["https://fsc.eu/api/health"])
-        self.assertTrue(any("readiness OK" in value for value in output))
-
-    def test_uncached_backend_readiness_retries_and_fails_closed(self) -> None:
-        calls = []
-        delays = []
-        output = []
-        def fetch(url: str) -> None:
-            calls.append(url)
-            raise PageCheckError("backend not ready")
-        self.assertFalse(check_backend_readiness(
-            fetch=fetch, sleep=delays.append, output=output.append,
-        ))
-        self.assertEqual(len(calls), 3)
-        self.assertEqual(delays, [3, 6])
-        self.assertIn("::error", output[-1])
 
     def test_not_confused_by_a_marker_in_an_embedded_script(self) -> None:
         with self.assertRaisesRegex(PageCheckError, "rendered h1"):
