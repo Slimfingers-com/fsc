@@ -5,6 +5,7 @@ the Next.js error boundary. Retry the *whole* page, and fail on persistent error
 """
 from __future__ import annotations
 
+import json
 import sys
 import time
 from dataclasses import dataclass
@@ -91,10 +92,53 @@ def check_page(page: Page, *, fetch=fetch_html, sleep=time.sleep, output=print) 
     return False
 
 
+
+def fetch_backend_readiness(url: str) -> None:
+    """An uncached check: a cached news listing cannot mask an API outage."""
+    request = Request(url, headers={
+        "Accept": "application/json",
+        "User-Agent": "FSC-production-uptime/2",
+        "Cache-Control": "no-cache",
+    })
+    with urlopen(request, timeout=12) as response:
+        if response.status != 200:
+            raise PageCheckError(f"readiness HTTP {response.status}")
+        if "application/json" not in response.headers.get("Content-Type", "").lower():
+            raise PageCheckError("readiness response is not JSON")
+        data = json.loads(response.read(4097))
+        if not isinstance(data, dict) or data.get("status") != "ready":
+            raise PageCheckError("backend not ready")
+
+
+def check_backend_readiness(
+    *, fetch=fetch_backend_readiness, sleep=time.sleep, output=print,
+) -> bool:
+    url = BASE_URL + "/api/health"
+    for attempt in range(1, ATTEMPTS + 1):
+        try:
+            fetch(url)
+        except (PageCheckError, HTTPError, URLError, TimeoutError,
+                OSError, UnicodeError, ValueError) as exc:
+            reason = f"{type(exc).__name__}: {exc}"
+            if attempt == ATTEMPTS:
+                output(f"::error title=Production readiness::{url} failed "
+                       f"{ATTEMPTS} times; last error: {reason}")
+                return False
+            output(f"::warning title=Transient backend readiness::Attempt "
+                   f"{attempt}/{ATTEMPTS}: {reason}; retrying")
+            sleep(3 * attempt)
+        else:
+            output("Backend readiness OK (uncached)." if attempt == 1
+                   else f"Backend readiness recovered after {attempt} attempts")
+            return True
+    return False
+
+
 def main() -> int:
     healthy = [check_page(page) for page in PAGES]
-    if all(healthy):
-        print("Production uptime OK: public pages fully rendered in German.")
+    backend_ready = check_backend_readiness()
+    if all(healthy) and backend_ready:
+        print("Production uptime OK: German pages rendered and live backend ready.")
         return 0
     print("Production uptime FAILED: one or more pages did not recover.", file=sys.stderr)
     return 1
