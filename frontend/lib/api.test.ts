@@ -51,7 +51,7 @@ describe("server API client", () => {
     expect(urls[1].searchParams.get("min_sources")).toBe("2");
   });
   it("caches only the anonymous default German story list", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(
+    const fetchMock = vi.fn().mockImplementation(async () =>
       new Response(JSON.stringify({
         items: [], total: 0, page: 1, page_size: 20, pages: 0,
       }), { status: 200 }),
