@@ -155,6 +155,12 @@ jobs:
           grep -Fi 'X-Request-ID: e2e-request-id' "$headers"
           grep -Fi 'X-Content-Type-Options: nosniff' "$headers"
 
+          # This live check bypasses the short public Story-list Data Cache.
+          curl --fail --silent --show-error --dump-header /tmp/fsc-live-headers \
+            http://127.0.0.1:8080/api/health > /tmp/fsc-live.json
+          grep -Fq '"status":"ready"' /tmp/fsc-live.json
+          grep -Fi 'cache-control: no-store' /tmp/fsc-live-headers
+
       - name: Verify rendered German Next.js routes through Nginx
         run: |
           set -euo pipefail

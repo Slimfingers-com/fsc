@@ -68,6 +68,7 @@ function logFailure({
 async function request<T>(
   path: string,
   params?: URLSearchParams,
+  options: { publicRevalidateSeconds?: number } = {},
 ): Promise<T> {
   const suffix = params?.size
     ? `?${params.toString()}`
@@ -80,14 +81,21 @@ async function request<T>(
     response = await fetch(
       `${API_URL}${path}${suffix}`,
       {
-        cache: "no-store",
+        // Only a narrowly scoped, anonymous, German listing is cached.
+        ...(options.publicRevalidateSeconds === undefined
+          ? { cache: "no-store" as const }
+          : { next: { revalidate: options.publicRevalidateSeconds } }),
         signal: AbortSignal.timeout(
           API_TIMEOUT_MS
         ),
-        headers: {
-          Accept: "application/json",
-          "X-Request-ID": requestId,
-        },
+        // A random request header prevents identical public GET cache hits.
+        // Backend still generates a correlation ID for uncached cache misses.
+        headers: options.publicRevalidateSeconds === undefined
+          ? {
+              Accept: "application/json",
+              "X-Request-ID": requestId,
+            }
+          : { Accept: "application/json" },
       },
     );
   } catch (error) {
@@ -240,9 +248,18 @@ export async function listStories(
     "min_sources",
     options.minSources ?? 1,
   );
+  // Only the default public listing (shared by /stories and homepage
+  // highlights) gets a short 60-second Data Cache. The full corpus is
+  // never cached here; filtered views and exact analyses remain live.
+  const defaultPublicListing = (
+    (options.sort ?? "newest") === "newest"
+    && (options.page ?? 1) === 1
+    && (options.minSources ?? 1) === 2
+  );
   return request<Page<StorySummary>>(
     "/stories",
     params,
+    defaultPublicListing ? { publicRevalidateSeconds: 60 } : {},
   );
 }
 

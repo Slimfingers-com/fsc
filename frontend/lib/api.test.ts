@@ -50,6 +50,42 @@ describe("server API client", () => {
     expect(urls.every((url) => url.searchParams.get("language") === "de")).toBe(true);
     expect(urls[1].searchParams.get("min_sources")).toBe("2");
   });
+  it("caches only the anonymous default German story list", async () => {
+    const fetchMock = vi.fn().mockImplementation(async () =>
+      new Response(JSON.stringify({
+        items: [], total: 0, page: 1, page_size: 20, pages: 0,
+      }), { status: 200 }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    await listStories({ sort: "newest", page: 1, minSources: 2 });
+    const cachedUrl = new URL(String(fetchMock.mock.calls[0][0]));
+    const cachedInit = fetchMock.mock.calls[0][1];
+    expect(cachedUrl.pathname).toBe("/stories");
+    expect(cachedUrl.searchParams.get("language")).toBe("de");
+    expect(cachedInit.next).toEqual({ revalidate: 60 });
+    expect(cachedInit.cache).toBeUndefined();
+    expect(new Headers(cachedInit.headers).has("X-Request-ID")).toBe(false);
+
+    await listStories({ sort: "newest", page: 2, minSources: 2 });
+    await listStories({ sort: "largest", page: 1, minSources: 2 });
+    await listStories({ sort: "newest", page: 1, minSources: 3 });
+    for (const call of fetchMock.mock.calls.slice(1)) {
+      const init = call[1];
+      expect(init.cache).toBe("no-store");
+      expect(init.next).toBeUndefined();
+      expect(new Headers(init.headers).get("X-Request-ID")).toMatch(
+        /^[0-9a-f-]{36}$/,
+      );
+    }
+
+    await searchArticles({ q: "Berlin" });
+    const searchInit = fetchMock.mock.calls[4][1];
+    expect(searchInit.cache).toBe("no-store");
+    expect(searchInit.next).toBeUndefined();
+  });
+
+
   it(
     "sends a correlation ID to FastAPI",
     async () => {
