@@ -15,7 +15,10 @@ export const metadata: Metadata = {
   title: "Nachrichten verstehen",
   description: "Deutschsprachige Nachrichten aus mehreren Quellen. Themen entdecken, Aussagen vergleichen und Hintergründe nachvollziehen.",
 };
-export const dynamic = "force-dynamic";
+// searchParams make this route request-rendered without disabling
+// explicitly opted-in Next.js Data Cache entries for public Story lists.
+// Do not set force-dynamic: that overrides fetch next.revalidate.
+
 
 type Props = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
