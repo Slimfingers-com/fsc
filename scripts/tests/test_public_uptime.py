@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from check_public_uptime import PAGES, PageCheckError, check_html, check_page  # noqa: E402
+from check_public_uptime import PAGES, PageCheckError, check_html, check_page, check_backend_readiness  # noqa: E402
 
 HOME = b'<html lang="de"><body><h1 id="home-title">News</h1><form role="search"></form></body></html>'
 STORIES = b'<html lang="de"><select id="story-sort"></select><select id="story-sources"></select></html>'
@@ -48,6 +48,41 @@ class UptimeMonitorTests(unittest.TestCase):
             return b'<html lang="de"><h1>Fehler</h1></html>'
         self.assertFalse(check_page(PAGES[0], fetch=fetch, sleep=sleeps.append, output=outputs.append))
         self.assertEqual(len(requests), 3)
+        self.assertEqual(sleeps, [3, 6])
+        self.assertIn("::error", outputs[-1])
+
+    def test_backend_ready_success(self) -> None:
+        outputs = []
+        addresses = []
+        def fetch(url: str) -> None:
+            addresses.append(url)
+        self.assertTrue(check_backend_readiness(fetch=fetch, output=outputs.append))
+        self.assertEqual(addresses, ["https://fsc.eu/api/health"])
+        self.assertIn("readiness OK", outputs[-1])
+
+    def test_backend_ready_recovery(self) -> None:
+        outputs = []
+        addresses = []
+        def fetch(url: str) -> None:
+            addresses.append(url)
+            if len(addresses) == 1:
+                raise PageCheckError("backend unavailable")
+        self.assertTrue(check_backend_readiness(
+            fetch=fetch, sleep=lambda delay: None, output=outputs.append,
+        ))
+        self.assertEqual(len(addresses), 2)
+        self.assertIn("recovered", outputs[-1])
+
+    def test_backend_down_does_not_become_healthy_with_cached_pages(self) -> None:
+        outputs = []
+        sleeps = []
+        def fetch(url: str) -> None:
+            raise PageCheckError("backend unavailable")
+        check_html(PAGES[0], HOME)
+        check_html(PAGES[1], STORIES)
+        self.assertFalse(check_backend_readiness(
+            fetch=fetch, sleep=sleeps.append, output=outputs.append,
+        ))
         self.assertEqual(sleeps, [3, 6])
         self.assertIn("::error", outputs[-1])
 
