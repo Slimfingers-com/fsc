@@ -215,6 +215,56 @@ jobs:
           test "$backend_uid" != "0"
           test "$frontend_uid" != "0"
 
+      - name: Verify public Story cache survives short backend outage
+        run: |
+          set -euo pipefail
+          compose=(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml)
+          public_url='http://127.0.0.1:8080/stories?sort=newest&min_sources=2'
+
+          # Warm the only explicitly revalidated anonymous German Story list.
+          curl --fail --silent --show-error --max-time 15 \
+            "$public_url" --output /tmp/fsc-stories-warm.html
+          grep -Fq 'id="story-sort"' /tmp/fsc-stories-warm.html
+
+          backend_stopped=0
+          restore_backend() {
+            if (( backend_stopped )); then
+              "${compose[@]}" start backend
+            fi
+          }
+          trap restore_backend EXIT
+          "${compose[@]}" stop -t 2 backend
+          backend_stopped=1
+
+          # No cached public response may make backend readiness appear healthy.
+          ready_code="$(curl --silent --show-error --max-time 10 \
+            --output /tmp/fsc-backend-down.json --write-out '%{http_code}' \
+            http://127.0.0.1:8080/api/health)"
+          test "$ready_code" = "503"
+          grep -Fq '"status":"unavailable"' /tmp/fsc-backend-down.json
+
+          # Within 60s, the repeated public page must still render through
+          # the Data Cache without requiring the temporarily stopped backend.
+          curl --fail --silent --show-error --max-time 15 \
+            "$public_url" --output /tmp/fsc-stories-cached.html
+          grep -Fq 'id="story-sort"' /tmp/fsc-stories-cached.html
+          grep -Fq 'id="story-sources"' /tmp/fsc-stories-cached.html
+
+          restore_backend
+          backend_stopped=0
+          trap - EXIT
+
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error --max-time 2 \
+              http://127.0.0.1:8000/health/ready >/dev/null; then
+              echo "Public Story cache and live readiness behaved correctly."
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Backend did not become ready after cache test." >&2
+          exit 1
+
       - name: Show stack state
         if: always()
         run: docker compose --env-file .env -f infrastructure/docker/docker-compose.yml ps
