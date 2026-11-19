@@ -271,8 +271,22 @@ jobs:
           compose=(docker compose --env-file .env -f infrastructure/docker/docker-compose.yml)
           old_ip="$(docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' fsc-frontend)"
           test -n "$old_ip"
-          # Replace only the disposable CI frontend; leave Nginx running.
-          "${compose[@]}" up -d --no-deps --no-build --force-recreate frontend
+          # Docker may reuse the same IP on plain --force-recreate.
+          # Hold the old IP in this disposable CI network to force a true
+          # re-resolution regression; Nginx itself must stay running.
+          network="$(docker inspect --format '{{range $name, $details := .NetworkSettings.Networks}}{{$name}}{{end}}' fsc-frontend)"
+          test -n "$network"
+          "${compose[@]}" stop -t 2 frontend
+          "${compose[@]}" rm -f frontend
+          docker run --detach --rm --name fsc-e2e-ip-holder \
+            --network "$network" --ip "$old_ip" \
+            --entrypoint sleep nginx:stable 240
+          restore_test() {
+            docker rm -f fsc-e2e-ip-holder >/dev/null 2>&1 || :
+            "${compose[@]}" up -d --no-deps --no-build frontend || :
+          }
+          trap restore_test EXIT
+          "${compose[@]}" up -d --no-deps --no-build frontend
           new_ip="$(docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' fsc-frontend)"
           test -n "$new_ip"
           echo "Frontend replacement: old=$old_ip new=$new_ip"
@@ -288,6 +302,8 @@ jobs:
                 --output /tmp/fsc-recreated-frontend.html \
               && grep -Fq 'id="story-sort"' /tmp/fsc-recreated-frontend.html; then
               echo "Nginx re-resolved the frontend without restarting."
+              docker rm -f fsc-e2e-ip-holder >/dev/null 2>&1 || :
+              trap - EXIT
               exit 0
             fi
             sleep 2
