@@ -2,7 +2,7 @@ from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
 from app.consensus.rule_based import (
@@ -13,11 +13,13 @@ from app.coverage.rule_based import (
     RuleBasedCoverageAnalyzer,
 )
 from app.db.session import get_db
-from app.models.story import Story
+from app.models.story import Story, StoryArticle
+from app.models.article import Article
+from app.models.feed import Feed
+from app.models.source import Source
 from app.models.coverage import StoryCoverageSummary
 from app.models.story_processing import StoryProcessingRun
 from app.enums.story_pipeline import StoryPipeline
-from app.stories.postgresql import PostgreSQLStoryReadProvider
 from app.schemas.story_analysis import (
     StoryAnalysisRead,
     ReadyAnalysisSummaryRead,
@@ -127,43 +129,92 @@ def ready_analyses(
         ).all()
     )
 
-    reader = PostgreSQLStoryReadProvider(db)
+    if not candidates:
+        return []
+
+    # Reuse the same active, normalized-article eligibility rules as the
+    # public Story reader. One bounded query covers every recent candidate,
+    # rather than loading an entire Story and its entities/topics repeatedly.
+    # Only German wording is exposed; publisher country is not restricted.
+    language = func.lower(func.trim(Article.language_code))
+    article_time = func.coalesce(Article.published_at, Article.created_at)
+    german_rows = db.execute(
+        select(
+            StoryArticle.story_id,
+            Article.title,
+            article_time.label("article_time"),
+            Source.id.label("source_id"),
+        )
+        .select_from(StoryArticle)
+        .join(Story, Story.id == StoryArticle.story_id)
+        .join(Article, Article.id == StoryArticle.article_id)
+        .join(Feed, Feed.id == Article.feed_id)
+        .join(Source, Source.id == Feed.source_id)
+        .where(
+            StoryArticle.story_id.in_(candidates),
+            StoryArticle.deleted_at.is_(None),
+            Story.deleted_at.is_(None),
+            Article.deleted_at.is_(None),
+            Article.normalized_at.is_not(None),
+            Article.normalized_text.is_not(None),
+            Feed.deleted_at.is_(None),
+            Feed.active.is_(True),
+            Source.deleted_at.is_(None),
+            Source.active.is_(True),
+            or_(language == "de", language.like("de-%")),
+        )
+        .order_by(
+            StoryArticle.story_id,
+            article_time.desc(),
+            StoryArticle.id.desc(),
+        )
+    ).all()
+
+    visible_by_story = {}
+    for row in german_rows:
+        info = visible_by_story.setdefault(
+            row.story_id,
+            {
+                "article_count": 0,
+                "source_ids": set(),
+                "title": None,
+                "last_article_at": row.article_time,
+            },
+        )
+        info["article_count"] += 1
+        info["source_ids"].add(row.source_id)
+        if info["title"] is None and row.title and row.title.strip():
+            info["title"] = row.title.strip()
+        if row.article_time > info["last_article_at"]:
+            info["last_article_at"] = row.article_time
+
     ready: list[ReadyAnalysisSummaryRead] = []
     for story_id in candidates:
+        visible = visible_by_story.get(story_id)
+        if (
+            visible is None
+            or len(visible["source_ids"]) < 2
+            or visible["title"] is None
+        ):
+            # Do not pay for full generation/hash validation on events that
+            # cannot be shown to the German public in the first place.
+            continue
         try:
             if service.load(db, story_id=story_id) is None:
-                continue
-            detail = reader.get_story(story_id)
-            if detail is None:
-                continue
-            german = [
-                item for item in detail.articles
-                if (item.language_code or "").strip().lower() == "de"
-                or (item.language_code or "").strip().lower().startswith("de-")
-            ]
-            sources = {article.source_id for article in german}
-            if len(sources) < 2:
-                continue
-            title = next(
-                (article.title.strip() for article in german
-                 if article.title and article.title.strip()),
-                None,
-            )
-            if not title:
                 continue
             ready.append(
                 ReadyAnalysisSummaryRead(
                     story_id=story_id,
-                    title=title,
-                    source_count=len(sources),
-                    article_count=len(german),
-                    last_article_at=max(article.article_time for article in german),
+                    title=visible["title"],
+                    source_count=len(visible["source_ids"]),
+                    article_count=visible["article_count"],
+                    last_article_at=visible["last_article_at"],
                 )
             )
             if len(ready) >= limit:
                 break
         finally:
-            # Bound identity-map growth without rolling back the request's
-            # read view (or uncommitted fixtures in transactional tests).
+            # Keep bounded ORM memory growth without rolling back the
+            # transactional view used by test fixtures.
             db.expire_all()
     return ready

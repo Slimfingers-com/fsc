@@ -10,18 +10,18 @@ def specs(languages=("de", "de")):
             "source_type": SourceType.NEWS,
             "claim_text": "The plan begins Monday.",
             "language_code": languages[0],
-            "title": "Deutscher Bericht A" if languages[0] == "de" else "English report A",
+            "title": "Deutscher Bericht A" if languages[0].startswith("de") else "English report A",
         },
         {
             "source_type": SourceType.AGENCY,
             "claim_text": "The plan begins Monday.",
             "language_code": languages[1],
-            "title": "Deutscher Bericht B" if languages[1] == "de" else "English report B",
+            "title": "Deutscher Bericht B" if languages[1].startswith("de") else "English report B",
         },
     ]
 
 
-def test_ready_discovery_requires_two_german_sources_and_full_generations(client, db):
+def test_ready_discovery_requires_two_german_sources_and_full_generations(client, db, monkeypatch):
     german = build_complete_analysis_story(db, specs=specs())
     foreign = build_complete_analysis_story(db, specs=specs(("en", "en")))
     mixed = build_complete_analysis_story(db, specs=specs(("de", "en")))
@@ -49,6 +49,17 @@ def test_ready_discovery_requires_two_german_sources_and_full_generations(client
         if a["language_code"] == "de"
     ]) == 2, detail_response.json()["articles"]
 
+    # Analyzing each foreign-only/mixed candidate was formerly expensive
+    # and eventually timed out the public ready-discovery request.
+    loaded_ids = []
+    original_load = service.load
+
+    def tracked_load(session, *, story_id):
+        loaded_ids.append(story_id)
+        return original_load(session, story_id=story_id)
+
+    monkeypatch.setattr(service, "load", tracked_load)
+
     response = client.get("/analyses/ready")
     assert response.status_code == 200, response.text
     results = response.json()
@@ -62,6 +73,22 @@ def test_ready_discovery_requires_two_german_sources_and_full_generations(client
     assert str(foreign["story"].id) not in response.text
     assert str(mixed["story"].id) not in response.text
     assert str(unprocessed["story"].id) not in response.text
+    assert foreign["story"].id not in loaded_ids
+    assert mixed["story"].id not in loaded_ids
+    assert german["story"].id in loaded_ids
+
+
+
+def test_ready_discovery_accepts_german_locale_variants(client, db):
+    localized = build_complete_analysis_story(
+        db, specs=specs(("de-AT", "de-CH"))
+    )
+    result = client.get("/analyses/ready")
+    assert result.status_code == 200, result.text
+    assert len(result.json()) == 1, result.text
+    assert result.json()[0]["story_id"] == str(localized["story"].id)
+    assert result.json()[0]["source_count"] == 2
+    assert result.json()[0]["title"].startswith("Deutscher Bericht")
 
 
 def test_ready_discovery_limit_is_bounded(client, db):
