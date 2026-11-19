@@ -137,11 +137,12 @@ def ready_analyses(
     # rather than loading an entire Story and its entities/topics repeatedly.
     # Only German wording is exposed; publisher country is not restricted.
     language = func.lower(func.trim(Article.language_code))
+    article_time = func.coalesce(Article.published_at, Article.created_at)
     german_rows = db.execute(
         select(
             StoryArticle.story_id,
             Article.title,
-            StoryArticle.article_time,
+            article_time.label("article_time"),
             Source.id.label("source_id"),
         )
         .select_from(StoryArticle)
@@ -164,7 +165,7 @@ def ready_analyses(
         )
         .order_by(
             StoryArticle.story_id,
-            StoryArticle.article_time.desc(),
+            article_time.desc(),
             StoryArticle.id.desc(),
         )
     ).all()
